@@ -1,0 +1,15 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": [
+    "minecraft:swamp",
+    "minecraft:lush_caves",
+    "minecraft:jungle",
+    "minecraft:mangrove_swamp"
+  ],
+  "spawners": {
+    "type": "half_life_mod:chumtoad",
+    "weight": 1,
+    "minCount": 1,
+    "maxCount": 3
+  }
+}

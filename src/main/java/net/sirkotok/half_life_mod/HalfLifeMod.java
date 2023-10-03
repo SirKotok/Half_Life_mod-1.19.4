@@ -1,0 +1,128 @@
+package net.sirkotok.half_life_mod;
+
+import com.mojang.logging.LogUtils;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
+
+
+import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+
+import net.sirkotok.half_life_mod.block.ModBlocks;
+
+import net.sirkotok.half_life_mod.effect.ModEffects;
+import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.brain.ModSensorType;
+import net.sirkotok.half_life_mod.entity.ModEntities;
+import net.sirkotok.half_life_mod.entity.mob.client.renderers.*;
+import net.sirkotok.half_life_mod.item.ModCreativeModeTabs;
+import net.sirkotok.half_life_mod.item.ModItems;
+import net.sirkotok.half_life_mod.networking.ModPackets;
+import net.sirkotok.half_life_mod.sound.ModSounds;
+import org.slf4j.Logger;
+
+
+@Mod(HalfLifeMod.MOD_ID)
+public class HalfLifeMod
+{
+    // Define mod id in a common place for everything to reference
+    public static final String MOD_ID = "half_life_mod";
+    // Directly reference a slf4j logger
+    private static final Logger LOGGER = LogUtils.getLogger();
+    public HalfLifeMod()
+    {
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        modEventBus.addListener(this::commonSetup);
+        ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
+        ModEntities.register(modEventBus);
+        ModSounds.register(modEventBus);
+        ModMemoryModuleType.register(modEventBus);
+        ModSensorType.register(modEventBus);
+        ModEffects.register(modEventBus);
+
+        MinecraftForge.EVENT_BUS.register(this);
+        modEventBus.addListener(this::addCreative);
+
+    }
+
+    private void commonSetup(final FMLCommonSetupEvent event)
+    {
+        event.enqueueWork(() -> {
+            ModPackets.register(); //this should be at the top, don't move it down
+
+        });
+
+
+    }
+
+
+
+    private void addCreative(CreativeModeTabEvent.BuildContents event)
+    {
+        if(event.getTab().equals(ModCreativeModeTabs.HALF_LIFE_SPAWN_EGGS)) {
+            //  spawn eggs
+            event.accept(ModItems.HEADCRAB_ONE_SPAWN_EGG);
+            event.accept(ModItems.HEADCRAB_TWO_SPAWN_EGG);
+            event.accept(ModItems.HEADCRAB_FAST_SPAWN_EGG);
+            event.accept(ModItems.HEADCRAB_POISON_HL2_SPAWN_EGG);
+            event.accept(ModItems.HEADCRAB_POISON_HLA_SPAWN_EGG);
+            event.accept(ModItems.HEADCRAB_ALYX_SPAWN_EGG);
+            event.accept(ModItems.HEADCRAB_ARMOR_SPAWN_EGG);
+          //  event.accept(ModItems.HEADCRAB_ZOMBIE_SPAWN_EGG);
+            event.accept(ModItems.BULLSQUID_SPAWN_EGG);
+            event.accept(ModItems.CHUMTOAD_SPAWN_EGG);
+            event.accept(ModItems.SNARK_SPAWN_EGG);
+            event.accept(ModItems.PENGUIN_SPAWN_EGG);
+            event.accept(ModItems.BARNEY_SPAWN_EGG);
+        }
+
+        if(event.getTab().equals(ModCreativeModeTabs.HALF_LIFE_WEOPONS_TAB)) {
+            // items that are guns
+            event.accept(ModItems.PISTOL);
+         //   items that throw entities
+            event.accept(ModItems.CHUMTOAD_THROWER);
+            event.accept(ModItems.SNARK_THROWER);
+            event.accept(ModItems.PENGUIN_THROWER);
+            event.accept(ModItems.SECURITY_GUARD_HELMET);
+            event.accept(ModItems.SECURITY_GUARD_VEST);
+        }
+    }
+
+
+
+
+    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    public static class ClientModEvents
+    {
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event)
+        {
+            EntityRenderers.register(ModEntities.HEADCRAB_HL1.get(), Headcrab_1renderer::new);
+            EntityRenderers.register(ModEntities.HEADCRAB_ZOMBIE_1.get(), Headcrab_zombie_standart_renderer::new);
+            EntityRenderers.register(ModEntities.HEADCRAB_HL2.get(), Headcrab_2renderer::new);
+            EntityRenderers.register(ModEntities.HEADCRAB_POISON_HL2.get(), Headcrab_poison_2renderer::new);
+            EntityRenderers.register(ModEntities.HEADCRAB_POISON_HLA.get(), Headcrab_poison_3renderer::new);
+            EntityRenderers.register(ModEntities.HEADCRAB_HLA.get(), Headcrab_3renderer::new);
+            EntityRenderers.register(ModEntities.HEADCRAB_ARMORED.get(), Headcrab_armoredrenderer::new);
+            EntityRenderers.register(ModEntities.HEADCRAB_FAST.get(), Headcrab_fastrenderer::new);
+            EntityRenderers.register(ModEntities.BULLSQUID.get(), Bullsquid_renderer::new);
+            EntityRenderers.register(ModEntities.CHUMTOAD.get(), Chumtoadrenderer::new);
+            EntityRenderers.register(ModEntities.SNARK.get(), Snarkrenderer::new);
+            EntityRenderers.register(ModEntities.PENGUIN.get(), PenguinRenderer::new);
+            EntityRenderers.register(ModEntities.BARNEY.get(), Barney_renderer::new);
+            EntityRenderers.register(ModEntities.ACID_BALL.get(), ThrownItemRenderer::new);
+            EntityRenderers.register(ModEntities.BULLET_ONE.get(), ThrownItemRenderer::new);
+        }
+    }
+}
+//TODO:
+/*  1) Better chumtoad, penguin, snark models; 2) Poison headcrab screen effect 3) Bullsquid and snark particles 4) better pistol reload sound and model... and so much more  */
+

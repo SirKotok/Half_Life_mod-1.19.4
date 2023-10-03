@@ -1,0 +1,126 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.pistol.shoot": {
+			"animation_length": 0.20833,
+			"bones": {
+				"root": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.0833": {
+							"vector": [-22.5, 0, 0],
+							"easing": "easeOutExpo"
+						},
+						"0.125": {
+							"vector": [2.5, 0, 0],
+							"easing": "easeInExpo"
+						},
+						"0.2083": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"slider": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.0833": {
+							"vector": [0, 0, 1],
+							"easing": "easeOutCirc"
+						},
+						"0.1667": {
+							"vector": [0, 0, 0],
+							"easing": "easeInCirc"
+						}
+					}
+				},
+				"flash": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.0833": {
+							"vector": [0, -1.1, -1],
+							"easing": "easeInCirc"
+						},
+						"0.1667": {
+							"vector": [0, 0, 0],
+							"easing": "easeOutCirc"
+						}
+					},
+					"scale": {
+						"0.0": {
+							"vector": [2.1, 1, 1]
+						},
+						"0.0833": {
+							"vector": [10, 7.6, 10],
+							"easing": "easeInCirc"
+						},
+						"0.1667": {
+							"vector": [2.1, 1, 1],
+							"easing": "easeOutCirc"
+						}
+					}
+				}
+			}
+		},
+		"animation.pistol.reload": {
+			"animation_length": 0.75,
+			"bones": {
+				"root": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.25": {
+							"vector": [0, 0, -95]
+						},
+						"0.5833": {
+							"vector": [0, 0, -95]
+						},
+						"0.75": {
+							"vector": [0, 0, 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.25": {
+							"vector": [1.4, 3.8, 0]
+						},
+						"0.5833": {
+							"vector": [1.4, 3.8, 0]
+						},
+						"0.75": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"ammo": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.25": {
+							"vector": [0, 0, 0]
+						},
+						"0.4167": {
+							"vector": [0, -7, 0]
+						},
+						"0.5833": {
+							"vector": [0, 0, 0]
+						}
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}
