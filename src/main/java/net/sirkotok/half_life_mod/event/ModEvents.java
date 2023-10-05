@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
@@ -103,41 +104,42 @@ public class ModEvents {
         @SubscribeEvent
         public static void  onLivingChangeTick(LivingEvent.LivingTickEvent event) {
             LivingEntity entity = event.getEntity();
-            if (entity.tickCount % 60 != 0) return;
             if (entity.level.isClientSide()) return;
             if (event.isCanceled()) return;
+            if (entity instanceof Chumtoad) {
+                if (entity.isDeadOrDying()) {
+                    SquareRadius radius1 = new SquareRadius(30, 7);
+                    List<Mob> targets = EntityRetrievalUtil.getEntities(entity.level, entity.getBoundingBox().inflate(radius1.xzRadius(), radius1.yRadius(), radius1.xzRadius()), obj -> ((obj instanceof Mob target) && !(obj instanceof Chumtoad)));
+                    if (!targets.isEmpty()) {
+                        for (Mob entity1 : targets) {
+                            if (entity1.getTarget() == entity) {
+                                entity1.setTarget(null);
+                            }
+                        }
+                    }
+                }
 
-            if (entity instanceof Chumtoad && !entity.isDeadOrDying()) {
-                SquareRadius radius = new SquareRadius(20, 7);
-                List<Mob> targets = EntityRetrievalUtil.getEntities(entity.level, entity.getBoundingBox().inflate(radius.xzRadius(), radius.yRadius(), radius.xzRadius()), obj -> ((obj instanceof Mob target) && !(obj instanceof Chumtoad)));
-                if (!targets.isEmpty()) {
-                    for (Mob entity1 : targets) {
+                if (entity.tickCount % 60 != 0) return;
+
+
+                if (!entity.isDeadOrDying()) {
+                    SquareRadius radius = new SquareRadius(20, 7);
+                    List<Mob> targets = EntityRetrievalUtil.getEntities(entity.level, entity.getBoundingBox().inflate(radius.xzRadius(), radius.yRadius(), radius.xzRadius()), obj -> ((obj instanceof Mob target) && !(obj instanceof Chumtoad)));
+                    if (!targets.isEmpty()) {
+                        for (Mob entity1 : targets) {
                             if (!(entity1.getTarget() instanceof Chumtoad)) {
-                            entity1.setTarget(entity);
-                        if (entity1 instanceof SmartBrainOwner) {
-                            if (!(BrainUtils.getMemory(entity1, MemoryModuleType.ATTACK_TARGET) instanceof Chumtoad)) {
-                            BrainUtils.setMemory(entity1, MemoryModuleType.ATTACK_TARGET, entity);
-                        }
-                        }
+                                entity1.setTarget(entity);
+                                if (entity1 instanceof SmartBrainOwner) {
+                                    if (!(BrainUtils.getMemory(entity1, MemoryModuleType.ATTACK_TARGET) instanceof Chumtoad)) {
+                                        BrainUtils.setMemory(entity1, MemoryModuleType.ATTACK_TARGET, entity);
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
 
-
-
-
-        /*   if (entity instanceof Mob){
-                SquareRadius radius = new SquareRadius(20, 7);
-                List<LivingEntity> toads = EntityRetrievalUtil.getEntities(entity.level, entity.getBoundingBox().inflate(radius.xzRadius(), radius.yRadius(), radius.xzRadius()), obj -> obj instanceof Chumtoad toad);
-                if (!toads.isEmpty()) {
-                    ((Mob) entity).setTarget(toads.get(0));
-                    if (entity instanceof SmartBrainOwner && !(entity instanceof Chumtoad)) {
-                        BrainUtils.setMemory(entity, MemoryModuleType.ATTACK_TARGET, toads.get(0));
-                    }
-                 }
-
-            } */
         }
 
 
@@ -149,7 +151,7 @@ public class ModEvents {
 
             if (entity instanceof Chumtoad) {
                 SquareRadius radius = new SquareRadius(20, 7);
-                List<LivingEntity> attackers = EntityRetrievalUtil.getEntities(entity.level, entity.getBoundingBox().inflate(radius.xzRadius(), radius.yRadius(), radius.xzRadius()), obj -> obj instanceof Mob);
+                List<LivingEntity> attackers = EntityRetrievalUtil.getEntities(entity.level, entity.getBoundingBox().inflate(radius.xzRadius(), radius.yRadius(), radius.xzRadius()), obj -> obj instanceof Mob);// /* && !(obj instanceof Cat) */);
                 ListIterator<LivingEntity>
                 iterator = attackers.listIterator();
                 while (iterator.hasNext()) {

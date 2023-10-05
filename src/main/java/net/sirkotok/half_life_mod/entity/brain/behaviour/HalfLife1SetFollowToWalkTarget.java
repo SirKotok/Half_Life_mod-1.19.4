@@ -65,7 +65,7 @@ public class HalfLife1SetFollowToWalkTarget<E extends HalfLifeNeutral> extends E
         if (playerlist == null || playerlist.isEmpty()) return;
         for (Player target : playerlist) {
             if (target.getUUID().equals(uuid)) {
-                if (entity.getSensing().hasLineOfSight(target) && BehaviorUtils.isWithinAttackRange(entity, target, 1)) {
+                if (entity.getSensing().hasLineOfSight(target) && entity.distanceTo(target) < 4) {
                     BrainUtils.clearMemory(entity, MemoryModuleType.WALK_TARGET);
                 }
                 else {

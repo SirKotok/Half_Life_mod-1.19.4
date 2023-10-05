@@ -29,6 +29,7 @@ public class CatchableCreature extends HalfLifeEntity{
 
     @Override
     public InteractionResult interactAt(Player pPlayer, Vec3 pVec, InteractionHand pHand) {
+        if (this.tickCount < 40) return InteractionResult.FAIL;
         Item item = getweopon();
             if (pPlayer.getItemInHand(pHand).isEmpty()) {
                 pPlayer.setItemInHand(pHand, getweopon().getDefaultInstance());
