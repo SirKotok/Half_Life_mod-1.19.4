@@ -1,4 +1,4 @@
-// 1.19.4	2023-10-02T19:20:22.1385687	Item Models: half_life_mod
+// 1.19.4	2023-10-11T22:51:14.0369786	Item Models: half_life_mod
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/barney_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/bullsquid_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/chumtoad_spawn_egg.json
@@ -13,4 +13,5 @@
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/penguin_spawn_egg.json
 dbe72b845f4b73852d0c4d2091299d93b8756e9e assets/half_life_mod/models/item/security_guard_chestplate.json
 5da4163924c3a0ba667da2f1dfe02b07cb4e7277 assets/half_life_mod/models/item/security_guard_helmet.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/shockroach_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/snark_spawn_egg.json

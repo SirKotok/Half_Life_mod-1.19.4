@@ -13,6 +13,7 @@ import net.sirkotok.half_life_mod.entity.ModEntities;
 import net.sirkotok.half_life_mod.item.custom.*;
 import net.sirkotok.half_life_mod.item.custom.armor.SecurityGuardArmorItem;
 import net.sirkotok.half_life_mod.item.custom.gun.Pistol_1_Item;
+import net.sirkotok.half_life_mod.item.custom.gun.Shockroach_Item;
 
 
 public class ModItems {
@@ -21,6 +22,9 @@ public class ModItems {
 
    public static final RegistryObject<Item> HEADCRAB_ONE_SPAWN_EGG = ITEMS.register("headcrab_1_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.HEADCRAB_HL1, 0xa39b74, 0x614a0d   ,
+                    new Item.Properties()));
+    public static final RegistryObject<Item> SHOCKROACH_SPAWN_EGG = ITEMS.register("shockroach_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.SHOCKROACH, 0x11117b, 0xc5a54c  ,
                     new Item.Properties()));
     public static final RegistryObject<Item> CHUMTOAD_SPAWN_EGG = ITEMS.register("chumtoad_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.CHUMTOAD, 0xc82eba, 0x40073a   ,
@@ -80,6 +84,8 @@ public class ModItems {
     //Guns
     public static final RegistryObject<Item> PISTOL = ITEMS.register("pistol_one_item",
             () -> new Pistol_1_Item(new Item.Properties()));
+    public static final RegistryObject<Item> SHOCKROACH_ITEM = ITEMS.register("shockroach_item",
+            () -> new Shockroach_Item(new Item.Properties()));
 
     //Armor
     public static final RegistryObject<Item> SECURITY_GUARD_HELMET = ITEMS.register("security_guard_helmet",

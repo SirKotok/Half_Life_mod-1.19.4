@@ -23,6 +23,11 @@ public class ModEntities {
                     () -> EntityType.Builder.of(Headcrab_1::new, MobCategory.MONSTER)
                             .sized(0.7f, 0.8f)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "headcrab_1").toString()));
+    public static final RegistryObject<EntityType<Shockroach>> SHOCKROACH =
+            ENTITY_TYPES.register("shockroach",
+                    () -> EntityType.Builder.of(Shockroach::new, MobCategory.MONSTER)
+                            .sized(0.7f, 0.8f)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "shockroach").toString()));
 
     public static final RegistryObject<EntityType<Headcrab_zombie_standart>> HEADCRAB_ZOMBIE_1 =
             ENTITY_TYPES.register("headcrab_zombie_1",

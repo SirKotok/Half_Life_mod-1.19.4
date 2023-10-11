@@ -46,6 +46,7 @@ public class ClientModBusEvents {
         EntityRenderers.register(ModEntities.BULLSQUID.get(), Bullsquid_renderer::new);
         EntityRenderers.register(ModEntities.CHUMTOAD.get(), Chumtoadrenderer::new);
         EntityRenderers.register(ModEntities.SNARK.get(), Snarkrenderer::new);
+        EntityRenderers.register(ModEntities.SHOCKROACH.get(), ShockRoachrenderer::new);
         EntityRenderers.register(ModEntities.PENGUIN.get(), PenguinRenderer::new);
         EntityRenderers.register(ModEntities.BARNEY.get(), Barney_renderer::new);
         EntityRenderers.register(ModEntities.ACID_BALL.get(), ThrownItemRenderer::new);

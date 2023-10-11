@@ -31,6 +31,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.HEADCRAB_POISON_HL2.get(), Headcrab_Poison_2.setAttributes());
         event.put(ModEntities.HEADCRAB_POISON_HLA.get(), Headcrab_Poison_3.setAttributes());
         event.put(ModEntities.BULLSQUID.get(), Bullsquid.setAttributes());
+        event.put(ModEntities.SHOCKROACH.get(), Shockroach.setAttributes());
     }
 
 

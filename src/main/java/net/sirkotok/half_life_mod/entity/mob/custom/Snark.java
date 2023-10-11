@@ -95,13 +95,6 @@ public class Snark extends HalfLifeEntity implements GeoEntity, SmartBrainOwner<
     }
 
 
-    @Override
-    public boolean canDrownInFluidType(FluidType type) {
-        if (type.equals(ForgeMod.WATER_TYPE.get())) {
-            return false;
-        }
-        return super.canDrownInFluidType(type);
-    }
 
     @Override
     protected float getWaterSlowDown() {
@@ -206,7 +199,7 @@ public class Snark extends HalfLifeEntity implements GeoEntity, SmartBrainOwner<
             return PlayState.CONTINUE;
         }
 
-        return PlayState.CONTINUE;
+        return PlayState.STOP;
     }
 
     @Override

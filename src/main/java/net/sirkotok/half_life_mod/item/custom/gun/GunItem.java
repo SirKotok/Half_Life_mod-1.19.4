@@ -5,6 +5,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
@@ -113,6 +114,9 @@ public class GunItem extends Item {
     }
 
 
+    public void award(Player pPlayer) {
+        pPlayer.awardStat(Stats.ITEM_USED.get(this));
+    }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
@@ -121,6 +125,7 @@ public class GunItem extends Item {
         if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
         pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.SNOWBALL_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (pLevel.getRandom().nextFloat() * 0.4F + 0.8F));
         shootright(pLevel, pPlayer, pHand);
+
         return InteractionResultHolder.pass(itemstack);
     }
 
@@ -157,6 +162,7 @@ public class GunItem extends Item {
             snowball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 4F, 6.0F);
             pLevel.addFreshEntity(snowball);
         }
+        award(pPlayer);
         if (!pPlayer.getAbilities().instabuild) SetAmmo(itemstack, GetAmmo(itemstack)-1);
     }
     public void shootleft(Level pLevel, Player pPlayer, InteractionHand pHand) {
@@ -168,7 +174,7 @@ public class GunItem extends Item {
             snowball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 4F, 1.0F);
             pLevel.addFreshEntity(snowball);
         }
-
+        award(pPlayer);
         if (!pPlayer.getAbilities().instabuild) SetAmmo(itemstack, GetAmmo(itemstack)-1);
     }
     public void reloadgun(Level pLevel, Player pPlayer, ItemStack itemstack) {

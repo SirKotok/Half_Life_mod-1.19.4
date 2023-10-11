@@ -9,6 +9,7 @@
   "item.half_life_mod.headcrab_zombie_spawn_egg": "Headcrab Zombie Spawn Egg",
   "item.half_life_mod.bullsquid_spawn_egg": "Bullsquid Spawn Egg",
   "item.half_life_mod.chumtoad_spawn_egg": "Chumtoad Spawn Egg",
+    "item.half_life_mod.shockroach_spawn_egg": "Shockroach Spawn Egg",
   "item.half_life_mod.chumtoad_thrower": "Chumtoad",
   "item.half_life_mod.snark_spawn_egg": "Snark Spawn Egg",
     "item.half_life_mod.penguin_spawn_egg": "Penguin Spawn Egg",
@@ -18,6 +19,7 @@
     "item.half_life_mod.pistol_one_item": "9mm Pistol",
     "item.half_life_mod.security_guard_helmet": "Security Guard Helmet",
     "item.half_life_mod.security_guard_chestplate": "Security Guard Vest",
+    "item.half_life_mod.shockroach_item": "Shockroach",
 
 
   "creativemodetab.half_life_tab": "Half-Life Spawn Eggs",
@@ -44,6 +46,7 @@
     "sounds.half_life_mod.ba_follow6": "Guard follows",
 
   "entity.half_life_mod.headcrab_1": "Headcrab",
+    "entity.half_life_mod.shockroach": "Shockroach",
   "entity.half_life_mod.chumtoad": "Chumtoad",
   "entity.half_life_mod.snark": "Snark",
     "entity.half_life_mod.barney": "Security Guard",

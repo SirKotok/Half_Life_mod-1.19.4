@@ -77,6 +77,7 @@ public class HalfLifeMod
             event.accept(ModItems.HEADCRAB_POISON_HLA_SPAWN_EGG);
             event.accept(ModItems.HEADCRAB_ALYX_SPAWN_EGG);
             event.accept(ModItems.HEADCRAB_ARMOR_SPAWN_EGG);
+            event.accept(ModItems.SHOCKROACH_SPAWN_EGG);
           //  event.accept(ModItems.HEADCRAB_ZOMBIE_SPAWN_EGG);
             event.accept(ModItems.BULLSQUID_SPAWN_EGG);
             event.accept(ModItems.CHUMTOAD_SPAWN_EGG);
@@ -88,6 +89,7 @@ public class HalfLifeMod
         if(event.getTab().equals(ModCreativeModeTabs.HALF_LIFE_WEOPONS_TAB)) {
             // items that are guns
             event.accept(ModItems.PISTOL);
+            event.accept(ModItems.SHOCKROACH_ITEM);
          //   items that throw entities
             event.accept(ModItems.CHUMTOAD_THROWER);
             event.accept(ModItems.SNARK_THROWER);

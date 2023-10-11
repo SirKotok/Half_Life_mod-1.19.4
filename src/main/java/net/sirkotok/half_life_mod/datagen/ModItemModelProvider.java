@@ -23,7 +23,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.SECURITY_GUARD_HELMET);
         simpleItem(ModItems.SECURITY_GUARD_VEST);
 
-         withExistingParent(ModItems.HEADCRAB_ONE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.SHOCKROACH_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.HEADCRAB_ONE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.BARNEY_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.HEADCRAB_TWO_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.HEADCRAB_ALYX_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
