@@ -13,6 +13,10 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.phys.Vec3;
 
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.mob.custom.Headcrab_1;
+import net.sirkotok.half_life_mod.entity.mob.custom.Headcrab_2;
+import net.sirkotok.half_life_mod.entity.mob.custom.Headcrab_Fast;
+import net.sirkotok.half_life_mod.entity.mob.custom.Headcrab_Poison_2;
 import net.tslat.smartbrainlib.api.core.behaviour.ExtendedBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.ConditionlessAttack;
 import net.tslat.smartbrainlib.util.BrainUtils;
@@ -83,18 +87,12 @@ public class HeadCrabJumpBehavior<E extends Monster>  extends ConditionlessAttac
     }
 
 
-  /*  @Override
-    protected void tick(E entity) {
-        super.tick(entity);
-
-            ++counter;
-            if (entity.isOnGround() && BrainUtils.getMemory(entity, MemoryModuleType.ATTACK_TARGET) != null) {
-            if(counter % (this.delayTime - 2) == 0)
-            {
-                this.jump(entity);
-                entity.playSound(this.jumpsound);
-        }}
-    } */
+  /*
+        if (entity instanceof Headcrab_1) ((Headcrab_1) entity).triggerAnim("jump", "jump");
+        if (entity instanceof Headcrab_2) ((Headcrab_2) entity).triggerAnim("jump", "jump");
+        if (entity instanceof Headcrab_Poison_2) ((Headcrab_Poison_2) entity).triggerAnim("jump", "jump");
+        if (entity instanceof Headcrab_Fast) ((Headcrab_Fast) entity).triggerAnim("jump", "jump");
+    */
 
 
 

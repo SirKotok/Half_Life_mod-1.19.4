@@ -318,7 +318,9 @@ public class Headcrab_Poison_3 extends HalfLifeEntity implements GeoEntity, Smar
                         .whenStopping(entity -> this.entityData.set(IS_SCARED, false)),
                 new Retaliate<>(),
                 new AlyxPoisoncrabJumpBehavior<>(12, 135, 35, getJumpSound(), getBiteSound(), getScreamSound(), -1)
-                        .cooldownFor(entity -> 40).startCondition(entity -> !this.entityData.get(IS_SCARED))
+                        .cooldownFor(entity -> 40)
+                        .startCondition(entity -> !this.entityData.get(IS_SCARED))
+                        .whenStarting(entity -> this.entityData.set(JUMP_TIMESTAMP, this.tickCount))
         );
 
     }
@@ -327,6 +329,13 @@ public class Headcrab_Poison_3 extends HalfLifeEntity implements GeoEntity, Smar
     @Override
     public void tick() {
          super.tick();
+
+
+        if ((this.tickCount - this.entityData.get(JUMP_TIMESTAMP) == 35) && !this.isPassenger()) {
+            this.stopAiFor(100);
+            this.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 100, false, false, false));
+        }
+
 
          if (aistopped() && ((this.tickCount - ai_stop_timestamp() > ai_stop_remaining()))) {
              this.entityData.set(AI_STOP, false);

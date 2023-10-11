@@ -25,6 +25,7 @@ import net.sirkotok.half_life_mod.entity.mob.client.renderers.*;
 import net.sirkotok.half_life_mod.item.ModCreativeModeTabs;
 import net.sirkotok.half_life_mod.item.ModItems;
 import net.sirkotok.half_life_mod.networking.ModPackets;
+import net.sirkotok.half_life_mod.particle.ModParticles;
 import net.sirkotok.half_life_mod.sound.ModSounds;
 import org.slf4j.Logger;
 
@@ -47,6 +48,7 @@ public class HalfLifeMod
         ModMemoryModuleType.register(modEventBus);
         ModSensorType.register(modEventBus);
         ModEffects.register(modEventBus);
+        ModParticles.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
@@ -62,7 +64,6 @@ public class HalfLifeMod
 
 
     }
-
 
 
     private void addCreative(CreativeModeTabEvent.BuildContents event)
@@ -98,31 +99,8 @@ public class HalfLifeMod
 
 
 
-
-    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents
-    {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
-            EntityRenderers.register(ModEntities.HEADCRAB_HL1.get(), Headcrab_1renderer::new);
-            EntityRenderers.register(ModEntities.HEADCRAB_ZOMBIE_1.get(), Headcrab_zombie_standart_renderer::new);
-            EntityRenderers.register(ModEntities.HEADCRAB_HL2.get(), Headcrab_2renderer::new);
-            EntityRenderers.register(ModEntities.HEADCRAB_POISON_HL2.get(), Headcrab_poison_2renderer::new);
-            EntityRenderers.register(ModEntities.HEADCRAB_POISON_HLA.get(), Headcrab_poison_3renderer::new);
-            EntityRenderers.register(ModEntities.HEADCRAB_HLA.get(), Headcrab_3renderer::new);
-            EntityRenderers.register(ModEntities.HEADCRAB_ARMORED.get(), Headcrab_armoredrenderer::new);
-            EntityRenderers.register(ModEntities.HEADCRAB_FAST.get(), Headcrab_fastrenderer::new);
-            EntityRenderers.register(ModEntities.BULLSQUID.get(), Bullsquid_renderer::new);
-            EntityRenderers.register(ModEntities.CHUMTOAD.get(), Chumtoadrenderer::new);
-            EntityRenderers.register(ModEntities.SNARK.get(), Snarkrenderer::new);
-            EntityRenderers.register(ModEntities.PENGUIN.get(), PenguinRenderer::new);
-            EntityRenderers.register(ModEntities.BARNEY.get(), Barney_renderer::new);
-            EntityRenderers.register(ModEntities.ACID_BALL.get(), ThrownItemRenderer::new);
-            EntityRenderers.register(ModEntities.BULLET_ONE.get(), ThrownItemRenderer::new);
-        }
-    }
 }
 //TODO:
 /*  1) Better chumtoad, penguin, snark models; 2) Poison headcrab screen effect 3) Bullsquid and snark particles 4) better pistol reload sound and model... and so much more  */
-
+// TODO: Fix the fucking bullet hole particles
+//TODO fix the fucking jumping guns

@@ -9,6 +9,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -251,8 +252,9 @@ public class Barney extends HalfLifeNeutral implements GeoEntity, SmartBrainOwne
 
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_33601_, DifficultyInstance p_33602_, MobSpawnType p_33603_, @Nullable SpawnGroupData p_33604_, @Nullable CompoundTag p_33605_) {
-        this.setItemSlot(EquipmentSlot.HEAD, ModItems.SECURITY_GUARD_HELMET.get().getDefaultInstance());
-        this.setItemSlot(EquipmentSlot.CHEST, ModItems.SECURITY_GUARD_VEST.get().getDefaultInstance());
+        if (RandomSource.create().nextFloat() < 0.9f) this.setItemSlot(EquipmentSlot.HEAD, ModItems.SECURITY_GUARD_HELMET.get().getDefaultInstance());
+        if (RandomSource.create().nextFloat() < 0.9f) this.setItemSlot(EquipmentSlot.CHEST, ModItems.SECURITY_GUARD_VEST.get().getDefaultInstance());
+
         this.setItemSlot(EquipmentSlot.MAINHAND, ModItems.PISTOL.get().getDefaultInstance());
 
         return super.finalizeSpawn(p_33601_, p_33602_, p_33603_, p_33604_, p_33605_);

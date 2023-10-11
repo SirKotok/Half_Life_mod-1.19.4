@@ -42,11 +42,11 @@ public class Pistol_1_Item extends GunItem implements GeoItem {
    @Override
     public int getRightClickCooldown(){
         return 4;
-    }
+    } //4
     @Override
     public int getLeftClickCooldown(){
         return 6;
-    }
+    } //6
     @Override
     public int getReloadCooldown(){
         return 20;

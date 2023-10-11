@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
@@ -280,6 +281,7 @@ public class Headcrab_3 extends HalfLifeEntity implements GeoEntity, SmartBrainO
                 new SetWalkTargetToAttackTarget<>(),
                 new Retaliate<>(),
                 new AlyxcrabJumpBehavior<>(12, 135, 35, getJumpSound(), getBiteSound(), 1f)
+                        .whenStarting(entity -> this.entityData.set(JUMP_TIMESTAMP, this.tickCount))
                         .cooldownFor(entity -> 40)
         );
 
@@ -289,6 +291,13 @@ public class Headcrab_3 extends HalfLifeEntity implements GeoEntity, SmartBrainO
     @Override
     public void tick() {
          super.tick();
+
+
+
+         if ((this.tickCount - this.entityData.get(JUMP_TIMESTAMP) == 35) && !this.isPassenger()) {
+             this.stopAiFor(100);
+             this.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 100, false, false, false));
+         }
 
          if (aistopped() && ((this.tickCount - ai_stop_timestamp() > ai_stop_remaining()))) {
              this.entityData.set(AI_STOP, false);

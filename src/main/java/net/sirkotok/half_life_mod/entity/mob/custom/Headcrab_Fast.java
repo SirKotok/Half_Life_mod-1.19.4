@@ -242,7 +242,7 @@ public class Headcrab_Fast extends HalfLifeEntity implements GeoEntity, SmartBra
                 new Retaliate<>(),
 
                 new BiteWhileJumpingBehavior<>(30, getBiteSound(), 0.2f).startCondition(entity -> !isOnGround()).cooldownFor(entity -> 20),
-                new HeadCrabJumpBehavior<>(14, getJumpSound(), null).SetMinDistance(3).whenStarting(entity -> triggerAnim("jump", "jump")).cooldownFor(entity -> 80)
+                new HeadCrabJumpBehavior<>(14, getJumpSound(), null).whenStarting(entity -> triggerAnim("jump", "jump")).cooldownFor(entity -> 80)
         );
 
     }
