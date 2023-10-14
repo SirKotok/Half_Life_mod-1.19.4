@@ -19,7 +19,8 @@ public class ModParticles {
     public static final RegistryObject<SimpleParticleType> SPIT_HIT =
             PARTICLE_TYPES.register("spit_hit", () -> new SimpleParticleType(true));
 
-
+    public static final RegistryObject<SimpleParticleType> SHOCK_IMPACT =
+            PARTICLE_TYPES.register("shock_impact", () -> new SimpleParticleType(true));
 
     public static void register(IEventBus eventBus){
         PARTICLE_TYPES.register(eventBus);

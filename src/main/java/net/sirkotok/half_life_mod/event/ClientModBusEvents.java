@@ -1,7 +1,6 @@
 package net.sirkotok.half_life_mod.event;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
@@ -14,7 +13,7 @@ import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.entity.ModEntities;
 import net.sirkotok.half_life_mod.entity.mob.client.renderers.*;
 import net.sirkotok.half_life_mod.particle.ModParticles;
-import net.sirkotok.half_life_mod.particle.custom.projectile_impact.AcidSpitHit;
+import net.sirkotok.half_life_mod.particle.custom.projectile_impact.BigImpactParticle;
 import net.sirkotok.half_life_mod.particle.custom.projectile_impact.BulletHoleParticle;
 import net.sirkotok.half_life_mod.util.KeyBinding;
 
@@ -30,7 +29,9 @@ public class ClientModBusEvents {
         Minecraft.getInstance().particleEngine.register(ModParticles.BULLET_HOLE.get(),
                 BulletHoleParticle.Provider::new);
         Minecraft.getInstance().particleEngine.register(ModParticles.SPIT_HIT.get(),
-                AcidSpitHit.Provider::new);
+                BigImpactParticle.Provider::new);
+        Minecraft.getInstance().particleEngine.register(ModParticles.SHOCK_IMPACT.get(),
+                BigImpactParticle.Provider::new);
     }
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event)
@@ -50,6 +51,7 @@ public class ClientModBusEvents {
         EntityRenderers.register(ModEntities.PENGUIN.get(), PenguinRenderer::new);
         EntityRenderers.register(ModEntities.BARNEY.get(), Barney_renderer::new);
         EntityRenderers.register(ModEntities.ACID_BALL.get(), ThrownItemRenderer::new);
+        EntityRenderers.register(ModEntities.SHOCK_SHOT.get(), ThrownItemRenderer::new);
         EntityRenderers.register(ModEntities.BULLET_ONE.get(), ThrownItemRenderer::new);
     }
 

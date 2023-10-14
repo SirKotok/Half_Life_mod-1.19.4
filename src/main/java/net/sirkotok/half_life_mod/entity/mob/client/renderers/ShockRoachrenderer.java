@@ -24,7 +24,7 @@ public class ShockRoachrenderer extends GeoEntityRenderer<Shockroach> {
                        float partialTick, PoseStack poseStack,
                        MultiBufferSource bufferSource, int packedLight) {
 
-        poseStack.scale(0.9f, 0.9f, 0.9f);
+        poseStack.scale(1f, 1f, 1f);
 
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }

@@ -12,6 +12,7 @@ import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.entity.mob.custom.*;
 import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
 import net.sirkotok.half_life_mod.entity.projectile.Bullet;
+import net.sirkotok.half_life_mod.entity.projectile.ShockProjectile;
 
 
 public class ModEntities {
@@ -26,7 +27,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<Shockroach>> SHOCKROACH =
             ENTITY_TYPES.register("shockroach",
                     () -> EntityType.Builder.of(Shockroach::new, MobCategory.MONSTER)
-                            .sized(0.7f, 0.8f)
+                            .sized(0.6f, 0.5f)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "shockroach").toString()));
 
     public static final RegistryObject<EntityType<Headcrab_zombie_standart>> HEADCRAB_ZOMBIE_1 =
@@ -100,6 +101,7 @@ public class ModEntities {
                                     .updateInterval(10)
                     .build(new ResourceLocation(HalfLifeMod.MOD_ID, "acid_ball").toString()));
 
+
     public static final RegistryObject<EntityType<Bullet>> BULLET_ONE =
             ENTITY_TYPES.register("bullet_one",
                     () -> EntityType.Builder.<Bullet>of(Bullet::new, MobCategory.MISC)
@@ -107,8 +109,14 @@ public class ModEntities {
                             .clientTrackingRange(4)
                             .updateInterval(10)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "bullet_one").toString()));
-    
 
+    public static final RegistryObject<EntityType<ShockProjectile>> SHOCK_SHOT =
+            ENTITY_TYPES.register("shock_shot",
+                    () -> EntityType.Builder.<ShockProjectile>of(ShockProjectile::new, MobCategory.MISC)
+                            .sized(0.25F, 0.25F)
+                            .clientTrackingRange(4)
+                            .updateInterval(10)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "shock_shot").toString()));
 
 
 

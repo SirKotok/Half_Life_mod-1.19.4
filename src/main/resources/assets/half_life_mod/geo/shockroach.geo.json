@@ -6,9 +6,9 @@
 				"identifier": "geometry.unknown",
 				"texture_width": 32,
 				"texture_height": 32,
-				"visible_bounds_width": 3,
-				"visible_bounds_height": 2.5,
-				"visible_bounds_offset": [0, 0.75, 0]
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 1.5,
+				"visible_bounds_offset": [0, 0.25, 0]
 			},
 			"bones": [
 				{
@@ -63,21 +63,7 @@
 				{
 					"name": "shooting",
 					"parent": "head",
-					"pivot": [0, 0, 0],
-					"cubes": [
-						{
-							"origin": [-4.3, 0.4, -9.2],
-							"size": [8.9, 5.3, 0],
-							"uv": {
-								"north": {"uv": [22.75, 23], "uv_size": [6, 6.25]},
-								"east": {"uv": [22.75, 23], "uv_size": [6, 6.25]},
-								"south": {"uv": [2.25, 23.75], "uv_size": [6.75, 7]},
-								"west": {"uv": [7, 23.75], "uv_size": [6.75, 7]},
-								"up": {"uv": [19.5, 30], "uv_size": [-6.75, -7]},
-								"down": {"uv": [30.75, 8], "uv_size": [-6.75, -7]}
-							}
-						}
-					]
+					"pivot": [0, 0, 0]
 				},
 				{
 					"name": "small2",
@@ -187,6 +173,27 @@
 					]
 				},
 				{
+					"name": "shoot1",
+					"parent": "thing1",
+					"pivot": [-0.4, 4.6, -9.1],
+					"cubes": [
+						{
+							"origin": [-0.2, 5, -9.2],
+							"size": [0.4, 0.5, 0],
+							"pivot": [-0.4, 3.5, -5.2],
+							"rotation": [9, 0, 0],
+							"uv": {
+								"north": {"uv": [25.75, 14.5], "uv_size": [2, 4.3]},
+								"east": {"uv": [23.25, 14.5], "uv_size": [0, 4.3]},
+								"south": {"uv": [25.75, 19], "uv_size": [2, 4.3]},
+								"west": {"uv": [23.25, 14.5], "uv_size": [0, 4.3]},
+								"up": {"uv": [25.25, 14.5], "uv_size": [-2, 0]},
+								"down": {"uv": [25.25, 14.5], "uv_size": [-2, 0]}
+							}
+						}
+					]
+				},
+				{
 					"name": "thing2",
 					"parent": "head",
 					"pivot": [1.2, 1.6, -5.1],
@@ -223,6 +230,27 @@
 					]
 				},
 				{
+					"name": "shoot2",
+					"parent": "thing2",
+					"pivot": [1.9, 3.3, -8.6],
+					"cubes": [
+						{
+							"origin": [0.9, 3.9, -9.2],
+							"size": [0.4, 0.4, 0],
+							"pivot": [1, 2.3, -5.2],
+							"rotation": [8.6981, -2.32044, 14.8235],
+							"uv": {
+								"north": {"uv": [25.75, 14.5], "uv_size": [2, 4.3]},
+								"east": {"uv": [23.25, 14.5], "uv_size": [0, 4.3]},
+								"south": {"uv": [25.75, 19], "uv_size": [2, 4.3]},
+								"west": {"uv": [23.25, 14.5], "uv_size": [0, 4.3]},
+								"up": {"uv": [25.25, 14.5], "uv_size": [-2, 0]},
+								"down": {"uv": [25.25, 14.5], "uv_size": [-2, 0]}
+							}
+						}
+					]
+				},
+				{
 					"name": "thing3",
 					"parent": "head",
 					"pivot": [-1.2, 0.8, -5.1],
@@ -254,6 +282,27 @@
 								"west": {"uv": [17, 10], "uv_size": [4, 0.75]},
 								"up": {"uv": [0, 17], "uv_size": [0.75, 4]},
 								"down": {"uv": [1, 21], "uv_size": [0.75, -4]}
+							}
+						}
+					]
+				},
+				{
+					"name": "shoot3",
+					"parent": "thing3",
+					"pivot": [-0.8, 2.8, -8.7],
+					"cubes": [
+						{
+							"origin": [-1.14313, 2.53688, -8.81745],
+							"size": [0.6, 0.2, 0],
+							"pivot": [-0.7, 2.96298, -8.60196],
+							"rotation": [8.9515, 0.93693, -5.92666],
+							"uv": {
+								"north": {"uv": [25.75, 14.5], "uv_size": [2, 4.3]},
+								"east": {"uv": [23.25, 14.5], "uv_size": [0, 4.3]},
+								"south": {"uv": [25.75, 19], "uv_size": [2, 4.3]},
+								"west": {"uv": [23.25, 14.5], "uv_size": [0, 4.3]},
+								"up": {"uv": [25.25, 14.5], "uv_size": [-2, 0]},
+								"down": {"uv": [25.25, 14.5], "uv_size": [-2, 0]}
 							}
 						}
 					]

@@ -6,6 +6,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -116,6 +117,8 @@ public class Pistol_1_Item extends GunItem implements GeoItem {
     public double getTick(Object itemStack) {
         return RenderUtils.getCurrentTick();
     }
+
+
 
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {

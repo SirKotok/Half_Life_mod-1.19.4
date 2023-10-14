@@ -60,6 +60,22 @@
   "entity.half_life_mod.bullsquid": "Bullsquid",
   "entity.half_life_mod.headcrab_zombie_1": "Headcrab Zombie",
 
+
+    "sounds.half_life_mod.shock_die": "Shockroach Dies",
+    "sounds.half_life_mod.shock_jump2": "Shockroach Jumps",
+    "sounds.half_life_mod.shock_jump1": "Shockroach Jumps",
+    "sounds.half_life_mod.shock_walk": "Shockroach angry",
+    "sounds.half_life_mod.shock_bite": "Shockroach  bites",
+    "sounds.half_life_mod.shock_flinch": "Shockroach flinches",
+    "sounds.half_life_mod.shock_angry": "Shockroach angry",
+    "sounds.half_life_mod.shock_idle1": "Shockroach idle",
+    "sounds.half_life_mod.shock_idle2": "Shockroach idle",
+    "sounds.half_life_mod.shock_idle3": "Shockroach idle",
+    "sounds.half_life_mod.shock_draw": "Shockroach noises",
+    "sounds.half_life_mod.shock_fire": "Electric shot fired",
+    "sounds.half_life_mod.shock_impact": "Electric shot impact",
+    "sounds.half_life_mod.shock_recharge": "Shockroach recharge",
+
     "sounds.half_life_mod.bullet_hit1": "Bullet hits" ,
     "sounds.half_life_mod.bullet_hit2": "Bullet hits" ,
     "sounds.half_life_mod.pistol_reload": "Pistol reload" ,

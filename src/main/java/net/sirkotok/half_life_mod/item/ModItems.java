@@ -12,6 +12,7 @@ import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.entity.ModEntities;
 import net.sirkotok.half_life_mod.item.custom.*;
 import net.sirkotok.half_life_mod.item.custom.armor.SecurityGuardArmorItem;
+import net.sirkotok.half_life_mod.item.custom.fake.FakeBulletItem;
 import net.sirkotok.half_life_mod.item.custom.gun.Pistol_1_Item;
 import net.sirkotok.half_life_mod.item.custom.gun.Shockroach_Item;
 
@@ -68,12 +69,15 @@ public class ModItems {
                     new Item.Properties()));
 
 
-    //Fake Items used for models in projectiles lmao
+    //Fake Items used for models/textures in projectiles lmao
     public static final RegistryObject<Item> FAKE_BULLET = ITEMS.register("bullet",
             () -> new FakeBulletItem(new Item.Properties()));
+    public static final RegistryObject<Item> FAKE_SHOCK = ITEMS.register("shock",
+            () -> new Item(new Item.Properties()));
 
-  //  public static final RegistryObject<Item> ENTITY_THROWER = ITEMS.register("entity_thrower",
-  //          () -> new EntityThrowingItem(new Item.Properties()));
+
+    // Entity throwers
+
     public static final RegistryObject<Item> CHUMTOAD_THROWER = ITEMS.register("chumtoad_thrower",
             () -> new ChumtoadItem(new Item.Properties()));
     public static final RegistryObject<Item> SNARK_THROWER = ITEMS.register("snark_thrower",
@@ -92,7 +96,6 @@ public class ModItems {
             () -> new SecurityGuardArmorItem(ModArmorMaterials.SECURITY_GUARD, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> SECURITY_GUARD_VEST = ITEMS.register("security_guard_chestplate",
             () -> new SecurityGuardArmorItem(ModArmorMaterials.SECURITY_GUARD, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
-
 
 
     public static void register(IEventBus eventBus) {

@@ -3,6 +3,7 @@ package net.sirkotok.half_life_mod.item.custom.gun;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -15,6 +16,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.sirkotok.half_life_mod.entity.projectile.Bullet;
+import net.sirkotok.half_life_mod.sound.ModSounds;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -28,7 +30,7 @@ public class RechargingGunItem extends GunItem {
 
 
     public static int GetMaxAmmo() {
-        return 8;
+        return 10;
     }
 
 
@@ -56,6 +58,19 @@ public class RechargingGunItem extends GunItem {
 
 
 
+    public SoundEvent getRechargeSound() {
+        return ModSounds.SHOCKROACH_RECHARGE.get();
+    }
+
+
+    public boolean needshand() {
+        return true;
+    }
+
+    public boolean hasrechargesound(){
+        return true;
+    }
+
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
         if (GetCooldow(pStack)>0) {
@@ -66,8 +81,9 @@ public class RechargingGunItem extends GunItem {
         SetTick(pStack, GetTick(pStack)+1);
         }
 
-        if (GetAmmo(pStack) < GetMaxAmmo() && GetTick(pStack) % 20 == 0) {
+        if (GetAmmo(pStack) < GetMaxAmmo() && GetTick(pStack) % 20 == 0 &&(!this.needshand() || pIsSelected)) {
             SetAmmo(pStack, GetAmmo(pStack)+1);
+            if (this.hasrechargesound()) pLevel.playSound((Player) null, pEntity.getX(), pEntity.getY(), pEntity.getZ(), this.getRechargeSound(), SoundSource.NEUTRAL, 0.5F, 1F);
         }
 
     }

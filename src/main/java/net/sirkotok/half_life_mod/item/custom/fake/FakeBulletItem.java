@@ -1,4 +1,4 @@
-package net.sirkotok.half_life_mod.item.custom;
+package net.sirkotok.half_life_mod.item.custom.fake;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.Item;

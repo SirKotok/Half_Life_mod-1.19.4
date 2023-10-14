@@ -9,6 +9,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.item.Item;
@@ -165,18 +166,31 @@ public class GunItem extends Item {
         award(pPlayer);
         if (!pPlayer.getAbilities().instabuild) SetAmmo(itemstack, GetAmmo(itemstack)-1);
     }
+
+
+    @Override
+    public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
+        return true;
+    }
+
+
+    @Override
+    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+        return super.shouldCauseReequipAnimation(oldStack, newStack, slotChanged) && slotChanged;
+    }
+
     public void shootleft(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         if (!pLevel.isClientSide) {
-            SetCooldow(itemstack, getLeftClickCooldown());
-            Bullet snowball = new Bullet(pLevel, pPlayer);
-            snowball.setItem(itemstack);
-            snowball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 4F, 1.0F);
+           SetCooldow(itemstack, getLeftClickCooldown());
+           Bullet snowball = new Bullet(pLevel, pPlayer);
+          snowball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 4F, 1.0F);
             pLevel.addFreshEntity(snowball);
-        }
+      }
         award(pPlayer);
-        if (!pPlayer.getAbilities().instabuild) SetAmmo(itemstack, GetAmmo(itemstack)-1);
+       if (!pPlayer.getAbilities().instabuild) SetAmmo(itemstack, GetAmmo(itemstack)-1);
     }
+
     public void reloadgun(Level pLevel, Player pPlayer, ItemStack itemstack) {
         if (GetAmmo(itemstack) != GetMaxAmmo() && !pPlayer.getAbilities().instabuild)
         {

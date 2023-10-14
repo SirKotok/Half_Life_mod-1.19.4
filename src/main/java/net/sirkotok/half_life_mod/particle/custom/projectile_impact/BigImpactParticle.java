@@ -12,11 +12,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
-public class AcidSpitHit extends TextureSheetParticle {
+public class BigImpactParticle extends TextureSheetParticle {
 
     int direction;
 
-    protected AcidSpitHit(ClientLevel pLevel, double pX, double pY, double pZ, SpriteSet spriteSet, double direction, double pYSpeed, double pZSpeed) {
+    protected BigImpactParticle(ClientLevel pLevel, double pX, double pY, double pZ, SpriteSet spriteSet, double direction, double pYSpeed, double pZSpeed) {
         super(pLevel, pX, pY, pZ, 0, 0, 0);
         this.friction = 1f;
         this.xd = 0;
@@ -61,7 +61,7 @@ public class AcidSpitHit extends TextureSheetParticle {
         public Particle createParticle(SimpleParticleType particleType, ClientLevel level,
                                        double x, double y, double z,
                                        double dx, double dy, double dz) {
-            return new AcidSpitHit(level, x, y, z, this.sprites, dx, dy, dz);
+            return new BigImpactParticle(level, x, y, z, this.sprites, dx, dy, dz);
         }
     }
 

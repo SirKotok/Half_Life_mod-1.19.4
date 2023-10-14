@@ -24,9 +24,6 @@ import java.util.List;
 
 public class AlyxcrabJumpBehavior<E extends Headcrab_3>  extends ConditionlessAttack<E> {
 
-    //Oh my god I hate my life so much, this code is not using brains well.... but otherwise it doesnt fukin work at all, the AI just stays on after it falls down.... I hate this
-    //TODO: (mayby one day) remake the entire fucking thing
-
 
     protected SoundEvent jumpsound;
     protected final RandomSource random = RandomSource.create();

@@ -15,6 +15,39 @@ public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 
+    //Shockroach item and entity sounds
+
+    public static final RegistryObject<SoundEvent> SHOCKROACH_DIE =
+            registerSoundEvent("shock_die");
+    public static final RegistryObject<SoundEvent> SHOCKROACH_JUMP_1 =
+            registerSoundEvent("shock_jump2");
+    public static final RegistryObject<SoundEvent> SHOCKROACH_JUMP_2 =
+            registerSoundEvent("shock_jump1");
+    public static final RegistryObject<SoundEvent> SHOCKROACH_WALK =
+            registerSoundEvent("shock_walk");
+    public static final RegistryObject<SoundEvent> SHOCKROACH_BITE =
+            registerSoundEvent("shock_bite");
+    public static final RegistryObject<SoundEvent> SHOCKROACH_PAIN =
+            registerSoundEvent("shock_flinch");
+    public static final RegistryObject<SoundEvent> SHOCKROACH_ANGRY =
+            registerSoundEvent("shock_angry");
+    public static final RegistryObject<SoundEvent> SHOCKROACH_IDLE_1 =
+            registerSoundEvent("shock_idle1");
+    public static final RegistryObject<SoundEvent> SHOCKROACH_IDLE_2 =
+            registerSoundEvent("shock_idle2");
+    public static final RegistryObject<SoundEvent> SHOCKROACH_IDLE_3 =
+            registerSoundEvent("shock_idle3");
+    public static final RegistryObject<SoundEvent> SHOCKROACH_DRAW =
+            registerSoundEvent("shock_draw");
+    public static final RegistryObject<SoundEvent> SHOCK_FIRE =
+            registerSoundEvent("shock_fire");
+    public static final RegistryObject<SoundEvent> SHOCK_IMPACT =
+            registerSoundEvent("shock_impact");
+    public static final RegistryObject<SoundEvent> SHOCKROACH_RECHARGE =
+            registerSoundEvent("shock_recharge");
+
+
+
     //headcrab hl1 sounds
     public static final RegistryObject<SoundEvent> HEADCRAB_1_IDLE_1 =
             registerSoundEvent("headcrab_1_idle_1");

@@ -17,6 +17,90 @@
       "half_life_mod:pistol_shot"
     ]
   },
+  "shock_die": {
+    "subtitle": "sounds.half_life_mod.shock_die",
+    "sounds": [
+      "half_life_mod:shock_die"
+    ]
+  },
+  "shock_jump2": {
+    "subtitle": "sounds.half_life_mod.shock_jump2",
+    "sounds": [
+      "half_life_mod:shock_jump2"
+    ]
+  },
+  "shock_jump1": {
+    "subtitle": "sounds.half_life_mod.shock_jump1",
+    "sounds": [
+      "half_life_mod:shock_jump1"
+    ]
+  },
+  "shock_walk": {
+    "subtitle": "sounds.half_life_mod.shock_walk",
+    "sounds": [
+      "half_life_mod:shock_walk"
+    ]
+  },
+  "shock_bite": {
+    "subtitle": "sounds.half_life_mod.shock_bite",
+    "sounds": [
+      "half_life_mod:shock_bite"
+    ]
+  },
+  "shock_flinch": {
+    "subtitle": "sounds.half_life_mod.shock_flinch",
+    "sounds": [
+      "half_life_mod:shock_flinch"
+    ]
+  },
+  "shock_angry": {
+    "subtitle": "sounds.half_life_mod.shock_angry",
+    "sounds": [
+      "half_life_mod:shock_angry"
+    ]
+  },
+  "shock_idle1": {
+    "subtitle": "sounds.half_life_mod.shock_idle1",
+    "sounds": [
+      "half_life_mod:shock_idle1"
+    ]
+  },
+  "shock_idle2": {
+    "subtitle": "sounds.half_life_mod.shock_idle2",
+    "sounds": [
+      "half_life_mod:shock_idle2"
+    ]
+  },
+  "shock_idle3": {
+    "subtitle": "sounds.half_life_mod.shock_idle3",
+    "sounds": [
+      "half_life_mod:shock_idle3"
+    ]
+  },
+  "shock_draw": {
+    "subtitle": "sounds.half_life_mod.shock_draw",
+    "sounds": [
+      "half_life_mod:shock_draw"
+    ]
+  },
+  "shock_fire": {
+    "subtitle": "sounds.half_life_mod.shock_fire",
+    "sounds": [
+      "half_life_mod:shock_fire"
+    ]
+  },
+  "shock_impact": {
+    "subtitle": "sounds.half_life_mod.shock_impact",
+    "sounds": [
+      "half_life_mod:shock_impact"
+    ]
+  },
+  "shock_recharge": {
+    "subtitle": "sounds.half_life_mod.shock_recharge",
+    "sounds": [
+      "half_life_mod:shock_recharge"
+    ]
+  },
   "ba_pain1": {
     "subtitle": "sounds.half_life_mod.ba_pain1",
     "sounds": [
