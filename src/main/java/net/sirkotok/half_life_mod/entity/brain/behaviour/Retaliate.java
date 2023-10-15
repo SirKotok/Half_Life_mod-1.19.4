@@ -14,6 +14,7 @@ import net.tslat.smartbrainlib.api.core.behaviour.ExtendedBehaviour;
 import net.tslat.smartbrainlib.util.BrainUtils;
 
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class Retaliate<E extends Mob> extends ExtendedBehaviour<E> {
@@ -24,6 +25,9 @@ public class Retaliate<E extends Mob> extends ExtendedBehaviour<E> {
 
     protected Predicate<LivingEntity> targetPredicate = entity -> entity.isAlive() && (!(entity instanceof Player player) || !player.isCreative()); // Predicate that determines an applicable target
     protected Predicate<E> canTargetPredicate = entity -> true; // Predicate that determines whether our entity is ready to target or not
+
+
+
 
 
     @Override
@@ -40,7 +44,9 @@ public class Retaliate<E extends Mob> extends ExtendedBehaviour<E> {
     protected void start(E entity) {
         LivingEntity target = BrainUtils.getMemory(entity, MemoryModuleType.HURT_BY_ENTITY); // put the entity that hurt us into target
 
-        if (target != null && this.targetPredicate.test(target)) { // If we have a valid target then, Target found, set the target in memory, and reset the unreachable target timer
+
+        // If we have a valid target then, Target found, set the target in memory, and reset the unreachable target timer
+        if (target != null && this.targetPredicate.test(target)) {
             BrainUtils.setMemory(entity, MemoryModuleType.ATTACK_TARGET, target);
             BrainUtils.clearMemory(entity, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE);
         }

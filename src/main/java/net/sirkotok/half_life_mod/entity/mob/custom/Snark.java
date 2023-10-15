@@ -83,7 +83,7 @@ public class Snark extends HalfLifeEntity implements GeoEntity, SmartBrainOwner<
             this.entityData.set(LIVED, true);
         }
 
-        if (this.tickCount > 500 && this.isAlive()) explode();
+        if (this.tickCount > 400 && this.isAlive()) explode();
     }
 
 
@@ -96,39 +96,7 @@ public class Snark extends HalfLifeEntity implements GeoEntity, SmartBrainOwner<
 
 
 
-    @Override
-    protected float getWaterSlowDown() {
-        return 0.98f;
-    }
 
-
-    @Override
-    public boolean isPushedByFluid(FluidType type) {
-        if (type.equals(ForgeMod.WATER_TYPE.get())) {
-            return false;
-        }
-        return super.isPushedByFluid(type);
-    }
-
-
-
-    @Override
-    public double getFluidMotionScale(FluidType type) {
-        if (type.equals(ForgeMod.WATER_TYPE.get())) {
-            return 1;
-        }
-        return super.getFluidMotionScale(type);
-    }
-
-    @Override
-    public double getFluidJumpThreshold() {
-        return 0.0D;
-    }
-
-    @Override
-    public void jumpInFluid(FluidType type) {
-        self().setDeltaMovement(self().getDeltaMovement().add(0.0D, 0.5f, 0.0D));
-    }
 
     protected SoundEvent getBiteSound() {
         return ModSounds.SNARK_ATTACK.get();
@@ -236,7 +204,7 @@ public class Snark extends HalfLifeEntity implements GeoEntity, SmartBrainOwner<
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<Snark>()
                         .setPredicate((target, entity) ->
-                                (!(target instanceof Snark))));
+                                (!(target instanceof Snark) && !(target instanceof Snarknest))));
     }
 
 

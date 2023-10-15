@@ -22,6 +22,7 @@ import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraftforge.fml.common.Mod;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeEntity;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.BiteWhileJumpingBehavior;
@@ -135,6 +136,7 @@ public class Headcrab_2 extends HalfLifeEntity implements GeoEntity, SmartBrainO
     }
 
     protected SoundEvent getHurtSound(DamageSource p_33034_) {
+        if (p_33034_.is(DamageTypes.ON_FIRE)) return ModSounds.HEADCRAB_2_BURNING.get();
         switch (this.random.nextInt(1,4)) {
             case 1:  return ModSounds.HEADCRAB_1_PAIN_1.get();
             case 2:  return ModSounds.HEADCRAB_1_PAIN_2.get();
@@ -154,9 +156,7 @@ public class Headcrab_2 extends HalfLifeEntity implements GeoEntity, SmartBrainO
 
     protected SoundEvent getAmbientSound() {
 
-        if (this.isOnFire()) {
-            return ModSounds.HEADCRAB_2_BURNING.get();
-        }
+
 
         if (this.isangry()) {
             return ModSounds.HEADCRAB_1_ALERT_1.get();

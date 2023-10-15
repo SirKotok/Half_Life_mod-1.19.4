@@ -2,12 +2,15 @@ package net.sirkotok.half_life_mod.entity.mob.custom;
 
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -25,6 +28,7 @@ import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidType;
 import net.sirkotok.half_life_mod.entity.base.CatchableCreature;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeEntity;
@@ -102,9 +106,7 @@ public class Shockroach extends CatchableCreature implements GeoEntity, SmartBra
         return this.entityData.get(IS_ANGRY);
     }
 
-
-
-
+    
 
 
     public Shockroach(EntityType type, Level level) {
@@ -155,7 +157,6 @@ public class Shockroach extends CatchableCreature implements GeoEntity, SmartBra
         if (this.isangry()) {
             switch (this.random.nextInt(1,3)) {
                 case 1:  return ModSounds.SHOCKROACH_ANGRY.get();
-                case 2:  return ModSounds.SHOCKROACH_WALK.get();
             }
         }
         switch (this.random.nextInt(1,4)) {
@@ -167,8 +168,17 @@ public class Shockroach extends CatchableCreature implements GeoEntity, SmartBra
     }
 
 
-
-
+    protected SoundEvent getStepSound() {
+        return SoundEvents.FROG_STEP;
+    }
+    @Override
+    protected void playStepSound(BlockPos pPos, BlockState pState) {
+        BlockState blockstate = this.level.getBlockState(pPos.above());
+        boolean flag = blockstate.is(BlockTags.INSIDE_STEP_SOUND_BLOCKS);
+        if (flag || !pState.getMaterial().isLiquid()) {
+            this.playSound(getStepSound());
+        }
+    }
 
     @Override
     protected Brain.Provider<?> brainProvider() {
@@ -237,7 +247,7 @@ public class Shockroach extends CatchableCreature implements GeoEntity, SmartBra
      @Override
     public void tick() {
          super.tick();
-         if (this.tickCount > 500 && this.isAlive()) {
+         if (this.tickCount > 400 && this.isAlive()) {
              this.playSound(getDeathSound());
              this.setHealth(0);
          }

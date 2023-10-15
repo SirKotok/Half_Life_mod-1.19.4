@@ -5,31 +5,34 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.NeutralMob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.fluids.FluidType;
 import net.sirkotok.half_life_mod.entity.base.CatchableCreature;
-import net.sirkotok.half_life_mod.entity.base.HalfLifeEntity;
-
+import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
+import net.sirkotok.half_life_mod.entity.brain.behaviour.Spawnsnarks;
 import net.sirkotok.half_life_mod.item.ModItems;
+import net.sirkotok.half_life_mod.sound.ModSounds;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -48,112 +51,79 @@ import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyPlayersSensor;
+import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.function.Predicate;
 
-public class Chumtoad extends CatchableCreature implements GeoEntity, SmartBrainOwner<Chumtoad> {
+public class Snarknest extends CatchableCreature implements GeoEntity, SmartBrainOwner<Snarknest> {
 
     public Item getweopon(){
-        return ModItems.CHUMTOAD_THROWER.get();
+        return ModItems.SNARK_THROWER.get();
     }
-
+    @Override
+    public int getemount(){
+        return 5;
+    }
     private AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    public Chumtoad(EntityType type, Level level) {
+    public Snarknest(EntityType type, Level level) {
         super(type, level);
-        this.xpReward = 3;
+        this.xpReward = 5;
     }
 
 
 
-    @Override
-    public boolean canDrownInFluidType(FluidType type) {
-        if (type.equals(ForgeMod.WATER_TYPE.get())) {
+
+    public static boolean checkNestSpawnRules(EntityType<Snarknest> pType, ServerLevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pBlockPos, RandomSource pRandom) {
+        if (pBlockPos.getY() >= pLevel.getSeaLevel()) {
             return false;
         }
-        return super.canDrownInFluidType(type);
+        int radius = 70;
+        List<Mob> entities = EntityRetrievalUtil.getEntities((Level) pLevel,
+                new AABB(pBlockPos.getX() - radius, pBlockPos.getY() - radius, pBlockPos.getZ() - radius,
+                pBlockPos.getX() + radius, pBlockPos.getY() + radius, pBlockPos.getZ() + radius), obj -> obj instanceof Snarknest);
+        if (!entities.isEmpty()) return false;
+
+        return pLevel.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(pLevel, pBlockPos, pRandom) && checkMobSpawnRules(pType, pLevel, pSpawnType, pBlockPos, pRandom);
     }
 
-    @Override
-    protected float getWaterSlowDown() {
-        return 0.98f;
-    }
 
-
-    @Override
-    public boolean isPushedByFluid(FluidType type) {
-        if (type.equals(ForgeMod.WATER_TYPE.get())) {
-            return false;
-        }
-        return super.isPushedByFluid(type);
-    }
 
 
 
     @Override
-    public double getFluidMotionScale(FluidType type) {
-        if (type.equals(ForgeMod.WATER_TYPE.get())) {
-            return 1;
-        }
-        return super.getFluidMotionScale(type);
-    }
-
-    @Override
-    public double getFluidJumpThreshold() {
-        return 0.0D;
-    }
-
-    @Override
-    public void jumpInFluid(FluidType type) {
-        self().setDeltaMovement(self().getDeltaMovement().add(0.0D, 0.5f, 0.0D));
-    }
-
-
-
-
-    @Nullable
-    protected SoundEvent getAmbientSound() {
-        return SoundEvents.FROG_AMBIENT;
+    public boolean isPersistenceRequired() {
+        return true;
     }
 
     @Nullable
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
-        return SoundEvents.FROG_HURT;
+        return ModSounds.SNARK_DIE.get();
     }
 
     @Nullable
     protected SoundEvent getDeathSound() {
-        return SoundEvents.FROG_DEATH;
+        return ModSounds.SNARK_DIE.get();
     }
 
-
-    protected SoundEvent getStepSound() {
-        return SoundEvents.FROG_STEP;
-    }
-    @Override
-    protected void playStepSound(BlockPos pPos, BlockState pState) {
-        BlockState blockstate = this.level.getBlockState(pPos.above());
-        boolean flag = blockstate.is(BlockTags.INSIDE_STEP_SOUND_BLOCKS);
-        if (flag || !pState.getMaterial().isLiquid()) {
-            this.playSound(getStepSound());
-        }
-    }
 
 
 
     public static AttributeSupplier setAttributes() {
         return Monster.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 10D)
-                .add(Attributes.ATTACK_DAMAGE, 3f)
-                .add(Attributes.ATTACK_SPEED, 1.0f)
+                .add(Attributes.MAX_HEALTH, 5D)
+                .add(Attributes.ATTACK_DAMAGE, 0f)
+                .add(Attributes.ATTACK_SPEED, 0f)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.0f)
-                .add(Attributes.MOVEMENT_SPEED, 0.3f).build();
+                .add(Attributes.MOVEMENT_SPEED, 0f).build();
     }
 
     @Override
@@ -161,17 +131,7 @@ public class Chumtoad extends CatchableCreature implements GeoEntity, SmartBrain
         controllerRegistrar.add(new AnimationController<>(this, "controller", 0, this::predicate)); }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
-
-        if(!this.isOnGround()) {
-            tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.chumtoad.jump", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-        if(tAnimationState.isMoving()) {
-            tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.chumtoad.hop", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
-        tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.chumtoad.idle", Animation.LoopType.LOOP));
+        tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.snarknest.idle", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
 
     }
@@ -199,51 +159,41 @@ public class Chumtoad extends CatchableCreature implements GeoEntity, SmartBrain
 
 
     @Override
-    public List<ExtendedSensor<Chumtoad>> getSensors() {
+    public List<ExtendedSensor<Snarknest>> getSensors() {
         return ObjectArrayList.of(
                 new HurtBySensor<>(),
                 new NearbyPlayersSensor<>(),
-                new NearbyLivingEntitySensor<Chumtoad>()
-                        .setPredicate((target, entity) ->
-                                (!(target instanceof Chumtoad) && target instanceof Enemy) || target instanceof NeutralMob));
+                new NearbyLivingEntitySensor<Snarknest>()
+                                .setPredicate((target, entity) ->
+                                        target instanceof Player || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
+                                                target instanceof AbstractVillager));
     }
 
 
 
     @Override
-    public BrainActivityGroup<Chumtoad> getCoreTasks() { // These are the tasks that run all the time (usually)
-        return BrainActivityGroup.coreTasks(
-              //  new MakeTargetThis<Chumtoad>().cooldownFor(entity -> 100),
-                new LookAtTarget<>(),                      // Have the entity turn to face and look at its current look target
-                new MoveToWalkTarget<>());
+    public BrainActivityGroup<Snarknest> getCoreTasks() {
+        return BrainActivityGroup.coreTasks();
     }
 
     @Override
-    public BrainActivityGroup<Chumtoad> getIdleTasks() { // These are the tasks that run when the mob isn't doing anything else (usually)
+    public BrainActivityGroup<Snarknest> getIdleTasks() { // These are the tasks that run when the mob isn't doing anything else (usually)
         return BrainActivityGroup.idleTasks(
-                new FirstApplicableBehaviour<Chumtoad>(
+                new FirstApplicableBehaviour<Snarknest>(
                         new TargetOrRetaliate<>(),
-                        new SetPlayerLookTarget<>(),
-                        new SetRandomLookTarget<>()),
-                new OneRandomBehaviour<>(
-                        new SetRandomWalkTarget<>(),          // Set a random walk target to a nearby position
-                        new Idle<>().runFor(entity -> entity.getRandom().nextInt(30, 90)))); // Do nothing for 1.5->4.5 seconds
+                        new Idle<>().runFor(entity -> entity.getRandom().nextInt(30, 90))));
     }
 
 
 
 
     @Override
-    public BrainActivityGroup<Chumtoad> getFightTasks() { // These are the tasks that handle fighting
+    public BrainActivityGroup<Snarknest> getFightTasks() { // These are the tasks that handle fighting
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>(),
                 new Retaliate<>(),
-                 new FleeTarget<>().speedModifier(1.1f)
+                new Spawnsnarks<>(0).cooldownFor(entity -> 200)
                 );
     }
-
-
-
-
 
 }

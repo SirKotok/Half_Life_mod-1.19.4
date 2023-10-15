@@ -21,6 +21,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.CHUMTOAD.get(), Chumtoad.setAttributes());
         event.put(ModEntities.BARNEY.get(), Barney.setAttributes());
         event.put(ModEntities.SNARK.get(), Snark.setAttributes());
+        event.put(ModEntities.SNARKNEST.get(), Snarknest.setAttributes());
         event.put(ModEntities.PENGUIN.get(), Snark.setAttributes());
         event.put(ModEntities.HEADCRAB_HL1.get(), Headcrab_1.setAttributes());
         event.put(ModEntities.HEADCRAB_ZOMBIE_1.get(), Headcrab_zombie_standart.setAttributes());
@@ -55,6 +56,8 @@ public class ModEventBusEvents {
                 Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(ModEntities.BULLSQUID.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        event.register(ModEntities.SNARKNEST.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Snarknest::checkNestSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
 
 
     }

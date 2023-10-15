@@ -77,12 +77,19 @@ public class HalfLifeMod
             event.accept(ModItems.HEADCRAB_POISON_HLA_SPAWN_EGG);
             event.accept(ModItems.HEADCRAB_ALYX_SPAWN_EGG);
             event.accept(ModItems.HEADCRAB_ARMOR_SPAWN_EGG);
-            event.accept(ModItems.SHOCKROACH_SPAWN_EGG);
+
           //  event.accept(ModItems.HEADCRAB_ZOMBIE_SPAWN_EGG);
+
             event.accept(ModItems.BULLSQUID_SPAWN_EGG);
-            event.accept(ModItems.CHUMTOAD_SPAWN_EGG);
+
+
+            event.accept(ModItems.SNARKNEST_SPAWN_EGG);
             event.accept(ModItems.SNARK_SPAWN_EGG);
             event.accept(ModItems.PENGUIN_SPAWN_EGG);
+            event.accept(ModItems.CHUMTOAD_SPAWN_EGG);
+
+            event.accept(ModItems.SHOCKROACH_SPAWN_EGG);
+
             event.accept(ModItems.BARNEY_SPAWN_EGG);
         }
 

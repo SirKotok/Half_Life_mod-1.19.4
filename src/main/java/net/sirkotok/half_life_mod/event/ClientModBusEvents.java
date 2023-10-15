@@ -12,6 +12,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.entity.ModEntities;
 import net.sirkotok.half_life_mod.entity.mob.client.renderers.*;
+import net.sirkotok.half_life_mod.entity.mob.custom.Snarknest;
 import net.sirkotok.half_life_mod.particle.ModParticles;
 import net.sirkotok.half_life_mod.particle.custom.projectile_impact.BigImpactParticle;
 import net.sirkotok.half_life_mod.particle.custom.projectile_impact.BulletHoleParticle;
@@ -36,6 +37,7 @@ public class ClientModBusEvents {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event)
     {
+        EntityRenderers.register(ModEntities.SNARKNEST.get(), Snarknestrenderer::new);
         EntityRenderers.register(ModEntities.HEADCRAB_HL1.get(), Headcrab_1renderer::new);
         EntityRenderers.register(ModEntities.HEADCRAB_ZOMBIE_1.get(), Headcrab_zombie_standart_renderer::new);
         EntityRenderers.register(ModEntities.HEADCRAB_HL2.get(), Headcrab_2renderer::new);

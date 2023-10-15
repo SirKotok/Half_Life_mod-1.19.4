@@ -40,6 +40,7 @@ import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
 import net.sirkotok.half_life_mod.entity.projectile.Bullet;
 import net.sirkotok.half_life_mod.item.ModItems;
 import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.util.ModTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -73,6 +74,9 @@ import javax.print.DocFlavor;
 import java.util.List;
 
 public class Barney extends HalfLifeNeutral implements GeoEntity, SmartBrainOwner<Barney>, RangedAttackMob {
+
+
+    //TODO completely remake the AI, and add sounds, and that stuff. Currently bad.
 
     private AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     public Barney(EntityType type, Level level) {
@@ -212,7 +216,6 @@ public class Barney extends HalfLifeNeutral implements GeoEntity, SmartBrainOwne
     @Override
     public BrainActivityGroup<Barney> getCoreTasks() { // These are the tasks that run all the time (usually)
         return BrainActivityGroup.coreTasks(
-                //  new MakeTargetThis<Chumtoad>().cooldownFor(entity -> 100),
                 new LookAtTarget<>(),                      // Have the entity turn to face and look at its current look target
                 new MoveToWalkTarget<>());
     }
@@ -236,8 +239,8 @@ public class Barney extends HalfLifeNeutral implements GeoEntity, SmartBrainOwne
     @Override
     public BrainActivityGroup<Barney> getFightTasks() { // These are the tasks that handle fighting
         return BrainActivityGroup.fightTasks(
-                new InvalidateAttackTarget<>(),
                 new Retaliate<>(),
+                new InvalidateAttackTarget<>(),
                 new SetWalkTargetToAttackTarget<Barney>().whenStarting(entity -> this.entityData.set(IS_ANGRY, true)),
                 new StopAndShoot<Barney>(14, 4f).startCondition(entity -> this.distanceTo(BrainUtils.getTargetOfEntity(this)) < 12)
                                 .whenStarting(entity -> triggerAnim("attack", "shoot"))

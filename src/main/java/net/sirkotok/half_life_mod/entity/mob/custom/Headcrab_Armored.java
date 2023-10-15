@@ -13,8 +13,10 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.sirkotok.half_life_mod.item.ModItems;
 import net.sirkotok.half_life_mod.util.ModTags;
 
 public class Headcrab_Armored extends Headcrab_3{

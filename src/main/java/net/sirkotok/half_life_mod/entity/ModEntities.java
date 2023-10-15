@@ -79,9 +79,14 @@ public class ModEntities {
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "barney").toString()));
     public static final RegistryObject<EntityType<Chumtoad>> CHUMTOAD =
             ENTITY_TYPES.register("chumtoad",
-                    () -> EntityType.Builder.of(Chumtoad::new, MobCategory.CREATURE)
+                    () -> EntityType.Builder.of(Chumtoad::new, MobCategory.MONSTER)
                             .sized(0.6f, 0.6f)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "chumtoad").toString()));
+    public static final RegistryObject<EntityType<Snarknest>> SNARKNEST =
+            ENTITY_TYPES.register("snarknest",
+                    () -> EntityType.Builder.of(Snarknest::new, MobCategory.MONSTER)
+                            .sized(0.7f, 0.7f)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "snarknest").toString()));
     public static final RegistryObject<EntityType<Snark>> SNARK =
             ENTITY_TYPES.register("snark",
                     () -> EntityType.Builder.of(Snark::new, MobCategory.MONSTER)

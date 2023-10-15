@@ -44,7 +44,14 @@ public class ModTags {
     public static class EntityTypes {
 
         public static final TagKey<EntityType<?>> HEAD_CRAB = tag("headcrab");
-        public static final TagKey<EntityType<?>> CHUMTOAD_SCARED_OF = tag("headcrab");
+
+
+        public static final TagKey<EntityType<?>> FACTION_RACE_X = tag("race_x");
+        public static final TagKey<EntityType<?>> FACTION_SCIENCE_TEAM = tag("science_team");
+
+
+
+
         public static final TagKey<EntityType<?>> HEAD_CRAB_TARGET = tag("can_be_headcrabbed");
         private static TagKey<EntityType<?>> tag(String name)
         {

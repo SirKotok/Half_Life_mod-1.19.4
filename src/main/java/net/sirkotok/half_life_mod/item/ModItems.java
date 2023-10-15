@@ -31,8 +31,11 @@ public class ModItems {
             () -> new ForgeSpawnEggItem(ModEntities.CHUMTOAD, 0xc82eba, 0x40073a   ,
                     new Item.Properties()));
     public static final RegistryObject<Item> SNARK_SPAWN_EGG = ITEMS.register("snark_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntities.SNARK, 0xff011b, 0x000000   ,
+            () -> new ForgeSpawnEggItem(ModEntities.SNARK, 0xff011b, 0x54060e  ,
                     new Item.Properties()));
+ public static final RegistryObject<Item> SNARKNEST_SPAWN_EGG = ITEMS.register("snarknest_spawn_egg",
+         () -> new ForgeSpawnEggItem(ModEntities.SNARKNEST, 0x7d010e, 0xff011b   ,
+                 new Item.Properties()));
     public static final RegistryObject<Item> PENGUIN_SPAWN_EGG = ITEMS.register("penguin_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.PENGUIN, 0xffffff, 0x000000   ,
                     new Item.Properties()));

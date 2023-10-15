@@ -3,6 +3,7 @@ package net.sirkotok.half_life_mod.entity.base;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -41,16 +42,18 @@ public class CatchableCreature extends HalfLifeEntity{
             ItemStack stack = pPlayer.getItemInHand(pHand);
             if (this.hasCustomName() && (!stack.getHoverName().equals(this.getCustomName()) || !stack.hasCustomHoverName())) return InteractionResult.PASS;
             if (!this.hasCustomName() && stack.hasCustomHoverName()) return InteractionResult.PASS;
-            if  (stack.is(getweopon()) && stack.getCount()+getemount() <= stack.getMaxStackSize()) {
+
+            if  (stack.is(getweopon()) && stack.getCount()<stack.getMaxStackSize()) {
+                if  (stack.getCount()+getemount() <= stack.getMaxStackSize()) {
                 stack.grow(getemount());
                 this.discard();
+                return InteractionResult.SUCCESS;}
+
+                stack.grow(stack.getMaxStackSize()-stack.getCount());
+                this.discard();
                 return InteractionResult.SUCCESS;
-        }
+
+    }
         return InteractionResult.PASS;
     }
-
-
-
-
-
 }
