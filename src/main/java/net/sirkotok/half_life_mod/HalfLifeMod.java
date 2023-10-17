@@ -1,17 +1,12 @@
 package net.sirkotok.half_life_mod;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 
 
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -21,7 +16,6 @@ import net.sirkotok.half_life_mod.effect.ModEffects;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.brain.ModSensorType;
 import net.sirkotok.half_life_mod.entity.ModEntities;
-import net.sirkotok.half_life_mod.entity.mob.client.renderers.*;
 import net.sirkotok.half_life_mod.item.ModCreativeModeTabs;
 import net.sirkotok.half_life_mod.item.ModItems;
 import net.sirkotok.half_life_mod.networking.ModPackets;
@@ -90,7 +84,13 @@ public class HalfLifeMod
 
             event.accept(ModItems.SHOCKROACH_SPAWN_EGG);
 
+            event.accept(ModItems.BARNACLE_ONE_SPAWN_EGG);
+
+
             event.accept(ModItems.BARNEY_SPAWN_EGG);
+
+
+
         }
 
         if(event.getTab().equals(ModCreativeModeTabs.HALF_LIFE_WEOPONS_TAB)) {

@@ -13,18 +13,11 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.phys.Vec3;
 
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
-import net.sirkotok.half_life_mod.entity.mob.custom.Headcrab_1;
-import net.sirkotok.half_life_mod.entity.mob.custom.Headcrab_2;
-import net.sirkotok.half_life_mod.entity.mob.custom.Headcrab_Fast;
-import net.sirkotok.half_life_mod.entity.mob.custom.Headcrab_Poison_2;
-import net.tslat.smartbrainlib.api.core.behaviour.ExtendedBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.ConditionlessAttack;
 import net.tslat.smartbrainlib.util.BrainUtils;
-import software.bernie.geckolib.core.animation.Animation;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class HeadCrabJumpBehavior<E extends Monster>  extends ConditionlessAttack<E> {
 

@@ -6,14 +6,14 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 
 
-import net.sirkotok.half_life_mod.entity.base.HalfLifeEntity;
+import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableMeleeAttack;
 import net.tslat.smartbrainlib.util.BrainUtils;
 
 import javax.annotation.Nullable;
 
-public class ConfigurableAnimatableMeleeAttack<E extends HalfLifeEntity> extends AnimatableMeleeAttack<E> {
+public class ConfigurableAnimatableMeleeAttack<E extends HalfLifeMonster> extends AnimatableMeleeAttack<E> {
 
   protected int attackmod;
   protected int counter = 0;

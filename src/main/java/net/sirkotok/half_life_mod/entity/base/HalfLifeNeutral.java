@@ -6,9 +6,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.RandomSource;
-import net.minecraft.util.TimeUtil;
-import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -17,11 +14,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
-import net.sirkotok.half_life_mod.entity.mob.custom.Barney;
-import org.stringtemplate.v4.ST;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Barney;
 
 import javax.annotation.Nullable;
-import java.util.List;
 import java.util.UUID;
 
 public class HalfLifeNeutral extends PathfinderMob implements NeutralMob {

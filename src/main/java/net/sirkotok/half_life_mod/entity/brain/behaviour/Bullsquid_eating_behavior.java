@@ -3,15 +3,13 @@ package net.sirkotok.half_life_mod.entity.brain.behaviour;
 import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
-import net.sirkotok.half_life_mod.entity.mob.custom.Bullsquid;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Bullsquid;
 import net.tslat.smartbrainlib.api.core.behaviour.DelayedBehaviour;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.CustomBehaviour;
 import net.tslat.smartbrainlib.util.BrainUtils;
 
 import java.util.List;

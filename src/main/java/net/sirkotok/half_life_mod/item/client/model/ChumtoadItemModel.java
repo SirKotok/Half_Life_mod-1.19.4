@@ -2,7 +2,6 @@ package net.sirkotok.half_life_mod.item.client.model;
 
 import net.minecraft.resources.ResourceLocation;
 import net.sirkotok.half_life_mod.HalfLifeMod;
-import net.sirkotok.half_life_mod.entity.mob.custom.Chumtoad;
 import net.sirkotok.half_life_mod.item.custom.ChumtoadItem;
 import software.bernie.geckolib.model.GeoModel;
 

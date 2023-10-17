@@ -9,7 +9,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.sirkotok.half_life_mod.HalfLifeMod;
-import net.sirkotok.half_life_mod.entity.mob.custom.*;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.*;
+import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
 import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
 import net.sirkotok.half_life_mod.entity.projectile.Bullet;
 import net.sirkotok.half_life_mod.entity.projectile.ShockProjectile;
@@ -29,6 +30,13 @@ public class ModEntities {
                     () -> EntityType.Builder.of(Shockroach::new, MobCategory.MONSTER)
                             .sized(0.6f, 0.5f)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "shockroach").toString()));
+
+    public static final RegistryObject<EntityType<Barnacle>> BARNACLE =
+            ENTITY_TYPES.register("barnacle",
+                    () -> EntityType.Builder.of(Barnacle::new, MobCategory.MONSTER)
+                            .sized(0.9f, 0.9f)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "barnacle").toString()));
+
 
     public static final RegistryObject<EntityType<Headcrab_zombie_standart>> HEADCRAB_ZOMBIE_1 =
             ENTITY_TYPES.register("headcrab_zombie_1",
@@ -97,6 +105,17 @@ public class ModEntities {
                     () -> EntityType.Builder.of(Penguin::new, MobCategory.MONSTER)
                             .sized(0.6f, 0.6f)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "penguin").toString()));
+
+
+
+  /*  public static final RegistryObject<EntityType<Barnacle>> BARNACLE =
+            ENTITY_TYPES.register("barnacle",
+                    () -> EntityType.Builder.of(Barnacle::new, MobCategory.MONSTER)
+                            .sized(1f, 1f)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "barnacle").toString())); */
+
+
+
 
     public static final RegistryObject<EntityType<AcidBall>> ACID_BALL =
             ENTITY_TYPES.register("acid_ball",
