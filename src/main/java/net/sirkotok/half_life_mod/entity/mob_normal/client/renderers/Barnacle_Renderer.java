@@ -1,11 +1,15 @@
 package net.sirkotok.half_life_mod.entity.mob_normal.client.renderers;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.HalfLifeMod;
@@ -43,11 +47,35 @@ public class Barnacle_Renderer extends MobRenderer<Barnacle, Barnacle_Model<Barn
     }
 
     protected void setupRotations(Barnacle pEntityLiving, PoseStack pMatrixStack, float pAgeInTicks, float pRotationYaw, float pPartialTicks) {
-        super.setupRotations(pEntityLiving, pMatrixStack, pAgeInTicks, pRotationYaw + 180.0F, pPartialTicks);
+        setupRotationsstep1(pEntityLiving, pMatrixStack, pAgeInTicks, pRotationYaw + 180.0F, pPartialTicks);
         pMatrixStack.translate(0.0D, 0.5D, 0.0D);
         pMatrixStack.mulPose(pEntityLiving.getAttachFace().getOpposite().getRotation());
         pMatrixStack.translate(0.0D, -0.5D, 0.0D);
     }
+
+
+
+    protected void setupRotationsstep1(Barnacle pEntityLiving, PoseStack pMatrixStack, float pAgeInTicks, float pRotationYaw, float pPartialTicks) {
+
+        if (this.isShaking(pEntityLiving)) {
+            pRotationYaw += (float)(Math.cos((double)pEntityLiving.tickCount * 3.25D) * Math.PI * (double)0.4F);
+        }
+
+        if (!pEntityLiving.hasPose(Pose.SLEEPING)) {
+            pMatrixStack.mulPose(Axis.YP.rotationDegrees(180.0F - pRotationYaw));
+        }
+
+        if (pEntityLiving.isAutoSpinAttack()) {
+            pMatrixStack.mulPose(Axis.XP.rotationDegrees(-90.0F - pEntityLiving.getXRot()));
+            pMatrixStack.mulPose(Axis.YP.rotationDegrees(((float)pEntityLiving.tickCount + pPartialTicks) * -75.0F));
+        }  else if (isEntityUpsideDown(pEntityLiving)) {
+            pMatrixStack.translate(0.0F, pEntityLiving.getBbHeight() + 0.1F, 0.0F);
+            pMatrixStack.mulPose(Axis.ZP.rotationDegrees(180.0F));
+        }
+
+    }
+
+
 
 }
 

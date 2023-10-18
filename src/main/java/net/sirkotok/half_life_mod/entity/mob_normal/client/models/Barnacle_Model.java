@@ -13,11 +13,13 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Shulker;
+import net.sirkotok.half_life_mod.entity.mob_normal.animations.ModAnimationDefenitions;
+import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
 
 
 import javax.swing.text.html.parser.Entity;
 
-public class Barnacle_Model<T extends Shulker> extends HierarchicalModel<T> {
+public class Barnacle_Model<T extends Barnacle> extends HierarchicalModel<T> {
 	private final ModelPart root;
 
 	public Barnacle_Model(ModelPart root) {
@@ -65,7 +67,10 @@ public class Barnacle_Model<T extends Shulker> extends HierarchicalModel<T> {
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
+		this.root().getAllParts().forEach(ModelPart::resetPose);
+		this.animate(((Barnacle) entity).idleAnimationState, ModAnimationDefenitions.BARNACLE_IDLE, ageInTicks, 1f);
+		this.animate(((Barnacle) entity).attackAnimationState, ModAnimationDefenitions.BARNACLE_BITE, ageInTicks, 1f);
+		this.animate(((Barnacle) entity).dyingAnimationState, ModAnimationDefenitions.BARNACLE_DIE, ageInTicks, 1f);
 	}
 
 	@Override
