@@ -34,8 +34,8 @@ public abstract class EntityThrowingItem extends Item {
         Vec3 vec3 = (new Vec3(pX, pY, pZ)).normalize().add(RandomSource.create().triangle(0.0D, 0.0172275D * (double)pInaccuracy), RandomSource.create().triangle(0.0D, 0.0172275D * (double)pInaccuracy), RandomSource.create().triangle(0.0D, 0.0172275D * (double)pInaccuracy)).scale((double)pVelocity);
         projectile.setDeltaMovement(vec3);
         double d0 = vec3.horizontalDistance();
-        projectile.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * (double)(180F / (float)Math.PI)));
-        projectile.setXRot((float)(Mth.atan2(vec3.y, d0) * (double)(180F / (float)Math.PI)));
+     //   projectile.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * (double)(180F / (float)Math.PI)));
+     //   projectile.setXRot((float)(Mth.atan2(vec3.y, d0) * (double)(180F / (float)Math.PI)));
         projectile.yRotO = projectile.getYRot();
         projectile.xRotO = projectile.getXRot();
     }
@@ -53,15 +53,15 @@ public abstract class EntityThrowingItem extends Item {
 
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
-
-
         pLevel.playSound((Player)null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.SNOWBALL_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (pLevel.getRandom().nextFloat() * 0.4F + 0.8F));
         if (!pLevel.isClientSide) {
             Entity summon = getentitytype().create(pLevel);
             if (summon instanceof Mob){
-                summon.setXRot(pPlayer.getXRot());
-                summon.setYRot(pPlayer.getYRot());
-            summon.moveTo(pPlayer.getX() - (double)(pPlayer.getBbWidth() + 1.0F) * 0.5D * (double)Mth.sin(pPlayer.yHeadRot * ((float)Math.PI / 180F)), pPlayer.getEyeY() - (double)0.2F* (double) Mth.sin((float)pPlayer.getXRot()* ((float)Math.PI / 180F)), pPlayer.getZ() + (double)(pPlayer.getBbWidth() + 1.0F) * 0.5D * (double) Mth.cos(pPlayer.yHeadRot* ((float)Math.PI / 180F)));
+                float yrot = pPlayer.getYRot();
+            summon.moveTo(pPlayer.getX() - (double)(pPlayer.getBbWidth() + 1.0F) * 0.5D * (double)Mth.sin(pPlayer.yHeadRot * ((float)Math.PI / 180F)),
+                    pPlayer.getEyeY() - (double)0.2F* (double) Mth.sin((float)pPlayer.getXRot()* ((float)Math.PI / 180F)),
+                    pPlayer.getZ() + (double)(pPlayer.getBbWidth() + 1.0F) * 0.5D * (double) Mth.cos(pPlayer.yHeadRot* ((float)Math.PI / 180F)),
+                    yrot, 0.0f);
             this.shootEntityFromRotation(summon, pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
             ForgeEventFactory.onFinalizeSpawn((Mob) summon, (ServerLevelAccessor) pLevel, pLevel.getCurrentDifficultyAt(summon.blockPosition()), MobSpawnType.REINFORCEMENT, null, null);
             pLevel.addFreshEntity(summon);
