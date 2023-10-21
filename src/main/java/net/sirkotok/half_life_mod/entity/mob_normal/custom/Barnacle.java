@@ -17,6 +17,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -160,9 +161,11 @@ public class Barnacle extends PathfinderMob {
             return SoundEvents.SHULKER_HURT;
         }
 
+        protected Direction CorrectDirection() {return Direction.UP;}
+
         protected void defineSynchedData() {
             super.defineSynchedData();
-            this.entityData.define(DATA_ATTACH_FACE_ID, Direction.DOWN);
+            this.entityData.define(DATA_ATTACH_FACE_ID, CorrectDirection());
             this.entityData.define(ATTACKING, false);
         }
 
@@ -176,9 +179,7 @@ public class Barnacle extends PathfinderMob {
         return this.entityData.get(ATTACKING);
     }
 
-        public static AttributeSupplier.Builder createAttributes() {
-            return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 30.0D);
-        }
+
 
         protected BodyRotationControl createBodyControl() {
             return new BarnacleBodyRotationControl(this);
@@ -205,36 +206,15 @@ public class Barnacle extends PathfinderMob {
          */
         public void tick() {
             super.tick();
-            if (!this.level.isClientSide && !this.isPassenger() && !this.canStayAt(this.blockPosition(), this.getAttachFace())) {
-                this.findNewAttachment();
+            if (!this.level.isClientSide && !this.canStayAt(this.blockPosition(), this.getAttachFace())) {
+                this.setHealth(0);
             }
-
-
             if(this.level.isClientSide()) {
                 setupAnimationStates();
             }
-
-
-
-            if (this.level.isClientSide) {
-                if (this.clientSideTeleportInterpolation > 0) {
-                    --this.clientSideTeleportInterpolation;
-                } else {
-                    this.clientOldAttachPosition = null;
-                }
-            }
-
         }
 
-        private void findNewAttachment() {
-            Direction direction = this.findAttachableSurface(this.blockPosition());
-            if (direction != null) {
-                this.setAttachFace(direction);
-            } else {
-                this.teleportSomewhere();
-            }
 
-        }
 
         protected AABB makeBoundingBox() {
             float f = getPhysicalPeek(0);
@@ -268,13 +248,7 @@ public class Barnacle extends PathfinderMob {
         }
 
         public boolean startRiding(Entity pEntity, boolean pForce) {
-            if (this.level.isClientSide()) {
-                this.clientOldAttachPosition = null;
-                this.clientSideTeleportInterpolation = 0;
-            }
-
-            this.setAttachFace(Direction.DOWN);
-            return super.startRiding(pEntity, pForce);
+            return false;
         }
 
         /**
@@ -282,12 +256,6 @@ public class Barnacle extends PathfinderMob {
          */
         public void stopRiding() {
             super.stopRiding();
-            if (this.level.isClientSide) {
-                this.clientOldAttachPosition = this.blockPosition();
-            }
-
-            this.yBodyRotO = 0.0F;
-            this.yBodyRot = 0.0F;
         }
 
         @Nullable
@@ -298,14 +266,6 @@ public class Barnacle extends PathfinderMob {
             return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
         }
 
-        public void move(MoverType pType, Vec3 pPos) {
-            if (pType == MoverType.SHULKER_BOX) {
-                this.teleportSomewhere();
-            } else {
-                super.move(pType, pPos);
-            }
-
-        }
 
         public Vec3 getDeltaMovement() {
             return Vec3.ZERO;
@@ -343,16 +303,15 @@ public class Barnacle extends PathfinderMob {
 
         @Nullable
         protected Direction findAttachableSurface(BlockPos pPos) {
-            for(Direction direction : Direction.values()) {
-                if (this.canStayAt(pPos, direction)) {
-                    return direction;
+                if (this.canStayAt(pPos, this.CorrectDirection())) {
+                    return this.CorrectDirection();
                 }
-            }
+
 
             return null;
         }
 
-        boolean canStayAt(BlockPos pPos, Direction pFacing) {
+        public boolean canStayAt(BlockPos pPos, Direction pFacing) {
             if (this.isPositionBlocked(pPos)) {
                 return false;
             } else {
@@ -360,8 +319,9 @@ public class Barnacle extends PathfinderMob {
                 if (!this.level.loadedAndEntityCanStandOnFace(pPos.relative(pFacing), this, direction)) {
                     return false;
                 } else {
-                    AABB aabb = getProgressAabb(direction, 1.0F).move(pPos).deflate(1.0E-6D);
-                    return this.level.noCollision(this, aabb);
+                    return true;
+                   /* AABB aabb = getProgressAabb(direction, 1.0F).move(pPos).deflate(1.0E-6D);
+                    return this.level.noCollision(this, aabb); */
                 }
             }
         }
@@ -376,37 +336,6 @@ public class Barnacle extends PathfinderMob {
             }
         }
 
-        protected boolean teleportSomewhere() {
-            if (!this.isNoAi() && this.isAlive()) {
-                BlockPos blockpos = this.blockPosition();
-
-                for(int i = 0; i < 5; ++i) {
-                    BlockPos blockpos1 = blockpos.offset(Mth.randomBetweenInclusive(this.random, -8, 8), Mth.randomBetweenInclusive(this.random, -8, 8), Mth.randomBetweenInclusive(this.random, -8, 8));
-                    if (blockpos1.getY() > this.level.getMinBuildHeight() && this.level.isEmptyBlock(blockpos1) && this.level.getWorldBorder().isWithinBounds(blockpos1) && this.level.noCollision(this, (new AABB(blockpos1)).deflate(1.0E-6D))) {
-                        Direction direction = this.findAttachableSurface(blockpos1);
-                        if (direction != null) {
-                            net.minecraftforge.event.entity.EntityTeleportEvent.EnderEntity event = net.minecraftforge.event.ForgeEventFactory.onEnderTeleport(this, blockpos1.getX(), blockpos1.getY(), blockpos1.getZ());
-                            if (event.isCanceled()) direction = null;
-                            blockpos1 = BlockPos.containing(event.getTargetX(), event.getTargetY(), event.getTargetZ());
-                        }
-
-                        if (direction != null) {
-                            this.unRide();
-                            this.setAttachFace(direction);
-                            this.playSound(SoundEvents.SHULKER_TELEPORT, 1.0F, 1.0F);
-                            this.setPos((double)blockpos1.getX() + 0.5D, (double)blockpos1.getY(), (double)blockpos1.getZ() + 0.5D);
-                            this.level.gameEvent(GameEvent.TELEPORT, blockpos, GameEvent.Context.of(this));
-                            this.setTarget((LivingEntity)null);
-                            return true;
-                        }
-                    }
-                }
-
-                return false;
-            } else {
-                return false;
-            }
-        }
 
         /**
          * Sets a target for the client to interpolate towards over the next few ticks
@@ -417,44 +346,6 @@ public class Barnacle extends PathfinderMob {
             this.setRot(pYaw, pPitch);
         }
 
-        /**
-         * Called when the entity is attacked.
-         */
-        public boolean hurt(DamageSource pSource, float pAmount) {
-
-            if (!super.hurt(pSource, pAmount)) {
-                return false;
-            } else {
-                if ((double)this.getHealth() < (double)this.getMaxHealth() * 0.5D && this.random.nextInt(4) == 0) {
-                    this.teleportSomewhere();
-                } else if (pSource.is(DamageTypeTags.IS_PROJECTILE)) {
-                    Entity entity1 = pSource.getDirectEntity();
-                    if (entity1 != null && entity1.getType() == EntityType.SHULKER_BULLET) {
-                        this.hitByShulkerBullet();
-                    }
-                }
-
-                return true;
-            }
-        }
-
-
-        private void hitByShulkerBullet() {
-            Vec3 vec3 = this.position();
-            AABB aabb = this.getBoundingBox();
-            if (this.teleportSomewhere()) {
-                int i = this.level.getEntities(EntityType.SHULKER, aabb.inflate(8.0D), Entity::isAlive).size();
-                float f = (float)(i - 1) / 5.0F;
-                if (!(this.level.random.nextFloat() < f)) {
-                    Shulker shulker = EntityType.SHULKER.create(this.level);
-                    if (shulker != null) {
-                        shulker.moveTo(vec3);
-                        this.level.addFreshEntity(shulker);
-                    }
-
-                }
-            }
-        }
 
         public boolean canBeCollidedWith() {
             return this.isAlive();
