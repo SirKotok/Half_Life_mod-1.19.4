@@ -72,6 +72,8 @@ public class BarnacleSpawnEggItem extends ForgeSpawnEggItem {
         }
     }
 
+
+
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);

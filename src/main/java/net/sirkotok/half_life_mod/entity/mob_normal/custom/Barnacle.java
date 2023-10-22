@@ -5,6 +5,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -12,47 +14,56 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.BodyRotationControl;
-import net.minecraft.world.entity.ai.control.LookControl;
-import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.Shulker;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.ShulkerBullet;
 import net.minecraft.world.entity.vehicle.Boat;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
-import org.joml.Vector3fc;
 
 import javax.annotation.Nullable;
-import java.util.EnumSet;
+import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public class Barnacle extends PathfinderMob {
+
+    private final BarnacleTongue tongue;
+    private final BarnacleTongue[] tongues;
+    @Override
+    public boolean isMultipartEntity() {
+        return true;
+    }
+
+
+
+
+
+
+    @Override
+    public net.minecraftforge.entity.PartEntity<?>[] getParts() { return this.tongues; }
+
+
+
+
+
+
+
+
+
+
+
          private static final EntityDataAccessor<Boolean> ATTACKING =
             SynchedEntityData.defineId(Barnacle.class, EntityDataSerializers.BOOLEAN);
         protected static final EntityDataAccessor<Direction> DATA_ATTACH_FACE_ID = SynchedEntityData.defineId(Barnacle.class, EntityDataSerializers.DIRECTION);
@@ -116,9 +127,59 @@ public class Barnacle extends PathfinderMob {
 
         public Barnacle(EntityType<? extends Barnacle> pEntityType, Level pLevel) {
             super(pEntityType, pLevel);
+            this.tongue = new BarnacleTongue(this, "tongue", 0.4F, 1f);
             this.xpReward = 5;
-
+            this.tongues = new BarnacleTongue[] {
+                    this.tongue
+            };
         }
+
+
+
+    private void tickPart(BarnacleTongue pPart) {
+        pPart.moveTo(this.getX(), this.getY() - getairemount()+0.5, this.getZ());
+    }
+
+
+
+
+    public void aiStep() {
+        super.aiStep();
+        tickPart(this.tongue);
+        this.tongue.setBoundingBox(new AABB(this.blockPosition().getX() + 0.3, this.blockPosition().getY(), this.blockPosition().getZ() + 0.3, this.blockPosition().getX()+0.7, this.blockPosition().getY() - getairemount(), this.blockPosition().getZ()+0.7));
+        this.checkTongue(this.tongue.getBoundingBox());
+    }
+
+
+    private void checkTongue(AABB box) {
+        List<Entity> list = this.level.getEntities(this, box);
+        if (!list.isEmpty()) {
+            for(int i = 0; i < list.size(); ++i) {
+                Entity entity = list.get(i);
+                if (entity instanceof LivingEntity) {
+                    ((LivingEntity)entity).addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 5, 0, false, true), this);
+                    break;
+                }
+            }
+        }
+    }
+
+
+    public int getairemount() {
+        int i = 0;
+        for (int j = 0; j<20; j++){
+            BlockPos pos = new BlockPos(this.blockPosition().getX(), this.blockPosition().getY() - j, this.blockPosition().getZ());
+            BlockState blockstate = this.level.getBlockState(pos);
+            if (!blockstate.isAir()) return i;
+            i++;}
+
+
+
+        return i;
+    }
+
+
+
 
 
 
@@ -301,15 +362,7 @@ public class Barnacle extends PathfinderMob {
             }
         }
 
-        @Nullable
-        protected Direction findAttachableSurface(BlockPos pPos) {
-                if (this.canStayAt(pPos, this.CorrectDirection())) {
-                    return this.CorrectDirection();
-                }
 
-
-            return null;
-        }
 
         public boolean canStayAt(BlockPos pPos, Direction pFacing) {
             if (this.isPositionBlocked(pPos)) {
@@ -320,8 +373,6 @@ public class Barnacle extends PathfinderMob {
                     return false;
                 } else {
                     return true;
-                   /* AABB aabb = getProgressAabb(direction, 1.0F).move(pPos).deflate(1.0E-6D);
-                    return this.level.noCollision(this, aabb); */
                 }
             }
         }

@@ -8,6 +8,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.sirkotok.half_life_mod.HalfLifeMod;
+
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
 
 

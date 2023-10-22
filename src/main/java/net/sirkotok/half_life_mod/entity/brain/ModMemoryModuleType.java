@@ -32,7 +32,6 @@ public class ModMemoryModuleType {
 
     public static final RegistryObject<MemoryModuleType<Integer>> RNG_COMPARITOR_1 = MEMORY_MODULE_TYPES.register("rng_1", () -> new MemoryModuleType<>(Optional.of(Codec.INT)));
     public static final RegistryObject<MemoryModuleType<Integer>> RNG_COMPARITOR_CHECK = MEMORY_MODULE_TYPES.register("rng_1_check", () -> new MemoryModuleType<>(Optional.of(Codec.INT)));
-    public static final RegistryObject<MemoryModuleType<Vec3>> CHECKED_LOCATION = MEMORY_MODULE_TYPES.register("checked_location", () -> new MemoryModuleType<>(Optional.empty()));
     public static void register(IEventBus eventBus) {
         MEMORY_MODULE_TYPES.register(eventBus);
     }

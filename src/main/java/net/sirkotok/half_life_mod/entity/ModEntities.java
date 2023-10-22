@@ -4,6 +4,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 
+import net.minecraft.world.level.Level;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -11,6 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.*;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
+import net.sirkotok.half_life_mod.entity.mob_normal.custom.BarnacleTongue;
 import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
 import net.sirkotok.half_life_mod.entity.projectile.Bullet;
 import net.sirkotok.half_life_mod.entity.projectile.ShockProjectile;
@@ -33,7 +35,7 @@ public class ModEntities {
 
     public static final RegistryObject<EntityType<Barnacle>> BARNACLE =
             ENTITY_TYPES.register("barnacle",
-                    () -> EntityType.Builder.of(Barnacle::new, MobCategory.MONSTER)
+                    () -> EntityType.Builder.of((EntityType<Barnacle> pEntityType, Level pLevel) -> new Barnacle(pEntityType, pLevel), MobCategory.MONSTER)
                             .sized(0.9f, 0.9f)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "barnacle").toString()));
 
