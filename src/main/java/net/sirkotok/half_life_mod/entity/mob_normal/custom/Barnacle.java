@@ -3,6 +3,7 @@ package net.sirkotok.half_life_mod.entity.mob_normal.custom;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
@@ -16,6 +17,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
@@ -29,6 +32,7 @@ import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
@@ -160,7 +164,7 @@ public class Barnacle extends PathfinderMob {
             this.xpReward = 5;
 
             this.noPhysics = true;
-            this.noCulling = true;
+         //   this.noCulling = true;
 
             this.parts = new BarnaclePart[] {
                     this.tongue,
@@ -201,7 +205,7 @@ public class Barnacle extends PathfinderMob {
     }
     @Override
     public boolean isPickable() {
-        return true;
+        return false;
     }
 
     public void aiStep() {
@@ -223,7 +227,9 @@ public class Barnacle extends PathfinderMob {
         tickMouth(this.mouth);
         this.checkTongue(this.tongue.getBoundingBox());
         if (this.tickCount % 15 == 0) this.checkMouth(this.mouth.getBoundingBox());
-        this.setBoundingBox(new AABB(this.blockPosition().getX(), this.blockPosition().getY()+1, this.blockPosition().getZ(), this.blockPosition().getX()+1f, this.blockPosition().getY() +0.5f, this.blockPosition().getZ()+1f));
+      //  this.setBoundingBox(new AABB(this.blockPosition().getX(), this.blockPosition().getY()+1, this.blockPosition().getZ(), this.blockPosition().getX()+1f, this.blockPosition().getY() +0.5f, this.blockPosition().getZ()+1f));
+        this.setBoundingBox(new AABB(this.blockPosition().getX(), this.blockPosition().getY()+1, this.blockPosition().getZ(), this.blockPosition().getX()+1f, this.blockPosition().getY()-this.getairemount(), this.blockPosition().getZ()+1f));
+
     }
 
 
@@ -273,19 +279,49 @@ public class Barnacle extends PathfinderMob {
                     this.doHurtTarget(entity);
                     this.setAttacking(true);
                     if (entity instanceof Headcrab_Poison_2) {
+                        this.eatpoisonheadcrab(entity);
                         this.setHealth(0);
                     this.playSound(this.getDeathSound());
-                    } else
+                    } else {
+                        this.doHurtTarget(entity);
                     this.heal(4);
+                }
                 }
             }
         }
 
-
-
-
-
     }
+
+
+    public boolean eatpoisonheadcrab(Entity pEntity) {
+        float f = (float) 100;
+        float f1 = (float)this.getAttributeValue(Attributes.ATTACK_KNOCKBACK);
+        if (pEntity instanceof LivingEntity) {
+            f += EnchantmentHelper.getDamageBonus(this.getMainHandItem(), ((LivingEntity)pEntity).getMobType());
+            f1 += (float)EnchantmentHelper.getKnockbackBonus(this);
+        }
+
+        int i = EnchantmentHelper.getFireAspect(this);
+        if (i > 0) {
+            pEntity.setSecondsOnFire(i * 4);
+        }
+
+        boolean flag = pEntity.hurt(this.damageSources().mobAttack(this), f);
+        if (flag) {
+            if (f1 > 0.0F && pEntity instanceof LivingEntity) {
+                ((LivingEntity)pEntity).knockback((double)(f1 * 0.5F), (double)Mth.sin(this.getYRot() * ((float)Math.PI / 180F)), (double)(-Mth.cos(this.getYRot() * ((float)Math.PI / 180F))));
+                this.setDeltaMovement(this.getDeltaMovement().multiply(0.6D, 1.0D, 0.6D));
+            }
+
+
+            this.doEnchantDamageEffects(this, pEntity);
+            this.setLastHurtMob(pEntity);
+        }
+
+        return flag;
+    }
+
+
 
 
 
@@ -493,7 +529,7 @@ public class Barnacle extends PathfinderMob {
             if (this.tickCount % 600 == 0) {
                 this.fooditementity = null;
             }
-            if (this.tickCount % 1200 == 0) {
+            if (this.tickCount % 600 == 0) {
                 this.foodliving = null;
             }
 

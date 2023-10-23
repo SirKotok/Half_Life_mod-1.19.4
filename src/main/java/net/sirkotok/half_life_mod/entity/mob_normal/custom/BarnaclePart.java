@@ -57,25 +57,14 @@ public class BarnaclePart extends net.minecraftforge.entity.PartEntity<Barnacle>
      * Returns {@code true} if other Entities should be prevented from moving through this Entity.
      */
     public boolean isPickable() {
-        return false;
+        return isbody;
     }
 
     public boolean hurt(DamageSource pSource, float pAmount) {
-        if (this.isbody) return this.parentMob.hurt(pSource, pAmount);
-        return false;
+        return this.parentMob.hurt(pSource, pAmount);
     }
 
-    @Override
-    public boolean isAttackable() {
-        if (this.isbody) {
-        return super.isAttackable();}
-        return false;
-    }
 
-    @Nullable
-    public ItemStack getPickResult() {
-        return this.parentMob.getPickResult();
-    }
 
 
 
