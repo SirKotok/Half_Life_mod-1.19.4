@@ -8,6 +8,7 @@
   "item.half_life_mod.headcrab_fast_spawn_egg": "Fast Headcrab Spawn Egg",
   "item.half_life_mod.headcrab_zombie_spawn_egg": "Headcrab Zombie Spawn Egg",
   "item.half_life_mod.bullsquid_spawn_egg": "Bullsquid Spawn Egg",
+    "item.half_life_mod.barnacle_1_spawn_egg": "Barnacle Spawn Egg",
   "item.half_life_mod.chumtoad_spawn_egg": "Chumtoad Spawn Egg",
     "item.half_life_mod.shockroach_spawn_egg": "Shockroach Spawn Egg",
   "item.half_life_mod.chumtoad_thrower": "Chumtoad",
@@ -31,7 +32,7 @@
 
 
 
-
+    "entity.half_life_mod.barnacle": "Barnacle",
     "entity.half_life_mod.headcrab_1": "Headcrab",
     "entity.half_life_mod.shockroach": "Shockroach",
   "entity.half_life_mod.chumtoad": "Chumtoad",
@@ -47,6 +48,18 @@
   "entity.half_life_mod.headcrab_armor": "Armored Headcrab",
   "entity.half_life_mod.bullsquid": "Bullsquid",
   "entity.half_life_mod.headcrab_zombie_1": "Headcrab Zombie",
+
+
+
+    "sounds.half_life_mod.barnacle_tongue": "Barnacle catches its prey",
+    "sounds.half_life_mod.barnacle_pain": "Barnacle is hurt",
+    "sounds.half_life_mod.barnacle_attack1": "Barnacle bites",
+    "sounds.half_life_mod.barnacle_attack2": "Barnacle bites",
+    "sounds.half_life_mod.barnacle_attack3": "Barnacle bites",
+    "sounds.half_life_mod.barnacle_attack4": "Barnacle bites",
+    "sounds.half_life_mod.barnacle_die1": "Barnacle dies",
+    "sounds.half_life_mod.barnacle_die2": "Barnacle dies",
+
 
 
     "sounds.half_life_mod.shock_die": "Shockroach Dies",

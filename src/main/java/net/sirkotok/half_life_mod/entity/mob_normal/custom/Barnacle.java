@@ -5,8 +5,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -15,6 +13,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -23,14 +22,21 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.BodyRotationControl;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Headcrab_Poison_2;
+import net.sirkotok.half_life_mod.sound.ModSounds;
 import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
@@ -39,8 +45,28 @@ import java.util.Optional;
 
 public class Barnacle extends PathfinderMob {
 
-    private final BarnacleTongue tongue;
-    private final BarnacleTongue[] tongues;
+    //TODO: bugfix
+    /*
+    bug 1 = headcrabs jumps and breaks it
+    bug 2 = items and everything to do with them
+    bug 3 = snark explode and it breaks (shitty fix applied)
+     */
+
+
+
+    @Nullable
+    private LivingEntity foodliving;
+    @Nullable
+    private ItemEntity fooditementity;
+
+    private final BarnaclePart tongue;
+    private final BarnaclePart mouth;
+    private final BarnaclePart body;
+    private final BarnaclePart[] parts;
+
+
+    public float mouthwidth = 0.1f;
+
     @Override
     public boolean isMultipartEntity() {
         return true;
@@ -52,7 +78,7 @@ public class Barnacle extends PathfinderMob {
 
 
     @Override
-    public net.minecraftforge.entity.PartEntity<?>[] getParts() { return this.tongues; }
+    public net.minecraftforge.entity.PartEntity<?>[] getParts() { return this.parts; }
 
 
 
@@ -61,7 +87,8 @@ public class Barnacle extends PathfinderMob {
 
 
 
-
+    private static final EntityDataAccessor<Float> TONGUE_LENGTH =
+            SynchedEntityData.defineId(Barnacle.class, EntityDataSerializers.FLOAT);
 
 
          private static final EntityDataAccessor<Boolean> ATTACKING =
@@ -127,47 +154,224 @@ public class Barnacle extends PathfinderMob {
 
         public Barnacle(EntityType<? extends Barnacle> pEntityType, Level pLevel) {
             super(pEntityType, pLevel);
-            this.tongue = new BarnacleTongue(this, "tongue", 0.4F, 1f);
+            this.tongue = new BarnaclePart(this, "tongue", 0.4F, 1f, false);
+            this.body = new BarnaclePart(this, "body", 0.8f, 0.8f, true);
+            this.mouth = new BarnaclePart(this, "mouth", 0.4F, 1f, false);
             this.xpReward = 5;
-            this.tongues = new BarnacleTongue[] {
-                    this.tongue
+
+            this.noPhysics = true;
+            this.noCulling = true;
+
+            this.parts = new BarnaclePart[] {
+                    this.tongue,
+                    this.body,
+                    this.mouth
             };
+            this.setId(ENTITY_COUNTER.getAndAdd(this.parts.length + 1) + 1); // Forge: Fix MC-158205: Make sure part ids are successors of parent mob id
         }
 
-
-
-    private void tickPart(BarnacleTongue pPart) {
-        pPart.moveTo(this.getX(), this.getY() - getairemount()+0.5, this.getZ());
+    @Override
+    public void setId(int pId) {
+        super.setId(pId);
+        for (int i = 0; i < this.parts.length; i++) // Forge: Fix MC-158205: Set part ids to successors of parent mob id
+            this.parts[i].setId(pId + i + 1);
     }
 
 
 
+    private void tickTongue(BarnaclePart pPart) {
+        pPart.moveTo(this.getX(), this.getY() - getairemount()+0.5, this.getZ());
+        double f = this.gettonguelength();
+        pPart.setBoundingBox(new AABB(this.blockPosition().getX() + 0.5 + mouthwidth/2, this.blockPosition().getY()+0.8, this.blockPosition().getZ() + 0.5 + mouthwidth/2, this.blockPosition().getX()+ 0.5 - mouthwidth/2, this.blockPosition().getY()-f, this.blockPosition().getZ()+ 0.5 - mouthwidth/2));
+    }
+    private void tickMouth(BarnaclePart pPart) {
+        pPart.moveTo(this.getX(), this.getY() - 0.5f, this.getZ());
+        pPart.setBoundingBox(new AABB(this.blockPosition().getX() + 0.5 + mouthwidth, this.blockPosition().getY()+0.1f, this.blockPosition().getZ() + 0.5 + mouthwidth, this.blockPosition().getX()+ 0.5 - mouthwidth, this.blockPosition().getY() + 0.7f, this.blockPosition().getZ()+ 0.5 - mouthwidth));
+    }
+
+    private void tickBody(BarnaclePart pPart) {
+        pPart.moveTo(this.getX(), this.getY(), this.getZ());
+        pPart.setBoundingBox(new AABB(this.blockPosition().getX(), this.blockPosition().getY()+0.5f, this.blockPosition().getZ(), this.blockPosition().getX()+1, this.blockPosition().getY()+1, this.blockPosition().getZ()+1));
+    }
+
+
+    @Override
+    public boolean canCollideWith(Entity pEntity) {
+        return false;
+    }
+    @Override
+    public boolean isPickable() {
+        return true;
+    }
 
     public void aiStep() {
+
+            if (this.isDeadOrDying()) return;
+
+
+            if (this.foodliving != null && this.foodliving.isDeadOrDying()) {
+                this.foodliving = null;
+            }
+
+            if (this.fooditementity != null && (this.fooditementity.getTags().contains(this.getStringUUID()+"checked"))) {
+                this.fooditementity = null;
+            }
+
         super.aiStep();
-        tickPart(this.tongue);
-        this.tongue.setBoundingBox(new AABB(this.blockPosition().getX() + 0.3, this.blockPosition().getY(), this.blockPosition().getZ() + 0.3, this.blockPosition().getX()+0.7, this.blockPosition().getY() - getairemount(), this.blockPosition().getZ()+0.7));
+        tickTongue(this.tongue);
+        tickBody(this.body);
+        tickMouth(this.mouth);
         this.checkTongue(this.tongue.getBoundingBox());
+        if (this.tickCount % 15 == 0) this.checkMouth(this.mouth.getBoundingBox());
+        this.setBoundingBox(new AABB(this.blockPosition().getX(), this.blockPosition().getY()+1, this.blockPosition().getZ(), this.blockPosition().getX()+1f, this.blockPosition().getY() +0.5f, this.blockPosition().getZ()+1f));
     }
 
 
-    private void checkTongue(AABB box) {
+
+
+    private void checkMouth(AABB box) {
         List<Entity> list = this.level.getEntities(this, box);
+        this.setAttacking(false);
+
+
+
         if (!list.isEmpty()) {
-            for(int i = 0; i < list.size(); ++i) {
+            for (int i = 0; i < list.size(); ++i) {
                 Entity entity = list.get(i);
+
+                if (entity instanceof ItemEntity food) {
+                    ItemStack stack = food.getItem();
+                    Item item = stack.getItem();
+                    if (item.isEdible())  {
+                        this.playSound(this.getBiteSound(), 0.5f, 1f);
+                    this.doHurtTarget(entity);
+                    this.setAttacking(true);
+                    if (stack.is(Items.POISONOUS_POTATO)) {
+                        addEffect(new MobEffectInstance(MobEffects.POISON, 100), this);
+                        } else {
+                        this.heal(4);
+                    }
+                    entity.discard();
+                    this.fooditementity = null;
+                    } else {
+                        entity.addTag(this.getStringUUID()+"checked");
+                        entity.removeTag("barnaclefood");
+                        this.fooditementity = null;
+                        entity.setDeltaMovement(0.5f*RandomSource.create().nextInt(-1, 1)*RandomSource.create().nextFloat(), 0.5f, 0.5f*RandomSource.create().nextInt(-1, 2)*RandomSource.create().nextFloat());
+                        this.playSound(this.getDisgustedSound(), 0.5f, 1f);
+                    }
+
+
+
+                }
+
+
+
+
                 if (entity instanceof LivingEntity) {
-                    ((LivingEntity)entity).addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 5, 0, false, true), this);
-                    break;
+                    this.playSound(this.getBiteSound(), 0.5f, 1f);
+                    this.doHurtTarget(entity);
+                    this.setAttacking(true);
+                    if (entity instanceof Headcrab_Poison_2) {
+                        this.setHealth(0);
+                    this.playSound(this.getDeathSound());
+                    } else
+                    this.heal(4);
                 }
             }
         }
+
+
+
+
+
     }
+
+
+
+    private void checkTongue(AABB box) {
+
+        if (this.foodliving == null && this.fooditementity == null)
+        {
+            List<Entity> list = this.level.getEntities(this, box);
+
+            if(!list.contains(this.fooditementity)) this.fooditementity = null;
+
+            if (!list.isEmpty()) {
+                for (int i = 0; i < list.size(); ++i) {
+                    Entity entity = list.get(i);
+
+                    if (entity instanceof ItemEntity && !entity.getTags().contains(this.getStringUUID()+"checked") && !entity.getTags().contains("barnaclefood")) {
+                        if (this.tickCount % 3 == 0) {
+                            this.fooditementity = (ItemEntity)entity;
+                            entity.moveTo(this.getX(), entity.getY(), this.getZ());
+                            entity.setDeltaMovement(0, 0.2, 0);
+                        }
+                        entity.addTag("barnaclefood");
+                        break;
+                    }
+
+                    Entity entity1;
+                    List<Entity> list1 = entity.getPassengers();
+                    if (list1.isEmpty()) entity1 = entity;
+                    else {
+                        entity1 = list1.get(RandomSource.create().nextInt(0, list1.size()));
+                        entity1.stopRiding();
+                    }
+                    if (entity1 instanceof LivingEntity && !((LivingEntity) entity1).isDeadOrDying() && !entity1.getTags().contains("barnaclefood") && !(entity1 instanceof Player pl && (pl.isCreative() || pl.isSpectator()))) {
+
+                        if(entity1.isPassenger()) entity1.stopRiding();
+
+                        this.playSound(this.getTongueSound(), 0.5f, 1);
+
+                        if (this.tickCount % 3 == 0) {
+                            entity1.moveTo(this.getX(), entity1.getY(), this.getZ());
+                            if (entity1 instanceof Player) {
+                                entity1.setDeltaMovement(0, 0.1, 0);
+                            } else {entity1.setDeltaMovement(0, 0, 0);}
+                        }
+                        ((LivingEntity)entity1).addEffect(new MobEffectInstance(MobEffects.LEVITATION, 3, 5, false, false, false), this);
+
+                        this.foodliving = (LivingEntity) entity1;
+                        entity1.addTag("barnaclefood");
+                        break;
+                    }
+                }
+                }
+            }
+
+        if(this.fooditementity != null) {
+            ItemEntity food = this.fooditementity;
+            if (this.tickCount % 3 == 0) {
+                food.moveTo(this.getX(), food.getY(), this.getZ());
+                food.setDeltaMovement(0, 0.2, 0);
+            }
+        }
+
+
+
+        if (this.foodliving != null) {
+            LivingEntity food = this.foodliving;
+            if (this.tickCount % 3 == 0) {
+                food.moveTo(this.getX(), food.getY(), this.getZ());
+                if (food instanceof Player) {
+                    food.setDeltaMovement(0, 0.1, 0);
+                } else {food.setDeltaMovement(0, 0, 0);}
+            }
+            (food).addEffect(new MobEffectInstance(MobEffects.LEVITATION, 3, 5, false, false, false), this);
+        }
+
+
+    }
+
+
+
+
 
 
     public int getairemount() {
         int i = 0;
-        for (int j = 0; j<20; j++){
+        for (int j = 1; j<20; j++){
             BlockPos pos = new BlockPos(this.blockPosition().getX(), this.blockPosition().getY() - j, this.blockPosition().getZ());
             BlockState blockstate = this.level.getBlockState(pos);
             if (!blockstate.isAir()) return i;
@@ -186,8 +390,7 @@ public class Barnacle extends PathfinderMob {
     public static AttributeSupplier setAttributes() {
         return Monster.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 10D)
-                .add(Attributes.ATTACK_DAMAGE, 0f)
-                .add(Attributes.ATTACK_SPEED, 0f)
+                .add(Attributes.ATTACK_DAMAGE, 10f)
                 .add(Attributes.ATTACK_KNOCKBACK, 0f)
                 .add(Attributes.MOVEMENT_SPEED, 0f).build();
     }
@@ -198,29 +401,36 @@ public class Barnacle extends PathfinderMob {
             return Entity.MovementEmission.NONE;
         }
 
-        public SoundSource getSoundSource() {
-            return SoundSource.HOSTILE;
-        }
 
-        protected SoundEvent getAmbientSound() {
-            return SoundEvents.SHULKER_AMBIENT;
-        }
-
-
-        public void playAmbientSound() {
-
-                super.playAmbientSound();
-
-
-        }
 
         protected SoundEvent getDeathSound() {
-            return SoundEvents.SHULKER_DEATH;
+            switch (this.random.nextInt(1,3)) {
+                case 1:  return ModSounds.BARNACLE_DIE1.get();
+                case 2:  return ModSounds.BARNACLE_DIE2.get();
+            }
+            return ModSounds.HEADCRAB_1_PAIN_1.get();
         }
 
         protected SoundEvent getHurtSound(DamageSource pDamageSource) {
-            return SoundEvents.SHULKER_HURT;
+            return ModSounds.BARNACLE_PAIN.get();
         }
+    protected SoundEvent getDisgustedSound() {
+        return ModSounds.BARNACLE_PAIN.get();
+    }
+
+    protected SoundEvent getBiteSound() {
+        switch (this.random.nextInt(1,5)) {
+            case 1:  return ModSounds.BARNACLE_BITE1.get();
+            case 2:  return ModSounds.BARNACLE_BITE2.get();
+            case 3:  return ModSounds.BARNACLE_BITE3.get();
+            case 4:  return ModSounds.BARNACLE_BITE4.get();
+        }
+        return ModSounds.HEADCRAB_1_PAIN_1.get();
+    }
+    protected SoundEvent getTongueSound() {
+            return ModSounds.BARNACLE_TONGUE.get();
+    }
+
 
         protected Direction CorrectDirection() {return Direction.UP;}
 
@@ -228,6 +438,7 @@ public class Barnacle extends PathfinderMob {
             super.defineSynchedData();
             this.entityData.define(DATA_ATTACH_FACE_ID, CorrectDirection());
             this.entityData.define(ATTACKING, false);
+            this.entityData.define(TONGUE_LENGTH, 0.0f);
         }
 
 
@@ -249,16 +460,27 @@ public class Barnacle extends PathfinderMob {
         /**
          * (abstract) Protected helper method to read subclass entity data from NBT.
          */
+
+
+        public float gettonguelength() {
+            return this.entityData.get(TONGUE_LENGTH);
+        }
+    protected void settonguelength(float lngth) {
+        this.entityData.set(TONGUE_LENGTH, lngth);
+    }
+
+
         public void readAdditionalSaveData(CompoundTag pCompound) {
             super.readAdditionalSaveData(pCompound);
+            this.settonguelength(pCompound.getFloat("TongueLength") + 1);
             this.setAttachFace(Direction.from3DDataValue(pCompound.getByte("AttachFace")));
-
 
         }
 
         public void addAdditionalSaveData(CompoundTag pCompound) {
             super.addAdditionalSaveData(pCompound);
             pCompound.putByte("AttachFace", (byte)this.getAttachFace().get3DDataValue());
+            pCompound.putFloat("TongueLength", this.gettonguelength() - 1 );
 
         }
 
@@ -267,6 +489,44 @@ public class Barnacle extends PathfinderMob {
          */
         public void tick() {
             super.tick();
+
+            if (this.tickCount % 600 == 0) {
+                this.fooditementity = null;
+            }
+            if (this.tickCount % 1200 == 0) {
+                this.foodliving = null;
+            }
+
+            if (this.fooditementity != null) {
+               if (!this.fooditementity.isAddedToWorld()) {
+                    this.fooditementity = null;
+                }
+            }
+
+            float f;
+            if (this.foodliving != null) {
+                f = (float) this.getY() - (float) this.foodliving.getY();
+            } else if (this.fooditementity!=null) {
+                f = (float) this.getY() - (float) this.fooditementity.getY();
+            } else {
+                f = gettonguelength();
+                if (f<getairemount()) {
+                    f = f+0.2f;
+                }
+            }
+
+            if (f>getairemount()) {
+                f = getairemount();
+                this.foodliving = null;
+            }
+
+
+            this.settonguelength(f);
+
+
+
+
+
             if (!this.level.isClientSide && !this.canStayAt(this.blockPosition(), this.getAttachFace())) {
                 this.setHealth(0);
             }
@@ -277,12 +537,7 @@ public class Barnacle extends PathfinderMob {
 
 
 
-        protected AABB makeBoundingBox() {
-            float f = getPhysicalPeek(0);
-            Direction direction = this.getAttachFace().getOpposite();
-            float f1 = this.getType().getWidth() / 2.0F;
-            return getProgressAabb(direction, f).move(this.getX() - (double)f1, this.getY(), this.getZ() - (double)f1);
-        }
+
 
         private static float getPhysicalPeek(float pPeek) {
             return 0.5F - Mth.sin((0.5F + pPeek) * (float)Math.PI) * 0.5F;
@@ -290,15 +545,7 @@ public class Barnacle extends PathfinderMob {
 
 
 
-        public static AABB getProgressAabb(Direction pDirection, float pDelta) {
-            return getProgressDeltaAabb(pDirection, -1.0F, pDelta);
-        }
 
-        public static AABB getProgressDeltaAabb(Direction pDirection, float pDelta, float pDeltaO) {
-            double d0 = (double)Math.max(pDelta, pDeltaO);
-            double d1 = (double)Math.min(pDelta, pDeltaO);
-            return (new AABB(BlockPos.ZERO)).expandTowards((double)pDirection.getStepX() * d0, (double)pDirection.getStepY() * d0, (double)pDirection.getStepZ() * d0).contract((double)(-pDirection.getStepX()) * (1.0D + d1), (double)(-pDirection.getStepY()) * (1.0D + d1), (double)(-pDirection.getStepZ()) * (1.0D + d1));
-        }
 
         /**
          * Returns the Y Offset of this entity.
@@ -398,9 +645,6 @@ public class Barnacle extends PathfinderMob {
         }
 
 
-        public boolean canBeCollidedWith() {
-            return this.isAlive();
-        }
 
         public Direction getAttachFace() {
             return this.entityData.get(DATA_ATTACH_FACE_ID);
@@ -410,13 +654,8 @@ public class Barnacle extends PathfinderMob {
             this.entityData.set(DATA_ATTACH_FACE_ID, pAttachFace);
         }
 
-        public void onSyncedDataUpdated(EntityDataAccessor<?> pKey) {
-            if (DATA_ATTACH_FACE_ID.equals(pKey)) {
-                this.setBoundingBox(this.makeBoundingBox());
-            }
 
-            super.onSyncedDataUpdated(pKey);
-        }
+
 
 
 

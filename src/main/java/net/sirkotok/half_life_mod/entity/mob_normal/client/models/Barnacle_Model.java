@@ -11,20 +11,27 @@ import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Shulker;
 import net.sirkotok.half_life_mod.entity.mob_normal.animations.ModAnimationDefenitions;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
+import org.joml.Vector3f;
 
 
+import javax.annotation.Nullable;
 import javax.swing.text.html.parser.Entity;
 
 public class Barnacle_Model<T extends Barnacle> extends HierarchicalModel<T> {
 	private final ModelPart root;
-
-	public Barnacle_Model(ModelPart root) {
-		this.root = root.getChild("root");
+	private final ModelPart tongue;
+	@Nullable
+	private Barnacle entity;
+	public Barnacle_Model(ModelPart pRoot) {
+		this.root = pRoot.getChild("root");
+		this.tongue = this.root.getChild("tongue");
 	}
+
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
@@ -62,7 +69,16 @@ public class Barnacle_Model<T extends Barnacle> extends HierarchicalModel<T> {
 
 		PartDefinition cube_r6 = tooth6.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(0, 0).addBox(-0.2F, -0.9003F, 0.0878F, 0.4F, 1.6F, 0.4F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -1.4F, 0.0F, -0.5061F, 0.0F, 0.0F));
 
+		PartDefinition tongue = root.addOrReplaceChild("tongue", CubeListBuilder.create().texOffs(0, 11).addBox(-0.5F, -21.9F, -0.5F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, 24.0F, 3.5F));
+
 		return LayerDefinition.create(meshdefinition, 64, 64);
+	}
+
+
+
+
+	public void prepareMobModel(Barnacle pEntity) {
+		this.entity = pEntity;
 	}
 
 	@Override
@@ -75,7 +91,16 @@ public class Barnacle_Model<T extends Barnacle> extends HierarchicalModel<T> {
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		this.root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		if (this.entity != null) {
+			float scale = this.entity.gettonguelength()*16+8;
+			Vector3f vec3f = new Vector3f(0, scale , 0);
+			Vector3f vec3mf = new Vector3f(-0.5f, 21.9f*(scale+1)-scale-5, -3.5f);
+		this.tongue.offsetScale(vec3f);
+		this.tongue.offsetPos(vec3mf);
+		}
+
+		this.tongue.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 
 	@Override

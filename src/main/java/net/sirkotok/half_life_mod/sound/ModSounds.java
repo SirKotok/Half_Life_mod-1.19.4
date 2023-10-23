@@ -15,6 +15,37 @@ public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 
+    // BARNACLE SOUNDS
+
+    public static final RegistryObject<SoundEvent> BARNACLE_TONGUE =
+            registerSoundEvent("barnacle_tongue");
+    public static final RegistryObject<SoundEvent> BARNACLE_PAIN =
+            registerSoundEvent("barnacle_pain");
+    public static final RegistryObject<SoundEvent> BARNACLE_BITE1 =
+            registerSoundEvent("barnacle_attack1");
+    public static final RegistryObject<SoundEvent> BARNACLE_BITE2 =
+            registerSoundEvent("barnacle_attack2");
+    public static final RegistryObject<SoundEvent> BARNACLE_BITE3 =
+            registerSoundEvent("barnacle_attack3");
+    public static final RegistryObject<SoundEvent> BARNACLE_BITE4 =
+            registerSoundEvent("barnacle_attack4");
+    public static final RegistryObject<SoundEvent> BARNACLE_DIE1 =
+            registerSoundEvent("barnacle_die1");
+    public static final RegistryObject<SoundEvent> BARNACLE_DIE2 =
+            registerSoundEvent("barnacle_die2");
+
+
+
+
+
+
+
+
+
+
+
+
+
     //Shockroach item and entity sounds
 
     public static final RegistryObject<SoundEvent> SHOCKROACH_DIE =

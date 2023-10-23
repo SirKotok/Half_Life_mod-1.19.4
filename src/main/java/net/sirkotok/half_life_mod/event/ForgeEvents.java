@@ -1,6 +1,7 @@
 package net.sirkotok.half_life_mod.event;
 
 
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -9,6 +10,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.*;
+import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.object.SquareRadius;
 import net.tslat.smartbrainlib.util.BrainUtils;
@@ -27,6 +29,16 @@ public class ForgeEvents {
             LivingEntity entity = event.getEntity();
             if (entity.level.isClientSide()) return;
             if (event.isCanceled()) return;
+
+            if (entity.getTags().contains("barnaclefood")) {
+                if (!entity.hasEffect(MobEffects.LEVITATION)) entity.removeTag("barnaclefood");
+            }
+
+            if (entity.isDeadOrDying() && entity.getKillCredit() instanceof Barnacle) {
+                entity.discard();
+            }
+
+
             if (entity instanceof Chumtoad) {
                 if (entity.isDeadOrDying()) {
                     SquareRadius radius1 = new SquareRadius(30, 7);
@@ -69,6 +81,10 @@ public class ForgeEvents {
             LivingEntity entity = event.getEntity();
             if (entity.level.isClientSide()) return;
             if (event.isCanceled()) return;
+
+            if (event.getSource().getEntity() instanceof Barnacle barnacle) {
+                barnacle.setHealth(barnacle.getMaxHealth());
+            }
 
             if (entity instanceof Chumtoad) {
                 SquareRadius radius = new SquareRadius(20, 7);

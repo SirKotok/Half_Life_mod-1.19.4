@@ -2,6 +2,7 @@ package net.sirkotok.half_life_mod.entity.mob_normal.client.renderers;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -22,7 +23,10 @@ import javax.annotation.Nullable;
 public class Barnacle_Renderer extends MobRenderer<Barnacle, Barnacle_Model<Barnacle>> {
 
     public Barnacle_Renderer(EntityRendererProvider.Context pContext) {
-        super(pContext, new Barnacle_Model<>(pContext.bakeLayer(ModModelLayers.BARNACLE_LAYER)), 0f);
+        super(pContext, new Barnacle_Model<>(
+                pContext.bakeLayer(ModModelLayers.BARNACLE_LAYER))
+                , 0f);
+
     }
 
     @Override
@@ -75,28 +79,13 @@ public class Barnacle_Renderer extends MobRenderer<Barnacle, Barnacle_Model<Barn
 
     }
 
-
-
+    @Override
+    public void render(Barnacle pEntity, float pEntityYaw, float pPartialTicks, PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight) {
+        this.model.prepareMobModel(pEntity);
+        super.render(pEntity, pEntityYaw, pPartialTicks, pMatrixStack, pBuffer, pPackedLight);
+    }
 }
 
-/*
- * Returns the location of an entity's texture. */
 
-    /* public ResourceLocation getTextureLocation(Shulker pEntity) {
-    return getTextureLocation(pEntity.getColor());
-    }
-
-    public static ResourceLocation getTextureLocation(@Nullable DyeColor pColor) {
-        return pColor == null ? DEFAULT_TEXTURE_LOCATION : TEXTURE_LOCATION[pColor.getId()];
-    }
-
-    protected void setupRotations(Shulker pEntityLiving, PoseStack pMatrixStack, float pAgeInTicks, float pRotationYaw, float pPartialTicks) {
-        super.setupRotations(pEntityLiving, pMatrixStack, pAgeInTicks, pRotationYaw + 180.0F, pPartialTicks);
-        pMatrixStack.translate(0.0D, 0.5D, 0.0D);
-        pMatrixStack.mulPose(pEntityLiving.getAttachFace().getOpposite().getRotation());
-        pMatrixStack.translate(0.0D, -0.5D, 0.0D);
-    }
-
-     */
 
 

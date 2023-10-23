@@ -11,6 +11,54 @@
       "half_life_mod:pistol_reload"
     ]
   },
+  "barnacle_tongue": {
+    "subtitle": "sounds.half_life_mod.barnacle_tongue",
+    "sounds": [
+      "half_life_mod:barnacle_tongue"
+    ]
+  },
+  "barnacle_pain": {
+    "subtitle": "sounds.half_life_mod.barnacle_pain",
+    "sounds": [
+      "half_life_mod:barnacle_pain"
+    ]
+  },
+  "barnacle_attack1": {
+    "subtitle": "sounds.half_life_mod.barnacle_attack1",
+    "sounds": [
+      "half_life_mod:barnacle_attack1"
+    ]
+  },
+  "barnacle_attack2": {
+    "subtitle": "sounds.half_life_mod.barnacle_attack2",
+    "sounds": [
+      "half_life_mod:barnacle_attack2"
+    ]
+  },
+  "barnacle_attack3": {
+    "subtitle": "sounds.half_life_mod.barnacle_attack3",
+    "sounds": [
+      "half_life_mod:barnacle_attack3"
+    ]
+  },
+  "barnacle_attack4": {
+    "subtitle": "sounds.half_life_mod.barnacle_attack4",
+    "sounds": [
+      "half_life_mod:barnacle_attack4"
+    ]
+  },
+  "barnacle_die1": {
+    "subtitle": "sounds.half_life_mod.barnacle_die1",
+    "sounds": [
+      "half_life_mod:barnacle_die1"
+    ]
+  },
+  "barnacle_die2": {
+    "subtitle": "sounds.half_life_mod.barnacle_die2",
+    "sounds": [
+      "half_life_mod:barnacle_die2"
+    ]
+  },
   "pistol_shot": {
     "subtitle": "sounds.half_life_mod.pistol_shot",
     "sounds": [
