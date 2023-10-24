@@ -210,6 +210,8 @@ public class Barnacle extends PathfinderMob {
 
     public void aiStep() {
 
+
+
             if (this.isDeadOrDying()) return;
 
 
@@ -225,9 +227,10 @@ public class Barnacle extends PathfinderMob {
         tickTongue(this.tongue);
         tickBody(this.body);
         tickMouth(this.mouth);
+        if (!this.level.isClientSide){
         this.checkTongue(this.tongue.getBoundingBox());
         if (this.tickCount % 15 == 0) this.checkMouth(this.mouth.getBoundingBox());
-      //  this.setBoundingBox(new AABB(this.blockPosition().getX(), this.blockPosition().getY()+1, this.blockPosition().getZ(), this.blockPosition().getX()+1f, this.blockPosition().getY() +0.5f, this.blockPosition().getZ()+1f));
+        }
         this.setBoundingBox(new AABB(this.blockPosition().getX(), this.blockPosition().getY()+1, this.blockPosition().getZ(), this.blockPosition().getX()+1f, this.blockPosition().getY()-this.getairemount(), this.blockPosition().getZ()+1f));
 
     }
@@ -270,9 +273,6 @@ public class Barnacle extends PathfinderMob {
 
 
                 }
-
-
-
 
                 if (entity instanceof LivingEntity) {
                     this.playSound(this.getBiteSound(), 0.5f, 1f);

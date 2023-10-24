@@ -123,7 +123,7 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
 
 
 
-
+    public static final EntityDataAccessor<Boolean> TERRITORIAL = SynchedEntityData.defineId(Bullsquid.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> IS_ANGRY = SynchedEntityData.defineId(Bullsquid.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Integer> ID_TEXTURE = SynchedEntityData.defineId(Bullsquid.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> IS_EATING = SynchedEntityData.defineId(Bullsquid.class, EntityDataSerializers.BOOLEAN);
@@ -136,6 +136,7 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
 
     protected void defineSynchedData() {
         super.defineSynchedData();
+        this.entityData.define(TERRITORIAL, true);
         this.entityData.define(IS_ANGRY, false);
         this.entityData.define(AI_STOP, false);
         this.entityData.define(IS_EATING, false);
@@ -174,10 +175,12 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
     public void addAdditionalSaveData(CompoundTag p_33619_) {
         super.addAdditionalSaveData(p_33619_);
         p_33619_.putInt("Texture", this.gettexture() - 1 );
+        p_33619_.putBoolean("Territorial", this.isterritorial());
     }
 
     public void readAdditionalSaveData(CompoundTag p_33607_) {
         this.settexture(p_33607_.getInt("Texture") + 1);
+        this.setterritorial(p_33607_.getBoolean("Territorial"));
         super.readAdditionalSaveData(p_33607_);
     }
 
@@ -189,6 +192,12 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
 
     protected boolean isangry() {
         return this.entityData.get(IS_ANGRY);
+    }
+    protected boolean isterritorial() {
+        return this.entityData.get(TERRITORIAL);
+    }
+    protected void setterritorial(boolean a) {
+        this.entityData.set(TERRITORIAL, a);
     }
 
     public Bullsquid(EntityType type, Level level) {
@@ -331,8 +340,9 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
                             target instanceof IronGolem ||
                             target instanceof AbstractVillager ||
                             target instanceof Slime ||
-                            target instanceof HalfLifeNeutral ||
-                            target instanceof Bullsquid));
+                            (target instanceof Bullsquid bullsquid && bullsquid.isterritorial() && this.isterritorial()) ||
+                            target instanceof HalfLifeNeutral
+                            ));
     }
 
 
@@ -491,6 +501,8 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_33601_, DifficultyInstance p_33602_, MobSpawnType p_33603_, @Nullable SpawnGroupData p_33604_, @Nullable CompoundTag p_33605_) {
         RandomSource randomsource = p_33601_.getRandom();
         int i = randomsource.nextInt(101);
+        int j = randomsource.nextInt(200);
+        if (j == 69) this.setterritorial(false);
         this.settexture(i);
         return super.finalizeSpawn(p_33601_, p_33602_, p_33603_, p_33604_, p_33605_);
     }
