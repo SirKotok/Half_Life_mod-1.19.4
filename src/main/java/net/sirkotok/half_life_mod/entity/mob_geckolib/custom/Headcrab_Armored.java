@@ -11,6 +11,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
+import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
 import net.sirkotok.half_life_mod.util.ModTags;
 
 public class Headcrab_Armored extends Headcrab_3{
@@ -57,12 +58,18 @@ public class Headcrab_Armored extends Headcrab_3{
         if (damageSource.is(DamageTypes.IN_WALL)) {
             return; }
 
+
+
         if ((!this.vulnerable() && (damageSource.is(ModTags.DamageTypes.HEADCRAB_ARMOR_PROTECTS_FROM)))) {
            if (this.getVehicle() != null) {
                if (this.isPassenger() && damageSource.getEntity().equals(this.getVehicle())){
                super.actuallyHurt(damageSource, v);
                return;
            }
+           }
+           if (damageSource.getEntity() instanceof Barnacle) {
+               super.actuallyHurt(damageSource, v);
+               return;
            }
             return;
         }

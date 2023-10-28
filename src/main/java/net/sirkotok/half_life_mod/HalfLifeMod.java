@@ -75,6 +75,7 @@ public class HalfLifeMod
           //  event.accept(ModItems.HEADCRAB_ZOMBIE_SPAWN_EGG);
 
             event.accept(ModItems.BULLSQUID_SPAWN_EGG);
+            event.accept(ModItems.HOUNDEYE_SPAWN_EGG);
 
 
             event.accept(ModItems.SNARKNEST_SPAWN_EGG);

@@ -1,5 +1,6 @@
 package net.sirkotok.half_life_mod.item.custom.gun;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -49,7 +50,7 @@ public class RechargingGunItem extends GunItem {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(getAmmooutofMax(pStack));
+        pTooltipComponents.add(getAmmooutofMax(pStack).withStyle(ChatFormatting.GRAY));
     }
     @Override
     public MutableComponent getAmmooutofMax(ItemStack pStack) {

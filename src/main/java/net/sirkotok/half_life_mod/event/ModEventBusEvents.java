@@ -35,6 +35,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.HEADCRAB_POISON_HL2.get(), Headcrab_Poison_2.setAttributes());
         event.put(ModEntities.HEADCRAB_POISON_HLA.get(), Headcrab_Poison_3.setAttributes());
         event.put(ModEntities.BULLSQUID.get(), Bullsquid.setAttributes());
+        event.put(ModEntities.HOUNDEYE.get(), Houndeye.setAttributes());
         event.put(ModEntities.SHOCKROACH.get(), Shockroach.setAttributes());
     }
 
@@ -61,6 +62,8 @@ public class ModEventBusEvents {
                 Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(ModEntities.SNARKNEST.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Snarknest::checkNestSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        event.register(ModEntities.BARNACLE.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING,
+                Barnacle::checkBarnacleSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
 
 
     }

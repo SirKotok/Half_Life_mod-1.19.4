@@ -15,6 +15,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
@@ -40,10 +41,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Headcrab_Poison_2;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Snarknest;
 import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
 import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -146,7 +150,32 @@ public class Barnacle extends PathfinderMob {
 
 
 
+    public static boolean checkBarnacleSpawnRules(EntityType<Barnacle> pType, ServerLevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pBlockPos, RandomSource pRandom) {
 
+        if (!canSpawnAt(pBlockPos, pLevel)) {
+            return false;
+        }
+
+        int radius = 70;
+        int rad = 10;
+        List<Mob>entities2 = EntityRetrievalUtil.getEntities((Level) pLevel,
+                new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
+                        pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj instanceof Barnacle);
+        List<Mob> entities = EntityRetrievalUtil.getEntities((Level) pLevel,
+                new AABB(pBlockPos.getX() - radius, pBlockPos.getY() - radius, pBlockPos.getZ() - radius,
+                        pBlockPos.getX() + radius, pBlockPos.getY() + radius, pBlockPos.getZ() + radius), obj -> obj instanceof Barnacle);
+       if (entities.isEmpty()) return pLevel.getDifficulty() != Difficulty.PEACEFUL && Monster.isDarkEnoughToSpawn(pLevel, pBlockPos, pRandom);
+       else if (entities.equals(entities2) && entities.size() <= 10)
+        return pLevel.getDifficulty() != Difficulty.PEACEFUL && Monster.isDarkEnoughToSpawn(pLevel, pBlockPos, pRandom);
+        else return false;
+    }
+
+    public static boolean canSpawnAt(BlockPos pPos, ServerLevelAccessor pLevel) {
+        BlockPos pos = new BlockPos(pPos.getX(), pPos.getY() + 1, pPos.getZ());
+        BlockState blockstate = pLevel.getBlockState(pos);
+        boolean flag = !blockstate.isAir();
+        return flag;
+    }
 
 
 
@@ -227,10 +256,10 @@ public class Barnacle extends PathfinderMob {
         tickTongue(this.tongue);
         tickBody(this.body);
         tickMouth(this.mouth);
-        if (!this.level.isClientSide){
+     //   if (!this.level.isClientSide){
         this.checkTongue(this.tongue.getBoundingBox());
         if (this.tickCount % 15 == 0) this.checkMouth(this.mouth.getBoundingBox());
-        }
+      //  }
         this.setBoundingBox(new AABB(this.blockPosition().getX(), this.blockPosition().getY()+1, this.blockPosition().getZ(), this.blockPosition().getX()+1f, this.blockPosition().getY()-this.getairemount(), this.blockPosition().getZ()+1f));
 
     }
@@ -529,7 +558,7 @@ public class Barnacle extends PathfinderMob {
             if (this.tickCount % 600 == 0) {
                 this.fooditementity = null;
             }
-            if (this.tickCount % 600 == 0) {
+            if (this.tickCount % 3000 == 0) {
                 this.foodliving = null;
             }
 
@@ -547,7 +576,7 @@ public class Barnacle extends PathfinderMob {
             } else {
                 f = gettonguelength();
                 if (f<getairemount()) {
-                    f = f+0.2f;
+                    f = f+0.1f;
                 }
             }
 
@@ -607,6 +636,7 @@ public class Barnacle extends PathfinderMob {
             this.setYRot(0.0F);
             this.yHeadRot = this.getYRot();
             this.setOldPosAndRot();
+            this.setPersistenceRequired();
             return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
         }
 
@@ -644,6 +674,10 @@ public class Barnacle extends PathfinderMob {
 
             }
         }
+
+
+
+
 
 
 

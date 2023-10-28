@@ -21,6 +21,14 @@ public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
             DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, HalfLifeMod.MOD_ID);
 
+
+    public static final RegistryObject<EntityType<Houndeye>> HOUNDEYE =
+            ENTITY_TYPES.register("houndeye",
+                    () -> EntityType.Builder.of(Houndeye::new, MobCategory.MONSTER)
+                            .sized(0.7f, 0.8f)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "houndeye").toString()));
+
+
     public static final RegistryObject<EntityType<Headcrab_1>> HEADCRAB_HL1 =
             ENTITY_TYPES.register("headcrab_1",
                     () -> EntityType.Builder.of(Headcrab_1::new, MobCategory.MONSTER)

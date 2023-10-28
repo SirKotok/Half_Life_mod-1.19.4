@@ -3,26 +3,29 @@ package net.sirkotok.half_life_mod.entity.mob_geckolib.client.renderers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.client.models.Snarknest_model;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Snarknest;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.client.models.Headcrab_m1;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.client.models.Houndeye_model;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Headcrab_1;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Houndeye;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;
 
 
-public class Snarknestrenderer extends GeoEntityRenderer<Snarknest> {
-    public Snarknestrenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new Snarknest_model());
+public class Houndeyerenderer extends GeoEntityRenderer<Houndeye> {
+    public Houndeyerenderer(EntityRendererProvider.Context renderManager) {
+        super(renderManager, new Houndeye_model());
         addRenderLayer(new AutoGlowingGeoLayer<>(this));
+
     }
 
 
 
     @Override
-    public void render(Snarknest entity, float entityYaw,
+    public void render(Houndeye entity, float entityYaw,
                        float partialTick, PoseStack poseStack,
                        MultiBufferSource bufferSource, int packedLight) {
 
-        poseStack.scale(1.2f, 1.2f, 1.2f);
+        poseStack.scale(1.3f, 1.3f, 1.3f);
 
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }

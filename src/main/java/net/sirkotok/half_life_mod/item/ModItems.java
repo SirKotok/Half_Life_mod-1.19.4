@@ -24,7 +24,9 @@ public class ModItems {
    public static final RegistryObject<Item> HEADCRAB_ONE_SPAWN_EGG = ITEMS.register("headcrab_1_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.HEADCRAB_HL1, 0xa39b74, 0x614a0d   ,
                     new Item.Properties()));
-
+   public static final RegistryObject<Item> HOUNDEYE_SPAWN_EGG = ITEMS.register("houndeye_spawn_egg",
+           () -> new ForgeSpawnEggItem(ModEntities.HOUNDEYE, 0xecb016, 0x28bae1   ,
+                   new Item.Properties()));
 
    public static final RegistryObject<Item> BARNACLE_ONE_SPAWN_EGG = ITEMS.register("barnacle_1_spawn_egg",
            () -> new BarnacleSpawnEggItem(ModEntities.BARNACLE, 0xef5b38, 0x9e7408   ,

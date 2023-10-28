@@ -1,5 +1,6 @@
 package net.sirkotok.half_life_mod.item.custom;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -40,7 +41,7 @@ public class BarnacleSpawnEggItem extends ForgeSpawnEggItem {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(tip(pStack));
+        pTooltipComponents.add(tip(pStack).withStyle(ChatFormatting.GRAY));
     }
 
     public MutableComponent tip(ItemStack pStack) {
