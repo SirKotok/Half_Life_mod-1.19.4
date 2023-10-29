@@ -274,7 +274,7 @@ public class Headcrab_Poison_3 extends HalfLifeMonster implements GeoEntity, Sma
 
     @Override
     public boolean doHurtTarget(Entity entity) {
-        return this.ConfigurabledoHurtTarget(entity, 0, 0, ModEffects.SET_HEALTH_TO_ONE.get(), 2, false);
+        return this.ConfigurabledoHurtTarget(entity, 0, 0, 0, ModEffects.SET_HEALTH_TO_ONE.get(), 2, false);
     }
 
 

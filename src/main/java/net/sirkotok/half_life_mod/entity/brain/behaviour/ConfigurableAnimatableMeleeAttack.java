@@ -20,6 +20,7 @@ public class ConfigurableAnimatableMeleeAttack<E extends HalfLifeMonster> extend
     protected boolean growled = false;
     protected int knockbackmod;
 
+    protected float disableshield;
     @Nullable
     protected MobEffect effect;
     @Nullable protected int effectduration;
@@ -28,13 +29,13 @@ public class ConfigurableAnimatableMeleeAttack<E extends HalfLifeMonster> extend
     protected SoundEvent onhit;
 
 
-    public ConfigurableAnimatableMeleeAttack(int delayTicks, int modattack, int modknockback, @Nullable MobEffect effect, int effectduration, @Nullable SoundEvent onhit) {
+    public ConfigurableAnimatableMeleeAttack(int delayTicks, float disablechance, int modattack, int modknockback, @Nullable MobEffect effect, int effectduration, @Nullable SoundEvent onhit) {
         super(delayTicks);
         this.attackmod = modattack;
         this.knockbackmod = modknockback;
         this.effect = effect;
         this.effectduration = effectduration;
-
+        this.disableshield = disablechance;
         this.onhit = onhit;
     }
 
@@ -52,7 +53,7 @@ public class ConfigurableAnimatableMeleeAttack<E extends HalfLifeMonster> extend
         if (entity.getSensing().hasLineOfSight(this.target) && entity.isWithinMeleeAttackRange(this.target)) {
             if (this.onhit != null) {
             entity.playSound(this.onhit);}
-            entity.ConfigurabledoHurtTarget(this.target, this.attackmod, this.knockbackmod, this.effect, this.effectduration, false);
+            entity.ConfigurabledoHurtTarget(this.target, this.disableshield, this.attackmod, this.knockbackmod, this.effect, this.effectduration, false);
         }
 
 }

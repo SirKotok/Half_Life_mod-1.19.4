@@ -13,6 +13,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 
@@ -31,12 +34,37 @@ public class HalfLifeMonster<T extends HalfLifeMonster<T>> extends Monster {
 
     }
 
+    private void maybeDisableShield(Player pPlayer, float f, ItemStack pPlayerItemStack) {
+        if (!pPlayerItemStack.isEmpty() && pPlayerItemStack.is(Items.SHIELD)) {
+            if (this.random.nextFloat() < f) {
+                pPlayer.getCooldowns().addCooldown(Items.SHIELD, 100);
+                this.level.broadcastEntityEvent(pPlayer, (byte)30);
+                pPlayer.stopUsingItem();
+            }
+        }
 
-    public boolean ConfigurabledoHurtTarget(Entity entity, int attack_modifier, int knockback_modifier, @Nullable MobEffect effect, int duration, boolean visible) {
+    }
+
+  public boolean ConfigurabledoHurtTarget(Entity entity, float disablechance, int attack_modifier, int knockback_modifier, @Nullable MobEffect effect, int duration, boolean visible) {
+        return ConfigurabledoHurtTargetShieldBoolean(true, entity, disablechance, attack_modifier, knockback_modifier, effect, duration, visible);
+  }
+
+
+
+
+    public boolean ConfigurabledoHurtTargetShieldBoolean(boolean after, Entity entity, float disablechance, int attack_modifier, int knockback_modifier, @Nullable MobEffect effect, int duration, boolean visible) {
         float f = (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE);
         f = attack_modifier*f;
         float f1 = (float) this.getAttributeValue(Attributes.ATTACK_KNOCKBACK);
         f1 = knockback_modifier*f1;
+
+
+        if (entity instanceof Player && disablechance>0 && !after) {
+            Player player = (Player)entity;
+            this.maybeDisableShield(player, disablechance, player.isUsingItem() ? player.getUseItem() : ItemStack.EMPTY);
+        }
+
+
 
         if (entity instanceof LivingEntity) {
             f += EnchantmentHelper.getDamageBonus(this.getMainHandItem(), ((LivingEntity) entity).getMobType());
@@ -55,7 +83,6 @@ public class HalfLifeMonster<T extends HalfLifeMonster<T>> extends Monster {
         }
 
 
-
         boolean flag = entity.hurt(this.damageSources().mobAttack(this), f);
         if (flag) {
             if (f1 > 0.0F && entity instanceof LivingEntity) {
@@ -67,6 +94,14 @@ public class HalfLifeMonster<T extends HalfLifeMonster<T>> extends Monster {
             this.doEnchantDamageEffects(this, entity);
             this.setLastHurtMob(entity);
         }
+
+        if (entity instanceof Player && disablechance>0 && after) {
+            Player player = (Player)entity;
+            this.maybeDisableShield(player, disablechance, player.isUsingItem() ? player.getUseItem() : ItemStack.EMPTY);
+        }
+
+
+
 
         return flag;
     }

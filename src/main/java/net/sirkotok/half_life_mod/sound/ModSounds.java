@@ -35,6 +35,40 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> HOUNDEYE_DIE_3 =
             registerSoundEvent("he_die3");
 
+    public static final RegistryObject<SoundEvent> HOUNDEYE_BARK =
+            registerSoundEvent("he_bark");
+    public static final RegistryObject<SoundEvent> HOUNDEYE_STEP1 =
+            registerSoundEvent("he_hunt1");
+    public static final RegistryObject<SoundEvent> HOUNDEYE_STEP2 =
+            registerSoundEvent("he_hunt2");
+    public static final RegistryObject<SoundEvent> HOUNDEYE_STEP3 =
+            registerSoundEvent("he_hunt3");
+    public static final RegistryObject<SoundEvent> HOUNDEYE_PAIN1 =
+            registerSoundEvent("he_hunt4");
+    public static final RegistryObject<SoundEvent> HOUNDEYE_IDLE1 =
+            registerSoundEvent("he_idle1");
+    public static final RegistryObject<SoundEvent> HOUNDEYE_IDLE2 =
+            registerSoundEvent("he_idle2");
+    public static final RegistryObject<SoundEvent> HOUNDEYE_IDLE3 =
+            registerSoundEvent("he_idle3");
+    public static final RegistryObject<SoundEvent> HOUNDEYE_IDLE4 =
+            registerSoundEvent("he_idle4");
+    public static final RegistryObject<SoundEvent> HOUNDEYE_PAIN2 =
+            registerSoundEvent("he_pain2");
+    public static final RegistryObject<SoundEvent> HOUNDEYE_PAIN3 =
+            registerSoundEvent("he_pain3");
+    public static final RegistryObject<SoundEvent> HOUNDEYE_PAIN4 =
+            registerSoundEvent("he_pain4");
+    public static final RegistryObject<SoundEvent> HOUNDEYE_PAIN5 =
+            registerSoundEvent("he_pain5");
+    public static final RegistryObject<SoundEvent> HOUNDEYE_ALERT1 =
+            registerSoundEvent("he_alert1");
+    public static final RegistryObject<SoundEvent> HOUNDEYE_ALERT2 =
+            registerSoundEvent("he_alert2");
+    public static final RegistryObject<SoundEvent> HOUNDEYE_ALERT3 =
+            registerSoundEvent("he_alert3");
+
+
 
 
 

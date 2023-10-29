@@ -18,6 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.common.ForgeHooks;
 import net.sirkotok.half_life_mod.entity.projectile.Bullet;
 import net.sirkotok.half_life_mod.item.ModItems;
@@ -160,6 +161,7 @@ public class GunItem extends Item {
     public void shootright(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         if (!pLevel.isClientSide) {
+            pPlayer.level.gameEvent(pPlayer, GameEvent.PROJECTILE_SHOOT, pPlayer.blockPosition());
             SetCooldow(itemstack, getRightClickCooldown());
             Bullet snowball = new Bullet(pLevel, pPlayer);
             snowball.setItem(itemstack);
@@ -185,6 +187,7 @@ public class GunItem extends Item {
     public void shootleft(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         if (!pLevel.isClientSide) {
+            pPlayer.level.gameEvent(pPlayer, GameEvent.PROJECTILE_SHOOT, pPlayer.blockPosition());
            SetCooldow(itemstack, getLeftClickCooldown());
            Bullet snowball = new Bullet(pLevel, pPlayer);
           snowball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 4F, 1.0F);
@@ -198,6 +201,7 @@ public class GunItem extends Item {
         if (GetAmmo(itemstack) != GetMaxAmmo() && !pPlayer.getAbilities().instabuild)
         {
             while (true) {
+                pPlayer.level.gameEvent(pPlayer, GameEvent.PROJECTILE_SHOOT, pPlayer.blockPosition());
                 SetCooldow(itemstack, getReloadCooldown());
                 int slotwithitem = pPlayer.getInventory().findSlotMatchingItem(getammoitem());
                 if (slotwithitem == -1) break;

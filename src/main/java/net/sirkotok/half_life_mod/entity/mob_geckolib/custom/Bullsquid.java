@@ -393,11 +393,11 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
                 new Retaliate<>(),
                 new SetWalkTargetToAttackTarget<Bullsquid>().speedMod(1.84f).whenStarting(entity -> this.entityData.set(IS_ANGRY, true)),
                 new FirstApplicableBehaviour<>(
-                new ConfigurableAnimatableMeleeAttack<Bullsquid>(20, 2, 1, null, 0, null)
+                new ConfigurableAnimatableMeleeAttack<Bullsquid>(20, 1f, 2, 1, null, 0, null)
                         .whenStarting(entity -> triggerAnim("onetime", "spin"))
                         .cooldownFor(entity -> random.nextInt(40, 80))
                         .startCondition(entity -> BrainUtils.getMemory(this, MemoryModuleType.ATTACK_TARGET).getHealth()<10.5f),
-                 new ConfigurableAnimatableMeleeAttack<Bullsquid>(15, 1, 2, null, 0, this.getBiteSound())
+                 new ConfigurableAnimatableMeleeAttack<Bullsquid>(15, 0.3f, 1, 2, null, 0, this.getBiteSound())
                          .whenActivating(entity -> this.playSound(this.getAttackGrowlSound(), this.getSoundVolume(), 1.0f))
                          .whenStarting(entity -> triggerAnim("onetime", "bite"))
                          .cooldownFor(entity -> random.nextInt(20, 30)),
