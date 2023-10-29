@@ -2111,6 +2111,27 @@
 						}
 					}
 				},
+				"lowleg3": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.5": {
+							"vector": [0, 0, 0]
+						},
+						"1.5833": {
+							"vector": [0, 0, 0]
+						}
+					},
+					"position": {
+						"0.25": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
 				"attack": {
 					"scale": {
 						"vector": [0, 1, 0]
@@ -2217,11 +2238,7 @@
 							"vector": [2.9, 1, 2.9],
 							"easing": "easeInBack"
 						},
-						"0.5833": {
-							"vector": [2.9, 1, 2.9],
-							"easing": "easeInBack"
-						},
-						"0.75": {
+						"0.55": {
 							"vector": [2.9, 1, 2.9],
 							"easing": "easeInBack"
 						}

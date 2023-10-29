@@ -80,15 +80,6 @@ public class HeadCrabJumpBehavior<E extends Monster>  extends ConditionlessAttac
     }
 
 
-  /*
-        if (entity instanceof Headcrab_1) ((Headcrab_1) entity).triggerAnim("jump", "jump");
-        if (entity instanceof Headcrab_2) ((Headcrab_2) entity).triggerAnim("jump", "jump");
-        if (entity instanceof Headcrab_Poison_2) ((Headcrab_Poison_2) entity).triggerAnim("jump", "jump");
-        if (entity instanceof Headcrab_Fast) ((Headcrab_Fast) entity).triggerAnim("jump", "jump");
-    */
-
-
-
     @Override
     protected void doDelayedAction(E entity) {
 

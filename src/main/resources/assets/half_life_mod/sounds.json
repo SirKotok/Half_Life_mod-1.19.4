@@ -11,6 +11,60 @@
       "half_life_mod:pistol_reload"
     ]
   },
+  "he_attack1": {
+    "subtitle": "sounds.half_life_mod.he_attack1",
+    "sounds": [
+      "half_life_mod:he_attack1"
+    ]
+  },
+  "he_attack2": {
+    "subtitle": "sounds.half_life_mod.he_attack2",
+    "sounds": [
+      "half_life_mod:he_attack2"
+    ]
+  },
+  "he_attack3": {
+    "subtitle": "sounds.half_life_mod.he_attack3",
+    "sounds": [
+      "half_life_mod:he_attack3"
+    ]
+  },
+  "he_blast1": {
+    "subtitle": "sounds.half_life_mod.he_blast1",
+    "sounds": [
+      "half_life_mod:he_blast1"
+    ]
+  },
+  "he_blast2": {
+    "subtitle": "sounds.half_life_mod.he_blast2",
+    "sounds": [
+      "half_life_mod:he_blast2"
+    ]
+  },
+  "he_blast3": {
+    "subtitle": "sounds.half_life_mod.he_blast3",
+    "sounds": [
+      "half_life_mod:he_blast3"
+    ]
+  },
+  "he_die1": {
+    "subtitle": "sounds.half_life_mod.he_die1",
+    "sounds": [
+      "half_life_mod:he_die1"
+    ]
+  },
+  "he_die2": {
+    "subtitle": "sounds.half_life_mod.he_die2",
+    "sounds": [
+      "half_life_mod:he_die2"
+    ]
+  },
+  "he_die3": {
+    "subtitle": "sounds.half_life_mod.he_die3",
+    "sounds": [
+      "half_life_mod:he_die3"
+    ]
+  },
   "barnacle_tongue": {
     "subtitle": "sounds.half_life_mod.barnacle_tongue",
     "sounds": [

@@ -95,6 +95,17 @@
     "sounds.half_life_mod.ba_leave6": "Guard stays behind",
     "sounds.half_life_mod.ba_follow6": "Guard follows",
 
+    "sounds.half_life_mod.he_attack1": "Houndeye prepares to attack",
+    "sounds.half_life_mod.he_attack2": "Houndeye prepares to attack",
+    "sounds.half_life_mod.he_attack3": "Houndeye prepares to attack",
+    "sounds.half_life_mod.he_blast1": "Sonic Blast",
+    "sounds.half_life_mod.he_blast2": "Sonic Blast",
+    "sounds.half_life_mod.he_blast3": "Sonic Blast",
+    "sounds.half_life_mod.he_die1": "Houndeye dies",
+    "sounds.half_life_mod.he_die2": "Houndeye dies",
+    "sounds.half_life_mod.he_die3": "Houndeye dies",
+
+
     "sounds.half_life_mod.bullet_hit1": "Bullet hits" ,
     "sounds.half_life_mod.bullet_hit2": "Bullet hits" ,
     "sounds.half_life_mod.pistol_reload": "Pistol reload" ,

@@ -15,6 +15,33 @@ public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 
+    //Houndeye sounds
+    public static final RegistryObject<SoundEvent> HOUNDEYE_ATTACK_1 =
+            registerSoundEvent("he_attack1");
+    public static final RegistryObject<SoundEvent> HOUNDEYE_ATTACK_2 =
+            registerSoundEvent("he_attack2");
+    public static final RegistryObject<SoundEvent> HOUNDEYE_ATTACK_3 =
+            registerSoundEvent("he_attack3");
+    public static final RegistryObject<SoundEvent> SONIC_BLAST_1 =
+            registerSoundEvent("he_blast1");
+    public static final RegistryObject<SoundEvent> SONIC_BLAST_2 =
+            registerSoundEvent("he_blast2");
+    public static final RegistryObject<SoundEvent> SONIC_BLAST_3 =
+            registerSoundEvent("he_blast3");
+    public static final RegistryObject<SoundEvent> HOUNDEYE_DIE_1 =
+            registerSoundEvent("he_die1");
+    public static final RegistryObject<SoundEvent> HOUNDEYE_DIE_2 =
+            registerSoundEvent("he_die2");
+    public static final RegistryObject<SoundEvent> HOUNDEYE_DIE_3 =
+            registerSoundEvent("he_die3");
+
+
+
+
+
+
+
+
     // BARNACLE SOUNDS
 
     public static final RegistryObject<SoundEvent> BARNACLE_TONGUE =

@@ -35,6 +35,14 @@ public class SetWalkTargetToRandomSpotAroundAttackTarget<E extends PathfinderMob
         return this;
     }
 
+    public SetWalkTargetToRandomSpotAroundAttackTarget<E> radius(int xz, int y) {
+        this.radius = new SquareRadius(xz, y);
+
+        return this;
+    }
+
+
+
     @Override
     protected List<Pair<MemoryModuleType<?>, MemoryStatus>> getMemoryRequirements() {
         return MEMORY_REQUIREMENTS;
