@@ -15,10 +15,10 @@ import net.tslat.smartbrainlib.util.BrainUtils;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class Bullsquid_eating_behavior<E extends Bullsquid> extends DelayedBehaviour<E> {
+public class BullsquidEatingBehavior<E extends Bullsquid> extends DelayedBehaviour<E> {
     private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(ModMemoryModuleType.FOOD_SMELL.get(), MemoryStatus.VALUE_PRESENT), Pair.of(ModMemoryModuleType.FOOD_ID.get(), MemoryStatus.VALUE_PRESENT));
 
-    public Bullsquid_eating_behavior() {
+    public BullsquidEatingBehavior() {
         super(0);
 
     }
@@ -30,7 +30,7 @@ public class Bullsquid_eating_behavior<E extends Bullsquid> extends DelayedBehav
         return MEMORY_REQUIREMENTS;
     }
 
-    public Bullsquid_eating_behavior<E> callback(Consumer<E> callback) {
+    public BullsquidEatingBehavior<E> callback(Consumer<E> callback) {
         this.callback = callback;
         return this;
     }

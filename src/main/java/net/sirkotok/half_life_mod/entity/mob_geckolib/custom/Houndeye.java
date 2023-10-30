@@ -4,9 +4,11 @@ package net.sirkotok.half_life_mod.entity.mob_geckolib.custom;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
@@ -26,11 +28,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.util.UUIDComparitorUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -49,8 +51,8 @@ import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyPlayersSensor;
+import net.tslat.smartbrainlib.util.BrainUtils;
 import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
-import org.joml.Vector3f;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -60,7 +62,9 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOwner<Houndeye> {
@@ -76,19 +80,60 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
     protected float chance = 0.1f;
 
 
+
+
+
+    public static final EntityDataAccessor<Boolean> IS_ANGRY = SynchedEntityData.defineId(Bullsquid.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> IS_LIGHT = SynchedEntityData.defineId(Houndeye.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> IS_LEADER = SynchedEntityData.defineId(Houndeye.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> SAD_TIMESTAMP = SynchedEntityData.defineId(Houndeye.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> SQUAD_SIZE = SynchedEntityData.defineId(Houndeye.class, EntityDataSerializers.INT);
-
+    public static final EntityDataAccessor<Boolean> AI_STOP = SynchedEntityData.defineId(Bullsquid.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> AI_STOP_TIMESTAMP = SynchedEntityData.defineId(Bullsquid.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> AI_STOP_DELAY = SynchedEntityData.defineId(Bullsquid.class, EntityDataSerializers.INT);
 
 
     protected void defineSynchedData() {
         super.defineSynchedData();
+        this.entityData.define(SAD_TIMESTAMP, 0);
         this.entityData.define(IS_LIGHT, false);
         this.entityData.define(IS_LEADER, false);
+        this.entityData.define(IS_ANGRY, false);
+        this.entityData.define(AI_STOP, false);
+        this.entityData.define(AI_STOP_TIMESTAMP, 0);
+        this.entityData.define(AI_STOP_DELAY, 0);
         this.entityData.define(SQUAD_SIZE, 1);
 
     }
+
+
+    public void stopAiFor(int delay) {
+        this.entityData.set(AI_STOP_TIMESTAMP, this.tickCount);
+        this.entityData.set(AI_STOP, true);
+        this.entityData.set(AI_STOP_DELAY, delay);
+    }
+
+    public int ai_stop_timestamp() {
+        return this.entityData.get(AI_STOP_TIMESTAMP);
+    }
+    public boolean aistopped() {
+        return this.entityData.get(AI_STOP);
+    }
+    public int ai_stop_remaining() {
+        return this.entityData.get(AI_STOP_DELAY);
+    }
+
+    protected boolean isangry() {
+        return this.entityData.get(IS_ANGRY);
+    }
+
+    public int getSadTimestamp() {
+        return this.entityData.get(SAD_TIMESTAMP);
+    }
+    protected void setSadTimestamp(int sad) {
+        this.entityData.set(SAD_TIMESTAMP, sad);
+    }
+
 
     public boolean islight() {
         return this.entityData.get(IS_LIGHT);
@@ -105,7 +150,7 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
     protected void setlight(boolean glow) {
         this.entityData.set(IS_LIGHT, glow);
     }
-    protected void makethisleader(boolean yes) {
+    protected void setthistoleader(boolean yes) {
         this.entityData.set(IS_LEADER, yes);
     }
     protected void setSquadSize(int size) {
@@ -141,10 +186,193 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
     }
 
 
+
+    public Houndeye leader;
+    public List<Houndeye> dogs;
+
+    public Houndeye getLeader() {
+        if (this.leader == null) return this;
+        return this.leader;
+    }
+    public void setLeader(Houndeye dog) {
+        this.leader = dog;
+    }
+
+    public List<Houndeye> getDogs() {
+        if (this.dogs == null) return new ArrayList<>();
+        return this.dogs;
+    }
+    public void setDogs(List<Houndeye> list) {
+        this.dogs = list;
+    }
+
+    public void addDogtoDogs(Houndeye dog) {
+        if (this.dogs == null) this.dogs = new ArrayList<>();
+        if (this.getDogs().contains(dog)) return;
+        this.dogs.add(dog);
+    }
+
+
+    public void removeDogfromDogs(Houndeye dog) {
+        if (this.dogs == null) this.dogs = new ArrayList<>();
+        if (!this.getDogs().contains(dog)) return;
+        this.dogs.remove(dog);
+    }
+ /* TODO: make this work, removing dogs that are too far away
+    public void removeDogsnotfromlist(List<Houndeye> hounds) {
+        int i = this.getDogs().size()-1;
+        int j = -1;
+        while (j<i) {
+            j++;
+            if (!hounds.contains(this.getDogs().get(j))) {
+                this.removeDogfromDogs(this.getDogs().get(j));
+                j--;
+            }
+            i = this.getDogs().size()-1;
+
+        }
+
+    } */
+
+
+    @Override
+    public void tick() {
+        super.tick();
+
+
+
+
+        if (!this.level.isClientSide()) {
+            ServerLevel pLevel = (ServerLevel) this.level;
+            BlockPos pBlockPos = this.blockPosition();
+            int rad = 12;
+
+            boolean yes = this.isleader() && aistopped();
+            if (yes) {
+            List<Houndeye> targets = EntityRetrievalUtil.getEntities((Level) pLevel,
+                    new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
+                            pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> (obj instanceof Player pl && !(pl.isCreative() || pl.isSpectator())) || obj instanceof IronGolem || obj instanceof HalfLifeNeutral ||
+                            obj instanceof AbstractVillager);
+            boolean one = false;
+            for (Houndeye dog : this.getDogs()) {
+              if (dog.getLastAttacker() != null) one = true;
+            }
+            yes = yes && (!targets.isEmpty() || one);
+
+            }
+
+
+            if (aistopped() && ((this.tickCount - ai_stop_timestamp() > ai_stop_remaining()) || yes)) {
+
+                for (Houndeye dog : this.getDogs()) {
+                if (dog == this) dog.triggerAnim("long", "jump");
+                else dog.triggerAnim("long", "startled");
+                dog.entityData.set(AI_STOP, false);
+                }
+
+            }
+
+
+
+
+
+            if (this.isDeadOrDying() && this.tickCount % 20 == 0) {
+
+                int radius = 100;
+                List<Houndeye> houndeyes = EntityRetrievalUtil.getEntities((Level) pLevel,
+                        new AABB(pBlockPos.getX() - radius, pBlockPos.getY() - radius, pBlockPos.getZ() - radius,
+                                pBlockPos.getX() + radius, pBlockPos.getY() + radius, pBlockPos.getZ() + radius), obj -> obj instanceof Houndeye);
+
+                for (Houndeye dog : houndeyes) {
+                    dog.removeDogfromDogs(this);
+                }
+
+            } else if (RandomSource.create().nextFloat() < 0.007f) this.triggerAnim("blink", "blink");
+
+
+
+            boolean notsad = (this.tickCount - this.getSadTimestamp() > 800 || this.getSadTimestamp() == 0);
+
+            if(notsad && this.getLeader().isDeadOrDying() ) {
+                this.setSadTimestamp(this.tickCount);
+                notsad = false;
+                this.setLeader(this);
+                List<Houndeye> a = new ArrayList<>();
+                a.add(this);
+                this.setDogs(a);
+                this.setthistoleader(false);
+                this.setSquadSize(this.getDogs().size());
+                this.setCustomName(Component.literal("sad" + this.getsquaidsize()));
+            }
+
+
+                if (this.tickCount % 20 == 0 && notsad && !this.isDeadOrDying()) {
+
+                    this.addDogtoDogs(this);
+                    this.setSquadSize(this.getDogs().size());
+                    int radius = 20;
+                    List<Houndeye> houndeyes = EntityRetrievalUtil.getEntities((Level) pLevel,
+                            new AABB(pBlockPos.getX() - radius, pBlockPos.getY() - radius, pBlockPos.getZ() - radius,
+                                    pBlockPos.getX() + radius, pBlockPos.getY() + radius, pBlockPos.getZ() + radius), obj -> obj instanceof Houndeye && !((Houndeye) obj).isDeadOrDying());
+                    List<UUID> uuids = new ArrayList<>();
+
+
+                    for (Houndeye dog : houndeyes) {
+                        uuids.add(dog.getUUID());
+                    }
+                    int max = UUIDComparitorUtil.getMaxUUIDnumber(uuids);
+                    this.setLeader(houndeyes.get(max));
+                    this.getLeader().addDogtoDogs(this);
+                    this.setDogs(this.getLeader().getDogs());
+
+
+                    if (this.isleader() && houndeyes.size() < 2) {
+                        List<Houndeye> a = new ArrayList<>();
+                        a.add(this);
+                        this.setDogs(a);
+                    }
+
+
+                    if (this.getLeader() == this && this.getsquaidsize() >= 2) {
+                        this.setthistoleader(true);
+                        this.setCustomName(Component.literal("leader" + this.getsquaidsize()));
+                    } else  {
+                        this.setthistoleader(false);
+                        this.setCustomName(Component.literal("alone" + this.getsquaidsize()));
+                        if (this.getsquaidsize() >=2) {
+                        this.setCustomName(Component.literal("sub" + this.getsquaidsize())); }
+                    }
+
+
+
+
+
+
+                    if (BrainUtils.getTargetOfEntity(this) != null) {
+                        for (Houndeye dog : this.getDogs()) {
+                            if (dog != null && dog.isAlive() && (BrainUtils.getTargetOfEntity(dog) == null
+                                    || (this.isleader() && this.tickCount - this.getLastHurtByMobTimestamp() < 20))) {
+                                BrainUtils.setTargetOfEntity(dog, BrainUtils.getTargetOfEntity(this));
+                            }
+                        }
+                    }
+
+
+
+
+                }
+        }
+    }
+
+
+
+
+
+
     public static AttributeSupplier setAttributes() {
         return Monster.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 15D)
-                .add(Attributes.ATTACK_DAMAGE, 5.5f)
+                .add(Attributes.ATTACK_DAMAGE, 4f)
                 .add(Attributes.ATTACK_SPEED, 1.0f)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.0f)
                 .add(Attributes.MOVEMENT_SPEED, 0.28f).build();
@@ -252,7 +480,8 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
 
     @Override
     protected void customServerAiStep() {
-        tickBrain(this);
+        if (!aistopped()) {
+            tickBrain(this);}
     }
 
 
@@ -281,7 +510,7 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
         List<LivingEntity> entities = EntityRetrievalUtil.getEntities(pLevel,
                 new AABB(pBlockPos.getX() - radius, pBlockPos.getY() - radius, pBlockPos.getZ() - radius,
                         pBlockPos.getX() + radius, pBlockPos.getY() + radius, pBlockPos.getZ() + radius), obj -> obj instanceof LivingEntity && !(obj instanceof Houndeye));
-        int mod = getsquaidsize();
+        int mod = Math.min(this.getsquaidsize(), 4);
         for (LivingEntity entity : entities) {
             this.ConfigurabledoHurtTargetShieldBoolean(false, entity, 1f, mod, 2, null, 0, false);
         }
@@ -299,12 +528,13 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
     public BrainActivityGroup<Houndeye> getIdleTasks() { // These are the tasks that run when the mob isn't doing anything else (usually)
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<Houndeye>(
-
+                        new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, false)).startCondition(entity -> this.isangry()),
                         new TargetOrRetaliate<>(),
-
                         new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>()),
+                        new HoundeyeFollowLeaderBehaviour<>().startCondition(entity -> (this.getLeader() != null) && (this.distanceTo(this.getLeader()) > 4)),
                 new OneRandomBehaviour<>(
+                        new HoundeyeSleepingBehaviour<>().startCondition(entity -> this.isleader() && this.tickCount > 600),
                         new SetRandomWalkTarget<>(),
                         new Idle<>().runFor(entity -> entity.getRandom().nextInt(30, 90))));
     }
@@ -317,13 +547,16 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>(),
                 new Retaliate<>(),
+                new CustomBehaviour<>(entity -> playSound(this.getAlertSound())).startCondition(entity -> !this.isangry() && this.isleader()),
+                new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, true)).startCondition(entity -> !this.isangry()),
                 new OneRandomBehaviour<>(
                         new SetWalkTargetToAttackTargetIfNoWalkTarget<>().speedMod(1.32f),
                         new SetWalkTargetToAttackTargetIfNoWalkTarget<>().speedMod(1.27f),
                         new SetWalkTargetToAttackTargetIfNoWalkTarget<>().speedMod(1.24f),
                         new SetWalkTargetToRandomSpotAroundAttackTarget<>().radius(5, 2).speedMod(1.30f),
                         new SetWalkTargetToRandomSpotAroundAttackTarget<>().radius(5, 2).speedMod(1.25f),
-                        new SetRandomWalkTarget<>().setRadius(7, 5).speedModifier(1.25f)
+                        new SetRandomWalkTarget<>().setRadius(7, 5).speedModifier(1.25f),
+                        new HoundeyeFollowLeaderBehaviour<>().startCondition(entity -> !this.isleader())
                 ),
                 new OneRandomBehaviour<>(
                         new CustomBehaviour<>(entity -> this.jumpback()).startCondition(entity -> this.getTarget() != null && this.distanceTo(this.getTarget()) < 3.2 && RandomSource.create().nextInt(30) == 10).whenStarting(entity -> this.triggerAnim("long", "jump")).cooldownFor(entity -> 450 + RandomSource.create().nextInt(500)),

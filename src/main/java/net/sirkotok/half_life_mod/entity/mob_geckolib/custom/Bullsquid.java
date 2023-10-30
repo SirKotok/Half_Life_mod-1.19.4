@@ -369,7 +369,7 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
                                 .whenStarting(entity -> triggerAnim("onetime", "startled"))
                                 .cooldownFor(entity -> 200),
                         new TargetOrRetaliate<>(),
-                       new Bullsquid_eating_behavior<>().callback(entity -> this.entityData.set(IS_EATING, true))
+                       new BullsquidEatingBehavior<>().callback(entity -> this.entityData.set(IS_EATING, true))
                                .whenStopping(entity -> this.entityData.set(IS_EATING, false)),
                         new SetFoodToWalkTarget<>().whenStarting(entity -> this.Smellfor()).cooldownFor(entity -> 400),
                         new SetPlayerLookTarget<>(),
