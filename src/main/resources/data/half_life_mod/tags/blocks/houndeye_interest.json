@@ -1,0 +1,15 @@
+{
+  "values": [
+    "minecraft:dispenser",
+    "minecraft:dropper",
+    "minecraft:repeater",
+    "minecraft:comparator",
+    "minecraft:redstone_lamp",
+    "minecraft:redstone_torch",
+    "minecraft:beacon",
+    "minecraft:enchanting_table",
+    "minecraft:spawner",
+    "minecraft:daylight_detector",
+    "minecraft:respawn_anchor"
+  ]
+}

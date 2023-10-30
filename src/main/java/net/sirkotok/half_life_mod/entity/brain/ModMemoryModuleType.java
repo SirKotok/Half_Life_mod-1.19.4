@@ -2,14 +2,18 @@ package net.sirkotok.half_life_mod.entity.brain;
 
 
 
+import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.sirkotok.half_life_mod.HalfLifeMod;
+
 
 
 import java.util.List;
@@ -28,7 +32,8 @@ public class ModMemoryModuleType {
     public static final RegistryObject<MemoryModuleType<Boolean>> FOLLOWING_PLAYER = MEMORY_MODULE_TYPES.register("following_player", () -> new MemoryModuleType<>(Optional.empty()));
 
     public static final RegistryObject<MemoryModuleType<List<Vec3>>> FOOD_SMELL = MEMORY_MODULE_TYPES.register("food_smell", () -> new MemoryModuleType<>(Optional.empty()));
-    public static final RegistryObject<MemoryModuleType<List<Vec3>>> CHECKED_LOCATIONS = MEMORY_MODULE_TYPES.register("checked_locations", () -> new MemoryModuleType<>(Optional.empty()));
+    public static final RegistryObject<MemoryModuleType<List<Pair<BlockPos, BlockState>>>> CHECKED_LOCATIONS = MEMORY_MODULE_TYPES.register("checked_locations", () -> new MemoryModuleType<>(Optional.empty()));
+    public static final RegistryObject<MemoryModuleType<com.mojang.datafixers.util.Pair<BlockPos, BlockState>>> LOCATION_OF_INTEREST = MEMORY_MODULE_TYPES.register("location_of_interest", () -> new MemoryModuleType<>(Optional.empty()));
 
     public static final RegistryObject<MemoryModuleType<Integer>> RNG_COMPARITOR_1 = MEMORY_MODULE_TYPES.register("rng_1", () -> new MemoryModuleType<>(Optional.of(Codec.INT)));
     public static final RegistryObject<MemoryModuleType<Integer>> RNG_COMPARITOR_CHECK = MEMORY_MODULE_TYPES.register("rng_1_check", () -> new MemoryModuleType<>(Optional.of(Codec.INT)));

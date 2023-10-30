@@ -32,6 +32,7 @@ import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.util.ModTags;
 import net.sirkotok.half_life_mod.util.UUIDComparitorUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
@@ -48,6 +49,7 @@ import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetPlayerLookTar
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.TargetOrRetaliate;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
+import net.tslat.smartbrainlib.api.core.sensor.custom.NearbyBlocksSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyPlayersSensor;
@@ -302,7 +304,7 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
                 this.setDogs(a);
                 this.setthistoleader(false);
                 this.setSquadSize(this.getDogs().size());
-                this.setCustomName(Component.literal("sad" + this.getsquaidsize()));
+             //   this.setCustomName(Component.literal("sad" + this.getsquaidsize()));
             }
 
 
@@ -335,12 +337,12 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
 
                     if (this.getLeader() == this && this.getsquaidsize() >= 2) {
                         this.setthistoleader(true);
-                        this.setCustomName(Component.literal("leader" + this.getsquaidsize()));
+                   //     this.setCustomName(Component.literal("leader" + this.getsquaidsize()));
                     } else  {
                         this.setthistoleader(false);
-                        this.setCustomName(Component.literal("alone" + this.getsquaidsize()));
-                        if (this.getsquaidsize() >=2) {
-                        this.setCustomName(Component.literal("sub" + this.getsquaidsize())); }
+                    //    this.setCustomName(Component.literal("alone" + this.getsquaidsize()));
+                   //      if (this.getsquaidsize() >=2) {
+                    //   this.setCustomName(Component.literal("sub" + this.getsquaidsize())); }
                     }
 
 
@@ -490,6 +492,7 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
     public List<ExtendedSensor<Houndeye>> getSensors() {
         return ObjectArrayList.of(
                 new HurtBySensor<>(),
+                new NearbyBlocksSensor<Houndeye>().setRadius(8, 4).setPredicate((state, entity) -> state.is(ModTags.Blocks.HOUNDEYE_INTEREST)),
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<Houndeye>()
                         .setPredicate((target, entity) ->
@@ -530,11 +533,13 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
                 new FirstApplicableBehaviour<Houndeye>(
                         new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, false)).startCondition(entity -> this.isangry()),
                         new TargetOrRetaliate<>(),
+                        new HoundeyeCuriocityBehaviour<>(),
                         new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>()),
                         new HoundeyeFollowLeaderBehaviour<>().startCondition(entity -> (this.getLeader() != null) && (this.distanceTo(this.getLeader()) > 4)),
                 new OneRandomBehaviour<>(
-                        new HoundeyeSleepingBehaviour<>().startCondition(entity -> this.isleader() && this.tickCount > 600),
+                        new SetBlockToWalkTarget<>().cooldownFor(entity -> 200),
+                        new HoundeyeSleepingBehaviour<>().startCondition(entity -> this.isleader() && RandomSource.create().nextFloat() < 0.01).cooldownFor(entity -> 800),
                         new SetRandomWalkTarget<>(),
                         new Idle<>().runFor(entity -> entity.getRandom().nextInt(30, 90))));
     }
