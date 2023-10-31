@@ -10,6 +10,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.sirkotok.half_life_mod.HalfLifeMod;
+import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.ShockWaveEffect;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.*;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
 import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
@@ -130,7 +131,11 @@ public class ModEntities {
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "barnacle").toString())); */
 
 
-
+    public static final RegistryObject<EntityType<ShockWaveEffect>> SHOCKWAVEEFFECT =
+            ENTITY_TYPES.register("shockwave_effect",
+                    () -> EntityType.Builder.of(ShockWaveEffect::new, MobCategory.MISC)
+                            .sized(0.6f, 0.6f)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "shockwave_effect").toString()));
 
     public static final RegistryObject<EntityType<AcidBall>> ACID_BALL =
             ENTITY_TYPES.register("acid_ball",

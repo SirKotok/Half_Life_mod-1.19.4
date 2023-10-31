@@ -3,7 +3,6 @@ package net.sirkotok.half_life_mod.entity.mob_geckolib.client.renderers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.client.models.Snark_model;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Snark;

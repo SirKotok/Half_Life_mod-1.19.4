@@ -4,9 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.client.models.Hoteye_model;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.client.models.Houndeye_model;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Hoteye;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Houndeye;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;
 

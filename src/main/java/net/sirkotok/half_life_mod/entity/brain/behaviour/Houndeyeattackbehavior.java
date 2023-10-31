@@ -6,11 +6,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Houndeye;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.ConditionlessAttack;
 import net.tslat.smartbrainlib.util.BrainUtils;
@@ -91,8 +89,27 @@ public class Houndeyeattackbehavior<E extends Houndeye> extends ConditionlessAtt
         if (this.tick > 19 && !this.flag && !this.animationed) {
             entity.addEffect(new MobEffectInstance(MobEffects.LUCK, 17, 100, false, false, false));
             this.animationed = true;
-            entity.triggerAnim("attack", "attack");
+
+            //TODO: make this work
+            /*
+             if (!(entity instanceof Hoteye)) {
+                if (!entity.getLevel().isClientSide()) {
+                    ServerLevel level = (ServerLevel) entity.level;
+                    ShockWaveEffect wave = ModEntities.SHOCKWAVEEFFECT.get().create(level);
+                    if (wave != null) {
+                        wave.moveTo(entity.getX(), entity.getY(), entity.getZ());
+                        wave.setSquadSize(entity.getsquaidsize()); //Determines the texture of the shockwave based on squad size
+                        level.addFreshEntity(wave);
+                        wave.triggerAnim("attack", "attack");
+                    }
+                }
+            } */
+
+           entity.triggerAnim("attack", "attack");
+            if (this.blastsound != null) {
              entity.playSound(blastsound);
+            }
+
         }
 
 

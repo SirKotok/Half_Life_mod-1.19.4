@@ -4,7 +4,6 @@ package net.sirkotok.half_life_mod.entity.mob_geckolib.custom;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -162,18 +161,18 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
 
 
 
-    public void addAdditionalSaveData(CompoundTag p_33619_) {
-        super.addAdditionalSaveData(p_33619_);
+    public void addAdditionalSaveData(CompoundTag pCompound) {
+        super.addAdditionalSaveData(pCompound);
 
-        p_33619_.putInt("Squad_size", this.getsquaidsize() - 1 );
-        p_33619_.putBoolean("Light", this.islight());
+        pCompound.putInt("Squad_size", this.getsquaidsize() - 1 );
+        pCompound.putBoolean("Light", this.islight());
     }
 
-    public void readAdditionalSaveData(CompoundTag p_33607_) {
+    public void readAdditionalSaveData(CompoundTag pCompound) {
 
-        this.setSquadSize(p_33607_.getInt("Squad_size") + 1);
-        this.setlight(p_33607_.getBoolean("Light"));
-        super.readAdditionalSaveData(p_33607_);
+        this.setSquadSize(pCompound.getInt("Squad_size") + 1);
+        this.setlight(pCompound.getBoolean("Light"));
+        super.readAdditionalSaveData(pCompound);
     }
 
 

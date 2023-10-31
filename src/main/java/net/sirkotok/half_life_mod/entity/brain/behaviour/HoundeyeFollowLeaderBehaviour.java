@@ -1,21 +1,16 @@
 package net.sirkotok.half_life_mod.entity.brain.behaviour;
 
 import com.mojang.datafixers.util.Pair;
-import com.mojang.util.UUIDTypeAdapter;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.entity.ai.behavior.EntityTracker;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
-import net.minecraft.world.entity.player.Player;
-import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Houndeye;
 import net.tslat.smartbrainlib.api.core.behaviour.ExtendedBehaviour;
 import net.tslat.smartbrainlib.util.BrainUtils;
 
 import java.util.List;
-import java.util.UUID;
 
 public class HoundeyeFollowLeaderBehaviour<E extends Houndeye> extends ExtendedBehaviour<E> {
 

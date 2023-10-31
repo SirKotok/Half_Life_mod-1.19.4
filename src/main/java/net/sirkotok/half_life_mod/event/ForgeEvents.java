@@ -9,7 +9,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sirkotok.half_life_mod.HalfLifeMod;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.*;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Chumtoad;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.object.SquareRadius;

@@ -3,7 +3,6 @@ package net.sirkotok.half_life_mod.event;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -11,8 +10,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.entity.ModEntities;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.*;
-import net.sirkotok.half_life_mod.entity.mob_normal.client.ModModelLayers;
-import net.sirkotok.half_life_mod.entity.mob_normal.client.models.Barnacle_Model;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
 
 @Mod.EventBusSubscriber(modid = HalfLifeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)

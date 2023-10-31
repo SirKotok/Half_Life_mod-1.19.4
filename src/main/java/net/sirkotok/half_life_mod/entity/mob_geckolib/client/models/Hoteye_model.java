@@ -3,7 +3,6 @@ package net.sirkotok.half_life_mod.entity.mob_geckolib.client.models;
 import net.minecraft.resources.ResourceLocation;
 import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Hoteye;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Houndeye;
 import software.bernie.geckolib.model.GeoModel;
 
 

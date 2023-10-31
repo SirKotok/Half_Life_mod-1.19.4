@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.entity.ModEntities;
+import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.Shockwaverenderer;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.client.renderers.*;
 import net.sirkotok.half_life_mod.entity.mob_normal.client.ModModelLayers;
 import net.sirkotok.half_life_mod.entity.mob_normal.client.models.Barnacle_Model;
@@ -40,6 +41,7 @@ public class ClientModBusEvents {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event)
     {
+        EntityRenderers.register(ModEntities.SHOCKWAVEEFFECT.get(), Shockwaverenderer::new);
         EntityRenderers.register(ModEntities.HOTEYE.get(), Hoteyerenderer::new);
         EntityRenderers.register(ModEntities.HOUNDEYE.get(), Houndeyerenderer::new);
         EntityRenderers.register(ModEntities.SNARKNEST.get(), Snarknestrenderer::new);

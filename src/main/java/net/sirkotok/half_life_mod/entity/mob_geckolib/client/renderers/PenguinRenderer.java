@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.client.models.Penguin_model;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Penguin;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Snark;
 import org.joml.Quaternionf;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 

@@ -6,12 +6,10 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.sirkotok.half_life_mod.sound.ModSounds;
 import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
-import org.apache.logging.log4j.core.jmx.Server;
 
 import java.util.List;
 
@@ -22,7 +20,7 @@ public class Hoteye extends Houndeye{
 
 
     public static AttributeSupplier setAttributes() {
-        return Monster.createMobAttributes()
+        return createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 1D)
                 .add(Attributes.ATTACK_DAMAGE, 4f)
                 .add(Attributes.ATTACK_SPEED, 1.0f)
