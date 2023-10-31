@@ -1,6 +1,7 @@
   {
   "item.half_life_mod.headcrab_1_spawn_egg": "Headcrab HL1 Spawn Egg",
     "item.half_life_mod.houndeye_spawn_egg": "Houndeye Spawn Egg",
+    "item.half_life_mod.hoteye_spawn_egg": "Hoteye Spawn Egg",
   "item.half_life_mod.headcrab_2_spawn_egg": "Headcrab HL2 Spawn Egg",
   "item.half_life_mod.headcrab_a_spawn_egg": "Headcrab HL:A Spawn Egg",
   "item.half_life_mod.headcrab_poison_2_spawn_egg": "Poison Headcrab HL2 Spawn Egg",
@@ -35,6 +36,7 @@
 
     "entity.half_life_mod.barnacle": "Barnacle",
     "entity.half_life_mod.houndeye": "Houndeye",
+    "entity.half_life_mod.hoteye": "Hoteye",
     "entity.half_life_mod.headcrab_1": "Headcrab",
     "entity.half_life_mod.shockroach": "Shockroach",
   "entity.half_life_mod.chumtoad": "Chumtoad",

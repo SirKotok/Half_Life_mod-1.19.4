@@ -40,6 +40,7 @@ public class ClientModBusEvents {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event)
     {
+        EntityRenderers.register(ModEntities.HOTEYE.get(), Hoteyerenderer::new);
         EntityRenderers.register(ModEntities.HOUNDEYE.get(), Houndeyerenderer::new);
         EntityRenderers.register(ModEntities.SNARKNEST.get(), Snarknestrenderer::new);
         EntityRenderers.register(ModEntities.HEADCRAB_HL1.get(), Headcrab_1renderer::new);

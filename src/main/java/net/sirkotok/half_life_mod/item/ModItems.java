@@ -28,6 +28,10 @@ public class ModItems {
            () -> new ForgeSpawnEggItem(ModEntities.HOUNDEYE, 0xecb016, 0x28bae1   ,
                    new Item.Properties()));
 
+   public static final RegistryObject<Item> HOTEYE_SPAWN_EGG = ITEMS.register("hoteye_spawn_egg",
+           () -> new ForgeSpawnEggItem(ModEntities.HOTEYE, 0xef7401, 0xff0000   ,
+                   new Item.Properties()));
+
    public static final RegistryObject<Item> BARNACLE_ONE_SPAWN_EGG = ITEMS.register("barnacle_1_spawn_egg",
            () -> new BarnacleSpawnEggItem(ModEntities.BARNACLE, 0xef5b38, 0x9e7408   ,
                    new Item.Properties()));
