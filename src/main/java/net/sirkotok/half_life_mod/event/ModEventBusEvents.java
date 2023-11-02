@@ -9,6 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.entity.ModEntities;
+import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.ShockWaveEffect;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.*;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
 
@@ -21,6 +22,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.BARNEY.get(), Barney.setAttributes());
         event.put(ModEntities.BARNACLE.get(), Barnacle.setAttributes());
         event.put(ModEntities.SNARK.get(), Snark.setAttributes());
+        event.put(ModEntities.SHOCKWAVEEFFECT.get(), ShockWaveEffect.setAttributes());
         event.put(ModEntities.SNARKNEST.get(), Snarknest.setAttributes());
         event.put(ModEntities.PENGUIN.get(), Snark.setAttributes());
         event.put(ModEntities.HEADCRAB_HL1.get(), Headcrab_1.setAttributes());

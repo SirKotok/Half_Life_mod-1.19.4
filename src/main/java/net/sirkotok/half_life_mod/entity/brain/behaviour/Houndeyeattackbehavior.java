@@ -6,9 +6,16 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraftforge.event.ForgeEventFactory;
+import net.sirkotok.half_life_mod.entity.ModEntities;
+import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.ShockWaveEffect;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Hoteye;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Houndeye;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.ConditionlessAttack;
 import net.tslat.smartbrainlib.util.BrainUtils;
@@ -43,6 +50,8 @@ public class Houndeyeattackbehavior<E extends Houndeye> extends ConditionlessAtt
         this.MaxDistance = distance;
         return this;
     }
+
+
 
 
 
@@ -91,7 +100,7 @@ public class Houndeyeattackbehavior<E extends Houndeye> extends ConditionlessAtt
             this.animationed = true;
 
             //TODO: make this work
-            /*
+
              if (!(entity instanceof Hoteye)) {
                 if (!entity.getLevel().isClientSide()) {
                     ServerLevel level = (ServerLevel) entity.level;
@@ -99,13 +108,15 @@ public class Houndeyeattackbehavior<E extends Houndeye> extends ConditionlessAtt
                     if (wave != null) {
                         wave.moveTo(entity.getX(), entity.getY(), entity.getZ());
                         wave.setSquadSize(entity.getsquaidsize()); //Determines the texture of the shockwave based on squad size
+                        wave.setYBodyRot(entity.yBodyRot);
+                        ForgeEventFactory.onFinalizeSpawn((Mob) wave, (ServerLevelAccessor) level, level.getCurrentDifficultyAt(wave.blockPosition()), MobSpawnType.REINFORCEMENT, null, null);
                         level.addFreshEntity(wave);
                         wave.triggerAnim("attack", "attack");
                     }
                 }
-            } */
+            }
 
-           entity.triggerAnim("attack", "attack");
+          // entity.triggerAnim("attack", "attack");
             if (this.blastsound != null) {
              entity.playSound(blastsound);
             }

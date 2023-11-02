@@ -133,7 +133,7 @@ public class ModEntities {
 
     public static final RegistryObject<EntityType<ShockWaveEffect>> SHOCKWAVEEFFECT =
             ENTITY_TYPES.register("shockwave_effect",
-                    () -> EntityType.Builder.of(ShockWaveEffect::new, MobCategory.MISC)
+                    () -> EntityType.Builder.of(ShockWaveEffect::new, MobCategory.MONSTER)
                             .sized(0.6f, 0.6f)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "shockwave_effect").toString()));
 

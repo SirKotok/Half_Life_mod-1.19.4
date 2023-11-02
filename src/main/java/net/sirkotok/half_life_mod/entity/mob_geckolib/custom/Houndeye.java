@@ -183,7 +183,7 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
 
     public Houndeye(EntityType type, Level level) {
         super(type, level);
-        this.xpReward = 3;
+        this.xpReward = 5;
     }
 
 
@@ -219,21 +219,6 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
         if (!this.getDogs().contains(dog)) return;
         this.dogs.remove(dog);
     }
- /* TODO: make this work, removing dogs that are too far away
-    public void removeDogsnotfromlist(List<Houndeye> hounds) {
-        int i = this.getDogs().size()-1;
-        int j = -1;
-        while (j<i) {
-            j++;
-            if (!hounds.contains(this.getDogs().get(j))) {
-                this.removeDogfromDogs(this.getDogs().get(j));
-                j--;
-            }
-            i = this.getDogs().size()-1;
-
-        }
-
-    } */
 
 
     @Override
