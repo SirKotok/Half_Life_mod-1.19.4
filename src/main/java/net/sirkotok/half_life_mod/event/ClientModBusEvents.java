@@ -1,6 +1,7 @@
 package net.sirkotok.half_life_mod.event;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
@@ -11,6 +12,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.sirkotok.half_life_mod.HalfLifeMod;
+import net.sirkotok.half_life_mod.block.blockentity.ModBlockEntities;
+import net.sirkotok.half_life_mod.block.blockentity.client.VoltigoreEggRenderer;
 import net.sirkotok.half_life_mod.entity.ModEntities;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.Shockwaverenderer;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.client.renderers.*;
@@ -58,11 +61,15 @@ public class ClientModBusEvents {
         EntityRenderers.register(ModEntities.SNARK.get(), Snarkrenderer::new);
         EntityRenderers.register(ModEntities.SHOCKROACH.get(), ShockRoachrenderer::new);
         EntityRenderers.register(ModEntities.PENGUIN.get(), PenguinRenderer::new);
+        EntityRenderers.register(ModEntities.VORTIGORE.get(), VortigoreRenderer::new);
         EntityRenderers.register(ModEntities.BARNEY.get(), Barney_renderer::new);
         EntityRenderers.register(ModEntities.ACID_BALL.get(), ThrownItemRenderer::new);
+        EntityRenderers.register(ModEntities.VOLTIGORE_SHOCK.get(), ThrownItemRenderer::new);
         EntityRenderers.register(ModEntities.SHOCK_SHOT.get(), ThrownItemRenderer::new);
         EntityRenderers.register(ModEntities.BULLET_ONE.get(), ThrownItemRenderer::new);
         EntityRenderers.register(ModEntities.BARNACLE.get(), Barnacle_Renderer::new);
+
+        BlockEntityRenderers.register(ModBlockEntities.VOLTIGORE_EGG_BLOCK_ENTITY.get(), VoltigoreEggRenderer::new);
     }
 
 

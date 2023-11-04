@@ -17,6 +17,156 @@
       "half_life_mod:he_attack1"
     ]
   },
+  "voltigore_attack_shock": {
+    "subtitle": "sounds.half_life_mod.voltigore_attack_shock",
+    "sounds": [
+      "half_life_mod:voltigore_attack_shock"
+    ]
+  },
+  "voltigore_eat": {
+    "subtitle": "sounds.half_life_mod.voltigore_eat",
+    "sounds": [
+      "half_life_mod:voltigore_eat"
+    ]
+  },
+  "voltigore_melee1": {
+    "subtitle": "sounds.half_life_mod.voltigore_melee1",
+    "sounds": [
+      "half_life_mod:voltigore_melee1"
+    ]
+  },
+  "voltigore_melee2": {
+    "subtitle": "sounds.half_life_mod.voltigore_melee2",
+    "sounds": [
+      "half_life_mod:voltigore_melee2"
+    ]
+  },
+  "voltigore_footstep1": {
+    "subtitle": "sounds.half_life_mod.voltigore_footstep1",
+    "sounds": [
+      "half_life_mod:voltigore_footstep1"
+    ]
+  },
+  "voltigore_footstep2": {
+    "subtitle": "sounds.half_life_mod.voltigore_footstep2",
+    "sounds": [
+      "half_life_mod:voltigore_footstep2"
+    ]
+  },
+  "voltigore_footstep3": {
+    "subtitle": "sounds.half_life_mod.voltigore_footstep3",
+    "sounds": [
+      "half_life_mod:voltigore_footstep3"
+    ]
+  },
+  "voltigore_die1": {
+    "subtitle": "sounds.half_life_mod.voltigore_die1",
+    "sounds": [
+      "half_life_mod:voltigore_die1"
+    ]
+  },
+  "voltigore_die2": {
+    "subtitle": "sounds.half_life_mod.voltigore_die2",
+    "sounds": [
+      "half_life_mod:voltigore_die2"
+    ]
+  },
+  "voltigore_die3": {
+    "subtitle": "sounds.half_life_mod.voltigore_die3",
+    "sounds": [
+      "half_life_mod:voltigore_die3"
+    ]
+  },
+  "voltigore_communicate1": {
+    "subtitle": "sounds.half_life_mod.voltigore_communicate1",
+    "sounds": [
+      "half_life_mod:voltigore_communicate1"
+    ]
+  },
+  "voltigore_communicate2": {
+    "subtitle": "sounds.half_life_mod.voltigore_communicate2",
+    "sounds": [
+      "half_life_mod:voltigore_communicate2"
+    ]
+  },
+  "voltigore_communicate3": {
+    "subtitle": "sounds.half_life_mod.voltigore_communicate3",
+    "sounds": [
+      "half_life_mod:voltigore_communicate3"
+    ]
+  },
+  "voltigore_idle1": {
+    "subtitle": "sounds.half_life_mod.voltigore_idle1",
+    "sounds": [
+      "half_life_mod:voltigore_idle1"
+    ]
+  },
+  "voltigore_idle2": {
+    "subtitle": "sounds.half_life_mod.voltigore_idle2",
+    "sounds": [
+      "half_life_mod:voltigore_idle2"
+    ]
+  },
+  "voltigore_idle3": {
+    "subtitle": "sounds.half_life_mod.voltigore_idle3",
+    "sounds": [
+      "half_life_mod:voltigore_idle3"
+    ]
+  },
+  "voltigore_pain1": {
+    "subtitle": "sounds.half_life_mod.voltigore_pain1",
+    "sounds": [
+      "half_life_mod:voltigore_pain1"
+    ]
+  },
+  "voltigore_pain2": {
+    "subtitle": "sounds.half_life_mod.voltigore_pain2",
+    "sounds": [
+      "half_life_mod:voltigore_pain2"
+    ]
+  },
+  "voltigore_pain3": {
+    "subtitle": "sounds.half_life_mod.voltigore_pain3",
+    "sounds": [
+      "half_life_mod:voltigore_pain3"
+    ]
+  },
+  "voltigore_run_grunt1": {
+    "subtitle": "sounds.half_life_mod.voltigore_run_grunt1",
+    "sounds": [
+      "half_life_mod:voltigore_run_grunt1"
+    ]
+  },
+  "voltigore_run_grunt2": {
+    "subtitle": "sounds.half_life_mod.voltigore_run_grunt2",
+    "sounds": [
+      "half_life_mod:voltigore_run_grunt2"
+    ]
+  },
+  "voltigore_pain4": {
+    "subtitle": "sounds.half_life_mod.voltigore_pain4",
+    "sounds": [
+      "half_life_mod:voltigore_pain4"
+    ]
+  },
+  "voltigore_alert1": {
+    "subtitle": "sounds.half_life_mod.voltigore_alert1",
+    "sounds": [
+      "half_life_mod:voltigore_alert1"
+    ]
+  },
+  "voltigore_alert2": {
+    "subtitle": "sounds.half_life_mod.voltigore_alert2",
+    "sounds": [
+      "half_life_mod:voltigore_alert2"
+    ]
+  },
+  "voltigore_alert3": {
+    "subtitle": "sounds.half_life_mod.voltigore_alert3",
+    "sounds": [
+      "half_life_mod:voltigore_alert3"
+    ]
+  },
   "he_attack2": {
     "subtitle": "sounds.half_life_mod.he_attack2",
     "sounds": [

@@ -25,6 +25,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.SHOCKWAVEEFFECT.get(), ShockWaveEffect.setAttributes());
         event.put(ModEntities.SNARKNEST.get(), Snarknest.setAttributes());
         event.put(ModEntities.PENGUIN.get(), Snark.setAttributes());
+        event.put(ModEntities.VORTIGORE.get(), Vortigore.setAttributes());
         event.put(ModEntities.HEADCRAB_HL1.get(), Headcrab_1.setAttributes());
         event.put(ModEntities.HEADCRAB_ZOMBIE_1.get(), Headcrab_zombie_standart.setAttributes());
         event.put(ModEntities.HEADCRAB_HL2.get(), Headcrab_2.setAttributes());

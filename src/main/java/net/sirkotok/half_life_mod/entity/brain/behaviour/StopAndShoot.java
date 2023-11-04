@@ -15,16 +15,18 @@ import net.tslat.smartbrainlib.util.BrainUtils;
 
 public class StopAndShoot<E extends LivingEntity & RangedAttackMob> extends AnimatableRangedAttack<E> {
     public float vel;
-    public StopAndShoot(int delayTicks, float velocity) {
+    public int ded;
+    public StopAndShoot(int delayTicks, int seconddelay, float velocity) {
         super(delayTicks);
         this.vel = velocity;
+        this.ded = seconddelay;
     }
     @Override
     protected void start(E entity) {
         entity.swing(InteractionHand.MAIN_HAND);
         BehaviorUtils.lookAtEntity(entity, this.target);
         BrainUtils.setForgettableMemory(entity, MemoryModuleType.SNIFFER_HAPPY, true, delayTime+10);
-        entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, delayTime+3, 100, false, false, false));
+        entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, delayTime+3+this.ded, 100, false, false, false));
     }
 
     @Override

@@ -226,7 +226,7 @@ public class Barney extends HalfLifeNeutral implements GeoEntity, SmartBrainOwne
                 new Retaliate<>(),
                 new InvalidateAttackTarget<>(),
                 new SetWalkTargetToAttackTarget<Barney>().whenStarting(entity -> this.entityData.set(IS_ANGRY, true)),
-                new StopAndShoot<Barney>(14, 4f).startCondition(entity -> this.distanceTo(BrainUtils.getTargetOfEntity(this)) < 12)
+                new StopAndShoot<Barney>(14, 0, 4f).startCondition(entity -> this.distanceTo(BrainUtils.getTargetOfEntity(this)) < 12)
                                 .whenStarting(entity -> triggerAnim("attack", "shoot"))
         );
     }

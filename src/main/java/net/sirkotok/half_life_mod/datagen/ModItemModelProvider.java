@@ -20,6 +20,8 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
 
+       // simpleItem(ModItems.VOLTIGORE_EGG_BLOCK_ITEM);
+        simpleItem(ModItems.SECURITY_GUARD_HELMET);
         simpleItem(ModItems.SECURITY_GUARD_HELMET);
         simpleItem(ModItems.SECURITY_GUARD_VEST);
         simpleItem(ModItems.FAKE_SHOCK);
@@ -42,6 +44,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         withExistingParent(ModItems.SNARK_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.SNARKNEST_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.PENGUIN_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.VORTIGORE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
     }
 
     private ItemModelBuilder saplingItem(RegistryObject<Block> item) {

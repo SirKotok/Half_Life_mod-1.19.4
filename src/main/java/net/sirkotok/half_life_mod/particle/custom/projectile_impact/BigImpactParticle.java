@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
@@ -16,7 +17,7 @@ public class BigImpactParticle extends TextureSheetParticle {
 
     int direction;
 
-    protected BigImpactParticle(ClientLevel pLevel, double pX, double pY, double pZ, SpriteSet spriteSet, double direction, double pYSpeed, double pZSpeed) {
+    public BigImpactParticle(ClientLevel pLevel, double pX, double pY, double pZ, SpriteSet spriteSet, double direction, double pYSpeed, double pZSpeed) {
         super(pLevel, pX, pY, pZ, 0, 0, 0);
         this.friction = 1f;
         this.xd = 0;

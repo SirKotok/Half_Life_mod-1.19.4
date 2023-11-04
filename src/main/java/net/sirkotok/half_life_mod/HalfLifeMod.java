@@ -12,6 +12,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import net.sirkotok.half_life_mod.block.ModBlocks;
 
+import net.sirkotok.half_life_mod.block.blockentity.ModBlockEntities;
 import net.sirkotok.half_life_mod.effect.ModEffects;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.brain.ModSensorType;
@@ -37,6 +38,7 @@ public class HalfLifeMod
         modEventBus.addListener(this::commonSetup);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
         ModEntities.register(modEventBus);
         ModSounds.register(modEventBus);
         ModMemoryModuleType.register(modEventBus);
@@ -84,15 +86,23 @@ public class HalfLifeMod
             event.accept(ModItems.PENGUIN_SPAWN_EGG);
             event.accept(ModItems.CHUMTOAD_SPAWN_EGG);
 
-            event.accept(ModItems.SHOCKROACH_SPAWN_EGG);
-
             event.accept(ModItems.BARNACLE_ONE_SPAWN_EGG);
+
+            event.accept(ModItems.SHOCKROACH_SPAWN_EGG);
+            event.accept(ModItems.VORTIGORE_SPAWN_EGG);
+
+
 
 
             event.accept(ModItems.BARNEY_SPAWN_EGG);
 
 
 
+        }
+
+        if(event.getTab().equals(ModCreativeModeTabs.HALF_LIFE_BLOCKS_TAB)) {
+            event.accept(ModBlocks.VOLTIGORE_NEST);
+            event.accept(ModItems.VOLTIGORE_EGG_BLOCK_ITEM);
         }
 
         if(event.getTab().equals(ModCreativeModeTabs.HALF_LIFE_WEOPONS_TAB)) {

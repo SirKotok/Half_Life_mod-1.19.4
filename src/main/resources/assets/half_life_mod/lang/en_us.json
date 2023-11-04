@@ -1,6 +1,7 @@
   {
   "item.half_life_mod.headcrab_1_spawn_egg": "Headcrab HL1 Spawn Egg",
     "item.half_life_mod.houndeye_spawn_egg": "Houndeye Spawn Egg",
+    "item.half_life_mod.vortigore_spawn_egg": "Voltigore Spawn Egg",
     "item.half_life_mod.hoteye_spawn_egg": "Hoteye Spawn Egg",
   "item.half_life_mod.headcrab_2_spawn_egg": "Headcrab HL2 Spawn Egg",
   "item.half_life_mod.headcrab_a_spawn_egg": "Headcrab HL:A Spawn Egg",
@@ -27,6 +28,10 @@
 
 
 
+    "block.half_life_mod.voltigore_nest": "Voltigore Nest",
+
+
+
   "creativemodetab.half_life_tab": "Half-Life Spawn Eggs",
     "creativemodetab.half_life_weopon_tab": "Half-Life Weapons",
   "key.category.half_life_mod.half_life": "Half-Life Category",
@@ -35,6 +40,7 @@
 
 
     "entity.half_life_mod.barnacle": "Barnacle",
+    "entity.half_life_mod.vortigore": "Voltigore",
     "entity.half_life_mod.houndeye": "Houndeye",
     "entity.half_life_mod.hoteye": "Hoteye",
     "entity.half_life_mod.headcrab_1": "Headcrab",
@@ -63,7 +69,32 @@
     "sounds.half_life_mod.barnacle_attack4": "Barnacle bites",
     "sounds.half_life_mod.barnacle_die1": "Barnacle dies",
     "sounds.half_life_mod.barnacle_die2": "Barnacle dies",
+    "sounds.half_life_mod.voltigore_run_grunt1": "Voltigore grunts",
+    "sounds.half_life_mod.voltigore_run_grunt2": "Voltigore grunts",
 
+    "sounds.half_life_mod.voltigore_attack_shock": "Voltigore Shocks",
+    "sounds.half_life_mod.voltigore_eat": "Voltigore Eating",
+    "sounds.half_life_mod.voltigore_melee1": "Voltigore Attacks",
+    "sounds.half_life_mod.voltigore_melee2": "Voltigore Attacks",
+    "sounds.half_life_mod.voltigore_footstep1": "Voltigore Footstep",
+    "sounds.half_life_mod.voltigore_footstep2": "Voltigore Footstep",
+    "sounds.half_life_mod.voltigore_footstep3": "Voltigore Footstep",
+    "sounds.half_life_mod.voltigore_die1": "Voltigore dies",
+    "sounds.half_life_mod.voltigore_die2": "Voltigore dies",
+    "sounds.half_life_mod.voltigore_die3": "Voltigore dies",
+    "sounds.half_life_mod.voltigore_communicate1": "Voltigore talks",
+    "sounds.half_life_mod.voltigore_communicate2": "Voltigore talks",
+    "sounds.half_life_mod.voltigore_communicate3": "Voltigore talks",
+    "sounds.half_life_mod.voltigore_idle1": "Voltigore sounds",
+    "sounds.half_life_mod.voltigore_idle2": "Voltigore sounds",
+    "sounds.half_life_mod.voltigore_idle3": "Voltigore sounds",
+    "sounds.half_life_mod.voltigore_pain1": "Voltigore hurts",
+    "sounds.half_life_mod.voltigore_pain2": "Voltigore hurts",
+    "sounds.half_life_mod.voltigore_pain3": "Voltigore hurts",
+    "sounds.half_life_mod.voltigore_pain4": "Voltigore hurts",
+    "sounds.half_life_mod.voltigore_alert1": "Voltigore angry sounds",
+    "sounds.half_life_mod.voltigore_alert2": "Voltigore angry sounds",
+    "sounds.half_life_mod.voltigore_alert3": "Voltigore angry sounds",
 
 
     "sounds.half_life_mod.shock_die": "Shockroach Dies",

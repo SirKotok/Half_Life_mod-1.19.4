@@ -76,19 +76,19 @@ public class AcidBall extends FireballNoTrail {
     protected void onHitBlock(BlockHitResult blockhit) {
         super.onHitBlock(blockhit);
         int direction = blockhit.getDirection().get3DDataValue();
-        if (this.isAlive() && this.level.isClientSide){
+        if (this.level.isClientSide){
             switch(direction){
-                case 0:  getLevel().addParticle(ModParticles.SPIT_HIT.get(), blockhit.getLocation().x(), blockhit.getLocation().y()-0.01f, blockhit.getLocation().z(), direction, 0, 0);
+                case 0:  getLevel().addAlwaysVisibleParticle(ModParticles.SPIT_HIT.get(), blockhit.getLocation().x(), blockhit.getLocation().y()-0.01f, blockhit.getLocation().z(), direction, 0, 0);
                     break;
-                case 1: getLevel().addParticle(ModParticles.SPIT_HIT.get(), blockhit.getLocation().x(), blockhit.getLocation().y()+0.01f, blockhit.getLocation().z(), direction, 0, 0);
+                case 1: getLevel().addAlwaysVisibleParticle(ModParticles.SPIT_HIT.get(), blockhit.getLocation().x(), blockhit.getLocation().y()+0.01f, blockhit.getLocation().z(), direction, 0, 0);
                     break;
-                case 2: getLevel().addParticle(ModParticles.SPIT_HIT.get(), blockhit.getLocation().x(), blockhit.getLocation().y(), blockhit.getLocation().z()-0.01f, direction, 0, 0);
+                case 2: getLevel().addAlwaysVisibleParticle(ModParticles.SPIT_HIT.get(), blockhit.getLocation().x(), blockhit.getLocation().y(), blockhit.getLocation().z()-0.01f, direction, 0, 0);
                     break;
-                case 3: getLevel().addParticle(ModParticles.SPIT_HIT.get(), blockhit.getLocation().x(), blockhit.getLocation().y(), blockhit.getLocation().z()+0.01f, direction, 0, 0);
+                case 3: getLevel().addAlwaysVisibleParticle(ModParticles.SPIT_HIT.get(), blockhit.getLocation().x(), blockhit.getLocation().y(), blockhit.getLocation().z()+0.01f, direction, 0, 0);
                     break;
-                case 4: getLevel().addParticle(ModParticles.SPIT_HIT.get(), blockhit.getLocation().x()-0.01f, blockhit.getLocation().y(), blockhit.getLocation().z(), direction, 0, 0);
+                case 4: getLevel().addAlwaysVisibleParticle(ModParticles.SPIT_HIT.get(), blockhit.getLocation().x()-0.01f, blockhit.getLocation().y(), blockhit.getLocation().z(), direction, 0, 0);
                     break;
-                case 5: getLevel().addParticle(ModParticles.SPIT_HIT.get(), blockhit.getLocation().x()+0.01f, blockhit.getLocation().y(), blockhit.getLocation().z(), direction, 0, 0);
+                case 5: getLevel().addAlwaysVisibleParticle(ModParticles.SPIT_HIT.get(), blockhit.getLocation().x()+0.01f, blockhit.getLocation().y(), blockhit.getLocation().z(), direction, 0, 0);
                     break;
             }}
         this.discard();

@@ -45,14 +45,14 @@ public class HalfLifeMonster<T extends HalfLifeMonster<T>> extends Monster {
 
     }
 
-  public boolean ConfigurabledoHurtTarget(Entity entity, float disablechance, int attack_modifier, int knockback_modifier, @Nullable MobEffect effect, int duration, boolean visible) {
+  public boolean ConfigurabledoHurtTarget(Entity entity, float disablechance, float attack_modifier, int knockback_modifier, @Nullable MobEffect effect, int duration, boolean visible) {
         return ConfigurabledoHurtTargetShieldBoolean(true, entity, disablechance, attack_modifier, knockback_modifier, effect, duration, visible);
   }
 
 
 
 
-    public boolean ConfigurabledoHurtTargetShieldBoolean(boolean after, Entity entity, float disablechance, int attack_modifier, int knockback_modifier, @Nullable MobEffect effect, int duration, boolean visible) {
+    public boolean ConfigurabledoHurtTargetShieldBoolean(boolean after, Entity entity, float disablechance, float attack_modifier, int knockback_modifier, @Nullable MobEffect effect, int duration, boolean visible) {
         float f = (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE);
         f = attack_modifier*f;
         float f1 = (float) this.getAttributeValue(Attributes.ATTACK_KNOCKBACK);

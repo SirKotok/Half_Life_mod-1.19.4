@@ -1,8 +1,9 @@
-package net.sirkotok.half_life_mod.item.custom;
+package net.sirkotok.half_life_mod.item.custom.spawnegg;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
@@ -38,6 +39,13 @@ public class BarnacleSpawnEggItem extends ForgeSpawnEggItem {
         super(type, backgroundColor, highlightColor, props);
     }
 
+
+
+    @Nullable
+    protected DispenseItemBehavior createDispenseBehavior()
+    {
+        return null;
+    }
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {

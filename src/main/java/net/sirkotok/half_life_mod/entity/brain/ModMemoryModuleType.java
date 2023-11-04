@@ -18,7 +18,7 @@ import net.sirkotok.half_life_mod.HalfLifeMod;
 
 import java.util.List;
 import java.util.Optional;
-
+import java.util.function.Supplier;
 
 
 public class ModMemoryModuleType {
@@ -37,6 +37,16 @@ public class ModMemoryModuleType {
 
     public static final RegistryObject<MemoryModuleType<Integer>> RNG_COMPARITOR_1 = MEMORY_MODULE_TYPES.register("rng_1", () -> new MemoryModuleType<>(Optional.of(Codec.INT)));
     public static final RegistryObject<MemoryModuleType<Integer>> RNG_COMPARITOR_CHECK = MEMORY_MODULE_TYPES.register("rng_1_check", () -> new MemoryModuleType<>(Optional.of(Codec.INT)));
+
+    public static final RegistryObject<MemoryModuleType<List<Pair<BlockPos, BlockState>>>> NEARBY_BLOCKS_TWO = MEMORY_MODULE_TYPES.register("nearby_blocks_two", () -> new MemoryModuleType<>(Optional.empty()));
+
+
+
+
+
+
+
+
     public static void register(IEventBus eventBus) {
         MEMORY_MODULE_TYPES.register(eventBus);
     }

@@ -77,17 +77,17 @@ public class Bullet extends FireballNoTrail {
 
     public void makeParticle(int direction, BlockHitResult blockhit){
         switch(direction){
-            case 0:  this.getLevel().addParticle(ModParticles.BULLET_HOLE.get(), blockhit.getLocation().x(), blockhit.getLocation().y()-0.01f, blockhit.getLocation().z(), direction, 0, 0);
+            case 0:  this.getLevel().addAlwaysVisibleParticle(ModParticles.BULLET_HOLE.get(), blockhit.getLocation().x(), blockhit.getLocation().y()-0.01f, blockhit.getLocation().z(), direction, 0, 0);
                 break;
-            case 1: this.getLevel().addParticle(ModParticles.BULLET_HOLE.get(), blockhit.getLocation().x(), blockhit.getLocation().y()+0.01f, blockhit.getLocation().z(), direction, 0, 0);
+            case 1: this.getLevel().addAlwaysVisibleParticle(ModParticles.BULLET_HOLE.get(), blockhit.getLocation().x(), blockhit.getLocation().y()+0.01f, blockhit.getLocation().z(), direction, 0, 0);
                 break;
-            case 2: this.getLevel().addParticle(ModParticles.BULLET_HOLE.get(), blockhit.getLocation().x(), blockhit.getLocation().y(), blockhit.getLocation().z()-0.01f, direction, 0, 0);
+            case 2: this.getLevel().addAlwaysVisibleParticle(ModParticles.BULLET_HOLE.get(), blockhit.getLocation().x(), blockhit.getLocation().y(), blockhit.getLocation().z()-0.01f, direction, 0, 0);
                 break;
-            case 3: this.getLevel().addParticle(ModParticles.BULLET_HOLE.get(), blockhit.getLocation().x(), blockhit.getLocation().y(), blockhit.getLocation().z()+0.01f, direction, 0, 0);
+            case 3: this.getLevel().addAlwaysVisibleParticle(ModParticles.BULLET_HOLE.get(), blockhit.getLocation().x(), blockhit.getLocation().y(), blockhit.getLocation().z()+0.01f, direction, 0, 0);
                 break;
-            case 4: this.getLevel().addParticle(ModParticles.BULLET_HOLE.get(), blockhit.getLocation().x()-0.01f, blockhit.getLocation().y(), blockhit.getLocation().z(), direction, 0, 0);
+            case 4: this.getLevel().addAlwaysVisibleParticle(ModParticles.BULLET_HOLE.get(), blockhit.getLocation().x()-0.01f, blockhit.getLocation().y(), blockhit.getLocation().z(), direction, 0, 0);
                 break;
-            case 5: this.getLevel().addParticle(ModParticles.BULLET_HOLE.get(), blockhit.getLocation().x()+0.01f, blockhit.getLocation().y(), blockhit.getLocation().z(), direction, 0, 0);
+            case 5: this.getLevel().addAlwaysVisibleParticle(ModParticles.BULLET_HOLE.get(), blockhit.getLocation().x()+0.01f, blockhit.getLocation().y(), blockhit.getLocation().z(), direction, 0, 0);
                 break;
         }
     }
@@ -98,7 +98,7 @@ public class Bullet extends FireballNoTrail {
         super.onHitBlock(blockhit);
        // Ordering index for D-U-N-S-W-E (DOWN UP NORTH SOUTH WEST EAST)
         int direction = blockhit.getDirection().get3DDataValue();
-        if (this.isAlive() && this.level.isClientSide()){
+        if (this.level.isClientSide()){
         this.makeParticle(direction, blockhit);
         this.discard();
     }}

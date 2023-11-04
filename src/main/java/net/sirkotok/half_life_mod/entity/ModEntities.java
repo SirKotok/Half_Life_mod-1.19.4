@@ -16,6 +16,7 @@ import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
 import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
 import net.sirkotok.half_life_mod.entity.projectile.Bullet;
 import net.sirkotok.half_life_mod.entity.projectile.ShockProjectile;
+import net.sirkotok.half_life_mod.entity.projectile.VoltigoreShock;
 
 
 public class ModEntities {
@@ -121,14 +122,14 @@ public class ModEntities {
                     () -> EntityType.Builder.of(Penguin::new, MobCategory.MONSTER)
                             .sized(0.6f, 0.6f)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "penguin").toString()));
+    public static final RegistryObject<EntityType<Vortigore>> VORTIGORE =
+            ENTITY_TYPES.register("vortigore",
+                    () -> EntityType.Builder.of(Vortigore::new, MobCategory.MONSTER)
+                            .sized(2f, 2f)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "vortigore").toString()));
 
 
 
-  /*  public static final RegistryObject<EntityType<Barnacle>> BARNACLE =
-            ENTITY_TYPES.register("barnacle",
-                    () -> EntityType.Builder.of(Barnacle::new, MobCategory.MONSTER)
-                            .sized(1f, 1f)
-                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "barnacle").toString())); */
 
 
     public static final RegistryObject<EntityType<ShockWaveEffect>> SHOCKWAVEEFFECT =
@@ -141,25 +142,31 @@ public class ModEntities {
             ENTITY_TYPES.register("acid_ball",
                             () -> EntityType.Builder.<AcidBall>of(AcidBall::new, MobCategory.MISC)
                                     .sized(0.25F, 0.25F)
-                                    .clientTrackingRange(4)
-                                    .updateInterval(10)
+                                    .clientTrackingRange(20)
+                                    .updateInterval(1)
                     .build(new ResourceLocation(HalfLifeMod.MOD_ID, "acid_ball").toString()));
-
+    public static final RegistryObject<EntityType<VoltigoreShock>> VOLTIGORE_SHOCK =
+            ENTITY_TYPES.register("voltigore_shock",
+                    () -> EntityType.Builder.<VoltigoreShock>of(VoltigoreShock::new, MobCategory.MISC)
+                            .sized(0.25F, 0.25F)
+                            .clientTrackingRange(20)
+                            .updateInterval(1)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "voltigore_shock").toString()));
 
     public static final RegistryObject<EntityType<Bullet>> BULLET_ONE =
             ENTITY_TYPES.register("bullet_one",
                     () -> EntityType.Builder.<Bullet>of(Bullet::new, MobCategory.MISC)
                             .sized(0.1F, 0.1F)
-                            .clientTrackingRange(4)
-                            .updateInterval(10)
+                            .clientTrackingRange(20)
+                            .updateInterval(1)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "bullet_one").toString()));
 
     public static final RegistryObject<EntityType<ShockProjectile>> SHOCK_SHOT =
             ENTITY_TYPES.register("shock_shot",
                     () -> EntityType.Builder.<ShockProjectile>of(ShockProjectile::new, MobCategory.MISC)
                             .sized(0.25F, 0.25F)
-                            .clientTrackingRange(4)
-                            .updateInterval(10)
+                            .clientTrackingRange(20)
+                            .updateInterval(1)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "shock_shot").toString()));
 
 

@@ -32,7 +32,7 @@ import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.sound.ModSounds;
 import net.sirkotok.half_life_mod.util.ModTags;
-import net.sirkotok.half_life_mod.util.UUIDComparitorUtil;
+import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -264,6 +264,15 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
 
             if (this.isDeadOrDying() && this.tickCount % 20 == 0) {
 
+
+                for (Houndeye dog : this.getDogs()) {
+                    if (dog != null && dog.isAlive() && (BrainUtils.getTargetOfEntity(dog) == null
+                            || this.isleader())) {
+                        BrainUtils.setTargetOfEntity(dog, this.getKillCredit());
+                    }
+                }
+
+
                 int radius = 100;
                 List<Houndeye> houndeyes = EntityRetrievalUtil.getEntities((Level) pLevel,
                         new AABB(pBlockPos.getX() - radius, pBlockPos.getY() - radius, pBlockPos.getZ() - radius,
@@ -273,7 +282,7 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
                     dog.removeDogfromDogs(this);
                 }
 
-            } else if (RandomSource.create().nextFloat() < 0.007f) this.triggerAnim("blink", "blink");
+            } else if (RandomSource.create().nextFloat() < 0.0007f) this.triggerAnim("blink", "blink");
 
 
 
@@ -306,7 +315,7 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
                     for (Houndeye dog : houndeyes) {
                         uuids.add(dog.getUUID());
                     }
-                    int max = UUIDComparitorUtil.getMaxUUIDnumber(uuids);
+                    int max = HLperUtil.getMaxUUIDnumber(uuids);
                     this.setLeader(houndeyes.get(max));
                     this.getLeader().addDogtoDogs(this);
                     this.setDogs(this.getLeader().getDogs());
@@ -337,7 +346,7 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
                     if (BrainUtils.getTargetOfEntity(this) != null) {
                         for (Houndeye dog : this.getDogs()) {
                             if (dog != null && dog.isAlive() && (BrainUtils.getTargetOfEntity(dog) == null
-                                    || (this.isleader() && this.tickCount - this.getLastHurtByMobTimestamp() < 20))) {
+                                    || (this.isleader() && this.tickCount - this.getLastHurtByMobTimestamp() < 400))) {
                                 BrainUtils.setTargetOfEntity(dog, BrainUtils.getTargetOfEntity(this));
                             }
                         }

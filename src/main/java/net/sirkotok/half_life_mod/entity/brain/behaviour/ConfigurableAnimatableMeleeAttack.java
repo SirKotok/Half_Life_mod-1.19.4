@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
 
 public class ConfigurableAnimatableMeleeAttack<E extends HalfLifeMonster> extends AnimatableMeleeAttack<E> {
 
-  protected int attackmod;
+  protected float attackmod;
   protected int counter = 0;
     protected boolean growled = false;
     protected int knockbackmod;
@@ -29,7 +29,7 @@ public class ConfigurableAnimatableMeleeAttack<E extends HalfLifeMonster> extend
     protected SoundEvent onhit;
 
 
-    public ConfigurableAnimatableMeleeAttack(int delayTicks, float disablechance, int modattack, int modknockback, @Nullable MobEffect effect, int effectduration, @Nullable SoundEvent onhit) {
+    public ConfigurableAnimatableMeleeAttack(int delayTicks, float disablechance, float modattack, int modknockback, @Nullable MobEffect effect, int effectduration, @Nullable SoundEvent onhit) {
         super(delayTicks);
         this.attackmod = modattack;
         this.knockbackmod = modknockback;

@@ -15,6 +15,66 @@ public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 
+    // Vortigore sounds
+    public static final RegistryObject<SoundEvent> VORTIGORE_SHOCK =
+            registerSoundEvent("voltigore_attack_shock");
+    public static final RegistryObject<SoundEvent> VORTIGORE_EAT =
+            registerSoundEvent("voltigore_eat");
+    public static final RegistryObject<SoundEvent> VORTIGORE_RIGHTATTACK =
+            registerSoundEvent("voltigore_melee1");
+    public static final RegistryObject<SoundEvent> VORTIGORE_BIGATTACK =
+            registerSoundEvent("voltigore_melee2");
+    public static final RegistryObject<SoundEvent> VORTIGORE_RUN_STEP1 =
+            registerSoundEvent("voltigore_run_grunt1");
+    public static final RegistryObject<SoundEvent> VORTIGORE_RUN_STEP2 =
+            registerSoundEvent("voltigore_run_grunt2");
+
+
+    public static final RegistryObject<SoundEvent> VORTIGORE_STEP3 =
+            registerSoundEvent("voltigore_footstep1");
+    public static final RegistryObject<SoundEvent> VORTIGORE_STEP2 =
+            registerSoundEvent("voltigore_footstep2");
+    public static final RegistryObject<SoundEvent> VORTIGORE_STEP1 =
+            registerSoundEvent("voltigore_footstep3");
+    public static final RegistryObject<SoundEvent> VORTIGORE_DIE3 =
+            registerSoundEvent("voltigore_die1");
+    public static final RegistryObject<SoundEvent> VORTIGORE_DIE2 =
+            registerSoundEvent("voltigore_die2");
+    public static final RegistryObject<SoundEvent> VORTIGORE_DIE1 =
+            registerSoundEvent("voltigore_die3");
+    public static final RegistryObject<SoundEvent> VORTIGORE_TALK3 =
+            registerSoundEvent("voltigore_communicate1");
+    public static final RegistryObject<SoundEvent> VORTIGORE_TALK2 =
+            registerSoundEvent("voltigore_communicate2");
+    public static final RegistryObject<SoundEvent> VORTIGORE_TALK1 =
+            registerSoundEvent("voltigore_communicate3");
+    public static final RegistryObject<SoundEvent> VORTIGORE_IDLE3 =
+            registerSoundEvent("voltigore_idle1");
+    public static final RegistryObject<SoundEvent> VORTIGORE_IDLE2 =
+            registerSoundEvent("voltigore_idle2");
+    public static final RegistryObject<SoundEvent> VORTIGORE_IDLE1 =
+            registerSoundEvent("voltigore_idle3");
+    public static final RegistryObject<SoundEvent> VORTIGORE_PAIN4 =
+            registerSoundEvent("voltigore_pain1");
+    public static final RegistryObject<SoundEvent> VORTIGORE_PAIN3 =
+            registerSoundEvent("voltigore_pain2");
+    public static final RegistryObject<SoundEvent> VORTIGORE_PAIN2 =
+            registerSoundEvent("voltigore_pain3");
+    public static final RegistryObject<SoundEvent> VORTIGORE_PAIN1 =
+            registerSoundEvent("voltigore_pain4");
+    public static final RegistryObject<SoundEvent> VORTIGORE_ALERT1 =
+            registerSoundEvent("voltigore_alert1");
+    public static final RegistryObject<SoundEvent> VORTIGORE_ALERT2 =
+            registerSoundEvent("voltigore_alert2");
+    public static final RegistryObject<SoundEvent> VORTIGORE_ALERT3 =
+            registerSoundEvent("voltigore_alert3");
+
+
+
+
+
+
+
     //Houndeye sounds
     public static final RegistryObject<SoundEvent> HOUNDEYE_ATTACK_1 =
             registerSoundEvent("he_attack1");

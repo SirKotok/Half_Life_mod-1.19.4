@@ -2,6 +2,7 @@ package net.sirkotok.half_life_mod.item;
 
 
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -9,12 +10,15 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.sirkotok.half_life_mod.HalfLifeMod;
+import net.sirkotok.half_life_mod.block.ModBlocks;
 import net.sirkotok.half_life_mod.entity.ModEntities;
 import net.sirkotok.half_life_mod.item.custom.*;
 import net.sirkotok.half_life_mod.item.custom.armor.SecurityGuardArmorItem;
 import net.sirkotok.half_life_mod.item.custom.fake.FakeBulletItem;
 import net.sirkotok.half_life_mod.item.custom.gun.Pistol_1_Item;
 import net.sirkotok.half_life_mod.item.custom.gun.Shockroach_Item;
+import net.sirkotok.half_life_mod.item.custom.spawnegg.BarnacleSpawnEggItem;
+import net.sirkotok.half_life_mod.item.custom.spawnegg.VortigoreSpawnEggItem;
 
 
 public class ModItems {
@@ -50,6 +54,16 @@ public class ModItems {
     public static final RegistryObject<Item> PENGUIN_SPAWN_EGG = ITEMS.register("penguin_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.PENGUIN, 0xffffff, 0x000000   ,
                     new Item.Properties()));
+
+   public static final RegistryObject<Item> VORTIGORE_SPAWN_EGG = ITEMS.register("vortigore_spawn_egg",
+           () -> new VortigoreSpawnEggItem(ModEntities.VORTIGORE, 0xf15100, 0xf100cd   ,
+                   new Item.Properties()));
+
+
+
+
+
+
     public static final RegistryObject<Item> HEADCRAB_TWO_SPAWN_EGG = ITEMS.register("headcrab_2_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.HEADCRAB_HL2, 0xa68c60, 0x47271b   ,
                     new Item.Properties()));
@@ -110,6 +124,11 @@ public class ModItems {
             () -> new SecurityGuardArmorItem(ModArmorMaterials.SECURITY_GUARD, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> SECURITY_GUARD_VEST = ITEMS.register("security_guard_chestplate",
             () -> new SecurityGuardArmorItem(ModArmorMaterials.SECURITY_GUARD, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+
+    // Block items
+
+    public static final RegistryObject<Item> VOLTIGORE_EGG_BLOCK_ITEM = ITEMS.register("voltigore_egg_block_item",
+            () -> new BlockItem(ModBlocks.VOLTIGORE_EGG.get(), new Item.Properties()));
 
 
     public static void register(IEventBus eventBus) {
