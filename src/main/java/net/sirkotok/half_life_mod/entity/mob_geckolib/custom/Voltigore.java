@@ -10,7 +10,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
@@ -28,21 +27,17 @@ import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.block.ModBlocks;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.NearbySecondBlocksSensor;
-import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
 import net.sirkotok.half_life_mod.entity.projectile.VoltigoreShock;
 import net.sirkotok.half_life_mod.sound.ModSounds;
 import net.sirkotok.half_life_mod.util.HLperUtil;
-import net.sirkotok.half_life_mod.util.ModTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -76,10 +71,10 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class Vortigore extends HalfLifeMonster implements GeoEntity, SmartBrainOwner<Vortigore>, RangedAttackMob {
+public class Voltigore extends HalfLifeMonster implements GeoEntity, SmartBrainOwner<Voltigore>, RangedAttackMob {
 
     private AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    public Vortigore(EntityType type, Level level) {
+    public Voltigore(EntityType type, Level level) {
         super(type, level);
         this.xpReward = 30;
     }
@@ -146,10 +141,6 @@ public class Vortigore extends HalfLifeMonster implements GeoEntity, SmartBrainO
         return this.entityData.get(VORTIGORES_AROUND);
     }
 
-    public float getmod() {
-        if (this.isBB()) return 0.15f;
-        return 1f;
-    }
 
     public void setageup(int age) {
         this.entityData.set(AGEUP, age);
@@ -226,10 +217,10 @@ public class Vortigore extends HalfLifeMonster implements GeoEntity, SmartBrainO
             ServerLevel pLevel = (ServerLevel) this.level;
             BlockPos pBlockPos = this.blockPosition();
             int rad = 20;
-                List<Vortigore> vortigores = EntityRetrievalUtil.getEntities((Level) pLevel,
+                List<Voltigore> voltigores = EntityRetrievalUtil.getEntities((Level) pLevel,
                         new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
-                                pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj instanceof Vortigore);
-            this.setvround(vortigores.size());
+                                pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj instanceof Voltigore);
+            this.setvround(voltigores.size());
 
         }
 
@@ -342,13 +333,13 @@ public class Vortigore extends HalfLifeMonster implements GeoEntity, SmartBrainO
 
 
     @Override
-    public List<ExtendedSensor<Vortigore>> getSensors() {
+    public List<ExtendedSensor<Voltigore>> getSensors() {
         return ObjectArrayList.of(
                 new HurtBySensor<>(),
                 new NearbyPlayersSensor<>(),
-                new NearbyBlocksSensor<Vortigore>().setRadius(20, 5).setPredicate((state, entity) -> state.is(ModBlocks.VOLTIGORE_NEST.get())),
-                new NearbySecondBlocksSensor<Vortigore>().setRadius(30, 5).setPredicate((state, entity) -> state.is(ModBlocks.VOLTIGORE_EGG.get())),
-                new NearbyLivingEntitySensor<Vortigore>()
+                new NearbyBlocksSensor<Voltigore>().setRadius(20, 5).setPredicate((state, entity) -> state.is(ModBlocks.VOLTIGORE_NEST.get())),
+                new NearbySecondBlocksSensor<Voltigore>().setRadius(30, 5).setPredicate((state, entity) -> state.is(ModBlocks.VOLTIGORE_EGG.get())),
+                new NearbyLivingEntitySensor<Voltigore>()
                         .setPredicate((target, entity) ->
                                 target instanceof Player || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
                                         target instanceof AbstractVillager));
@@ -357,17 +348,17 @@ public class Vortigore extends HalfLifeMonster implements GeoEntity, SmartBrainO
 
 
     @Override
-    public BrainActivityGroup<Vortigore> getCoreTasks() { // These are the tasks that run all the time (usually)
+    public BrainActivityGroup<Voltigore> getCoreTasks() { // These are the tasks that run all the time (usually)
         return BrainActivityGroup.coreTasks(
                 new LookAtTarget<>(),                      // Have the entity turn to face and look at its current look target
                 new MoveToWalkTarget<>());
     }
 
     @Override
-    public BrainActivityGroup<Vortigore> getIdleTasks() { // These are the tasks that run when the mob isn't doing anything else (usually)
+    public BrainActivityGroup<Voltigore> getIdleTasks() { // These are the tasks that run when the mob isn't doing anything else (usually)
         return BrainActivityGroup.idleTasks(
-                new FirstApplicableBehaviour<Vortigore>(
-                        new TargetOrRetaliate<>(),
+                new FirstApplicableBehaviour<Voltigore>(
+                        new TargetOrRetaliateHLT<>(),
                         new CustomBehaviour<>(entity -> BrainUtils.clearMemory(this, ModMemoryModuleType.CHECKED_LOCATIONS.get())).cooldownFor(entity -> 3000),
                         new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, false)).startCondition(entity -> this.isangry()),
                         new SetPlayerLookTarget<>(),
@@ -386,21 +377,20 @@ public class Vortigore extends HalfLifeMonster implements GeoEntity, SmartBrainO
 
 
     @Override
-    public BrainActivityGroup<Vortigore> getFightTasks() { // These are the tasks that handle fighting
+    public BrainActivityGroup<Voltigore> getFightTasks() { // These are the tasks that handle fighting
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>(),
                 new Retaliate<>(),
                 new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, true)).startCondition(entity -> !this.isangry()),
                 new SetWalkTargetToAttackTarget<>().speedMod(1.5f),
                 new FirstApplicableBehaviour<>(
-                        new ConfigurableAnimatableMeleeAttack<Vortigore>(15, 1f * (this.isBB() ? 0 : 1), this.getmod(), 2 * (this.isBB() ? 0 : 1), null, 0, this.getBigAttackSound())
+                        new ConfigurableAnimatableMeleeAttack<Voltigore>(15, 1f * (this.isBB() ? 0 : 1), (this.isBB() ? 0.3f : 1), 2 * (this.isBB() ? 0 : 1), null, 0, this.getBigAttackSound())
                                 .whenStarting(entity -> triggerAnim("onetime", "bigattack"))
-                                .cooldownFor(entity -> random.nextInt(20, 40))
-                                .startCondition(entity -> BrainUtils.getMemory(this, MemoryModuleType.ATTACK_TARGET).getHealth()<10.5f),
-                        new ConfigurableAnimatableMeleeAttack<Vortigore>(10, 0.5f * (this.isBB() ? 0 : 1), this.getmod(), (this.isBB() ? 0 : 1), null, 0, this.getRightAttackSound())
+                                .cooldownFor(entity -> random.nextInt(20, 40)),
+                        new ConfigurableAnimatableMeleeAttack<Voltigore>(10, 0.5f * (this.isBB() ? 0 : 1), (this.isBB() ? 0.3f : 1), (this.isBB() ? 0 : 1), null, 0, this.getRightAttackSound())
                                 .whenStarting(entity -> triggerAnim("onetime", "right"))
                                 .cooldownFor(entity -> random.nextInt(15, 25)),
-                        new StopAndShoot<Vortigore>(12, 10, 1f).cooldownFor(entity -> random.nextInt(50, 90))
+                        new StopAndShoot<Voltigore>(12, 10, 1f).cooldownFor(entity -> random.nextInt(50, 90))
                                 .whenStarting(entity -> triggerAnim("onetime", "shoot"))
                                 .startCondition(entity -> !this.isBB())
                 )
@@ -431,7 +421,7 @@ public class Vortigore extends HalfLifeMonster implements GeoEntity, SmartBrainO
         double d4 = Math.sqrt(Math.sqrt(d0)) * 0.5D;
 
 
-        this.playSound(getSpitSound(), this.getSoundVolume(), 1.2f);
+        this.playSound(getSpitSound(), this.getSoundVolume(), this.getVoicePitch());
 
 
         VoltigoreShock acidBall = new VoltigoreShock(this.level, this, d1, d2, d3); //this.getRandom().triangle(d1, 2.297D * d4)
@@ -443,8 +433,7 @@ public class Vortigore extends HalfLifeMonster implements GeoEntity, SmartBrainO
 
     @Override
     public float getVoicePitch() {
-        if (this.isBB()) return 1.5f;
-        return super.getVoicePitch();
+        return this.isBB() ? 1.6f : 1f;
     }
 
     public SoundEvent getSpitSound() {
@@ -497,7 +486,7 @@ public class Vortigore extends HalfLifeMonster implements GeoEntity, SmartBrainO
             BlockState blockstate = this.level.getBlockState(pPos.above());
             boolean flag = blockstate.is(BlockTags.INSIDE_STEP_SOUND_BLOCKS);
             if (flag || !pState.getMaterial().isLiquid()) {
-                this.playSound(getStepSound());
+                this.playSound(getStepSound(), this.getSoundVolume(), this.getVoicePitch());
             }
         }
     }

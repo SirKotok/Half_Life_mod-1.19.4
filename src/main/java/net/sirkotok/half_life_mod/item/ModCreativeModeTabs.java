@@ -25,7 +25,7 @@ public class ModCreativeModeTabs {
 
 
         HALF_LIFE_BLOCKS_TAB = event.registerCreativeModeTab(new ResourceLocation(HalfLifeMod.MOD_ID, "half_life_blocks_tab"),
-                builder -> builder.icon(() -> new ItemStack(ModItems.SNARK_SPAWN_EGG.get()))
+                builder -> builder.icon(() -> new ItemStack(ModBlocks.VOLTIGORE_NEST.get().asItem()))
                         .title(Component.translatable("creativemodetab.half_life_blocks_tab")));
 
         HALF_LIFE_WEOPONS_TAB = event.registerCreativeModeTab(new ResourceLocation(HalfLifeMod.MOD_ID, "half_life_weopon_tab"),

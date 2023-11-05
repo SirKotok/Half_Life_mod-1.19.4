@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.entity.ModEntities;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.ShockWaveEffect;
+import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.VoltigoreProjectileAftereffect;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.*;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
 
@@ -23,9 +24,10 @@ public class ModEventBusEvents {
         event.put(ModEntities.BARNACLE.get(), Barnacle.setAttributes());
         event.put(ModEntities.SNARK.get(), Snark.setAttributes());
         event.put(ModEntities.SHOCKWAVEEFFECT.get(), ShockWaveEffect.setAttributes());
+        event.put(ModEntities.VOLTIGOREPROJECTEFFECT.get(), VoltigoreProjectileAftereffect.setAttributes());
         event.put(ModEntities.SNARKNEST.get(), Snarknest.setAttributes());
         event.put(ModEntities.PENGUIN.get(), Snark.setAttributes());
-        event.put(ModEntities.VORTIGORE.get(), Vortigore.setAttributes());
+        event.put(ModEntities.VOLTIGORE.get(), Voltigore.setAttributes());
         event.put(ModEntities.HEADCRAB_HL1.get(), Headcrab_1.setAttributes());
         event.put(ModEntities.HEADCRAB_ZOMBIE_1.get(), Headcrab_zombie_standart.setAttributes());
         event.put(ModEntities.HEADCRAB_HL2.get(), Headcrab_2.setAttributes());
@@ -43,6 +45,8 @@ public class ModEventBusEvents {
 
     @SubscribeEvent
     public static void entitySpawnRestriction(SpawnPlacementRegisterEvent event) {
+        event.register(ModEntities.VOLTIGORE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(ModEntities.HEADCRAB_HL1.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(ModEntities.HOUNDEYE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,

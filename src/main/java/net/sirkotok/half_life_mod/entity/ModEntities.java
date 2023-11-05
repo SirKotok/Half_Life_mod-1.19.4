@@ -11,6 +11,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.ShockWaveEffect;
+import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.VoltigoreProjectileAftereffect;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.*;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
 import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
@@ -122,9 +123,9 @@ public class ModEntities {
                     () -> EntityType.Builder.of(Penguin::new, MobCategory.MONSTER)
                             .sized(0.6f, 0.6f)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "penguin").toString()));
-    public static final RegistryObject<EntityType<Vortigore>> VORTIGORE =
+    public static final RegistryObject<EntityType<Voltigore>> VOLTIGORE =
             ENTITY_TYPES.register("vortigore",
-                    () -> EntityType.Builder.of(Vortigore::new, MobCategory.MONSTER)
+                    () -> EntityType.Builder.of(Voltigore::new, MobCategory.MONSTER)
                             .sized(2f, 2f)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "vortigore").toString()));
 
@@ -137,6 +138,13 @@ public class ModEntities {
                     () -> EntityType.Builder.of(ShockWaveEffect::new, MobCategory.MONSTER)
                             .sized(0.6f, 0.6f)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "shockwave_effect").toString()));
+
+
+    public static final RegistryObject<EntityType<VoltigoreProjectileAftereffect>> VOLTIGOREPROJECTEFFECT =
+            ENTITY_TYPES.register("voltigore_projectile_aftereffect",
+                    () -> EntityType.Builder.of(VoltigoreProjectileAftereffect::new, MobCategory.MONSTER)
+                            .sized(0.6f, 0.6f)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "voltigore_projectile_aftereffect").toString()));
 
     public static final RegistryObject<EntityType<AcidBall>> ACID_BALL =
             ENTITY_TYPES.register("acid_ball",

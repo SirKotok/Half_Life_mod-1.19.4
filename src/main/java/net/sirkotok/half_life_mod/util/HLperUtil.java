@@ -1,6 +1,7 @@
 package net.sirkotok.half_life_mod.util;
 
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.LivingEntity;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -15,6 +16,15 @@ public final class HLperUtil {
             if (max.compareTo(id) < 0) max = id;
         }
       return max;
+    }
+
+
+
+    public static boolean issameteam(LivingEntity one, LivingEntity two){
+        boolean science_team = (one.getType().is(ModTags.EntityTypes.FACTION_SCIENCE_TEAM) && two.getType().is(ModTags.EntityTypes.FACTION_SCIENCE_TEAM));
+        boolean race_x = (one.getType().is(ModTags.EntityTypes.FACTION_RACE_X) && two.getType().is(ModTags.EntityTypes.FACTION_RACE_X));
+
+        return science_team || race_x;
     }
 
 

@@ -9,20 +9,17 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.sirkotok.half_life_mod.block.ModBlocks;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Houndeye;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Vortigore;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Voltigore;
 import net.tslat.smartbrainlib.api.core.behaviour.DelayedBehaviour;
 import net.tslat.smartbrainlib.util.BrainUtils;
 
 import java.util.List;
 
-public class VortigoreLayAnEggBehavior<E extends Vortigore> extends DelayedBehaviour<E> {
+public class VortigoreLayAnEggBehavior<E extends Voltigore> extends DelayedBehaviour<E> {
     private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(ModMemoryModuleType.LOCATION_OF_INTEREST.get(), MemoryStatus.VALUE_PRESENT), Pair.of(ModMemoryModuleType.NEARBY_BLOCKS_TWO.get(), MemoryStatus.REGISTERED));
 
     public VortigoreLayAnEggBehavior() {

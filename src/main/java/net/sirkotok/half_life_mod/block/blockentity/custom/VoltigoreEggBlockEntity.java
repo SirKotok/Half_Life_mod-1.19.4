@@ -13,19 +13,16 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.block.ModBlocks;
 import net.sirkotok.half_life_mod.block.blockentity.ModBlockEntities;
 import net.sirkotok.half_life_mod.entity.ModEntities;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Vortigore;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Voltigore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
@@ -60,7 +57,7 @@ public class VoltigoreEggBlockEntity extends BlockEntity implements GeoBlockEnti
                 if (!level.isClientSide)
                 {
                     pLevel.levelEvent(2001, pPos, Block.getId(pState));
-                    Vortigore turtle = ModEntities.VORTIGORE.get().create(pLevel);
+                    Voltigore turtle = ModEntities.VOLTIGORE.get().create(pLevel);
                     this.level.sendBlockUpdated(this.worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
                     remove = 20;
                     this.cracked = true;

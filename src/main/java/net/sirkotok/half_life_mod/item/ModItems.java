@@ -56,7 +56,7 @@ public class ModItems {
                     new Item.Properties()));
 
    public static final RegistryObject<Item> VORTIGORE_SPAWN_EGG = ITEMS.register("vortigore_spawn_egg",
-           () -> new VortigoreSpawnEggItem(ModEntities.VORTIGORE, 0xf15100, 0xf100cd   ,
+           () -> new VortigoreSpawnEggItem(ModEntities.VOLTIGORE, 0xf15100, 0xf100cd   ,
                    new Item.Properties()));
 
 

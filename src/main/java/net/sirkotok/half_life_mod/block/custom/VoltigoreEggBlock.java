@@ -2,13 +2,7 @@ package net.sirkotok.half_life_mod.block.custom;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.animal.Turtle;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -19,15 +13,10 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.sirkotok.half_life_mod.block.ModBlocks;
 import net.sirkotok.half_life_mod.block.blockentity.ModBlockEntities;
 import net.sirkotok.half_life_mod.block.blockentity.custom.VoltigoreEggBlockEntity;
-import net.sirkotok.half_life_mod.entity.ModEntities;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Vortigore;
 import org.jetbrains.annotations.Nullable;
 
 public class VoltigoreEggBlock extends BaseEntityBlock {

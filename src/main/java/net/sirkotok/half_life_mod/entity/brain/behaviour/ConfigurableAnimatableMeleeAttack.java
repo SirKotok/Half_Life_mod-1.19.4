@@ -52,7 +52,7 @@ public class ConfigurableAnimatableMeleeAttack<E extends HalfLifeMonster> extend
 
         if (entity.getSensing().hasLineOfSight(this.target) && entity.isWithinMeleeAttackRange(this.target)) {
             if (this.onhit != null) {
-            entity.playSound(this.onhit);}
+            entity.playSound(this.onhit, 0.8f, entity.getVoicePitch());}
             entity.ConfigurabledoHurtTarget(this.target, this.disableshield, this.attackmod, this.knockbackmod, this.effect, this.effectduration, false);
         }
 

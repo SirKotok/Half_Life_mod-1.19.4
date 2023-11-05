@@ -24,6 +24,7 @@ import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.HalfLife1SetFollowToWalkTarget;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.StopAndShoot;
+import net.sirkotok.half_life_mod.entity.brain.behaviour.TargetOrRetaliateHLT;
 import net.sirkotok.half_life_mod.entity.projectile.Bullet;
 import net.sirkotok.half_life_mod.item.ModItems;
 import net.sirkotok.half_life_mod.sound.ModSounds;
@@ -208,7 +209,7 @@ public class Barney extends HalfLifeNeutral implements GeoEntity, SmartBrainOwne
     public BrainActivityGroup<Barney> getIdleTasks() { // These are the tasks that run when the mob isn't doing anything else (usually)
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<Barney>(
-                        new TargetOrRetaliate<>(),
+                        new TargetOrRetaliateHLT<>(),
                         new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>()).whenStarting(entity -> this.entityData.set(IS_ANGRY, false)),
                 new HalfLife1SetFollowToWalkTarget<>().cooldownFor(entity -> 20),

@@ -27,6 +27,7 @@ import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.BiteWhileJumpingBehavior;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.HeadCrabJumpBehavior;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
+import net.sirkotok.half_life_mod.entity.brain.behaviour.TargetOrRetaliateHLT;
 import net.sirkotok.half_life_mod.item.ModItems;
 import net.sirkotok.half_life_mod.sound.ModSounds;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
@@ -208,7 +209,7 @@ public class Shockroach extends CatchableMonster implements GeoEntity, SmartBrai
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<Shockroach>(
 
-                        new TargetOrRetaliate<>(),
+                        new TargetOrRetaliateHLT<>(),
 
                         new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>()),

@@ -18,6 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Voltigore;
 
 import javax.annotation.Nullable;
 
@@ -53,8 +54,8 @@ public class HalfLifeMonster<T extends HalfLifeMonster<T>> extends Monster {
 
 
     public boolean ConfigurabledoHurtTargetShieldBoolean(boolean after, Entity entity, float disablechance, float attack_modifier, int knockback_modifier, @Nullable MobEffect effect, int duration, boolean visible) {
-        float f = (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE);
-        f = attack_modifier*f;
+        float p = (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE);
+        float f = attack_modifier*p;
         float f1 = (float) this.getAttributeValue(Attributes.ATTACK_KNOCKBACK);
         f1 = knockback_modifier*f1;
 
@@ -81,9 +82,8 @@ public class HalfLifeMonster<T extends HalfLifeMonster<T>> extends Monster {
             float t = this.level.getCurrentDifficultyAt(this.blockPosition()).getEffectiveDifficulty();
             ((LivingEntity)entity).addEffect(new MobEffectInstance(effect, duration, 0, false, visible), this);
         }
-
-
-        boolean flag = entity.hurt(this.damageSources().mobAttack(this), f);
+        boolean flag;
+        if (this instanceof Voltigore voltigore && voltigore.isBB()) flag = entity.hurt(this.damageSources().mobAttack(this), 2f); else flag = entity.hurt(this.damageSources().mobAttack(this), f);
         if (flag) {
             if (f1 > 0.0F && entity instanceof LivingEntity) {
                 ((LivingEntity) entity).knockback((double) (f1 * 0.5F), (double) Mth.sin(this.getYRot() * ((float) Math.PI / 180F)), (double) (-Mth.cos(this.getYRot() * ((float) Math.PI / 180F))));

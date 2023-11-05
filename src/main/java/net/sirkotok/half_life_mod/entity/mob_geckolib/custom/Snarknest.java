@@ -69,7 +69,7 @@ public class Snarknest extends CatchableMonster implements GeoEntity, SmartBrain
         if (pBlockPos.getY() >= pLevel.getSeaLevel()) {
             return false;
         }
-        int radius = 70;
+        int radius = 80;
         List<Mob> entities = EntityRetrievalUtil.getEntities((Level) pLevel,
                 new AABB(pBlockPos.getX() - radius, pBlockPos.getY() - radius, pBlockPos.getZ() - radius,
                 pBlockPos.getX() + radius, pBlockPos.getY() + radius, pBlockPos.getZ() + radius), obj -> obj instanceof Snarknest);

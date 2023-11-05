@@ -39,6 +39,7 @@ public class ModMemoryModuleType {
     public static final RegistryObject<MemoryModuleType<Integer>> RNG_COMPARITOR_CHECK = MEMORY_MODULE_TYPES.register("rng_1_check", () -> new MemoryModuleType<>(Optional.of(Codec.INT)));
 
     public static final RegistryObject<MemoryModuleType<List<Pair<BlockPos, BlockState>>>> NEARBY_BLOCKS_TWO = MEMORY_MODULE_TYPES.register("nearby_blocks_two", () -> new MemoryModuleType<>(Optional.empty()));
+    public static final RegistryObject<MemoryModuleType<Boolean>> RETALIATECOOLDOWN = MEMORY_MODULE_TYPES.register("retaliate_cooldown", () -> new MemoryModuleType<>(Optional.empty()));
 
 
 
