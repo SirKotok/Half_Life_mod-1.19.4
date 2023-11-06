@@ -339,6 +339,7 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
                             target.getType().getCategory().getName().equals("creature") ||
                             target instanceof IronGolem ||
                             target instanceof AbstractVillager ||
+                            target instanceof Pitdrone ||
                             target instanceof Slime ||
                             (target instanceof Bullsquid bullsquid && bullsquid.isterritorial() && this.isterritorial()) ||
                             target instanceof HalfLifeNeutral
@@ -393,12 +394,11 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
                 new Retaliate<>(),
                 new SetWalkTargetToAttackTarget<Bullsquid>().speedMod(1.84f).whenStarting(entity -> this.entityData.set(IS_ANGRY, true)),
                 new FirstApplicableBehaviour<>(
-                new ConfigurableAnimatableMeleeAttack<Bullsquid>(20, 1f, 2, 2, null, 0, null)
+                new ConfigurableAnimatableMeleeAttack<Bullsquid>(20, 1f, 2, 2, null, 0, null, null)
                         .whenStarting(entity -> triggerAnim("onetime", "spin"))
                         .cooldownFor(entity -> random.nextInt(40, 80))
                         .startCondition(entity -> BrainUtils.getMemory(this, MemoryModuleType.ATTACK_TARGET).getHealth()<10.5f),
-                 new ConfigurableAnimatableMeleeAttack<Bullsquid>(15, 0.3f, 1, 2, null, 0, this.getBiteSound())
-                         .whenActivating(entity -> this.playSound(this.getAttackGrowlSound(), this.getSoundVolume(), 1.0f))
+                 new ConfigurableAnimatableMeleeAttack<Bullsquid>(15, 0.3f, 1, 2, null, 0, this.getBiteSound(), this.getAttackGrowlSound())
                          .whenStarting(entity -> triggerAnim("onetime", "bite"))
                          .cooldownFor(entity -> random.nextInt(20, 30)),
                         new StopAndShoot<Bullsquid>(21, 0, 1f).cooldownFor(entity -> random.nextInt(20, 40))

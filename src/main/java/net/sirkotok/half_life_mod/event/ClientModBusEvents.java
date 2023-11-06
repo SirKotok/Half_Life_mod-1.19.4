@@ -21,7 +21,8 @@ import net.sirkotok.half_life_mod.entity.mob_geckolib.client.renderers.*;
 import net.sirkotok.half_life_mod.entity.mob_normal.client.ModModelLayers;
 import net.sirkotok.half_life_mod.entity.mob_normal.client.models.Barnacle_Model;
 import net.sirkotok.half_life_mod.entity.mob_normal.client.renderers.Barnacle_Renderer;
-import net.sirkotok.half_life_mod.entity.projectile.client.Voltigore_projectile_renderer;
+import net.sirkotok.half_life_mod.entity.projectile.client.renderer.Pitdrone_spike_renderer;
+import net.sirkotok.half_life_mod.entity.projectile.client.renderer.Voltigore_projectile_renderer;
 import net.sirkotok.half_life_mod.particle.ModParticles;
 import net.sirkotok.half_life_mod.particle.custom.projectile_impact.BigImpactParticle;
 import net.sirkotok.half_life_mod.particle.custom.projectile_impact.BulletHoleParticle;
@@ -49,6 +50,7 @@ public class ClientModBusEvents {
         EntityRenderers.register(ModEntities.VOLTIGOREPROJECTEFFECT.get(), Voltigore_projectile_e_renderer::new);
         EntityRenderers.register(ModEntities.SHOCKWAVEEFFECT.get(), Shockwaverenderer::new);
         EntityRenderers.register(ModEntities.HOTEYE.get(), Hoteyerenderer::new);
+        EntityRenderers.register(ModEntities.PITDRONE.get(), Pitdrone_renderer::new);
         EntityRenderers.register(ModEntities.HOUNDEYE.get(), Houndeyerenderer::new);
         EntityRenderers.register(ModEntities.SNARKNEST.get(), Snarknestrenderer::new);
         EntityRenderers.register(ModEntities.HEADCRAB_HL1.get(), Headcrab_1renderer::new);
@@ -68,6 +70,7 @@ public class ClientModBusEvents {
         EntityRenderers.register(ModEntities.BARNEY.get(), Barney_renderer::new);
         EntityRenderers.register(ModEntities.ACID_BALL.get(), ThrownItemRenderer::new);
         EntityRenderers.register(ModEntities.VOLTIGORE_SHOCK.get(), Voltigore_projectile_renderer::new);
+        EntityRenderers.register(ModEntities.PITDRONE_SPIKE.get(), Pitdrone_spike_renderer::new);
         EntityRenderers.register(ModEntities.SHOCK_SHOT.get(), ThrownItemRenderer::new);
         EntityRenderers.register(ModEntities.BULLET_ONE.get(), ThrownItemRenderer::new);
         EntityRenderers.register(ModEntities.BARNACLE.get(), Barnacle_Renderer::new);

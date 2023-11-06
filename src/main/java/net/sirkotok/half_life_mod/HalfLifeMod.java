@@ -90,7 +90,7 @@ public class HalfLifeMod
 
             event.accept(ModItems.SHOCKROACH_SPAWN_EGG);
             event.accept(ModItems.VORTIGORE_SPAWN_EGG);
-
+            event.accept(ModItems.PITDRONE_SPAWN_EGG);
 
 
 

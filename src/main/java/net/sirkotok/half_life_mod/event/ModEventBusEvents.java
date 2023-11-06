@@ -37,6 +37,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.HEADCRAB_POISON_HL2.get(), Headcrab_Poison_2.setAttributes());
         event.put(ModEntities.HEADCRAB_POISON_HLA.get(), Headcrab_Poison_3.setAttributes());
         event.put(ModEntities.BULLSQUID.get(), Bullsquid.setAttributes());
+        event.put(ModEntities.PITDRONE.get(), Pitdrone.setAttributes());
         event.put(ModEntities.HOUNDEYE.get(), Houndeye.setAttributes());
         event.put(ModEntities.HOTEYE.get(), Hoteye.setAttributes());
         event.put(ModEntities.SHOCKROACH.get(), Shockroach.setAttributes());
@@ -46,6 +47,8 @@ public class ModEventBusEvents {
     @SubscribeEvent
     public static void entitySpawnRestriction(SpawnPlacementRegisterEvent event) {
         event.register(ModEntities.VOLTIGORE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        event.register(ModEntities.PITDRONE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(ModEntities.HEADCRAB_HL1.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);

@@ -15,6 +15,59 @@ public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 
+    //PitDrone sounds
+    public static final RegistryObject<SoundEvent> PITDRONE_METAL_STEP =
+            registerSoundEvent("pit_step_metal");
+    public static final RegistryObject<SoundEvent> PITDRONE_MELEEATTACK1 =
+            registerSoundEvent("pit_drone_melee_attack1");
+    public static final RegistryObject<SoundEvent> PITDRONE_MELEEATTACK2 =
+            registerSoundEvent("pit_drone_melee_attack2");
+    public static final RegistryObject<SoundEvent> PITDRONE_DIE1 =
+            registerSoundEvent("pit_drone_die1");
+    public static final RegistryObject<SoundEvent> PITDRONE_DIE2 =
+            registerSoundEvent("pit_drone_die2");
+    public static final RegistryObject<SoundEvent> PITDRONE_DIE3 =
+            registerSoundEvent("pit_drone_die3");
+    public static final RegistryObject<SoundEvent> PITDRONE_TALK1 =
+            registerSoundEvent("pit_drone_communicate1");
+    public static final RegistryObject<SoundEvent> PITDRONE_TALK2 =
+            registerSoundEvent("pit_drone_communicate2");
+    public static final RegistryObject<SoundEvent> PITDRONE_TALK3 =
+            registerSoundEvent("pit_drone_communicate3");
+    public static final RegistryObject<SoundEvent> PITDRONE_TALK4 =
+            registerSoundEvent("pit_drone_communicate4");
+    public static final RegistryObject<SoundEvent> PITDRONE_IDLE1 =
+            registerSoundEvent("pit_drone_idle1");
+    public static final RegistryObject<SoundEvent> PITDRONE_IDLE2 =
+            registerSoundEvent("pit_drone_idle2");
+    public static final RegistryObject<SoundEvent> PITDRONE_IDLE3 =
+            registerSoundEvent("pit_drone_idle3");
+    public static final RegistryObject<SoundEvent> PITDRONE_IDLE4 =
+            registerSoundEvent("pit_drone_idle4");
+    public static final RegistryObject<SoundEvent> PITDRONE_IDLE5 =
+            registerSoundEvent("pit_drone_idle5");
+    public static final RegistryObject<SoundEvent> PITDRONE_IDLE6 =
+            registerSoundEvent("pit_drone_idle6");
+    public static final RegistryObject<SoundEvent> PITDRONE_PAIN1 =
+            registerSoundEvent("pit_drone_pain1");
+    public static final RegistryObject<SoundEvent> PITDRONE_PAIN2 =
+            registerSoundEvent("pit_drone_pain2");
+    public static final RegistryObject<SoundEvent> PITDRONE_PAIN3 =
+            registerSoundEvent("pit_drone_pain3");
+    public static final RegistryObject<SoundEvent> PITDRONE_PAIN4 =
+            registerSoundEvent("pit_drone_pain4");
+    public static final RegistryObject<SoundEvent> PITDRONE_SPIKE1 =
+            registerSoundEvent("pit_drone_attack_spike1");
+    public static final RegistryObject<SoundEvent> PITDRONE_SPIKE2 =
+            registerSoundEvent("pit_drone_attack_spike2");
+    public static final RegistryObject<SoundEvent> PITDRONE_SPIKE_HIT =
+            registerSoundEvent("pit_hit");
+
+
+
+
+
+
     // Vortigore sounds
     public static final RegistryObject<SoundEvent> VORTIGORE_SHOCK =
             registerSoundEvent("voltigore_attack_shock");

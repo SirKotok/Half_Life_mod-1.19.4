@@ -3,7 +3,7 @@
   "biomes": "#minecraft:is_overworld",
   "spawners": {
     "type": "half_life_mod:houndeye",
-    "weight": 10,
+    "weight": 15,
     "minCount": 1,
     "maxCount": 3
   }

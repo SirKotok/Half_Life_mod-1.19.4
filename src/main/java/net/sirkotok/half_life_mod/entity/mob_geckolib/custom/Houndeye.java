@@ -558,7 +558,7 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
                 ),
                 new OneRandomBehaviour<>(
                         new CustomBehaviour<>(entity -> this.jumpback()).startCondition(entity -> this.getTarget() != null && this.distanceTo(this.getTarget()) < 3.2 && RandomSource.create().nextInt(30) == 10).whenStarting(entity -> this.triggerAnim("long", "jump")).cooldownFor(entity -> 450 + RandomSource.create().nextInt(500)),
-                        new StayAndSound<>(40, this.getBarkSound()).whenStarting(entity -> this.triggerAnim("long", "bark")).cooldownFor(entity -> 90),
+                        new BarkAtTarget<>(40, this.getBarkSound()).whenStarting(entity -> this.triggerAnim("long", "bark")).cooldownFor(entity -> 90),
                         new Houndeyeattackbehavior<>(25, this.getBlastSound(), this.getBuildupSound()).cooldownFor(entity -> 60 + RandomSource.create().nextInt(60))
                    ));
 

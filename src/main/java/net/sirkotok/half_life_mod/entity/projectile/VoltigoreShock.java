@@ -20,6 +20,7 @@ import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.VoltigoreProje
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Voltigore;
 import net.sirkotok.half_life_mod.particle.ModParticles;
 import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -69,15 +70,19 @@ public class VoltigoreShock extends FireballNoTrail implements GeoEntity {
             BlockPos pBlockPos = entity.blockPosition();
             if (entity1 instanceof LivingEntity) {
                 LivingEntity bullsquid = (LivingEntity) entity1;
-                entity.hurt(this.damageSources().mobProjectile(this, bullsquid), 15f);
 
+                entity.hurt(this.damageSources().mobProjectile(this, bullsquid), 15f);
+                HLperUtil.DisableShieldFor(entity, 1f, 300, serverlevel);
                 int rad = 3;
                 List<LivingEntity> targets = EntityRetrievalUtil.getEntities((Level) serverlevel,
                         new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
                                 pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> !(obj instanceof Voltigore) && obj instanceof LivingEntity);
 
                     for (LivingEntity entity2 : targets) {
-                        if (entity2 != entity) entity2.hurt(this.damageSources().mobProjectile(this, (LivingEntity) entity1 ), 2f); }
+                        if (entity2 != entity) {
+                            HLperUtil.DisableShieldFor(entity, 0.1f, 20, serverlevel);
+                            entity2.hurt(this.damageSources().mobProjectile(this, (LivingEntity) entity1 ), 2f);
+                        } }
 
                 VoltigoreProjectileAftereffect wave = ModEntities.VOLTIGOREPROJECTEFFECT.get().create(serverlevel);
                 if (wave != null) {
@@ -136,6 +141,7 @@ public class VoltigoreShock extends FireballNoTrail implements GeoEntity {
                             pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> !(obj instanceof Voltigore) && obj instanceof LivingEntity);
         if (entity1 instanceof LivingEntity) {
             for (LivingEntity entity : targets) {
+            HLperUtil.DisableShieldFor(entity, 0.1f, 20, serverlevel);
             entity.hurt(this.damageSources().mobProjectile(this, (LivingEntity) entity1 ), 5f); }
         }}}
 

@@ -92,6 +92,12 @@ public class ModItems {
     public static final RegistryObject<Item> BULLSQUID_SPAWN_EGG = ITEMS.register("bullsquid_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.BULLSQUID, 0x4f6307, 0x781104   ,
                     new Item.Properties()));
+
+
+    public static final RegistryObject<Item> PITDRONE_SPAWN_EGG = ITEMS.register("pitdrone_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.PITDRONE, 0x7d4a10, 0x9b9b9b   ,
+                    new Item.Properties()));
+
     public static final RegistryObject<Item> BARNEY_SPAWN_EGG = ITEMS.register("barney_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.BARNEY, 0x5352fa, 0x000000   ,
                     new Item.Properties()));

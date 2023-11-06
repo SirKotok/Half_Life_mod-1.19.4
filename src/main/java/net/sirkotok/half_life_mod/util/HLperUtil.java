@@ -1,7 +1,14 @@
 package net.sirkotok.half_life_mod.util;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Pitdrone;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Shockroach;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -23,9 +30,32 @@ public final class HLperUtil {
     public static boolean issameteam(LivingEntity one, LivingEntity two){
         boolean science_team = (one.getType().is(ModTags.EntityTypes.FACTION_SCIENCE_TEAM) && two.getType().is(ModTags.EntityTypes.FACTION_SCIENCE_TEAM));
         boolean race_x = (one.getType().is(ModTags.EntityTypes.FACTION_RACE_X) && two.getType().is(ModTags.EntityTypes.FACTION_RACE_X));
+        boolean pitdrone_unique = !((one instanceof Pitdrone && two instanceof Shockroach) || (one instanceof Shockroach && two instanceof Pitdrone));
 
-        return science_team || race_x;
+        return (science_team || race_x) && pitdrone_unique;
     }
+
+
+
+
+    private static void maybeDisableShieldFor(int ticks, Player pPlayer, ServerLevel level, float f, ItemStack pPlayerItemStack) {
+        if (!pPlayerItemStack.isEmpty() && pPlayerItemStack.is(Items.SHIELD)) {
+            if (RandomSource.create().nextFloat() < f) {
+                pPlayer.getCooldowns().addCooldown(Items.SHIELD, ticks);
+                level.broadcastEntityEvent(pPlayer, (byte)30);
+                pPlayer.stopUsingItem();
+            }
+        }
+    }
+
+    public static void DisableShieldFor(Entity entity, float chance, int ticks, ServerLevel level) {
+        if (entity instanceof Player && chance>0) {
+            Player player = (Player)entity;
+            maybeDisableShieldFor(ticks, player, level, chance, player.isUsingItem() ? player.getUseItem() : ItemStack.EMPTY);
+        }
+    }
+
+
 
 
 

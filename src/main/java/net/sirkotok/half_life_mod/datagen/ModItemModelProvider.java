@@ -20,7 +20,6 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
 
-       // simpleItem(ModItems.VOLTIGORE_EGG_BLOCK_ITEM);
         simpleItem(ModItems.SECURITY_GUARD_HELMET);
         simpleItem(ModItems.SECURITY_GUARD_HELMET);
         simpleItem(ModItems.SECURITY_GUARD_VEST);
@@ -38,6 +37,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         withExistingParent(ModItems.HEADCRAB_POISON_HL2_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.HEADCRAB_POISON_HLA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.BULLSQUID_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.PITDRONE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.HEADCRAB_FAST_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.HEADCRAB_ZOMBIE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.CHUMTOAD_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));

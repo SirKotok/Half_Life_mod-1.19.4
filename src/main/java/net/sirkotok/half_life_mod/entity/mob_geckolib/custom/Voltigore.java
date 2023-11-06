@@ -38,6 +38,7 @@ import net.sirkotok.half_life_mod.entity.brain.sensor.NearbySecondBlocksSensor;
 import net.sirkotok.half_life_mod.entity.projectile.VoltigoreShock;
 import net.sirkotok.half_life_mod.sound.ModSounds;
 import net.sirkotok.half_life_mod.util.HLperUtil;
+import net.sirkotok.half_life_mod.util.ModTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -211,7 +212,10 @@ public class Voltigore extends HalfLifeMonster implements GeoEntity, SmartBrainO
     public void tick() {
         super.tick();
 
-        if (this.tickCount % 20 == 0) this.refreshDimensions();
+        if (this.tickCount % 20 == 0) {this.refreshDimensions();
+
+
+        }
 
         if (this.tickCount % 100 == 0 && !this.level.isClientSide()) {
             ServerLevel pLevel = (ServerLevel) this.level;
@@ -222,7 +226,24 @@ public class Voltigore extends HalfLifeMonster implements GeoEntity, SmartBrainO
                                 pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj instanceof Voltigore);
             this.setvround(voltigores.size());
 
+            if (BrainUtils.getTargetOfEntity(this) != null) {
+                List<Mob> race_x = EntityRetrievalUtil.getEntities((Level) pLevel,
+                        new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
+                                pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj.getType().is(ModTags.EntityTypes.FACTION_RACE_X));
+                for (Mob x : race_x) {
+                         if (BrainUtils.getTargetOfEntity(x) == null) {
+                         BrainUtils.setTargetOfEntity(x, BrainUtils.getTargetOfEntity(this));
+                    }
+                }
+            }
+
+
+
         }
+
+
+
+
 
 
         if (this.tickCount % 40 == 0) {this.setage(this.getage()+1);}
@@ -384,10 +405,10 @@ public class Voltigore extends HalfLifeMonster implements GeoEntity, SmartBrainO
                 new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, true)).startCondition(entity -> !this.isangry()),
                 new SetWalkTargetToAttackTarget<>().speedMod(1.5f),
                 new FirstApplicableBehaviour<>(
-                        new ConfigurableAnimatableMeleeAttack<Voltigore>(15, 1f * (this.isBB() ? 0 : 1), (this.isBB() ? 0.3f : 1), 2 * (this.isBB() ? 0 : 1), null, 0, this.getBigAttackSound())
+                        new ConfigurableAnimatableMeleeAttack<Voltigore>(15, 1f * (this.isBB() ? 0 : 1), (this.isBB() ? 0.3f : 1), 2 * (this.isBB() ? 0 : 1), null, 0, null, this.getBigAttackSound())
                                 .whenStarting(entity -> triggerAnim("onetime", "bigattack"))
                                 .cooldownFor(entity -> random.nextInt(20, 40)),
-                        new ConfigurableAnimatableMeleeAttack<Voltigore>(10, 0.5f * (this.isBB() ? 0 : 1), (this.isBB() ? 0.3f : 1), (this.isBB() ? 0 : 1), null, 0, this.getRightAttackSound())
+                        new ConfigurableAnimatableMeleeAttack<Voltigore>(10, 0.5f * (this.isBB() ? 0 : 1), (this.isBB() ? 0.3f : 1), (this.isBB() ? 0 : 1), null, 0, null, this.getRightAttackSound())
                                 .whenStarting(entity -> triggerAnim("onetime", "right"))
                                 .cooldownFor(entity -> random.nextInt(15, 25)),
                         new StopAndShoot<Voltigore>(12, 10, 1f).cooldownFor(entity -> random.nextInt(50, 90))
@@ -405,7 +426,7 @@ public class Voltigore extends HalfLifeMonster implements GeoEntity, SmartBrainO
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_33601_, DifficultyInstance p_33602_, MobSpawnType p_33603_, @Nullable SpawnGroupData p_33604_, @Nullable CompoundTag p_33605_) {
         RandomSource randomsource = p_33601_.getRandom();
-        int i = randomsource.nextInt(900, 3600);
+        int i = randomsource.nextInt(300, 3600);
         this.setageup(i);
         return super.finalizeSpawn(p_33601_, p_33602_, p_33603_, p_33604_, p_33605_);
     }

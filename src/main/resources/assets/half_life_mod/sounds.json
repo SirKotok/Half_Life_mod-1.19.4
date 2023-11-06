@@ -17,6 +17,144 @@
       "half_life_mod:he_attack1"
     ]
   },
+  "pit_step_metal": {
+    "subtitle": "sounds.half_life_mod.pit_step_metal",
+    "sounds": [
+      "half_life_mod:pit_step_metal"
+    ]
+  },
+  "pit_drone_melee_attack1": {
+    "subtitle": "sounds.half_life_mod.pit_drone_melee_attack1",
+    "sounds": [
+      "half_life_mod:pit_drone_melee_attack1"
+    ]
+  },
+  "pit_drone_melee_attack2": {
+    "subtitle": "sounds.half_life_mod.pit_drone_melee_attack2",
+    "sounds": [
+      "half_life_mod:pit_drone_melee_attack2"
+    ]
+  },
+  "pit_drone_die1": {
+    "subtitle": "sounds.half_life_mod.pit_drone_die1",
+    "sounds": [
+      "half_life_mod:pit_drone_die1"
+    ]
+  },
+  "pit_drone_die2": {
+    "subtitle": "sounds.half_life_mod.pit_drone_die2",
+    "sounds": [
+      "half_life_mod:pit_drone_die2"
+    ]
+  },
+  "pit_drone_die3": {
+    "subtitle": "sounds.half_life_mod.pit_drone_die3",
+    "sounds": [
+      "half_life_mod:pit_drone_die3"
+    ]
+  },
+  "pit_drone_communicate1": {
+    "subtitle": "sounds.half_life_mod.pit_drone_communicate1",
+    "sounds": [
+      "half_life_mod:pit_drone_communicate1"
+    ]
+  },
+  "pit_drone_communicate2": {
+    "subtitle": "sounds.half_life_mod.pit_drone_communicate2",
+    "sounds": [
+      "half_life_mod:pit_drone_communicate2"
+    ]
+  },
+  "pit_drone_communicate3": {
+    "subtitle": "sounds.half_life_mod.pit_drone_communicate3",
+    "sounds": [
+      "half_life_mod:pit_drone_communicate3"
+    ]
+  },
+  "pit_drone_communicate4": {
+    "subtitle": "sounds.half_life_mod.pit_drone_communicate4",
+    "sounds": [
+      "half_life_mod:pit_drone_communicate4"
+    ]
+  },
+  "pit_drone_idle1": {
+    "subtitle": "sounds.half_life_mod.pit_drone_idle1",
+    "sounds": [
+      "half_life_mod:pit_drone_idle1"
+    ]
+  },
+  "pit_drone_idle2": {
+    "subtitle": "sounds.half_life_mod.pit_drone_idle2",
+    "sounds": [
+      "half_life_mod:pit_drone_idle2"
+    ]
+  },
+  "pit_drone_idle3": {
+    "subtitle": "sounds.half_life_mod.pit_drone_idle3",
+    "sounds": [
+      "half_life_mod:pit_drone_idle3"
+    ]
+  },
+  "pit_drone_idle4": {
+    "subtitle": "sounds.half_life_mod.pit_drone_idle4",
+    "sounds": [
+      "half_life_mod:pit_drone_idle4"
+    ]
+  },
+  "pit_drone_idle5": {
+    "subtitle": "sounds.half_life_mod.pit_drone_idle5",
+    "sounds": [
+      "half_life_mod:pit_drone_idle5"
+    ]
+  },
+  "pit_drone_idle6": {
+    "subtitle": "sounds.half_life_mod.pit_drone_idle6",
+    "sounds": [
+      "half_life_mod:pit_drone_idle6"
+    ]
+  },
+  "pit_drone_pain1": {
+    "subtitle": "sounds.half_life_mod.pit_drone_pain1",
+    "sounds": [
+      "half_life_mod:pit_drone_pain1"
+    ]
+  },
+  "pit_drone_pain2": {
+    "subtitle": "sounds.half_life_mod.pit_drone_pain2",
+    "sounds": [
+      "half_life_mod:pit_drone_pain2"
+    ]
+  },
+  "pit_drone_pain3": {
+    "subtitle": "sounds.half_life_mod.pit_drone_pain3",
+    "sounds": [
+      "half_life_mod:pit_drone_pain3"
+    ]
+  },
+  "pit_drone_pain4": {
+    "subtitle": "sounds.half_life_mod.pit_drone_pain4",
+    "sounds": [
+      "half_life_mod:pit_drone_pain4"
+    ]
+  },
+  "pit_hit": {
+    "subtitle": "sounds.half_life_mod.pit_hit",
+    "sounds": [
+      "half_life_mod:pit_hit"
+    ]
+  },
+  "pit_drone_attack_spike1": {
+    "subtitle": "sounds.half_life_mod.pit_drone_attack_spike1",
+    "sounds": [
+      "half_life_mod:pit_drone_attack_spike1"
+    ]
+  },
+  "pit_drone_attack_spike2": {
+    "subtitle": "sounds.half_life_mod.pit_drone_attack_spike2",
+    "sounds": [
+      "half_life_mod:pit_drone_attack_spike2"
+    ]
+  },
   "voltigore_attack_shock": {
     "subtitle": "sounds.half_life_mod.voltigore_attack_shock",
     "sounds": [

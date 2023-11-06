@@ -14,10 +14,7 @@ import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.ShockWaveEffec
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.VoltigoreProjectileAftereffect;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.*;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
-import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
-import net.sirkotok.half_life_mod.entity.projectile.Bullet;
-import net.sirkotok.half_life_mod.entity.projectile.ShockProjectile;
-import net.sirkotok.half_life_mod.entity.projectile.VoltigoreShock;
+import net.sirkotok.half_life_mod.entity.projectile.*;
 
 
 public class ModEntities {
@@ -98,6 +95,14 @@ public class ModEntities {
                     () -> EntityType.Builder.of(Bullsquid::new, MobCategory.MONSTER)
                             .sized(1f, 1f)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "bullsquid").toString()));
+
+    public static final RegistryObject<EntityType<Pitdrone>> PITDRONE =
+            ENTITY_TYPES.register("pitdrone",
+                    () -> EntityType.Builder.of(Pitdrone::new, MobCategory.MONSTER)
+                            .sized(0.6f, 1f)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "pitdrone").toString()));
+
+
     public static final RegistryObject<EntityType<Barney>> BARNEY =
             ENTITY_TYPES.register("barney",
                     () -> EntityType.Builder.of(Barney::new, MobCategory.MONSTER)
@@ -153,6 +158,17 @@ public class ModEntities {
                                     .clientTrackingRange(20)
                                     .updateInterval(1)
                     .build(new ResourceLocation(HalfLifeMod.MOD_ID, "acid_ball").toString()));
+
+
+    public static final RegistryObject<EntityType<PitdroneSpike>> PITDRONE_SPIKE =
+            ENTITY_TYPES.register("pit_spike",
+                    () -> EntityType.Builder.<PitdroneSpike>of(PitdroneSpike::new, MobCategory.MISC)
+                            .sized(0.25F, 0.25F)
+                            .clientTrackingRange(20)
+                            .updateInterval(1)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "pit_spike").toString()));
+
+
     public static final RegistryObject<EntityType<VoltigoreShock>> VOLTIGORE_SHOCK =
             ENTITY_TYPES.register("voltigore_shock",
                     () -> EntityType.Builder.<VoltigoreShock>of(VoltigoreShock::new, MobCategory.MISC)

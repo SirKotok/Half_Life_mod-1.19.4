@@ -48,7 +48,7 @@ public class VoltigoreEggBlockEntity extends BlockEntity implements GeoBlockEnti
         if (remove>0) remove--;
         if (remove == 0) pLevel.removeBlock(pPos, false);
 
-        if (this.tick % 20 == 0 && this.tick > 200 && OnNest(pLevel, pPos) && (pRandom.nextFloat() < 0.2f)) {
+        if (this.tick % 20 == 0 && this.tick > 200 && (pRandom.nextFloat() < 0.2f)) {
             float i = pRandom.nextFloat();
             if (i > 0.01f) {
                 if (i > 0.6f) pLevel.playSound((Player)null, pPos, SoundEvents.TURTLE_EGG_CRACK, SoundSource.BLOCKS, 0.7F, 0.9F + pRandom.nextFloat() * 0.2F);
@@ -74,13 +74,7 @@ public class VoltigoreEggBlockEntity extends BlockEntity implements GeoBlockEnti
 
     }
 
-    public static boolean OnNest(BlockGetter pLevel, BlockPos pPos) {
-        return IsNest(pLevel, pPos.below());
-    }
 
-    public static boolean IsNest(BlockGetter pReader, BlockPos pPos) {
-        return pReader.getBlockState(pPos).is(ModBlocks.VOLTIGORE_NEST.get());
-    }
 
 
 

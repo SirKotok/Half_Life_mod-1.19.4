@@ -14,14 +14,14 @@ import net.tslat.smartbrainlib.util.BrainUtils;
 
 import java.util.List;
 
-public class StayAndSound<E extends Mob> extends ConditionlessAttack<E> {
+public class BarkAtTarget<E extends Mob> extends ConditionlessAttack<E> {
 
     protected SoundEvent bark;
     protected int tick = 0;
     protected boolean animationed = false;
 
 
-    public StayAndSound(int delayTicks, SoundEvent bark) {
+    public BarkAtTarget(int delayTicks, SoundEvent bark) {
         super(delayTicks);
         this.bark = bark;
     }
@@ -34,7 +34,7 @@ public class StayAndSound<E extends Mob> extends ConditionlessAttack<E> {
 
 
 
-    public StayAndSound<E> SetMaxDistance(int distance) {
+    public BarkAtTarget<E> SetMaxDistance(int distance) {
         this.MaxDistance = distance;
         return this;
     }
