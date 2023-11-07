@@ -3,8 +3,8 @@
   "biomes": "#minecraft:is_overworld",
   "spawners": {
     "type": "half_life_mod:pitdrone",
-    "weight": 12,
-    "minCount": 3,
+    "weight": 7,
+    "minCount": 2,
     "maxCount": 5
   }
 }

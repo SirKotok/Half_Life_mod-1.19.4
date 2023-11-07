@@ -3,7 +3,7 @@
   "biomes": "#minecraft:is_overworld",
   "spawners": {
     "type": "half_life_mod:snarknest",
-    "weight": 50,
+    "weight": 10,
     "minCount": 1,
     "maxCount": 1
   }

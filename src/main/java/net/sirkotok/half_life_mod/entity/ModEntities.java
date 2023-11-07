@@ -134,6 +134,11 @@ public class ModEntities {
                             .sized(2f, 2f)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "vortigore").toString()));
 
+    public static final RegistryObject<EntityType<Shocktrooper>> SHOCKTROOPER =
+            ENTITY_TYPES.register("shocktrooper",
+                    () -> EntityType.Builder.of(Shocktrooper::new, MobCategory.MONSTER)
+                            .sized(0.8f, 2.4f)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "shocktrooper").toString()));
 
 
 

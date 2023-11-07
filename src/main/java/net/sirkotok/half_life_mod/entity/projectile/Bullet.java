@@ -1,5 +1,8 @@
 package net.sirkotok.half_life_mod.entity.projectile;
 
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -12,26 +15,25 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.sirkotok.half_life_mod.entity.ModEntities;
 import net.sirkotok.half_life_mod.entity.base.FireballNoTrail;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Houndeye;
 import net.sirkotok.half_life_mod.item.ModItems;
 import net.sirkotok.half_life_mod.particle.ModParticles;
 import net.sirkotok.half_life_mod.sound.ModSounds;
 
 public class Bullet extends FireballNoTrail {
-
     public Bullet(EntityType<? extends Bullet> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-    //    this.setItem(ModItems.FAKE_BULLET.get().getDefaultInstance());
     }
 
 
     public Bullet(Level pLevel, LivingEntity pShooter) {
         super(ModEntities.BULLET_ONE.get(), pShooter, pLevel);
-
     }
+
     public Bullet(Level pLevel, LivingEntity pShooter, double pOffsetX, double pOffsetY, double pOffsetZ) {
         super(ModEntities.BULLET_ONE.get(), pShooter, pOffsetX, pOffsetY, pOffsetZ, pLevel);
-
     }
+
 
     public Bullet(Level pLevel, double pX, double pY, double pZ, double pOffsetX, double pOffsetY, double pOffsetZ) {
         super(ModEntities.BULLET_ONE.get(), pX, pY, pZ, pOffsetX, pOffsetY, pOffsetZ, pLevel);
@@ -40,6 +42,23 @@ public class Bullet extends FireballNoTrail {
     public ItemStack GetAllwaysItem() {
         return ModItems.FAKE_BULLET.get().getDefaultInstance();
     }
+
+
+
+    public static final EntityDataAccessor<Float> BULLETDAMAGE = SynchedEntityData.defineId(Bullet.class, EntityDataSerializers.FLOAT);
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(BULLETDAMAGE, 3.5f);
+    }
+
+
+    public void setdamage(float i){
+        this.entityData.set(BULLETDAMAGE, i);
+    }
+    public float getdamage(){
+        return entityData.get(BULLETDAMAGE);
+    }
+
 
 
 
@@ -57,9 +76,7 @@ public class Bullet extends FireballNoTrail {
         return ModSounds.HEADCRAB_1_DIE_1.get();
     }
 
-    public float getDamageEmount(){
-        return 3.5f;
-    }
+
 
     protected void onHitEntity(EntityHitResult pResult) {
         super.onHitEntity(pResult);
@@ -68,7 +85,7 @@ public class Bullet extends FireballNoTrail {
             Entity entity1 = this.getOwner();
             if (entity1 instanceof LivingEntity) {
                 LivingEntity shooter = (LivingEntity) entity1;
-                entity.hurt(this.damageSources().mobProjectile(this, shooter), getDamageEmount());
+                entity.hurt(this.damageSources().mobProjectile(this, shooter), getdamage());
             }
         }
     }

@@ -59,6 +59,9 @@ public class ModItems {
            () -> new VortigoreSpawnEggItem(ModEntities.VOLTIGORE, 0xf15100, 0xf100cd   ,
                    new Item.Properties()));
 
+    public static final RegistryObject<Item> SHOCKTROOPER_SPAWN_EGG = ITEMS.register("shocktrooper_spawn_egg",
+            () -> new VortigoreSpawnEggItem(ModEntities.SHOCKTROOPER, 0x9fae9c, 0x0bf3eb,
+                    new Item.Properties()));
 
 
 

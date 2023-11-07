@@ -53,6 +53,10 @@ public class Pistol_1_Item extends GunItem implements GeoItem {
         return 20;
     }
 
+    @Override
+    public float getgundamage() {
+        return 3.5f;
+    }
 
     @Override
     public InteractionResultHolder<ItemStack> Reload(Level pLevel, Player pPlayer, InteractionHand pHand) {

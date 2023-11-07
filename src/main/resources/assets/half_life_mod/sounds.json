@@ -143,6 +143,144 @@
       "half_life_mod:pit_hit"
     ]
   },
+  "st_alien_spotted": {
+    "subtitle": "sounds.half_life_mod.st_alien_spotted",
+    "sounds": [
+      "half_life_mod:st_alien_spotted"
+    ]
+  },
+  "st_idle_answer": {
+    "subtitle": "sounds.half_life_mod.st_idle_answer",
+    "sounds": [
+      "half_life_mod:st_idle_answer"
+    ]
+  },
+  "st_idle_check_in": {
+    "subtitle": "sounds.half_life_mod.st_idle_check_in",
+    "sounds": [
+      "half_life_mod:st_idle_check_in"
+    ]
+  },
+  "st_idle": {
+    "subtitle": "sounds.half_life_mod.st_idle",
+    "sounds": [
+      "half_life_mod:st_idle"
+    ]
+  },
+  "st_charging_enemy_position": {
+    "subtitle": "sounds.half_life_mod.st_charging_enemy_position",
+    "sounds": [
+      "half_life_mod:st_charging_enemy_position"
+    ]
+  },
+  "st_idle_question": {
+    "subtitle": "sounds.half_life_mod.st_idle_question",
+    "sounds": [
+      "half_life_mod:st_idle_question"
+    ]
+  },
+  "st_nade_warning": {
+    "subtitle": "sounds.half_life_mod.st_nade_warning",
+    "sounds": [
+      "half_life_mod:st_nade_warning"
+    ]
+  },
+  "st_throwing": {
+    "subtitle": "sounds.half_life_mod.st_throwing",
+    "sounds": [
+      "half_life_mod:st_throwing"
+    ]
+  },
+  "st_taunt": {
+    "subtitle": "sounds.half_life_mod.st_taunt",
+    "sounds": [
+      "half_life_mod:st_taunt"
+    ]
+  },
+  "st_player_spot_1": {
+    "subtitle": "sounds.half_life_mod.st_player_spot_1",
+    "sounds": [
+      "half_life_mod:st_player_spot_1"
+    ]
+  },
+  "st_player_spotted_2": {
+    "subtitle": "sounds.half_life_mod.st_player_spotted_2",
+    "sounds": [
+      "half_life_mod:st_player_spotted_2"
+    ]
+  },
+  "st_player_spotted_3": {
+    "subtitle": "sounds.half_life_mod.st_player_spotted_3",
+    "sounds": [
+      "half_life_mod:st_player_spotted_3"
+    ]
+  },
+  "shock_trooper_attack": {
+    "subtitle": "sounds.half_life_mod.shock_trooper_attack",
+    "sounds": [
+      "half_life_mod:shock_trooper_attack"
+    ]
+  },
+  "shock_trooper_die1": {
+    "subtitle": "sounds.half_life_mod.shock_trooper_die1",
+    "sounds": [
+      "half_life_mod:shock_trooper_die1"
+    ]
+  },
+  "shock_trooper_die2": {
+    "subtitle": "sounds.half_life_mod.shock_trooper_die2",
+    "sounds": [
+      "half_life_mod:shock_trooper_die2"
+    ]
+  },
+  "shock_trooper_die3": {
+    "subtitle": "sounds.half_life_mod.shock_trooper_die3",
+    "sounds": [
+      "half_life_mod:shock_trooper_die3"
+    ]
+  },
+  "shock_trooper_die4": {
+    "subtitle": "sounds.half_life_mod.shock_trooper_die4",
+    "sounds": [
+      "half_life_mod:shock_trooper_die4"
+    ]
+  },
+  "shock_trooper_pain1": {
+    "subtitle": "sounds.half_life_mod.shock_trooper_pain1",
+    "sounds": [
+      "half_life_mod:shock_trooper_pain1"
+    ]
+  },
+  "st_idle_clear_response": {
+    "subtitle": "sounds.half_life_mod.st_idle_clear_response",
+    "sounds": [
+      "half_life_mod:st_idle_clear_response"
+    ]
+  },
+  "shock_trooper_pain2": {
+    "subtitle": "sounds.half_life_mod.shock_trooper_pain2",
+    "sounds": [
+      "half_life_mod:shock_trooper_pain2"
+    ]
+  },
+  "shock_trooper_pain3": {
+    "subtitle": "sounds.half_life_mod.shock_trooper_pain3",
+    "sounds": [
+      "half_life_mod:shock_trooper_pain3"
+    ]
+  },
+  "shock_trooper_pain4": {
+    "subtitle": "sounds.half_life_mod.shock_trooper_pain4",
+    "sounds": [
+      "half_life_mod:shock_trooper_pain4"
+    ]
+  },
+  "shock_trooper_pain5": {
+    "subtitle": "sounds.half_life_mod.shock_trooper_pain5",
+    "sounds": [
+      "half_life_mod:shock_trooper_pain5"
+    ]
+  },
   "pit_drone_attack_spike1": {
     "subtitle": "sounds.half_life_mod.pit_drone_attack_spike1",
     "sounds": [

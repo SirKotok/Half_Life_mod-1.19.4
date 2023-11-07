@@ -117,6 +117,9 @@ public class GunItem extends Item {
     public int getReloadCooldown(){
         return 20;
     }
+    public float getgundamage(){
+        return 3.5f;
+    }
 
 
     public void award(Player pPlayer) {
@@ -164,7 +167,7 @@ public class GunItem extends Item {
             pPlayer.level.gameEvent(pPlayer, GameEvent.PROJECTILE_SHOOT, pPlayer.blockPosition());
             SetCooldow(itemstack, getRightClickCooldown());
             Bullet snowball = new Bullet(pLevel, pPlayer);
-            snowball.setItem(itemstack);
+            snowball.setdamage(this.getgundamage());
             snowball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 4F, 6.0F);
             pLevel.addFreshEntity(snowball);
         }
@@ -179,6 +182,8 @@ public class GunItem extends Item {
     }
 
 
+
+
     @Override
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
         return super.shouldCauseReequipAnimation(oldStack, newStack, slotChanged) && slotChanged;
@@ -190,6 +195,7 @@ public class GunItem extends Item {
             pPlayer.level.gameEvent(pPlayer, GameEvent.PROJECTILE_SHOOT, pPlayer.blockPosition());
            SetCooldow(itemstack, getLeftClickCooldown());
            Bullet snowball = new Bullet(pLevel, pPlayer);
+            snowball.setdamage(this.getgundamage());
           snowball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 4F, 1.0F);
             pLevel.addFreshEntity(snowball);
       }

@@ -64,6 +64,54 @@ public class ModSounds {
             registerSoundEvent("pit_hit");
 
 
+    //Shocktrooper sounds
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_ENEMY_SPOT =
+            registerSoundEvent("st_alien_spotted");
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_IDLE_A =
+            registerSoundEvent("st_idle_answer");
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_IDLE_CHECK_IN =
+            registerSoundEvent("st_idle_check_in");
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_IDLE =
+            registerSoundEvent("st_idle");
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_CHARGE =
+            registerSoundEvent("st_charging_enemy_position");
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_IDLE_Q =
+            registerSoundEvent("st_idle_question");
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_WARN_NADE =
+            registerSoundEvent("st_nade_warning");
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_THROW =
+            registerSoundEvent("st_throwing");
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_TAUNT =
+            registerSoundEvent("st_taunt");
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_PL_SPOT3 =
+            registerSoundEvent("st_player_spot_1");
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_PL_SPOT2 =
+            registerSoundEvent("st_player_spotted_2");
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_PL_SPOT1 =
+            registerSoundEvent("st_player_spotted_3");
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_ATTACK =
+            registerSoundEvent("shock_trooper_attack");
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_DIE1 =
+            registerSoundEvent("shock_trooper_die1");
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_DIE2 =
+            registerSoundEvent("shock_trooper_die2");
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_DIE3 =
+            registerSoundEvent("shock_trooper_die3");
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_DIE4 =
+            registerSoundEvent("shock_trooper_die4");
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_PAIN4 =
+            registerSoundEvent("shock_trooper_pain1");
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_PAIN3 =
+            registerSoundEvent("shock_trooper_pain2");
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_PAIN2 =
+            registerSoundEvent("shock_trooper_pain3");
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_PAIN5 =
+            registerSoundEvent("shock_trooper_pain4");
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_PAIN1 =
+            registerSoundEvent("shock_trooper_pain5");
+    public static final RegistryObject<SoundEvent> SHOCKTROOPER_IDLE_CLEAR =
+            registerSoundEvent("st_idle_clear_response");
+
 
 
 

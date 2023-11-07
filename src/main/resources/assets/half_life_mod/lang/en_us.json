@@ -63,6 +63,32 @@
 
 
 
+
+    "sounds.half_life_mod.st_alien_spotted": "Shocktrooper spots enemy",
+    "sounds.half_life_mod.st_idle_answer": "Shocktrooper answers",
+    "sounds.half_life_mod.st_idle_check_in": "Shocktrooper questions",
+    "sounds.half_life_mod.st_idle": "Shocktrooper sounds",
+    "sounds.half_life_mod.st_charging_enemy_position": "Shocktrooper charges",
+    "sounds.half_life_mod.st_idle_question": "Shocktrooper questions",
+    "sounds.half_life_mod.st_nade_warning": "Shocktrooper spots a granade",
+    "sounds.half_life_mod.st_clear_response": "Shocktrooper is clear",
+    "sounds.half_life_mod.st_throwing": "Shocktrooper throws spores",
+    "sounds.half_life_mod.st_taunt": "Shocktrooper taunts",
+    "sounds.half_life_mod.st_player_spot_1": "Shocktrooper spots player",
+    "sounds.half_life_mod.st_player_spotted_2": "Shocktrooper spots player",
+    "sounds.half_life_mod.st_player_spotted_3": "Shocktrooper spots player",
+    "sounds.half_life_mod.shock_trooper_attack": "Shocktrooper attacks",
+    "sounds.half_life_mod.shock_trooper_die1": "Shocktrooper dies",
+    "sounds.half_life_mod.shock_trooper_die2": "Shocktrooper dies",
+    "sounds.half_life_mod.shock_trooper_die3": "Shocktrooper dies",
+    "sounds.half_life_mod.shock_trooper_die4": "Shocktrooper dies",
+    "sounds.half_life_mod.shock_trooper_pain1": "Shocktrooper hurts",
+    "sounds.half_life_mod.shock_trooper_pain2": "Shocktrooper hurts",
+    "sounds.half_life_mod.shock_trooper_pain3": "Shocktrooper hurts",
+    "sounds.half_life_mod.shock_trooper_pain4": "Shocktrooper hurts",
+    "sounds.half_life_mod.shock_trooper_pain5": "Shocktrooper hurts",
+
+
     "sounds.half_life_mod.pit_hit": "Spike hits",
     "sounds.half_life_mod.pit_step_metal": "Pitdrone Steps",
     "sounds.half_life_mod.pit_drone_melee_attack1": "Pitdrone Attacks",

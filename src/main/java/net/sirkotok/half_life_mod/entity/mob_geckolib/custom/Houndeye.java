@@ -282,7 +282,7 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
                     dog.removeDogfromDogs(this);
                 }
 
-            } else if (RandomSource.create().nextFloat() < 0.0007f) this.triggerAnim("blink", "blink");
+            } else if (RandomSource.create().nextFloat() < 0.002f) this.triggerAnim("blink", "blink");
 
 
 
