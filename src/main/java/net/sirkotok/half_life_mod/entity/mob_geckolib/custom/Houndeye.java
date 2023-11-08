@@ -30,6 +30,7 @@ import net.minecraft.world.phys.AABB;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
+import net.sirkotok.half_life_mod.entity.modinterface.HasLeaderMob;
 import net.sirkotok.half_life_mod.sound.ModSounds;
 import net.sirkotok.half_life_mod.util.ModTags;
 import net.sirkotok.half_life_mod.util.HLperUtil;
@@ -68,7 +69,7 @@ import java.util.List;
 import java.util.UUID;
 
 
-public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOwner<Houndeye> {
+public class Houndeye extends HalfLifeMonster implements GeoEntity, HasLeaderMob<Houndeye>, SmartBrainOwner<Houndeye> {
 
 
 
@@ -529,7 +530,7 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
                         new HoundeyeCuriocityBehaviour<>(),
                         new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>()),
-                        new HoundeyeFollowLeaderBehaviour<>().startCondition(entity -> (this.getLeader() != null) && (this.distanceTo(this.getLeader()) > 4)),
+                        new FollowLeaderBehaviour<Houndeye>().startCondition(entity -> (this.getLeader() != null) && (this.distanceTo(this.getLeader()) > 4)),
                 new OneRandomBehaviour<>(
                         new SetBlockToWalkTarget<>().cooldownFor(entity -> 200),
                         new HoundeyeSleepingBehaviour<>().startCondition(entity -> this.isleader() && RandomSource.create().nextFloat() < 0.01).cooldownFor(entity -> 800),
@@ -545,8 +546,8 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>(),
                 new Retaliate<>(),
-                new CustomBehaviour<>(entity -> playSound(this.getAlertSound())).startCondition(entity -> !this.isangry() && this.isleader()),
-                new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, true)).startCondition(entity -> !this.isangry()),
+                new CustomBehaviour<Houndeye>(entity -> playSound(this.getAlertSound())).startCondition(entity -> !this.isangry() && this.isleader()),
+                new CustomBehaviour<Houndeye>(entity -> this.entityData.set(IS_ANGRY, true)).startCondition(entity -> !this.isangry()),
                 new OneRandomBehaviour<>(
                         new SetWalkTargetToAttackTargetIfNoWalkTarget<>().speedMod(1.32f),
                         new SetWalkTargetToAttackTargetIfNoWalkTarget<>().speedMod(1.27f),
@@ -554,11 +555,11 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
                         new SetWalkTargetToRandomSpotAroundAttackTarget<>().radius(5, 2).speedMod(1.30f),
                         new SetWalkTargetToRandomSpotAroundAttackTarget<>().radius(5, 2).speedMod(1.25f),
                         new SetRandomWalkTarget<>().setRadius(7, 5).speedModifier(1.25f),
-                        new HoundeyeFollowLeaderBehaviour<>().startCondition(entity -> !this.isleader())
+                        new FollowLeaderBehaviour<Houndeye>().startCondition(entity -> !this.isleader())
                 ),
                 new OneRandomBehaviour<>(
-                        new CustomBehaviour<>(entity -> this.jumpback()).startCondition(entity -> this.getTarget() != null && this.distanceTo(this.getTarget()) < 3.2 && RandomSource.create().nextInt(30) == 10).whenStarting(entity -> this.triggerAnim("long", "jump")).cooldownFor(entity -> 450 + RandomSource.create().nextInt(500)),
-                        new BarkAtTarget<>(40, this.getBarkSound()).whenStarting(entity -> this.triggerAnim("long", "bark")).cooldownFor(entity -> 90),
+                        new CustomBehaviour<Houndeye>(entity -> this.jumpback()).startCondition(entity -> this.getTarget() != null && this.distanceTo(this.getTarget()) < 3.2 && RandomSource.create().nextInt(30) == 10).whenStarting(entity -> this.triggerAnim("long", "jump")).cooldownFor(entity -> 450 + RandomSource.create().nextInt(500)),
+                        new BarkAtTarget<Houndeye>(40, this.getBarkSound()).whenStarting(entity -> this.triggerAnim("long", "bark")).cooldownFor(entity -> 90),
                         new Houndeyeattackbehavior<>(25, this.getBlastSound(), this.getBuildupSound()).cooldownFor(entity -> 60 + RandomSource.create().nextInt(60))
                    ));
 
@@ -633,5 +634,9 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, SmartBrainOw
      //   this.setCustomName(Component.literal(this.getUUID().toString()));
         return super.finalizeSpawn(p_33601_, p_33602_, p_33603_, p_33604_, p_33605_);
     }
+
+
+
+
 
 }

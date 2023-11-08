@@ -29,7 +29,12 @@ public class ShocktrooperRenderer extends GeoEntityRenderer<Shocktrooper> {
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 
-
+    @Override
+    public void preRender(PoseStack poseStack, Shocktrooper animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue,
+                          float alpha) {
+        this.entityRenderTranslations = new Matrix4f(poseStack.last().pose());
+        scaleModelForRender(0.9f, 0.9f, poseStack, animatable, model, isReRender, partialTick, packedLight, packedOverlay);
+    }
 
 }
 
