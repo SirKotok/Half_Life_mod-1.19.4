@@ -164,6 +164,14 @@ public class ModEntities {
                                     .updateInterval(1)
                     .build(new ResourceLocation(HalfLifeMod.MOD_ID, "acid_ball").toString()));
 
+    public static final RegistryObject<EntityType<SporeShot>> SPORESHOT =
+            ENTITY_TYPES.register("spore_shot",
+                    () -> EntityType.Builder.<SporeShot>of(SporeShot::new, MobCategory.MISC)
+                            .sized(0.3F, 0.3F)
+                            .clientTrackingRange(20)
+                            .updateInterval(1)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "spore_shot").toString()));
+
 
     public static final RegistryObject<EntityType<PitdroneSpike>> PITDRONE_SPIKE =
             ENTITY_TYPES.register("pit_spike",

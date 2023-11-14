@@ -76,7 +76,7 @@ import java.util.UUID;
 
 
 public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, HasLeaderMob<Shocktrooper>, GeoEntity, SmartBrainOwner<Shocktrooper> {
-
+    //TODO: implement the spore launcher projectile thing so it works. Fix the position of the shooting from the shockroach.
     @Override
     protected float getSoundVolume() {
         return 0.5f;

@@ -1,6 +1,7 @@
 package net.sirkotok.half_life_mod;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 
 
@@ -66,6 +67,13 @@ public class HalfLifeMod
     {
         if(event.getTab().equals(ModCreativeModeTabs.HALF_LIFE_SPAWN_EGGS)) {
             //  spawn eggs
+
+            // This is here for more easy structure building in the future
+          //  event.accept(Blocks.STRUCTURE_VOID);
+         //   event.accept(Blocks.STRUCTURE_BLOCK);
+         //   event.accept(Blocks.JIGSAW);
+
+
             event.accept(ModItems.HEADCRAB_ONE_SPAWN_EGG);
             event.accept(ModItems.HEADCRAB_TWO_SPAWN_EGG);
             event.accept(ModItems.HEADCRAB_FAST_SPAWN_EGG);

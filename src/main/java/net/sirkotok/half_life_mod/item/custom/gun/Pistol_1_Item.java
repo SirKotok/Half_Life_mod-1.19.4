@@ -11,7 +11,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.sirkotok.half_life_mod.entity.projectile.Bullet;
+import net.sirkotok.half_life_mod.entity.projectile.SporeShot;
 import net.sirkotok.half_life_mod.item.client.renderer.ChumtoadItemRenderer;
 import net.sirkotok.half_life_mod.item.client.renderer.Pistol_1_ItemRenderer;
 import net.sirkotok.half_life_mod.sound.ModSounds;
@@ -138,6 +141,19 @@ public class Pistol_1_Item extends GunItem implements GeoItem {
         });
     }
 
-
+ /*
+    @Override
+    public void shootleft(Level pLevel, Player pPlayer, InteractionHand pHand) {
+        ItemStack itemstack = pPlayer.getItemInHand(pHand);
+        if (!pLevel.isClientSide) {
+            pPlayer.level.gameEvent(pPlayer, GameEvent.PROJECTILE_SHOOT, pPlayer.blockPosition());
+            SetCooldow(itemstack, getLeftClickCooldown());
+            SporeShot snowball = new SporeShot(pLevel, pPlayer);
+            snowball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1F, 1.0F);
+            pLevel.addFreshEntity(snowball);
+        }
+        award(pPlayer);
+        if (!pPlayer.getAbilities().instabuild) SetAmmo(itemstack, GetAmmo(itemstack)-1);
+    } */
 
 }

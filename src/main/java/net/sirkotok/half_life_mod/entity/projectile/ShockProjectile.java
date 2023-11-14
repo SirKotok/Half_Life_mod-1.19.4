@@ -66,7 +66,6 @@ public class ShockProjectile extends FireballNoTrail {
     public void makeParticle(int direction, BlockHitResult blockhit) {
             switch(direction){
                 case 0:  this.getLevel().addAlwaysVisibleParticle(ModParticles.SHOCK_IMPACT.get(), blockhit.getLocation().x(), blockhit.getLocation().y()-0.01f, blockhit.getLocation().z(), direction, 0, 0);
-
                 break;
                 case 1: this.getLevel().addAlwaysVisibleParticle(ModParticles.SHOCK_IMPACT.get(), blockhit.getLocation().x(), blockhit.getLocation().y()+0.01f, blockhit.getLocation().z(), direction, 0, 0);
                     break;

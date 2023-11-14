@@ -143,7 +143,8 @@ public class VoltigoreShock extends FireballNoTrail implements GeoEntity {
             for (LivingEntity entity : targets) {
             HLperUtil.DisableShieldFor(entity, 0.1f, 20, serverlevel);
             entity.hurt(this.damageSources().mobProjectile(this, (LivingEntity) entity1 ), 5f); }
-        }}}
+        }}
+        }
 
         this.discard();
     }
