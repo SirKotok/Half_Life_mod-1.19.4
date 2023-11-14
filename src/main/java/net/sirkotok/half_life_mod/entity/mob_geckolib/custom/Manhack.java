@@ -31,6 +31,7 @@ import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fluids.FluidType;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
@@ -67,6 +68,7 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
+import software.bernie.shadowed.eliotlash.mclib.math.functions.classic.Pi;
 
 import java.util.List;
 
@@ -97,15 +99,84 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
 
 
     public static final EntityDataAccessor<Integer> CAN_CONTROL_TIMESTAMP = SynchedEntityData.defineId(Manhack.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> TILTDIRECTION = SynchedEntityData.defineId(Manhack.class, EntityDataSerializers.INT);
+
+    // 0
+
+    public static final EntityDataAccessor<Boolean> ISOPEN = SynchedEntityData.defineId(Manhack.class, EntityDataSerializers.BOOLEAN);
     protected void defineSynchedData() {
         super.defineSynchedData();
+        this.entityData.define(ISOPEN, false);
         this.entityData.define(CAN_CONTROL_TIMESTAMP, 0);
+        this.entityData.define(TILTDIRECTION, 0);
     }
 
 
+    public boolean getOpen(){
+        return this.entityData.get(ISOPEN);
+    }
+    public void setOpen(boolean b){
+        this.entityData.set(ISOPEN, b);
+    }
+    public int getTilt(){
+        return this.entityData.get(TILTDIRECTION);
+    }
+    public void setTilt(int tilt){
+        this.entityData.set(TILTDIRECTION, tilt);
+    }
+
+
+
+
+
+    @Override
+    public void tick() {
+        super.tick();
+        LivingEntity entity = this.getTarget();
+        if (entity != null) {
+            float f = this.distanceTo(entity);
+            if (f < 3.8 && !this.getOpen()) {
+                this.setOpen(true);
+                this.playSound(ModSounds.MANHACK_BLADE_SNICK.get());
+            }
+            if (f > 4.2 && this.getOpen()) {
+                this.setOpen(false);
+                this.playSound(ModSounds.MANHACK_BLADE_SNICK.get());
+            }
+        }
+
+    /*
+        Vec3 vec31 = this.getLookAngle();
+        this.setYBodyRot((float) Math.atan2(vec31.x, vec31.z));
+
+
+        if (this.tickCount % 10 == 0) {
+            int t = 0;
+            if (this.getDeltaMovement().length() > 2f) {
+            Vec3 vec3 = this.getDeltaMovement().normalize();
+            Vec2 vec2 = this.getRotationVector();
+            double rotb = (Math.atan2(vec2.x, vec2.y));
+            double rotm = (Math.atan2(vec3.x, vec3.z));  //+ Math.PI /2
+            double d = rotm - rotb;
+            if (d < 0) d += 2 * Math.PI;
+            if (d >= 0 && d <= Math.PI / 8) t = 1;
+            if (d > Math.PI / 8 && d <= 3 * Math.PI / 8) t = 2;
+            if (d > 3 * Math.PI / 8 && d <= 5 * Math.PI / 8) t = 3;
+            if (d > 5 * Math.PI / 8 && d <= 7 * Math.PI / 8) t = 4;
+            if (d > 7 * Math.PI / 8 && d <= 9 * Math.PI / 8) t = 5;
+            if (d > 9 * Math.PI / 8 && d <= 11 * Math.PI / 8) t = 6;
+            if (d > 11 * Math.PI / 8 && d <= 13 * Math.PI / 8) t = 7;
+            if (d > 13 * Math.PI / 8 && d <= 15 * Math.PI / 8) t = 8;
+            if (d > 15 * Math.PI / 8 && d <= 16 * Math.PI / 8) t = 1;
+            }
+            this.setTilt(t);
+        } */
+
+    }
+
     public boolean cancontrol(){
         boolean flag1 = this.tickCount < 50;
-        boolean flag2 = (this.tickCount - this.entityData.get(CAN_CONTROL_TIMESTAMP) > 50);
+        boolean flag2 = (this.tickCount - this.entityData.get(CAN_CONTROL_TIMESTAMP) > 40);
         return flag1 || flag2;
     }
 
@@ -145,12 +216,25 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
         return i;
     }
 
+    public void ricochete(float a) {
+        int i = random.nextFloat() < 0.5f ? 1 : -1;
+        int j = random.nextFloat() < 0.5f ? 1 : -1;
+        int k = random.nextFloat() < 0.5f ? 1 : -1;
+        this.setDeltaMovement(i*2*random.nextFloat()*a, j*2*random.nextFloat()*a, k*2*random.nextFloat()*a);
+        this.setcontroltimestamp();
+    }
 
 
 
     @Override
     public void aiStep() {
         super.aiStep();
+
+        if (!this.level.isClientSide) {
+        if ((horizontalCollision || verticalCollision) && this.tickCount % 20 == 0) {
+            this.playSound(getGrindSound(), getSoundVolume(), getVoicePitch());
+            this.ricochete(random.nextFloat()*random.nextFloat());
+        }
 
         if (this.tickCount % 4 == 0) {
             int m = random.nextFloat() < 0.5f ? 1 : -1;
@@ -163,13 +247,10 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
             if (entity instanceof LivingEntity living) {
                 this.doHurtTarget(living);
                 this.playSound(getGrindFleshSound(), getSoundVolume(), getVoicePitch());
-                int i = random.nextFloat() < 0.5f ? 1 : -1;
-                int j = random.nextFloat() < 0.5f ? 1 : -1;
-                int k = random.nextFloat() < 0.5f ? 1 : -1;
-                this.setDeltaMovement(i*2*random.nextFloat(), j*2*random.nextFloat(), k*2*random.nextFloat());
-                this.setcontroltimestamp();
+                this.ricochete(1);
             }
         }
+    }
     }
     }
 
@@ -331,26 +412,66 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
 
 
-    //    controllerRegistrar.add(new AnimationController<>(this, "direction", 0, this::predicate));
+   //     controllerRegistrar.add(new AnimationController<>(this, "direction", 0, this::predicate));
         controllerRegistrar.add(new AnimationController<>(this, "spin", 0, this::allways));
-
+        controllerRegistrar.add(new AnimationController<>(this, "open", 0, this::opencontrol));
         controllerRegistrar.add(new AnimationController<>(this, "die", state -> PlayState.STOP)
                 .triggerableAnim("die", RawAnimation.begin().then("animation.manhack.die", Animation.LoopType.PLAY_ONCE)));
 
 
     }
 
+    private <T extends GeoAnimatable> PlayState opencontrol(AnimationState<T> tAnimationState) {
+        if (this.getOpen()) {
+            tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.open", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+        tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.close", Animation.LoopType.LOOP));
+        return PlayState.CONTINUE;
+
+    }
 
 
-  //  private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
-//
-  // }
+  /*  private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
+        int i = this.getTilt();
+        switch(i){
+            case 0:
+                tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.rotstraight", Animation.LoopType.LOOP));
+                return PlayState.CONTINUE;
+            case 1:
+                tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.rotforward", Animation.LoopType.LOOP));
+                return PlayState.CONTINUE;
+            case 2:
+                tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.rotfs1", Animation.LoopType.LOOP));
+                return PlayState.CONTINUE;
+            case 3:
+                tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.rotside1", Animation.LoopType.LOOP));
+                return PlayState.CONTINUE;
+            case 4:
+                tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.rotbs1", Animation.LoopType.LOOP));
+                return PlayState.CONTINUE;
+            case 5:
+                tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.rotback", Animation.LoopType.LOOP));
+                return PlayState.CONTINUE;
+            case 6:
+                tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.rotbs2", Animation.LoopType.LOOP));
+                return PlayState.CONTINUE;
+            case 7:
+                tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.rotside2", Animation.LoopType.LOOP));
+                return PlayState.CONTINUE;
+            case 8:
+                tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.rotfs2", Animation.LoopType.LOOP));
+                return PlayState.CONTINUE;
+        }
+
+        tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.rotstraight", Animation.LoopType.LOOP));
+        return PlayState.CONTINUE;
+  } */
 
 
     private <T extends GeoAnimatable> PlayState allways(AnimationState<T> tAnimationState) {
         tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.spin", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
-
     }
 
 

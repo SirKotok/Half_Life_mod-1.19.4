@@ -39,7 +39,8 @@ public class ModSounds {
             registerSoundEvent("mh_gf2");
     public static final RegistryObject<SoundEvent> MANHACK_GRIND_FLESH_3 =
             registerSoundEvent("mh_gf3");
-
+    public static final RegistryObject<SoundEvent> MANHACK_BLADE_SNICK =
+            registerSoundEvent("mh_blade_snick1");
 
 
 

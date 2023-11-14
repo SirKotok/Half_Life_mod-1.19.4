@@ -59,6 +59,12 @@
       "half_life_mod:mh_g5"
     ]
   },
+  "mh_blade_snick1": {
+    "subtitle": "sounds.half_life_mod.mh_blade_snick1",
+    "sounds": [
+      "half_life_mod:mh_blade_snick1"
+    ]
+  },
   "mh_gf1": {
     "subtitle": "sounds.half_life_mod.mh_gf1",
     "sounds": [
