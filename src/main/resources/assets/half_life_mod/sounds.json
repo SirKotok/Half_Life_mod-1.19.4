@@ -11,6 +11,72 @@
       "half_life_mod:pistol_reload"
     ]
   },
+  "mh_die": {
+    "subtitle": "sounds.half_life_mod.mh_die",
+    "sounds": [
+      "half_life_mod:mh_die"
+    ]
+  },
+  "mh_loop1": {
+    "subtitle": "sounds.half_life_mod.mh_loop1",
+    "sounds": [
+      "half_life_mod:mh_loop1"
+    ]
+  },
+  "mh_loop2": {
+    "subtitle": "sounds.half_life_mod.mh_loop2",
+    "sounds": [
+      "half_life_mod:mh_loop2"
+    ]
+  },
+  "mh_g1": {
+    "subtitle": "sounds.half_life_mod.mh_g1",
+    "sounds": [
+      "half_life_mod:mh_g1"
+    ]
+  },
+  "mh_g2": {
+    "subtitle": "sounds.half_life_mod.mh_g2",
+    "sounds": [
+      "half_life_mod:mh_g2"
+    ]
+  },
+  "mh_g3": {
+    "subtitle": "sounds.half_life_mod.mh_g3",
+    "sounds": [
+      "half_life_mod:mh_g3"
+    ]
+  },
+  "mh_g4": {
+    "subtitle": "sounds.half_life_mod.mh_g4",
+    "sounds": [
+      "half_life_mod:mh_g4"
+    ]
+  },
+  "mh_g5": {
+    "subtitle": "sounds.half_life_mod.mh_g5",
+    "sounds": [
+      "half_life_mod:mh_g5"
+    ]
+  },
+  "mh_gf1": {
+    "subtitle": "sounds.half_life_mod.mh_gf1",
+    "sounds": [
+      "half_life_mod:mh_gf1"
+    ]
+  },
+  "mh_gf2": {
+    "subtitle": "sounds.half_life_mod.mh_gf2",
+    "sounds": [
+      "half_life_mod:mh_gf2"
+    ]
+  },
+  "mh_gf3": {
+    "subtitle": "sounds.half_life_mod.mh_gf3",
+    "sounds": [
+      "half_life_mod:mh_gf3"
+    ]
+  },
   "he_attack1": {
     "subtitle": "sounds.half_life_mod.he_attack1",
     "sounds": [

@@ -48,7 +48,7 @@ public class ModTags {
 
         public static final TagKey<EntityType<?>> FACTION_RACE_X = tag("race_x");
         public static final TagKey<EntityType<?>> FACTION_SCIENCE_TEAM = tag("science_team");
-
+        public static final TagKey<EntityType<?>> FACTION_COMBINE = tag("combine");
 
 
 

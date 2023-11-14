@@ -15,6 +15,37 @@ public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 
+    //Manhack
+
+    public static final RegistryObject<SoundEvent> MANHACK_DIES =
+            registerSoundEvent("mh_die");
+    public static final RegistryObject<SoundEvent> MANHACK_LOOP1 =
+            registerSoundEvent("mh_loop1");
+    public static final RegistryObject<SoundEvent> MANHACK_LOOP2 =
+            registerSoundEvent("mh_loop2");
+    public static final RegistryObject<SoundEvent> MANHACK_GRIND1 =
+            registerSoundEvent("mh_g1");
+    public static final RegistryObject<SoundEvent> MANHACK_GRIND2 =
+            registerSoundEvent("mh_g2");
+    public static final RegistryObject<SoundEvent> MANHACK_GRIND3 =
+            registerSoundEvent("mh_g3");
+    public static final RegistryObject<SoundEvent> MANHACK_GRIND4 =
+            registerSoundEvent("mh_g4");
+    public static final RegistryObject<SoundEvent> MANHACK_GRIND5 =
+            registerSoundEvent("mh_g5");
+    public static final RegistryObject<SoundEvent> MANHACK_GRIND_FLESH_1 =
+            registerSoundEvent("mh_gf1");
+    public static final RegistryObject<SoundEvent> MANHACK_GRIND_FLESH_2 =
+            registerSoundEvent("mh_gf2");
+    public static final RegistryObject<SoundEvent> MANHACK_GRIND_FLESH_3 =
+            registerSoundEvent("mh_gf3");
+
+
+
+
+
+
+
     //PitDrone sounds
     public static final RegistryObject<SoundEvent> PITDRONE_METAL_STEP =
             registerSoundEvent("pit_step_metal");

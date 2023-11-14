@@ -4,6 +4,7 @@
     "item.half_life_mod.vortigore_spawn_egg": "Voltigore Spawn Egg",
     "item.half_life_mod.hoteye_spawn_egg": "Hoteye Spawn Egg",
   "item.half_life_mod.headcrab_2_spawn_egg": "Headcrab HL2 Spawn Egg",
+    "item.half_life_mod.manhack_spawn_egg": "Manhack Spawn Egg",
   "item.half_life_mod.headcrab_a_spawn_egg": "Headcrab HL:A Spawn Egg",
     "item.half_life_mod.pitdrone_spawn_egg": "Pitdrone Spawn Egg",
     "item.half_life_mod.shocktrooper_spawn_egg": "Shocktrooper Spawn Egg",
@@ -40,7 +41,7 @@
   "key.category.half_life_mod.half_life": "Half-Life Category",
     "key.half_life_mod.reload_gun": "Reload Gun",
 
-
+    "entity.half_life_mod.manhack": "Manhack",
     "entity.half_life_mod.pitdrone": "Pitdrone",
     "entity.half_life_mod.barnacle": "Barnacle",
     "entity.half_life_mod.vortigore": "Voltigore",
@@ -64,6 +65,18 @@
     "entity.half_life_mod.shocktrooper": "Shocktrooper",
 
 
+
+    "sounds.half_life_mod.mh_die": "Manhack Dies",
+    "sounds.half_life_mod.mh_loop1": "Manhack Engine sounds",
+    "sounds.half_life_mod.mh_loop2": "Manhack Engine sounds",
+    "sounds.half_life_mod.mh_g1": "Manhack grinds",
+    "sounds.half_life_mod.mh_g2": "Manhack grinds",
+    "sounds.half_life_mod.mh_g3": "Manhack grinds",
+    "sounds.half_life_mod.mh_g4": "Manhack grinds",
+    "sounds.half_life_mod.mh_g5": "Manhack grinds",
+    "sounds.half_life_mod.mh_gf1": "Manhack grinds",
+    "sounds.half_life_mod.mh_gf2": "Manhack grinds",
+    "sounds.half_life_mod.mh_gf3": "Manhack grinds",
 
     "sounds.half_life_mod.st_alien_spotted": "Shocktrooper spots enemy",
     "sounds.half_life_mod.st_idle_answer": "Shocktrooper answers",

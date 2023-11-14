@@ -108,6 +108,13 @@ public class ModEntities {
                     () -> EntityType.Builder.of(Barney::new, MobCategory.MONSTER)
                             .sized(0.6F, 1.95F)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "barney").toString()));
+
+
+    public static final RegistryObject<EntityType<Manhack>> MANHACK =
+            ENTITY_TYPES.register("manhack",
+                    () -> EntityType.Builder.of(Manhack::new, MobCategory.MONSTER)
+                            .sized(0.6F, 0.6F)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "manhack").toString()));
     public static final RegistryObject<EntityType<Chumtoad>> CHUMTOAD =
             ENTITY_TYPES.register("chumtoad",
                     () -> EntityType.Builder.of(Chumtoad::new, MobCategory.MONSTER)

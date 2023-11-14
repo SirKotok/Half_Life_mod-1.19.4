@@ -107,6 +107,9 @@ public class HalfLifeMod
 
 
 
+            event.accept(ModItems.MANHACK_SPAWN_EGG);
+
+
         }
 
         if(event.getTab().equals(ModCreativeModeTabs.HALF_LIFE_BLOCKS_TAB)) {

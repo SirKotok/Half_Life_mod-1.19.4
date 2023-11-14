@@ -105,6 +105,11 @@ public class ModItems {
             () -> new ForgeSpawnEggItem(ModEntities.BARNEY, 0x5352fa, 0x000000   ,
                     new Item.Properties()));
 
+    public static final RegistryObject<Item> MANHACK_SPAWN_EGG = ITEMS.register("manhack_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.MANHACK, 0x6d6161, 0xf20b0b   ,
+                    new Item.Properties()));
+
+
 
     //Fake Items used for models/textures in projectiles lmao
     public static final RegistryObject<Item> FAKE_BULLET = ITEMS.register("bullet",
