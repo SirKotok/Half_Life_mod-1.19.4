@@ -21,6 +21,7 @@ public class ModEventBusEvents {
     public static void entityAttributeEvent(EntityAttributeCreationEvent event) {
         event.put(ModEntities.CHUMTOAD.get(), Chumtoad.setAttributes());
         event.put(ModEntities.BARNEY.get(), Barney.setAttributes());
+        event.put(ModEntities.COCKROACH.get(), Cockroach.setAttributes());
         event.put(ModEntities.MANHACK.get(), Manhack.setAttributes());
         event.put(ModEntities.BARNACLE.get(), Barnacle.setAttributes());
         event.put(ModEntities.SNARK.get(), Snark.setAttributes());

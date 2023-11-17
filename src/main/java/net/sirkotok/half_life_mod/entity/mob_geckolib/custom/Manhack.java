@@ -231,7 +231,7 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
         super.aiStep();
 
         if (!this.level.isClientSide) {
-        if ((horizontalCollision || verticalCollision) && this.tickCount % 20 == 0) {
+        if ((horizontalCollision || verticalCollision) && this.tickCount % 15 == 0) {
             this.playSound(getGrindSound(), getSoundVolume(), getVoicePitch());
             this.ricochete(random.nextFloat()*random.nextFloat());
         }

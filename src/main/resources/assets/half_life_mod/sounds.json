@@ -35,6 +35,24 @@
       "half_life_mod:mh_g1"
     ]
   },
+  "rch_die": {
+    "subtitle": "sounds.half_life_mod.rch_die",
+    "sounds": [
+      "half_life_mod:rch_die"
+    ]
+  },
+  "rch_smash": {
+    "subtitle": "sounds.half_life_mod.rch_smash",
+    "sounds": [
+      "half_life_mod:rch_smash"
+    ]
+  },
+  "rch_walk": {
+    "subtitle": "sounds.half_life_mod.rch_walk",
+    "sounds": [
+      "half_life_mod:rch_walk"
+    ]
+  },
   "mh_g2": {
     "subtitle": "sounds.half_life_mod.mh_g2",
     "sounds": [

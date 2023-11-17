@@ -27,6 +27,19 @@ public class ModSounds {
             registerSoundEvent("mh_g1");
     public static final RegistryObject<SoundEvent> MANHACK_GRIND2 =
             registerSoundEvent("mh_g2");
+
+
+    public static final RegistryObject<SoundEvent> COCKROACH_DIES =
+            registerSoundEvent("rch_die");
+    public static final RegistryObject<SoundEvent> COCKROACH_IS_STOMPED =
+            registerSoundEvent("rch_smash");
+    public static final RegistryObject<SoundEvent> COCKROACH_WALK =
+            registerSoundEvent("rch_walk");
+
+
+
+
+
     public static final RegistryObject<SoundEvent> MANHACK_GRIND3 =
             registerSoundEvent("mh_g3");
     public static final RegistryObject<SoundEvent> MANHACK_GRIND4 =

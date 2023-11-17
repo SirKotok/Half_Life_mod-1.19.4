@@ -336,7 +336,7 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
                         .setPredicate((target, entity) ->
                             target instanceof Player ||
                             target.getType().is(ModTags.EntityTypes.HEAD_CRAB) ||
-                            target.getType().getCategory().getName().equals("creature") ||
+                            (target.getType().getCategory().getName().equals("creature") && !(target instanceof Cockroach)) ||
                             target instanceof IronGolem ||
                             target instanceof AbstractVillager ||
                             target instanceof Pitdrone ||
@@ -370,7 +370,7 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
                                 .whenStarting(entity -> triggerAnim("onetime", "startled"))
                                 .cooldownFor(entity -> 200),
                         new TargetOrRetaliate<>(),
-                       new BullsquidEatingBehavior<>().callback(entity -> this.entityData.set(IS_EATING, true))
+                       new EatingBehavior<>().callback(entity -> this.entityData.set(IS_EATING, true))
                                .whenStopping(entity -> this.entityData.set(IS_EATING, false)),
                         new SetFoodToWalkTarget<>().whenStarting(entity -> this.Smellfor()).cooldownFor(entity -> 400),
                         new SetPlayerLookTarget<>(),

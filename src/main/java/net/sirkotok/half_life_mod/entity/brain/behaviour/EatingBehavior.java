@@ -3,6 +3,9 @@ package net.sirkotok.half_life_mod.entity.brain.behaviour;
 import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 
@@ -15,10 +18,10 @@ import net.tslat.smartbrainlib.util.BrainUtils;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class BullsquidEatingBehavior<E extends Bullsquid> extends DelayedBehaviour<E> {
+public class EatingBehavior<E extends PathfinderMob> extends DelayedBehaviour<E> {
     private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(ModMemoryModuleType.FOOD_SMELL.get(), MemoryStatus.VALUE_PRESENT), Pair.of(ModMemoryModuleType.FOOD_ID.get(), MemoryStatus.VALUE_PRESENT));
 
-    public BullsquidEatingBehavior() {
+    public EatingBehavior() {
         super(0);
 
     }
@@ -30,7 +33,7 @@ public class BullsquidEatingBehavior<E extends Bullsquid> extends DelayedBehavio
         return MEMORY_REQUIREMENTS;
     }
 
-    public BullsquidEatingBehavior<E> callback(Consumer<E> callback) {
+    public EatingBehavior<E> callback(Consumer<E> callback) {
         this.callback = callback;
         return this;
     }
@@ -49,10 +52,17 @@ public class BullsquidEatingBehavior<E extends Bullsquid> extends DelayedBehavio
 
 
     protected void StopAiBasedOnHunger(E entity){
-        if (BrainUtils.getMemory(entity, ModMemoryModuleType.HUNGRY.get()) == null) {
-            entity.heal(entity.getMaxHealth());
-            entity.stopAiFor(740 );
-        } else {entity.stopAiFor(95);}
+        if (entity instanceof Bullsquid squid) {
+            if (BrainUtils.getMemory(entity, ModMemoryModuleType.HUNGRY.get()) == null) {
+                entity.heal(entity.getMaxHealth());
+                squid.stopAiFor(740);
+            } else {
+                squid.stopAiFor(95);
+            }
+        } else {
+            entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200, 100, false, false, false));
+
+        }
 
     }
 
@@ -63,20 +73,23 @@ public class BullsquidEatingBehavior<E extends Bullsquid> extends DelayedBehavio
 
     @Override
     protected void doDelayedAction(E entity) {
-        if (BrainUtils.getMemory(entity, ModMemoryModuleType.HUNGRY.get()) == null) {
-            entity.triggerAnim("onetime", "eatlong");
+        if (entity instanceof Bullsquid squid) {
+            if (BrainUtils.getMemory(entity, ModMemoryModuleType.HUNGRY.get()) == null) {
+                squid.triggerAnim("onetime", "eatlong");
+            }
+            else squid.triggerAnim("onetime", "nothungry");
         }
-        else entity.triggerAnim("onetime", "nothungry");
-        this.callback.accept(entity);
-        this.StopAiBasedOnHunger(entity);
+            this.callback.accept(entity);
+            this.StopAiBasedOnHunger(entity);
 
 
-        if (BrainUtils.getMemory(entity, ModMemoryModuleType.HUNGRY.get()) == null) {
-            BrainUtils.setForgettableMemory(entity,    ModMemoryModuleType.HUNGRY.get(), false, 3000);
-        }
-        List<Vec3> food = BrainUtils.getMemory(entity, ModMemoryModuleType.FOOD_SMELL.get());
-         food.remove(Math.min(BrainUtils.getMemory(entity, ModMemoryModuleType.FOOD_ID.get()), food.size()));
-        BrainUtils.setMemory(entity,  ModMemoryModuleType.FOOD_SMELL.get(), food);
-        BrainUtils.clearMemory(entity, ModMemoryModuleType.FOOD_ID.get());
-    }
+            if (BrainUtils.getMemory(entity, ModMemoryModuleType.HUNGRY.get()) == null) {
+                BrainUtils.setForgettableMemory(entity,    ModMemoryModuleType.HUNGRY.get(), false, 3000);
+            }
+            List<Vec3> food = BrainUtils.getMemory(entity, ModMemoryModuleType.FOOD_SMELL.get());
+            food.remove(Math.min(BrainUtils.getMemory(entity, ModMemoryModuleType.FOOD_ID.get()), food.size()));
+            BrainUtils.setMemory(entity,  ModMemoryModuleType.FOOD_SMELL.get(), food);
+            BrainUtils.clearMemory(entity, ModMemoryModuleType.FOOD_ID.get());
+   }
 }
+
