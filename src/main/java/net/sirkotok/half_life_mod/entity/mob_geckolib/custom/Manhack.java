@@ -2,6 +2,7 @@ package net.sirkotok.half_life_mod.entity.mob_geckolib.custom;
 
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -10,6 +11,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -75,7 +77,7 @@ import java.util.List;
 
 public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwner<Manhack> {
 
-
+    private BlockPos targetPosition;
 
     @Override
     protected void actuallyHurt(DamageSource p_21240_, float p_21241_) {
@@ -143,6 +145,7 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
                 this.setOpen(false);
                 this.playSound(ModSounds.MANHACK_BLADE_SNICK.get());
             }
+
         }
 
     /*
@@ -255,6 +258,7 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
     }
 
 
+
     protected SoundEvent getGrindFleshSound() {
         switch (this.random.nextInt(1,4)) {
             case 1:  return ModSounds.MANHACK_GRIND_FLESH_1.get();
@@ -281,6 +285,13 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
         return ModSounds.MANHACK_LOOP2.get();
     }
 
+    @Override
+    public void playAmbientSound() {
+        SoundEvent soundevent = this.getAmbientSound();
+        if (soundevent != null) {
+            this.playSound(soundevent, this.getSoundVolume()/4, this.getVoicePitch());
+        }
+    }
 
     @Override
     public int getAmbientSoundInterval() {
@@ -353,6 +364,33 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
     @Override
     protected void customServerAiStep() {
         tickBrain(this);
+
+
+
+
+        if (this.targetPosition != null && (!this.level.isEmptyBlock(this.targetPosition) || this.targetPosition.getY() <= this.level.getMinBuildHeight())) {
+            this.targetPosition = null;
+        }
+
+        if (this.targetPosition == null || this.random.nextInt(30) == 0 || this.targetPosition.closerToCenterThan(this.position(), 2.0D)) {
+            this.targetPosition = BlockPos.containing(this.getX() + (double)this.random.nextInt(7) - (double)this.random.nextInt(7), this.getY() + (double)this.random.nextInt(6) - 2.0D, this.getZ() + (double)this.random.nextInt(7) - (double)this.random.nextInt(7));
+        }
+
+        double d2 = (double)this.targetPosition.getX() + 0.5D - this.getX();
+        double d0 = (double)this.targetPosition.getY() + 0.1D - this.getY();
+        double d1 = (double)this.targetPosition.getZ() + 0.5D - this.getZ();
+        Vec3 vec3 = this.getDeltaMovement();
+        Vec3 vec31 = vec3.add((Math.signum(d2) * 0.5D - vec3.x) * (double)0.1F, (Math.signum(d0) * (double)0.7F - vec3.y) * (double)0.1F, (Math.signum(d1) * 0.5D - vec3.z) * (double)0.1F);
+        // this.setDeltaMovement(vec31);
+        float f = (float)(Mth.atan2(vec31.z, vec31.x) * (double)(180F / (float)Math.PI)) - 90.0F;
+        float f1 = Mth.wrapDegrees(f - this.getYRot());
+        this.zza = 0.5F;
+        this.setYRot(this.getYRot() + f1);
+
+
+
+
+
     }
 
 
