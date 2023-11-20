@@ -36,7 +36,6 @@ import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
 import net.sirkotok.half_life_mod.entity.modinterface.AmmoCountMob;
-import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
 import net.sirkotok.half_life_mod.entity.projectile.PitdroneSpike;
 import net.sirkotok.half_life_mod.sound.ModSounds;
 import net.sirkotok.half_life_mod.util.HLperUtil;
@@ -210,7 +209,7 @@ public class Pitdrone extends HalfLifeMonster implements AmmoCountMob, RangedAtt
                 new NearbyLivingEntitySensor<Pitdrone>()
                         .setPredicate((target, entity) ->
                             target instanceof Player ||
-                            target.getType().is(ModTags.EntityTypes.HEAD_CRAB) ||
+                            target.getType().is(ModTags.EntityTypes.HEADCRAB) ||
                             target instanceof IronGolem ||
                             target instanceof AbstractVillager ||
                             target instanceof Shockroach ||
@@ -361,7 +360,7 @@ public class Pitdrone extends HalfLifeMonster implements AmmoCountMob, RangedAtt
         RandomSource randomsource = p_33601_.getRandom();
         int i = randomsource.nextInt(7);
         float f = randomsource.nextFloat();
-        this.setcanreload(!(f < 0.1f));
+        this.setcanreload(!(f < 0.2f));
         this.setammo(i);
         return super.finalizeSpawn(p_33601_, p_33602_, p_33603_, p_33604_, p_33605_);
     }

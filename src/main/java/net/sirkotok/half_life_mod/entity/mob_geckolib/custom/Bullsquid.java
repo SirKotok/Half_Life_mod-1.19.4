@@ -335,7 +335,7 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
                 new NearbyLivingEntitySensor<Bullsquid>()
                         .setPredicate((target, entity) ->
                             target instanceof Player ||
-                            target.getType().is(ModTags.EntityTypes.HEAD_CRAB) ||
+                            target.getType().is(ModTags.EntityTypes.HEADCRAB) ||
                             (target.getType().getCategory().getName().equals("creature") && !(target instanceof Cockroach)) ||
                             target instanceof IronGolem ||
                             target instanceof AbstractVillager ||

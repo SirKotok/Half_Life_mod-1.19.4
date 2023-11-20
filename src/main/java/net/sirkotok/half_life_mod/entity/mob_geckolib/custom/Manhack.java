@@ -38,10 +38,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fluids.FluidType;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
-import net.sirkotok.half_life_mod.entity.brain.behaviour.BiteWhileJumpingBehavior;
-import net.sirkotok.half_life_mod.entity.brain.behaviour.HeadCrabJumpBehavior;
-import net.sirkotok.half_life_mod.entity.brain.behaviour.PushToWalkTarget;
-import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
+import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.sound.ModSounds;
 import net.sirkotok.half_life_mod.util.ModTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
@@ -422,7 +419,7 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
     public BrainActivityGroup<Manhack> getIdleTasks() { // These are the tasks that run when the mob isn't doing anything else (usually)
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<Manhack>(
-                        new TargetOrRetaliate<>(),
+                        new TargetOrRetaliateHLT<>(),
                          new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>()),
                         new SetRandomWalkTarget<>()

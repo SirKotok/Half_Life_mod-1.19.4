@@ -28,11 +28,12 @@ public final class HLperUtil {
 
 
     public static boolean issameteam(LivingEntity one, LivingEntity two){
+        boolean combine = (one.getType().is(ModTags.EntityTypes.FACTION_COMBINE) && two.getType().is(ModTags.EntityTypes.FACTION_COMBINE));
         boolean science_team = (one.getType().is(ModTags.EntityTypes.FACTION_SCIENCE_TEAM) && two.getType().is(ModTags.EntityTypes.FACTION_SCIENCE_TEAM));
         boolean race_x = (one.getType().is(ModTags.EntityTypes.FACTION_RACE_X) && two.getType().is(ModTags.EntityTypes.FACTION_RACE_X));
         boolean pitdrone_unique = !((one instanceof Pitdrone && two instanceof Shockroach) || (one instanceof Shockroach && two instanceof Pitdrone));
 
-        return (science_team || race_x) && pitdrone_unique;
+        return (science_team || race_x || combine) && pitdrone_unique;
     }
 
 

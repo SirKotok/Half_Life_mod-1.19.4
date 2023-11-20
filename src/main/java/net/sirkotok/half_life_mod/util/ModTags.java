@@ -2,7 +2,6 @@ package net.sirkotok.half_life_mod.util;
 
 import net.minecraft.core.registries.Registries;
 
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.EntityType;
 
@@ -43,7 +42,7 @@ public class ModTags {
 
     public static class EntityTypes {
 
-        public static final TagKey<EntityType<?>> HEAD_CRAB = tag("headcrab");
+        public static final TagKey<EntityType<?>> HEADCRAB = tag("headcrab");
 
 
         public static final TagKey<EntityType<?>> FACTION_RACE_X = tag("race_x");
