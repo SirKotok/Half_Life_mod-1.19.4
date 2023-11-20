@@ -25,7 +25,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.SECURITY_GUARD_VEST);
         simpleItem(ModItems.FAKE_SHOCK);
 
-
+        withExistingParent(ModItems.LEECH_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.COCKROACH_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.SHOCKROACH_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.BARNACLE_ONE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));

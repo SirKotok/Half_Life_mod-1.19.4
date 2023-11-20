@@ -108,7 +108,9 @@ public class ModItems {
     public static final RegistryObject<Item> COCKROACH_SPAWN_EGG = ITEMS.register("cockroach_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.COCKROACH, 0xc2660b, 0xeae3dc   ,
                     new Item.Properties()));
-
+    public static final RegistryObject<Item> LEECH_SPAWN_EGG = ITEMS.register("leech_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.LEECH, 0xeeeddb, 0xaba76b   ,
+                    new Item.Properties()));
 
     public static final RegistryObject<Item> MANHACK_SPAWN_EGG = ITEMS.register("manhack_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.MANHACK, 0x6d6161, 0xf20b0b   ,

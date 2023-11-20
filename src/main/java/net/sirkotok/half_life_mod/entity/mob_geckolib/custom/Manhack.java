@@ -196,6 +196,11 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
     }
 
 
+
+
+
+
+
     public static AttributeSupplier setAttributes() {
         return Monster.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 10D)

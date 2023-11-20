@@ -23,6 +23,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.BARNEY.get(), Barney.setAttributes());
         event.put(ModEntities.COCKROACH.get(), Cockroach.setAttributes());
         event.put(ModEntities.MANHACK.get(), Manhack.setAttributes());
+        event.put(ModEntities.LEECH.get(), Leech.setAttributes());
         event.put(ModEntities.BARNACLE.get(), Barnacle.setAttributes());
         event.put(ModEntities.SNARK.get(), Snark.setAttributes());
         event.put(ModEntities.SHOCKWAVEEFFECT.get(), ShockWaveEffect.setAttributes());
