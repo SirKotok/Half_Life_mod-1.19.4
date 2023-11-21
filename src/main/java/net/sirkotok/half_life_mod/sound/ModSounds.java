@@ -15,6 +15,24 @@ public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 
+
+  // LEECH
+  public static final RegistryObject<SoundEvent> LEECH_BITE3 =
+          registerSoundEvent("leech_bite1");
+    public static final RegistryObject<SoundEvent> LEECH_BITE2 =
+            registerSoundEvent("leech_bite2");
+    public static final RegistryObject<SoundEvent> LEECH_BITE1 =
+            registerSoundEvent("leech_bite3");
+    public static final RegistryObject<SoundEvent> LEECH_IDLE2 =
+            registerSoundEvent("leech_alert1");
+    public static final RegistryObject<SoundEvent> LEECH_IDLE1 =
+            registerSoundEvent("leech_alert2");
+
+
+
+
+
+
     //Manhack
 
     public static final RegistryObject<SoundEvent> MANHACK_DIES =

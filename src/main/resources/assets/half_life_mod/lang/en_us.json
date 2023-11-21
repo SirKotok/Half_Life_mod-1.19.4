@@ -68,7 +68,11 @@
   "entity.half_life_mod.headcrab_zombie_1": "Headcrab Zombie",
     "entity.half_life_mod.shocktrooper": "Shocktrooper",
 
-
+    "sounds.half_life_mod.leech_bite1": "Leech bites",
+    "sounds.half_life_mod.leech_bite2": "Leech bites",
+    "sounds.half_life_mod.leech_bite3": "Leech bites",
+    "sounds.half_life_mod.leech_alert1": "Leech swims",
+    "sounds.half_life_mod.leech_alert2": "Leech swims",
     "sounds.half_life_mod.rch_die": "Roach dies",
     "sounds.half_life_mod.rch_smash": "Roach is stomped on",
     "sounds.half_life_mod.rch_walk": "Roach sounds",

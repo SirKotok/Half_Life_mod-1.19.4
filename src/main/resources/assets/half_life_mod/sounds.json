@@ -5,6 +5,36 @@
       "half_life_mod:headcrab_1_idle_1"
     ]
   },
+  "leech_bite1": {
+    "subtitle": "sounds.half_life_mod.leech_bite1",
+    "sounds": [
+      "half_life_mod:leech_bite1"
+    ]
+  },
+  "leech_bite2": {
+    "subtitle": "sounds.half_life_mod.leech_bite2",
+    "sounds": [
+      "half_life_mod:leech_bite2"
+    ]
+  },
+  "leech_bite3": {
+    "subtitle": "sounds.half_life_mod.leech_bite3",
+    "sounds": [
+      "half_life_mod:leech_bite3"
+    ]
+  },
+  "leech_alert1": {
+    "subtitle": "sounds.half_life_mod.leech_alert1",
+    "sounds": [
+      "half_life_mod:leech_alert1"
+    ]
+  },
+  "leech_alert2": {
+    "subtitle": "sounds.half_life_mod.leech_alert2",
+    "sounds": [
+      "half_life_mod:leech_alert2"
+    ]
+  },
   "pistol_reload": {
     "subtitle": "sounds.half_life_mod.pistol_reload",
     "sounds": [

@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
@@ -35,6 +36,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.fluids.FluidType;
+import net.minecraftforge.fml.common.Mod;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
@@ -93,7 +95,28 @@ public class Leech extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
     private AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
 
+    @Override
+    protected void playSwimSound(float pVolume) {
+        if (RandomSource.create().nextFloat() < 0.05f) super.playSwimSound(pVolume);
+    }
 
+
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        if (RandomSource.create().nextFloat() < 0.5f) return  ModSounds.LEECH_IDLE1.get();
+        else return ModSounds.LEECH_IDLE2.get();
+    }
+
+
+
+    public SoundEvent getBiteSound(){
+        switch(RandomSource.create().nextInt(1,4)){
+            case 1: return ModSounds.LEECH_BITE1.get();
+            case 2: return ModSounds.LEECH_BITE2.get();
+        }
+        return ModSounds.LEECH_BITE3.get();
+    }
 
 
     protected void defineSynchedData() {
@@ -111,6 +134,7 @@ public class Leech extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
             for (Entity entity : list) {
                 if (entity instanceof LivingEntity living) {
                     this.doHurtTarget(living);
+                    this.playSound(this.getBiteSound(), this.getSoundVolume(), this.getVoicePitch());
                 }
             }
         }
@@ -307,7 +331,7 @@ public class Leech extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
 
     @Override
     protected float getWaterSlowDown() {
-        if (this.getTarget() != null) return 0.98f;
+      //  if (this.getTarget() != null) return 0.98f;
         return 0.9f;
 
     }
