@@ -118,10 +118,14 @@ public class ModEntities {
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "cockroach").toString()));
     public static final RegistryObject<EntityType<Leech>> LEECH =
             ENTITY_TYPES.register("leech",
-                    () -> EntityType.Builder.of(Leech::new, MobCategory.CREATURE)
+                    () -> EntityType.Builder.of(Leech::new, MobCategory.MONSTER)
                             .sized(0.2F, 0.2F)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "leech").toString()));
-
+    public static final RegistryObject<EntityType<Shark>> SHARK =
+            ENTITY_TYPES.register("shark",
+                    () -> EntityType.Builder.of(Shark::new, MobCategory.CREATURE)
+                            .sized(2F, 1.5F)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "shark").toString()));
 
     public static final RegistryObject<EntityType<Manhack>> MANHACK =
             ENTITY_TYPES.register("manhack",

@@ -108,7 +108,7 @@ public class HalfLifeMod
 
             event.accept(ModItems.COCKROACH_SPAWN_EGG);
             event.accept(ModItems.LEECH_SPAWN_EGG);
-
+            event.accept(ModItems.SHARK_SPAWN_EGG);
             event.accept(ModItems.MANHACK_SPAWN_EGG);
 
 
