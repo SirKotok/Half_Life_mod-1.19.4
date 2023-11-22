@@ -61,6 +61,7 @@ import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetPlayerLookTar
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.TargetOrRetaliate;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
+import net.tslat.smartbrainlib.api.core.sensor.custom.NearbyBlocksSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyPlayersSensor;
@@ -262,6 +263,7 @@ public class Leech extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
                 new HurtBySensor<>(),
                 new SmellSensor<>(),
                 new NearbyPlayersSensor<>(),
+                new NearbyBlocksSensor<Leech>().setRadius(16D, 16D).setPredicate((state, entity) -> state.is(Blocks.WATER)),
                 new NearbyLivingEntitySensor<Leech>()
                         .setPredicate((target, entity) ->
                                 (target instanceof Player ||
@@ -272,7 +274,6 @@ public class Leech extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
                                 target.getType().getCategory().getName().equals("underground_water_creature") ||
                                 target.getType().getCategory().getName().equals("axolotls") ||
                                 target instanceof IronGolem ||
-                                target instanceof Slime ||
                                 target instanceof AbstractVillager ||
                                 target instanceof HalfLifeNeutral ) && target.isInWaterOrBubble() && !(target instanceof Leech)
                         ));
@@ -294,7 +295,8 @@ public class Leech extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
                 new FirstApplicableBehaviour<Leech>(
                         new TargetOrRetaliateHLT<>(),
                         new SetPlayerLookTarget<>(),
-                        new SetRandomLookTarget<>()
+                        new SetRandomLookTarget<>(),
+                        new SetBlockToWalkTargetNoInterest<>()
                 )
         );
 

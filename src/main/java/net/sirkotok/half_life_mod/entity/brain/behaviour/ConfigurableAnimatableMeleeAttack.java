@@ -18,7 +18,7 @@ public class ConfigurableAnimatableMeleeAttack<E extends HalfLifeMonster> extend
   protected float attackmod;
   protected int counter = 0;
     protected boolean growled = false;
-    protected int knockbackmod;
+    protected float knockbackmod;
 
     protected float disableshield;
     @Nullable
@@ -30,7 +30,7 @@ public class ConfigurableAnimatableMeleeAttack<E extends HalfLifeMonster> extend
     @Nullable
     protected SoundEvent startsound;
 
-    public ConfigurableAnimatableMeleeAttack(int delayTicks, float disablechance, float modattack, int modknockback, @Nullable MobEffect effect, int effectduration, @Nullable SoundEvent onhit, @Nullable SoundEvent startsound) {
+    public ConfigurableAnimatableMeleeAttack(int delayTicks, float disablechance, float modattack, float modknockback, @Nullable MobEffect effect, int effectduration, @Nullable SoundEvent onhit, @Nullable SoundEvent startsound) {
         super(delayTicks);
         this.attackmod = modattack;
         this.knockbackmod = modknockback;

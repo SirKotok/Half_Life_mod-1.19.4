@@ -1,5 +1,6 @@
 package net.sirkotok.half_life_mod.util;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -7,6 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Pitdrone;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Shockroach;
 
@@ -36,6 +38,14 @@ public final class HLperUtil {
         return (science_team || race_x || combine) && pitdrone_unique;
     }
 
+
+
+    public static boolean isWithinSpawnChunks(BlockPos pBlockPos, ServerLevelAccessor pLevel) {
+        BlockPos spwanpos = pLevel.getLevel().getSharedSpawnPos();
+        int x = Math.abs(spwanpos.getX()-pBlockPos.getX());
+        int z = Math.abs(spwanpos.getZ()-pBlockPos.getZ());
+        return x < 310 && z < 310;
+    }
 
 
 

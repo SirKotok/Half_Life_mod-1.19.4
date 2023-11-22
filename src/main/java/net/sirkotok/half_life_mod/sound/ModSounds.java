@@ -31,9 +31,52 @@ public class ModSounds {
 
 
 
+    // ICHTYOSAUR
+    public static final RegistryObject<SoundEvent> ICHY_BITE1 =
+            registerSoundEvent("ichy_bite1");
+  public static final RegistryObject<SoundEvent> ICHY_BITE2 =
+          registerSoundEvent("ichy_bite2");
+  public static final RegistryObject<SoundEvent> ICHY_ATTACK1 =
+          registerSoundEvent("ichy_attack1");
+  public static final RegistryObject<SoundEvent> ICHY_ATTACK2 =
+          registerSoundEvent("ichy_attack2");
+  public static final RegistryObject<SoundEvent> ICHY_ALERT2 =
+          registerSoundEvent("ichy_alert1");
+  public static final RegistryObject<SoundEvent> ICHY_ALERT1 =
+          registerSoundEvent("ichy_alert2");
+  public static final RegistryObject<SoundEvent> ICHY_ALERT3 =
+          registerSoundEvent("ichy_alert3");
+  public static final RegistryObject<SoundEvent> ICHY_DIE1 =
+          registerSoundEvent("ichy_die1");
+  public static final RegistryObject<SoundEvent> ICHY_DIE2 =
+          registerSoundEvent("ichy_die2");
+  public static final RegistryObject<SoundEvent> ICHY_DIE3 =
+          registerSoundEvent("ichy_die3");
+  public static final RegistryObject<SoundEvent> ICHY_DIE4 =
+          registerSoundEvent("ichy_die4");
+  public static final RegistryObject<SoundEvent> ICHY_IDLE1 =
+          registerSoundEvent("ichy_idle1");
+  public static final RegistryObject<SoundEvent> ICHY_IDLE2 =
+          registerSoundEvent("ichy_idle2");
+  public static final RegistryObject<SoundEvent> ICHY_IDLE3 =
+          registerSoundEvent("ichy_idle3");
+  public static final RegistryObject<SoundEvent> ICHY_IDLE4 =
+          registerSoundEvent("ichy_idle4");
+  public static final RegistryObject<SoundEvent> ICHY_PAIN1 =
+          registerSoundEvent("ichy_pain1");
+  public static final RegistryObject<SoundEvent> ICHY_PAIN2 =
+          registerSoundEvent("ichy_pain2");
+  public static final RegistryObject<SoundEvent> ICHY_PAIN3 =
+          registerSoundEvent("ichy_pain3");
+  public static final RegistryObject<SoundEvent> ICHY_PAIN4 =
+          registerSoundEvent("ichy_pain4");
 
 
-    //Manhack
+
+
+
+
+  //Manhack
 
     public static final RegistryObject<SoundEvent> MANHACK_DIES =
             registerSoundEvent("mh_die");

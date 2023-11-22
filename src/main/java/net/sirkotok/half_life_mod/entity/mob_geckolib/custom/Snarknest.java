@@ -1,6 +1,7 @@
 package net.sirkotok.half_life_mod.entity.mob_geckolib.custom;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.commands.arguments.coordinates.WorldCoordinate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
@@ -24,6 +25,7 @@ import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.Spawnsnarks;
 import net.sirkotok.half_life_mod.item.ModItems;
 import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -69,6 +71,10 @@ public class Snarknest extends CatchableMonster implements GeoEntity, SmartBrain
         if (pBlockPos.getY() >= pLevel.getSeaLevel()) {
             return false;
         }
+
+        boolean flag = HLperUtil.isWithinSpawnChunks(pBlockPos, pLevel);
+        if (flag) return false;
+
         int radius = 80;
         List<Mob> entities = EntityRetrievalUtil.getEntities((Level) pLevel,
                 new AABB(pBlockPos.getX() - radius, pBlockPos.getY() - radius, pBlockPos.getZ() - radius,

@@ -123,7 +123,7 @@ public class ModEntities {
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "leech").toString()));
     public static final RegistryObject<EntityType<Shark>> SHARK =
             ENTITY_TYPES.register("shark",
-                    () -> EntityType.Builder.of(Shark::new, MobCategory.CREATURE)
+                    () -> EntityType.Builder.of(Shark::new, MobCategory.MONSTER)
                             .sized(2F, 1.5F)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "shark").toString()));
 

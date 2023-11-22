@@ -3,66 +3,94 @@ package net.sirkotok.half_life_mod.entity.mob_geckolib.custom;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.fluids.FluidType;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
-import net.sirkotok.half_life_mod.entity.brain.behaviour.PushToWalkTarget;
-import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
-import net.sirkotok.half_life_mod.entity.brain.behaviour.TargetOrRetaliateHLT;
+import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.parts.SharkPart;
+import net.sirkotok.half_life_mod.entity.mob_normal.custom.BarnaclePart;
 import net.sirkotok.half_life_mod.sound.ModSounds;
 import net.sirkotok.half_life_mod.util.ModTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
 import net.tslat.smartbrainlib.api.core.behaviour.FirstApplicableBehaviour;
+import net.tslat.smartbrainlib.api.core.behaviour.OneRandomBehaviour;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableMeleeAttack;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.CustomBehaviour;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetWalkTargetToAttackTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.InvalidateAttackTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetPlayerLookTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTarget;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
+import net.tslat.smartbrainlib.api.core.sensor.custom.NearbyBlocksSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyPlayersSensor;
+import net.tslat.smartbrainlib.util.BrainUtils;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
+import java.util.Objects;
 
 
 public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner<Shark> {
 
  //TODO: sounds
     public int light = 0;
+
+    private final SharkPart mouth;
+    private final SharkPart[] parts;
+
+    @Override
+    public boolean isMultipartEntity() {
+        return true;
+    }
+
+    @Override
+    public net.minecraftforge.entity.PartEntity<?>[] getParts() { return this.parts; }
+
+
+
 
 
     @Override
@@ -72,29 +100,47 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
 
     private BlockPos targetPosition;
 
-
+    private int attackbehaviour;
     private AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
 
     @Override
     protected void playSwimSound(float pVolume) {
-        if (RandomSource.create().nextFloat() < 0.05f) super.playSwimSound(pVolume);
+        if (RandomSource.create().nextFloat() < 0.08f) super.playSwimSound(pVolume);
     }
 
+
+    protected void playAgroSound(float pVolume) {
+        this.playSound(this.getAgroSound(), pVolume, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.05F);
+    }
+    protected SoundEvent getAgroSound() {
+        return RandomSource.create().nextFloat() < 0.5 ? ModSounds.ICHY_ATTACK1.get() : ModSounds.ICHY_ATTACK2.get();
+    }
 
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
-        if (RandomSource.create().nextFloat() < 0.5f) return  ModSounds.LEECH_IDLE1.get();
-        else return ModSounds.LEECH_IDLE2.get();
+        if (this.getTarget() != null)
+            switch(RandomSource.create().nextInt(1,4)){
+                case 1: return ModSounds.ICHY_ALERT1.get();
+                case 2: return ModSounds.ICHY_ALERT2.get();
+                case 3: return ModSounds.ICHY_ALERT3.get();
+            }
+        switch(RandomSource.create().nextInt(1,5)){
+            case 1: return ModSounds.ICHY_IDLE1.get();
+            case 2: return ModSounds.ICHY_IDLE2.get();
+            case 3: return ModSounds.ICHY_IDLE3.get();
+            case 4: return ModSounds.ICHY_IDLE4.get();
+        }
+        return ModSounds.ICHY_IDLE1.get();
     }
 
 
 
     public SoundEvent getBiteSound(){
         switch(RandomSource.create().nextInt(1,4)){
-            case 1: return ModSounds.LEECH_BITE1.get();
-            case 2: return ModSounds.LEECH_BITE2.get();
+            case 1: return ModSounds.ICHY_BITE1.get();
+            case 2: return ModSounds.ICHY_BITE2.get();
         }
         return ModSounds.LEECH_BITE3.get();
     }
@@ -103,7 +149,7 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
     public static final EntityDataAccessor<Integer> TITL_UD = SynchedEntityData.defineId(Shark.class, EntityDataSerializers.INT); // -2 to 2
     public static final EntityDataAccessor<Integer> TITL_RL_NUM = SynchedEntityData.defineId(Shark.class, EntityDataSerializers.INT); // 1 to 3
     public static final EntityDataAccessor<Integer> TITL_RL = SynchedEntityData.defineId(Shark.class, EntityDataSerializers.INT); // -1 to 1
-
+    public static final EntityDataAccessor<Boolean> ID_SPECIAL = SynchedEntityData.defineId(Shark.class, EntityDataSerializers.BOOLEAN);
 
     protected void defineSynchedData() {
         super.defineSynchedData();
@@ -111,6 +157,7 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
         this.entityData.define(TITL_UD, 0);
         this.entityData.define(TITL_RL, 0);
         this.entityData.define(TITL_RL_NUM, 1);
+        this.entityData.define(ID_SPECIAL, false);
     }
 
     public int getMouthPose(){
@@ -132,6 +179,30 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
         this.entityData.set(TITL_UD, tilt_ud);
         this.entityData.set(TITL_RL_NUM, tilt_rlnum);
     }
+
+
+
+
+    public boolean gettexture() {
+        return this.entityData.get(ID_SPECIAL);
+    }
+    protected void settexture(boolean texture) {
+        this.entityData.set(ID_SPECIAL, texture);
+    }
+
+    public void addAdditionalSaveData(CompoundTag p_33619_) {
+        super.addAdditionalSaveData(p_33619_);
+        p_33619_.putBoolean("Texture", this.gettexture());
+    }
+
+    public void readAdditionalSaveData(CompoundTag p_33607_) {
+        this.settexture(p_33607_.getBoolean("Texture"));
+        super.readAdditionalSaveData(p_33607_);
+    }
+
+
+
+
 
     public void setMouthPose(int mouth){
         this.setAnimationPose(mouth, this.getTiltUD(), this.getTiltRL(), this.getTiltRLNUM());
@@ -156,14 +227,18 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
 
     public void updatetitlUD(){
         int i = 0;
-        Float dy = (float)this.getDeltaMovement().y();
-        if (dy > 1) i = 1;
-        if (dy > 2) i = 2;
-        if (dy < -1) i = -1;
-        if (dy < -2) i = -2;
+        Float y = (float)this.getLookAngle().y();
+        if (y > 0.4) i = 1;
+        if (y > 0.25) i = 2;
+        if (y < -0.3) i = -1;
+        if (y < -0.5) i = -2;
+        int s = Mth.sign(i);
+        float f = (float) this.getDeltaMovement().normalize().y;
+        int j = Mth.sign(f);
+        if ((s != j) || (Math.abs(f)<0.1) || (this.getwateremountabove() < 2 && s>0) || (this.getwateremountbelow() < 2 && s<0)) i = 0;
+
 
         this.setTitlUd(i);
-
     }
 
 
@@ -173,33 +248,81 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
         return super.doHurtTarget(pEntity);
     }
 
-
-
-
+    @Override
+    public boolean ConfigurabledoHurtTarget(Entity entity, float disablechance, float attack_modifier, float knockback_modifier, @Nullable MobEffect effect, int duration, boolean visible) {
+         if (RandomSource.create().nextFloat() < 0.2f) this.randomtitlRl();
+        return super.ConfigurabledoHurtTarget(entity, disablechance, attack_modifier, knockback_modifier, effect, duration, visible);
+    }
 
     @Override
     public void aiStep() {
         super.aiStep();
-
+        tickMouth(this.mouth);
 
         if (this.tickCount % 30 == 0) {
-            this.setMouthPose(RandomSource.create().nextInt(-1, 2));
             this.resettitlRl();
         }
 
-        if (this.tickCount % 5 == 0) {
-            this.updatetitlUD();
+        if (this.tickCount % 10 == 0) this.updatetitlUD();
 
-            List<Entity> list = this.level.getEntities(this, this.getBoundingBox(), obj -> obj.equals(this.getTarget()));
+        if (!this.isInWaterOrBubble() & this.isOnGround() && this.tickCount % 13 == 0) {
+            this.setTitlUd(RandomSource.create().nextInt(-2, 3));
+            this.randomtitlRl();
+            if (this.getTiltRL() > 0) this.randomtitlRl();
+        }
+
+
+
+
+        if (this.attackbehaviour == 1) {
+        if (this.tickCount % 5 == 0) {
+            List<Entity> list = this.level.getEntities(this, this.mouth.getBoundingBox(), obj -> !(obj instanceof Shark));
             for (Entity entity : list) {
                 if (entity instanceof LivingEntity living) {
                     this.doHurtTarget(living);
                     this.playSound(this.getBiteSound(), this.getSoundVolume(), this.getVoicePitch());
                 }
             }
+        } else if (this.tickCount % 3 == 0) this.playAgroSound(this.getSoundVolume()*0.5f);
+        }
+
+    }
+
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        switch(RandomSource.create().nextInt(1,5)){
+            case 1: return ModSounds.ICHY_DIE1.get();
+            case 2: return ModSounds.ICHY_DIE2.get();
+            case 3: return ModSounds.ICHY_DIE3.get();
+            case 4: return ModSounds.ICHY_DIE4.get();
+        }
+        return ModSounds.ICHY_IDLE1.get();
+    }
+
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+        switch(RandomSource.create().nextInt(1,5)){
+            case 1: return ModSounds.ICHY_PAIN1.get();
+            case 2: return ModSounds.ICHY_PAIN2.get();
+            case 3: return ModSounds.ICHY_PAIN3.get();
+            case 4: return ModSounds.ICHY_PAIN4.get();
+        }
+        return ModSounds.ICHY_IDLE1.get();
+    }
+
+
+    @Override
+    public boolean hurt(DamageSource pSource, float pAmount) {
+
+        if (this.attackbehaviour == 1 && RandomSource.create().nextFloat() < 0.1f) {
+            BrainUtils.clearMemory(this, MemoryModuleType.WALK_TARGET);
+            this.attackbehaviour = 0;
         }
 
 
+        return super.hurt(pSource, pAmount);
     }
 
     public Shark(EntityType type, Level level) {
@@ -207,18 +330,53 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
         this.xpReward = 20;
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
         this.setPathfindingMalus(BlockPathTypes.WATER_BORDER, 0.0F);
+        this.mouth = new SharkPart(this, "mouth", 1F, 1f);
+        this.parts = new SharkPart[] {
+                this.mouth
+        };
+        this.setId(ENTITY_COUNTER.getAndAdd(this.parts.length + 1) + 1);
     }
+
+    @Override
+    public void setId(int pId) {
+        super.setId(pId);
+        for (int i = 0; i < this.parts.length; i++) // Forge: Fix MC-158205: Set part ids to successors of parent mob id
+            this.parts[i].setId(pId + i + 1);
+    }
+
+
+    private void tickMouth(SharkPart pPart) {
+        pPart.moveTo(this.getX(), this.getY()+0.5, this.getZ());
+        double yrot = this.yBodyRot/180*Math.PI;
+        double d1 = Math.sin(yrot);
+        double d2 = Math.cos(yrot);
+        double d3 = 0.5;
+        switch(this.getTiltUD()){
+            case -2: d3 = -0.8d;
+                break;
+            case -1: d3 = -0.2d;
+                break;
+            case 0: d3 = 0.5;
+                break;
+            case 1: d3 = 1d;
+                break;
+            case 2:d3 = 1.5d;
+                break;
+        }
+        pPart.moveTo(this.getX()-2.1*d1, this.getY()+d3, this.getZ()+2.1*d2);
+    }
+
 
 
 
     public static AttributeSupplier setAttributes() {
         return Monster.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 100D)
-                .add(Attributes.ATTACK_DAMAGE, 8f)
+                .add(Attributes.MAX_HEALTH, 150D)
+                .add(Attributes.ATTACK_DAMAGE, 8.5f)
                 .add(Attributes.ATTACK_SPEED, 3.0f)
-                .add(Attributes.ATTACK_KNOCKBACK, 0.5f)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.7f)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5f)
-                .add(Attributes.MOVEMENT_SPEED, 0.30f).build();
+                .add(Attributes.MOVEMENT_SPEED, 0.15f).build();
     }
 
 
@@ -271,6 +429,8 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
     protected void customServerAiStep() {
         tickBrain(this);
 
+        this.setMouthPose(this.attackbehaviour == 1 ? 1 : 0);
+
         if (this.isInWaterOrBubble()) {
 
             if (this.targetPosition != null && (!this.level.getBlockState(this.targetPosition).equals(Blocks.WATER.defaultBlockState()) || this.targetPosition.getY() <= this.level.getMinBuildHeight())) {
@@ -292,7 +452,9 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
             this.zza = 0.5F;
             this.setYRot(this.getYRot() + f1);
 
-        }
+        } else if (!this.onGround) {
+            this.setDeltaMovement(this.getDeltaMovement().x(), -0.1f, this.getDeltaMovement().z());
+        } else if (this.getTarget() != null) this.attackbehaviour = 1;
 
 
 
@@ -306,14 +468,11 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
                 new HurtBySensor<>(),
                 new SmellSensor<>(),
                 new NearbyPlayersSensor<>(),
-                new NearbyLivingEntitySensor<Shark>()
+                new NearbyBlocksSensor<Shark>().setRadius(16D, 16D).setPredicate((state, entity) -> state.is(Blocks.WATER)),
+                new NearbyLivingEntitySensor<Shark>().setRadius(32, 32)
                         .setPredicate((target, entity) ->
                                 (target instanceof Player ||
                                 target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) ||
-                              /*  (target.getType().getCategory().getName().equals("creature") && !(target instanceof Cockroach)) ||
-                                target.getType().getCategory().getName().equals("water_creature") ||
-                                target.getType().getCategory().getName().equals("water_ambient") ||
-                                target.getType().getCategory().getName().equals("underground_water_creature") || */
                                 target.getType().getCategory().getName().equals("axolotls") ||
                                 target instanceof IronGolem ||
                                 target instanceof AbstractVillager ||
@@ -327,7 +486,7 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
     public BrainActivityGroup<Shark> getCoreTasks() { // These are the tasks that run all the time (usually)
         return BrainActivityGroup.coreTasks(
                 new LookAtTarget<>(),
-                new PushToWalkTarget<>().startCondition(entity -> this.isInWaterOrBubble()).cooldownFor(entity -> entity.getRandom().nextInt(1, 2))
+                new MoveToWalkTarget<>().startCondition(entity -> !this.isInWaterOrBubble() && this.isOnGround())
         );
     }
 
@@ -335,12 +494,25 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
     public BrainActivityGroup<Shark> getIdleTasks() { // These are the tasks that run when the mob isn't doing anything else (usually)
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<Shark>(
+                        new CustomBehaviour<>(entity -> BrainUtils.clearMemory(this, MemoryModuleType.WALK_TARGET)).cooldownFor(entity -> 150),
+                        new CustomBehaviour<>(entity -> this.attackbehaviour = 0).startCondition(entity -> this.attackbehaviour != 0),
                         new TargetOrRetaliateHLT<>(),
                         new SetPlayerLookTarget<>(),
-                        new SetRandomLookTarget<>()
+                        new SetRandomLookTarget<>(),
+                        new SetBlockToWalkTargetNoInterest<>(),
+                        new PushToWalkTarget<>()
+                                .setXZMoveSpeedMod(entity -> 0.2f)
+                                .startCondition(entity -> this.isInWaterOrBubble())
+                                .cooldownFor(entity -> entity.getRandom().nextInt(1, 2))
                 )
         );
 
+    }
+
+
+    public void setAttackbehaviour(int attackbehaviour) {
+        this.attackbehaviour = attackbehaviour;
+       // this.setCustomName(Component.literal(""+this.attackbehaviour));
     }
 
     @Override
@@ -350,9 +522,42 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
     @Override
     public BrainActivityGroup<Shark> getFightTasks() { // These are the tasks that handle fighting
         return BrainActivityGroup.fightTasks(
-                new InvalidateAttackTarget<>().invalidateIf((entity, target) -> target instanceof Player pl && (pl.isCreative() || pl.isSpectator()) || !target.isInWaterOrBubble()),
-                new Retaliate<>(),
-                new SetWalkTargetToAttackTarget<>()
+                new CustomBehaviour<>(entity -> BrainUtils.clearMemory(this, MemoryModuleType.WALK_TARGET)).cooldownFor(entity -> 260),
+                new InvalidateAttackTarget<Shark>().invalidateIf((entity, target) -> (target instanceof Player pl && (pl.isCreative() || pl.isSpectator()))), //|| ((!target.isInWaterOrBubble() && target.isOnGround()) && (!this.isOnGround() || this.isInWaterOrBubble()))),
+                new Retaliate<Shark>(),
+                new SwitchTarget<>().startCondition(entity -> RandomSource.create().nextFloat() < 0.01f).cooldownFor(entity -> 400),
+                new CustomBehaviour<>(entity -> BrainUtils.clearMemory(this, MemoryModuleType.WALK_TARGET)).cooldownFor(entity -> 80).startCondition(entity -> this.attackbehaviour == 0),
+                new OneRandomBehaviour<>(
+                new SetBlockToWalkTargetNoInterest<Shark>().whenStarting(entity -> this.setAttackbehaviour(0)).startCondition(entity -> (this.isInWaterOrBubble() || !this.isOnGround())),
+                new SetBlockToWalkTargetNoInterest<Shark>().whenStarting(entity -> this.setAttackbehaviour(0)).startCondition(entity -> (this.isInWaterOrBubble() || !this.isOnGround())),
+                new SetBlockToWalkTargetNoInterest<Shark>().whenStarting(entity -> this.setAttackbehaviour(0)),
+                new SetWalkTargetToAttackTargetIfNoWalkTarget<Shark>().whenStarting(entity -> this.setAttackbehaviour(1)),
+                new SetWalkTargetToAttackTargetIfNoWalkTarget<Shark>().whenStarting(entity -> this.setAttackbehaviour(1)),
+                new SetWalkTargetToAttackTargetIfNoWalkTarget<Shark>().whenStarting(entity -> this.setAttackbehaviour(1))  //RandomSource.create().nextInt(1, 3)))
+        ),
+                new SetWalkTargetToAttackTarget<>().whenStarting(entity -> this.setAttackbehaviour(1)).startCondition(entity -> this.distanceTo(Objects.requireNonNull(this.getTarget())) > 24),
+                new SetWalkTargetToAttackTarget<>().whenStarting(entity -> this.setAttackbehaviour(1)).startCondition(entity -> this.getLastHurtByMob() != null).cooldownFor(entity -> 600),
+                new FirstApplicableBehaviour<>(
+                new PushToWalkTarget<>()
+                        .setXZMoveSpeedMod(entity -> 0.3f)
+                        .startCondition(entity -> (this.isInWaterOrBubble() || !this.isOnGround()) && this.attackbehaviour == 0)
+                        .cooldownFor(entity -> entity.getRandom().nextInt(1, 2)),
+                new PushToWalkTargetDontStop<>()
+                        .setXZMoveSpeedMod(entity -> 0.33f)
+                        .startCondition(entity -> (this.isInWaterOrBubble() || !this.isOnGround()) && this.attackbehaviour != 0)
+                        .cooldownFor(entity -> entity.getRandom().nextInt(1, 2))
+                ),
+                new OneRandomBehaviour<>(
+                new ConfigurableAnimatableMeleeAttack<Shark>(9, 0.3f, 1.4f, 1.7f, null, 0, this.getBiteSound(), null) //this.getBiteSound(), this.getAttackGrowlSound())
+                        .whenStarting(entity -> triggerAnim("onetime", "attack"))
+                        .cooldownFor(entity -> random.nextInt(20, 50)),
+                new ConfigurableAnimatableMeleeAttack<Shark>(13, 0.3f, 1.4f, 1.7f, null, 0, this.getBiteSound(), null) //this.getBiteSound(), this.getAttackGrowlSound())
+                        .whenStarting(entity -> triggerAnim("onetime", "bigattack"))
+                        .cooldownFor(entity -> random.nextInt(20, 50)),
+                new DoubleMeleeAttack<Shark>(15, 10, 0, 1.2f, 1.7f, null , 0, this.getBiteSound(), null) //this.getDoubleAttackSound())
+                                .whenStarting(entity ->triggerAnim("onetime", "twice"))
+                                .cooldownFor(entity -> random.nextInt(20, 50))
+                ).cooldownFor(entity -> 20).startCondition(entity -> this.attackbehaviour != 0)
         );
 
     }
@@ -375,8 +580,15 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
     @Override
     protected float getWaterSlowDown() {
       //  if (this.getTarget() != null) return 0.98f;
-        return 0.9f;
+        return 0.5f;
 
+    }
+
+
+    public void recreateFromPacket(ClientboundAddEntityPacket pPacket) {
+        super.recreateFromPacket(pPacket);
+        this.yBodyRot = 0.0F;
+        this.yBodyRotO = 0.0F;
     }
 
 
@@ -396,7 +608,7 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
     @Override
     public double getFluidMotionScale(FluidType type) {
         if (type.equals(ForgeMod.WATER_TYPE.get())) {
-            return 0.98;
+            return 0.5;
         }
         return super.getFluidMotionScale(type);
     }
@@ -413,6 +625,10 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
         controllerRegistrar.add(new AnimationController<>(this, "walk", 0, this::walkpred));
         controllerRegistrar.add(new AnimationController<>(this, "tiltrl", 0, this::tiltrl));
         controllerRegistrar.add(new AnimationController<>(this, "tiltud", 0, this::tiltud));
+        controllerRegistrar.add(new AnimationController<>(this, "onetime", state -> PlayState.STOP)
+                .triggerableAnim("attack", RawAnimation.begin().then("animation.shark.attack", Animation.LoopType.PLAY_ONCE)) // 0.4583
+                .triggerableAnim("bigattack", RawAnimation.begin().then("animation.shark.attackbig", Animation.LoopType.PLAY_ONCE)) // 0.5833
+                .triggerableAnim("twice", RawAnimation.begin().then("animation.shark.attacktwice", Animation.LoopType.PLAY_ONCE))); // 0.5 + 0.7083
     }
 
     private <T extends GeoAnimatable> PlayState idle(AnimationState<T> tAnimationState) {
@@ -498,13 +714,17 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
 
     }
 
-
-
-
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
     }
 
+
+    @Nullable
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
+        if (random.nextFloat() < 0.01f) this.settexture(true);
+        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
+    }
 }
 

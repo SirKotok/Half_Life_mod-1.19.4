@@ -37,6 +37,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Headcrab_Poison_2;
 import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
 import org.joml.Vector3f;
 
@@ -73,19 +74,8 @@ public class Barnacle extends PathfinderMob {
         return true;
     }
 
-
-
-
-
-
     @Override
     public net.minecraftforge.entity.PartEntity<?>[] getParts() { return this.parts; }
-
-
-
-
-
-
 
 
     private static final EntityDataAccessor<Float> TONGUE_LENGTH =
@@ -148,6 +138,9 @@ public class Barnacle extends PathfinderMob {
         if (!canSpawnAt(pBlockPos, pLevel)) {
             return false;
         }
+
+        boolean flag = HLperUtil.isWithinSpawnChunks(pBlockPos, pLevel);
+        if (flag) return false;
 
         int radius = 70;
         int rad = 10;

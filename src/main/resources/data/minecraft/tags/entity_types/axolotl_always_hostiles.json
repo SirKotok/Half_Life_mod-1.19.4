@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "half_life_mod:chumtoad"
+    "half_life_mod:chumtoad",
+    "half_life_mod:leech",
+    "half_life_mod:shark",
+    "half_life_mod:snark"
   ]
 }

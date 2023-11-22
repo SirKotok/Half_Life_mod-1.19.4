@@ -15,7 +15,7 @@ public class DoubleMeleeAttack<E extends HalfLifeMonster> extends AnimatableMele
   protected int counter = 0;
     protected boolean growled = false;
     protected int firsthitdelay;
-    protected int knockbackmod;
+    protected float knockbackmod;
     protected int tick;
     protected float disableshield;
     @Nullable
@@ -28,7 +28,7 @@ public class DoubleMeleeAttack<E extends HalfLifeMonster> extends AnimatableMele
     protected SoundEvent startsound;
     protected boolean attacked;
 
-    public DoubleMeleeAttack(int delayTicks, int firsthitdelay, float disablechance, float modattack, int modknockback, @Nullable MobEffect effect, int effectduration, @Nullable SoundEvent onhit, @Nullable SoundEvent startsound) {
+    public DoubleMeleeAttack(int delayTicks, int firsthitdelay, float disablechance, float modattack, float modknockback, @Nullable MobEffect effect, int effectduration, @Nullable SoundEvent onhit, @Nullable SoundEvent startsound) {
         super(delayTicks);
         this.attackmod = modattack;
         this.knockbackmod = modknockback;
