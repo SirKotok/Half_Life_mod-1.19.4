@@ -149,7 +149,7 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
     public static final EntityDataAccessor<Integer> TITL_UD = SynchedEntityData.defineId(Shark.class, EntityDataSerializers.INT); // -2 to 2
     public static final EntityDataAccessor<Integer> TITL_RL_NUM = SynchedEntityData.defineId(Shark.class, EntityDataSerializers.INT); // 1 to 3
     public static final EntityDataAccessor<Integer> TITL_RL = SynchedEntityData.defineId(Shark.class, EntityDataSerializers.INT); // -1 to 1
-    public static final EntityDataAccessor<Boolean> ID_SPECIAL = SynchedEntityData.defineId(Shark.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> ID_SPECIAL = SynchedEntityData.defineId(Shark.class, EntityDataSerializers.INT);
 
     protected void defineSynchedData() {
         super.defineSynchedData();
@@ -157,7 +157,7 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
         this.entityData.define(TITL_UD, 0);
         this.entityData.define(TITL_RL, 0);
         this.entityData.define(TITL_RL_NUM, 1);
-        this.entityData.define(ID_SPECIAL, false);
+        this.entityData.define(ID_SPECIAL, 0);
     }
 
     public int getMouthPose(){
@@ -183,20 +183,20 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
 
 
 
-    public boolean gettexture() {
+    public int gettexture() {
         return this.entityData.get(ID_SPECIAL);
     }
-    protected void settexture(boolean texture) {
+    protected void settexture(int texture) {
         this.entityData.set(ID_SPECIAL, texture);
     }
 
     public void addAdditionalSaveData(CompoundTag p_33619_) {
         super.addAdditionalSaveData(p_33619_);
-        p_33619_.putBoolean("Texture", this.gettexture());
+        p_33619_.putInt("Textur", this.gettexture());
     }
 
     public void readAdditionalSaveData(CompoundTag p_33607_) {
-        this.settexture(p_33607_.getBoolean("Texture"));
+        this.settexture(p_33607_.getInt("Textur"));
         super.readAdditionalSaveData(p_33607_);
     }
 
@@ -723,7 +723,7 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
     @Nullable
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
-        if (random.nextFloat() < 0.01f) this.settexture(true);
+        if (random.nextFloat() < 0.02f) this.settexture(random.nextInt(0, 3));
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
     }
 }

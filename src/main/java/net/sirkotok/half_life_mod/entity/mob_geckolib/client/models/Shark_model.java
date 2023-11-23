@@ -17,8 +17,8 @@ public class Shark_model extends GeoModel<Shark> {
 
     @Override
     public ResourceLocation getTextureResource(Shark animatable) {
-        if (animatable.gettexture()) return new ResourceLocation(HalfLifeMod.MOD_ID, "textures/entity/icht2.png");
-        return new ResourceLocation(HalfLifeMod.MOD_ID, "textures/entity/icht1.png");
+        int i = animatable.gettexture()+1;
+        return new ResourceLocation(HalfLifeMod.MOD_ID, "textures/entity/icht"+i+".png");
     }
 
 
@@ -30,7 +30,7 @@ public class Shark_model extends GeoModel<Shark> {
 
     @Override
    public RenderType getRenderType(Shark animatable, ResourceLocation texture) {
-        if (animatable.gettexture()) return RenderType.entityTranslucent(texture);
+        if (animatable.gettexture() == 1) return RenderType.entityTranslucent(texture);
         return RenderType.entityCutoutNoCull(texture);
     }
 
