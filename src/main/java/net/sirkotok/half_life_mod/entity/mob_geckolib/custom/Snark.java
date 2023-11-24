@@ -56,6 +56,11 @@ public class Snark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
 
 
     @Override
+    public float getVoicePitch() {
+        return 1+this.tickCount/600f;
+    }
+
+    @Override
     public boolean shouldDropExperience() {
         return !(this.getSpawnType().equals(MobSpawnType.REINFORCEMENT));
     }
@@ -210,7 +215,6 @@ public class Snark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
     @Override
     public BrainActivityGroup<Snark> getCoreTasks() { // These are the tasks that run all the time (usually)
         return BrainActivityGroup.coreTasks(
-              //  new MakeTargetThis<Chumtoad>().cooldownFor(entity -> 100),
                 new LookAtTarget<>(),                      // Have the entity turn to face and look at its current look target
                 new MoveToWalkTarget<>());
     }

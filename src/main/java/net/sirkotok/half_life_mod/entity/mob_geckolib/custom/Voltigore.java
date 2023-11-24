@@ -101,14 +101,14 @@ public class Voltigore extends HalfLifeMonster implements GeoEntity, SmartBrainO
     }
 
 
-    public static final EntityDataAccessor<Integer> VORTIGORES_AROUND = SynchedEntityData.defineId(Bullsquid.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> AGE = SynchedEntityData.defineId(Bullsquid.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> AGEUP = SynchedEntityData.defineId(Bullsquid.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> VORTIGORES_AROUND = SynchedEntityData.defineId(Voltigore.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> AGE = SynchedEntityData.defineId(Voltigore.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> AGEUP = SynchedEntityData.defineId(Voltigore.class, EntityDataSerializers.INT);
 
 
-    public static final EntityDataAccessor<Boolean> IS_BABY = SynchedEntityData.defineId(Bullsquid.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> IS_BABY = SynchedEntityData.defineId(Voltigore.class, EntityDataSerializers.BOOLEAN);
 
-    public static final EntityDataAccessor<Boolean> IS_ANGRY = SynchedEntityData.defineId(Bullsquid.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> IS_ANGRY = SynchedEntityData.defineId(Voltigore.class, EntityDataSerializers.BOOLEAN);
 
     protected void defineSynchedData() {
         super.defineSynchedData();
@@ -198,7 +198,6 @@ public class Voltigore extends HalfLifeMonster implements GeoEntity, SmartBrainO
     @Override
     public void aiStep() {
         super.aiStep();
-       // this.setBoundingBox(this.makeBoundingBox());
     }
 
 

@@ -6,6 +6,7 @@
     "item.half_life_mod.hoteye_spawn_egg": "Hoteye Spawn Egg",
   "item.half_life_mod.headcrab_2_spawn_egg": "Headcrab HL2 Spawn Egg",
     "item.half_life_mod.manhack_spawn_egg": "Manhack Spawn Egg",
+    "item.half_life_mod.baby_headcrab_spawn_egg": "Baby Headcrab Spawn Egg",
   "item.half_life_mod.headcrab_a_spawn_egg": "Headcrab HL:A Spawn Egg",
     "item.half_life_mod.pitdrone_spawn_egg": "Pitdrone Spawn Egg",
     "item.half_life_mod.shocktrooper_spawn_egg": "Shocktrooper Spawn Egg",
@@ -44,6 +45,7 @@
   "key.category.half_life_mod.half_life": "Half-Life Category",
     "key.half_life_mod.reload_gun": "Reload Gun",
 
+    "entity.half_life_mod.baby_headcrab": "Baby Headcrab",
     "entity.half_life_mod.leech": "Leech",
     "entity.half_life_mod.cockroach": "Cockroach",
     "entity.half_life_mod.manhack": "Manhack",

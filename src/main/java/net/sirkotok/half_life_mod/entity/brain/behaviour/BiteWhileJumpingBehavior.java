@@ -64,7 +64,7 @@ public class BiteWhileJumpingBehavior<E extends LivingEntity> extends Conditionl
         if (!entity.isOnGround() && BrainUtils.getMemory(entity, MemoryModuleType.ATTACK_TARGET) != null) {
             if(canBite(entity))
             {
-                entity.playSound(this.bitesound, 0.3f, 1);
+                entity.playSound(this.bitesound, 0.3f, entity.getVoicePitch());
                 entity.doHurtTarget(this.target);
                if (canSitOnHead() && (this.random.nextFloat()<this.sitchance)) {
                     entity.startRiding(this.target, true);

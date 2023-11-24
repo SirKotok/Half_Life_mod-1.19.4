@@ -62,7 +62,7 @@ public class HeadCrabJumpBehavior<E extends Monster>  extends ConditionlessAttac
     @Override
     protected void start(E entity) {
         super.start(entity);
-        if (this.scream !=null) {entity.playSound(this.scream, 0.3f, 1);}
+        if (this.scream !=null) {entity.playSound(this.scream, 0.3f, entity.getVoicePitch());}
     }
 
     @Override
@@ -87,7 +87,7 @@ public class HeadCrabJumpBehavior<E extends Monster>  extends ConditionlessAttac
                 BehaviorUtils.lookAtEntity(entity, this.target);
                 this.jump(entity);
                 if (this.jumpsound != null) {
-                entity.playSound(this.jumpsound, 0.3f, 1);
+                entity.playSound(this.jumpsound, 0.3f, entity.getVoicePitch());
                 }
             }
 
