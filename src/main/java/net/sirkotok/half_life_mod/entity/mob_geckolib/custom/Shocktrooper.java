@@ -35,6 +35,7 @@ import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
+import net.sirkotok.half_life_mod.entity.modinterface.DoubleRangedMob;
 import net.sirkotok.half_life_mod.entity.modinterface.HasLeaderMob;
 import net.sirkotok.half_life_mod.entity.projectile.ShockProjectile;
 import net.sirkotok.half_life_mod.sound.ModSounds;
@@ -75,7 +76,7 @@ import java.util.List;
 import java.util.UUID;
 
 
-public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, HasLeaderMob<Shocktrooper>, GeoEntity, SmartBrainOwner<Shocktrooper> {
+public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, DoubleRangedMob, HasLeaderMob<Shocktrooper>, GeoEntity, SmartBrainOwner<Shocktrooper> {
     //TODO: implement the spore launcher projectile thing so it works. Fix the position of the shooting from the shockroach.
     @Override
     protected float getSoundVolume() {
@@ -573,7 +574,12 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Ha
         return cache;
     }
 
+
     @Override
+    public void performSecondRangedAttack(LivingEntity livingentity, float p_33318_) {
+    }
+
+        @Override
     public void performRangedAttack(LivingEntity livingentity, float p_33318_) {
 
         double d0 = this.distanceToSqr(livingentity);

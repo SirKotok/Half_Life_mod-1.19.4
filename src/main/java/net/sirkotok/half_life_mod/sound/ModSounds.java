@@ -15,6 +15,63 @@ public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 
+    // GONARHC
+    public static final RegistryObject<SoundEvent> GON_DIE1=
+            registerSoundEvent("gon_die1");
+  public static final RegistryObject<SoundEvent> CLAW_STRIKE1=
+          registerSoundEvent("claw_strike1");
+  public static final RegistryObject<SoundEvent> CLAW_STRIKE2=
+          registerSoundEvent("claw_strike2");
+  public static final RegistryObject<SoundEvent> CLAW_STRIKE3=
+          registerSoundEvent("claw_strike3");
+  public static final RegistryObject<SoundEvent> GON_ATTACK1=
+          registerSoundEvent("gon_attack1");
+  public static final RegistryObject<SoundEvent> GON_ATTACK2=
+          registerSoundEvent("gon_attack2");
+  public static final RegistryObject<SoundEvent> GON_ATTACK3=
+          registerSoundEvent("gon_attack3");
+  public static final RegistryObject<SoundEvent> GON_ALERT1=
+          registerSoundEvent("gon_alert1");
+  public static final RegistryObject<SoundEvent> GON_ALERT2=
+          registerSoundEvent("gon_alert2");
+  public static final RegistryObject<SoundEvent> GON_ALERT3=
+          registerSoundEvent("gon_alert3");
+  public static final RegistryObject<SoundEvent> GON_CHILDDIE1=
+          registerSoundEvent("gon_childdie1");
+  public static final RegistryObject<SoundEvent> GON_CHILDDIE2=
+          registerSoundEvent("gon_childdie2");
+  public static final RegistryObject<SoundEvent> GON_CHILDDIE3=
+          registerSoundEvent("gon_childdie3");
+  public static final RegistryObject<SoundEvent> GON_SACK1=
+          registerSoundEvent("gon_sack1");
+  public static final RegistryObject<SoundEvent> GON_SACK2=
+          registerSoundEvent("gon_sack2");
+  public static final RegistryObject<SoundEvent> GON_SACK3=
+          registerSoundEvent("gon_sack3");
+  public static final RegistryObject<SoundEvent> GON_PAIN1=
+          registerSoundEvent("gon_pain1");
+  public static final RegistryObject<SoundEvent> GON_PAIN2=
+          registerSoundEvent("gon_pain2");
+  public static final RegistryObject<SoundEvent> GON_PAIN3=
+          registerSoundEvent("gon_pain3");
+  public static final RegistryObject<SoundEvent> GON_STEP1=
+          registerSoundEvent("gon_step1");
+  public static final RegistryObject<SoundEvent> GON_STEP2=
+          registerSoundEvent("gon_step2");
+  public static final RegistryObject<SoundEvent> GON_STEP3=
+          registerSoundEvent("gon_step3");
+  public static final RegistryObject<SoundEvent> GON_BIRTH1=
+          registerSoundEvent("gon_birth1");
+  public static final RegistryObject<SoundEvent> GON_BIRTH2=
+          registerSoundEvent("gon_birth2");
+  public static final RegistryObject<SoundEvent> GON_BIRTH3=
+          registerSoundEvent("gon_birth3");
+
+
+
+
+
+
 
   // LEECH
   public static final RegistryObject<SoundEvent> LEECH_BITE3 =

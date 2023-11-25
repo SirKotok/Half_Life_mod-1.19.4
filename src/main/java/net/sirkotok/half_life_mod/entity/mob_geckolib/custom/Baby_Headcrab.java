@@ -3,6 +3,7 @@ package net.sirkotok.half_life_mod.entity.mob_geckolib.custom;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -130,7 +131,7 @@ public class Baby_Headcrab extends HalfLifeMonster implements GeoEntity, SmartBr
 
     public static AttributeSupplier setAttributes() {
         return Monster.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 3D)
+                .add(Attributes.MAX_HEALTH, 2D)
                 .add(Attributes.ATTACK_DAMAGE, 1f)
                 .add(Attributes.ATTACK_SPEED, 1.0f)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.0f)
@@ -268,19 +269,23 @@ public class Baby_Headcrab extends HalfLifeMonster implements GeoEntity, SmartBr
      @Override
     public void tick() {
          super.tick();
+
          if (!this.level.isClientSide() && this.tickCount % 20 == 0) this.setage(this.getage()+1);
          if (this.getage() > this.getagetoageup() && !this.level.isClientSide() && this.tickCount % 5 == 0) {
-             int i = RandomSource.create().nextInt(0, 8);
+             int i = RandomSource.create().nextInt(-4, 8);
              this.doage((ServerLevel) this.level, i);
          }
      }
 
 
+    @Override
+    public boolean shouldDropExperience() {
+        return false;
+    }
 
-
-
-     public void doage(ServerLevel level, int i){
+    public void doage(ServerLevel level, int i){
         LivingEntity summon = null;
+        if (i < 0) i = RandomSource.create().nextInt(4);
         if (i == 0) {summon = ModEntities.HEADCRAB_HL1.get().create(level);}
         else if (i == 1) {summon = ModEntities.HEADCRAB_HL2.get().create(level);}
         else if (i == 3) {summon = ModEntities.HEADCRAB_HLA.get().create(level);}
@@ -293,6 +298,7 @@ public class Baby_Headcrab extends HalfLifeMonster implements GeoEntity, SmartBr
              ForgeEventFactory.onFinalizeSpawn((Mob) summon, (ServerLevelAccessor) level, level.getCurrentDifficultyAt(summon.blockPosition()), this.getSpawnType(), null, null);
              level.addFreshEntity(summon);
              if (this.hasCustomName()) summon.setCustomName(this.getCustomName());
+             summon.addTag("nodrop");
              BrainUtils.setMemory(summon, MemoryModuleType.ATTACK_TARGET, BrainUtils.getMemory(this, MemoryModuleType.ATTACK_TARGET));
              this.discard();
          }
@@ -333,7 +339,7 @@ public class Baby_Headcrab extends HalfLifeMonster implements GeoEntity, SmartBr
     @Nullable
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
-        this.setageup(RandomSource.create().nextInt(30, 240));
+        this.setageup(RandomSource.create().nextInt(30, 600));
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
     }
 }

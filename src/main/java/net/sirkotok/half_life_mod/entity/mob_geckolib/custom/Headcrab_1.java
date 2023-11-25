@@ -3,6 +3,7 @@ package net.sirkotok.half_life_mod.entity.mob_geckolib.custom;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -105,21 +106,45 @@ public class Headcrab_1 extends HalfLifeMonster implements GeoEntity, SmartBrain
 
     public static final EntityDataAccessor<Boolean> IS_ANGRY = SynchedEntityData.defineId(Headcrab_1.class, EntityDataSerializers.BOOLEAN);
 
-
+    public static final EntityDataAccessor<Boolean> NO_DROP = SynchedEntityData.defineId(Headcrab_1.class, EntityDataSerializers.BOOLEAN);
 
 
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(IS_ANGRY, false);
+        this.entityData.define(NO_DROP, false);
     }
     protected boolean isangry() {
         return this.entityData.get(IS_ANGRY);
     }
 
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        if(this.getTags().contains("nodrop")) this.setNoDrop(true);
+    }
 
+    protected void setNoDrop(boolean noDrop){
+        this.entityData.set(NO_DROP, noDrop);
+    }
+    protected boolean  getNoDrop(){
+      return this.entityData.get(NO_DROP);
+    }
 
+    public void addAdditionalSaveData(CompoundTag p_33619_) {
+        super.addAdditionalSaveData(p_33619_);
+        p_33619_.putBoolean("dontdrop", this.getNoDrop());
+    }
 
+    public void readAdditionalSaveData(CompoundTag p_33607_) {;
+        this.setNoDrop(p_33607_.getBoolean("dontdrop"));
+        super.readAdditionalSaveData(p_33607_);
+    }
 
+    @Override
+    public boolean shouldDropExperience() {
+        return !getNoDrop();
+    }
 
     public Headcrab_1(EntityType type, Level level) {
         super(type, level);

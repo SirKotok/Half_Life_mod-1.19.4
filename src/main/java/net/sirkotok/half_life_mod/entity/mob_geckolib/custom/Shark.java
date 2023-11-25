@@ -54,6 +54,7 @@ import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetWalkTargetToAtt
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.InvalidateAttackTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetPlayerLookTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTarget;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.target.TargetOrRetaliate;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.custom.NearbyBlocksSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
@@ -496,7 +497,7 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
                 new FirstApplicableBehaviour<Shark>(
                         new CustomBehaviour<>(entity -> BrainUtils.clearMemory(this, MemoryModuleType.WALK_TARGET)).cooldownFor(entity -> 150),
                         new CustomBehaviour<>(entity -> this.attackbehaviour = 0).startCondition(entity -> this.attackbehaviour != 0),
-                        new TargetOrRetaliateHLT<>(),
+                        new TargetOrRetaliate<>(),
                         new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>(),
                         new SetBlockToWalkTargetNoInterest<>(),

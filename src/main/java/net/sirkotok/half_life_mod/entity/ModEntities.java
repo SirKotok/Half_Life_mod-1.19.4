@@ -96,6 +96,14 @@ public class ModEntities {
                             .sized(1f, 1f)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "bullsquid").toString()));
 
+
+    public static final RegistryObject<EntityType<Gonarch>> GONARCH =
+            ENTITY_TYPES.register("gonarch",
+                    () -> EntityType.Builder.of(Gonarch::new, MobCategory.MONSTER)
+                            .sized(3f, 4.5f)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "gonarch").toString()));
+
+
     public static final RegistryObject<EntityType<Pitdrone>> PITDRONE =
             ENTITY_TYPES.register("pitdrone",
                     () -> EntityType.Builder.of(Pitdrone::new, MobCategory.MONSTER)
@@ -193,6 +201,16 @@ public class ModEntities {
                                     .clientTrackingRange(20)
                                     .updateInterval(1)
                     .build(new ResourceLocation(HalfLifeMod.MOD_ID, "acid_ball").toString()));
+
+
+    public static final RegistryObject<EntityType<AcidThrown>> ACID_THROWN =
+            ENTITY_TYPES.register("acid_thrown",
+                    () -> EntityType.Builder.<AcidThrown>of(AcidThrown::new, MobCategory.MISC)
+                            .sized(0.4F, 0.4F)
+                            .clientTrackingRange(20)
+                            .updateInterval(1)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "acid_thrown").toString()));
+
 
     public static final RegistryObject<EntityType<SporeShot>> SPORESHOT =
             ENTITY_TYPES.register("spore_shot",

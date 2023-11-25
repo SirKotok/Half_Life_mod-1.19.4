@@ -72,7 +72,7 @@ public class HalfLifeMod
          //   event.accept(Blocks.STRUCTURE_BLOCK);
          //   event.accept(Blocks.JIGSAW);
 
-
+            event.accept(ModItems.GONARCH_SPAWN_EGG);
             event.accept(ModItems.HEADCRAB_ONE_SPAWN_EGG);
             event.accept(ModItems.BABY_HEADCRAB_SPAWN_EGG);
             event.accept(ModItems.HEADCRAB_TWO_SPAWN_EGG);
@@ -81,6 +81,8 @@ public class HalfLifeMod
             event.accept(ModItems.HEADCRAB_POISON_HLA_SPAWN_EGG);
             event.accept(ModItems.HEADCRAB_ALYX_SPAWN_EGG);
             event.accept(ModItems.HEADCRAB_ARMOR_SPAWN_EGG);
+
+
 
           //  event.accept(ModItems.HEADCRAB_ZOMBIE_SPAWN_EGG);
 

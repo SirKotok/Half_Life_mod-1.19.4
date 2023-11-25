@@ -65,6 +65,7 @@ public class ClientModBusEvents {
         EntityRenderers.register(ModEntities.HEADCRAB_ARMORED.get(), Headcrab_armoredrenderer::new);
         EntityRenderers.register(ModEntities.HEADCRAB_FAST.get(), Headcrab_fastrenderer::new);
         EntityRenderers.register(ModEntities.BULLSQUID.get(), Bullsquid_renderer::new);
+        EntityRenderers.register(ModEntities.GONARCH.get(), Gonarch_renderer::new);
         EntityRenderers.register(ModEntities.CHUMTOAD.get(), Chumtoadrenderer::new);
         EntityRenderers.register(ModEntities.SNARK.get(), Snarkrenderer::new);
         EntityRenderers.register(ModEntities.SHOCKROACH.get(), ShockRoachrenderer::new);
@@ -82,6 +83,7 @@ public class ClientModBusEvents {
         EntityRenderers.register(ModEntities.PITDRONE_SPIKE.get(), Pitdrone_spike_renderer::new);
         EntityRenderers.register(ModEntities.SHOCK_SHOT.get(), ThrownItemRenderer::new);
         EntityRenderers.register(ModEntities.BULLET_ONE.get(), ThrownItemRenderer::new);
+        EntityRenderers.register(ModEntities.ACID_THROWN.get(), ThrownItemRenderer::new);
         EntityRenderers.register(ModEntities.BARNACLE.get(), Barnacle_Renderer::new);
 
         BlockEntityRenderers.register(ModBlockEntities.VOLTIGORE_EGG_BLOCK_ENTITY.get(), VoltigoreEggRenderer::new);

@@ -11,6 +11,156 @@
       "half_life_mod:leech_bite1"
     ]
   },
+  "gon_die1": {
+    "subtitle": "sounds.half_life_mod.gon_die1",
+    "sounds": [
+      "half_life_mod:gon_die1"
+    ]
+  },
+  "claw_strike1": {
+    "subtitle": "sounds.half_life_mod.claw_strike1",
+    "sounds": [
+      "half_life_mod:claw_strike1"
+    ]
+  },
+  "claw_strike2": {
+    "subtitle": "sounds.half_life_mod.claw_strike2",
+    "sounds": [
+      "half_life_mod:claw_strike2"
+    ]
+  },
+  "claw_strike3": {
+    "subtitle": "sounds.half_life_mod.claw_strike3",
+    "sounds": [
+      "half_life_mod:claw_strike3"
+    ]
+  },
+  "gon_attack1": {
+    "subtitle": "sounds.half_life_mod.gon_attack1",
+    "sounds": [
+      "half_life_mod:gon_attack1"
+    ]
+  },
+  "gon_attack2": {
+    "subtitle": "sounds.half_life_mod.gon_attack2",
+    "sounds": [
+      "half_life_mod:gon_attack2"
+    ]
+  },
+  "gon_attack3": {
+    "subtitle": "sounds.half_life_mod.gon_attack3",
+    "sounds": [
+      "half_life_mod:gon_attack3"
+    ]
+  },
+  "gon_alert1": {
+    "subtitle": "sounds.half_life_mod.gon_alert1",
+    "sounds": [
+      "half_life_mod:gon_alert1"
+    ]
+  },
+  "gon_alert2": {
+    "subtitle": "sounds.half_life_mod.gon_alert2",
+    "sounds": [
+      "half_life_mod:gon_alert2"
+    ]
+  },
+  "gon_alert3": {
+    "subtitle": "sounds.half_life_mod.gon_alert3",
+    "sounds": [
+      "half_life_mod:gon_alert3"
+    ]
+  },
+  "gon_childdie1": {
+    "subtitle": "sounds.half_life_mod.gon_childdie1",
+    "sounds": [
+      "half_life_mod:gon_childdie1"
+    ]
+  },
+  "gon_childdie2": {
+    "subtitle": "sounds.half_life_mod.gon_childdie2",
+    "sounds": [
+      "half_life_mod:gon_childdie2"
+    ]
+  },
+  "gon_childdie3": {
+    "subtitle": "sounds.half_life_mod.gon_childdie3",
+    "sounds": [
+      "half_life_mod:gon_childdie3"
+    ]
+  },
+  "gon_sack1": {
+    "subtitle": "sounds.half_life_mod.gon_sack1",
+    "sounds": [
+      "half_life_mod:gon_sack1"
+    ]
+  },
+  "gon_sack2": {
+    "subtitle": "sounds.half_life_mod.gon_sack2",
+    "sounds": [
+      "half_life_mod:gon_sack2"
+    ]
+  },
+  "gon_sack3": {
+    "subtitle": "sounds.half_life_mod.gon_sack3",
+    "sounds": [
+      "half_life_mod:gon_sack3"
+    ]
+  },
+  "gon_pain1": {
+    "subtitle": "sounds.half_life_mod.gon_pain1",
+    "sounds": [
+      "half_life_mod:gon_pain1"
+    ]
+  },
+  "gon_pain2": {
+    "subtitle": "sounds.half_life_mod.gon_pain2",
+    "sounds": [
+      "half_life_mod:gon_pain2"
+    ]
+  },
+  "gon_pain3": {
+    "subtitle": "sounds.half_life_mod.gon_pain3",
+    "sounds": [
+      "half_life_mod:gon_pain3"
+    ]
+  },
+  "gon_step1": {
+    "subtitle": "sounds.half_life_mod.gon_step1",
+    "sounds": [
+      "half_life_mod:gon_step1"
+    ]
+  },
+  "gon_step2": {
+    "subtitle": "sounds.half_life_mod.gon_step2",
+    "sounds": [
+      "half_life_mod:gon_step2"
+    ]
+  },
+  "gon_step3": {
+    "subtitle": "sounds.half_life_mod.gon_step3",
+    "sounds": [
+      "half_life_mod:gon_step3"
+    ]
+  },
+  "gon_birth1": {
+    "subtitle": "sounds.half_life_mod.gon_birth1",
+    "sounds": [
+      "half_life_mod:gon_birth1"
+    ]
+  },
+  "gon_birth2": {
+    "subtitle": "sounds.half_life_mod.gon_birth2",
+    "sounds": [
+      "half_life_mod:gon_birth2"
+    ]
+  },
+  "gon_birth3": {
+    "subtitle": "sounds.half_life_mod.gon_birth3",
+    "sounds": [
+      "half_life_mod:gon_birth3"
+    ]
+  },
   "leech_bite2": {
     "subtitle": "sounds.half_life_mod.leech_bite2",
     "sounds": [

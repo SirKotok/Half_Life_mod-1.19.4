@@ -2,6 +2,7 @@ package net.sirkotok.half_life_mod.entity.mob_geckolib.custom;
 
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -90,12 +91,13 @@ public class Headcrab_3 extends HalfLifeMonster implements GeoEntity, SmartBrain
     public static final EntityDataAccessor<Integer> JUMP_TIMESTAMP = SynchedEntityData.defineId(Headcrab_3.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> AI_STOP_DELAY = SynchedEntityData.defineId(Headcrab_3.class, EntityDataSerializers.INT);
 
-
+    public static final EntityDataAccessor<Boolean> NO_DROP = SynchedEntityData.defineId(Headcrab_3.class, EntityDataSerializers.BOOLEAN);
 
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(IS_ANGRY, false);
         this.entityData.define(IS_JUMPING, false);
+        this.entityData.define(NO_DROP, false);
         this.entityData.define(AI_STOP, false);
         this.entityData.define(AI_STOP_TIMESTAMP, 0);
         this.entityData.define(JUMP_TIMESTAMP, 0);
@@ -104,6 +106,32 @@ public class Headcrab_3 extends HalfLifeMonster implements GeoEntity, SmartBrain
     protected boolean isangry() {
         return this.entityData.get(IS_ANGRY);
     }
+
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        if(this.getTags().contains("nodrop")) this.setNoDrop(true);
+    }
+
+    protected void setNoDrop(boolean noDrop){
+        this.entityData.set(NO_DROP, noDrop);
+    }
+    protected boolean  getNoDrop(){
+        return this.entityData.get(NO_DROP);
+    }
+
+    public void addAdditionalSaveData(CompoundTag p_33619_) {
+        super.addAdditionalSaveData(p_33619_);
+        p_33619_.putBoolean("dontdrop", this.getNoDrop());
+    }
+
+    public void readAdditionalSaveData(CompoundTag p_33607_) {;
+        this.setNoDrop(p_33607_.getBoolean("dontdrop"));
+        super.readAdditionalSaveData(p_33607_);
+    }
+
+
 
     public void stopAiFor(int delay) {
         this.entityData.set(AI_STOP_TIMESTAMP, this.tickCount);

@@ -185,7 +185,7 @@ public class Voltigore extends HalfLifeMonster implements GeoEntity, SmartBrainO
 
     public static AttributeSupplier setAttributes() {
         return Monster.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 200D)
+                .add(Attributes.MAX_HEALTH, 190D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D)
                 .add(Attributes.ARMOR, 10D)
                 .add(Attributes.ATTACK_DAMAGE, 16f)
