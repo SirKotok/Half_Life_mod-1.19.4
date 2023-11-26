@@ -20,6 +20,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -37,6 +38,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -55,9 +57,12 @@ import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.parts.GonarchPart;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.parts.SharkPart;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.BarnaclePart;
 import net.sirkotok.half_life_mod.entity.modinterface.DoubleRangedMob;
+import net.sirkotok.half_life_mod.entity.modinterface.MultiMeleeEntity;
 import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
 import net.sirkotok.half_life_mod.entity.projectile.AcidThrown;
 import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.util.CommonSounds;
+import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.sirkotok.half_life_mod.util.ModTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
@@ -90,9 +95,10 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 
-public class Gonarch extends HalfLifeMonster implements RangedAttackMob, DoubleRangedMob, GeoEntity, SmartBrainOwner<Gonarch> {
+public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, RangedAttackMob, DoubleRangedMob, GeoEntity, SmartBrainOwner<Gonarch> {
 
 
     private int babyemount = 0;
@@ -103,6 +109,7 @@ public class Gonarch extends HalfLifeMonster implements RangedAttackMob, DoubleR
     private final GonarchPart leg2;
     private final GonarchPart leg3;
     private final GonarchPart leg4;
+    private final GonarchPart front;
     private int dyingticks = 0;
     private final GonarchPart armorabove;
     private final GonarchPart[] parts;
@@ -114,9 +121,6 @@ public class Gonarch extends HalfLifeMonster implements RangedAttackMob, DoubleR
 
     @Override
     public net.minecraftforge.entity.PartEntity<?>[] getParts() { return this.parts; }
-
-
-
 
 
 
@@ -209,15 +213,17 @@ public class Gonarch extends HalfLifeMonster implements RangedAttackMob, DoubleR
          this.setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1F);
         this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, -1F);
         this.setMaxUpStep(2f);
-        this.sack = new GonarchPart(this, "mouth", 2F, 2f, true);
-        this.leg1 = new GonarchPart(this, "mouth", 0.7F, 3f, false);
-        this.leg2 = new GonarchPart(this, "mouth", 0.7F, 3f, false);
-        this.leg3 = new GonarchPart(this, "mouth", 0.7F, 3f, false);
-        this.leg4 = new GonarchPart(this, "mouth", 0.7F, 3f, false);
-        this.armorabove = new GonarchPart(this, "mouth", 4F, 1.5f, false);
+        this.sack = new GonarchPart(this, "mouth", 2F, 2f, true, true, true);
+        this.leg1 = new GonarchPart(this, "mouth", 0.7F, 3f, false, true, false);
+        this.leg2 = new GonarchPart(this, "mouth", 0.7F, 3f, false, true, false);
+        this.leg3 = new GonarchPart(this, "mouth", 0.7F, 3f, false, true, false);
+        this.leg4 = new GonarchPart(this, "mouth", 0.7F, 3f, false, true, false);
+        this.front = new GonarchPart(this, "mouth", this.getBbWidth()+1f, 1f, false, false, false);
+        this.armorabove = new GonarchPart(this, "mouth", 4F, 1.5f, false, true, true);
         this.parts = new GonarchPart[] {
                 this.sack,
                 this.leg1,
+                this.front,
                 this.leg2,
                 this.leg3,
                 this.leg4,
@@ -247,7 +253,14 @@ public class Gonarch extends HalfLifeMonster implements RangedAttackMob, DoubleR
     private void tickLeg1(GonarchPart pPart) {
         pPart.moveTo(rotvec(45));
     }
-
+    private void tickfront(GonarchPart pPart) {
+        float i = length()-1.8f;
+        double yrot = (this.yBodyRot)/180*Math.PI;
+        double d1 = Math.sin(yrot);
+        double d2 = Math.cos(yrot);
+        Vec3 vec3 = new Vec3((float)this.getX()-i*d1, this.getY(), (float)this.getZ()+i*d2);
+        pPart.moveTo(vec3);
+    }
     private Vec3 rotvec(int angledegree){
         float i = length();
         double yrot = (this.yBodyRot+angledegree)/180*Math.PI;
@@ -256,6 +269,16 @@ public class Gonarch extends HalfLifeMonster implements RangedAttackMob, DoubleR
         return new Vec3((float)this.getX()-i*d1, this.getY(), (float)this.getZ()+i*d2);
     }
 
+    @Override
+    protected void dropExperience() {
+    }
+
+    protected void actuallydropExperience() {
+        if (this.level instanceof ServerLevel && !this.wasExperienceConsumed() && (this.isAlwaysExperienceDropper() || this.lastHurtByPlayerTime > 0 && this.shouldDropExperience() && this.level.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT))) {
+            int reward = net.minecraftforge.event.ForgeEventFactory.getExperienceDrop(this, this.lastHurtByPlayer, this.getExperienceReward());
+            ExperienceOrb.award((ServerLevel)this.level, this.position(), reward);
+        }
+    }
 
     private void tickLeg2(GonarchPart pPart) {
         pPart.moveTo(rotvec(-45));
@@ -275,6 +298,7 @@ public class Gonarch extends HalfLifeMonster implements RangedAttackMob, DoubleR
         this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
         tickLeg1(leg1);
         tickLeg2(leg2);
+        tickfront(front);
         tickLeg3(leg3);
         tickLeg4(leg4);
         tickarmor(armorabove);
@@ -367,13 +391,10 @@ public class Gonarch extends HalfLifeMonster implements RangedAttackMob, DoubleR
     }
 
     protected SoundEvent getHitSound(){
-        switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.CLAW_STRIKE1.get();
-            case 2:  return ModSounds.CLAW_STRIKE2.get();
-            case 3:  return ModSounds.CLAW_STRIKE3.get();
-        }
-        return ModSounds.HEADCRAB_1_ALERT_1.get();
+        return CommonSounds.getClawHitSound();
     }
+
+
 
     protected SoundEvent getAttackSound(){
         switch (this.random.nextInt(1,4)) {
@@ -433,11 +454,6 @@ public class Gonarch extends HalfLifeMonster implements RangedAttackMob, DoubleR
 
 
 
-
-
-
-
-
     @Override
     protected Brain.Provider<?> brainProvider() {
         return new SmartBrainProvider<>(this);
@@ -447,6 +463,27 @@ public class Gonarch extends HalfLifeMonster implements RangedAttackMob, DoubleR
     @Override
     public void tick() {
         super.tick();
+
+
+        if (this.isDeadOrDying() && !this.level.isClientSide()) {
+            dyingticks++;
+            if (dyingticks == 17){
+                this.level.explode(this, this.getX(), this.getY(), this.getZ(), 5f, Level.ExplosionInteraction.MOB);
+            }
+            if (dyingticks == 18) {
+                this.makebaby();
+                this.makebaby();
+                this.makebaby();
+                this.makebaby();
+                this.makebaby();
+                this.makebaby();
+                this.makebaby();
+                this.makebaby();
+                this.makebaby();
+                this.actuallydropExperience();
+            }
+        }
+
 
 
         if (this.tickCount % 20 == 0 && !this.level.isClientSide()) {
@@ -489,6 +526,23 @@ public class Gonarch extends HalfLifeMonster implements RangedAttackMob, DoubleR
         }
 
 
+        if (BrainUtils.getTargetOfEntity(this) == null && !this.level.isClientSide() && this.tickCount % 100 == 0) {
+            ServerLevel pLevel = (ServerLevel) this.level;
+            BlockPos pBlockPos = this.blockPosition();
+            int rad = 35;
+            int i = 0;
+            List<Mob> enemies = EntityRetrievalUtil.getEntities((Level) pLevel,
+                    new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
+                            pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), target ->
+                            target instanceof Player ||
+                            target instanceof IronGolem ||
+                            target instanceof AbstractVillager ||
+                            target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) ||
+                            target instanceof HalfLifeNeutral);
+            BrainUtils.setTargetOfEntity(this, enemies.get(random.nextInt(0, enemies.size())));
+        }
+
+
 
 
     }
@@ -511,9 +565,6 @@ public class Gonarch extends HalfLifeMonster implements RangedAttackMob, DoubleR
                             target instanceof Player ||
                             target instanceof IronGolem ||
                             target instanceof AbstractVillager ||
-                            target instanceof Pitdrone ||
-                            target instanceof Slime ||
-                            target instanceof Bullsquid ||
                             target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) ||
                             target instanceof HalfLifeNeutral
                             ));
@@ -540,8 +591,8 @@ public class Gonarch extends HalfLifeMonster implements RangedAttackMob, DoubleR
                         new TargetOrRetaliateHLT<>(),
                         new SetRandomLookTarget<>()),
                 new OneRandomBehaviour<>(
-                        new SetRandomWalkTarget<>(),
-                        new Idle<>().runFor(entity -> entity.getRandom().nextInt(30, 90))
+                        new SetRandomWalkTarget<>().speedModifier(1f),
+                        new Idle<>().runFor(entity -> entity.getRandom().nextInt(50, 100))
                                ));
     }
 
@@ -581,21 +632,21 @@ public class Gonarch extends HalfLifeMonster implements RangedAttackMob, DoubleR
                         new SetWalkTargetToAttackTargetIfNoWalkTarget<Gonarch>().speedMod(2.0f).startCondition(entity -> !this.runround),
                         new SetWalkTargetToAttackTargetIfNoWalkTarget<Gonarch>().speedMod(2.0f)
                 ),
-                new SetWalkTargetToAttackTarget<>().speedMod(2.0f).startCondition(entity -> this.distanceTo(Objects.requireNonNull(this.getTarget())) > 24),
+                new SetWalkTargetToAttackTarget<>().speedMod(2.0f).startCondition(entity -> this.distanceTo(BrainUtils.getTargetOfEntity(this) != null ? BrainUtils.getTargetOfEntity(this) : this) > 24),
                 new SetWalkTargetToAttackTarget<>().speedMod(2.0f).startCondition(entity -> this.getLastHurtByMob() != null).cooldownFor(entity -> 600),
                 new FirstApplicableBehaviour<>(
                         new OneRandomBehaviour<>(
-                 new ConfigurableAnimatableMeleeAttack<Gonarch>(12, 1f, 1, 1.5f, null, 0, this.getHitSound(), this.getAttackSound())
+                 new MultiMeleeAttack<Gonarch>(true, 4, 1f, 1, 1.5f, null, 0, this.getHitSound(), this.getAttackSound())
                         .whenStarting(entity -> triggerAnim("onetime", "left"))
-                        .cooldownFor(entity -> random.nextInt(20, 30)),
-                 new ConfigurableAnimatableMeleeAttack<Gonarch>(10, 1f, 1, 1.5f, null, 0, this.getHitSound(), this.getAttackSound())
+                        .cooldownFor(entity -> random.nextInt(10, 20)),
+                 new MultiMeleeAttack<Gonarch>(true,4, 1f, 1, 1.5f, null, 0, this.getHitSound(), this.getAttackSound())
                                 .whenStarting(entity -> triggerAnim("onetime", "right"))
-                                .cooldownFor(entity -> random.nextInt(20, 30)),
-                 new ConfigurableAnimatableMeleeAttack<Gonarch>(14, 1f, 1, 1.5f, null, 0, this.getHitSound(), this.getAttackSound())
+                                .cooldownFor(entity -> random.nextInt(10, 20)),
+                 new MultiMeleeAttack<Gonarch>(true,4, 1f, 1, 1.5f, null, 0, this.getHitSound(), this.getAttackSound())
                                 .whenStarting(entity -> triggerAnim("onetime", "double"))
-                                .cooldownFor(entity -> random.nextInt(20, 30))),
+                                .cooldownFor(entity -> random.nextInt(10, 20))),
                 new StopAndShoot<Gonarch>(10, 10, 1f).attackRadius(32f).cooldownFor(entity -> random.nextFloat() < 0.1f ? 220 : random.nextInt(30, 60))
-                              .whenStarting(entity -> triggerAnim("onetime", "shoot")).startCondition(emtity -> this.distanceTo(BrainUtils.getTargetOfEntity(this)) > 7f || (BrainUtils.getTargetOfEntity(this).getY() - this.getY()+4)>0),
+                              .whenStarting(entity -> triggerAnim("onetime", "shoot")).startCondition(emtity -> this.distanceTo(HLperUtil.TargetOrThis(this)) > 7f || (HLperUtil.TargetOrThis(this).getY() - this.getY()+4)>0),
                 new StopAndSecondShoot<Gonarch>(15, 8, 1f, this.getBirthSound()).attackRadius(32f).cooldownFor(entity -> random.nextInt(20, 40)).startCondition(entity -> this.babyemount <= this.babymaxemount)
                        .whenStarting(entity -> triggerAnim("onetime", "birth")).cooldownFor(entity -> random.nextInt(30, 80))
                 )
@@ -628,8 +679,13 @@ public class Gonarch extends HalfLifeMonster implements RangedAttackMob, DoubleR
             summon.moveTo(this.position());
             ForgeEventFactory.onFinalizeSpawn((Mob) summon, (ServerLevelAccessor) level, level.getCurrentDifficultyAt(summon.blockPosition()), MobSpawnType.REINFORCEMENT, null, null);
             level.addFreshEntity(summon);
-            BrainUtils.setMemory(summon, MemoryModuleType.ATTACK_TARGET, BrainUtils.getMemory(this, MemoryModuleType.ATTACK_TARGET));
-    }
+
+            if (this.isDeadOrDying()) BrainUtils.setMemory(summon, MemoryModuleType.ATTACK_TARGET, this.getKillCredit());
+            else BrainUtils.setMemory(summon, MemoryModuleType.ATTACK_TARGET, BrainUtils.getMemory(this, MemoryModuleType.ATTACK_TARGET));
+
+
+
+        }
     }
 
 
@@ -686,6 +742,24 @@ public class Gonarch extends HalfLifeMonster implements RangedAttackMob, DoubleR
     }
 
 
+    @Override
+    public boolean performMultiAttack(boolean after, Entity entity, float disablechance, float attack_modifier, float knockback_modifier, @Nullable MobEffect effect, int duration, boolean visible) {
+        boolean u = false;
+        List<Entity> list = this.level.getEntities(this, this.front.getBoundingBox(), obj -> obj instanceof LivingEntity && !(obj.getType().is(ModTags.EntityTypes.FACTION_HEADCRAB)));
+        for (Entity entity1 : list) {
+            if (entity1 instanceof LivingEntity living) {
+                this.ConfigurabledoHurtTargetShieldBoolean(after, entity1, disablechance, attack_modifier, knockback_modifier, effect, duration, visible);
+                u = true;
+            }
+        }
+        return u;
+    }
+
+    @Override
+    public boolean isinside() {
+         List<Entity> list = this.level.getEntities(this, this.front.getBoundingBox(), obj -> obj instanceof LivingEntity && !(obj.getType().is(ModTags.EntityTypes.FACTION_HEADCRAB)));
+        return !list.isEmpty();
+    }
 }
 
 

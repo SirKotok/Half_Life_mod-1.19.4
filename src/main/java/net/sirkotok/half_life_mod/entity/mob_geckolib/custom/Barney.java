@@ -28,6 +28,7 @@ import net.sirkotok.half_life_mod.entity.brain.behaviour.TargetOrRetaliateHLT;
 import net.sirkotok.half_life_mod.entity.projectile.Bullet;
 import net.sirkotok.half_life_mod.item.ModItems;
 import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -227,7 +228,7 @@ public class Barney extends HalfLifeNeutral implements GeoEntity, SmartBrainOwne
                 new Retaliate<>(),
                 new InvalidateAttackTarget<>(),
                 new SetWalkTargetToAttackTarget<Barney>().whenStarting(entity -> this.entityData.set(IS_ANGRY, true)),
-                new StopAndShoot<Barney>(14, 0, 4f).startCondition(entity -> this.distanceTo(BrainUtils.getTargetOfEntity(this)) < 12)
+                new StopAndShoot<Barney>(14, 0, 4f).startCondition(entity -> this.distanceTo(HLperUtil.TargetOrThis(this)) < 12)
                                 .whenStarting(entity -> triggerAnim("attack", "shoot"))
         );
     }

@@ -11,6 +11,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Pitdrone;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Shockroach;
+import net.tslat.smartbrainlib.util.BrainUtils;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -27,6 +28,11 @@ public final class HLperUtil {
       return max;
     }
 
+
+
+    public static LivingEntity TargetOrThis(LivingEntity me){
+        return BrainUtils.getTargetOfEntity(me) != null ? BrainUtils.getTargetOfEntity(me) : me;
+    }
 
 
     public static boolean issameteam(LivingEntity one, LivingEntity two){

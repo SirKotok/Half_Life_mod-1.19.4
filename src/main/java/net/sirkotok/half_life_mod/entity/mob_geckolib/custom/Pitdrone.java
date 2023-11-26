@@ -211,6 +211,7 @@ public class Pitdrone extends HalfLifeMonster implements AmmoCountMob, RangedAtt
                             target instanceof Player ||
                             target.getType().is(ModTags.EntityTypes.HEADCRAB) ||
                             target instanceof IronGolem ||
+                            target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) ||
                             target instanceof AbstractVillager ||
                             target instanceof Shockroach ||
                             target instanceof Bullsquid ||

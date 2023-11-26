@@ -434,6 +434,7 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Do
                 new NearbyLivingEntitySensor<Shocktrooper>()
                         .setPredicate((target, entity) ->
                             target instanceof Player ||
+                                    target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) ||
                             target instanceof IronGolem ||
                             target instanceof AbstractVillager ||
                             target instanceof HalfLifeNeutral

@@ -12,6 +12,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
+import net.sirkotok.half_life_mod.util.CommonSounds;
 import net.sirkotok.half_life_mod.util.ModTags;
 
 public class Headcrab_Armored extends Headcrab_3{
@@ -49,7 +50,8 @@ public class Headcrab_Armored extends Headcrab_3{
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
         if (pSource.is(DamageTypeTags.IS_PROJECTILE) && !this.vulnerable()) {
-            return false; }
+            this.playSound(CommonSounds.getRicSound(), 0.8f,  this.getVoicePitch());
+            return false;}
         return super.hurt(pSource, pAmount);
     }
 

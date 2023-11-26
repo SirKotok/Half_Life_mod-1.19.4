@@ -33,6 +33,8 @@ import net.sirkotok.half_life_mod.entity.brain.behaviour.BiteWhileJumpingBehavio
 import net.sirkotok.half_life_mod.entity.brain.behaviour.HeadCrabJumpBehavior;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
 import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.util.HLperUtil;
+import net.sirkotok.half_life_mod.util.ModTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -251,7 +253,8 @@ public class Headcrab_Poison_2 extends HalfLifeMonster implements GeoEntity, Sma
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<Headcrab_Poison_2>()
                         .setPredicate((target, entity) ->
-                            target instanceof Player || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
+                            target instanceof Player || target instanceof IronGolem ||
+                                    target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) ||  target instanceof HalfLifeNeutral ||
                             target instanceof AbstractVillager));
     }
 
@@ -299,7 +302,7 @@ public class Headcrab_Poison_2 extends HalfLifeMonster implements GeoEntity, Sma
                         .startCondition(entity -> this.getLastAttacker() != null)
                         .whenStarting(entity -> this.entityData.set(IS_SCARED, true))
                         .whenStopping(entity -> this.entityData.set(IS_SCARED, false)),
-                new FleeTarget<>().fleeDistance(3).startCondition(entity -> distanceTo(BrainUtils.getTargetOfEntity(this)) < 3.5),
+                new FleeTarget<>().fleeDistance(3).startCondition(entity -> distanceTo(HLperUtil.TargetOrThis(this)) < 3.5),
                 new BiteWhileJumpingBehavior<>(30, getBiteSound(), -1).startCondition(entity -> !isOnGround()).cooldownFor(entity -> 20),
                 new HeadCrabJumpBehavior<>(14, getJumpSound(), getScreamSound())
                         .SetMinDistance(3)

@@ -32,6 +32,7 @@ import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.AlyxPoisoncrabJumpBehavior;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
 import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.util.ModTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -305,7 +306,10 @@ public class Headcrab_Poison_3 extends HalfLifeMonster implements GeoEntity, Sma
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<Headcrab_Poison_3>()
                         .setPredicate((target, entity) ->
-                            target instanceof Player || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
+                            target instanceof Player ||
+                                    target.getType().is(ModTags.EntityTypes.FACTION_COMBINE)
+                                    ||  target instanceof IronGolem
+                                    || target instanceof HalfLifeNeutral ||
                             target instanceof AbstractVillager));
     }
 

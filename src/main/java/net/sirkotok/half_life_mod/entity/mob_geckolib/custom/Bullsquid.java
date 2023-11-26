@@ -37,6 +37,7 @@ import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
 import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
 import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.sirkotok.half_life_mod.util.ModTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
@@ -397,7 +398,7 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
                 new ConfigurableAnimatableMeleeAttack<Bullsquid>(20, 1f, 2, 2, null, 0, null, null)
                         .whenStarting(entity -> triggerAnim("onetime", "spin"))
                         .cooldownFor(entity -> random.nextInt(40, 80))
-                        .startCondition(entity -> BrainUtils.getMemory(this, MemoryModuleType.ATTACK_TARGET).getHealth()<10.5f),
+                        .startCondition(entity -> HLperUtil.TargetOrThis(this).getHealth()<10.5f),
                  new ConfigurableAnimatableMeleeAttack<Bullsquid>(15, 0.3f, 1, 2, null, 0, this.getBiteSound(), this.getAttackGrowlSound())
                          .whenStarting(entity -> triggerAnim("onetime", "bite"))
                          .cooldownFor(entity -> random.nextInt(20, 30)),

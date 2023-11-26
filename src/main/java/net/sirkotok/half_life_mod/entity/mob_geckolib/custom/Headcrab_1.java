@@ -29,6 +29,7 @@ import net.sirkotok.half_life_mod.entity.brain.behaviour.HeadCrabJumpBehavior;
 
 import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
 import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.util.ModTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
@@ -121,7 +122,6 @@ public class Headcrab_1 extends HalfLifeMonster implements GeoEntity, SmartBrain
     @Override
     public void aiStep() {
         super.aiStep();
-        if(this.getTags().contains("nodrop")) this.setNoDrop(true);
     }
 
     protected void setNoDrop(boolean noDrop){
@@ -241,6 +241,7 @@ public class Headcrab_1 extends HalfLifeMonster implements GeoEntity, SmartBrain
                 new NearbyLivingEntitySensor<Headcrab_1>()
                         .setPredicate((target, entity) ->
                             target instanceof Player || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
+                                    target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) ||
                             target instanceof AbstractVillager));
     }
 

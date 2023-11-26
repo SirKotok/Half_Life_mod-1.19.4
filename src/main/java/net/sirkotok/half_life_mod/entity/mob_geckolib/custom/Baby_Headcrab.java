@@ -34,6 +34,7 @@ import net.sirkotok.half_life_mod.entity.brain.behaviour.HeadCrabJumpBehavior;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.SetWalkTargetToRandomSpotAroundAttackTarget;
 import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.util.ModTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -226,7 +227,8 @@ public class Baby_Headcrab extends HalfLifeMonster implements GeoEntity, SmartBr
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<Baby_Headcrab>()
                         .setPredicate((target, entity) ->
-                            target instanceof Player || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
+                            target instanceof Player ||
+                                    target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
                             target instanceof AbstractVillager));
     }
 
@@ -298,7 +300,12 @@ public class Baby_Headcrab extends HalfLifeMonster implements GeoEntity, SmartBr
              ForgeEventFactory.onFinalizeSpawn((Mob) summon, (ServerLevelAccessor) level, level.getCurrentDifficultyAt(summon.blockPosition()), this.getSpawnType(), null, null);
              level.addFreshEntity(summon);
              if (this.hasCustomName()) summon.setCustomName(this.getCustomName());
-             summon.addTag("nodrop");
+             if (summon instanceof Headcrab_1) ((Headcrab_1) summon).setNoDrop(true);
+             if (summon instanceof Headcrab_2) ((Headcrab_2) summon).setNoDrop(true);
+             if (summon instanceof Headcrab_3) ((Headcrab_3) summon).setNoDrop(true);
+             if (summon instanceof Headcrab_Poison_3) ((Headcrab_Poison_3) summon).setNoDrop(true);
+             if (summon instanceof Headcrab_Poison_2) ((Headcrab_Poison_2) summon).setNoDrop(true);
+             if (summon instanceof Headcrab_Fast) ((Headcrab_Fast) summon).setNoDrop(true);
              BrainUtils.setMemory(summon, MemoryModuleType.ATTACK_TARGET, BrainUtils.getMemory(this, MemoryModuleType.ATTACK_TARGET));
              this.discard();
          }

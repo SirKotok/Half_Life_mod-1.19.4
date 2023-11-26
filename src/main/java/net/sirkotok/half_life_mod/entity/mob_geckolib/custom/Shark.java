@@ -40,6 +40,7 @@ import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.parts.SharkPart;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.BarnaclePart;
 import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.sirkotok.half_life_mod.util.ModTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
@@ -536,7 +537,7 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
                 new SetWalkTargetToAttackTargetIfNoWalkTarget<Shark>().whenStarting(entity -> this.setAttackbehaviour(1)),
                 new SetWalkTargetToAttackTargetIfNoWalkTarget<Shark>().whenStarting(entity -> this.setAttackbehaviour(1))  //RandomSource.create().nextInt(1, 3)))
         ),
-                new SetWalkTargetToAttackTarget<>().whenStarting(entity -> this.setAttackbehaviour(1)).startCondition(entity -> this.distanceTo(Objects.requireNonNull(this.getTarget())) > 24),
+                new SetWalkTargetToAttackTarget<>().whenStarting(entity -> this.setAttackbehaviour(1)).startCondition(entity -> this.distanceTo(HLperUtil.TargetOrThis(this)) > 24),
                 new SetWalkTargetToAttackTarget<>().whenStarting(entity -> this.setAttackbehaviour(1)).startCondition(entity -> this.getLastHurtByMob() != null).cooldownFor(entity -> 600),
                 new FirstApplicableBehaviour<>(
                 new PushToWalkTarget<>()

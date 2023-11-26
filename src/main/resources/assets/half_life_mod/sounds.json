@@ -137,6 +137,36 @@
       "half_life_mod:gon_step2"
     ]
   },
+  "ric1": {
+    "subtitle": "sounds.half_life_mod.ric1",
+    "sounds": [
+      "half_life_mod:ric1"
+    ]
+  },
+  "ric2": {
+    "subtitle": "sounds.half_life_mod.ric2",
+    "sounds": [
+      "half_life_mod:ric2"
+    ]
+  },
+  "ric3": {
+    "subtitle": "sounds.half_life_mod.ric3",
+    "sounds": [
+      "half_life_mod:ric3"
+    ]
+  },
+  "ric4": {
+    "subtitle": "sounds.half_life_mod.ric4",
+    "sounds": [
+      "half_life_mod:ric4"
+    ]
+  },
+  "ric5": {
+    "subtitle": "sounds.half_life_mod.ric5",
+    "sounds": [
+      "half_life_mod:ric5"
+    ]
+  },
   "gon_step3": {
     "subtitle": "sounds.half_life_mod.gon_step3",
     "sounds": [

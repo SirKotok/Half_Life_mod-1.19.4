@@ -361,7 +361,8 @@ public class Voltigore extends HalfLifeMonster implements GeoEntity, SmartBrainO
                 new NearbySecondBlocksSensor<Voltigore>().setRadius(30, 5).setPredicate((state, entity) -> state.is(ModBlocks.VOLTIGORE_EGG.get())),
                 new NearbyLivingEntitySensor<Voltigore>()
                         .setPredicate((target, entity) ->
-                                target instanceof Player || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
+                                target instanceof Player ||
+                                        target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
                                         target instanceof AbstractVillager));
     }
 

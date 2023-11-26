@@ -16,7 +16,22 @@ public class ModSounds {
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 
     // GONARHC
-    public static final RegistryObject<SoundEvent> GON_DIE1=
+
+  public static final RegistryObject<SoundEvent> RIC1=
+          registerSoundEvent("ric1");
+  public static final RegistryObject<SoundEvent> RIC2=
+          registerSoundEvent("ric2");
+  public static final RegistryObject<SoundEvent> RIC3=
+          registerSoundEvent("ric3");
+  public static final RegistryObject<SoundEvent> RIC4=
+          registerSoundEvent("ric4");
+  public static final RegistryObject<SoundEvent> RIC5=
+          registerSoundEvent("ric5");
+
+
+
+
+  public static final RegistryObject<SoundEvent> GON_DIE1=
             registerSoundEvent("gon_die1");
   public static final RegistryObject<SoundEvent> CLAW_STRIKE1=
           registerSoundEvent("claw_strike1");

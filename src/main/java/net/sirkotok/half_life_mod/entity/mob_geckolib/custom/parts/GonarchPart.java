@@ -8,25 +8,31 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.Pose;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Gonarch;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Headcrab_Armored;
+import net.sirkotok.half_life_mod.util.CommonSounds;
+import net.sirkotok.half_life_mod.util.ModTags;
 
 public class GonarchPart extends net.minecraftforge.entity.PartEntity<Gonarch> {
     public final Gonarch parentMob;
     public final String name;
     private final EntityDimensions size;
     private final boolean issack;
-
-    public GonarchPart(Gonarch pParentMob, String pName, float pWidth, float pHeight, boolean issack) {
+    private final boolean ispick;
+    private final boolean solid;
+    public GonarchPart(Gonarch pParentMob, String pName, float pWidth, float pHeight, boolean issack, boolean ispick, boolean solid) {
         super(pParentMob);
         this.size = EntityDimensions.scalable(pWidth, pHeight);
         this.refreshDimensions();
         this.parentMob = pParentMob;
         this.name = pName;
         this.issack = issack;
+        this.solid = solid;
+        this.ispick = ispick;
     }
 
 
     public boolean canBeCollidedWith() {
-        return false;
+        return solid;
     }
 
 
@@ -51,11 +57,14 @@ public class GonarchPart extends net.minecraftforge.entity.PartEntity<Gonarch> {
      * Returns {@code true} if other Entities should be prevented from moving through this Entity.
      */
     public boolean isPickable() {
-        return true;
+        return ispick;
     }
 
     public boolean hurt(DamageSource pSource, float pAmount) {
-        if (!this.issack) return false;
+        if (!this.issack) {
+            if (pSource.is(ModTags.DamageTypes.HEADCRAB_ARMOR_PROTECTS_FROM)) this.playSound(CommonSounds.getRicSound(), 0.8f,  this.parentMob.getVoicePitch());
+            return false;
+        }
         return this.parentMob.hurt(pSource, pAmount);
     }
 
