@@ -100,7 +100,7 @@ import java.util.function.Predicate;
 
 public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, RangedAttackMob, DoubleRangedMob, GeoEntity, SmartBrainOwner<Gonarch> {
 
-
+    private int destroyBlocksTick = 40;
     private int babyemount = 0;
     private boolean runround = false;
     private final int babymaxemount = 20;
@@ -466,20 +466,21 @@ public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, Ranged
 
 
         if (this.isDeadOrDying() && !this.level.isClientSide()) {
+            if (dyingticks == 0) this.triggerAnim("onetime", "die");
             dyingticks++;
             if (dyingticks == 17){
                 this.level.explode(this, this.getX(), this.getY(), this.getZ(), 5f, Level.ExplosionInteraction.MOB);
             }
             if (dyingticks == 18) {
-                this.makebaby();
-                this.makebaby();
-                this.makebaby();
-                this.makebaby();
-                this.makebaby();
-                this.makebaby();
-                this.makebaby();
-                this.makebaby();
-                this.makebaby();
+                this.makebaby(true);
+                this.makebaby(true);
+                this.makebaby(true);
+                this.makebaby(true);
+                this.makebaby(true);
+                this.makebaby(true);
+                this.makebaby(false);
+                this.makebaby(false);
+                this.makebaby(false);
                 this.actuallydropExperience();
             }
         }
@@ -539,7 +540,7 @@ public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, Ranged
                             target instanceof AbstractVillager ||
                             target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) ||
                             target instanceof HalfLifeNeutral);
-            BrainUtils.setTargetOfEntity(this, enemies.get(random.nextInt(0, enemies.size())));
+            if (!enemies.isEmpty()) BrainUtils.setTargetOfEntity(this, enemies.get(random.nextInt(0, enemies.size())));
         }
 
 
@@ -550,7 +551,57 @@ public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, Ranged
     @Override
     protected void customServerAiStep() {
         tickBrain(this);
+ /*
+        if (this.destroyBlocksTick > 0 && !this.runround &&
+                (( // (HLperUtil.TargetOrThis(this).getY() - this.getY() < 6) &&
+                         BrainUtils.getTargetOfEntity(this) != null)
+                        || (this.getLastDamageSource() != null && this.random.nextFloat() < 0.1f))) {
+            --this.destroyBlocksTick;
+            if (this.destroyBlocksTick == 0 && net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this)) {
+                this.destroyBlocksTick = 40;
+                int j1 = Mth.floor(this.getY());
+                int i2 = Mth.floor(this.getX());
+                int j2 = Mth.floor(this.getZ());
+                boolean flag = false;
+
+                for(int j = -3; j <= 3; ++j) {
+                    for(int k2 = -3; k2 <= 3; ++k2) {
+
+
+                        int o1 = (HLperUtil.TargetOrThis(this).getY() - this.getY() > 2) ? 1 : 0;
+                        int o2 = (HLperUtil.TargetOrThis(this).getY() - this.getY() < -2) ? -1 : 0;
+
+                        for(int k =  o1 + o2 ; k <= 4 + o1 + o2; ++k) {
+
+                            int l2 = i2 + j;
+                            int l = j1 + k ;
+                            int i1 = j2 + k2;
+                            BlockPos blockpos = new BlockPos(l2, l, i1);
+                            BlockState blockstate = this.level.getBlockState(blockpos);
+                            if (this.canbreak(blockstate) && blockstate.canEntityDestroy(this.level, blockpos, this) && net.minecraftforge.event.ForgeEventFactory.onEntityDestroyBlock(this, blockpos, blockstate)) {
+                                flag = this.level.destroyBlock(blockpos, this.random.nextFloat() < 0.4f, this) || flag;
+                            }
+                        }
+                    }
+                }
+
+                if (flag) {
+                    this.level.levelEvent((Player)null, 1022, this.blockPosition(), 0);
+                }
+            }
+        }
+
+ */
+
     }
+
+
+    public boolean canbreak(BlockState state){
+       return (state.is(BlockTags.MINEABLE_WITH_AXE) || state.is(BlockTags.MINEABLE_WITH_HOE) || state.is(BlockTags.MINEABLE_WITH_PICKAXE) || state.is(BlockTags.MINEABLE_WITH_SHOVEL))
+               && !(state.is(BlockTags.NEEDS_DIAMOND_TOOL) || state.is(BlockTags.NEEDS_IRON_TOOL));
+    }
+
+
 
 
 
@@ -666,20 +717,20 @@ public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, Ranged
                         .triggerableAnim("double", RawAnimation.begin().then("animation.mom.attack3", Animation.LoopType.PLAY_ONCE))
                         .triggerableAnim("birth", RawAnimation.begin().then("animation.mom.baby", Animation.LoopType.PLAY_ONCE))
                         .triggerableAnim("shoot", RawAnimation.begin().then("animation.mom.shoot", Animation.LoopType.PLAY_ONCE))
-
+                        .triggerableAnim("die", RawAnimation.begin().then("animation.mom.die", Animation.LoopType.PLAY_ONCE))
                     );
 
 
 
     }
 
-    private void makebaby(){
+    private void makebaby(boolean launch){
         Baby_Headcrab summon = ModEntities.BABY_HEADCRAB.get().create(level);
         if (summon != null) {
             summon.moveTo(this.position());
             ForgeEventFactory.onFinalizeSpawn((Mob) summon, (ServerLevelAccessor) level, level.getCurrentDifficultyAt(summon.blockPosition()), MobSpawnType.REINFORCEMENT, null, null);
             level.addFreshEntity(summon);
-
+            if (launch) summon.setDeltaMovement(this.random.nextFloat()*(this.random.nextFloat() < 0.5 ? -1 : 1)*1.5f, 2f,this.random.nextFloat()*(this.random.nextFloat() < 0.5 ? -1 : 1)*1.5f);
             if (this.isDeadOrDying()) BrainUtils.setMemory(summon, MemoryModuleType.ATTACK_TARGET, this.getKillCredit());
             else BrainUtils.setMemory(summon, MemoryModuleType.ATTACK_TARGET, BrainUtils.getMemory(this, MemoryModuleType.ATTACK_TARGET));
 
@@ -719,8 +770,8 @@ public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, Ranged
     @Override
     public void performSecondRangedAttack(LivingEntity livingentity, float p_33318_) {
         this.playSound(this.getSackSound(), this.getSoundVolume(), this.getVoicePitch());
-        this.makebaby();
-        this.makebaby();
+        this.makebaby(false);
+        this.makebaby(false);
     }
 
 

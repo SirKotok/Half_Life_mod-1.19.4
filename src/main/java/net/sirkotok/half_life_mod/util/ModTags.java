@@ -19,7 +19,6 @@ public class ModTags {
     public static class Blocks {
         public static final TagKey<Block> HOUNDEYE_INTEREST = tag("houndeye_interest");
 
-
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(HalfLifeMod.MOD_ID, name));
         }
