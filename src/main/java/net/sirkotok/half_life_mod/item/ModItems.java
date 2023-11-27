@@ -107,6 +107,10 @@ public class ModItems {
     public static final RegistryObject<Item> GONARCH_SPAWN_EGG = ITEMS.register("gonarch_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.GONARCH, 0x5d573a, 0xf2e297   ,
                     new Item.Properties()));
+
+    public static final RegistryObject<Item> GONARCHBM_SPAWN_EGG = ITEMS.register("gonarchbm_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.GONARCHBM, 0xee7c7c, 0x9d0808   ,
+                    new Item.Properties()));
     public static final RegistryObject<Item> COCKROACH_SPAWN_EGG = ITEMS.register("cockroach_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.COCKROACH, 0xc2660b, 0xeae3dc   ,
                     new Item.Properties()));

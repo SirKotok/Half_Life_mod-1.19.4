@@ -16,12 +16,14 @@ import net.sirkotok.half_life_mod.block.blockentity.ModBlockEntities;
 import net.sirkotok.half_life_mod.block.blockentity.client.VoltigoreEggRenderer;
 import net.sirkotok.half_life_mod.entity.ModEntities;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.Shockwaverenderer;
+import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.SitRenderer;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.Voltigore_projectile_e_renderer;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.client.renderers.*;
 import net.sirkotok.half_life_mod.entity.mob_normal.client.ModModelLayers;
 import net.sirkotok.half_life_mod.entity.mob_normal.client.models.Barnacle_Model;
 import net.sirkotok.half_life_mod.entity.mob_normal.client.renderers.Barnacle_Renderer;
 import net.sirkotok.half_life_mod.entity.projectile.SporeShot;
+import net.sirkotok.half_life_mod.entity.projectile.client.renderer.AcidThrownBMRenderer;
 import net.sirkotok.half_life_mod.entity.projectile.client.renderer.Pitdrone_spike_renderer;
 import net.sirkotok.half_life_mod.entity.projectile.client.renderer.Spore_renderer;
 import net.sirkotok.half_life_mod.entity.projectile.client.renderer.Voltigore_projectile_renderer;
@@ -51,6 +53,7 @@ public class ClientModBusEvents {
     {
         EntityRenderers.register(ModEntities.VOLTIGOREPROJECTEFFECT.get(), Voltigore_projectile_e_renderer::new);
         EntityRenderers.register(ModEntities.SHOCKWAVEEFFECT.get(), Shockwaverenderer::new);
+        EntityRenderers.register(ModEntities.SITBLOWUP.get(), SitRenderer::new);
         EntityRenderers.register(ModEntities.SPORESHOT.get(), Spore_renderer::new);
         EntityRenderers.register(ModEntities.HOTEYE.get(), Hoteyerenderer::new);
         EntityRenderers.register(ModEntities.PITDRONE.get(), Pitdrone_renderer::new);
@@ -67,6 +70,7 @@ public class ClientModBusEvents {
         EntityRenderers.register(ModEntities.BULLSQUID.get(), Bullsquid_renderer::new);
         EntityRenderers.register(ModEntities.GONARCH.get(), Gonarch_renderer::new);
         EntityRenderers.register(ModEntities.CHUMTOAD.get(), Chumtoadrenderer::new);
+        EntityRenderers.register(ModEntities.GONARCHBM.get(), GonarchBM_renderer::new);
         EntityRenderers.register(ModEntities.SNARK.get(), Snarkrenderer::new);
         EntityRenderers.register(ModEntities.SHOCKROACH.get(), ShockRoachrenderer::new);
         EntityRenderers.register(ModEntities.PENGUIN.get(), PenguinRenderer::new);
@@ -84,6 +88,7 @@ public class ClientModBusEvents {
         EntityRenderers.register(ModEntities.SHOCK_SHOT.get(), ThrownItemRenderer::new);
         EntityRenderers.register(ModEntities.BULLET_ONE.get(), ThrownItemRenderer::new);
         EntityRenderers.register(ModEntities.ACID_THROWN.get(), ThrownItemRenderer::new);
+        EntityRenderers.register(ModEntities.ACID_THROWNBM.get(), AcidThrownBMRenderer::new);
         EntityRenderers.register(ModEntities.BARNACLE.get(), Barnacle_Renderer::new);
 
         BlockEntityRenderers.register(ModBlockEntities.VOLTIGORE_EGG_BLOCK_ENTITY.get(), VoltigoreEggRenderer::new);

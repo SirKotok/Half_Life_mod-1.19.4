@@ -11,6 +11,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.ShockWaveEffect;
+import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.SitThenBlowUpEffect;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.VoltigoreProjectileAftereffect;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.*;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
@@ -102,6 +103,11 @@ public class ModEntities {
                     () -> EntityType.Builder.of(Gonarch::new, MobCategory.MONSTER)
                             .sized(3f, 4.5f)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "gonarch").toString()));
+    public static final RegistryObject<EntityType<GonarchBM>> GONARCHBM =
+            ENTITY_TYPES.register("gonarchbm",
+                    () -> EntityType.Builder.of(GonarchBM::new, MobCategory.MONSTER)
+                            .sized(3f, 4.5f)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "gonarchbn").toString()));
 
 
     public static final RegistryObject<EntityType<Pitdrone>> PITDRONE =
@@ -187,7 +193,11 @@ public class ModEntities {
                             .sized(0.6f, 0.6f)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "shockwave_effect").toString()));
 
-
+    public static final RegistryObject<EntityType<SitThenBlowUpEffect>> SITBLOWUP =
+            ENTITY_TYPES.register("blow_up_effect",
+                    () -> EntityType.Builder.of(SitThenBlowUpEffect::new, MobCategory.MONSTER)
+                            .sized(0.6f, 0.6f)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "blow_up_effect").toString()));
     public static final RegistryObject<EntityType<VoltigoreProjectileAftereffect>> VOLTIGOREPROJECTEFFECT =
             ENTITY_TYPES.register("voltigore_projectile_aftereffect",
                     () -> EntityType.Builder.of(VoltigoreProjectileAftereffect::new, MobCategory.MONSTER)
@@ -210,7 +220,13 @@ public class ModEntities {
                             .clientTrackingRange(20)
                             .updateInterval(1)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "acid_thrown").toString()));
-
+    public static final RegistryObject<EntityType<AcidThrownBM>> ACID_THROWNBM =
+            ENTITY_TYPES.register("acid_thrownbm",
+                    () -> EntityType.Builder.<AcidThrownBM>of(AcidThrownBM::new, MobCategory.MISC)
+                            .sized(0.4F, 0.4F)
+                            .clientTrackingRange(20)
+                            .updateInterval(1)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "acid_thrownbm").toString()));
 
     public static final RegistryObject<EntityType<SporeShot>> SPORESHOT =
             ENTITY_TYPES.register("spore_shot",

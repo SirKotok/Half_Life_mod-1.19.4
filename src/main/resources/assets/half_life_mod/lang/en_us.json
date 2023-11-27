@@ -5,6 +5,7 @@
     "item.half_life_mod.cockroach_spawn_egg": "Cockroach Spawn Egg",
     "item.half_life_mod.hoteye_spawn_egg": "Hoteye Spawn Egg",
     "item.half_life_mod.gonarch_spawn_egg": "Gonarch Spawn Egg",
+    "item.half_life_mod.gonarchbm_spawn_egg": "Gonarch (Black Mesa) Spawn Egg",
   "item.half_life_mod.headcrab_2_spawn_egg": "Headcrab HL2 Spawn Egg",
     "item.half_life_mod.manhack_spawn_egg": "Manhack Spawn Egg",
     "item.half_life_mod.baby_headcrab_spawn_egg": "Baby Headcrab Spawn Egg",
@@ -48,6 +49,7 @@
 
     "entity.half_life_mod.baby_headcrab": "Baby Headcrab",
     "entity.half_life_mod.gonarch": "Gonarch",
+    "entity.half_life_mod.gonarchbm": "Gonarch",
     "entity.half_life_mod.leech": "Leech",
     "entity.half_life_mod.cockroach": "Cockroach",
     "entity.half_life_mod.manhack": "Manhack",

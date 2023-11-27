@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.entity.ModEntities;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.ShockWaveEffect;
+import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.SitThenBlowUpEffect;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.VoltigoreProjectileAftereffect;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.*;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
@@ -29,6 +30,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.BARNACLE.get(), Barnacle.setAttributes());
         event.put(ModEntities.SNARK.get(), Snark.setAttributes());
         event.put(ModEntities.SHOCKWAVEEFFECT.get(), ShockWaveEffect.setAttributes());
+        event.put(ModEntities.SITBLOWUP.get(), SitThenBlowUpEffect.setAttributes());
         event.put(ModEntities.VOLTIGOREPROJECTEFFECT.get(), VoltigoreProjectileAftereffect.setAttributes());
         event.put(ModEntities.SNARKNEST.get(), Snarknest.setAttributes());
         event.put(ModEntities.PENGUIN.get(), Snark.setAttributes());
@@ -44,6 +46,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.HEADCRAB_POISON_HLA.get(), Headcrab_Poison_3.setAttributes());
         event.put(ModEntities.BULLSQUID.get(), Bullsquid.setAttributes());
         event.put(ModEntities.PITDRONE.get(), Pitdrone.setAttributes());
+        event.put(ModEntities.GONARCHBM.get(), GonarchBM.setAttributes());
         event.put(ModEntities.GONARCH.get(), Gonarch.setAttributes());
         event.put(ModEntities.HOUNDEYE.get(), Houndeye.setAttributes());
         event.put(ModEntities.HOTEYE.get(), Hoteye.setAttributes());
