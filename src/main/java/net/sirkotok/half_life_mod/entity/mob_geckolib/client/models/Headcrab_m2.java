@@ -22,7 +22,7 @@ public class Headcrab_m2 extends GeoModel<Headcrab_2> {
 
     @Override
     public ResourceLocation getAnimationResource(Headcrab_2 animatable) {
-        return new ResourceLocation(HalfLifeMod.MOD_ID, "animations/headcrab_m1.animation.json");
+        return new ResourceLocation(HalfLifeMod.MOD_ID, "animations/headcrab.animation.json");
     }
 
 

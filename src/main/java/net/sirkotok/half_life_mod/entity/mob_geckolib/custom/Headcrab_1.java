@@ -332,7 +332,7 @@ public class Headcrab_1 extends HalfLifeMonster implements GeoEntity, SmartBrain
 
 
         if(tAnimationState.isMoving() && this.isOnGround()) {
-            tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.headcrab.walk", Animation.LoopType.LOOP));
+            tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.headcrab.walk2", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
 
