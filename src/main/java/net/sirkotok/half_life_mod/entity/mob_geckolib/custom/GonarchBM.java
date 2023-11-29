@@ -617,6 +617,7 @@ public class GonarchBM extends HalfLifeMonster implements MultiMeleeEntity, Trip
                         new SetPlayerLookTarget<>(),
                         new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, false)).startCondition(entity -> this.entityData.get(IS_ANGRY)),
                         new TargetOrRetaliateHLT<>(),
+                        new CustomBehaviour<>(entity -> this.heal(1)).cooldownFor(entity -> 10),
                      //   new TargetOrRetaliate<>(),
                         new SetRandomLookTarget<>()),
                 new OneRandomBehaviour<>(
@@ -687,9 +688,9 @@ public class GonarchBM extends HalfLifeMonster implements MultiMeleeEntity, Trip
                 ,
                new StopAndShootx3<GonarchBM>(35, 15, 10, 23, 1f).attackRadius(32f).cooldownFor(entity -> random.nextFloat() < 0.1f ? 220 : random.nextInt(30, 60))
                                 .whenStarting(entity -> triggerAnim("onetime", "shoot3")).startCondition(entity -> this.getPhase() == 1 && (this.distanceTo(HLperUtil.TargetOrThis(this)) > 5f || (HLperUtil.TargetOrThis(this).getY() - (this.getY()+4))>0)),
-              new StopAndSecondShootx3<GonarchBM>(38, 15, 9, 22, 1f ).attackRadius(15f).cooldownFor(entity -> random.nextFloat() < 0.1f ? 220 : random.nextInt(30, 60))
+              new StopAndSecondShootx3<GonarchBM>(38, 15, 9, 22, 1f, null).attackRadius(15f).cooldownFor(entity -> random.nextFloat() < 0.1f ? 220 : random.nextInt(30, 60))
                                 .whenStarting(entity -> triggerAnim("onetime", "web3")).startCondition(entity -> this.getPhase() == 1 && (HLperUtil.TargetOrThis(this).getY() - (this.getY()+4))<0),
-               new StopAndThirdShoot<GonarchBM>(15, 8, 1f, this.getBirthSound()).attackRadius(32f).cooldownFor(entity -> random.nextInt(200, 400) + 200 * this.getPhase()).startCondition(entity -> this.babyemount <= this.babymaxemount)
+               new StopAndThirdShoot<GonarchBM>(15, 8, 1f, this.getBirthSound()).attackRadius(32f).cooldownFor(entity -> random.nextInt(250, 450) + 200 * this.getPhase()).startCondition(entity -> this.babyemount <= this.babymaxemount)
                        .whenStarting(entity -> triggerAnim("onetime", "birth"))
 
                )

@@ -639,6 +639,7 @@ public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, Ranged
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<Gonarch>(
                         new SetPlayerLookTarget<>(),
+                        new CustomBehaviour<>(entity -> this.heal(1)).cooldownFor(entity -> 20).startCondition(entity -> this.getLastHurtByMob() == null),
                         new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, false)).startCondition(entity -> this.entityData.get(IS_ANGRY)),
                         new TargetOrRetaliateHLT<>(),
                       //  new TargetOrRetaliate<>(),
@@ -700,8 +701,8 @@ public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, Ranged
                                 .cooldownFor(entity -> random.nextInt(10, 20))),
                 new StopAndShoot<Gonarch>(10, 10, 1f).attackRadius(32f).cooldownFor(entity -> random.nextFloat() < 0.1f ? 220 : random.nextInt(30, 60))
                               .whenStarting(entity -> triggerAnim("onetime", "shoot")).startCondition(emtity -> this.distanceTo(HLperUtil.TargetOrThis(this)) > 7f || (HLperUtil.TargetOrThis(this).getY() - this.getY()+4)>0),
-                new StopAndSecondShoot<Gonarch>(15, 8, 1f, this.getBirthSound()).attackRadius(32f).cooldownFor(entity -> random.nextInt(20, 40)).startCondition(entity -> this.babyemount <= this.babymaxemount)
-                       .whenStarting(entity -> triggerAnim("onetime", "birth")).cooldownFor(entity -> random.nextInt(30, 80))
+                new StopAndSecondShootx3<Gonarch>(31, 13, 15, 100, 1f, this.getBirthSound()).attackRadius(32f).cooldownFor(entity -> random.nextInt(20, 40)).startCondition(entity -> this.babyemount <= this.babymaxemount)
+                       .whenStarting(entity -> triggerAnim("onetime", "birth")).cooldownFor(entity -> random.nextInt(60, 180))
                 )
         );
 
@@ -717,7 +718,7 @@ public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, Ranged
                 .triggerableAnim("right", RawAnimation.begin().then("animation.mom.attack1right", Animation.LoopType.PLAY_ONCE))
                         .triggerableAnim("left", RawAnimation.begin().then("animation.mom.attack1left", Animation.LoopType.PLAY_ONCE))
                         .triggerableAnim("double", RawAnimation.begin().then("animation.mom.attack3", Animation.LoopType.PLAY_ONCE))
-                        .triggerableAnim("birth", RawAnimation.begin().then("animation.mom.baby", Animation.LoopType.PLAY_ONCE))
+                        .triggerableAnim("birth", RawAnimation.begin().then("animation.mom.babyx2", Animation.LoopType.PLAY_ONCE))
                         .triggerableAnim("shoot", RawAnimation.begin().then("animation.mom.shoot", Animation.LoopType.PLAY_ONCE))
                         .triggerableAnim("die", RawAnimation.begin().then("animation.mom.die", Animation.LoopType.PLAY_ONCE))
                     );
@@ -772,7 +773,6 @@ public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, Ranged
     @Override
     public void performSecondRangedAttack(LivingEntity livingentity, float p_33318_) {
         this.playSound(this.getSackSound(), this.getSoundVolume(), this.getVoicePitch());
-        this.makebaby(false);
         this.makebaby(false);
     }
 

@@ -122,6 +122,9 @@ public class ModItems {
     public static final RegistryObject<Item> LEECH_SPAWN_EGG = ITEMS.register("leech_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.LEECH, 0xeeeddb, 0xaba76b   ,
                     new Item.Properties()));
+    public static final RegistryObject<Item> HUNTER_SPAWN_EGG = ITEMS.register("hunter_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.HUNTER, 0xc3898, 0x18fce3   ,
+                    new Item.Properties()));
    public static final RegistryObject<Item> SHARK_SPAWN_EGG = ITEMS.register("shark_spawn_egg",
          () -> new ForgeSpawnEggItem(ModEntities.SHARK, 0x71a549, 0xb22c2a   ,
                  new Item.Properties()));

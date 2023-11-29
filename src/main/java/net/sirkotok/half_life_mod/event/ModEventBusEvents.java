@@ -25,6 +25,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.COCKROACH.get(), Cockroach.setAttributes());
         event.put(ModEntities.BABY_HEADCRAB.get(), Baby_Headcrab.setAttributes());
         event.put(ModEntities.MANHACK.get(), Manhack.setAttributes());
+        event.put(ModEntities.HUNTER.get(), Hunter.setAttributes());
         event.put(ModEntities.LEECH.get(), Leech.setAttributes());
         event.put(ModEntities.SHARK.get(), Shark.setAttributes());
         event.put(ModEntities.BARNACLE.get(), Barnacle.setAttributes());
