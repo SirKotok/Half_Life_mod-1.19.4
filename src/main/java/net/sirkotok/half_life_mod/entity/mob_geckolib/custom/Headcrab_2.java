@@ -227,7 +227,6 @@ public class Headcrab_2 extends HalfLifeMonster implements GeoEntity, SmartBrain
                 new NearbyLivingEntitySensor<Headcrab_2>()
                         .setPredicate((target, entity) ->
                             target instanceof Player || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
-                                    target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) ||
                             target instanceof AbstractVillager));
     }
 

@@ -162,14 +162,16 @@ public class Shockroach extends CatchableMonster implements GeoEntity, SmartBrai
 
 
     protected SoundEvent getStepSound() {
-        return SoundEvents.FROG_STEP;
+        return ModSounds.SHOCKROACH_WALK.get();
     }
     @Override
     protected void playStepSound(BlockPos pPos, BlockState pState) {
-        BlockState blockstate = this.level.getBlockState(pPos.above());
-        boolean flag = blockstate.is(BlockTags.INSIDE_STEP_SOUND_BLOCKS);
-        if (flag || !pState.getMaterial().isLiquid()) {
-            this.playSound(getStepSound());
+        if (this.tickCount%3 == 0) {
+            BlockState blockstate = this.level.getBlockState(pPos.above());
+            boolean flag = blockstate.is(BlockTags.INSIDE_STEP_SOUND_BLOCKS);
+            if (flag || !pState.getMaterial().isLiquid()) {
+                this.playSound(getStepSound());
+            }
         }
     }
 

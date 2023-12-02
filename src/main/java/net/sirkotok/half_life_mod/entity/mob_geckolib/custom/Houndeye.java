@@ -490,8 +490,7 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, HasLeaderMob
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<Houndeye>()
                         .setPredicate((target, entity) ->
-                            target instanceof Player ||
-                                    target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
+                            target instanceof Player || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
                             target instanceof AbstractVillager));
     }
 

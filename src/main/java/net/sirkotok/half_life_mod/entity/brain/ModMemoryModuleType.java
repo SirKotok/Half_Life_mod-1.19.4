@@ -40,6 +40,7 @@ public class ModMemoryModuleType {
 
     public static final RegistryObject<MemoryModuleType<List<Pair<BlockPos, BlockState>>>> NEARBY_BLOCKS_TWO = MEMORY_MODULE_TYPES.register("nearby_blocks_two", () -> new MemoryModuleType<>(Optional.empty()));
     public static final RegistryObject<MemoryModuleType<Boolean>> RETALIATECOOLDOWN = MEMORY_MODULE_TYPES.register("retaliate_cooldown", () -> new MemoryModuleType<>(Optional.empty()));
+    public static final RegistryObject<MemoryModuleType<Boolean>> RUSHING = MEMORY_MODULE_TYPES.register("rushing", () -> new MemoryModuleType<>(Optional.empty()));
 
 
 

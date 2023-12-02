@@ -15,6 +15,226 @@ public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 
+
+    // Hunter
+
+  public static final RegistryObject<SoundEvent> BODY_MEDIUM_IMPACT_HARD1=
+          registerSoundEvent("body_medium_impact_hard1");
+  public static final RegistryObject<SoundEvent> BODY_MEDIUM_IMPACT_HARD2=
+          registerSoundEvent("body_medium_impact_hard2");
+  public static final RegistryObject<SoundEvent> BODY_MEDIUM_IMPACT_HARD3=
+          registerSoundEvent("body_medium_impact_hard3");
+  public static final RegistryObject<SoundEvent> BODY_MEDIUM_IMPACT_HARD4=
+          registerSoundEvent("body_medium_impact_hard4");
+  public static final RegistryObject<SoundEvent> BODY_MEDIUM_IMPACT_HARD5=
+          registerSoundEvent("body_medium_impact_hard5");
+  public static final RegistryObject<SoundEvent> BODY_MEDIUM_IMPACT_HARD6=
+          registerSoundEvent("body_medium_impact_hard6");
+  public static final RegistryObject<SoundEvent> FLECHETTELTOR01=
+          registerSoundEvent("flechetteltor01");
+  public static final RegistryObject<SoundEvent> FLECHETTELTOR02=
+          registerSoundEvent("flechetteltor02");
+  public static final RegistryObject<SoundEvent> FLECHETTELTOR03=
+          registerSoundEvent("flechetteltor03");
+  public static final RegistryObject<SoundEvent> FLECHETTELTOR04=
+          registerSoundEvent("flechetteltor04");
+  public static final RegistryObject<SoundEvent> FLECHETTE_EXPLODE1=
+          registerSoundEvent("flechette_explode1");
+  public static final RegistryObject<SoundEvent> FLECHETTE_EXPLODE2=
+          registerSoundEvent("flechette_explode2");
+  public static final RegistryObject<SoundEvent> FLECHETTE_EXPLODE3=
+          registerSoundEvent("flechette_explode3");
+  public static final RegistryObject<SoundEvent> FLECHETTE_FLESH_IMPACT1=
+          registerSoundEvent("flechette_flesh_impact1");
+  public static final RegistryObject<SoundEvent> FLECHETTE_FLESH_IMPACT2=
+          registerSoundEvent("flechette_flesh_impact2");
+  public static final RegistryObject<SoundEvent> FLECHETTE_FLESH_IMPACT3=
+          registerSoundEvent("flechette_flesh_impact3");
+  public static final RegistryObject<SoundEvent> FLECHETTE_FLESH_IMPACT4=
+          registerSoundEvent("flechette_flesh_impact4");
+  public static final RegistryObject<SoundEvent> FLECHETTE_IMPACT_STICK1=
+          registerSoundEvent("flechette_impact_stick1");
+  public static final RegistryObject<SoundEvent> FLECHETTE_IMPACT_STICK2=
+          registerSoundEvent("flechette_impact_stick2");
+  public static final RegistryObject<SoundEvent> FLECHETTE_IMPACT_STICK3=
+          registerSoundEvent("flechette_impact_stick3");
+  public static final RegistryObject<SoundEvent> FLECHETTE_IMPACT_STICK4=
+          registerSoundEvent("flechette_impact_stick4");
+  public static final RegistryObject<SoundEvent> FLECHETTE_IMPACT_STICK5=
+          registerSoundEvent("flechette_impact_stick5");
+  public static final RegistryObject<SoundEvent> HUNTER_ALERT1=
+          registerSoundEvent("hunter_alert1");
+  public static final RegistryObject<SoundEvent> HUNTER_ALERT2=
+          registerSoundEvent("hunter_alert2");
+  public static final RegistryObject<SoundEvent> HUNTER_ALERT3=
+          registerSoundEvent("hunter_alert3");
+  public static final RegistryObject<SoundEvent> HUNTER_ANGRY1=
+          registerSoundEvent("hunter_angry1");
+  public static final RegistryObject<SoundEvent> HUNTER_ANGRY2=
+          registerSoundEvent("hunter_angry2");
+  public static final RegistryObject<SoundEvent> HUNTER_ANGRY3=
+          registerSoundEvent("hunter_angry3");
+  public static final RegistryObject<SoundEvent> HUNTER_CHARGE3=
+          registerSoundEvent("hunter_charge3");
+  public static final RegistryObject<SoundEvent> HUNTER_CHARGE4=
+          registerSoundEvent("hunter_charge4");
+  public static final RegistryObject<SoundEvent> HUNTER_DEFENDSTRIDER1=
+          registerSoundEvent("hunter_defendstrider1");
+  public static final RegistryObject<SoundEvent> HUNTER_DEFENDSTRIDER2=
+          registerSoundEvent("hunter_defendstrider2");
+  public static final RegistryObject<SoundEvent> HUNTER_DEFENDSTRIDER3=
+          registerSoundEvent("hunter_defendstrider3");
+  public static final RegistryObject<SoundEvent> HUNTER_DIE2=
+          registerSoundEvent("hunter_die2");
+  public static final RegistryObject<SoundEvent> HUNTER_DIE3=
+          registerSoundEvent("hunter_die3");
+  public static final RegistryObject<SoundEvent> HUNTER_FIRE_LOOP3=
+          registerSoundEvent("hunter_fire_loop3");
+  public static final RegistryObject<SoundEvent> HUNTER_FLANK_ANNOUNCE1=
+          registerSoundEvent("hunter_flank_announce1");
+  public static final RegistryObject<SoundEvent> HUNTER_FLANK_ANNOUNCE2=
+          registerSoundEvent("hunter_flank_announce2");
+  public static final RegistryObject<SoundEvent> HUNTER_FLECHETTE_PREEXPLODE1=
+          registerSoundEvent("hunter_flechette_preexplode1");
+  public static final RegistryObject<SoundEvent> HUNTER_FLECHETTE_PREEXPLODE2=
+          registerSoundEvent("hunter_flechette_preexplode2");
+  public static final RegistryObject<SoundEvent> HUNTER_FLECHETTE_PREEXPLODE3=
+          registerSoundEvent("hunter_flechette_preexplode3");
+  public static final RegistryObject<SoundEvent> HUNTER_FOUNDENEMY1=
+          registerSoundEvent("hunter_foundenemy1");
+  public static final RegistryObject<SoundEvent> HUNTER_FOUNDENEMY2=
+          registerSoundEvent("hunter_foundenemy2");
+  public static final RegistryObject<SoundEvent> HUNTER_FOUNDENEMY3=
+          registerSoundEvent("hunter_foundenemy3");
+  public static final RegistryObject<SoundEvent> HUNTER_FOUNDENEMY_ACK1=
+          registerSoundEvent("hunter_foundenemy_ack1");
+  public static final RegistryObject<SoundEvent> HUNTER_FOUNDENEMY_ACK2=
+          registerSoundEvent("hunter_foundenemy_ack2");
+  public static final RegistryObject<SoundEvent> HUNTER_FOUNDENEMY_ACK3=
+          registerSoundEvent("hunter_foundenemy_ack3");
+  public static final RegistryObject<SoundEvent> HUNTER_IDLE1=
+          registerSoundEvent("hunter_idle1");
+  public static final RegistryObject<SoundEvent> HUNTER_IDLE2=
+          registerSoundEvent("hunter_idle2");
+  public static final RegistryObject<SoundEvent> HUNTER_IDLE3=
+          registerSoundEvent("hunter_idle3");
+  public static final RegistryObject<SoundEvent> HUNTER_LAUGH1=
+          registerSoundEvent("hunter_laugh1");
+  public static final RegistryObject<SoundEvent> HUNTER_LAUGH2=
+          registerSoundEvent("hunter_laugh2");
+  public static final RegistryObject<SoundEvent> HUNTER_LAUGH3=
+          registerSoundEvent("hunter_laugh3");
+  public static final RegistryObject<SoundEvent> HUNTER_LAUGH4=
+          registerSoundEvent("hunter_laugh4");
+  public static final RegistryObject<SoundEvent> HUNTER_LAUGH5=
+          registerSoundEvent("hunter_laugh5");
+  public static final RegistryObject<SoundEvent> HUNTER_PAIN2=
+          registerSoundEvent("hunter_pain2");
+  public static final RegistryObject<SoundEvent> HUNTER_PAIN4=
+          registerSoundEvent("hunter_pain4");
+  public static final RegistryObject<SoundEvent> HUNTER_PRESTRIKE1=
+          registerSoundEvent("hunter_prestrike1");
+  public static final RegistryObject<SoundEvent> HUNTER_SCAN1=
+          registerSoundEvent("hunter_scan1");
+  public static final RegistryObject<SoundEvent> HUNTER_SCAN2=
+          registerSoundEvent("hunter_scan2");
+  public static final RegistryObject<SoundEvent> HUNTER_SCAN3=
+          registerSoundEvent("hunter_scan3");
+  public static final RegistryObject<SoundEvent> HUNTER_SCAN4=
+          registerSoundEvent("hunter_scan4");
+  public static final RegistryObject<SoundEvent> MINISTRIDER_FIRE1=
+          registerSoundEvent("ministrider_fire1");
+  public static final RegistryObject<SoundEvent> MINISTRIDER_FOOTSTEP1=
+          registerSoundEvent("ministrider_footstep1");
+  public static final RegistryObject<SoundEvent> MINISTRIDER_FOOTSTEP2=
+          registerSoundEvent("ministrider_footstep2");
+  public static final RegistryObject<SoundEvent> MINISTRIDER_FOOTSTEP3=
+          registerSoundEvent("ministrider_footstep3");
+  public static final RegistryObject<SoundEvent> MINISTRIDER_FOOTSTEP4=
+          registerSoundEvent("ministrider_footstep4");
+  public static final RegistryObject<SoundEvent> MINISTRIDER_FOOTSTEP5=
+          registerSoundEvent("ministrider_footstep5");
+  public static final RegistryObject<SoundEvent> MINISTRIDER_PREFLECHETTE=
+          registerSoundEvent("ministrider_preflechette");
+  public static final RegistryObject<SoundEvent> MINISTRIDER_SKEWER1=
+          registerSoundEvent("ministrider_skewer1");
+
+    /*      "sounds.half_life_mod.body_medium_impact_hard1": "Hunter ",
+          "sounds.half_life_mod.body_medium_impact_hard2": "Hunter ",
+          "sounds.half_life_mod.body_medium_impact_hard3": "Hunter ",
+          "sounds.half_life_mod.body_medium_impact_hard4": "Hunter ",
+          "sounds.half_life_mod.body_medium_impact_hard5": "Hunter ",
+          "sounds.half_life_mod.body_medium_impact_hard6": "Hunter ",
+          "sounds.half_life_mod.flechetteltor01": "Hunter ",
+          "sounds.half_life_mod.flechetteltor02": "Hunter ",
+          "sounds.half_life_mod.flechetteltor03": "Hunter ",
+          "sounds.half_life_mod.flechetteltor04": "Hunter ",
+          "sounds.half_life_mod.flechette_explode1": "Hunter ",
+          "sounds.half_life_mod.flechette_explode2": "Hunter ",
+          "sounds.half_life_mod.flechette_explode3": "Hunter ",
+          "sounds.half_life_mod.flechette_flesh_impact1": "Hunter ",
+          "sounds.half_life_mod.flechette_flesh_impact2": "Hunter ",
+          "sounds.half_life_mod.flechette_flesh_impact3": "Hunter ",
+          "sounds.half_life_mod.flechette_flesh_impact4": "Hunter ",
+          "sounds.half_life_mod.flechette_impact_stick1": "Hunter ",
+          "sounds.half_life_mod.flechette_impact_stick2": "Hunter ",
+          "sounds.half_life_mod.flechette_impact_stick3": "Hunter ",
+          "sounds.half_life_mod.flechette_impact_stick4": "Hunter ",
+          "sounds.half_life_mod.flechette_impact_stick5": "Hunter ",
+          "sounds.half_life_mod.hunter_alert1": "Hunter ",
+          "sounds.half_life_mod.hunter_alert2": "Hunter ",
+          "sounds.half_life_mod.hunter_alert3": "Hunter ",
+          "sounds.half_life_mod.hunter_angry1": "Hunter ",
+          "sounds.half_life_mod.hunter_angry2": "Hunter ",
+          "sounds.half_life_mod.hunter_angry3": "Hunter ",
+          "sounds.half_life_mod.hunter_charge3": "Hunter ",
+          "sounds.half_life_mod.hunter_charge4": "Hunter ",
+          "sounds.half_life_mod.hunter_defendstrider1": "Hunter ",
+          "sounds.half_life_mod.hunter_defendstrider2": "Hunter ",
+          "sounds.half_life_mod.hunter_defendstrider3": "Hunter ",
+          "sounds.half_life_mod.hunter_die2": "Hunter ",
+          "sounds.half_life_mod.hunter_die3": "Hunter ",
+          "sounds.half_life_mod.hunter_fire_loop3": "Hunter ",
+          "sounds.half_life_mod.hunter_flank_announce1": "Hunter ",
+          "sounds.half_life_mod.hunter_flank_announce2": "Hunter ",
+          "sounds.half_life_mod.hunter_flechette_preexplode1": "Hunter ",
+          "sounds.half_life_mod.hunter_flechette_preexplode2": "Hunter ",
+          "sounds.half_life_mod.hunter_flechette_preexplode3": "Hunter ",
+          "sounds.half_life_mod.hunter_foundenemy1": "Hunter ",
+          "sounds.half_life_mod.hunter_foundenemy2": "Hunter ",
+          "sounds.half_life_mod.hunter_foundenemy3": "Hunter ",
+          "sounds.half_life_mod.hunter_foundenemy_ack1": "Hunter ",
+          "sounds.half_life_mod.hunter_foundenemy_ack2": "Hunter ",
+          "sounds.half_life_mod.hunter_foundenemy_ack3": "Hunter ",
+          "sounds.half_life_mod.hunter_idle1": "Hunter ",
+          "sounds.half_life_mod.hunter_idle2": "Hunter ",
+          "sounds.half_life_mod.hunter_idle3": "Hunter ",
+          "sounds.half_life_mod.hunter_laugh1": "Hunter ",
+          "sounds.half_life_mod.hunter_laugh2": "Hunter ",
+          "sounds.half_life_mod.hunter_laugh3": "Hunter ",
+          "sounds.half_life_mod.hunter_laugh4": "Hunter ",
+          "sounds.half_life_mod.hunter_laugh5": "Hunter ",
+          "sounds.half_life_mod.hunter_pain2": "Hunter ",
+          "sounds.half_life_mod.hunter_pain4": "Hunter ",
+          "sounds.half_life_mod.hunter_prestrike1": "Hunter ",
+          "sounds.half_life_mod.hunter_scan1": "Hunter ",
+          "sounds.half_life_mod.hunter_scan2": "Hunter ",
+          "sounds.half_life_mod.hunter_scan3": "Hunter ",
+          "sounds.half_life_mod.hunter_scan4": "Hunter ",
+          "sounds.half_life_mod.ministrider_fire1": "Hunter ",
+          "sounds.half_life_mod.ministrider_footstep1": "Hunter ",
+          "sounds.half_life_mod.ministrider_footstep2": "Hunter ",
+          "sounds.half_life_mod.ministrider_footstep3": "Hunter ",
+          "sounds.half_life_mod.ministrider_footstep4": "Hunter ",
+          "sounds.half_life_mod.ministrider_footstep5": "Hunter ",
+          "sounds.half_life_mod.ministrider_preflechette": "Hunter ",
+          "sounds.half_life_mod.ministrider_skewer1": "Hunter ", */
+
+
+
+
+
+
     // GONARHC
 
   public static final RegistryObject<SoundEvent> RIC1=

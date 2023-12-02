@@ -49,6 +49,7 @@ import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.parts.GonarchBMPart
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.parts.GonarchPart;
 import net.sirkotok.half_life_mod.entity.modinterface.DoubleRangedMob;
 import net.sirkotok.half_life_mod.entity.modinterface.MultiMeleeEntity;
+import net.sirkotok.half_life_mod.entity.modinterface.RushingMob;
 import net.sirkotok.half_life_mod.entity.modinterface.TripleRangedMob;
 import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
 import net.sirkotok.half_life_mod.entity.projectile.AcidThrown;
@@ -92,7 +93,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 
-public class GonarchBM extends HalfLifeMonster implements MultiMeleeEntity, TripleRangedMob, RangedAttackMob, DoubleRangedMob, GeoEntity, SmartBrainOwner<GonarchBM> {
+public class GonarchBM extends HalfLifeMonster implements RushingMob, MultiMeleeEntity, TripleRangedMob, RangedAttackMob, DoubleRangedMob, GeoEntity, SmartBrainOwner<GonarchBM> {
 
     private int destroyBlocksTick = 40;
     private int babyemount = 0;
@@ -617,7 +618,7 @@ public class GonarchBM extends HalfLifeMonster implements MultiMeleeEntity, Trip
                         new SetPlayerLookTarget<>(),
                         new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, false)).startCondition(entity -> this.entityData.get(IS_ANGRY)),
                         new TargetOrRetaliateHLT<>(),
-                        new CustomBehaviour<>(entity -> this.heal(1)).cooldownFor(entity -> 10),
+                        new CustomBehaviour<>(entity -> this.heal(1)).cooldownFor(entity -> 20).startCondition(entity -> this.getLastHurtByMob() == null),
                      //   new TargetOrRetaliate<>(),
                         new SetRandomLookTarget<>()),
                 new OneRandomBehaviour<>(
@@ -679,18 +680,18 @@ public class GonarchBM extends HalfLifeMonster implements MultiMeleeEntity, Trip
                                 .whenStarting(entity -> triggerAnim("onetime", "double")).startCondition(entity -> this.getPhase() < 2)
                                 .cooldownFor(entity -> random.nextInt(10, 20))),
                new OneRandomBehaviour<>(
-               new StopAndShoot<GonarchBM>(5, 15, 1f).attackRadius(32f).cooldownFor(entity -> random.nextFloat() < 0.1f ? 220 : random.nextInt(20,45))
+                       new RushPushToTarget<>(200, 26, 0, 80, (entity, targetpos) -> 2.2f, false, null).whenStarting(entity -> triggerAnim("onetime", "rush")).cooldownFor(entity -> 500).startCondition(entity -> this.distanceTo(HLperUtil.TargetOrThis(this)) > 8 && this.random.nextFloat() < 0.1f && this.getPhase() < 2),
+                       new StopAndShoot<GonarchBM>(5, 15, 1f).attackRadius(32f).cooldownFor(entity -> random.nextFloat() < 0.1f ? 220 : random.nextInt(20,45))
                                         .whenStarting(entity -> triggerAnim("onetime", "injureshot")).startCondition(entity -> this.getPhase() == 2),
-               new StopAndShoot<GonarchBM>(10, 15, 1f).attackRadius(32f).cooldownFor(entity -> random.nextFloat() < 0.1f ? 220 : random.nextInt(30, 60))
+                       new StopAndShoot<GonarchBM>(10, 15, 1f).attackRadius(32f).cooldownFor(entity -> random.nextFloat() < 0.1f ? 220 : random.nextInt(30, 60))
                              .whenStarting(entity -> triggerAnim("onetime", "shoot")).startCondition(entity -> this.getPhase() == 0 && (this.distanceTo(HLperUtil.TargetOrThis(this)) > 5f || (HLperUtil.TargetOrThis(this).getY() - (this.getY()+4))>0)),
-               new StopAndSecondShoot<GonarchBM>(9, 15, 1f, null).attackRadius(15f).cooldownFor(entity -> random.nextFloat() < 0.1f ? 220 : random.nextInt(30, 60))
-                        .whenStarting(entity -> triggerAnim("onetime", "web")).startCondition(entity -> this.getPhase() == 0 && (HLperUtil.TargetOrThis(this).getY() - (this.getY()+4))<0)
-                ,
-               new StopAndShootx3<GonarchBM>(35, 15, 10, 23, 1f).attackRadius(32f).cooldownFor(entity -> random.nextFloat() < 0.1f ? 220 : random.nextInt(30, 60))
+                       new StopAndSecondShoot<GonarchBM>(9, 15, 1f, null).attackRadius(15f).cooldownFor(entity -> random.nextFloat() < 0.1f ? 220 : random.nextInt(30, 60))
+                        .whenStarting(entity -> triggerAnim("onetime", "web")).startCondition(entity -> this.getPhase() == 0 && (HLperUtil.TargetOrThis(this).getY() - (this.getY()+4))<0),
+                       new StopAndShootx3<GonarchBM>(35, 15, 10, 23, 1f).attackRadius(32f).cooldownFor(entity -> random.nextFloat() < 0.1f ? 220 : random.nextInt(30, 60))
                                 .whenStarting(entity -> triggerAnim("onetime", "shoot3")).startCondition(entity -> this.getPhase() == 1 && (this.distanceTo(HLperUtil.TargetOrThis(this)) > 5f || (HLperUtil.TargetOrThis(this).getY() - (this.getY()+4))>0)),
-              new StopAndSecondShootx3<GonarchBM>(38, 15, 9, 22, 1f, null).attackRadius(15f).cooldownFor(entity -> random.nextFloat() < 0.1f ? 220 : random.nextInt(30, 60))
+                       new StopAndSecondShootx3<GonarchBM>(38, 15, 9, 22, 1f, null).attackRadius(15f).cooldownFor(entity -> random.nextFloat() < 0.1f ? 220 : random.nextInt(30, 60))
                                 .whenStarting(entity -> triggerAnim("onetime", "web3")).startCondition(entity -> this.getPhase() == 1 && (HLperUtil.TargetOrThis(this).getY() - (this.getY()+4))<0),
-               new StopAndThirdShoot<GonarchBM>(15, 8, 1f, this.getBirthSound()).attackRadius(32f).cooldownFor(entity -> random.nextInt(250, 450) + 200 * this.getPhase()).startCondition(entity -> this.babyemount <= this.babymaxemount)
+                       new StopAndThirdShoot<GonarchBM>(15, 8, 1f, this.getBirthSound()).attackRadius(32f).cooldownFor(entity -> random.nextInt(250, 450) + 200 * this.getPhase()).startCondition(entity -> this.babyemount <= this.babymaxemount)
                        .whenStarting(entity -> triggerAnim("onetime", "birth"))
 
                )
@@ -717,6 +718,9 @@ public class GonarchBM extends HalfLifeMonster implements MultiMeleeEntity, Trip
                         .triggerableAnim("shoot3", RawAnimation.begin().then("animation.mom.shootx3", Animation.LoopType.PLAY_ONCE))
                         .triggerableAnim("web3", RawAnimation.begin().then("animation.mom.sackattackx3", Animation.LoopType.PLAY_ONCE))
                         .triggerableAnim("web", RawAnimation.begin().then("animation.mom.sackattack", Animation.LoopType.PLAY_ONCE))
+                        .triggerableAnim("rush", RawAnimation.begin().then("animation.mom.rush", Animation.LoopType.PLAY_ONCE))
+                        .triggerableAnim("wall", RawAnimation.begin().then("animation.mom.wallhit", Animation.LoopType.PLAY_ONCE))
+
         );
 
 
@@ -892,6 +896,20 @@ public class GonarchBM extends HalfLifeMonster implements MultiMeleeEntity, Trip
     public boolean isinside() {
          List<Entity> list = this.level.getEntities(this, this.front.getBoundingBox(), obj -> obj instanceof LivingEntity && !(obj.getType().is(ModTags.EntityTypes.FACTION_HEADCRAB)));
         return !list.isEmpty();
+    }
+
+    @Override
+    public void hitbody() {
+    }
+
+    @Override
+    public void hitwall() {
+        this.triggerAnim("onetime", "wall");
+    }
+
+    @Override
+    public AABB getrushingbox() {
+        return this.getBoundingBox();
     }
 }
 

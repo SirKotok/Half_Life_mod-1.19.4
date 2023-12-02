@@ -17,6 +17,426 @@
       "half_life_mod:gon_die1"
     ]
   },
+  "body_medium_impact_hard1": {
+    "subtitle": "sounds.half_life_mod.body_medium_impact_hard1",
+    "sounds": [
+      "half_life_mod:body_medium_impact_hard1"
+    ]
+  },
+  "body_medium_impact_hard2": {
+    "subtitle": "sounds.half_life_mod.body_medium_impact_hard2",
+    "sounds": [
+      "half_life_mod:body_medium_impact_hard2"
+    ]
+  },
+  "body_medium_impact_hard3": {
+    "subtitle": "sounds.half_life_mod.body_medium_impact_hard3",
+    "sounds": [
+      "half_life_mod:body_medium_impact_hard3"
+    ]
+  },
+  "body_medium_impact_hard4": {
+    "subtitle": "sounds.half_life_mod.body_medium_impact_hard4",
+    "sounds": [
+      "half_life_mod:body_medium_impact_hard4"
+    ]
+  },
+  "body_medium_impact_hard5": {
+    "subtitle": "sounds.half_life_mod.body_medium_impact_hard5",
+    "sounds": [
+      "half_life_mod:body_medium_impact_hard5"
+    ]
+  },
+  "body_medium_impact_hard6": {
+    "subtitle": "sounds.half_life_mod.body_medium_impact_hard6",
+    "sounds": [
+      "half_life_mod:body_medium_impact_hard6"
+    ]
+  },
+  "flechetteltor01": {
+    "subtitle": "sounds.half_life_mod.flechetteltor01",
+    "sounds": [
+      "half_life_mod:flechetteltor01"
+    ]
+  },
+  "flechetteltor02": {
+    "subtitle": "sounds.half_life_mod.flechetteltor02",
+    "sounds": [
+      "half_life_mod:flechetteltor02"
+    ]
+  },
+  "flechetteltor03": {
+    "subtitle": "sounds.half_life_mod.flechetteltor03",
+    "sounds": [
+      "half_life_mod:flechetteltor03"
+    ]
+  },
+  "flechetteltor04": {
+    "subtitle": "sounds.half_life_mod.flechetteltor04",
+    "sounds": [
+      "half_life_mod:flechetteltor04"
+    ]
+  },
+  "flechette_explode1": {
+    "subtitle": "sounds.half_life_mod.flechette_explode1",
+    "sounds": [
+      "half_life_mod:flechette_explode1"
+    ]
+  },
+  "flechette_explode2": {
+    "subtitle": "sounds.half_life_mod.flechette_explode2",
+    "sounds": [
+      "half_life_mod:flechette_explode2"
+    ]
+  },
+  "flechette_explode3": {
+    "subtitle": "sounds.half_life_mod.flechette_explode3",
+    "sounds": [
+      "half_life_mod:flechette_explode3"
+    ]
+  },
+  "flechette_flesh_impact1": {
+    "subtitle": "sounds.half_life_mod.flechette_flesh_impact1",
+    "sounds": [
+      "half_life_mod:flechette_flesh_impact1"
+    ]
+  },
+  "flechette_flesh_impact2": {
+    "subtitle": "sounds.half_life_mod.flechette_flesh_impact2",
+    "sounds": [
+      "half_life_mod:flechette_flesh_impact2"
+    ]
+  },
+  "flechette_flesh_impact3": {
+    "subtitle": "sounds.half_life_mod.flechette_flesh_impact3",
+    "sounds": [
+      "half_life_mod:flechette_flesh_impact3"
+    ]
+  },
+  "flechette_flesh_impact4": {
+    "subtitle": "sounds.half_life_mod.flechette_flesh_impact4",
+    "sounds": [
+      "half_life_mod:flechette_flesh_impact4"
+    ]
+  },
+  "flechette_impact_stick1": {
+    "subtitle": "sounds.half_life_mod.flechette_impact_stick1",
+    "sounds": [
+      "half_life_mod:flechette_impact_stick1"
+    ]
+  },
+  "flechette_impact_stick2": {
+    "subtitle": "sounds.half_life_mod.flechette_impact_stick2",
+    "sounds": [
+      "half_life_mod:flechette_impact_stick2"
+    ]
+  },
+  "flechette_impact_stick3": {
+    "subtitle": "sounds.half_life_mod.flechette_impact_stick3",
+    "sounds": [
+      "half_life_mod:flechette_impact_stick3"
+    ]
+  },
+  "flechette_impact_stick4": {
+    "subtitle": "sounds.half_life_mod.flechette_impact_stick4",
+    "sounds": [
+      "half_life_mod:flechette_impact_stick4"
+    ]
+  },
+  "flechette_impact_stick5": {
+    "subtitle": "sounds.half_life_mod.flechette_impact_stick5",
+    "sounds": [
+      "half_life_mod:flechette_impact_stick5"
+    ]
+  },
+  "hunter_alert1": {
+    "subtitle": "sounds.half_life_mod.hunter_alert1",
+    "sounds": [
+      "half_life_mod:hunter_alert1"
+    ]
+  },
+  "hunter_alert2": {
+    "subtitle": "sounds.half_life_mod.hunter_alert2",
+    "sounds": [
+      "half_life_mod:hunter_alert2"
+    ]
+  },
+  "hunter_alert3": {
+    "subtitle": "sounds.half_life_mod.hunter_alert3",
+    "sounds": [
+      "half_life_mod:hunter_alert3"
+    ]
+  },
+  "hunter_angry1": {
+    "subtitle": "sounds.half_life_mod.hunter_angry1",
+    "sounds": [
+      "half_life_mod:hunter_angry1"
+    ]
+  },
+  "hunter_angry2": {
+    "subtitle": "sounds.half_life_mod.hunter_angry2",
+    "sounds": [
+      "half_life_mod:hunter_angry2"
+    ]
+  },
+  "hunter_angry3": {
+    "subtitle": "sounds.half_life_mod.hunter_angry3",
+    "sounds": [
+      "half_life_mod:hunter_angry3"
+    ]
+  },
+  "hunter_charge3": {
+    "subtitle": "sounds.half_life_mod.hunter_charge3",
+    "sounds": [
+      "half_life_mod:hunter_charge3"
+    ]
+  },
+  "hunter_charge4": {
+    "subtitle": "sounds.half_life_mod.hunter_charge4",
+    "sounds": [
+      "half_life_mod:hunter_charge4"
+    ]
+  },
+  "hunter_defendstrider1": {
+    "subtitle": "sounds.half_life_mod.hunter_defendstrider1",
+    "sounds": [
+      "half_life_mod:hunter_defendstrider1"
+    ]
+  },
+  "hunter_defendstrider2": {
+    "subtitle": "sounds.half_life_mod.hunter_defendstrider2",
+    "sounds": [
+      "half_life_mod:hunter_defendstrider2"
+    ]
+  },
+  "hunter_defendstrider3": {
+    "subtitle": "sounds.half_life_mod.hunter_defendstrider3",
+    "sounds": [
+      "half_life_mod:hunter_defendstrider3"
+    ]
+  },
+  "hunter_die2": {
+    "subtitle": "sounds.half_life_mod.hunter_die2",
+    "sounds": [
+      "half_life_mod:hunter_die2"
+    ]
+  },
+  "hunter_die3": {
+    "subtitle": "sounds.half_life_mod.hunter_die3",
+    "sounds": [
+      "half_life_mod:hunter_die3"
+    ]
+  },
+  "hunter_fire_loop3": {
+    "subtitle": "sounds.half_life_mod.hunter_fire_loop3",
+    "sounds": [
+      "half_life_mod:hunter_fire_loop3"
+    ]
+  },
+  "hunter_flank_announce1": {
+    "subtitle": "sounds.half_life_mod.hunter_flank_announce1",
+    "sounds": [
+      "half_life_mod:hunter_flank_announce1"
+    ]
+  },
+  "hunter_flank_announce2": {
+    "subtitle": "sounds.half_life_mod.hunter_flank_announce2",
+    "sounds": [
+      "half_life_mod:hunter_flank_announce2"
+    ]
+  },
+  "hunter_flechette_preexplode1": {
+    "subtitle": "sounds.half_life_mod.hunter_flechette_preexplode1",
+    "sounds": [
+      "half_life_mod:hunter_flechette_preexplode1"
+    ]
+  },
+  "hunter_flechette_preexplode2": {
+    "subtitle": "sounds.half_life_mod.hunter_flechette_preexplode2",
+    "sounds": [
+      "half_life_mod:hunter_flechette_preexplode2"
+    ]
+  },
+  "hunter_flechette_preexplode3": {
+    "subtitle": "sounds.half_life_mod.hunter_flechette_preexplode3",
+    "sounds": [
+      "half_life_mod:hunter_flechette_preexplode3"
+    ]
+  },
+  "hunter_foundenemy1": {
+    "subtitle": "sounds.half_life_mod.hunter_foundenemy1",
+    "sounds": [
+      "half_life_mod:hunter_foundenemy1"
+    ]
+  },
+  "hunter_foundenemy2": {
+    "subtitle": "sounds.half_life_mod.hunter_foundenemy2",
+    "sounds": [
+      "half_life_mod:hunter_foundenemy2"
+    ]
+  },
+  "hunter_foundenemy3": {
+    "subtitle": "sounds.half_life_mod.hunter_foundenemy3",
+    "sounds": [
+      "half_life_mod:hunter_foundenemy3"
+    ]
+  },
+  "hunter_foundenemy_ack1": {
+    "subtitle": "sounds.half_life_mod.hunter_foundenemy_ack1",
+    "sounds": [
+      "half_life_mod:hunter_foundenemy_ack1"
+    ]
+  },
+  "hunter_foundenemy_ack2": {
+    "subtitle": "sounds.half_life_mod.hunter_foundenemy_ack2",
+    "sounds": [
+      "half_life_mod:hunter_foundenemy_ack2"
+    ]
+  },
+  "hunter_foundenemy_ack3": {
+    "subtitle": "sounds.half_life_mod.hunter_foundenemy_ack3",
+    "sounds": [
+      "half_life_mod:hunter_foundenemy_ack3"
+    ]
+  },
+  "hunter_idle1": {
+    "subtitle": "sounds.half_life_mod.hunter_idle1",
+    "sounds": [
+      "half_life_mod:hunter_idle1"
+    ]
+  },
+  "hunter_idle2": {
+    "subtitle": "sounds.half_life_mod.hunter_idle2",
+    "sounds": [
+      "half_life_mod:hunter_idle2"
+    ]
+  },
+  "hunter_idle3": {
+    "subtitle": "sounds.half_life_mod.hunter_idle3",
+    "sounds": [
+      "half_life_mod:hunter_idle3"
+    ]
+  },
+  "hunter_laugh1": {
+    "subtitle": "sounds.half_life_mod.hunter_laugh1",
+    "sounds": [
+      "half_life_mod:hunter_laugh1"
+    ]
+  },
+  "hunter_laugh2": {
+    "subtitle": "sounds.half_life_mod.hunter_laugh2",
+    "sounds": [
+      "half_life_mod:hunter_laugh2"
+    ]
+  },
+  "hunter_laugh3": {
+    "subtitle": "sounds.half_life_mod.hunter_laugh3",
+    "sounds": [
+      "half_life_mod:hunter_laugh3"
+    ]
+  },
+  "hunter_laugh4": {
+    "subtitle": "sounds.half_life_mod.hunter_laugh4",
+    "sounds": [
+      "half_life_mod:hunter_laugh4"
+    ]
+  },
+  "hunter_laugh5": {
+    "subtitle": "sounds.half_life_mod.hunter_laugh5",
+    "sounds": [
+      "half_life_mod:hunter_laugh5"
+    ]
+  },
+  "hunter_pain2": {
+    "subtitle": "sounds.half_life_mod.hunter_pain2",
+    "sounds": [
+      "half_life_mod:hunter_pain2"
+    ]
+  },
+  "hunter_pain4": {
+    "subtitle": "sounds.half_life_mod.hunter_pain4",
+    "sounds": [
+      "half_life_mod:hunter_pain4"
+    ]
+  },
+  "hunter_prestrike1": {
+    "subtitle": "sounds.half_life_mod.hunter_prestrike1",
+    "sounds": [
+      "half_life_mod:hunter_prestrike1"
+    ]
+  },
+  "hunter_scan1": {
+    "subtitle": "sounds.half_life_mod.hunter_scan1",
+    "sounds": [
+      "half_life_mod:hunter_scan1"
+    ]
+  },
+  "hunter_scan2": {
+    "subtitle": "sounds.half_life_mod.hunter_scan2",
+    "sounds": [
+      "half_life_mod:hunter_scan2"
+    ]
+  },
+  "hunter_scan3": {
+    "subtitle": "sounds.half_life_mod.hunter_scan3",
+    "sounds": [
+      "half_life_mod:hunter_scan3"
+    ]
+  },
+  "hunter_scan4": {
+    "subtitle": "sounds.half_life_mod.hunter_scan4",
+    "sounds": [
+      "half_life_mod:hunter_scan4"
+    ]
+  },
+  "ministrider_fire1": {
+    "subtitle": "sounds.half_life_mod.ministrider_fire1",
+    "sounds": [
+      "half_life_mod:ministrider_fire1"
+    ]
+  },
+  "ministrider_footstep1": {
+    "subtitle": "sounds.half_life_mod.ministrider_footstep1",
+    "sounds": [
+      "half_life_mod:ministrider_footstep1"
+    ]
+  },
+  "ministrider_footstep2": {
+    "subtitle": "sounds.half_life_mod.ministrider_footstep2",
+    "sounds": [
+      "half_life_mod:ministrider_footstep2"
+    ]
+  },
+  "ministrider_footstep3": {
+    "subtitle": "sounds.half_life_mod.ministrider_footstep3",
+    "sounds": [
+      "half_life_mod:ministrider_footstep3"
+    ]
+  },
+  "ministrider_footstep4": {
+    "subtitle": "sounds.half_life_mod.ministrider_footstep4",
+    "sounds": [
+      "half_life_mod:ministrider_footstep4"
+    ]
+  },
+  "ministrider_footstep5": {
+    "subtitle": "sounds.half_life_mod.ministrider_footstep5",
+    "sounds": [
+      "half_life_mod:ministrider_footstep5"
+    ]
+  },
+  "ministrider_preflechette": {
+    "subtitle": "sounds.half_life_mod.ministrider_preflechette",
+    "sounds": [
+      "half_life_mod:ministrider_preflechette"
+    ]
+  },
+  "ministrider_skewer1": {
+    "subtitle": "sounds.half_life_mod.ministrider_skewer1",
+    "sounds": [
+      "half_life_mod:ministrider_skewer1"
+    ]
+  },
   "claw_strike1": {
     "subtitle": "sounds.half_life_mod.claw_strike1",
     "sounds": [

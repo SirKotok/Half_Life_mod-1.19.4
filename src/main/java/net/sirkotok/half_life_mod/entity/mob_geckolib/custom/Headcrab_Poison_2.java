@@ -253,8 +253,7 @@ public class Headcrab_Poison_2 extends HalfLifeMonster implements GeoEntity, Sma
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<Headcrab_Poison_2>()
                         .setPredicate((target, entity) ->
-                            target instanceof Player || target instanceof IronGolem ||
-                                    target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) ||  target instanceof HalfLifeNeutral ||
+                            target instanceof Player || target instanceof IronGolem  ||  target instanceof HalfLifeNeutral ||
                             target instanceof AbstractVillager));
     }
 

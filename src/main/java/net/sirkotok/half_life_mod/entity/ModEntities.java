@@ -16,6 +16,7 @@ import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.VoltigoreProje
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.*;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
 import net.sirkotok.half_life_mod.entity.projectile.*;
+import net.sirkotok.half_life_mod.entity.projectile.arrowlike.Flechette;
 
 
 public class ModEntities {
@@ -252,6 +253,15 @@ public class ModEntities {
                             .clientTrackingRange(20)
                             .updateInterval(1)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "pit_spike").toString()));
+
+
+    public static final RegistryObject<EntityType<Flechette>> FLECHETTE =
+            ENTITY_TYPES.register("flechette",
+                    () -> EntityType.Builder.<Flechette>of(Flechette::new, MobCategory.MISC)
+                            .sized(0.25F, 0.25F)
+                            .clientTrackingRange(20)
+                            .updateInterval(1)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "flechette").toString()));
 
 
     public static final RegistryObject<EntityType<VoltigoreShock>> VOLTIGORE_SHOCK =
