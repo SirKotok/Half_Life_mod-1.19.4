@@ -22,7 +22,7 @@ import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Voltigore;
 
 import javax.annotation.Nullable;
 
-public class HalfLifeMonster<T extends HalfLifeMonster<T>> extends Monster {
+public class HalfLifeMonster extends Monster {
 
     public static final EntityDataAccessor<Integer> ENTITY_MODEL = SynchedEntityData.defineId(HalfLifeMonster.class, EntityDataSerializers.INT);
 
@@ -51,7 +51,9 @@ public class HalfLifeMonster<T extends HalfLifeMonster<T>> extends Monster {
   }
 
 
-
+    public float getMonsterSoundVolume(){
+        return this.getSoundVolume();
+    }
 
     public boolean ConfigurabledoHurtTargetShieldBoolean(boolean after, Entity entity, float disablechance, float attack_modifier, float knockback_modifier, @Nullable MobEffect effect, int duration, boolean visible) {
         float p = (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE);

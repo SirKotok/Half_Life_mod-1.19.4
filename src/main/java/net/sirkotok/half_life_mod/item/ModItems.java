@@ -16,6 +16,7 @@ import net.sirkotok.half_life_mod.item.custom.*;
 import net.sirkotok.half_life_mod.item.custom.armor.SecurityGuardArmorItem;
 import net.sirkotok.half_life_mod.item.custom.fake.FakeBulletItem;
 import net.sirkotok.half_life_mod.item.custom.gun.Pistol_1_Item;
+import net.sirkotok.half_life_mod.item.custom.gun.SMG_1_Item;
 import net.sirkotok.half_life_mod.item.custom.gun.Shockroach_Item;
 import net.sirkotok.half_life_mod.item.custom.spawnegg.BarnacleSpawnEggItem;
 import net.sirkotok.half_life_mod.item.custom.spawnegg.VortigoreSpawnEggItem;
@@ -154,6 +155,8 @@ public class ModItems {
     //Guns
     public static final RegistryObject<Item> PISTOL = ITEMS.register("pistol_one_item",
             () -> new Pistol_1_Item(new Item.Properties()));
+    public static final RegistryObject<Item> SMG_HL1 = ITEMS.register("smg_hl1",
+         () -> new SMG_1_Item(new Item.Properties()));
     public static final RegistryObject<Item> SHOCKROACH_ITEM = ITEMS.register("shockroach_item",
             () -> new Shockroach_Item(new Item.Properties()));
 

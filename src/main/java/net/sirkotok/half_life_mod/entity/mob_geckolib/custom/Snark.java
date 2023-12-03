@@ -18,6 +18,7 @@ import net.sirkotok.half_life_mod.entity.brain.behaviour.HeadCrabJumpBehavior;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.LeapTowardTargetBehavior;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
 import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.util.CommonSounds;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -92,12 +93,14 @@ public class Snark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
 
 
     public void explode(){
-        this.playSound(ModSounds.SNARK_BLAST.get(), 0.3f, 1);
+        CommonSounds.PlaySoundAsOwn(this, this.getExplosionSound());
         this.dead = true;
         this.discard();
     }
 
-
+    public SoundEvent getExplosionSound(){
+        return ModSounds.SNARK_BLAST.get();
+    }
 
 
 

@@ -349,7 +349,9 @@ public class Hunter extends HalfLifeMonster implements RushingMob, GeoEntity, Ra
     public BrainActivityGroup<Hunter> getCoreTasks() {
         return BrainActivityGroup.coreTasks(
                 new LookAtTarget<>(),
-                new MoveToWalkTarget<>()
+                new MoveToWalkTarget<>(),
+                new CustomBehaviour<>(entity -> BrainUtils.clearMemory(this, MemoryModuleType.HURT_BY_ENTITY)).startCondition(entity -> BrainUtils.getMemory(this, MemoryModuleType.HURT_BY_ENTITY) instanceof Hunter),
+                new CustomBehaviour<>(entity -> BrainUtils.clearMemory(this, MemoryModuleType.ATTACK_TARGET)).startCondition(entity -> BrainUtils.getMemory(this, MemoryModuleType.ATTACK_TARGET) instanceof Hunter)
         );
 
     }
@@ -362,6 +364,7 @@ public class Hunter extends HalfLifeMonster implements RushingMob, GeoEntity, Ra
                         new TargetOrRetaliateHLT<>(),
                          new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>()),
+
                new OneRandomBehaviour<>(
                 new SetRandomWalkTarget<>().setRadius(20, 10).speedModifier(1f),
                 new Idle<>().runFor(entity -> entity.getRandom().nextInt(30, 90)))
@@ -379,6 +382,7 @@ public class Hunter extends HalfLifeMonster implements RushingMob, GeoEntity, Ra
     public BrainActivityGroup<Hunter> getFightTasks() { // These are the tasks that handle fighting
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>(),
+                new InvalidateAttackTarget<>().invalidateIf((entity, target) -> HLperUtil.issameteam(entity, target)),
                 new CustomBehaviour<>(entity -> this.setAngry(true)).startCondition(entity -> !this.getAngry() && this.random.nextFloat() < 0.1f).whenStarting(entity -> playSound(getEnemySpotSound(), this.getSoundVolume(), this.getVoicePitch())),
                 new CustomBehaviour<>(entity -> BrainUtils.clearMemory(this, MemoryModuleType.WALK_TARGET)).cooldownFor(entity -> 200),
                 new Retaliate<>(),
@@ -404,9 +408,9 @@ public class Hunter extends HalfLifeMonster implements RushingMob, GeoEntity, Ra
                         ),
                         new OneRandomBehaviour<>(
                          new RushPushToTarget<>(200, 26, 25, 32, (entity, targetpos) -> 1.5f, true, getChargeSound()).whenStarting(entity -> triggerAnim("onetime", "startrun")).cooldownFor(entity -> 400).startCondition(entity -> this.distanceTo(HLperUtil.TargetOrThis(this)) > 8 && this.random.nextFloat() < 0.1f && this.getphase() < 5),
-                         new StopAndShootOverTime<>(50, 1, 12, 40, 4, 3f, true, getFireLoopSound(), getPreFlechetteSound()).cooldownFor(entity -> random.nextInt(100, 200))
+                         new StopAndShootOverTime<>(50, 1, 12, 40, 2, 3.2f, true, getFireLoopSound(), getPreFlechetteSound()).cooldownFor(entity -> random.nextInt(100, 200))
                                 .whenStarting(entity -> triggerAnim("onetime", "shoot")),
-                         new StopAndShootOverTime<>(50, 1, 12, 40, 4, 3f, false, getFireLoopSound(), getPreFlechetteSound()).cooldownFor(entity -> random.nextInt(100, 200))
+                         new StopAndShootOverTime<>(50, 1, 12, 40, 2, 3.2f, false, getFireLoopSound(), getPreFlechetteSound()).cooldownFor(entity -> random.nextInt(100, 200))
                                 .whenStarting(entity -> triggerAnim("onetime", "shoot")))
                 ));
     }

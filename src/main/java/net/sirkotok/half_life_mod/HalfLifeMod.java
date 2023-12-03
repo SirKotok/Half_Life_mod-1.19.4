@@ -128,6 +128,7 @@ public class HalfLifeMod
         if(event.getTab().equals(ModCreativeModeTabs.HALF_LIFE_WEOPONS_TAB)) {
             // items that are guns
             event.accept(ModItems.PISTOL);
+            event.accept(ModItems.SMG_HL1);
             event.accept(ModItems.SHOCKROACH_ITEM);
          //   items that throw entities
             event.accept(ModItems.CHUMTOAD_THROWER);

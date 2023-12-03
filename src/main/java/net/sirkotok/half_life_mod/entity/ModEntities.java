@@ -237,6 +237,15 @@ public class ModEntities {
                             .updateInterval(1)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "acid_thrownbm").toString()));
 
+
+    public static final RegistryObject<EntityType<UnderbarrelGranade>> UNDER_NADE =
+            ENTITY_TYPES.register("undernade",
+                    () -> EntityType.Builder.<UnderbarrelGranade>of(UnderbarrelGranade::new, MobCategory.MISC)
+                            .sized(0.4F, 0.4F)
+                            .clientTrackingRange(20)
+                            .updateInterval(1)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "undernade").toString()));
+
     public static final RegistryObject<EntityType<SporeShot>> SPORESHOT =
             ENTITY_TYPES.register("spore_shot",
                     () -> EntityType.Builder.<SporeShot>of(SporeShot::new, MobCategory.MISC)

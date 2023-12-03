@@ -2,9 +2,23 @@ package net.sirkotok.half_life_mod.util;
 
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
+import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.sound.ModSounds;
 
 public final class CommonSounds {
+
+    public static void PlaySoundAsOwn(HalfLifeMonster monster, SoundEvent soundEvent){
+        monster.playSound(soundEvent, monster.getMonsterSoundVolume(), monster.getVoicePitch());
+    }
+
+    public static SoundEvent getHL1Explosion(){
+        switch (RandomSource.create().nextInt(1,4)) {
+            case 1:  return ModSounds.EXPLODE3.get();
+            case 2:  return ModSounds.EXPLODE4.get();
+            case 3:  return ModSounds.EXPLODE5.get();
+        }
+        return ModSounds.HEADCRAB_1_ALERT_1.get();
+    }
 
     public static SoundEvent getClawHitSound(){
         switch (RandomSource.create().nextInt(1,4)) {

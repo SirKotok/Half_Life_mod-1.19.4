@@ -82,8 +82,8 @@ public class RushPushToTarget<E extends Mob & RushingMob> extends DelayedBehavio
                 if (!list.isEmpty()) {
                     for (Entity entity2 : list) {
                         if (entity2 instanceof LivingEntity alive && ticks % 4 == 0) {
-                            if (entity instanceof HalfLifeMonster<?>) {
-                                ((HalfLifeMonster<?>) entity).ConfigurabledoHurtTarget(alive, 0.5f, 1f, 2f, null, 0, false);
+                            if (entity instanceof HalfLifeMonster) {
+                                ((HalfLifeMonster) entity).ConfigurabledoHurtTarget(alive, 0.5f, 1f, 2f, null, 0, false);
                             } else entity.doHurtTarget(alive);
                             if (alive.equals(entity1) || alive.getBbWidth() > entity.getBbWidth()) {
                                 entity.hitbody();

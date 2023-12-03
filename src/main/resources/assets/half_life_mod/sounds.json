@@ -353,6 +353,60 @@
       "half_life_mod:hunter_pain2"
     ]
   },
+  "dryfire1": {
+    "subtitle": "sounds.half_life_mod.dryfire1",
+    "sounds": [
+      "half_life_mod:dryfire1"
+    ]
+  },
+  "explode3": {
+    "subtitle": "sounds.half_life_mod.explode3",
+    "sounds": [
+      "half_life_mod:explode3"
+    ]
+  },
+  "explode4": {
+    "subtitle": "sounds.half_life_mod.explode4",
+    "sounds": [
+      "half_life_mod:explode4"
+    ]
+  },
+  "explode5": {
+    "subtitle": "sounds.half_life_mod.explode5",
+    "sounds": [
+      "half_life_mod:explode5"
+    ]
+  },
+  "glauncher": {
+    "subtitle": "sounds.half_life_mod.glauncher",
+    "sounds": [
+      "half_life_mod:glauncher"
+    ]
+  },
+  "glauncher2": {
+    "subtitle": "sounds.half_life_mod.glauncher2",
+    "sounds": [
+      "half_life_mod:glauncher2"
+    ]
+  },
+  "smg_shot1": {
+    "subtitle": "sounds.half_life_mod.smg_shot1",
+    "sounds": [
+      "half_life_mod:smg_shot1"
+    ]
+  },
+  "smg_shot2": {
+    "subtitle": "sounds.half_life_mod.smg_shot2",
+    "sounds": [
+      "half_life_mod:smg_shot2"
+    ]
+  },
+  "smg_shot3": {
+    "subtitle": "sounds.half_life_mod.smg_shot3",
+    "sounds": [
+      "half_life_mod:smg_shot3"
+    ]
+  },
   "hunter_pain4": {
     "subtitle": "sounds.half_life_mod.hunter_pain4",
     "sounds": [

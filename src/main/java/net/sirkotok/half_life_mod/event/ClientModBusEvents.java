@@ -88,6 +88,7 @@ public class ClientModBusEvents {
         EntityRenderers.register(ModEntities.BULLET_ONE.get(), ThrownItemRenderer::new);
         EntityRenderers.register(ModEntities.ACID_THROWN.get(), ThrownItemRenderer::new);
         EntityRenderers.register(ModEntities.ACID_THROWNBM.get(), AcidThrownBMRenderer::new);
+        EntityRenderers.register(ModEntities.UNDER_NADE.get(), Undernade_renderer::new);
         EntityRenderers.register(ModEntities.BARNACLE.get(), Barnacle_Renderer::new);
 
         BlockEntityRenderers.register(ModBlockEntities.VOLTIGORE_EGG_BLOCK_ENTITY.get(), VoltigoreEggRenderer::new);

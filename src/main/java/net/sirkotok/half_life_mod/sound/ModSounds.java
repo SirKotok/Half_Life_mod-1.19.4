@@ -16,7 +16,40 @@ public class ModSounds {
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 
 
-    // Hunter
+    // SMG
+
+  public static final RegistryObject<SoundEvent> DRYFIRE1=
+          registerSoundEvent("dryfire1");
+  public static final RegistryObject<SoundEvent> EXPLODE3=
+          registerSoundEvent("explode3");
+  public static final RegistryObject<SoundEvent> EXPLODE4=
+          registerSoundEvent("explode4");
+  public static final RegistryObject<SoundEvent> EXPLODE5=
+          registerSoundEvent("explode5");
+  public static final RegistryObject<SoundEvent> GLAUNCHER=
+          registerSoundEvent("glauncher");
+  public static final RegistryObject<SoundEvent> GLAUNCHER2=
+          registerSoundEvent("glauncher2");
+  public static final RegistryObject<SoundEvent> SMG_SHOT1=
+          registerSoundEvent("smg_shot1");
+  public static final RegistryObject<SoundEvent> SMG_SHOT2=
+          registerSoundEvent("smg_shot2");
+  public static final RegistryObject<SoundEvent> SMG_SHOT3=
+          registerSoundEvent("smg_shot3");
+
+/*          "sounds.half_life_mod.dryfire1": " ",
+          "sounds.half_life_mod.explode3": " ",
+          "sounds.half_life_mod.explode4": " ",
+          "sounds.half_life_mod.explode5": " ",
+          "sounds.half_life_mod.glauncher": " ",
+          "sounds.half_life_mod.glauncher2": " ",
+          "sounds.half_life_mod.smg_shot1": " ",
+          "sounds.half_life_mod.smg_shot2": " ",
+          "sounds.half_life_mod.smg_shot3": " ",
+*/
+
+
+  // Hunter
 
   public static final RegistryObject<SoundEvent> BODY_MEDIUM_IMPACT_HARD1=
           registerSoundEvent("body_medium_impact_hard1");

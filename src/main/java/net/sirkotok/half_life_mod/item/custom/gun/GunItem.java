@@ -22,6 +22,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.common.ForgeHooks;
 import net.sirkotok.half_life_mod.entity.projectile.Bullet;
 import net.sirkotok.half_life_mod.item.ModItems;
+import net.sirkotok.half_life_mod.sound.ModSounds;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -31,7 +32,7 @@ import java.util.function.Predicate;
 public class GunItem extends Item {
 
     private static final String ATTACK_COOLDOWN = "Cooldown";
-    private static final String AMMO_COUNT = "AmmoCount";
+    private static final String AMMO_COUNT = "Ammo";
     private static final String RELOAD_TIMER = "ReloadTimer";
     public ItemStack getammoitem(){
         return Items.BEDROCK.getDefaultInstance();
@@ -49,7 +50,7 @@ public class GunItem extends Item {
 
 
 
-    public static int GetMaxAmmo() {
+    public int GetMaxAmmo() {
         return 17;
     }
 
@@ -129,7 +130,10 @@ public class GunItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
-        if (GetAmmo(itemstack) == 0 && !pPlayer.getAbilities().instabuild) return InteractionResultHolder.fail(itemstack);
+        if (GetAmmo(itemstack) == 0 && !pPlayer.getAbilities().instabuild) {
+            pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), ModSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
+            return InteractionResultHolder.fail(itemstack);
+        }
         if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
         pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.SNOWBALL_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (pLevel.getRandom().nextFloat() * 0.4F + 0.8F));
         shootright(pLevel, pPlayer, pHand);
@@ -152,7 +156,10 @@ public class GunItem extends Item {
 
     public InteractionResultHolder<ItemStack> leftuse(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
-        if (GetAmmo(itemstack) == 0 && !pPlayer.getAbilities().instabuild) return InteractionResultHolder.fail(itemstack);
+        if (GetAmmo(itemstack) == 0 && !pPlayer.getAbilities().instabuild) {
+            pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), ModSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
+            return InteractionResultHolder.fail(itemstack);
+        }
         if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
         pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.SNOWBALL_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (pLevel.getRandom().nextFloat() * 0.4F + 0.8F));
         shootleft(pLevel, pPlayer, pHand);

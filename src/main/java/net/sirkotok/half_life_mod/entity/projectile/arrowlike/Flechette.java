@@ -31,6 +31,8 @@ import java.util.List;
 
 public class Flechette extends AbstractArrow implements GeoEntity{
 
+    // TODO: make the rotation correct
+
     public boolean start = false;
     public int remaining = 0;
     public Flechette(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
@@ -62,17 +64,16 @@ public class Flechette extends AbstractArrow implements GeoEntity{
                 this.discard();
                 ServerLevel serverlevel = (ServerLevel) level;
                 Entity entity = this.getOwner();
-                BlockPos pBlockPos = entity.blockPosition();
-                int rad = 3;
+                BlockPos pBlockPos = this.blockPosition();
+                int rad = 2;
                 List<LivingEntity> targets = EntityRetrievalUtil.getEntities((Level) serverlevel,
                         new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
                                 pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj instanceof LivingEntity);
 
                 for (LivingEntity entity2 : targets) {
                     if (entity2.equals(entity)) {
-                        entity2.hurt(this.damageSources().mobProjectile(this, (LivingEntity) entity), 2f);
-                    } else
-                     {
+                       entity2.hurt(this.damageSources().mobProjectile(this, (LivingEntity) entity), 2f);
+                    } else {
                         entity2.hurt(this.damageSources().mobProjectile(this, (LivingEntity) entity), 4f);
                     }
                 }
@@ -86,6 +87,7 @@ public class Flechette extends AbstractArrow implements GeoEntity{
     protected void onHitEntity(EntityHitResult pResult) {
         this.playSound(this.getfleshhitSound(), 0.5f, 1);
         super.onHitEntity(pResult);
+        this.discard();
     }
 
     @Override

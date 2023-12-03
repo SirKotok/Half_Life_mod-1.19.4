@@ -29,8 +29,8 @@ public class RechargingGunItem extends GunItem {
 
 
 
-
-    public static int GetMaxAmmo() {
+    @Override
+    public int GetMaxAmmo() {
         return 10;
     }
 
