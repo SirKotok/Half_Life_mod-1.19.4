@@ -85,6 +85,7 @@ public class Flechette extends AbstractArrow implements GeoEntity{
 
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
+        this.setBaseDamage(1D);
         this.playSound(this.getfleshhitSound(), 0.5f, 1);
         super.onHitEntity(pResult);
         this.discard();

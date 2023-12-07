@@ -83,8 +83,10 @@ public class Pistol_1_Item extends GunItem implements GeoItem {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
 
         if (!pLevel.isClientSide) {
-            if (GetAmmo(itemstack) == 0 && !pPlayer.getAbilities().instabuild)
+            if (GetAmmo(itemstack) == 0 && !pPlayer.getAbilities().instabuild) {
+                pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), ModSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
                 return InteractionResultHolder.fail(itemstack);
+            }
             if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
             triggerAnim(pPlayer, GeoItem.getOrAssignId(pPlayer.getItemInHand(pHand), (ServerLevel) pLevel),"onetime", "shoot");
             pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), ModSounds.PISTOL_SHOOT.get(), SoundSource.NEUTRAL, 0.5F, 1F);
@@ -97,8 +99,10 @@ public class Pistol_1_Item extends GunItem implements GeoItem {
     public InteractionResultHolder<ItemStack> leftuse(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         if (!pLevel.isClientSide) {
-            if (GetAmmo(itemstack) == 0 && !pPlayer.getAbilities().instabuild)
+            if (GetAmmo(itemstack) == 0 && !pPlayer.getAbilities().instabuild) {
+                pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), ModSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
                 return InteractionResultHolder.fail(itemstack);
+            }
             if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
             triggerAnim(pPlayer, GeoItem.getOrAssignId(pPlayer.getItemInHand(pHand), (ServerLevel) pLevel),"onetime", "shoot");
             pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), ModSounds.PISTOL_SHOOT.get(), SoundSource.NEUTRAL, 0.5F, 1F);

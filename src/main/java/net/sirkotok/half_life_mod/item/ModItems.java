@@ -37,6 +37,10 @@ public class ModItems {
            () -> new ForgeSpawnEggItem(ModEntities.HOTEYE, 0xef7401, 0xff0000   ,
                    new Item.Properties()));
 
+ public static final RegistryObject<Item> CONTROLLER_SPAWN_EGG = ITEMS.register("controller_spawn_egg",
+         () -> new ForgeSpawnEggItem(ModEntities.CONTROLLER, 0xd14816, 0x450200   ,
+                 new Item.Properties()));
+
    public static final RegistryObject<Item> BARNACLE_ONE_SPAWN_EGG = ITEMS.register("barnacle_1_spawn_egg",
            () -> new BarnacleSpawnEggItem(ModEntities.BARNACLE, 0xef5b38, 0x9e7408   ,
                    new Item.Properties()));

@@ -4,6 +4,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -90,6 +91,16 @@ public class GunItem extends Item {
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
+
+        if (pEntity instanceof Player pPlayer && !pLevel.isClientSide() && pIsSelected) {
+          ItemStack pPlayerItemStack =  pPlayer.getOffhandItem();
+            if (!pPlayerItemStack.isEmpty() && pPlayerItemStack.is(Items.SHIELD) && pPlayer.isUsingItem()) {
+                    pPlayer.getCooldowns().addCooldown(Items.SHIELD, 10);
+                    pLevel.broadcastEntityEvent(pPlayer, (byte)30);
+                    pPlayer.stopUsingItem();
+                }
+        }
+
         if (GetCooldow(pStack)>0) {
             int i = GetCooldow(pStack);
             SetCooldow(pStack, i-1);
@@ -104,6 +115,19 @@ public class GunItem extends Item {
     }
 
 
+
+
+    public SoundEvent shootrightsound(){
+        return ModSounds.PISTOL_SHOOT.get();
+    }
+
+    public SoundEvent shootleftsound(){
+        return ModSounds.PISTOL_SHOOT.get();
+    }
+
+    public SoundEvent reloadsound(){
+        return ModSounds.PISTOL_RELOAD.get();
+    }
 
     public GunItem(Properties pProperties) {
         super(pProperties.stacksTo(1));
@@ -135,7 +159,7 @@ public class GunItem extends Item {
             return InteractionResultHolder.fail(itemstack);
         }
         if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
-        pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.SNOWBALL_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (pLevel.getRandom().nextFloat() * 0.4F + 0.8F));
+        pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), this.shootrightsound(), SoundSource.NEUTRAL, 0.5F, 0.4F / (pLevel.getRandom().nextFloat() * 0.4F + 0.8F));
         shootright(pLevel, pPlayer, pHand);
 
         return InteractionResultHolder.pass(itemstack);
@@ -149,7 +173,8 @@ public class GunItem extends Item {
             if (GetAmmo(itemstack) != GetMaxAmmo() || pPlayer.getAbilities().instabuild) {
             if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
             SetReloadTimer(itemstack, getReloadCooldown());
-            SetCooldow(itemstack, getReloadCooldown());
+            pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), this.reloadsound(), SoundSource.NEUTRAL, 0.5F, 1F);
+                SetCooldow(itemstack, getReloadCooldown());
         }}
         return InteractionResultHolder.pass(itemstack);
     }
@@ -161,7 +186,7 @@ public class GunItem extends Item {
             return InteractionResultHolder.fail(itemstack);
         }
         if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
-        pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.SNOWBALL_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (pLevel.getRandom().nextFloat() * 0.4F + 0.8F));
+        pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), this.shootleftsound(), SoundSource.NEUTRAL, 0.5F, 0.4F / (pLevel.getRandom().nextFloat() * 0.4F + 0.8F));
         shootleft(pLevel, pPlayer, pHand);
 
         return InteractionResultHolder.pass(itemstack);

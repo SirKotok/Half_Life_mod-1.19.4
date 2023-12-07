@@ -70,14 +70,17 @@ public class RushPushToTarget<E extends Mob & RushingMob> extends DelayedBehavio
     protected void tick(E entity) {
         super.tick(entity);
         Vec3 pPos = entity.position();
+        if (this.pushvec3 != null) {
+            this.setcorrectrotation(entity, pushvec3);
+            entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5, 100, false, false, false));
+        }
         LivingEntity entity1 = BrainUtils.getTargetOfEntity(entity);
         if (this.ticks % 4 == 0) {
-            this.setcorrectrotation(entity);
             if (entity1 != null && this.ticks > startticks) {
                 if (this.pushvec3 == null) this.pushvec3 =
                         new Vec3(entity1.getX() - entity.getX(), 0, entity1.getZ() - entity.getZ()).normalize();
+
                 entity.setDeltaMovement(entity1.getDeltaMovement().add(pushvec3));
-                entity.setYBodyRot((float)Math.atan2(pushvec3.x, pushvec3.z)*180/Mth.PI);
                 List<Entity> list = ((ServerLevel) entity.level).getEntities(entity, entity.getrushingbox(), obj -> !(obj.equals(entity)) && obj instanceof LivingEntity living && !HLperUtil.issameteam(entity, living));
                 if (!list.isEmpty()) {
                     for (Entity entity2 : list) {
@@ -121,27 +124,33 @@ public class RushPushToTarget<E extends Mob & RushingMob> extends DelayedBehavio
 
     //TODO: fix rotaiton
 
-   protected void setcorrectrotation(E entity){
-       if (this.targetPosition != null && (!entity.level.isEmptyBlock(this.targetPosition) || this.targetPosition.getY() <= entity.level.getMinBuildHeight())) {
-           this.targetPosition = null;
-       }
-
-       if (this.targetPosition == null || RandomSource.create().nextInt(30) == 0 || this.targetPosition.closerToCenterThan(entity.position(), 2.0D)) {
-           this.targetPosition = BlockPos.containing(entity.getX(), entity.getY(), entity.getZ());
-       }
-
-       double d2 = (double)this.targetPosition.getX() + 0.5D - entity.getX();
-       double d0 = (double)this.targetPosition.getY() + 0.1D - entity.getY();
-       double d1 = (double)this.targetPosition.getZ() + 0.5D - entity.getZ();
-       Vec3 vec3 = entity.getDeltaMovement();
-       Vec3 vec31 = vec3.add((Math.signum(d2) * 0.5D - vec3.x) * (double)0.1F, (Math.signum(d0) * (double)0.7F - vec3.y) * (double)0.1F, (Math.signum(d1) * 0.5D - vec3.z) * (double)0.1F);
-       // this.setDeltaMovement(vec31);
-       float f = (float)(Mth.atan2(vec3.z, vec3.x) * (double)(180F / (float)Math.PI)) - 90.0F;
-       float f1 = Mth.wrapDegrees(f - entity.getYRot());
-       entity.zza = 0.5F;
-       entity.setYRot(entity.getYRot() + f1);
+   protected void setcorrectrotation(E entity, Vec3 vec3){
+       double d0 = vec3.x;
+       double d1 = vec3.z;
+       float f9 = (float)(Mth.atan2(d1, d0) * (double)(180F / (float)Math.PI)) - 90.0F;
+       entity.setYRot(this.rotlerp(entity.getYRot(), f9, 90.0F));
+       entity.yBodyRot = f9;
    }
 
+    protected float rotlerp(float pSourceAngle, float pTargetAngle, float pMaximumChange) {
+        float f = Mth.wrapDegrees(pTargetAngle - pSourceAngle);
+        if (f > pMaximumChange) {
+            f = pMaximumChange;
+        }
+
+        if (f < -pMaximumChange) {
+            f = -pMaximumChange;
+        }
+
+        float f1 = pSourceAngle + f;
+        if (f1 < 0.0F) {
+            f1 += 360.0F;
+        } else if (f1 > 360.0F) {
+            f1 -= 360.0F;
+        }
+
+        return f1;
+    }
 
 
 

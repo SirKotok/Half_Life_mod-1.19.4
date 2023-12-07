@@ -1,5 +1,6 @@
   {
   "item.half_life_mod.headcrab_1_spawn_egg": "Headcrab HL1 Spawn Egg",
+    "item.half_life_mod.controller_spawn_egg": "Alien Controller Spawn Egg",
     "item.half_life_mod.houndeye_spawn_egg": "Houndeye Spawn Egg",
     "item.half_life_mod.vortigore_spawn_egg": "Voltigore Spawn Egg",
     "item.half_life_mod.cockroach_spawn_egg": "Cockroach Spawn Egg",
@@ -32,6 +33,7 @@
   "item.half_life_mod.snark_thrower": "Snark",
   "item.half_life_mod.penguin_thrower": "Penguin",
     "item.half_life_mod.pistol_one_item": "9mm Pistol",
+    "item.half_life_mod.smg_hl1": "SMG",
     "item.half_life_mod.security_guard_helmet": "Security Guard Helmet",
     "item.half_life_mod.security_guard_chestplate": "Security Guard Vest",
     "item.half_life_mod.shockroach_item": "Shockroach",
@@ -49,6 +51,7 @@
     "key.half_life_mod.reload_gun": "Reload Gun",
 
     "entity.half_life_mod.hunter": "Hunter",
+    "entity.half_life_mod.controller": "Alien Controller",
     "entity.half_life_mod.baby_headcrab": "Baby Headcrab",
     "entity.half_life_mod.gonarch": "Gonarch",
     "entity.half_life_mod.gonarchbm": "Gonarch",

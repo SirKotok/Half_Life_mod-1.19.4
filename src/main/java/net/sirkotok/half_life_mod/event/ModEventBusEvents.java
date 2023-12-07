@@ -51,6 +51,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.GONARCH.get(), Gonarch.setAttributes());
         event.put(ModEntities.HOUNDEYE.get(), Houndeye.setAttributes());
         event.put(ModEntities.HOTEYE.get(), Hoteye.setAttributes());
+        event.put(ModEntities.CONTROLLER.get(), Controller.setAttributes());
         event.put(ModEntities.SHOCKROACH.get(), Shockroach.setAttributes());
     }
 
@@ -87,7 +88,8 @@ public class ModEventBusEvents {
                 Snarknest::checkNestSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(ModEntities.BARNACLE.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING,
                 Barnacle::checkBarnacleSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
-
+        event.register(ModEntities.SHARK.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Shark::checkSharkSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
 
     }
 

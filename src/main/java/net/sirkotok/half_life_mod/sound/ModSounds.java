@@ -37,6 +37,12 @@ public class ModSounds {
   public static final RegistryObject<SoundEvent> SMG_SHOT3=
           registerSoundEvent("smg_shot3");
 
+
+  public static final RegistryObject<SoundEvent> SMG_RELOAD=
+          registerSoundEvent("smg_reload");
+
+
+
 /*          "sounds.half_life_mod.dryfire1": " ",
           "sounds.half_life_mod.explode3": " ",
           "sounds.half_life_mod.explode4": " ",
@@ -46,6 +52,7 @@ public class ModSounds {
           "sounds.half_life_mod.smg_shot1": " ",
           "sounds.half_life_mod.smg_shot2": " ",
           "sounds.half_life_mod.smg_shot3": " ",
+          "sounds.half_life_mod.smg_reload": " ",
 */
 
 

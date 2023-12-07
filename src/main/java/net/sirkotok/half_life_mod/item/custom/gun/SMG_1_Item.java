@@ -74,7 +74,7 @@ public class SMG_1_Item extends GunAltFireItem implements GeoItem {
         if (!pLevel.isClientSide) {
             if (GetAmmo(itemstack) != GetMaxAmmo() || pPlayer.getAbilities().instabuild) {
             if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
-            pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), ModSounds.PISTOL_RELOAD.get(), SoundSource.NEUTRAL, 0.5F, 1F);
+            pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), ModSounds.SMG_RELOAD.get(), SoundSource.NEUTRAL, 0.5F, 1F);
             triggerAnim(pPlayer, GeoItem.getOrAssignId(pPlayer.getItemInHand(pHand), (ServerLevel) pLevel),"onetime", "reload");
             SetReloadTimer(itemstack, getReloadCooldown());
             SetCooldow(itemstack, getReloadCooldown());

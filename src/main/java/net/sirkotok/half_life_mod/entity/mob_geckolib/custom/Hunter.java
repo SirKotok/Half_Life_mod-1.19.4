@@ -499,9 +499,7 @@ public class Hunter extends HalfLifeMonster implements RushingMob, GeoEntity, Ra
         double d2 = (livingentity.getY(0.4D)*(1 - down*0.05) - this.getY(0.4D));
         double d3 = (livingentity.getZ()*(1 - down*0.05) - this.getZ());
         double d4 = Math.sqrt(Math.sqrt(d0)) * 0.5D;
-
         this.playSound(this.getFireSound(), this.getSoundVolume(), this.getVoicePitch());
-
         Flechette flechette = new Flechette(this.level, this); //this.getRandom().triangle(d1, 2.297D * d4)
         flechette.setPos(this.getX() - (double)(this.getBbWidth() + 1.0F) * 0.5D * (double)Mth.sin(this.yBodyRot * ((float)Math.PI / 180F)), this.getEyeY() - (double)0.1F, this.getZ() + (double)(this.getBbWidth() + 1.0F) * 0.5D * (double) Mth.cos(this.yBodyRot * ((float)Math.PI / 180F)));
         flechette.shoot(d1, d2, d3, pVelocity, (float)(14 - this.level.getDifficulty().getId() * 4));

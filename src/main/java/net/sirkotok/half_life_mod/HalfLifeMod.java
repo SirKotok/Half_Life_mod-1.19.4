@@ -93,6 +93,8 @@ public class HalfLifeMod
             event.accept(ModItems.HOUNDEYE_SPAWN_EGG);
             event.accept(ModItems.HOTEYE_SPAWN_EGG);
 
+            event.accept(ModItems.CONTROLLER_SPAWN_EGG);
+
 
             event.accept(ModItems.SNARKNEST_SPAWN_EGG);
             event.accept(ModItems.SNARK_SPAWN_EGG);

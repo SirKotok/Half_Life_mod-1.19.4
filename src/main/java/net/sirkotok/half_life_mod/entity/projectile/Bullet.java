@@ -1,10 +1,14 @@
 package net.sirkotok.half_life_mod.entity.projectile;
 
+import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,6 +17,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.sirkotok.half_life_mod.damagesource.ModDamageSources;
+import net.sirkotok.half_life_mod.damagesource.ModDamageTypes;
 import net.sirkotok.half_life_mod.entity.ModEntities;
 import net.sirkotok.half_life_mod.entity.base.FireballNoTrail;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Houndeye;
@@ -21,6 +27,9 @@ import net.sirkotok.half_life_mod.particle.ModParticles;
 import net.sirkotok.half_life_mod.sound.ModSounds;
 
 public class Bullet extends FireballNoTrail {
+
+
+
     public Bullet(EntityType<? extends Bullet> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -85,12 +94,14 @@ public class Bullet extends FireballNoTrail {
             Entity entity1 = this.getOwner();
             if (entity1 instanceof LivingEntity) {
                 LivingEntity shooter = (LivingEntity) entity1;
-                entity.hurt(this.damageSources().mobProjectile(this, shooter), getdamage());
+                entity.hurt(this.damageSources().mobProjectile(this, shooter), this.getdamage());
             }
         }
     }
-
-
+    // entity.hurt( new DamageSource(getHolderOrThro(ModDamageTypes.HL_BULLET), getdamage());
+ // new DamageSource(this.damageTypes.getHolderOrThrow(pDamageTypeKey));
+ // ModDamageSources.shotbullet(this, shooter)
+// this.level.damageSources().source(ModDamageTypes.HL_BULLET)
 
     public void makeParticle(int direction, BlockHitResult blockhit){
         switch(direction){

@@ -53,6 +53,7 @@ public class ClientModBusEvents {
         EntityRenderers.register(ModEntities.SITBLOWUP.get(), SitRenderer::new);
         EntityRenderers.register(ModEntities.SPORESHOT.get(), Spore_renderer::new);
         EntityRenderers.register(ModEntities.HOTEYE.get(), Hoteyerenderer::new);
+        EntityRenderers.register(ModEntities.CONTROLLER.get(), ControllerRenderer::new);
         EntityRenderers.register(ModEntities.PITDRONE.get(), Pitdrone_renderer::new);
         EntityRenderers.register(ModEntities.HOUNDEYE.get(), Houndeyerenderer::new);
         EntityRenderers.register(ModEntities.SNARKNEST.get(), Snarknestrenderer::new);

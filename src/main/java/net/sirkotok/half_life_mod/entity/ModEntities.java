@@ -37,6 +37,13 @@ public class ModEntities {
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "hoteye").toString()));
 
 
+    public static final RegistryObject<EntityType<Controller>> CONTROLLER =
+            ENTITY_TYPES.register("controller",
+                    () -> EntityType.Builder.of(Controller::new, MobCategory.MONSTER)
+                            .sized(1f, 1.6f)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "controller").toString()));
+
+
     public static final RegistryObject<EntityType<Headcrab_1>> HEADCRAB_HL1 =
             ENTITY_TYPES.register("headcrab_1",
                     () -> EntityType.Builder.of(Headcrab_1::new, MobCategory.MONSTER)

@@ -389,6 +389,12 @@
       "half_life_mod:glauncher2"
     ]
   },
+  "smg_reload": {
+    "subtitle": "sounds.half_life_mod.smg_reload",
+    "sounds": [
+      "half_life_mod:smg_reload"
+    ]
+  },
   "smg_shot1": {
     "subtitle": "sounds.half_life_mod.smg_shot1",
     "sounds": [
