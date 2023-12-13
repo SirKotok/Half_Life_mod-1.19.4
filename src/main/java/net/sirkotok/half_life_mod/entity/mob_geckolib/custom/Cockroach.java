@@ -128,7 +128,7 @@ public class Cockroach extends Animal implements GeoEntity, SmartBrainOwner<Cock
         if (this.tickCount - this.entityData.get(STARTLED_TIMESTAMP) > 100 || this.tickCount < 100) this.entityData.set(STARTLED, false);
 
         List<Entity> list = this.level.getEntities(this, this.getBoundingBox(), obj -> obj instanceof LivingEntity && obj.getBbWidth() > 0.5f && !obj.getDeltaMovement().equals(new Vec3(0, 0, 0)));
-        if (!list.isEmpty() && !this.isDeadOrDying()) {
+        if (!list.isEmpty() && !this.isDeadOrDying() && !this.hasCustomName()) {
             this.setHealth(0);
             this.playSound(ModSounds.COCKROACH_IS_STOMPED.get(), this.getSoundVolume(), this.getVoicePitch());
         }

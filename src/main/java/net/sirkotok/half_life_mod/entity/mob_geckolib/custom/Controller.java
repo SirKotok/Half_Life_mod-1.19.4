@@ -247,7 +247,7 @@ public class Controller extends HalfLifeMonster implements GeoEntity, RangedAtta
                 new NearbyLivingEntitySensor<Controller>()
                         .setPredicate((target, entity) ->
                             target instanceof Player || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
-                            target instanceof AbstractVillager || (target instanceof Enemy && !target.getType().is(ModTags.EntityTypes.FACTION_COMBINE))));
+                            target instanceof AbstractVillager || target.getType().is(ModTags.EntityTypes.FACTION_COMBINE)));
     }
 
 
