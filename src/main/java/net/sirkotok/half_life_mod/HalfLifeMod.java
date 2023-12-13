@@ -125,6 +125,7 @@ public class HalfLifeMod
         if(event.getTab().equals(ModCreativeModeTabs.HALF_LIFE_BLOCKS_TAB)) {
             event.accept(ModBlocks.VOLTIGORE_NEST);
             event.accept(ModItems.VOLTIGORE_EGG_BLOCK_ITEM);
+            event.accept(ModBlocks.HALF_LIFE_PORTAL);
         }
 
         if(event.getTab().equals(ModCreativeModeTabs.HALF_LIFE_WEOPONS_TAB)) {

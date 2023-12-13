@@ -16,8 +16,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     @Override
     protected void generate() {
         dropSelf(ModBlocks.VOLTIGORE_NEST.get());
-        dropSelf(ModBlocks.VOLTIGORE_EGG.get());
-
+        dropWhenSilkTouch(ModBlocks.VOLTIGORE_EGG.get());
     }
 
     @Override

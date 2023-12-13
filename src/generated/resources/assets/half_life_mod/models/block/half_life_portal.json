@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "half_life_mod:block/half_life_portal"
+  }
+}

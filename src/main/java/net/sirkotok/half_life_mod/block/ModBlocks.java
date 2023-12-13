@@ -1,6 +1,5 @@
 package net.sirkotok.half_life_mod.block;
 
-import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
@@ -13,6 +12,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.block.custom.VoltigoreEggBlock;
+import net.sirkotok.half_life_mod.block.custom.portal.BasicPortalBlock;
 import net.sirkotok.half_life_mod.item.ModItems;
 
 
@@ -22,6 +22,10 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, HalfLifeMod.MOD_ID);
 
+    public static final RegistryObject<Block> HALF_LIFE_PORTAL = registerBlock("half_life_portal",
+            () -> new BasicPortalBlock(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(5f).noLootTable()));
+
 
     public static final RegistryObject<Block> VOLTIGORE_NEST = registerBlock("voltigore_nest",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE)
@@ -30,11 +34,6 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> VOLTIGORE_EGG = BLOCKS.register("voltigore_egg_block",
             () -> new VoltigoreEggBlock(BlockBehaviour.Properties.of(Material.EGG).noOcclusion().noParticlesOnBreak().sound(SoundType.METAL)));
-
-
-
-
-
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
@@ -54,3 +53,4 @@ public class ModBlocks {
 }
 
 
+// REMEMBER TO REGISTERBLOCK not BLOCKS.REGISTER FOR NORMAL BLOCKS. IT TOOK ME 5 HOURS TO UNDERSTAND WHY THE GAME KEEPS CRASHING, I HATE MY LIFE

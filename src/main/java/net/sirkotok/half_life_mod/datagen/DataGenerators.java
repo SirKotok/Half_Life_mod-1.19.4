@@ -1,6 +1,7 @@
 package net.sirkotok.half_life_mod.datagen;
 
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
@@ -11,8 +12,10 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sirkotok.half_life_mod.HalfLifeMod;
+import net.sirkotok.half_life_mod.worldgen.dimension.ModDimensions;
 
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 
 @Mod.EventBusSubscriber(modid = HalfLifeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -20,20 +23,35 @@ import java.util.Set;
 public class DataGenerators {
 
     private static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
-            .add(Registries.DAMAGE_TYPE, ModDamageTypesBootstrap::bootstrap);
+            .add(Registries.DAMAGE_TYPE, ModDamageTypesBootstrap::bootstrap)
+            .add(Registries.DIMENSION_TYPE, ModDimensions::bootstrapType)
+            .add(Registries.LEVEL_STEM, ModDimensions::bootstrapStem);
 
+
+
+//     .add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap)
+//     .add(Registries.PLACED_FEATURE, ModPlacedFeatures::bootstrap)
+//     .add(ForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap)
+//     .add(Registries.BIOME, ModBiomes::boostrap)
 
     @SubscribeEvent
     public static void gatherData (GatherDataEvent event){
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+
+
+
+
 
         generator.addProvider(true, new ModItemModelProvider(packOutput, existingFileHelper));
         generator.addProvider(true, ModLootTableProvider.create(packOutput));
         generator.addProvider(true, new ModBlockStateProvider(packOutput, existingFileHelper));
 
-        generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(packOutput, event.getLookupProvider(), BUILDER, Set.of(HalfLifeMod.MOD_ID)));
+
+
+        generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(packOutput, lookupProvider, BUILDER, Set.of(HalfLifeMod.MOD_ID)));
     }
 
 }
