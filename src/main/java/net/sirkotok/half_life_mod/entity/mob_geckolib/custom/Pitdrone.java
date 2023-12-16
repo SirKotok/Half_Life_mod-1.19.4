@@ -37,9 +37,9 @@ import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
 import net.sirkotok.half_life_mod.entity.modinterface.AmmoCountMob;
 import net.sirkotok.half_life_mod.entity.projectile.PitdroneSpike;
-import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.HLperUtil;
-import net.sirkotok.half_life_mod.util.ModTags;
+import net.sirkotok.half_life_mod.util.HLTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -116,7 +116,7 @@ public class Pitdrone extends HalfLifeMonster implements AmmoCountMob, RangedAtt
             int rad = 20;
             List<Mob> race_x = EntityRetrievalUtil.getEntities((Level) pLevel,
                     new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
-                            pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj.getType().is(ModTags.EntityTypes.FACTION_RACE_X));
+                            pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj.getType().is(HLTags.EntityTypes.FACTION_RACE_X));
             this.setxround(race_x.size());
             if (BrainUtils.getTargetOfEntity(this) != null && !(BrainUtils.getTargetOfEntity(this) instanceof Shockroach)) {
                 for (Mob x : race_x) {
@@ -209,9 +209,9 @@ public class Pitdrone extends HalfLifeMonster implements AmmoCountMob, RangedAtt
                 new NearbyLivingEntitySensor<Pitdrone>()
                         .setPredicate((target, entity) ->
                             target instanceof Player ||
-                            target.getType().is(ModTags.EntityTypes.HEADCRAB) ||
+                            target.getType().is(HLTags.EntityTypes.HEADCRAB) ||
                             target instanceof IronGolem ||
-                            target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) ||
+                            target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) ||
                             target instanceof AbstractVillager ||
                             target instanceof Shockroach ||
                             target instanceof Bullsquid ||
@@ -381,38 +381,38 @@ public class Pitdrone extends HalfLifeMonster implements AmmoCountMob, RangedAtt
 
 
     public SoundEvent getSpitSound() {
-        return this.random.nextInt(2) == 1 ?  ModSounds.PITDRONE_SPIKE1.get() : ModSounds.PITDRONE_SPIKE2.get();
+        return this.random.nextInt(2) == 1 ?  HalfLifeSounds.PITDRONE_SPIKE1.get() : HalfLifeSounds.PITDRONE_SPIKE2.get();
     }
     public SoundEvent getDoubleAttackSound() {
-       return ModSounds.PITDRONE_MELEEATTACK2.get();
+       return HalfLifeSounds.PITDRONE_MELEEATTACK2.get();
     }
     public SoundEvent getBigAttackSound() {
-        return ModSounds.PITDRONE_MELEEATTACK1.get();
+        return HalfLifeSounds.PITDRONE_MELEEATTACK1.get();
     }
 
     protected SoundEvent getDeathSound() {
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.PITDRONE_DIE1.get();
-            case 2:  return ModSounds.PITDRONE_DIE2.get();
-            case 3:  return ModSounds.PITDRONE_DIE3.get();
+            case 1:  return HalfLifeSounds.PITDRONE_DIE1.get();
+            case 2:  return HalfLifeSounds.PITDRONE_DIE2.get();
+            case 3:  return HalfLifeSounds.PITDRONE_DIE3.get();
         }
-        return ModSounds.HEADCRAB_1_DIE_1.get();
+        return HalfLifeSounds.HEADCRAB_1_DIE_1.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
         switch (this.random.nextInt(1,5)) {
-            case 1:  return ModSounds.PITDRONE_PAIN1.get();
-            case 2:  return ModSounds.PITDRONE_PAIN2.get();
-            case 3:  return ModSounds.PITDRONE_PAIN3.get();
-            case 4:  return ModSounds.PITDRONE_PAIN4.get();
+            case 1:  return HalfLifeSounds.PITDRONE_PAIN1.get();
+            case 2:  return HalfLifeSounds.PITDRONE_PAIN2.get();
+            case 3:  return HalfLifeSounds.PITDRONE_PAIN3.get();
+            case 4:  return HalfLifeSounds.PITDRONE_PAIN4.get();
         }
-        return ModSounds.HEADCRAB_1_DIE_1.get();
+        return HalfLifeSounds.HEADCRAB_1_DIE_1.get();
     }
 
 
     protected SoundEvent getMetalStepsound() {
-        return ModSounds.PITDRONE_METAL_STEP.get();
+        return HalfLifeSounds.PITDRONE_METAL_STEP.get();
     }
 
     @Override
@@ -447,16 +447,16 @@ public class Pitdrone extends HalfLifeMonster implements AmmoCountMob, RangedAtt
 
 
         switch (f) {
-            case 1:  return ModSounds.PITDRONE_IDLE1.get();
-            case 2:  return ModSounds.PITDRONE_IDLE2.get();
-            case 3:  return ModSounds.PITDRONE_IDLE3.get();
-            case 4:  return ModSounds.PITDRONE_TALK1.get();
-            case 5:  return ModSounds.PITDRONE_TALK2.get();
-            case 6:  return ModSounds.PITDRONE_TALK3.get();
-            case 7:  return ModSounds.PITDRONE_TALK4.get();
-            case 8:  return ModSounds.PITDRONE_IDLE4.get();
-            case 9:  return ModSounds.PITDRONE_IDLE5.get();
-            case 10:  return ModSounds.PITDRONE_IDLE6.get();
+            case 1:  return HalfLifeSounds.PITDRONE_IDLE1.get();
+            case 2:  return HalfLifeSounds.PITDRONE_IDLE2.get();
+            case 3:  return HalfLifeSounds.PITDRONE_IDLE3.get();
+            case 4:  return HalfLifeSounds.PITDRONE_TALK1.get();
+            case 5:  return HalfLifeSounds.PITDRONE_TALK2.get();
+            case 6:  return HalfLifeSounds.PITDRONE_TALK3.get();
+            case 7:  return HalfLifeSounds.PITDRONE_TALK4.get();
+            case 8:  return HalfLifeSounds.PITDRONE_IDLE4.get();
+            case 9:  return HalfLifeSounds.PITDRONE_IDLE5.get();
+            case 10:  return HalfLifeSounds.PITDRONE_IDLE6.get();
         }
         return SoundEvents.FROG_STEP;
     }

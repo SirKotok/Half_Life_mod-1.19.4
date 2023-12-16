@@ -31,8 +31,7 @@ import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.AlyxPoisoncrabJumpBehavior;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
-import net.sirkotok.half_life_mod.sound.ModSounds;
-import net.sirkotok.half_life_mod.util.ModTags;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -200,52 +199,52 @@ public class Headcrab_Poison_3 extends HalfLifeMonster implements GeoEntity, Sma
 
     protected SoundEvent getJumpSound() {
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.HEADCRAB_POISON_A_JUMP_1.get();
-            case 2:  return ModSounds.HEADCRAB_POISON_A_JUMP_2.get();
-            case 3:  return ModSounds.HEADCRAB_POISON_A_JUMP_3.get();
+            case 1:  return HalfLifeSounds.HEADCRAB_POISON_A_JUMP_1.get();
+            case 2:  return HalfLifeSounds.HEADCRAB_POISON_A_JUMP_2.get();
+            case 3:  return HalfLifeSounds.HEADCRAB_POISON_A_JUMP_3.get();
         }
-        return ModSounds.HEADCRAB_1_ATTACK_1.get();
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
     }
 
     protected SoundEvent getScreamSound() {
         switch (this.random.nextInt(1,3)) {
-            case 1:  return ModSounds.HEADCRAB_POISON_A_ATTACK_GROWL.get();
-            case 2:  return ModSounds.HEADCRAB_POISON_A_ATTACK_SCREECH.get();
+            case 1:  return HalfLifeSounds.HEADCRAB_POISON_A_ATTACK_GROWL.get();
+            case 2:  return HalfLifeSounds.HEADCRAB_POISON_A_ATTACK_SCREECH.get();
         }
-        return ModSounds.HEADCRAB_1_ATTACK_1.get();
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
     }
 
     protected SoundEvent getBiteSound() {
         switch (this.random.nextInt(1,5)) {
-            case 1:  return ModSounds.HEADCRAB_POISON_A_BITE_1.get();
-            case 2:  return ModSounds.HEADCRAB_POISON_A_BITE_2.get();
-            case 3:  return ModSounds.HEADCRAB_POISON_A_BITE_3.get();
-            case 4:  return ModSounds.HEADCRAB_POISON_A_BITE_4.get();
+            case 1:  return HalfLifeSounds.HEADCRAB_POISON_A_BITE_1.get();
+            case 2:  return HalfLifeSounds.HEADCRAB_POISON_A_BITE_2.get();
+            case 3:  return HalfLifeSounds.HEADCRAB_POISON_A_BITE_3.get();
+            case 4:  return HalfLifeSounds.HEADCRAB_POISON_A_BITE_4.get();
         }
-        return ModSounds.HEADCRAB_A_BITE_1.get();
+        return HalfLifeSounds.HEADCRAB_A_BITE_1.get();
     }
 
     protected SoundEvent getHurtSound(DamageSource p_33034_) {
         switch (this.random.nextInt(1,7)) {
-            case 1:  return ModSounds.HEADCRAB_POISON_A_PAIN_1.get();
-            case 2:  return ModSounds.HEADCRAB_POISON_A_PAIN_2.get();
-            case 3:  return ModSounds.HEADCRAB_POISON_A_PAIN_3.get();
-            case 4:  return ModSounds.HEADCRAB_POISON_A_PAIN_4.get();
-            case 5:  return ModSounds.HEADCRAB_POISON_A_PAIN_5.get();
-            case 6:  return ModSounds.HEADCRAB_POISON_A_PAIN_6.get();
+            case 1:  return HalfLifeSounds.HEADCRAB_POISON_A_PAIN_1.get();
+            case 2:  return HalfLifeSounds.HEADCRAB_POISON_A_PAIN_2.get();
+            case 3:  return HalfLifeSounds.HEADCRAB_POISON_A_PAIN_3.get();
+            case 4:  return HalfLifeSounds.HEADCRAB_POISON_A_PAIN_4.get();
+            case 5:  return HalfLifeSounds.HEADCRAB_POISON_A_PAIN_5.get();
+            case 6:  return HalfLifeSounds.HEADCRAB_POISON_A_PAIN_6.get();
         }
-        return ModSounds.HEADCRAB_1_PAIN_1.get();
+        return HalfLifeSounds.HEADCRAB_1_PAIN_1.get();
     }
 
     protected SoundEvent getDeathSound() {
         switch (this.random.nextInt(1,6)) {
-            case 1:  return ModSounds.HEADCRAB_POISON_A_DIE_1.get();
-            case 2:  return ModSounds.HEADCRAB_POISON_A_DIE_2.get();
-            case 3:  return ModSounds.HEADCRAB_POISON_A_DIE_3.get();
-            case 4:  return ModSounds.HEADCRAB_POISON_A_DIE_4.get();
-            case 5:  return ModSounds.HEADCRAB_POISON_A_DIE_5.get();
+            case 1:  return HalfLifeSounds.HEADCRAB_POISON_A_DIE_1.get();
+            case 2:  return HalfLifeSounds.HEADCRAB_POISON_A_DIE_2.get();
+            case 3:  return HalfLifeSounds.HEADCRAB_POISON_A_DIE_3.get();
+            case 4:  return HalfLifeSounds.HEADCRAB_POISON_A_DIE_4.get();
+            case 5:  return HalfLifeSounds.HEADCRAB_POISON_A_DIE_5.get();
         }
-        return ModSounds.HEADCRAB_1_DIE_1.get();
+        return HalfLifeSounds.HEADCRAB_1_DIE_1.get();
     }
 
 
@@ -253,32 +252,32 @@ public class Headcrab_Poison_3 extends HalfLifeMonster implements GeoEntity, Sma
 
         if (this.isangry()) {
             switch (this.random.nextInt(1,5)) {
-                case 1:  return ModSounds.HEADCRAB_POISON_A_RATTLE_WARNING_1.get();
-                case 2:  return ModSounds.HEADCRAB_POISON_A_RATTLE_WARNING_2.get();
-                case 3:  return ModSounds.HEADCRAB_POISON_A_RATTLE_WARNING_3.get();
-                case 4:  return ModSounds.HEADCRAB_POISON_A_RATTLE_WARNING_4.get();
+                case 1:  return HalfLifeSounds.HEADCRAB_POISON_A_RATTLE_WARNING_1.get();
+                case 2:  return HalfLifeSounds.HEADCRAB_POISON_A_RATTLE_WARNING_2.get();
+                case 3:  return HalfLifeSounds.HEADCRAB_POISON_A_RATTLE_WARNING_3.get();
+                case 4:  return HalfLifeSounds.HEADCRAB_POISON_A_RATTLE_WARNING_4.get();
             }
         }
         switch (this.random.nextInt(1,18)) {
-            case 1:  return ModSounds.HEADCRAB_POISON_A_IDLE_1.get();
-            case 2:  return ModSounds.HEADCRAB_POISON_A_IDLE_2.get();
-            case 3:  return ModSounds.HEADCRAB_POISON_A_IDLE_3.get();
-            case 4:  return ModSounds.HEADCRAB_POISON_A_IDLE_4.get();
-            case 5:  return ModSounds.HEADCRAB_POISON_A_IDLE_5.get();
-            case 6:  return ModSounds.HEADCRAB_POISON_A_IDLE_6.get();
-            case 7:  return ModSounds.HEADCRAB_POISON_A_IDLE_7.get();
-            case 8:  return ModSounds.HEADCRAB_POISON_A_IDLE_8.get();
-            case 9:  return ModSounds.HEADCRAB_POISON_A_IDLE_9.get();
-            case 10:  return ModSounds.HEADCRAB_POISON_A_IDLE_10.get();
-            case 11:  return ModSounds.HEADCRAB_POISON_A_IDLE_11.get();
-            case 12:  return ModSounds.HEADCRAB_POISON_A_IDLE_12.get();
-            case 13:  return ModSounds.HEADCRAB_POISON_A_IDLE_13.get();
-            case 14:  return ModSounds.HEADCRAB_POISON_A_IDLE_14.get();
-            case 15:  return ModSounds.HEADCRAB_POISON_A_IDLE_15.get();
-            case 16:  return ModSounds.HEADCRAB_POISON_A_IDLE_16.get();
-            case 17:  return ModSounds.HEADCRAB_POISON_A_IDLE_17.get();
+            case 1:  return HalfLifeSounds.HEADCRAB_POISON_A_IDLE_1.get();
+            case 2:  return HalfLifeSounds.HEADCRAB_POISON_A_IDLE_2.get();
+            case 3:  return HalfLifeSounds.HEADCRAB_POISON_A_IDLE_3.get();
+            case 4:  return HalfLifeSounds.HEADCRAB_POISON_A_IDLE_4.get();
+            case 5:  return HalfLifeSounds.HEADCRAB_POISON_A_IDLE_5.get();
+            case 6:  return HalfLifeSounds.HEADCRAB_POISON_A_IDLE_6.get();
+            case 7:  return HalfLifeSounds.HEADCRAB_POISON_A_IDLE_7.get();
+            case 8:  return HalfLifeSounds.HEADCRAB_POISON_A_IDLE_8.get();
+            case 9:  return HalfLifeSounds.HEADCRAB_POISON_A_IDLE_9.get();
+            case 10:  return HalfLifeSounds.HEADCRAB_POISON_A_IDLE_10.get();
+            case 11:  return HalfLifeSounds.HEADCRAB_POISON_A_IDLE_11.get();
+            case 12:  return HalfLifeSounds.HEADCRAB_POISON_A_IDLE_12.get();
+            case 13:  return HalfLifeSounds.HEADCRAB_POISON_A_IDLE_13.get();
+            case 14:  return HalfLifeSounds.HEADCRAB_POISON_A_IDLE_14.get();
+            case 15:  return HalfLifeSounds.HEADCRAB_POISON_A_IDLE_15.get();
+            case 16:  return HalfLifeSounds.HEADCRAB_POISON_A_IDLE_16.get();
+            case 17:  return HalfLifeSounds.HEADCRAB_POISON_A_IDLE_17.get();
         }
-        return ModSounds.HEADCRAB_1_ALERT_1.get();
+        return HalfLifeSounds.HEADCRAB_1_ALERT_1.get();
     }
 
 

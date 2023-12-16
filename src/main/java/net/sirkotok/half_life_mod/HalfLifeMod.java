@@ -10,18 +10,18 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-import net.sirkotok.half_life_mod.block.ModBlocks;
+import net.sirkotok.half_life_mod.block.HalfLifeBlocks;
 
-import net.sirkotok.half_life_mod.block.blockentity.ModBlockEntities;
+import net.sirkotok.half_life_mod.block.blockentity.HalfLifeBlockEntities;
 import net.sirkotok.half_life_mod.effect.ModEffects;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.brain.ModSensorType;
-import net.sirkotok.half_life_mod.entity.ModEntities;
-import net.sirkotok.half_life_mod.item.ModCreativeModeTabs;
-import net.sirkotok.half_life_mod.item.ModItems;
-import net.sirkotok.half_life_mod.networking.ModPackets;
-import net.sirkotok.half_life_mod.particle.ModParticles;
-import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
+import net.sirkotok.half_life_mod.item.HalfLifeCreativeModeTabs;
+import net.sirkotok.half_life_mod.item.HalfLifeItems;
+import net.sirkotok.half_life_mod.networking.HalfLifePackets;
+import net.sirkotok.half_life_mod.particle.HalfLifeParticles;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import org.slf4j.Logger;
 
 
@@ -36,15 +36,15 @@ public class HalfLifeMod
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
-        ModItems.register(modEventBus);
-        ModBlocks.register(modEventBus);
-        ModBlockEntities.register(modEventBus);
-        ModEntities.register(modEventBus);
-        ModSounds.register(modEventBus);
+        HalfLifeItems.register(modEventBus);
+        HalfLifeBlocks.register(modEventBus);
+        HalfLifeBlockEntities.register(modEventBus);
+        HalfLifeEntities.register(modEventBus);
+        HalfLifeSounds.register(modEventBus);
         ModMemoryModuleType.register(modEventBus);
         ModSensorType.register(modEventBus);
         ModEffects.register(modEventBus);
-        ModParticles.register(modEventBus);
+        HalfLifeParticles.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
@@ -54,7 +54,7 @@ public class HalfLifeMod
     private void commonSetup(final FMLCommonSetupEvent event)
     {
         event.enqueueWork(() -> {
-            ModPackets.register(); //this should be at the top, don't move it down
+            HalfLifePackets.register(); //this should be at the top, don't move it down
 
         });
 
@@ -64,7 +64,7 @@ public class HalfLifeMod
 
     private void addCreative(CreativeModeTabEvent.BuildContents event)
     {
-        if(event.getTab().equals(ModCreativeModeTabs.HALF_LIFE_SPAWN_EGGS)) {
+        if(event.getTab().equals(HalfLifeCreativeModeTabs.HALF_LIFE_SPAWN_EGGS)) {
             //  spawn eggs
 
             // This is here for more easy structure building in the future
@@ -73,72 +73,72 @@ public class HalfLifeMod
          //   event.accept(Blocks.JIGSAW);
 
 
-            event.accept(ModItems.HEADCRAB_ONE_SPAWN_EGG);
-            event.accept(ModItems.BABY_HEADCRAB_SPAWN_EGG);
-            event.accept(ModItems.HEADCRAB_TWO_SPAWN_EGG);
-            event.accept(ModItems.HEADCRAB_FAST_SPAWN_EGG);
-            event.accept(ModItems.HEADCRAB_POISON_HL2_SPAWN_EGG);
-            event.accept(ModItems.HEADCRAB_POISON_HLA_SPAWN_EGG);
-            event.accept(ModItems.HEADCRAB_ALYX_SPAWN_EGG);
-            event.accept(ModItems.HEADCRAB_ARMOR_SPAWN_EGG);
+            event.accept(HalfLifeItems.HEADCRAB_ONE_SPAWN_EGG);
+            event.accept(HalfLifeItems.BABY_HEADCRAB_SPAWN_EGG);
+            event.accept(HalfLifeItems.HEADCRAB_TWO_SPAWN_EGG);
+            event.accept(HalfLifeItems.HEADCRAB_FAST_SPAWN_EGG);
+            event.accept(HalfLifeItems.HEADCRAB_POISON_HL2_SPAWN_EGG);
+            event.accept(HalfLifeItems.HEADCRAB_POISON_HLA_SPAWN_EGG);
+            event.accept(HalfLifeItems.HEADCRAB_ALYX_SPAWN_EGG);
+            event.accept(HalfLifeItems.HEADCRAB_ARMOR_SPAWN_EGG);
 
 
-            event.accept(ModItems.GONARCH_SPAWN_EGG);
-            event.accept(ModItems.GONARCHBM_SPAWN_EGG);
+            event.accept(HalfLifeItems.GONARCH_SPAWN_EGG);
+            event.accept(HalfLifeItems.GONARCHBM_SPAWN_EGG);
 
 
           //  event.accept(ModItems.HEADCRAB_ZOMBIE_SPAWN_EGG);
 
-            event.accept(ModItems.BULLSQUID_SPAWN_EGG);
-            event.accept(ModItems.HOUNDEYE_SPAWN_EGG);
-            event.accept(ModItems.HOTEYE_SPAWN_EGG);
+            event.accept(HalfLifeItems.BULLSQUID_SPAWN_EGG);
+            event.accept(HalfLifeItems.HOUNDEYE_SPAWN_EGG);
+            event.accept(HalfLifeItems.HOTEYE_SPAWN_EGG);
 
-            event.accept(ModItems.CONTROLLER_SPAWN_EGG);
-
-
-            event.accept(ModItems.SNARKNEST_SPAWN_EGG);
-            event.accept(ModItems.SNARK_SPAWN_EGG);
-            event.accept(ModItems.PENGUIN_SPAWN_EGG);
-            event.accept(ModItems.CHUMTOAD_SPAWN_EGG);
-
-            event.accept(ModItems.BARNACLE_ONE_SPAWN_EGG);
-
-            event.accept(ModItems.SHOCKROACH_SPAWN_EGG);
-            event.accept(ModItems.SHOCKTROOPER_SPAWN_EGG);
-            event.accept(ModItems.VORTIGORE_SPAWN_EGG);
-            event.accept(ModItems.PITDRONE_SPAWN_EGG);
+            event.accept(HalfLifeItems.CONTROLLER_SPAWN_EGG);
 
 
+            event.accept(HalfLifeItems.SNARKNEST_SPAWN_EGG);
+            event.accept(HalfLifeItems.SNARK_SPAWN_EGG);
+            event.accept(HalfLifeItems.PENGUIN_SPAWN_EGG);
+            event.accept(HalfLifeItems.CHUMTOAD_SPAWN_EGG);
 
-            event.accept(ModItems.BARNEY_SPAWN_EGG);
+            event.accept(HalfLifeItems.BARNACLE_ONE_SPAWN_EGG);
+
+            event.accept(HalfLifeItems.SHOCKROACH_SPAWN_EGG);
+            event.accept(HalfLifeItems.SHOCKTROOPER_SPAWN_EGG);
+            event.accept(HalfLifeItems.VORTIGORE_SPAWN_EGG);
+            event.accept(HalfLifeItems.PITDRONE_SPAWN_EGG);
 
 
-            event.accept(ModItems.COCKROACH_SPAWN_EGG);
-            event.accept(ModItems.LEECH_SPAWN_EGG);
-            event.accept(ModItems.SHARK_SPAWN_EGG);
-            event.accept(ModItems.MANHACK_SPAWN_EGG);
-            event.accept(ModItems.HUNTER_SPAWN_EGG);
+
+            event.accept(HalfLifeItems.BARNEY_SPAWN_EGG);
+
+
+            event.accept(HalfLifeItems.COCKROACH_SPAWN_EGG);
+            event.accept(HalfLifeItems.LEECH_SPAWN_EGG);
+            event.accept(HalfLifeItems.SHARK_SPAWN_EGG);
+            event.accept(HalfLifeItems.MANHACK_SPAWN_EGG);
+            event.accept(HalfLifeItems.HUNTER_SPAWN_EGG);
 
 
         }
 
-        if(event.getTab().equals(ModCreativeModeTabs.HALF_LIFE_BLOCKS_TAB)) {
-            event.accept(ModBlocks.VOLTIGORE_NEST);
-            event.accept(ModItems.VOLTIGORE_EGG_BLOCK_ITEM);
-            event.accept(ModBlocks.HALF_LIFE_PORTAL);
+        if(event.getTab().equals(HalfLifeCreativeModeTabs.HALF_LIFE_BLOCKS_TAB)) {
+            event.accept(HalfLifeBlocks.VOLTIGORE_NEST);
+            event.accept(HalfLifeItems.VOLTIGORE_EGG_BLOCK_ITEM);
+            event.accept(HalfLifeBlocks.HALF_LIFE_PORTAL);
         }
 
-        if(event.getTab().equals(ModCreativeModeTabs.HALF_LIFE_WEOPONS_TAB)) {
+        if(event.getTab().equals(HalfLifeCreativeModeTabs.HALF_LIFE_WEOPONS_TAB)) {
             // items that are guns
-            event.accept(ModItems.PISTOL);
-            event.accept(ModItems.SMG_HL1);
-            event.accept(ModItems.SHOCKROACH_ITEM);
+            event.accept(HalfLifeItems.PISTOL);
+            event.accept(HalfLifeItems.SMG_HL1);
+            event.accept(HalfLifeItems.SHOCKROACH_ITEM);
          //   items that throw entities
-            event.accept(ModItems.CHUMTOAD_THROWER);
-            event.accept(ModItems.SNARK_THROWER);
-            event.accept(ModItems.PENGUIN_THROWER);
-            event.accept(ModItems.SECURITY_GUARD_HELMET);
-            event.accept(ModItems.SECURITY_GUARD_VEST);
+            event.accept(HalfLifeItems.CHUMTOAD_THROWER);
+            event.accept(HalfLifeItems.SNARK_THROWER);
+            event.accept(HalfLifeItems.PENGUIN_THROWER);
+            event.accept(HalfLifeItems.SECURITY_GUARD_HELMET);
+            event.accept(HalfLifeItems.SECURITY_GUARD_VEST);
         }
     }
 

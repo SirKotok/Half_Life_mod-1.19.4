@@ -12,7 +12,7 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sirkotok.half_life_mod.HalfLifeMod;
-import net.sirkotok.half_life_mod.worldgen.dimension.ModDimensions;
+import net.sirkotok.half_life_mod.worldgen.dimension.HalfLifeDimensions;
 
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -24,8 +24,8 @@ public class DataGenerators {
 
     private static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(Registries.DAMAGE_TYPE, ModDamageTypesBootstrap::bootstrap)
-            .add(Registries.DIMENSION_TYPE, ModDimensions::bootstrapType)
-            .add(Registries.LEVEL_STEM, ModDimensions::bootstrapStem);
+            .add(Registries.DIMENSION_TYPE, HalfLifeDimensions::bootstrapType)
+            .add(Registries.LEVEL_STEM, HalfLifeDimensions::bootstrapStem);
 
 
 

@@ -3,70 +3,47 @@ package net.sirkotok.half_life_mod.entity.mob_geckolib.custom;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fml.common.Mod;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
-import net.sirkotok.half_life_mod.sound.ModSounds;
-import net.sirkotok.half_life_mod.util.ModTags;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
+import net.sirkotok.half_life_mod.util.HLTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
 import net.tslat.smartbrainlib.api.core.behaviour.FirstApplicableBehaviour;
-import net.tslat.smartbrainlib.api.core.behaviour.OneRandomBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.CustomBehaviour;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.move.EscapeSun;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.move.FleeTarget;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetWalkTargetToAttackTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.InvalidateAttackTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetPlayerLookTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTarget;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.target.TargetOrRetaliate;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.custom.NearbyBlocksSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyPlayersSensor;
-import net.tslat.smartbrainlib.util.BrainUtils;
-import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -75,7 +52,6 @@ import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -105,18 +81,18 @@ public class Leech extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
-        if (RandomSource.create().nextFloat() < 0.5f) return  ModSounds.LEECH_IDLE1.get();
-        else return ModSounds.LEECH_IDLE2.get();
+        if (RandomSource.create().nextFloat() < 0.5f) return  HalfLifeSounds.LEECH_IDLE1.get();
+        else return HalfLifeSounds.LEECH_IDLE2.get();
     }
 
 
 
     public SoundEvent getBiteSound(){
         switch(RandomSource.create().nextInt(1,4)){
-            case 1: return ModSounds.LEECH_BITE1.get();
-            case 2: return ModSounds.LEECH_BITE2.get();
+            case 1: return HalfLifeSounds.LEECH_BITE1.get();
+            case 2: return HalfLifeSounds.LEECH_BITE2.get();
         }
-        return ModSounds.LEECH_BITE3.get();
+        return HalfLifeSounds.LEECH_BITE3.get();
     }
 
 
@@ -267,7 +243,7 @@ public class Leech extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
                 new NearbyLivingEntitySensor<Leech>()
                         .setPredicate((target, entity) ->
                                 (target instanceof Player ||
-                                target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) ||
+                                target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) ||
                                 (target.getType().getCategory().getName().equals("creature") && !(target instanceof Cockroach)) ||
                                 target.getType().getCategory().getName().equals("water_creature") ||
                                 target.getType().getCategory().getName().equals("water_ambient") ||

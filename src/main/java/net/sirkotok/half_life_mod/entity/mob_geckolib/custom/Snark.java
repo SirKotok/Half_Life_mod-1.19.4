@@ -17,7 +17,7 @@ import net.sirkotok.half_life_mod.entity.brain.behaviour.BiteWhileJumpingBehavio
 import net.sirkotok.half_life_mod.entity.brain.behaviour.HeadCrabJumpBehavior;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.LeapTowardTargetBehavior;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
-import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.CommonSounds;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
@@ -99,30 +99,30 @@ public class Snark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
     }
 
     public SoundEvent getExplosionSound(){
-        return ModSounds.SNARK_BLAST.get();
+        return HalfLifeSounds.SNARK_BLAST.get();
     }
 
 
 
     protected SoundEvent getBiteSound() {
-        return ModSounds.SNARK_ATTACK.get();
+        return HalfLifeSounds.SNARK_ATTACK.get();
     }
 
 
     @Nullable
     protected SoundEvent getAmbientSound() {
             switch (this.random.nextInt(1,4)) {
-                case 1:  return ModSounds.SNARK_IDLE_1.get();
-                case 2:  return ModSounds.SNARK_IDLE_2.get();
+                case 1:  return HalfLifeSounds.SNARK_IDLE_1.get();
+                case 2:  return HalfLifeSounds.SNARK_IDLE_2.get();
     }
-        return ModSounds.SNARK_IDLE_3.get();
+        return HalfLifeSounds.SNARK_IDLE_3.get();
     }
 
 
 
     @Nullable
     protected SoundEvent getDeathSound() {
-        return ModSounds.SNARK_DIE.get();
+        return HalfLifeSounds.SNARK_DIE.get();
     }
 
 

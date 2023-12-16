@@ -3,9 +3,8 @@ package net.sirkotok.half_life_mod.item.custom;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import net.sirkotok.half_life_mod.entity.ModEntities;
+import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.item.client.renderer.PenguinItemRenderer;
-import net.sirkotok.half_life_mod.item.client.renderer.SnarkItemRenderer;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -22,7 +21,7 @@ public class PenguinItem extends EntityThrowingItem implements GeoItem {
 
     @Override
     public EntityType getentitytype() {
-        return ModEntities.PENGUIN.get();
+        return HalfLifeEntities.PENGUIN.get();
     }
 
 

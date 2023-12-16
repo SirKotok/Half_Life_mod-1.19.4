@@ -22,7 +22,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
-import net.sirkotok.half_life_mod.entity.ModEntities;
+import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -191,7 +191,7 @@ public class Headcrab_zombie_standart extends HalfLifeMonster implements GeoEnti
         int i = randomsource.nextInt(4);
         this.setdefaulttexture(i);
 
-        EntityType<Headcrab_1> type = ModEntities.HEADCRAB_HL1.get();
+        EntityType<Headcrab_1> type = HalfLifeEntities.HEADCRAB_HL1.get();
         Headcrab_1 headcrab1 = type.create(this.level);
         if (headcrab1 != null) {
             headcrab1.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);

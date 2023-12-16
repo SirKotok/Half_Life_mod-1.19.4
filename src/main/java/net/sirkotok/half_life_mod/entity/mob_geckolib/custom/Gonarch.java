@@ -15,7 +15,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.Difficulty;
@@ -29,41 +28,30 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
-import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.ThrownPotion;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.FluidType;
-import net.sirkotok.half_life_mod.entity.ModEntities;
+import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.parts.GonarchPart;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.parts.SharkPart;
-import net.sirkotok.half_life_mod.entity.mob_normal.custom.BarnaclePart;
 import net.sirkotok.half_life_mod.entity.modinterface.DoubleRangedMob;
 import net.sirkotok.half_life_mod.entity.modinterface.MultiMeleeEntity;
-import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
 import net.sirkotok.half_life_mod.entity.projectile.AcidThrown;
-import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.CommonSounds;
 import net.sirkotok.half_life_mod.util.HLperUtil;
-import net.sirkotok.half_life_mod.util.ModTags;
+import net.sirkotok.half_life_mod.util.HLTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -78,7 +66,6 @@ import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetWalkTargetToAtt
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.InvalidateAttackTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetPlayerLookTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTarget;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.target.TargetOrRetaliate;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
@@ -95,8 +82,6 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Objects;
-import java.util.function.Predicate;
 
 
 public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, RangedAttackMob, DoubleRangedMob, GeoEntity, SmartBrainOwner<Gonarch> {
@@ -359,36 +344,36 @@ public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, Ranged
 
     protected SoundEvent getSpitSound() {
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.BULLSQUID_SHOOT_1.get();
-            case 2:  return ModSounds.BULLSQUID_SHOOT_2.get();
-            case 3:  return ModSounds.BULLSQUID_SHOOT_3.get();
+            case 1:  return HalfLifeSounds.BULLSQUID_SHOOT_1.get();
+            case 2:  return HalfLifeSounds.BULLSQUID_SHOOT_2.get();
+            case 3:  return HalfLifeSounds.BULLSQUID_SHOOT_3.get();
         }
-        return ModSounds.HEADCRAB_1_PAIN_1.get();
+        return HalfLifeSounds.HEADCRAB_1_PAIN_1.get();
     }
 
 
 
     protected SoundEvent getHurtSound(DamageSource p_33034_) {
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.GON_PAIN1.get();
-            case 2:  return ModSounds.GON_PAIN2.get();
-            case 3:  return ModSounds.GON_PAIN3.get();
+            case 1:  return HalfLifeSounds.GON_PAIN1.get();
+            case 2:  return HalfLifeSounds.GON_PAIN2.get();
+            case 3:  return HalfLifeSounds.GON_PAIN3.get();
         }
-        return ModSounds.HEADCRAB_1_PAIN_1.get();
+        return HalfLifeSounds.HEADCRAB_1_PAIN_1.get();
     }
 
     protected SoundEvent getDeathSound() {
-        return ModSounds.GON_DIE1.get();
+        return HalfLifeSounds.GON_DIE1.get();
     }
 
 
     protected SoundEvent getAmbientSound() {
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.GON_ALERT1.get();
-            case 2:  return ModSounds.GON_ALERT2.get();
-            case 3:  return ModSounds.GON_ALERT3.get();
+            case 1:  return HalfLifeSounds.GON_ALERT1.get();
+            case 2:  return HalfLifeSounds.GON_ALERT2.get();
+            case 3:  return HalfLifeSounds.GON_ALERT3.get();
         }
-        return ModSounds.HEADCRAB_1_ALERT_1.get();
+        return HalfLifeSounds.HEADCRAB_1_ALERT_1.get();
     }
 
     protected SoundEvent getHitSound(){
@@ -399,43 +384,43 @@ public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, Ranged
 
     protected SoundEvent getAttackSound(){
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.GON_ATTACK1.get();
-            case 2:  return ModSounds.GON_ATTACK2.get();
-            case 3:  return ModSounds.GON_ATTACK3.get();
+            case 1:  return HalfLifeSounds.GON_ATTACK1.get();
+            case 2:  return HalfLifeSounds.GON_ATTACK2.get();
+            case 3:  return HalfLifeSounds.GON_ATTACK3.get();
         }
-        return ModSounds.HEADCRAB_1_ALERT_1.get();
+        return HalfLifeSounds.HEADCRAB_1_ALERT_1.get();
     }
     protected SoundEvent getBirthSound(){
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.GON_BIRTH1.get();
-            case 2:  return ModSounds.GON_BIRTH2.get();
-            case 3:  return ModSounds.GON_BIRTH3.get();
+            case 1:  return HalfLifeSounds.GON_BIRTH1.get();
+            case 2:  return HalfLifeSounds.GON_BIRTH2.get();
+            case 3:  return HalfLifeSounds.GON_BIRTH3.get();
         }
-        return ModSounds.HEADCRAB_1_ALERT_1.get();
+        return HalfLifeSounds.HEADCRAB_1_ALERT_1.get();
     }
     protected SoundEvent getCrySound(){
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.GON_CHILDDIE1.get();
-            case 2:  return ModSounds.GON_CHILDDIE2.get();
-            case 3:  return ModSounds.GON_CHILDDIE3.get();
+            case 1:  return HalfLifeSounds.GON_CHILDDIE1.get();
+            case 2:  return HalfLifeSounds.GON_CHILDDIE2.get();
+            case 3:  return HalfLifeSounds.GON_CHILDDIE3.get();
         }
-        return ModSounds.HEADCRAB_1_ALERT_1.get();
+        return HalfLifeSounds.HEADCRAB_1_ALERT_1.get();
     }
 
     protected SoundEvent getSackSound(){
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.GON_SACK1.get();
-            case 2:  return ModSounds.GON_SACK2.get();
-            case 3:  return ModSounds.GON_SACK3.get();
+            case 1:  return HalfLifeSounds.GON_SACK1.get();
+            case 2:  return HalfLifeSounds.GON_SACK2.get();
+            case 3:  return HalfLifeSounds.GON_SACK3.get();
         }
-        return ModSounds.HEADCRAB_1_ALERT_1.get();
+        return HalfLifeSounds.HEADCRAB_1_ALERT_1.get();
     }
 
     protected SoundEvent getStepSound() {
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.GON_STEP1.get();
-            case 2:  return ModSounds.GON_STEP2.get();
-            case 3:  return ModSounds.GON_STEP3.get();
+            case 1:  return HalfLifeSounds.GON_STEP1.get();
+            case 2:  return HalfLifeSounds.GON_STEP2.get();
+            case 3:  return HalfLifeSounds.GON_STEP3.get();
 
         }
         return SoundEvents.FROG_STEP;
@@ -496,7 +481,7 @@ public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, Ranged
             int i = 0;
             List<Mob> friends = EntityRetrievalUtil.getEntities((Level) pLevel,
                     new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
-                            pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj.getType().is(ModTags.EntityTypes.FACTION_HEADCRAB));
+                            pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj.getType().is(HLTags.EntityTypes.FACTION_HEADCRAB));
 
             if (BrainUtils.getTargetOfEntity(this) != null) {
              for (Mob x : friends) {
@@ -539,7 +524,7 @@ public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, Ranged
                             target instanceof Player ||
                             target instanceof IronGolem ||
                             target instanceof AbstractVillager ||
-                            target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) ||
+                            target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) ||
                             target instanceof HalfLifeNeutral);
             if (!enemies.isEmpty()) BrainUtils.setTargetOfEntity(this, enemies.get(random.nextInt(0, enemies.size())));
         }
@@ -617,7 +602,7 @@ public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, Ranged
                             target instanceof Player ||
                             target instanceof IronGolem ||
                             target instanceof AbstractVillager ||
-                            target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) ||
+                            target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) ||
                             target instanceof HalfLifeNeutral // || target instanceof GonarchBM
                             ));
     }
@@ -728,7 +713,7 @@ public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, Ranged
     }
 
     private void makebaby(boolean launch){
-        Baby_Headcrab summon = ModEntities.BABY_HEADCRAB.get().create(level);
+        Baby_Headcrab summon = HalfLifeEntities.BABY_HEADCRAB.get().create(level);
         if (summon != null) {
             summon.moveTo(this.position());
             ForgeEventFactory.onFinalizeSpawn((Mob) summon, (ServerLevelAccessor) level, level.getCurrentDifficultyAt(summon.blockPosition()), MobSpawnType.REINFORCEMENT, null, null);
@@ -798,7 +783,7 @@ public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, Ranged
     @Override
     public boolean performMultiAttack(boolean after, Entity entity, float disablechance, float attack_modifier, float knockback_modifier, @Nullable MobEffect effect, int duration, boolean visible) {
         boolean u = false;
-        List<Entity> list = this.level.getEntities(this, this.front.getBoundingBox(), obj -> obj instanceof LivingEntity && !(obj.getType().is(ModTags.EntityTypes.FACTION_HEADCRAB)));
+        List<Entity> list = this.level.getEntities(this, this.front.getBoundingBox(), obj -> obj instanceof LivingEntity && !(obj.getType().is(HLTags.EntityTypes.FACTION_HEADCRAB)));
         for (Entity entity1 : list) {
             if (entity1 instanceof LivingEntity living) {
                 this.ConfigurabledoHurtTargetShieldBoolean(after, entity1, disablechance, attack_modifier, knockback_modifier, effect, duration, visible);
@@ -810,7 +795,7 @@ public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, Ranged
 
     @Override
     public boolean isinside() {
-         List<Entity> list = this.level.getEntities(this, this.front.getBoundingBox(), obj -> obj instanceof LivingEntity && !(obj.getType().is(ModTags.EntityTypes.FACTION_HEADCRAB)));
+         List<Entity> list = this.level.getEntities(this, this.front.getBoundingBox(), obj -> obj instanceof LivingEntity && !(obj.getType().is(HLTags.EntityTypes.FACTION_HEADCRAB)));
         return !list.isEmpty();
     }
 }

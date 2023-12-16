@@ -6,17 +6,15 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.util.ITeleporter;
-import net.sirkotok.half_life_mod.block.ModBlocks;
-import net.sirkotok.half_life_mod.block.custom.portal.BasicPortalBlock;
 
 
 import java.util.function.Function;
 
-public class ModTeleporter implements ITeleporter {
+public class XenTeleporter implements ITeleporter {
     public static BlockPos thisPos = BlockPos.ZERO;
     public static boolean insideDimension = true;
 
-    public ModTeleporter(BlockPos pos, boolean insideDim) {
+    public XenTeleporter(BlockPos pos, boolean insideDim) {
         thisPos = pos;
         insideDimension = insideDim;
     }

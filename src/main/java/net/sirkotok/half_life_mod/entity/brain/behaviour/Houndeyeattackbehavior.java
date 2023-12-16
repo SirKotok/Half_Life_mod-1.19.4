@@ -13,7 +13,7 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.sirkotok.half_life_mod.entity.ModEntities;
+import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.ShockWaveEffect;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Hoteye;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Houndeye;
@@ -104,7 +104,7 @@ public class Houndeyeattackbehavior<E extends Houndeye> extends ConditionlessAtt
              if (!(entity instanceof Hoteye)) {
                 if (!entity.getLevel().isClientSide()) {
                     ServerLevel level = (ServerLevel) entity.level;
-                    ShockWaveEffect wave = ModEntities.SHOCKWAVEEFFECT.get().create(level);
+                    ShockWaveEffect wave = HalfLifeEntities.SHOCKWAVEEFFECT.get().create(level);
                     if (wave != null) {
                         wave.moveTo(entity.getX(), entity.getY(), entity.getZ());
                         wave.setSquadSize(entity.getsquaidsize()); //Determines the texture of the shockwave based on squad size

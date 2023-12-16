@@ -13,13 +13,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.sirkotok.half_life_mod.entity.ModEntities;
+import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.base.FireballNoTrail;
-import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.ShockWaveEffect;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.VoltigoreProjectileAftereffect;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Voltigore;
-import net.sirkotok.half_life_mod.particle.ModParticles;
-import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.particle.HalfLifeParticles;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -41,11 +40,11 @@ public class VoltigoreShock extends FireballNoTrail implements GeoEntity {
         this.setItem(Items.SLIME_BALL.getDefaultInstance());
     }
     public VoltigoreShock(Level pLevel, LivingEntity pShooter, double pOffsetX, double pOffsetY, double pOffsetZ) {
-        super(ModEntities.VOLTIGORE_SHOCK.get(), pShooter, pOffsetX, pOffsetY, pOffsetZ, pLevel);
+        super(HalfLifeEntities.VOLTIGORE_SHOCK.get(), pShooter, pOffsetX, pOffsetY, pOffsetZ, pLevel);
     }
 
     public VoltigoreShock(Level pLevel, double pX, double pY, double pZ, double pOffsetX, double pOffsetY, double pOffsetZ) {
-        super(ModEntities.VOLTIGORE_SHOCK.get(), pX, pY, pZ, pOffsetX, pOffsetY, pOffsetZ, pLevel);
+        super(HalfLifeEntities.VOLTIGORE_SHOCK.get(), pX, pY, pZ, pOffsetX, pOffsetY, pOffsetZ, pLevel);
     }
 
 
@@ -58,7 +57,7 @@ public class VoltigoreShock extends FireballNoTrail implements GeoEntity {
 
 
     protected SoundEvent getHitSound() {
-        return ModSounds.SHOCK_IMPACT.get();
+        return HalfLifeSounds.SHOCK_IMPACT.get();
     }
 
     protected void onHitEntity(EntityHitResult pResult) {
@@ -85,7 +84,7 @@ public class VoltigoreShock extends FireballNoTrail implements GeoEntity {
                         }
                     }
 
-                VoltigoreProjectileAftereffect wave = ModEntities.VOLTIGOREPROJECTEFFECT.get().create(serverlevel);
+                VoltigoreProjectileAftereffect wave = HalfLifeEntities.VOLTIGOREPROJECTEFFECT.get().create(serverlevel);
                 if (wave != null) {
                     wave.moveTo(this.getX(), this.getY(), this.getZ());
                     wave.setYBodyRot(this.getYRot());
@@ -103,17 +102,17 @@ public class VoltigoreShock extends FireballNoTrail implements GeoEntity {
         int direction = blockhit.getDirection().get3DDataValue();
         if (this.level.isClientSide){
             switch(direction){
-                case 0:  getLevel().addAlwaysVisibleParticle(ModParticles.SHOCK_IMPACT.get(), blockhit.getLocation().x(), blockhit.getLocation().y()-0.01f, blockhit.getLocation().z(), direction, 0, 0);
+                case 0:  getLevel().addAlwaysVisibleParticle(HalfLifeParticles.SHOCK_IMPACT.get(), blockhit.getLocation().x(), blockhit.getLocation().y()-0.01f, blockhit.getLocation().z(), direction, 0, 0);
                     break;
-                case 1: getLevel().addAlwaysVisibleParticle(ModParticles.SHOCK_IMPACT.get(), blockhit.getLocation().x(), blockhit.getLocation().y()+0.01f, blockhit.getLocation().z(), direction, 0, 0);
+                case 1: getLevel().addAlwaysVisibleParticle(HalfLifeParticles.SHOCK_IMPACT.get(), blockhit.getLocation().x(), blockhit.getLocation().y()+0.01f, blockhit.getLocation().z(), direction, 0, 0);
                     break;
-                case 2: getLevel().addAlwaysVisibleParticle(ModParticles.SHOCK_IMPACT.get(), blockhit.getLocation().x(), blockhit.getLocation().y(), blockhit.getLocation().z()-0.01f, direction, 0, 0);
+                case 2: getLevel().addAlwaysVisibleParticle(HalfLifeParticles.SHOCK_IMPACT.get(), blockhit.getLocation().x(), blockhit.getLocation().y(), blockhit.getLocation().z()-0.01f, direction, 0, 0);
                     break;
-                case 3: getLevel().addAlwaysVisibleParticle(ModParticles.SHOCK_IMPACT.get(), blockhit.getLocation().x(), blockhit.getLocation().y(), blockhit.getLocation().z()+0.01f, direction, 0, 0);
+                case 3: getLevel().addAlwaysVisibleParticle(HalfLifeParticles.SHOCK_IMPACT.get(), blockhit.getLocation().x(), blockhit.getLocation().y(), blockhit.getLocation().z()+0.01f, direction, 0, 0);
                     break;
-                case 4: getLevel().addAlwaysVisibleParticle(ModParticles.SHOCK_IMPACT.get(), blockhit.getLocation().x()-0.01f, blockhit.getLocation().y(), blockhit.getLocation().z(), direction, 0, 0);
+                case 4: getLevel().addAlwaysVisibleParticle(HalfLifeParticles.SHOCK_IMPACT.get(), blockhit.getLocation().x()-0.01f, blockhit.getLocation().y(), blockhit.getLocation().z(), direction, 0, 0);
                     break;
-                case 5: getLevel().addAlwaysVisibleParticle(ModParticles.SHOCK_IMPACT.get(), blockhit.getLocation().x()+0.01f, blockhit.getLocation().y(), blockhit.getLocation().z(), direction, 0, 0);
+                case 5: getLevel().addAlwaysVisibleParticle(HalfLifeParticles.SHOCK_IMPACT.get(), blockhit.getLocation().x()+0.01f, blockhit.getLocation().y(), blockhit.getLocation().z(), direction, 0, 0);
                     break;
             }}
         BlockPos pBlockPos = blockhit.getBlockPos();
@@ -124,7 +123,7 @@ public class VoltigoreShock extends FireballNoTrail implements GeoEntity {
 
 
                 ServerLevel serverlevel = (ServerLevel) level;
-                VoltigoreProjectileAftereffect wave = ModEntities.VOLTIGOREPROJECTEFFECT.get().create(serverlevel);
+                VoltigoreProjectileAftereffect wave = HalfLifeEntities.VOLTIGOREPROJECTEFFECT.get().create(serverlevel);
                 if (wave != null) {
                     wave.moveTo(this.getX(), this.getY(), this.getZ());
                     wave.setYBodyRot(this.getYRot());

@@ -19,7 +19,6 @@ import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.ai.memory.WalkTarget;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
@@ -30,7 +29,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.sirkotok.half_life_mod.entity.ModEntities;
+import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
@@ -38,9 +37,9 @@ import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
 import net.sirkotok.half_life_mod.entity.modinterface.DoubleRangedMob;
 import net.sirkotok.half_life_mod.entity.modinterface.HasLeaderMob;
 import net.sirkotok.half_life_mod.entity.projectile.ShockProjectile;
-import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.HLperUtil;
-import net.sirkotok.half_life_mod.util.ModTags;
+import net.sirkotok.half_life_mod.util.HLTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -54,7 +53,6 @@ import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetWalkTargetToAttackTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.InvalidateAttackTarget;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetAttackTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetPlayerLookTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTarget;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
@@ -128,7 +126,7 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Do
         super.die(pDamageSource);
         if (!level.isClientSide()) {
             ServerLevel serverLevel = (ServerLevel) level;
-                Shockroach summon = ModEntities.SHOCKROACH.get().create(serverLevel);
+                Shockroach summon = HalfLifeEntities.SHOCKROACH.get().create(serverLevel);
                 if (summon != null) {
                     summon.moveTo(this.position());
                     ForgeEventFactory.onFinalizeSpawn((Mob) summon, (ServerLevelAccessor) serverLevel, serverLevel.getCurrentDifficultyAt(summon.blockPosition()), MobSpawnType.REINFORCEMENT, null, null);
@@ -227,7 +225,7 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Do
                 int rad = 20;
                 List<Mob> race_x = EntityRetrievalUtil.getEntities((Level) pLevel,
                         new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
-                                pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj.getType().is(ModTags.EntityTypes.FACTION_RACE_X));
+                                pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj.getType().is(HLTags.EntityTypes.FACTION_RACE_X));
                 this.setxround(race_x.size());
                 if (BrainUtils.getTargetOfEntity(this) != null) {
                     for (Mob x : race_x) {
@@ -434,7 +432,7 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Do
                 new NearbyLivingEntitySensor<Shocktrooper>()
                         .setPredicate((target, entity) ->
                             target instanceof Player ||
-                                    target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) ||
+                                    target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) ||
                             target instanceof IronGolem ||
                             target instanceof AbstractVillager ||
                             target instanceof HalfLifeNeutral
@@ -606,33 +604,33 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Do
     }
 
     public SoundEvent getShootSound() {
-        return ModSounds.SHOCK_FIRE.get();
+        return HalfLifeSounds.SHOCK_FIRE.get();
     }
     public SoundEvent getDoubleAttackSound() {
-       return ModSounds.SHOCKTROOPER_ATTACK.get();
+       return HalfLifeSounds.SHOCKTROOPER_ATTACK.get();
     }
 
 
     protected SoundEvent getDeathSound() {
         switch (this.random.nextInt(1,5)) {
-            case 1:  return ModSounds.SHOCKTROOPER_DIE1.get();
-            case 2:  return ModSounds.SHOCKTROOPER_DIE2.get();
-            case 3:  return ModSounds.SHOCKTROOPER_DIE3.get();
-            case 4:  return ModSounds.SHOCKTROOPER_DIE4.get();
+            case 1:  return HalfLifeSounds.SHOCKTROOPER_DIE1.get();
+            case 2:  return HalfLifeSounds.SHOCKTROOPER_DIE2.get();
+            case 3:  return HalfLifeSounds.SHOCKTROOPER_DIE3.get();
+            case 4:  return HalfLifeSounds.SHOCKTROOPER_DIE4.get();
         }
-        return ModSounds.HEADCRAB_1_DIE_1.get();
+        return HalfLifeSounds.HEADCRAB_1_DIE_1.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
         switch (this.random.nextInt(1,5)) {
-            case 1:  return ModSounds.SHOCKTROOPER_PAIN1.get();
-            case 2:  return ModSounds.SHOCKTROOPER_PAIN2.get();
-            case 3:  return ModSounds.SHOCKTROOPER_PAIN3.get();
-            case 4:  return ModSounds.SHOCKTROOPER_PAIN4.get();
-            case 5:  return ModSounds.SHOCKTROOPER_PAIN5.get();
+            case 1:  return HalfLifeSounds.SHOCKTROOPER_PAIN1.get();
+            case 2:  return HalfLifeSounds.SHOCKTROOPER_PAIN2.get();
+            case 3:  return HalfLifeSounds.SHOCKTROOPER_PAIN3.get();
+            case 4:  return HalfLifeSounds.SHOCKTROOPER_PAIN4.get();
+            case 5:  return HalfLifeSounds.SHOCKTROOPER_PAIN5.get();
         }
-        return ModSounds.HEADCRAB_1_DIE_1.get();
+        return HalfLifeSounds.HEADCRAB_1_DIE_1.get();
     }
 
     @Override
@@ -641,7 +639,7 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Do
     }
 
     protected SoundEvent getAmbientSound() {
-        return ModSounds.SHOCKTROOPER_IDLE.get();
+        return HalfLifeSounds.SHOCKTROOPER_IDLE.get();
     }
 
 

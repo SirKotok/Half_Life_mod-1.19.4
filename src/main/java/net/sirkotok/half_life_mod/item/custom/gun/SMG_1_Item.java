@@ -15,9 +15,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.sirkotok.half_life_mod.entity.projectile.UnderbarrelGranade;
-import net.sirkotok.half_life_mod.item.client.renderer.Pistol_1_ItemRenderer;
 import net.sirkotok.half_life_mod.item.client.renderer.SMG_1_ItemRenderer;
-import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -74,7 +73,7 @@ public class SMG_1_Item extends GunAltFireItem implements GeoItem {
         if (!pLevel.isClientSide) {
             if (GetAmmo(itemstack) != GetMaxAmmo() || pPlayer.getAbilities().instabuild) {
             if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
-            pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), ModSounds.SMG_RELOAD.get(), SoundSource.NEUTRAL, 0.5F, 1F);
+            pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.SMG_RELOAD.get(), SoundSource.NEUTRAL, 0.5F, 1F);
             triggerAnim(pPlayer, GeoItem.getOrAssignId(pPlayer.getItemInHand(pHand), (ServerLevel) pLevel),"onetime", "reload");
             SetReloadTimer(itemstack, getReloadCooldown());
             SetCooldow(itemstack, getReloadCooldown());
@@ -89,18 +88,18 @@ public class SMG_1_Item extends GunAltFireItem implements GeoItem {
 
     public SoundEvent getShootingSound(){
         switch (RandomSource.create().nextInt(1,4)) {
-            case 1:  return ModSounds.SMG_SHOT1.get();
-            case 2:  return ModSounds.SMG_SHOT2.get();
-            case 3:  return ModSounds.SMG_SHOT3.get();
+            case 1:  return HalfLifeSounds.SMG_SHOT1.get();
+            case 2:  return HalfLifeSounds.SMG_SHOT2.get();
+            case 3:  return HalfLifeSounds.SMG_SHOT3.get();
         }
-        return ModSounds.HEADCRAB_1_ALERT_1.get();
+        return HalfLifeSounds.HEADCRAB_1_ALERT_1.get();
     }
     public SoundEvent getAltfireSound(){
         switch (RandomSource.create().nextInt(1,3)) {
-            case 1:  return ModSounds.GLAUNCHER.get();
-            case 2:  return ModSounds.GLAUNCHER2.get();
+            case 1:  return HalfLifeSounds.GLAUNCHER.get();
+            case 2:  return HalfLifeSounds.GLAUNCHER2.get();
         }
-        return ModSounds.HEADCRAB_1_ALERT_1.get();
+        return HalfLifeSounds.HEADCRAB_1_ALERT_1.get();
     }
 
 
@@ -110,7 +109,7 @@ public class SMG_1_Item extends GunAltFireItem implements GeoItem {
         Inventory inventory = pPlayer.getInventory();
         if (!pLevel.isClientSide) {
             if ((GetAltAmmo(itemstack) == 0  || inventory.findSlotMatchingItem(getaltammoitem()) == -1) && !pPlayer.getAbilities().instabuild) {
-                pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), ModSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
+                pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
                 return InteractionResultHolder.fail(itemstack);
             }
             if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
@@ -126,7 +125,7 @@ public class SMG_1_Item extends GunAltFireItem implements GeoItem {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         if (!pLevel.isClientSide) {
             if (GetAmmo(itemstack) == 0 && !pPlayer.getAbilities().instabuild) {
-                pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), ModSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
+                pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
                 return InteractionResultHolder.fail(itemstack);
             }
             if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);

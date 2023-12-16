@@ -1,14 +1,10 @@
 package net.sirkotok.half_life_mod.entity.projectile;
 
-import net.minecraft.core.Registry;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,14 +13,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.sirkotok.half_life_mod.damagesource.ModDamageSources;
-import net.sirkotok.half_life_mod.damagesource.ModDamageTypes;
-import net.sirkotok.half_life_mod.entity.ModEntities;
+import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.base.FireballNoTrail;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Houndeye;
-import net.sirkotok.half_life_mod.item.ModItems;
-import net.sirkotok.half_life_mod.particle.ModParticles;
-import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.item.HalfLifeItems;
+import net.sirkotok.half_life_mod.particle.HalfLifeParticles;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 
 public class Bullet extends FireballNoTrail {
 
@@ -36,20 +29,20 @@ public class Bullet extends FireballNoTrail {
 
 
     public Bullet(Level pLevel, LivingEntity pShooter) {
-        super(ModEntities.BULLET_ONE.get(), pShooter, pLevel);
+        super(HalfLifeEntities.BULLET_ONE.get(), pShooter, pLevel);
     }
 
     public Bullet(Level pLevel, LivingEntity pShooter, double pOffsetX, double pOffsetY, double pOffsetZ) {
-        super(ModEntities.BULLET_ONE.get(), pShooter, pOffsetX, pOffsetY, pOffsetZ, pLevel);
+        super(HalfLifeEntities.BULLET_ONE.get(), pShooter, pOffsetX, pOffsetY, pOffsetZ, pLevel);
     }
 
 
     public Bullet(Level pLevel, double pX, double pY, double pZ, double pOffsetX, double pOffsetY, double pOffsetZ) {
-        super(ModEntities.BULLET_ONE.get(), pX, pY, pZ, pOffsetX, pOffsetY, pOffsetZ, pLevel);
+        super(HalfLifeEntities.BULLET_ONE.get(), pX, pY, pZ, pOffsetX, pOffsetY, pOffsetZ, pLevel);
     }
 
     public ItemStack GetAllwaysItem() {
-        return ModItems.FAKE_BULLET.get().getDefaultInstance();
+        return HalfLifeItems.FAKE_BULLET.get().getDefaultInstance();
     }
 
 
@@ -79,10 +72,10 @@ public class Bullet extends FireballNoTrail {
 
     protected SoundEvent getHitSound(){
         switch (this.random.nextInt(1,3)) {
-            case 1:  return ModSounds.BULLET_HIT_1.get();
-            case 2:  return ModSounds.BULLET_HIT_2.get();
+            case 1:  return HalfLifeSounds.BULLET_HIT_1.get();
+            case 2:  return HalfLifeSounds.BULLET_HIT_2.get();
         }
-        return ModSounds.HEADCRAB_1_DIE_1.get();
+        return HalfLifeSounds.HEADCRAB_1_DIE_1.get();
     }
 
 
@@ -105,17 +98,17 @@ public class Bullet extends FireballNoTrail {
 
     public void makeParticle(int direction, BlockHitResult blockhit){
         switch(direction){
-            case 0:  this.getLevel().addAlwaysVisibleParticle(ModParticles.BULLET_HOLE.get(), blockhit.getLocation().x(), blockhit.getLocation().y()-0.01f, blockhit.getLocation().z(), direction, 0, 0);
+            case 0:  this.getLevel().addAlwaysVisibleParticle(HalfLifeParticles.BULLET_HOLE.get(), blockhit.getLocation().x(), blockhit.getLocation().y()-0.01f, blockhit.getLocation().z(), direction, 0, 0);
                 break;
-            case 1: this.getLevel().addAlwaysVisibleParticle(ModParticles.BULLET_HOLE.get(), blockhit.getLocation().x(), blockhit.getLocation().y()+0.01f, blockhit.getLocation().z(), direction, 0, 0);
+            case 1: this.getLevel().addAlwaysVisibleParticle(HalfLifeParticles.BULLET_HOLE.get(), blockhit.getLocation().x(), blockhit.getLocation().y()+0.01f, blockhit.getLocation().z(), direction, 0, 0);
                 break;
-            case 2: this.getLevel().addAlwaysVisibleParticle(ModParticles.BULLET_HOLE.get(), blockhit.getLocation().x(), blockhit.getLocation().y(), blockhit.getLocation().z()-0.01f, direction, 0, 0);
+            case 2: this.getLevel().addAlwaysVisibleParticle(HalfLifeParticles.BULLET_HOLE.get(), blockhit.getLocation().x(), blockhit.getLocation().y(), blockhit.getLocation().z()-0.01f, direction, 0, 0);
                 break;
-            case 3: this.getLevel().addAlwaysVisibleParticle(ModParticles.BULLET_HOLE.get(), blockhit.getLocation().x(), blockhit.getLocation().y(), blockhit.getLocation().z()+0.01f, direction, 0, 0);
+            case 3: this.getLevel().addAlwaysVisibleParticle(HalfLifeParticles.BULLET_HOLE.get(), blockhit.getLocation().x(), blockhit.getLocation().y(), blockhit.getLocation().z()+0.01f, direction, 0, 0);
                 break;
-            case 4: this.getLevel().addAlwaysVisibleParticle(ModParticles.BULLET_HOLE.get(), blockhit.getLocation().x()-0.01f, blockhit.getLocation().y(), blockhit.getLocation().z(), direction, 0, 0);
+            case 4: this.getLevel().addAlwaysVisibleParticle(HalfLifeParticles.BULLET_HOLE.get(), blockhit.getLocation().x()-0.01f, blockhit.getLocation().y(), blockhit.getLocation().z(), direction, 0, 0);
                 break;
-            case 5: this.getLevel().addAlwaysVisibleParticle(ModParticles.BULLET_HOLE.get(), blockhit.getLocation().x()+0.01f, blockhit.getLocation().y(), blockhit.getLocation().z(), direction, 0, 0);
+            case 5: this.getLevel().addAlwaysVisibleParticle(HalfLifeParticles.BULLET_HOLE.get(), blockhit.getLocation().x()+0.01f, blockhit.getLocation().y(), blockhit.getLocation().z(), direction, 0, 0);
                 break;
         }
     }

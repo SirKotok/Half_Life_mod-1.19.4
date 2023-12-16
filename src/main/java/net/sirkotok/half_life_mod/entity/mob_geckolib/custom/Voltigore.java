@@ -19,7 +19,6 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
@@ -29,16 +28,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.sirkotok.half_life_mod.block.ModBlocks;
+import net.sirkotok.half_life_mod.block.HalfLifeBlocks;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.NearbySecondBlocksSensor;
 import net.sirkotok.half_life_mod.entity.projectile.VoltigoreShock;
-import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.HLperUtil;
-import net.sirkotok.half_life_mod.util.ModTags;
+import net.sirkotok.half_life_mod.util.HLTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -53,7 +52,6 @@ import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetWalkTargetToAtt
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.InvalidateAttackTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetPlayerLookTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTarget;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.target.TargetOrRetaliate;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.custom.NearbyBlocksSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
@@ -228,7 +226,7 @@ public class Voltigore extends HalfLifeMonster implements GeoEntity, SmartBrainO
             if (BrainUtils.getTargetOfEntity(this) != null) {
                 List<Mob> race_x = EntityRetrievalUtil.getEntities((Level) pLevel,
                         new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
-                                pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj.getType().is(ModTags.EntityTypes.FACTION_RACE_X));
+                                pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj.getType().is(HLTags.EntityTypes.FACTION_RACE_X));
                 for (Mob x : race_x) {
                          if (BrainUtils.getTargetOfEntity(x) == null) {
                          BrainUtils.setTargetOfEntity(x, BrainUtils.getTargetOfEntity(this));
@@ -357,12 +355,12 @@ public class Voltigore extends HalfLifeMonster implements GeoEntity, SmartBrainO
         return ObjectArrayList.of(
                 new HurtBySensor<>(),
                 new NearbyPlayersSensor<>(),
-                new NearbyBlocksSensor<Voltigore>().setRadius(20, 5).setPredicate((state, entity) -> state.is(ModBlocks.VOLTIGORE_NEST.get())),
-                new NearbySecondBlocksSensor<Voltigore>().setRadius(30, 5).setPredicate((state, entity) -> state.is(ModBlocks.VOLTIGORE_EGG.get())),
+                new NearbyBlocksSensor<Voltigore>().setRadius(20, 5).setPredicate((state, entity) -> state.is(HalfLifeBlocks.VOLTIGORE_NEST.get())),
+                new NearbySecondBlocksSensor<Voltigore>().setRadius(30, 5).setPredicate((state, entity) -> state.is(HalfLifeBlocks.VOLTIGORE_EGG.get())),
                 new NearbyLivingEntitySensor<Voltigore>()
                         .setPredicate((target, entity) ->
                                 target instanceof Player ||
-                                        target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
+                                        target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
                                         target instanceof AbstractVillager));
     }
 
@@ -458,33 +456,33 @@ public class Voltigore extends HalfLifeMonster implements GeoEntity, SmartBrainO
     }
 
     public SoundEvent getSpitSound() {
-        return ModSounds.VORTIGORE_SHOCK.get();
+        return HalfLifeSounds.VORTIGORE_SHOCK.get();
     }
     public SoundEvent getRightAttackSound() {
-        return ModSounds.VORTIGORE_RIGHTATTACK.get();
+        return HalfLifeSounds.VORTIGORE_RIGHTATTACK.get();
     }
     public SoundEvent getBigAttackSound() {
-        return ModSounds.VORTIGORE_BIGATTACK.get();
+        return HalfLifeSounds.VORTIGORE_BIGATTACK.get();
     }
 
     protected SoundEvent getDeathSound() {
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.VORTIGORE_DIE1.get();
-            case 2:  return ModSounds.VORTIGORE_DIE2.get();
-            case 3:  return ModSounds.VORTIGORE_DIE3.get();
+            case 1:  return HalfLifeSounds.VORTIGORE_DIE1.get();
+            case 2:  return HalfLifeSounds.VORTIGORE_DIE2.get();
+            case 3:  return HalfLifeSounds.VORTIGORE_DIE3.get();
         }
-        return ModSounds.HEADCRAB_1_DIE_1.get();
+        return HalfLifeSounds.HEADCRAB_1_DIE_1.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
         switch (this.random.nextInt(1,5)) {
-            case 1:  return ModSounds.VORTIGORE_PAIN1.get();
-            case 2:  return ModSounds.VORTIGORE_PAIN2.get();
-            case 3:  return ModSounds.VORTIGORE_PAIN3.get();
-            case 4:  return ModSounds.VORTIGORE_PAIN4.get();
+            case 1:  return HalfLifeSounds.VORTIGORE_PAIN1.get();
+            case 2:  return HalfLifeSounds.VORTIGORE_PAIN2.get();
+            case 3:  return HalfLifeSounds.VORTIGORE_PAIN3.get();
+            case 4:  return HalfLifeSounds.VORTIGORE_PAIN4.get();
         }
-        return ModSounds.HEADCRAB_1_DIE_1.get();
+        return HalfLifeSounds.HEADCRAB_1_DIE_1.get();
     }
 
 
@@ -492,11 +490,11 @@ public class Voltigore extends HalfLifeMonster implements GeoEntity, SmartBrainO
         int i = this.random.nextInt(1,4);
         if (this.isangry()) i = this.random.nextInt(1,6);
         switch (i) {
-            case 1:  return ModSounds.VORTIGORE_STEP1.get();
-            case 2:  return ModSounds.VORTIGORE_STEP2.get();
-            case 3:  return ModSounds.VORTIGORE_STEP3.get();
-            case 4:  return ModSounds.VORTIGORE_RUN_STEP1.get();
-            case 5:  return ModSounds.VORTIGORE_RUN_STEP2.get();
+            case 1:  return HalfLifeSounds.VORTIGORE_STEP1.get();
+            case 2:  return HalfLifeSounds.VORTIGORE_STEP2.get();
+            case 3:  return HalfLifeSounds.VORTIGORE_STEP3.get();
+            case 4:  return HalfLifeSounds.VORTIGORE_RUN_STEP1.get();
+            case 5:  return HalfLifeSounds.VORTIGORE_RUN_STEP2.get();
         }
         return SoundEvents.FROG_STEP;
     }
@@ -526,15 +524,15 @@ public class Voltigore extends HalfLifeMonster implements GeoEntity, SmartBrainO
 
 
         switch (f) {
-            case 1:  return ModSounds.VORTIGORE_IDLE1.get();
-            case 2:  return ModSounds.VORTIGORE_IDLE2.get();
-            case 3:  return ModSounds.VORTIGORE_IDLE3.get();
-            case 4:  return ModSounds.VORTIGORE_TALK1.get();
-            case 5:  return ModSounds.VORTIGORE_TALK2.get();
-            case 6:  return ModSounds.VORTIGORE_TALK3.get();
-            case 7:  return ModSounds.VORTIGORE_ALERT1.get();
-            case 8:  return ModSounds.VORTIGORE_ALERT2.get();
-            case 9:  return ModSounds.VORTIGORE_ALERT3.get();
+            case 1:  return HalfLifeSounds.VORTIGORE_IDLE1.get();
+            case 2:  return HalfLifeSounds.VORTIGORE_IDLE2.get();
+            case 3:  return HalfLifeSounds.VORTIGORE_IDLE3.get();
+            case 4:  return HalfLifeSounds.VORTIGORE_TALK1.get();
+            case 5:  return HalfLifeSounds.VORTIGORE_TALK2.get();
+            case 6:  return HalfLifeSounds.VORTIGORE_TALK3.get();
+            case 7:  return HalfLifeSounds.VORTIGORE_ALERT1.get();
+            case 8:  return HalfLifeSounds.VORTIGORE_ALERT2.get();
+            case 9:  return HalfLifeSounds.VORTIGORE_ALERT3.get();
         }
         return SoundEvents.FROG_STEP;
     }

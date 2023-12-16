@@ -20,7 +20,7 @@ import net.sirkotok.half_life_mod.HalfLifeMod;
 import java.util.List;
 import java.util.OptionalLong;
 
-public class ModDimensions {
+public class HalfLifeDimensions {
     public static final ResourceKey<LevelStem> HALFLIFE_KEY = ResourceKey.create(Registries.LEVEL_STEM,
             new ResourceLocation(HalfLifeMod.MOD_ID, "half_life_dim"));
     public static final ResourceKey<Level> HALFLIFE_LEVEL_KEY = ResourceKey.create(Registries.DIMENSION,
@@ -114,11 +114,11 @@ public class ModDimensions {
 
 
                                     ))),
-                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD));
+                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.FLOATING_ISLANDS));
 
 
 
-        LevelStem stem = new LevelStem(dimTypes.getOrThrow(ModDimensions.HALFLIFE_DIM_TYPE), noiseBasedChunkGenerator);
+        LevelStem stem = new LevelStem(dimTypes.getOrThrow(HalfLifeDimensions.HALFLIFE_DIM_TYPE), noiseBasedChunkGenerator);
 
         context.register(HALFLIFE_KEY, stem);
     }

@@ -8,18 +8,14 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
-import net.sirkotok.half_life_mod.entity.projectile.Bullet;
 import net.sirkotok.half_life_mod.entity.projectile.ShockProjectile;
-import net.sirkotok.half_life_mod.item.client.renderer.Pistol_1_ItemRenderer;
 import net.sirkotok.half_life_mod.item.client.renderer.Shockroach_ItemRenderer;
-import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -87,7 +83,7 @@ public class Shockroach_Item extends RechargingGunItem implements GeoItem {
         if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
         if (!pLevel.isClientSide) {
             pPlayer.level.gameEvent(pPlayer, GameEvent.PROJECTILE_SHOOT, pPlayer.blockPosition()); //TODO: not sure if it even works
-            pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), ModSounds.SHOCKROACH_DRAW.get(), SoundSource.NEUTRAL, 0.5F, 1F);
+            pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.SHOCKROACH_DRAW.get(), SoundSource.NEUTRAL, 0.5F, 1F);
             triggerAnim(pPlayer, GeoItem.getOrAssignId(pPlayer.getItemInHand(pHand), (ServerLevel) pLevel),"onetime", "idle");
             SetCooldow(itemstack, getLeftClickCooldown());
             return InteractionResultHolder.fail(itemstack);
@@ -103,7 +99,7 @@ public class Shockroach_Item extends RechargingGunItem implements GeoItem {
                 return InteractionResultHolder.fail(itemstack);
             if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
             triggerAnim(pPlayer, GeoItem.getOrAssignId(pPlayer.getItemInHand(pHand), (ServerLevel) pLevel),"onetime", "shoot");
-            pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), ModSounds.SHOCK_FIRE.get(), SoundSource.NEUTRAL, 0.5F, 1F);
+            pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.SHOCK_FIRE.get(), SoundSource.NEUTRAL, 0.5F, 1F);
             shootleft(pLevel, pPlayer, pHand);
         }
         return InteractionResultHolder.pass(itemstack);

@@ -4,7 +4,6 @@ package net.sirkotok.half_life_mod.entity.mob_geckolib.custom;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -22,17 +21,14 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.animal.IronGolem;
-import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.fluids.FluidType;
@@ -41,16 +37,14 @@ import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.parts.SharkPart;
-import net.sirkotok.half_life_mod.entity.mob_normal.custom.BarnaclePart;
-import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.HLperUtil;
-import net.sirkotok.half_life_mod.util.ModTags;
+import net.sirkotok.half_life_mod.util.HLTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
 import net.tslat.smartbrainlib.api.core.behaviour.FirstApplicableBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.OneRandomBehaviour;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableMeleeAttack;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.CustomBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
@@ -75,7 +69,6 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
-import java.util.Objects;
 
 
 public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner<Shark> {
@@ -119,7 +112,7 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
         this.playSound(this.getAgroSound(), pVolume, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.05F);
     }
     protected SoundEvent getAgroSound() {
-        return RandomSource.create().nextFloat() < 0.5 ? ModSounds.ICHY_ATTACK1.get() : ModSounds.ICHY_ATTACK2.get();
+        return RandomSource.create().nextFloat() < 0.5 ? HalfLifeSounds.ICHY_ATTACK1.get() : HalfLifeSounds.ICHY_ATTACK2.get();
     }
 
     @Nullable
@@ -127,27 +120,27 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
     protected SoundEvent getAmbientSound() {
         if (this.getTarget() != null)
             switch(RandomSource.create().nextInt(1,4)){
-                case 1: return ModSounds.ICHY_ALERT1.get();
-                case 2: return ModSounds.ICHY_ALERT2.get();
-                case 3: return ModSounds.ICHY_ALERT3.get();
+                case 1: return HalfLifeSounds.ICHY_ALERT1.get();
+                case 2: return HalfLifeSounds.ICHY_ALERT2.get();
+                case 3: return HalfLifeSounds.ICHY_ALERT3.get();
             }
         switch(RandomSource.create().nextInt(1,5)){
-            case 1: return ModSounds.ICHY_IDLE1.get();
-            case 2: return ModSounds.ICHY_IDLE2.get();
-            case 3: return ModSounds.ICHY_IDLE3.get();
-            case 4: return ModSounds.ICHY_IDLE4.get();
+            case 1: return HalfLifeSounds.ICHY_IDLE1.get();
+            case 2: return HalfLifeSounds.ICHY_IDLE2.get();
+            case 3: return HalfLifeSounds.ICHY_IDLE3.get();
+            case 4: return HalfLifeSounds.ICHY_IDLE4.get();
         }
-        return ModSounds.ICHY_IDLE1.get();
+        return HalfLifeSounds.ICHY_IDLE1.get();
     }
 
 
 
     public SoundEvent getBiteSound(){
         switch(RandomSource.create().nextInt(1,4)){
-            case 1: return ModSounds.ICHY_BITE1.get();
-            case 2: return ModSounds.ICHY_BITE2.get();
+            case 1: return HalfLifeSounds.ICHY_BITE1.get();
+            case 2: return HalfLifeSounds.ICHY_BITE2.get();
         }
-        return ModSounds.LEECH_BITE3.get();
+        return HalfLifeSounds.LEECH_BITE3.get();
     }
 
     public static final EntityDataAccessor<Integer> MOUTH_OP = SynchedEntityData.defineId(Shark.class, EntityDataSerializers.INT); // -1 to 1
@@ -297,24 +290,24 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
     @Override
     protected SoundEvent getDeathSound() {
         switch(RandomSource.create().nextInt(1,5)){
-            case 1: return ModSounds.ICHY_DIE1.get();
-            case 2: return ModSounds.ICHY_DIE2.get();
-            case 3: return ModSounds.ICHY_DIE3.get();
-            case 4: return ModSounds.ICHY_DIE4.get();
+            case 1: return HalfLifeSounds.ICHY_DIE1.get();
+            case 2: return HalfLifeSounds.ICHY_DIE2.get();
+            case 3: return HalfLifeSounds.ICHY_DIE3.get();
+            case 4: return HalfLifeSounds.ICHY_DIE4.get();
         }
-        return ModSounds.ICHY_IDLE1.get();
+        return HalfLifeSounds.ICHY_IDLE1.get();
     }
 
 
     @Override
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
         switch(RandomSource.create().nextInt(1,5)){
-            case 1: return ModSounds.ICHY_PAIN1.get();
-            case 2: return ModSounds.ICHY_PAIN2.get();
-            case 3: return ModSounds.ICHY_PAIN3.get();
-            case 4: return ModSounds.ICHY_PAIN4.get();
+            case 1: return HalfLifeSounds.ICHY_PAIN1.get();
+            case 2: return HalfLifeSounds.ICHY_PAIN2.get();
+            case 3: return HalfLifeSounds.ICHY_PAIN3.get();
+            case 4: return HalfLifeSounds.ICHY_PAIN4.get();
         }
-        return ModSounds.ICHY_IDLE1.get();
+        return HalfLifeSounds.ICHY_IDLE1.get();
     }
 
 
@@ -477,7 +470,7 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
                 new NearbyLivingEntitySensor<Shark>().setRadius(32, 32)
                         .setPredicate((target, entity) ->
                                 (target instanceof Player ||
-                                target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) ||
+                                target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) ||
                                 target.getType().getCategory().getName().equals("axolotls") ||
                                 target instanceof IronGolem ||
                                 target instanceof AbstractVillager ||

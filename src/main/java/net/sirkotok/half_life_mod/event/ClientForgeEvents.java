@@ -9,7 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.item.custom.gun.GunItem;
-import net.sirkotok.half_life_mod.networking.ModPackets;
+import net.sirkotok.half_life_mod.networking.HalfLifePackets;
 import net.sirkotok.half_life_mod.networking.packet.GunLeftC2SPacket;
 import net.sirkotok.half_life_mod.networking.packet.GunReloadC2SPacket;
 import net.sirkotok.half_life_mod.networking.packet.GunRightC2SPacket;
@@ -36,7 +36,7 @@ public class ClientForgeEvents {
             if (localPlayer != null) {
                 boolean holdingGun = localPlayer.getMainHandItem().getItem() instanceof GunItem;
                 if (holdingGun) {
-                    ModPackets.sendToServer(new GunReloadC2SPacket());
+                    HalfLifePackets.sendToServer(new GunReloadC2SPacket());
                 }
             }
         }
@@ -52,10 +52,10 @@ public class ClientForgeEvents {
                 boolean rightMouse = Minecraft.getInstance().mouseHandler.isRightPressed();
                 boolean holdingGun = localPlayer.getMainHandItem().getItem() instanceof GunItem;
                 if (holdingGun && leftMouse) {
-                    ModPackets.sendToServer(new GunLeftC2SPacket());
+                    HalfLifePackets.sendToServer(new GunLeftC2SPacket());
                 }
                 if (holdingGun && rightMouse) {
-                    ModPackets.sendToServer(new GunRightC2SPacket());
+                    HalfLifePackets.sendToServer(new GunRightC2SPacket());
                 }
             }
         }

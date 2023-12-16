@@ -1,7 +1,6 @@
 package net.sirkotok.half_life_mod.entity.mob_geckolib.custom;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.commands.arguments.coordinates.WorldCoordinate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
@@ -23,10 +22,10 @@ import net.sirkotok.half_life_mod.entity.base.CatchableMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.Spawnsnarks;
-import net.sirkotok.half_life_mod.item.ModItems;
-import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.item.HalfLifeItems;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.HLperUtil;
-import net.sirkotok.half_life_mod.util.ModTags;
+import net.sirkotok.half_life_mod.util.HLTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -53,7 +52,7 @@ import java.util.List;
 public class Snarknest extends CatchableMonster implements GeoEntity, SmartBrainOwner<Snarknest> {
 
     public Item getweopon(){
-        return ModItems.SNARK_THROWER.get();
+        return HalfLifeItems.SNARK_THROWER.get();
     }
     @Override
     public int getemount(){
@@ -96,12 +95,12 @@ public class Snarknest extends CatchableMonster implements GeoEntity, SmartBrain
 
     @Nullable
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
-        return ModSounds.SNARK_DIE.get();
+        return HalfLifeSounds.SNARK_DIE.get();
     }
 
     @Nullable
     protected SoundEvent getDeathSound() {
-        return ModSounds.SNARK_DIE.get();
+        return HalfLifeSounds.SNARK_DIE.get();
     }
 
 
@@ -156,7 +155,7 @@ public class Snarknest extends CatchableMonster implements GeoEntity, SmartBrain
                 new NearbyLivingEntitySensor<Snarknest>()
                                 .setPredicate((target, entity) ->
                                         target instanceof Player ||
-                                                target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
+                                                target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
                                                 target instanceof AbstractVillager));
     }
 

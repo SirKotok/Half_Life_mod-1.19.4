@@ -21,7 +21,7 @@ import net.minecraftforge.fluids.FluidType;
 import net.sirkotok.half_life_mod.entity.base.CatchableMonster;
 
 import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
-import net.sirkotok.half_life_mod.item.ModItems;
+import net.sirkotok.half_life_mod.item.HalfLifeItems;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -53,7 +53,7 @@ import java.util.List;
 public class Chumtoad extends CatchableMonster implements GeoEntity, SmartBrainOwner<Chumtoad> {
 
     public Item getweopon(){
-        return ModItems.CHUMTOAD_THROWER.get();
+        return HalfLifeItems.CHUMTOAD_THROWER.get();
     }
 
     private AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);

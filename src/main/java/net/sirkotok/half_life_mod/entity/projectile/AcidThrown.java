@@ -6,18 +6,14 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
-import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.sirkotok.half_life_mod.entity.ModEntities;
-import net.sirkotok.half_life_mod.entity.base.FireballNoTrail;
-import net.sirkotok.half_life_mod.particle.ModParticles;
-import net.sirkotok.half_life_mod.sound.ModSounds;
-import net.sirkotok.half_life_mod.util.ModTags;
+import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
+import net.sirkotok.half_life_mod.util.HLTags;
 
 public class AcidThrown extends ThrowableItemProjectile {
     public AcidThrown(EntityType<AcidThrown> pEntityType, Level pLevel) {
@@ -35,33 +31,33 @@ public class AcidThrown extends ThrowableItemProjectile {
     }
 
     public AcidThrown(Level pLevel, LivingEntity pShooter) {
-        this(ModEntities.ACID_THROWN.get(), pShooter, pLevel);
+        this(HalfLifeEntities.ACID_THROWN.get(), pShooter, pLevel);
     }
 
 
 
     protected SoundEvent getAcidSound(){
             switch (this.random.nextInt(1,3)) {
-                case 1:  return ModSounds.BULLSQUID_ACID_1.get();
-                case 2:  return ModSounds.BULLSQUID_ACID_2.get();
+                case 1:  return HalfLifeSounds.BULLSQUID_ACID_1.get();
+                case 2:  return HalfLifeSounds.BULLSQUID_ACID_2.get();
             }
-            return ModSounds.HEADCRAB_1_DIE_1.get();
+            return HalfLifeSounds.HEADCRAB_1_DIE_1.get();
     }
 
     protected SoundEvent getHitSound(){
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.BULLSQUID_SPIT_1.get();
-            case 2:  return ModSounds.BULLSQUID_SPIT_2.get();
-            case 3:  return ModSounds.BULLSQUID_SPIT_3.get();
+            case 1:  return HalfLifeSounds.BULLSQUID_SPIT_1.get();
+            case 2:  return HalfLifeSounds.BULLSQUID_SPIT_2.get();
+            case 3:  return HalfLifeSounds.BULLSQUID_SPIT_3.get();
         }
-        return ModSounds.HEADCRAB_1_DIE_1.get();
+        return HalfLifeSounds.HEADCRAB_1_DIE_1.get();
     }
 
     protected void onHitEntity(EntityHitResult pResult) {
         super.onHitEntity(pResult);
         if (!this.level.isClientSide) {
             Entity entity = pResult.getEntity();
-            if (entity.getType().is(ModTags.EntityTypes.FACTION_HEADCRAB)) return;
+            if (entity.getType().is(HLTags.EntityTypes.FACTION_HEADCRAB)) return;
             playSound(this.getAcidSound(), 0.3f, 1f);
             Entity entity1 = this.getOwner();
             if (entity1 instanceof LivingEntity) {

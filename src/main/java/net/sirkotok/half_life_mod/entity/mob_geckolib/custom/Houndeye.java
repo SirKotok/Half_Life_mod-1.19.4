@@ -31,8 +31,8 @@ import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.modinterface.HasLeaderMob;
-import net.sirkotok.half_life_mod.sound.ModSounds;
-import net.sirkotok.half_life_mod.util.ModTags;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
+import net.sirkotok.half_life_mod.util.HLTags;
 import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
@@ -384,51 +384,51 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, HasLeaderMob
 
     protected SoundEvent getBlastSound() {
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.SONIC_BLAST_1.get();
-            case 2:  return ModSounds.SONIC_BLAST_2.get();
-            case 3:  return ModSounds.SONIC_BLAST_3.get();
+            case 1:  return HalfLifeSounds.SONIC_BLAST_1.get();
+            case 2:  return HalfLifeSounds.SONIC_BLAST_2.get();
+            case 3:  return HalfLifeSounds.SONIC_BLAST_3.get();
         }
-        return ModSounds.HEADCRAB_1_ATTACK_1.get();
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
     }
 
     protected SoundEvent getBuildupSound() {
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.HOUNDEYE_ATTACK_1.get();
-            case 2:  return ModSounds.HOUNDEYE_ATTACK_2.get();
-            case 3:  return ModSounds.HOUNDEYE_ATTACK_3.get();
+            case 1:  return HalfLifeSounds.HOUNDEYE_ATTACK_1.get();
+            case 2:  return HalfLifeSounds.HOUNDEYE_ATTACK_2.get();
+            case 3:  return HalfLifeSounds.HOUNDEYE_ATTACK_3.get();
         }
-        return ModSounds.HEADCRAB_1_ATTACK_1.get();
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
     }
 
 
 
     protected SoundEvent getDeathSound() {
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.HOUNDEYE_DIE_1.get();
-            case 2:  return ModSounds.HOUNDEYE_DIE_2.get();
-            case 3:  return ModSounds.HOUNDEYE_DIE_3.get();
+            case 1:  return HalfLifeSounds.HOUNDEYE_DIE_1.get();
+            case 2:  return HalfLifeSounds.HOUNDEYE_DIE_2.get();
+            case 3:  return HalfLifeSounds.HOUNDEYE_DIE_3.get();
         }
-        return ModSounds.HEADCRAB_1_DIE_1.get();
+        return HalfLifeSounds.HEADCRAB_1_DIE_1.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
         switch (this.random.nextInt(1,6)) {
-            case 1:  return ModSounds.HOUNDEYE_PAIN1.get();
-            case 2:  return ModSounds.HOUNDEYE_PAIN2.get();
-            case 3:  return ModSounds.HOUNDEYE_PAIN3.get();
-            case 4:  return ModSounds.HOUNDEYE_PAIN4.get();
-            case 5:  return ModSounds.HOUNDEYE_PAIN5.get();
+            case 1:  return HalfLifeSounds.HOUNDEYE_PAIN1.get();
+            case 2:  return HalfLifeSounds.HOUNDEYE_PAIN2.get();
+            case 3:  return HalfLifeSounds.HOUNDEYE_PAIN3.get();
+            case 4:  return HalfLifeSounds.HOUNDEYE_PAIN4.get();
+            case 5:  return HalfLifeSounds.HOUNDEYE_PAIN5.get();
         }
-        return ModSounds.HEADCRAB_1_DIE_1.get();
+        return HalfLifeSounds.HEADCRAB_1_DIE_1.get();
     }
 
 
     protected SoundEvent getStepSound() {
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.HOUNDEYE_STEP1.get();
-            case 2:  return ModSounds.HOUNDEYE_STEP2.get();
-            case 3:  return ModSounds.HOUNDEYE_STEP3.get();
+            case 1:  return HalfLifeSounds.HOUNDEYE_STEP1.get();
+            case 2:  return HalfLifeSounds.HOUNDEYE_STEP2.get();
+            case 3:  return HalfLifeSounds.HOUNDEYE_STEP3.get();
         }
         return SoundEvents.FROG_STEP;
     }
@@ -447,23 +447,23 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, HasLeaderMob
 
     protected SoundEvent getAmbientSound() {
         switch (this.random.nextInt(1,5)) {
-            case 1:  return ModSounds.HOUNDEYE_IDLE1.get();
-            case 2:  return ModSounds.HOUNDEYE_IDLE2.get();
-            case 3:  return ModSounds.HOUNDEYE_IDLE3.get();
-            case 4:  return ModSounds.HOUNDEYE_IDLE4.get();
+            case 1:  return HalfLifeSounds.HOUNDEYE_IDLE1.get();
+            case 2:  return HalfLifeSounds.HOUNDEYE_IDLE2.get();
+            case 3:  return HalfLifeSounds.HOUNDEYE_IDLE3.get();
+            case 4:  return HalfLifeSounds.HOUNDEYE_IDLE4.get();
         }
         return SoundEvents.FROG_STEP;
     }
     protected SoundEvent getAlertSound() {
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.HOUNDEYE_ALERT1.get();
-            case 2:  return ModSounds.HOUNDEYE_ALERT2.get();
-            case 3:  return ModSounds.HOUNDEYE_ALERT3.get();
+            case 1:  return HalfLifeSounds.HOUNDEYE_ALERT1.get();
+            case 2:  return HalfLifeSounds.HOUNDEYE_ALERT2.get();
+            case 3:  return HalfLifeSounds.HOUNDEYE_ALERT3.get();
         }
         return SoundEvents.FROG_STEP;
     }
     protected SoundEvent getBarkSound() {
-        return ModSounds.HOUNDEYE_BARK.get();
+        return HalfLifeSounds.HOUNDEYE_BARK.get();
     }
 
 
@@ -486,7 +486,7 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, HasLeaderMob
     public List<ExtendedSensor<Houndeye>> getSensors() {
         return ObjectArrayList.of(
                 new HurtBySensor<>(),
-                new NearbyBlocksSensor<Houndeye>().setRadius(8, 4).setPredicate((state, entity) -> state.is(ModTags.Blocks.HOUNDEYE_INTEREST)),
+                new NearbyBlocksSensor<Houndeye>().setRadius(8, 4).setPredicate((state, entity) -> state.is(HLTags.Blocks.HOUNDEYE_INTEREST)),
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<Houndeye>()
                         .setPredicate((target, entity) ->

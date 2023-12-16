@@ -2,30 +2,22 @@ package net.sirkotok.half_life_mod.entity.mob_geckolib.custom;
 
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.ai.memory.WalkTarget;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
@@ -33,29 +25,23 @@ import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.fluids.FluidType;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
-import net.sirkotok.half_life_mod.sound.ModSounds;
-import net.sirkotok.half_life_mod.util.ModTags;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
+import net.sirkotok.half_life_mod.util.HLTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
 import net.tslat.smartbrainlib.api.core.behaviour.FirstApplicableBehaviour;
-import net.tslat.smartbrainlib.api.core.behaviour.OneRandomBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.CustomBehaviour;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetWalkTargetToAttackTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.InvalidateAttackTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetPlayerLookTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTarget;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.target.TargetOrRetaliate;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
@@ -67,7 +53,6 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
-import software.bernie.shadowed.eliotlash.mclib.math.functions.classic.Pi;
 
 import java.util.List;
 
@@ -136,11 +121,11 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
             float f = this.distanceTo(entity);
             if (f < 3.8 && !this.getOpen()) {
                 this.setOpen(true);
-                this.playSound(ModSounds.MANHACK_BLADE_SNICK.get());
+                this.playSound(HalfLifeSounds.MANHACK_BLADE_SNICK.get());
             }
             if (f > 4.2 && this.getOpen()) {
                 this.setOpen(false);
-                this.playSound(ModSounds.MANHACK_BLADE_SNICK.get());
+                this.playSound(HalfLifeSounds.MANHACK_BLADE_SNICK.get());
             }
 
         }
@@ -263,28 +248,28 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
 
     protected SoundEvent getGrindFleshSound() {
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.MANHACK_GRIND_FLESH_1.get();
-            case 2:  return ModSounds.MANHACK_GRIND_FLESH_2.get();
-            case 3:  return ModSounds.MANHACK_GRIND_FLESH_3.get();
+            case 1:  return HalfLifeSounds.MANHACK_GRIND_FLESH_1.get();
+            case 2:  return HalfLifeSounds.MANHACK_GRIND_FLESH_2.get();
+            case 3:  return HalfLifeSounds.MANHACK_GRIND_FLESH_3.get();
         }
-        return ModSounds.HEADCRAB_1_ATTACK_1.get();
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
     }
 
     protected SoundEvent getGrindSound(){
     switch (this.random.nextInt(1,6)) {
-        case 1:  return ModSounds.MANHACK_GRIND1.get();
-        case 2:  return ModSounds.MANHACK_GRIND2.get();
-        case 3:  return ModSounds.MANHACK_GRIND3.get();
-        case 4:  return ModSounds.MANHACK_GRIND4.get();
-        case 5:  return ModSounds.MANHACK_GRIND5.get();
+        case 1:  return HalfLifeSounds.MANHACK_GRIND1.get();
+        case 2:  return HalfLifeSounds.MANHACK_GRIND2.get();
+        case 3:  return HalfLifeSounds.MANHACK_GRIND3.get();
+        case 4:  return HalfLifeSounds.MANHACK_GRIND4.get();
+        case 5:  return HalfLifeSounds.MANHACK_GRIND5.get();
     }
-        return ModSounds.HEADCRAB_1_ATTACK_1.get();
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
    }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        if (random.nextFloat() < 0.5f) return ModSounds.MANHACK_LOOP1.get();
-        return ModSounds.MANHACK_LOOP2.get();
+        if (random.nextFloat() < 0.5f) return HalfLifeSounds.MANHACK_LOOP1.get();
+        return HalfLifeSounds.MANHACK_LOOP2.get();
     }
 
     @Override
@@ -352,7 +337,7 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
 
 
     protected SoundEvent getDeathSound() {
-        return ModSounds.MANHACK_DIES.get();
+        return HalfLifeSounds.MANHACK_DIES.get();
     }
 
 
@@ -405,7 +390,7 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
                 new NearbyLivingEntitySensor<Manhack>()
                         .setPredicate((target, entity) ->
                             target instanceof Player || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
-                            target instanceof AbstractVillager || (target instanceof Enemy && !target.getType().is(ModTags.EntityTypes.FACTION_COMBINE))));
+                            target instanceof AbstractVillager || (target instanceof Enemy && !target.getType().is(HLTags.EntityTypes.FACTION_COMBINE))));
     }
 
 

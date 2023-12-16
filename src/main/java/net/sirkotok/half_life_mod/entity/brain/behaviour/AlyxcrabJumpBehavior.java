@@ -16,7 +16,7 @@ import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Headcrab_3;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Headcrab_Armored;
-import net.sirkotok.half_life_mod.util.ModTags;
+import net.sirkotok.half_life_mod.util.HLTags;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.ConditionlessAttack;
 import net.tslat.smartbrainlib.util.BrainUtils;
 
@@ -99,7 +99,7 @@ public class AlyxcrabJumpBehavior<E extends Headcrab_3>  extends ConditionlessAt
         return entity.distanceToSqr(this.target.getX(), this.target.getY() + this.target.getEyeHeight(),this.target.getZ());
     }
     public boolean canSitOnHead() {
-        return this.target.getType().is(ModTags.EntityTypes.HEAD_CRAB_TARGET) && (this.target.getItemBySlot(EquipmentSlot.HEAD).isEmpty()) && this.target.getPassengers().isEmpty();
+        return this.target.getType().is(HLTags.EntityTypes.HEAD_CRAB_TARGET) && (this.target.getItemBySlot(EquipmentSlot.HEAD).isEmpty()) && this.target.getPassengers().isEmpty();
     }
     public boolean canBite(E entity)
     {

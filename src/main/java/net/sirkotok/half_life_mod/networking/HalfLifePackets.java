@@ -11,7 +11,7 @@ import net.sirkotok.half_life_mod.networking.packet.GunLeftC2SPacket;
 import net.sirkotok.half_life_mod.networking.packet.GunReloadC2SPacket;
 import net.sirkotok.half_life_mod.networking.packet.GunRightC2SPacket;
 
-public class ModPackets     {
+public class HalfLifePackets {
     private static SimpleChannel INSTANCE;
     private static int packetId = 0;
     private static int id() {

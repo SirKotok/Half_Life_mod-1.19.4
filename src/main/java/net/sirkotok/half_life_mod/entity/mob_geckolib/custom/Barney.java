@@ -26,8 +26,8 @@ import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.StopAndShoot;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.TargetOrRetaliateHLT;
 import net.sirkotok.half_life_mod.entity.projectile.Bullet;
-import net.sirkotok.half_life_mod.item.ModItems;
-import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.item.HalfLifeItems;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
@@ -42,12 +42,10 @@ import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetWalkTargetToAtt
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.InvalidateAttackTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetPlayerLookTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTarget;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.target.TargetOrRetaliate;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyPlayersSensor;
-import net.tslat.smartbrainlib.util.BrainUtils;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -82,26 +80,26 @@ public class Barney extends HalfLifeNeutral implements GeoEntity, SmartBrainOwne
     @Override
     public SoundEvent getStartFollowingSound() {
         switch (this.random.nextInt(1,7)) {
-            case 1:  return ModSounds.GUARD_FOLLOW_1.get();
-            case 2:  return ModSounds.GUARD_FOLLOW_2.get();
-            case 3:  return ModSounds.GUARD_FOLLOW_3.get();
-            case 4:  return ModSounds.GUARD_FOLLOW_4.get();
-            case 5:  return ModSounds.GUARD_FOLLOW_5.get();
-            case 6:  return ModSounds.GUARD_FOLLOW_6.get();
+            case 1:  return HalfLifeSounds.GUARD_FOLLOW_1.get();
+            case 2:  return HalfLifeSounds.GUARD_FOLLOW_2.get();
+            case 3:  return HalfLifeSounds.GUARD_FOLLOW_3.get();
+            case 4:  return HalfLifeSounds.GUARD_FOLLOW_4.get();
+            case 5:  return HalfLifeSounds.GUARD_FOLLOW_5.get();
+            case 6:  return HalfLifeSounds.GUARD_FOLLOW_6.get();
         }
-        return ModSounds.HEADCRAB_1_ATTACK_1.get();
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
     }
     @Override
     public SoundEvent getStopFollowingSound() {
         switch (this.random.nextInt(1,7)) {
-            case 1:  return ModSounds.GUARD_STAY_1.get();
-            case 2:  return ModSounds.GUARD_STAY_2.get();
-            case 3:  return ModSounds.GUARD_STAY_3.get();
-            case 4:  return ModSounds.GUARD_STAY_4.get();
-            case 5:  return ModSounds.GUARD_STAY_5.get();
-            case 6:  return ModSounds.GUARD_STAY_6.get();
+            case 1:  return HalfLifeSounds.GUARD_STAY_1.get();
+            case 2:  return HalfLifeSounds.GUARD_STAY_2.get();
+            case 3:  return HalfLifeSounds.GUARD_STAY_3.get();
+            case 4:  return HalfLifeSounds.GUARD_STAY_4.get();
+            case 5:  return HalfLifeSounds.GUARD_STAY_5.get();
+            case 6:  return HalfLifeSounds.GUARD_STAY_6.get();
         }
-        return ModSounds.HEADCRAB_1_ATTACK_1.get();
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
     }
 
     @Nullable
@@ -241,10 +239,10 @@ public class Barney extends HalfLifeNeutral implements GeoEntity, SmartBrainOwne
 
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_33601_, DifficultyInstance p_33602_, MobSpawnType p_33603_, @Nullable SpawnGroupData p_33604_, @Nullable CompoundTag p_33605_) {
-        if (RandomSource.create().nextFloat() < 0.9f) this.setItemSlot(EquipmentSlot.HEAD, ModItems.SECURITY_GUARD_HELMET.get().getDefaultInstance());
-        if (RandomSource.create().nextFloat() < 0.9f) this.setItemSlot(EquipmentSlot.CHEST, ModItems.SECURITY_GUARD_VEST.get().getDefaultInstance());
+        if (RandomSource.create().nextFloat() < 0.9f) this.setItemSlot(EquipmentSlot.HEAD, HalfLifeItems.SECURITY_GUARD_HELMET.get().getDefaultInstance());
+        if (RandomSource.create().nextFloat() < 0.9f) this.setItemSlot(EquipmentSlot.CHEST, HalfLifeItems.SECURITY_GUARD_VEST.get().getDefaultInstance());
 
-        this.setItemSlot(EquipmentSlot.MAINHAND, ModItems.PISTOL.get().getDefaultInstance());
+        this.setItemSlot(EquipmentSlot.MAINHAND, HalfLifeItems.PISTOL.get().getDefaultInstance());
 
         return super.finalizeSpawn(p_33601_, p_33602_, p_33603_, p_33604_, p_33605_);
     }
@@ -258,7 +256,7 @@ public class Barney extends HalfLifeNeutral implements GeoEntity, SmartBrainOwne
         double d2 = livingentity.getY(0.4D) - this.getY(0.4D);
         double d3 = livingentity.getZ() - this.getZ();
 
-        this.playSound(ModSounds.PISTOL_SHOOT.get(), this.getSoundVolume(), 1f);
+        this.playSound(HalfLifeSounds.PISTOL_SHOOT.get(), this.getSoundVolume(), 1f);
 
 
         Bullet bullet = new Bullet(this.level, this, d1, d2, d3);

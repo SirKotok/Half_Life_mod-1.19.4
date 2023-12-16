@@ -8,16 +8,12 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.ForgeEventFactory;
-import net.sirkotok.half_life_mod.entity.ModEntities;
-import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.VoltigoreProjectileAftereffect;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Voltigore;
-import net.sirkotok.half_life_mod.particle.ModParticles;
+import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
+import net.sirkotok.half_life_mod.particle.HalfLifeParticles;
 import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -35,7 +31,7 @@ public class SporeShot extends ThrowableProjectile implements GeoEntity {
     }
 
     public SporeShot(Level pLevel, LivingEntity pShooter) {
-        super(ModEntities.SPORESHOT.get(), pShooter, pLevel);
+        super(HalfLifeEntities.SPORESHOT.get(), pShooter, pLevel);
     }
 
 
@@ -136,17 +132,17 @@ public class SporeShot extends ThrowableProjectile implements GeoEntity {
 
     public void makeParticle(int direction, BlockHitResult blockhit) {
         switch(direction){
-            case 0:  this.getLevel().addAlwaysVisibleParticle(ModParticles.SPIT_HIT.get(), blockhit.getLocation().x(), blockhit.getLocation().y()-0.01f, blockhit.getLocation().z(), direction, 0, 0);
+            case 0:  this.getLevel().addAlwaysVisibleParticle(HalfLifeParticles.SPIT_HIT.get(), blockhit.getLocation().x(), blockhit.getLocation().y()-0.01f, blockhit.getLocation().z(), direction, 0, 0);
                 break;
-            case 1: this.getLevel().addAlwaysVisibleParticle(ModParticles.SPIT_HIT.get(), blockhit.getLocation().x(), blockhit.getLocation().y()+0.01f, blockhit.getLocation().z(), direction, 0, 0);
+            case 1: this.getLevel().addAlwaysVisibleParticle(HalfLifeParticles.SPIT_HIT.get(), blockhit.getLocation().x(), blockhit.getLocation().y()+0.01f, blockhit.getLocation().z(), direction, 0, 0);
                 break;
-            case 2: this.getLevel().addAlwaysVisibleParticle(ModParticles.SPIT_HIT.get(), blockhit.getLocation().x(), blockhit.getLocation().y(), blockhit.getLocation().z()-0.01f, direction, 0, 0);
+            case 2: this.getLevel().addAlwaysVisibleParticle(HalfLifeParticles.SPIT_HIT.get(), blockhit.getLocation().x(), blockhit.getLocation().y(), blockhit.getLocation().z()-0.01f, direction, 0, 0);
                 break;
-            case 3: this.getLevel().addAlwaysVisibleParticle(ModParticles.SPIT_HIT.get(), blockhit.getLocation().x(), blockhit.getLocation().y(), blockhit.getLocation().z()+0.01f, direction, 0, 0);
+            case 3: this.getLevel().addAlwaysVisibleParticle(HalfLifeParticles.SPIT_HIT.get(), blockhit.getLocation().x(), blockhit.getLocation().y(), blockhit.getLocation().z()+0.01f, direction, 0, 0);
                 break;
-            case 4: this.getLevel().addAlwaysVisibleParticle(ModParticles.SPIT_HIT.get(), blockhit.getLocation().x()-0.01f, blockhit.getLocation().y(), blockhit.getLocation().z(), direction, 0, 0);
+            case 4: this.getLevel().addAlwaysVisibleParticle(HalfLifeParticles.SPIT_HIT.get(), blockhit.getLocation().x()-0.01f, blockhit.getLocation().y(), blockhit.getLocation().z(), direction, 0, 0);
                 break;
-            case 5: this.getLevel().addAlwaysVisibleParticle(ModParticles.SPIT_HIT.get(), blockhit.getLocation().x()+0.01f, blockhit.getLocation().y(), blockhit.getLocation().z(), direction, 0, 0);
+            case 5: this.getLevel().addAlwaysVisibleParticle(HalfLifeParticles.SPIT_HIT.get(), blockhit.getLocation().x()+0.01f, blockhit.getLocation().y(), blockhit.getLocation().z(), direction, 0, 0);
                 break;
         }
     }

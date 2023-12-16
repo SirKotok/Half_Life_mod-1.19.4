@@ -8,7 +8,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public class Hoteye extends Houndeye{
 
 
     public void explode() {
-        this.playSound(ModSounds.SNARK_BLAST.get(), 0.3f, 1); //TODO: change to correct sound
+        this.playSound(HalfLifeSounds.SNARK_BLAST.get(), 0.3f, 1); //TODO: change to correct sound
         if (!this.level.isClientSide) {
         ServerLevel pLevel = (ServerLevel) this.getLevel();
         BlockPos pBlockPos = this.blockPosition();

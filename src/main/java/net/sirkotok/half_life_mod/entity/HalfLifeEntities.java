@@ -19,7 +19,7 @@ import net.sirkotok.half_life_mod.entity.projectile.*;
 import net.sirkotok.half_life_mod.entity.projectile.arrowlike.Flechette;
 
 
-public class ModEntities {
+public class HalfLifeEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
             DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, HalfLifeMod.MOD_ID);
 

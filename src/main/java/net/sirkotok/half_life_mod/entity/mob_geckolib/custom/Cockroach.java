@@ -8,11 +8,8 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -27,11 +24,10 @@ import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.EatingBehavior;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.SetFoodToWalkTarget;
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
-import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -130,7 +126,7 @@ public class Cockroach extends Animal implements GeoEntity, SmartBrainOwner<Cock
         List<Entity> list = this.level.getEntities(this, this.getBoundingBox(), obj -> obj instanceof LivingEntity && obj.getBbWidth() > 0.5f && !obj.getDeltaMovement().equals(new Vec3(0, 0, 0)));
         if (!list.isEmpty() && !this.isDeadOrDying() && !this.hasCustomName()) {
             this.setHealth(0);
-            this.playSound(ModSounds.COCKROACH_IS_STOMPED.get(), this.getSoundVolume(), this.getVoicePitch());
+            this.playSound(HalfLifeSounds.COCKROACH_IS_STOMPED.get(), this.getSoundVolume(), this.getVoicePitch());
         }
 
 
@@ -186,11 +182,11 @@ public class Cockroach extends Animal implements GeoEntity, SmartBrainOwner<Cock
 
 
     protected SoundEvent getDeathSound() {
-        return ModSounds.COCKROACH_DIES.get();
+        return HalfLifeSounds.COCKROACH_DIES.get();
     }
 
     protected SoundEvent getStepSound() {
-        return ModSounds.COCKROACH_WALK.get();
+        return HalfLifeSounds.COCKROACH_WALK.get();
     }
 
     @Override

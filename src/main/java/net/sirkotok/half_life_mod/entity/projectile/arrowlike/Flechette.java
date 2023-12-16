@@ -4,23 +4,17 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-import net.sirkotok.half_life_mod.entity.ModEntities;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.GonarchBM;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Hunter;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Voltigore;
-import net.sirkotok.half_life_mod.sound.ModSounds;
-import net.sirkotok.half_life_mod.util.HLperUtil;
+import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -44,7 +38,7 @@ public class Flechette extends AbstractArrow implements GeoEntity{
     }
 
     public Flechette(Level pLevel, LivingEntity pShooter) {
-        this(ModEntities.FLECHETTE.get(), pShooter.getX(), pShooter.getY(), pShooter.getZ(), pLevel);
+        this(HalfLifeEntities.FLECHETTE.get(), pShooter.getX(), pShooter.getY(), pShooter.getZ(), pLevel);
         this.setOwner(pShooter);
         this.setRot(pShooter.getYRot(), pShooter.getXRot());
     }
@@ -104,38 +98,38 @@ public class Flechette extends AbstractArrow implements GeoEntity{
 
     protected SoundEvent getPreExplodeSound() {
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.HUNTER_FLECHETTE_PREEXPLODE2.get();
-            case 2:  return ModSounds.HUNTER_FLECHETTE_PREEXPLODE3.get();
-            case 3:  return ModSounds.HUNTER_FLECHETTE_PREEXPLODE1.get();
+            case 1:  return HalfLifeSounds.HUNTER_FLECHETTE_PREEXPLODE2.get();
+            case 2:  return HalfLifeSounds.HUNTER_FLECHETTE_PREEXPLODE3.get();
+            case 3:  return HalfLifeSounds.HUNTER_FLECHETTE_PREEXPLODE1.get();
         }
         return SoundEvents.FROG_STEP;
     }
 
     protected SoundEvent getGroundhitSound() {
         switch (this.random.nextInt(1,6)) {
-            case 1:  return ModSounds.FLECHETTE_IMPACT_STICK1.get();
-            case 2:  return ModSounds.FLECHETTE_IMPACT_STICK2.get();
-            case 3:  return ModSounds.FLECHETTE_IMPACT_STICK3.get();
-            case 4:  return ModSounds.FLECHETTE_IMPACT_STICK5.get();
-            case 5:  return ModSounds.FLECHETTE_IMPACT_STICK4.get();
+            case 1:  return HalfLifeSounds.FLECHETTE_IMPACT_STICK1.get();
+            case 2:  return HalfLifeSounds.FLECHETTE_IMPACT_STICK2.get();
+            case 3:  return HalfLifeSounds.FLECHETTE_IMPACT_STICK3.get();
+            case 4:  return HalfLifeSounds.FLECHETTE_IMPACT_STICK5.get();
+            case 5:  return HalfLifeSounds.FLECHETTE_IMPACT_STICK4.get();
         }
         return SoundEvents.FROG_STEP;
     }
     protected SoundEvent getfleshhitSound() {
         switch (this.random.nextInt(1,5)) {
-            case 1:  return ModSounds.FLECHETTE_FLESH_IMPACT1.get();
-            case 2:  return ModSounds.FLECHETTE_FLESH_IMPACT2.get();
-            case 3:  return ModSounds.FLECHETTE_FLESH_IMPACT3.get();
-            case 4:  return ModSounds.FLECHETTE_FLESH_IMPACT4.get();
+            case 1:  return HalfLifeSounds.FLECHETTE_FLESH_IMPACT1.get();
+            case 2:  return HalfLifeSounds.FLECHETTE_FLESH_IMPACT2.get();
+            case 3:  return HalfLifeSounds.FLECHETTE_FLESH_IMPACT3.get();
+            case 4:  return HalfLifeSounds.FLECHETTE_FLESH_IMPACT4.get();
         }
         return SoundEvents.FROG_STEP;
     }
 
     protected SoundEvent getExplodeSound() {
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.FLECHETTE_EXPLODE1.get();
-            case 2:  return ModSounds.FLECHETTE_EXPLODE2.get();
-            case 3:  return ModSounds.FLECHETTE_EXPLODE3.get();
+            case 1:  return HalfLifeSounds.FLECHETTE_EXPLODE1.get();
+            case 2:  return HalfLifeSounds.FLECHETTE_EXPLODE2.get();
+            case 3:  return HalfLifeSounds.FLECHETTE_EXPLODE3.get();
         }
         return SoundEvents.FROG_STEP;
     }

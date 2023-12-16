@@ -11,7 +11,7 @@ import net.sirkotok.half_life_mod.HalfLifeMod;
 
 
 
-public class ModSounds {
+public class HalfLifeSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 

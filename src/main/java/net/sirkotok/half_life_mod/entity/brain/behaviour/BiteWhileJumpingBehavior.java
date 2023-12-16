@@ -12,16 +12,11 @@ import net.minecraft.world.entity.LivingEntity;
 
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
-import net.sirkotok.half_life_mod.util.ModTags;
-import net.tslat.smartbrainlib.api.core.behaviour.DelayedBehaviour;
-import net.tslat.smartbrainlib.api.core.behaviour.ExtendedBehaviour;
+import net.sirkotok.half_life_mod.util.HLTags;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.ConditionlessAttack;
 import net.tslat.smartbrainlib.util.BrainUtils;
-import software.bernie.shadowed.eliotlash.mclib.math.functions.utility.RandomInteger;
 
 import java.util.List;
-import java.util.ListIterator;
 
 public class BiteWhileJumpingBehavior<E extends LivingEntity> extends ConditionlessAttack<E> {
     private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT));
@@ -44,7 +39,7 @@ public class BiteWhileJumpingBehavior<E extends LivingEntity> extends Conditionl
         return entity.distanceToSqr(this.target.getX(), this.target.getY() + this.target.getEyeHeight(),this.target.getZ());
     }
     public boolean canSitOnHead() {
-        return this.target.getType().is(ModTags.EntityTypes.HEAD_CRAB_TARGET) && (this.target.getItemBySlot(EquipmentSlot.HEAD).isEmpty()) && this.target.getPassengers().isEmpty();
+        return this.target.getType().is(HLTags.EntityTypes.HEAD_CRAB_TARGET) && (this.target.getItemBySlot(EquipmentSlot.HEAD).isEmpty()) && this.target.getPassengers().isEmpty();
     }
     public boolean canBite(E entity)
     {

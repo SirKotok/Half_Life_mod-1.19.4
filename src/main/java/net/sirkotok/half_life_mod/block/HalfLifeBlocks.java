@@ -13,12 +13,12 @@ import net.minecraftforge.registries.RegistryObject;
 import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.block.custom.VoltigoreEggBlock;
 import net.sirkotok.half_life_mod.block.custom.portal.BasicPortalBlock;
-import net.sirkotok.half_life_mod.item.ModItems;
+import net.sirkotok.half_life_mod.item.HalfLifeItems;
 
 
 import java.util.function.Supplier;
 
-public class ModBlocks {
+public class HalfLifeBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, HalfLifeMod.MOD_ID);
 
@@ -43,7 +43,7 @@ public class ModBlocks {
     }
 
     private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
-        return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(),
+        return HalfLifeItems.ITEMS.register(name, () -> new BlockItem(block.get(),
                 new Item.Properties()));
     }
 

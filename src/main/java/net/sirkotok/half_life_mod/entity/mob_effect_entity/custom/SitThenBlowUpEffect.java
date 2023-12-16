@@ -1,17 +1,9 @@
 package net.sirkotok.half_life_mod.entity.mob_effect_entity.custom;
 
-import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -20,18 +12,14 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeAnimatedEffect;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Voltigore;
 import net.sirkotok.half_life_mod.util.HLperUtil;
-import net.sirkotok.half_life_mod.util.ModTags;
+import net.sirkotok.half_life_mod.util.HLTags;
 import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
-import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-import java.util.Collection;
 import java.util.List;
 
 
@@ -75,7 +63,7 @@ public class SitThenBlowUpEffect extends HalfLifeAnimatedEffect implements GeoEn
        Level serverlevel = this.level;
         List<LivingEntity> targets = EntityRetrievalUtil.getEntities((Level) serverlevel,
                 new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
-                        pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> !(obj.getType().is(ModTags.EntityTypes.FACTION_HEADCRAB)) && obj instanceof LivingEntity);
+                        pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> !(obj.getType().is(HLTags.EntityTypes.FACTION_HEADCRAB)) && obj instanceof LivingEntity);
         for (LivingEntity entity2 : targets) {
                 entity2.hurt(this.damageSources().explosion(null, null ), 30f);
                 HLperUtil.DisableShieldFor(entity2, 0.1f, 20, (ServerLevel) serverlevel);

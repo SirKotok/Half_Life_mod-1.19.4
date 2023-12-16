@@ -11,7 +11,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.sirkotok.half_life_mod.block.ModBlocks;
+import net.sirkotok.half_life_mod.block.HalfLifeBlocks;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Voltigore;
 import net.tslat.smartbrainlib.api.core.behaviour.DelayedBehaviour;
@@ -72,7 +72,7 @@ public class VortigoreLayAnEggBehavior<E extends Voltigore> extends DelayedBehav
         BlockState blockstate = entity.level.getBlockState(pos2);
 
         if (blockstate.isAir()) {
-        entity.level.setBlock(pos2, ModBlocks.VOLTIGORE_EGG.get().defaultBlockState(), 2);
+        entity.level.setBlock(pos2, HalfLifeBlocks.VOLTIGORE_EGG.get().defaultBlockState(), 2);
         entity.playSound(SoundEvents.TURTLE_LAY_EGG);
         entity.setPersistenceRequired();
         }

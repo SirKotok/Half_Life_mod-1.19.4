@@ -5,19 +5,15 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.sirkotok.half_life_mod.entity.projectile.Bullet;
-import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -60,7 +56,7 @@ public class RechargingGunItem extends GunItem {
 
 
     public SoundEvent getRechargeSound() {
-        return ModSounds.SHOCKROACH_RECHARGE.get();
+        return HalfLifeSounds.SHOCKROACH_RECHARGE.get();
     }
 
 

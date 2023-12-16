@@ -27,7 +27,7 @@ import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.modinterface.VariableRangedMob;
 import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
 import net.sirkotok.half_life_mod.util.HLperUtil;
-import net.sirkotok.half_life_mod.util.ModTags;
+import net.sirkotok.half_life_mod.util.HLTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -246,7 +246,7 @@ public class Controller extends HalfLifeMonster implements GeoEntity, RangedAtta
                 new NearbyLivingEntitySensor<Controller>()
                         .setPredicate((target, entity) ->
                             target instanceof Player || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
-                            target instanceof AbstractVillager || target.getType().is(ModTags.EntityTypes.FACTION_COMBINE)));
+                            target instanceof AbstractVillager || target.getType().is(HLTags.EntityTypes.FACTION_COMBINE)));
     }
 
 

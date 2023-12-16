@@ -32,11 +32,10 @@ import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.modinterface.RushingMob;
 import net.sirkotok.half_life_mod.entity.modinterface.VariableRangedMob;
-import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
 import net.sirkotok.half_life_mod.entity.projectile.arrowlike.Flechette;
-import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.HLperUtil;
-import net.sirkotok.half_life_mod.util.ModTags;
+import net.sirkotok.half_life_mod.util.HLTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -133,19 +132,19 @@ public class Hunter extends HalfLifeMonster implements RushingMob, GeoEntity, Ra
     }
 
 
-    protected SoundEvent getScewerSound() {return ModSounds.MINISTRIDER_SKEWER1.get();}
-    protected SoundEvent getPreStrikeSound() {return ModSounds.HUNTER_PRESTRIKE1.get();}
-    protected SoundEvent getPreFlechetteSound() {return ModSounds.MINISTRIDER_PREFLECHETTE.get();}
-    protected SoundEvent getFireLoopSound() {return ModSounds.HUNTER_FIRE_LOOP3.get();}
-    protected SoundEvent getFireSound() {return ModSounds.MINISTRIDER_FIRE1.get();}
+    protected SoundEvent getScewerSound() {return HalfLifeSounds.MINISTRIDER_SKEWER1.get();}
+    protected SoundEvent getPreStrikeSound() {return HalfLifeSounds.HUNTER_PRESTRIKE1.get();}
+    protected SoundEvent getPreFlechetteSound() {return HalfLifeSounds.MINISTRIDER_PREFLECHETTE.get();}
+    protected SoundEvent getFireLoopSound() {return HalfLifeSounds.HUNTER_FIRE_LOOP3.get();}
+    protected SoundEvent getFireSound() {return HalfLifeSounds.MINISTRIDER_FIRE1.get();}
     protected SoundEvent getImpactSound(){
         switch (this.random.nextInt(1,7)) {
-            case 1:  return ModSounds.BODY_MEDIUM_IMPACT_HARD1.get();
-            case 2:  return ModSounds.BODY_MEDIUM_IMPACT_HARD2.get();
-            case 3:  return ModSounds.BODY_MEDIUM_IMPACT_HARD3.get();
-            case 4:  return ModSounds.BODY_MEDIUM_IMPACT_HARD4.get();
-            case 5:  return ModSounds.BODY_MEDIUM_IMPACT_HARD5.get();
-            case 6:  return ModSounds.BODY_MEDIUM_IMPACT_HARD6.get();
+            case 1:  return HalfLifeSounds.BODY_MEDIUM_IMPACT_HARD1.get();
+            case 2:  return HalfLifeSounds.BODY_MEDIUM_IMPACT_HARD2.get();
+            case 3:  return HalfLifeSounds.BODY_MEDIUM_IMPACT_HARD3.get();
+            case 4:  return HalfLifeSounds.BODY_MEDIUM_IMPACT_HARD4.get();
+            case 5:  return HalfLifeSounds.BODY_MEDIUM_IMPACT_HARD5.get();
+            case 6:  return HalfLifeSounds.BODY_MEDIUM_IMPACT_HARD6.get();
         }
         return SoundEvents.FROG_STEP;
     }
@@ -153,22 +152,22 @@ public class Hunter extends HalfLifeMonster implements RushingMob, GeoEntity, Ra
 
     protected SoundEvent getFlankSound(){
         switch (this.random.nextInt(1,3)) {
-            case 1:  return ModSounds.HUNTER_FLANK_ANNOUNCE1.get();
-            case 2:  return ModSounds.HUNTER_FLANK_ANNOUNCE2.get();
+            case 1:  return HalfLifeSounds.HUNTER_FLANK_ANNOUNCE1.get();
+            case 2:  return HalfLifeSounds.HUNTER_FLANK_ANNOUNCE2.get();
         }
         return SoundEvents.FROG_STEP;
     }
 
     protected SoundEvent getEnemySpotSound(){
         switch (this.random.nextInt(1,6)) {
-            case 1:  return ModSounds.HUNTER_FOUNDENEMY_ACK1.get();
-            case 2:  return ModSounds.HUNTER_FOUNDENEMY_ACK2.get();
-            case 3:  return ModSounds.HUNTER_FOUNDENEMY_ACK3.get();
+            case 1:  return HalfLifeSounds.HUNTER_FOUNDENEMY_ACK1.get();
+            case 2:  return HalfLifeSounds.HUNTER_FOUNDENEMY_ACK2.get();
+            case 3:  return HalfLifeSounds.HUNTER_FOUNDENEMY_ACK3.get();
         }
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.HUNTER_FOUNDENEMY1.get();
-            case 2:  return ModSounds.HUNTER_FOUNDENEMY2.get();
-            case 3:  return ModSounds.HUNTER_FOUNDENEMY3.get();
+            case 1:  return HalfLifeSounds.HUNTER_FOUNDENEMY1.get();
+            case 2:  return HalfLifeSounds.HUNTER_FOUNDENEMY2.get();
+            case 3:  return HalfLifeSounds.HUNTER_FOUNDENEMY3.get();
         }
         return SoundEvents.FROG_STEP;
     }
@@ -183,11 +182,11 @@ public class Hunter extends HalfLifeMonster implements RushingMob, GeoEntity, Ra
             int m = this.random.nextInt(1, 4);
             switch (m) {
                 case 1:
-                    return ModSounds.HUNTER_DEFENDSTRIDER1.get();
+                    return HalfLifeSounds.HUNTER_DEFENDSTRIDER1.get();
                 case 2:
-                    return ModSounds.HUNTER_DEFENDSTRIDER2.get();
+                    return HalfLifeSounds.HUNTER_DEFENDSTRIDER2.get();
                 case 3:
-                    return ModSounds.HUNTER_DEFENDSTRIDER3.get();
+                    return HalfLifeSounds.HUNTER_DEFENDSTRIDER3.get();
             }
         }
 
@@ -197,32 +196,32 @@ public class Hunter extends HalfLifeMonster implements RushingMob, GeoEntity, Ra
                 int j = this.random.nextInt(1, 6);
                 switch (j) {
                     case 1:
-                        return ModSounds.HUNTER_LAUGH1.get();
+                        return HalfLifeSounds.HUNTER_LAUGH1.get();
                     case 2:
-                        return ModSounds.HUNTER_LAUGH2.get();
+                        return HalfLifeSounds.HUNTER_LAUGH2.get();
                     case 3:
-                        return ModSounds.HUNTER_LAUGH3.get();
+                        return HalfLifeSounds.HUNTER_LAUGH3.get();
                     case 4:
-                        return ModSounds.HUNTER_LAUGH4.get();
+                        return HalfLifeSounds.HUNTER_LAUGH4.get();
                     case 5:
-                        return ModSounds.HUNTER_LAUGH5.get();
+                        return HalfLifeSounds.HUNTER_LAUGH5.get();
                 }
             }
             int i = this.random.nextInt(1, 7);
             if (i > 3) i = this.random.nextInt(1, 7);
             switch (i) {
                 case 1:
-                    return ModSounds.HUNTER_ALERT1.get();
+                    return HalfLifeSounds.HUNTER_ALERT1.get();
                 case 2:
-                    return ModSounds.HUNTER_ALERT2.get();
+                    return HalfLifeSounds.HUNTER_ALERT2.get();
                 case 3:
-                    return ModSounds.HUNTER_ALERT3.get();
+                    return HalfLifeSounds.HUNTER_ALERT3.get();
                 case 4:
-                    return ModSounds.HUNTER_ANGRY1.get();
+                    return HalfLifeSounds.HUNTER_ANGRY1.get();
                 case 5:
-                    return ModSounds.HUNTER_ANGRY2.get();
+                    return HalfLifeSounds.HUNTER_ANGRY2.get();
                 case 6:
-                    return ModSounds.HUNTER_ANGRY3.get();
+                    return HalfLifeSounds.HUNTER_ANGRY3.get();
             }
         }
 
@@ -230,24 +229,24 @@ public class Hunter extends HalfLifeMonster implements RushingMob, GeoEntity, Ra
             int i = this.random.nextInt(1, 5);
             switch (i) {
                 case 1:
-                    return ModSounds.HUNTER_SCAN1.get();
+                    return HalfLifeSounds.HUNTER_SCAN1.get();
                 case 2:
-                    return ModSounds.HUNTER_SCAN2.get();
+                    return HalfLifeSounds.HUNTER_SCAN2.get();
                 case 3:
-                    return ModSounds.HUNTER_SCAN3.get();
+                    return HalfLifeSounds.HUNTER_SCAN3.get();
                 case 4:
-                    return ModSounds.HUNTER_SCAN4.get();
+                    return HalfLifeSounds.HUNTER_SCAN4.get();
             }
         }
 
         int k = this.random.nextInt(1, 4);
         switch (k) {
             case 1:
-                return ModSounds.HUNTER_IDLE1.get();
+                return HalfLifeSounds.HUNTER_IDLE1.get();
             case 2:
-                return ModSounds.HUNTER_IDLE2.get();
+                return HalfLifeSounds.HUNTER_IDLE2.get();
             case 3:
-                return ModSounds.HUNTER_IDLE3.get();
+                return HalfLifeSounds.HUNTER_IDLE3.get();
         }
 
         return SoundEvents.FROG_STEP;
@@ -260,18 +259,18 @@ public class Hunter extends HalfLifeMonster implements RushingMob, GeoEntity, Ra
         int j = this.random.nextInt(1, 6);
         switch (j) {
             case 1:
-                return ModSounds.MINISTRIDER_FOOTSTEP1.get();
+                return HalfLifeSounds.MINISTRIDER_FOOTSTEP1.get();
             case 2:
-                return ModSounds.MINISTRIDER_FOOTSTEP2.get();
+                return HalfLifeSounds.MINISTRIDER_FOOTSTEP2.get();
             case 3:
-                return ModSounds.MINISTRIDER_FOOTSTEP3.get();
+                return HalfLifeSounds.MINISTRIDER_FOOTSTEP3.get();
             case 4:
-                return ModSounds.MINISTRIDER_FOOTSTEP4.get();
+                return HalfLifeSounds.MINISTRIDER_FOOTSTEP4.get();
             case 5:
-                return ModSounds.MINISTRIDER_FOOTSTEP5.get();
+                return HalfLifeSounds.MINISTRIDER_FOOTSTEP5.get();
         }
 
-        return ModSounds.SHOCKROACH_WALK.get();
+        return HalfLifeSounds.SHOCKROACH_WALK.get();
     }
     @Override
     protected void playStepSound(BlockPos pPos, BlockState pState) {
@@ -286,15 +285,15 @@ public class Hunter extends HalfLifeMonster implements RushingMob, GeoEntity, Ra
 
     protected SoundEvent getDeathSound() {
         switch (this.random.nextInt(1,3)) {
-            case 1:  return ModSounds.HUNTER_DIE2.get();
-            case 2:  return ModSounds.HUNTER_DIE3.get();
+            case 1:  return HalfLifeSounds.HUNTER_DIE2.get();
+            case 2:  return HalfLifeSounds.HUNTER_DIE3.get();
         }
         return SoundEvents.FROG_STEP;
     }
     protected SoundEvent getChargeSound() {
         switch (this.random.nextInt(1,3)) {
-            case 1:  return ModSounds.HUNTER_CHARGE3.get();
-            case 2:  return ModSounds.HUNTER_CHARGE4.get();
+            case 1:  return HalfLifeSounds.HUNTER_CHARGE3.get();
+            case 2:  return HalfLifeSounds.HUNTER_CHARGE4.get();
         }
         return SoundEvents.FROG_STEP;
     }
@@ -302,8 +301,8 @@ public class Hunter extends HalfLifeMonster implements RushingMob, GeoEntity, Ra
 
     protected SoundEvent getHurtSound(DamageSource pSource) {
         switch (this.random.nextInt(1,3)) {
-            case 1:  return ModSounds.HUNTER_PAIN2.get();
-            case 2:  return ModSounds.HUNTER_PAIN4.get();
+            case 1:  return HalfLifeSounds.HUNTER_PAIN2.get();
+            case 2:  return HalfLifeSounds.HUNTER_PAIN4.get();
         }
         return SoundEvents.FROG_STEP;
     }
@@ -340,7 +339,7 @@ public class Hunter extends HalfLifeMonster implements RushingMob, GeoEntity, Ra
                 new NearbyLivingEntitySensor<Hunter>()
                         .setPredicate((target, entity) ->
                             target instanceof Player || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
-                            target instanceof AbstractVillager || (target instanceof Enemy && !target.getType().is(ModTags.EntityTypes.FACTION_COMBINE))));
+                            target instanceof AbstractVillager || (target instanceof Enemy && !target.getType().is(HLTags.EntityTypes.FACTION_COMBINE))));
     }
 
 

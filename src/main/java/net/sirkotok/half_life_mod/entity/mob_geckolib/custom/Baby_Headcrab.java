@@ -3,7 +3,6 @@ package net.sirkotok.half_life_mod.entity.mob_geckolib.custom;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -26,15 +25,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.sirkotok.half_life_mod.entity.ModEntities;
+import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.BiteWhileJumpingBehavior;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.HeadCrabJumpBehavior;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.SetWalkTargetToRandomSpotAroundAttackTarget;
-import net.sirkotok.half_life_mod.sound.ModSounds;
-import net.sirkotok.half_life_mod.util.ModTags;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
+import net.sirkotok.half_life_mod.util.HLTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -159,50 +158,50 @@ public class Baby_Headcrab extends HalfLifeMonster implements GeoEntity, SmartBr
 
     protected SoundEvent getJumpSound() {
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.HEADCRAB_1_ATTACK_1.get();
-            case 2:  return ModSounds.HEADCRAB_1_ATTACK_2.get();
-            case 3:  return ModSounds.HEADCRAB_1_ATTACK_3.get();
+            case 1:  return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
+            case 2:  return HalfLifeSounds.HEADCRAB_1_ATTACK_2.get();
+            case 3:  return HalfLifeSounds.HEADCRAB_1_ATTACK_3.get();
         }
-        return ModSounds.HEADCRAB_1_ATTACK_1.get();
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
     }
 
     protected SoundEvent getBiteSound() {
-        return ModSounds.HEADCRAB_1_HEADBITE.get();
+        return HalfLifeSounds.HEADCRAB_1_HEADBITE.get();
     }
 
     protected SoundEvent getHurtSound(DamageSource p_33034_) {
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.HEADCRAB_1_PAIN_1.get();
-            case 2:  return ModSounds.HEADCRAB_1_PAIN_2.get();
-            case 3:  return ModSounds.HEADCRAB_1_PAIN_3.get();
+            case 1:  return HalfLifeSounds.HEADCRAB_1_PAIN_1.get();
+            case 2:  return HalfLifeSounds.HEADCRAB_1_PAIN_2.get();
+            case 3:  return HalfLifeSounds.HEADCRAB_1_PAIN_3.get();
         }
-        return ModSounds.HEADCRAB_1_PAIN_1.get();
+        return HalfLifeSounds.HEADCRAB_1_PAIN_1.get();
     }
 
     protected SoundEvent getDeathSound() {
         switch (this.random.nextInt(1,3)) {
-            case 1:  return ModSounds.HEADCRAB_1_DIE_1.get();
-            case 2:  return ModSounds.HEADCRAB_1_DIE_2.get();
+            case 1:  return HalfLifeSounds.HEADCRAB_1_DIE_1.get();
+            case 2:  return HalfLifeSounds.HEADCRAB_1_DIE_2.get();
         }
-        return ModSounds.HEADCRAB_1_DIE_1.get();
+        return HalfLifeSounds.HEADCRAB_1_DIE_1.get();
     }
 
 
     protected SoundEvent getAmbientSound() {
         if (this.isangry()) {
             switch (this.random.nextInt(1,3)) {
-                case 1:  return ModSounds.HEADCRAB_1_ALERT_1.get();
-                case 2:  return ModSounds.HEADCRAB_1_ALERT_2.get();
+                case 1:  return HalfLifeSounds.HEADCRAB_1_ALERT_1.get();
+                case 2:  return HalfLifeSounds.HEADCRAB_1_ALERT_2.get();
             }
         }
         switch (this.random.nextInt(1,6)) {
-            case 1:  return ModSounds.HEADCRAB_1_IDLE_1.get();
-            case 2:  return ModSounds.HEADCRAB_1_IDLE_2.get();
-            case 3:  return ModSounds.HEADCRAB_1_IDLE_3.get();
-            case 4:  return ModSounds.HEADCRAB_1_IDLE_4.get();
-            case 5:  return ModSounds.HEADCRAB_1_IDLE_5.get();
+            case 1:  return HalfLifeSounds.HEADCRAB_1_IDLE_1.get();
+            case 2:  return HalfLifeSounds.HEADCRAB_1_IDLE_2.get();
+            case 3:  return HalfLifeSounds.HEADCRAB_1_IDLE_3.get();
+            case 4:  return HalfLifeSounds.HEADCRAB_1_IDLE_4.get();
+            case 5:  return HalfLifeSounds.HEADCRAB_1_IDLE_5.get();
         }
-        return ModSounds.HEADCRAB_1_ALERT_1.get();
+        return HalfLifeSounds.HEADCRAB_1_ALERT_1.get();
     }
 
 
@@ -228,7 +227,7 @@ public class Baby_Headcrab extends HalfLifeMonster implements GeoEntity, SmartBr
                 new NearbyLivingEntitySensor<Baby_Headcrab>()
                         .setPredicate((target, entity) ->
                             target instanceof Player ||
-                                    target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
+                                    target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
                             target instanceof AbstractVillager));
     }
 
@@ -288,13 +287,13 @@ public class Baby_Headcrab extends HalfLifeMonster implements GeoEntity, SmartBr
     public void doage(ServerLevel level, int i){
         LivingEntity summon = null;
         if (i < 0) i = RandomSource.create().nextInt(4);
-        if (i == 0) {summon = ModEntities.HEADCRAB_HL1.get().create(level);}
-        else if (i == 1) {summon = ModEntities.HEADCRAB_HL2.get().create(level);}
-        else if (i == 3) {summon = ModEntities.HEADCRAB_HLA.get().create(level);}
-        else if (i == 4) {summon = ModEntities.HEADCRAB_POISON_HL2.get().create(level);}
-        else if (i == 5) {summon = ModEntities.HEADCRAB_POISON_HLA.get().create(level);}
-        else if (i == 6) {summon = ModEntities.HEADCRAB_FAST.get().create(level);}
-        else if (i == 7) {summon = ModEntities.HEADCRAB_ARMORED.get().create(level);}
+        if (i == 0) {summon = HalfLifeEntities.HEADCRAB_HL1.get().create(level);}
+        else if (i == 1) {summon = HalfLifeEntities.HEADCRAB_HL2.get().create(level);}
+        else if (i == 3) {summon = HalfLifeEntities.HEADCRAB_HLA.get().create(level);}
+        else if (i == 4) {summon = HalfLifeEntities.HEADCRAB_POISON_HL2.get().create(level);}
+        else if (i == 5) {summon = HalfLifeEntities.HEADCRAB_POISON_HLA.get().create(level);}
+        else if (i == 6) {summon = HalfLifeEntities.HEADCRAB_FAST.get().create(level);}
+        else if (i == 7) {summon = HalfLifeEntities.HEADCRAB_ARMORED.get().create(level);}
          if (summon != null) {
              summon.moveTo(this.position());
              ForgeEventFactory.onFinalizeSpawn((Mob) summon, (ServerLevelAccessor) level, level.getCurrentDifficultyAt(summon.blockPosition()), this.getSpawnType(), null, null);

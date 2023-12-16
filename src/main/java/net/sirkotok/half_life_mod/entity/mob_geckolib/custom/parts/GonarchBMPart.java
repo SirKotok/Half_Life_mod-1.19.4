@@ -7,10 +7,9 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.Pose;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Gonarch;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.GonarchBM;
 import net.sirkotok.half_life_mod.util.CommonSounds;
-import net.sirkotok.half_life_mod.util.ModTags;
+import net.sirkotok.half_life_mod.util.HLTags;
 
 public class GonarchBMPart extends net.minecraftforge.entity.PartEntity<GonarchBM> {
     public final GonarchBM parentMob;
@@ -62,7 +61,7 @@ public class GonarchBMPart extends net.minecraftforge.entity.PartEntity<GonarchB
 
     public boolean hurt(DamageSource pSource, float pAmount) {
         if (!this.issack) {
-            if (pSource.is(ModTags.DamageTypes.HEADCRAB_ARMOR_PROTECTS_FROM)) this.playSound(CommonSounds.getRicSound(), 0.8f,  this.parentMob.getVoicePitch());
+            if (pSource.is(HLTags.DamageTypes.HEADCRAB_ARMOR_PROTECTS_FROM)) this.playSound(CommonSounds.getRicSound(), 0.8f,  this.parentMob.getVoicePitch());
             return false;
         }
         return this.parentMob.hurt(pSource, pAmount);

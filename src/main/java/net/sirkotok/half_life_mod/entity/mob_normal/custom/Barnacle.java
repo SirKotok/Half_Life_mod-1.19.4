@@ -36,7 +36,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Headcrab_Poison_2;
-import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
 import org.joml.Vector3f;
@@ -456,30 +456,30 @@ public class Barnacle extends PathfinderMob {
 
         protected SoundEvent getDeathSound() {
             switch (this.random.nextInt(1,3)) {
-                case 1:  return ModSounds.BARNACLE_DIE1.get();
-                case 2:  return ModSounds.BARNACLE_DIE2.get();
+                case 1:  return HalfLifeSounds.BARNACLE_DIE1.get();
+                case 2:  return HalfLifeSounds.BARNACLE_DIE2.get();
             }
-            return ModSounds.HEADCRAB_1_PAIN_1.get();
+            return HalfLifeSounds.HEADCRAB_1_PAIN_1.get();
         }
 
         protected SoundEvent getHurtSound(DamageSource pDamageSource) {
-            return ModSounds.BARNACLE_PAIN.get();
+            return HalfLifeSounds.BARNACLE_PAIN.get();
         }
     protected SoundEvent getDisgustedSound() {
-        return ModSounds.BARNACLE_PAIN.get();
+        return HalfLifeSounds.BARNACLE_PAIN.get();
     }
 
     protected SoundEvent getBiteSound() {
         switch (this.random.nextInt(1,5)) {
-            case 1:  return ModSounds.BARNACLE_BITE1.get();
-            case 2:  return ModSounds.BARNACLE_BITE2.get();
-            case 3:  return ModSounds.BARNACLE_BITE3.get();
-            case 4:  return ModSounds.BARNACLE_BITE4.get();
+            case 1:  return HalfLifeSounds.BARNACLE_BITE1.get();
+            case 2:  return HalfLifeSounds.BARNACLE_BITE2.get();
+            case 3:  return HalfLifeSounds.BARNACLE_BITE3.get();
+            case 4:  return HalfLifeSounds.BARNACLE_BITE4.get();
         }
-        return ModSounds.HEADCRAB_1_PAIN_1.get();
+        return HalfLifeSounds.HEADCRAB_1_PAIN_1.get();
     }
     protected SoundEvent getTongueSound() {
-            return ModSounds.BARNACLE_TONGUE.get();
+            return HalfLifeSounds.BARNACLE_TONGUE.get();
     }
 
 

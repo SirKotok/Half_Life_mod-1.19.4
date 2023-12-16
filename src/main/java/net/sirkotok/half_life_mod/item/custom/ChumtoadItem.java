@@ -3,7 +3,7 @@ package net.sirkotok.half_life_mod.item.custom;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import net.sirkotok.half_life_mod.entity.ModEntities;
+import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.item.client.renderer.ChumtoadItemRenderer;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -21,7 +21,7 @@ public class ChumtoadItem extends EntityThrowingItem implements GeoItem {
 
     @Override
     public EntityType getentitytype() {
-        return ModEntities.CHUMTOAD.get();
+        return HalfLifeEntities.CHUMTOAD.get();
     }
 
 

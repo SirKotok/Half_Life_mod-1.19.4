@@ -6,7 +6,7 @@ import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import net.sirkotok.half_life_mod.HalfLifeMod;
-import net.sirkotok.half_life_mod.block.ModBlocks;
+import net.sirkotok.half_life_mod.block.HalfLifeBlocks;
 
 public class ModBlockStateProvider extends BlockStateProvider {
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
@@ -15,8 +15,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        blockWithItem(ModBlocks.VOLTIGORE_NEST);
-        blockWithItem(ModBlocks.HALF_LIFE_PORTAL);
+        blockWithItem(HalfLifeBlocks.VOLTIGORE_NEST);
+        blockWithItem(HalfLifeBlocks.HALF_LIFE_PORTAL);
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {

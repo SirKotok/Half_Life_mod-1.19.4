@@ -5,7 +5,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -13,21 +12,17 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraftforge.common.ForgeHooks;
 import net.sirkotok.half_life_mod.entity.projectile.Bullet;
-import net.sirkotok.half_life_mod.item.ModItems;
-import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 
 public class GunItem extends Item {
@@ -118,15 +113,15 @@ public class GunItem extends Item {
 
 
     public SoundEvent shootrightsound(){
-        return ModSounds.PISTOL_SHOOT.get();
+        return HalfLifeSounds.PISTOL_SHOOT.get();
     }
 
     public SoundEvent shootleftsound(){
-        return ModSounds.PISTOL_SHOOT.get();
+        return HalfLifeSounds.PISTOL_SHOOT.get();
     }
 
     public SoundEvent reloadsound(){
-        return ModSounds.PISTOL_RELOAD.get();
+        return HalfLifeSounds.PISTOL_RELOAD.get();
     }
 
     public GunItem(Properties pProperties) {
@@ -155,7 +150,7 @@ public class GunItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         if (GetAmmo(itemstack) == 0 && !pPlayer.getAbilities().instabuild) {
-            pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), ModSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
+            pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
             return InteractionResultHolder.fail(itemstack);
         }
         if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
@@ -182,7 +177,7 @@ public class GunItem extends Item {
     public InteractionResultHolder<ItemStack> leftuse(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         if (GetAmmo(itemstack) == 0 && !pPlayer.getAbilities().instabuild) {
-            pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), ModSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
+            pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
             return InteractionResultHolder.fail(itemstack);
         }
         if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);

@@ -7,7 +7,6 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -28,9 +27,9 @@ import net.sirkotok.half_life_mod.entity.brain.behaviour.BiteWhileJumpingBehavio
 import net.sirkotok.half_life_mod.entity.brain.behaviour.HeadCrabJumpBehavior;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.TargetOrRetaliateHLT;
-import net.sirkotok.half_life_mod.item.ModItems;
-import net.sirkotok.half_life_mod.sound.ModSounds;
-import net.sirkotok.half_life_mod.util.ModTags;
+import net.sirkotok.half_life_mod.item.HalfLifeItems;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
+import net.sirkotok.half_life_mod.util.HLTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -44,7 +43,6 @@ import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetWalkTargetToAtt
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.InvalidateAttackTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetPlayerLookTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTarget;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.target.TargetOrRetaliate;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
@@ -62,7 +60,7 @@ import java.util.List;
 public class Shockroach extends CatchableMonster implements GeoEntity, SmartBrainOwner<Shockroach> {
 
     public Item getweopon(){
-        return ModItems.SHOCKROACH_ITEM.get();
+        return HalfLifeItems.SHOCKROACH_ITEM.get();
     }
 
     @Override
@@ -127,42 +125,42 @@ public class Shockroach extends CatchableMonster implements GeoEntity, SmartBrai
 
     protected SoundEvent getJumpSound() {
         switch (this.random.nextInt(1,3)) {
-            case 1:  return ModSounds.SHOCKROACH_JUMP_1.get();
-            case 2:  return ModSounds.SHOCKROACH_JUMP_2.get();
+            case 1:  return HalfLifeSounds.SHOCKROACH_JUMP_1.get();
+            case 2:  return HalfLifeSounds.SHOCKROACH_JUMP_2.get();
     }
-    return ModSounds.HEADCRAB_1_ATTACK_1.get();
+    return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
     }
 
     protected SoundEvent getBiteSound() {
-        return ModSounds.SHOCKROACH_BITE.get();
+        return HalfLifeSounds.SHOCKROACH_BITE.get();
     }
 
     protected SoundEvent getHurtSound(DamageSource p_33034_) {
-        return ModSounds.SHOCKROACH_PAIN.get();
+        return HalfLifeSounds.SHOCKROACH_PAIN.get();
     }
 
     protected SoundEvent getDeathSound() {
-        return ModSounds.SHOCKROACH_DIE.get();
+        return HalfLifeSounds.SHOCKROACH_DIE.get();
     }
 
 
     protected SoundEvent getAmbientSound() {
         if (this.isangry()) {
             switch (this.random.nextInt(1,3)) {
-                case 1:  return ModSounds.SHOCKROACH_ANGRY.get();
+                case 1:  return HalfLifeSounds.SHOCKROACH_ANGRY.get();
             }
         }
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.SHOCKROACH_IDLE_3.get();
-            case 2:  return ModSounds.SHOCKROACH_IDLE_2.get();
-            case 3:  return ModSounds.SHOCKROACH_IDLE_1.get();
+            case 1:  return HalfLifeSounds.SHOCKROACH_IDLE_3.get();
+            case 2:  return HalfLifeSounds.SHOCKROACH_IDLE_2.get();
+            case 3:  return HalfLifeSounds.SHOCKROACH_IDLE_1.get();
         }
-        return ModSounds.HEADCRAB_1_ALERT_1.get();
+        return HalfLifeSounds.HEADCRAB_1_ALERT_1.get();
     }
 
 
     protected SoundEvent getStepSound() {
-        return ModSounds.SHOCKROACH_WALK.get();
+        return HalfLifeSounds.SHOCKROACH_WALK.get();
     }
     @Override
     protected void playStepSound(BlockPos pPos, BlockState pState) {
@@ -195,7 +193,7 @@ public class Shockroach extends CatchableMonster implements GeoEntity, SmartBrai
                 new NearbyLivingEntitySensor<Shockroach>()
                         .setPredicate((target, entity) ->
                             target instanceof Player ||
-                                    target.getType().is(ModTags.EntityTypes.FACTION_COMBINE) || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
+                                    target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
                             target instanceof AbstractVillager));
     }
 

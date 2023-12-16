@@ -13,7 +13,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
 import net.sirkotok.half_life_mod.util.CommonSounds;
-import net.sirkotok.half_life_mod.util.ModTags;
+import net.sirkotok.half_life_mod.util.HLTags;
 
 public class Headcrab_Armored extends Headcrab_3{
 
@@ -62,7 +62,7 @@ public class Headcrab_Armored extends Headcrab_3{
 
 
 
-        if ((!this.vulnerable() && (damageSource.is(ModTags.DamageTypes.HEADCRAB_ARMOR_PROTECTS_FROM)))) {
+        if ((!this.vulnerable() && (damageSource.is(HLTags.DamageTypes.HEADCRAB_ARMOR_PROTECTS_FROM)))) {
            if (this.getVehicle() != null) {
                if (this.isPassenger() && damageSource.getEntity().equals(this.getVehicle())){
                super.actuallyHurt(damageSource, v);

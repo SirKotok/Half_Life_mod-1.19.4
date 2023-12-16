@@ -13,8 +13,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.sirkotok.half_life_mod.worldgen.dimension.ModDimensions;
-import net.sirkotok.half_life_mod.worldgen.portal.ModTeleporter;
+import net.sirkotok.half_life_mod.worldgen.dimension.HalfLifeDimensions;
+import net.sirkotok.half_life_mod.worldgen.portal.XenTeleporter;
 
 public class BasicPortalBlock extends Block {
     public BasicPortalBlock(Properties pProperties) {
@@ -34,14 +34,14 @@ public class BasicPortalBlock extends Block {
     private void handleHalfLifePortal(Entity player, BlockPos pPos) {
         if (player.level instanceof ServerLevel serverlevel) {
             MinecraftServer minecraftserver = serverlevel.getServer();
-            ResourceKey<Level> resourcekey = player.level.dimension() == ModDimensions.HALFLIFE_LEVEL_KEY ?
-                    Level.OVERWORLD : ModDimensions.HALFLIFE_LEVEL_KEY;
+            ResourceKey<Level> resourcekey = player.level.dimension() == HalfLifeDimensions.HALFLIFE_LEVEL_KEY ?
+                    Level.OVERWORLD : HalfLifeDimensions.HALFLIFE_LEVEL_KEY;
             ServerLevel portalDimension = minecraftserver.getLevel(resourcekey);
             if (portalDimension != null && !player.isPassenger()) {
-                if(resourcekey == ModDimensions.HALFLIFE_LEVEL_KEY) {
-                    player.changeDimension(portalDimension, new ModTeleporter(pPos, true));
+                if(resourcekey == HalfLifeDimensions.HALFLIFE_LEVEL_KEY) {
+                    player.changeDimension(portalDimension, new XenTeleporter(pPos, true));
                 } else {
-                    player.changeDimension(portalDimension, new ModTeleporter(pPos, false));
+                    player.changeDimension(portalDimension, new XenTeleporter(pPos, false));
                 }
             }
         }

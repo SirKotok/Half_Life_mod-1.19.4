@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.sirkotok.half_life_mod.block.blockentity.ModBlockEntities;
+import net.sirkotok.half_life_mod.block.blockentity.HalfLifeBlockEntities;
 import net.sirkotok.half_life_mod.block.blockentity.custom.VoltigoreEggBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,7 +41,7 @@ public class VoltigoreEggBlock extends BaseEntityBlock {
             return null;
         }
 
-        return createTickerHelper(pBlockEntityType, ModBlockEntities.VOLTIGORE_EGG_BLOCK_ENTITY.get(),
+        return createTickerHelper(pBlockEntityType, HalfLifeBlockEntities.VOLTIGORE_EGG_BLOCK_ENTITY.get(),
                 (pLevel1, pPos, pState1, pBlockEntity) -> pBlockEntity.tick( pState1, (ServerLevel) pLevel1, pPos, this.random));
     }
 

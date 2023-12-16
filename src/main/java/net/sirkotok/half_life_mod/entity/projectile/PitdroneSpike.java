@@ -1,21 +1,17 @@
 package net.sirkotok.half_life_mod.entity.projectile;
 
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.sirkotok.half_life_mod.entity.ModEntities;
+import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.base.FireballNoTrail;
-import net.sirkotok.half_life_mod.particle.ModParticles;
-import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
@@ -25,11 +21,11 @@ public class PitdroneSpike extends FireballNoTrail implements GeoEntity {
         super(pEntityType, pLevel);
     }
     public PitdroneSpike(Level pLevel, LivingEntity pShooter, double pOffsetX, double pOffsetY, double pOffsetZ) {
-        super(ModEntities.PITDRONE_SPIKE.get(), pShooter, pOffsetX, pOffsetY, pOffsetZ, pLevel);
+        super(HalfLifeEntities.PITDRONE_SPIKE.get(), pShooter, pOffsetX, pOffsetY, pOffsetZ, pLevel);
     }
 
     public PitdroneSpike(Level pLevel, double pX, double pY, double pZ, double pOffsetX, double pOffsetY, double pOffsetZ) {
-        super(ModEntities.PITDRONE_SPIKE.get(), pX, pY, pZ, pOffsetX, pOffsetY, pOffsetZ, pLevel);
+        super(HalfLifeEntities.PITDRONE_SPIKE.get(), pX, pY, pZ, pOffsetX, pOffsetY, pOffsetZ, pLevel);
     }
 
 
@@ -55,7 +51,7 @@ public class PitdroneSpike extends FireballNoTrail implements GeoEntity {
     protected void onHitBlock(BlockHitResult blockhit) {
         super.onHitBlock(blockhit);
         int direction = blockhit.getDirection().get3DDataValue();
-        this.playSound(ModSounds.PITDRONE_SPIKE_HIT.get());
+        this.playSound(HalfLifeSounds.PITDRONE_SPIKE_HIT.get());
     }
 
     /**

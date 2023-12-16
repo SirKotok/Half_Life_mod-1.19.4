@@ -36,9 +36,9 @@ import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
 import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
-import net.sirkotok.half_life_mod.sound.ModSounds;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.HLperUtil;
-import net.sirkotok.half_life_mod.util.ModTags;
+import net.sirkotok.half_life_mod.util.HLTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -225,61 +225,61 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
 
     protected SoundEvent getAttackGrowlSound() {
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.BULLSQUID_ATTACK_1.get();
-            case 2:  return ModSounds.BULLSQUID_ATTACK_2.get();
-            case 3:  return ModSounds.BULLSQUID_ATTACK_3.get();
+            case 1:  return HalfLifeSounds.BULLSQUID_ATTACK_1.get();
+            case 2:  return HalfLifeSounds.BULLSQUID_ATTACK_2.get();
+            case 3:  return HalfLifeSounds.BULLSQUID_ATTACK_3.get();
         }
-        return ModSounds.HEADCRAB_1_PAIN_1.get();
+        return HalfLifeSounds.HEADCRAB_1_PAIN_1.get();
     }
 
     protected SoundEvent getSpitSound() {
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.BULLSQUID_SHOOT_1.get();
-            case 2:  return ModSounds.BULLSQUID_SHOOT_2.get();
-            case 3:  return ModSounds.BULLSQUID_SHOOT_3.get();
+            case 1:  return HalfLifeSounds.BULLSQUID_SHOOT_1.get();
+            case 2:  return HalfLifeSounds.BULLSQUID_SHOOT_2.get();
+            case 3:  return HalfLifeSounds.BULLSQUID_SHOOT_3.get();
         }
-        return ModSounds.HEADCRAB_1_PAIN_1.get();
+        return HalfLifeSounds.HEADCRAB_1_PAIN_1.get();
 
     }
     protected SoundEvent getBiteSound() {
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.BULLSQUID_BITE_1.get();
-            case 2:  return ModSounds.BULLSQUID_BITE_2.get();
-            case 3:  return ModSounds.BULLSQUID_BITE_3.get();
+            case 1:  return HalfLifeSounds.BULLSQUID_BITE_1.get();
+            case 2:  return HalfLifeSounds.BULLSQUID_BITE_2.get();
+            case 3:  return HalfLifeSounds.BULLSQUID_BITE_3.get();
         }
-        return ModSounds.HEADCRAB_1_HEADBITE.get();
+        return HalfLifeSounds.HEADCRAB_1_HEADBITE.get();
     }
 
     protected SoundEvent getHurtSound(DamageSource p_33034_) {
         switch (this.random.nextInt(1,5)) {
-            case 1:  return ModSounds.BULLSQUID_PAIN_1.get();
-            case 2:  return ModSounds.BULLSQUID_PAIN_2.get();
-            case 3:  return ModSounds.BULLSQUID_PAIN_3.get();
-            case 4:  return ModSounds.BULLSQUID_PAIN_4.get();
+            case 1:  return HalfLifeSounds.BULLSQUID_PAIN_1.get();
+            case 2:  return HalfLifeSounds.BULLSQUID_PAIN_2.get();
+            case 3:  return HalfLifeSounds.BULLSQUID_PAIN_3.get();
+            case 4:  return HalfLifeSounds.BULLSQUID_PAIN_4.get();
         }
-        return ModSounds.HEADCRAB_1_PAIN_1.get();
+        return HalfLifeSounds.HEADCRAB_1_PAIN_1.get();
     }
 
     protected SoundEvent getDeathSound() {
         switch (this.random.nextInt(1,4)) {
-            case 1:  return ModSounds.BULLSQUID_DIE_1.get();
-            case 2:  return ModSounds.BULLSQUID_DIE_2.get();
-            case 3: return ModSounds.BULLSQUID_DIE_3.get();
+            case 1:  return HalfLifeSounds.BULLSQUID_DIE_1.get();
+            case 2:  return HalfLifeSounds.BULLSQUID_DIE_2.get();
+            case 3: return HalfLifeSounds.BULLSQUID_DIE_3.get();
         }
-        return ModSounds.HEADCRAB_1_DIE_1.get();
+        return HalfLifeSounds.HEADCRAB_1_DIE_1.get();
     }
 
 
     protected SoundEvent getAmbientSound() {
 
         switch (this.random.nextInt(1,6)) {
-            case 1:  return ModSounds.BULLSQUID_IDLE_1.get();
-            case 2:  return ModSounds.BULLSQUID_IDLE_2.get();
-            case 3:  return ModSounds.BULLSQUID_IDLE_3.get();
-            case 4:  return ModSounds.BULLSQUID_IDLE_4.get();
-            case 5:  return ModSounds.BULLSQUID_IDLE_5.get();
+            case 1:  return HalfLifeSounds.BULLSQUID_IDLE_1.get();
+            case 2:  return HalfLifeSounds.BULLSQUID_IDLE_2.get();
+            case 3:  return HalfLifeSounds.BULLSQUID_IDLE_3.get();
+            case 4:  return HalfLifeSounds.BULLSQUID_IDLE_4.get();
+            case 5:  return HalfLifeSounds.BULLSQUID_IDLE_5.get();
         }
-        return ModSounds.HEADCRAB_1_ALERT_1.get();
+        return HalfLifeSounds.HEADCRAB_1_ALERT_1.get();
     }
 
 
@@ -336,7 +336,7 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
                 new NearbyLivingEntitySensor<Bullsquid>()
                         .setPredicate((target, entity) ->
                             target instanceof Player ||
-                            target.getType().is(ModTags.EntityTypes.HEADCRAB) ||
+                            target.getType().is(HLTags.EntityTypes.HEADCRAB) ||
                             (target.getType().getCategory().getName().equals("creature") && !(target instanceof Cockroach)) ||
                             target instanceof IronGolem ||
                             target instanceof AbstractVillager ||
