@@ -15,6 +15,7 @@ import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.item.custom.*;
 import net.sirkotok.half_life_mod.item.custom.armor.SecurityGuardArmorItem;
 import net.sirkotok.half_life_mod.item.custom.fake.FakeBulletItem;
+import net.sirkotok.half_life_mod.item.custom.gun.Displacer_cannon;
 import net.sirkotok.half_life_mod.item.custom.gun.Pistol_1_Item;
 import net.sirkotok.half_life_mod.item.custom.gun.SMG_1_Item;
 import net.sirkotok.half_life_mod.item.custom.gun.Shockroach_Item;
@@ -161,6 +162,9 @@ public class HalfLifeItems {
             () -> new Pistol_1_Item(new Item.Properties()));
     public static final RegistryObject<Item> SMG_HL1 = ITEMS.register("smg_hl1",
          () -> new SMG_1_Item(new Item.Properties()));
+
+  public static final RegistryObject<Item> DISPLACER = ITEMS.register("displacer_cannon",
+         () -> new Displacer_cannon(new Item.Properties()));
     public static final RegistryObject<Item> SHOCKROACH_ITEM = ITEMS.register("shockroach_item",
             () -> new Shockroach_Item(new Item.Properties()));
 

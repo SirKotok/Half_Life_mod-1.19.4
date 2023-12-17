@@ -28,9 +28,15 @@ public class HalfLifeBlocks {
 
 
     public static final RegistryObject<Block> VOLTIGORE_NEST = registerBlock("voltigore_nest",
-            () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE)
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(5f).requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> XEN_GROUND = registerBlock("xen_ground",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(2f).requiresCorrectToolForDrops()));
 
+    public static final RegistryObject<Block> XEN_ROCK = registerBlock("xen_rock",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(5f).requiresCorrectToolForDrops()));
 
     public static final RegistryObject<Block> VOLTIGORE_EGG = BLOCKS.register("voltigore_egg_block",
             () -> new VoltigoreEggBlock(BlockBehaviour.Properties.of(Material.EGG).noOcclusion().noParticlesOnBreak().sound(SoundType.METAL)));

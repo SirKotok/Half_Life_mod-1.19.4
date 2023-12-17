@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.sirkotok.half_life_mod.worldgen.dimension.HalfLifeDimensions;
 import net.sirkotok.half_life_mod.worldgen.portal.XenTeleporter;
+import net.tslat.smartbrainlib.object.SquareRadius;
 
 public class BasicPortalBlock extends Block {
     public BasicPortalBlock(Properties pProperties) {
@@ -46,4 +47,6 @@ public class BasicPortalBlock extends Block {
             }
         }
     }
+
 }
+

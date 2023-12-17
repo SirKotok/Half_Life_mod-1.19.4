@@ -16,6 +16,7 @@ import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import net.sirkotok.half_life_mod.HalfLifeMod;
+import net.sirkotok.half_life_mod.worldgen.noise.AetherNoiseSettings;
 
 import java.util.List;
 import java.util.OptionalLong;
@@ -34,16 +35,16 @@ public class HalfLifeDimensions {
     public static void bootstrapType(BootstapContext<DimensionType> context) {
         context.register(HALFLIFE_DIM_TYPE, new DimensionType(
                 OptionalLong.of(12000), // fixedTime
-                false, // hasSkylight
+                true, // hasSkylight
                 false, // hasCeiling
                 false, // ultraWarm
-                false, // natural
+                false   , // natural
                 1.0, // coordinateScale
                 true, // bedWorks
                 false, // respawnAnchorWorks
                 0, // minY
-                256, // height
-                256, // logicalHeight
+                300, // height
+                300, // logicalHeight
                 BlockTags.INFINIBURN_OVERWORLD, // infiniburn
                 BuiltinDimensionTypes.OVERWORLD_EFFECTS, // effectsLocation
                 1.0f, // ambientLight
@@ -80,7 +81,7 @@ public class HalfLifeDimensions {
                                         0.0F,
                                         0.0F,
                                         0.0F),
-                                biomeRegistry.getOrThrow(Biomes.THE_VOID)),
+                                biomeRegistry.getOrThrow(Biomes.DESERT)),
                         Pair.of(
                                 Climate.parameters(
                                         0.2F,
@@ -111,10 +112,8 @@ public class HalfLifeDimensions {
                                         0.51F,
                                         0.0F),
                                 biomeRegistry.getOrThrow(Biomes.BAMBOO_JUNGLE))
-
-
                                     ))),
-                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.FLOATING_ISLANDS));
+                noiseGenSettings.getOrThrow(AetherNoiseSettings.AETHER));
 
 
 

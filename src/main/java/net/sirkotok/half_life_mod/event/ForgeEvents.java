@@ -1,9 +1,12 @@
 package net.sirkotok.half_life_mod.event;
 
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -29,6 +32,24 @@ public class ForgeEvents {
             LivingEntity entity = event.getEntity();
             if (entity.level.isClientSide()) return;
             if (event.isCanceled()) return;
+
+            if (entity.getTags().contains("xenported")) {
+                if (entity.isOnGround() && !entity.isInWall()) entity.removeTag("xenported");
+                else {
+                    SquareRadius radius = new SquareRadius(25, 60);
+                    for (BlockPos pos : BlockPos.betweenClosed(entity.blockPosition().subtract(radius.toVec3i()), entity.blockPosition().offset(radius.toVec3i()))) {
+                        BlockState state = entity.level.getBlockState(pos);
+                        BlockState statebelow = entity.level.getBlockState(pos.below());
+                        BlockState stateabove = entity.level.getBlockState(pos.above());
+                        if (state.isAir() && !statebelow.isAir() && stateabove.isAir()) {
+                            entity.moveTo(pos.getCenter());
+                            break;
+                        }
+                    }
+                   if (RandomSource.create().nextFloat() < 0.9f) entity.removeTag("xenported");
+            }
+            }
+
 
             if (entity.getTags().contains("barnaclefood")) {
                 if (!entity.hasEffect(MobEffects.LEVITATION)) entity.removeTag("barnaclefood");

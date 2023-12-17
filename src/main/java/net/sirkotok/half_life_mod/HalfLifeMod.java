@@ -123,6 +123,10 @@ public class HalfLifeMod
         }
 
         if(event.getTab().equals(HalfLifeCreativeModeTabs.HALF_LIFE_BLOCKS_TAB)) {
+
+            event.accept(HalfLifeBlocks.XEN_GROUND);
+            event.accept(HalfLifeBlocks.XEN_ROCK);
+
             event.accept(HalfLifeBlocks.VOLTIGORE_NEST);
             event.accept(HalfLifeItems.VOLTIGORE_EGG_BLOCK_ITEM);
             event.accept(HalfLifeBlocks.HALF_LIFE_PORTAL);
@@ -133,6 +137,7 @@ public class HalfLifeMod
             event.accept(HalfLifeItems.PISTOL);
             event.accept(HalfLifeItems.SMG_HL1);
             event.accept(HalfLifeItems.SHOCKROACH_ITEM);
+            event.accept(HalfLifeItems.DISPLACER);
          //   items that throw entities
             event.accept(HalfLifeItems.CHUMTOAD_THROWER);
             event.accept(HalfLifeItems.SNARK_THROWER);

@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "half_life_mod:voltigore_nest"
+    "half_life_mod:voltigore_nest",
+    "half_life_mod:xen_rock",
+    "half_life_mod:xen_ground"
   ]
 }

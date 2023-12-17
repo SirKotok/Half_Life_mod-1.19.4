@@ -1,3 +1,5 @@
-// 1.19.4	2023-12-13T23:06:22.7253296	Loot Tables
+// 1.19.4	2023-12-16T23:19:21.5475266	Loot Tables
 16009b0dd342bb3a6d851e4558b102cd501dd3b7 data/half_life_mod/loot_tables/blocks/voltigore_egg_block.json
 fc23ed321119c596b2dfdfb0f5c8868366e3b04c data/half_life_mod/loot_tables/blocks/voltigore_nest.json
+94523c7faf3d0ddbebdbe7d47570bb55f0a12375 data/half_life_mod/loot_tables/blocks/xen_ground.json
+1cad3a17a76f41c4d549f39400d08507455cb4b2 data/half_life_mod/loot_tables/blocks/xen_rock.json

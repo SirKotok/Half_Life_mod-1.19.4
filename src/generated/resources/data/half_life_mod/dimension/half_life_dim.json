@@ -18,7 +18,7 @@
           }
         },
         {
-          "biome": "minecraft:the_void",
+          "biome": "minecraft:desert",
           "parameters": {
             "continentalness": 0.0,
             "depth": 0.0,
@@ -67,6 +67,6 @@
         }
       ]
     },
-    "settings": "minecraft:floating_islands"
+    "settings": "half_life_mod:xen_ns"
   }
 }

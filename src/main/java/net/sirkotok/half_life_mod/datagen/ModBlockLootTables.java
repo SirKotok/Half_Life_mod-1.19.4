@@ -16,6 +16,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     @Override
     protected void generate() {
         dropSelf(HalfLifeBlocks.VOLTIGORE_NEST.get());
+        dropSelf(HalfLifeBlocks.XEN_ROCK.get());
+        dropSelf(HalfLifeBlocks.XEN_GROUND.get());
         dropWhenSilkTouch(HalfLifeBlocks.VOLTIGORE_EGG.get());
     }
 

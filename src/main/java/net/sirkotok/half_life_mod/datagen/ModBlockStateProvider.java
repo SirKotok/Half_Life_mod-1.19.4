@@ -16,6 +16,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         blockWithItem(HalfLifeBlocks.VOLTIGORE_NEST);
+        blockWithItem(HalfLifeBlocks.XEN_GROUND);
+        blockWithItem(HalfLifeBlocks.XEN_ROCK);
         blockWithItem(HalfLifeBlocks.HALF_LIFE_PORTAL);
     }
 
