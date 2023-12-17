@@ -2,6 +2,7 @@ package net.sirkotok.half_life_mod.item.custom.gun;
 
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -9,7 +10,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
@@ -19,9 +19,10 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import net.sirkotok.half_life_mod.entity.projectile.UnderbarrelGranade;
+import net.sirkotok.half_life_mod.entity.projectile.client.TeleportingBullet;
 import net.sirkotok.half_life_mod.item.client.renderer.Displacer_cannon_renderer;
-import net.sirkotok.half_life_mod.item.client.renderer.SMG_1_ItemRenderer;
+import net.sirkotok.half_life_mod.item.custom.gun.base.EnergyGunItem;
+import net.sirkotok.half_life_mod.item.custom.gun.base.GunAltFireItem;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.worldgen.dimension.HalfLifeDimensions;
 import net.sirkotok.half_life_mod.worldgen.portal.XenTeleporter;
@@ -36,13 +37,36 @@ import software.bernie.geckolib.util.RenderUtils;
 
 import java.util.function.Consumer;
 
-public class Displacer_cannon extends GunAltFireItem implements GeoItem {
+public class Displacer_cannon extends EnergyGunItem implements GeoItem {
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    @Override
-    public ItemStack getammoitem(){
-        return Items.IRON_INGOT.getDefaultInstance();
+
+
+
+    public static void SetShootLeftTimer(ItemStack gunstack, int cooldown) {
+        CompoundTag compoundtag = gunstack.getOrCreateTag();
+        compoundtag.putInt("ShootLeftTimer", cooldown);
     }
+    public static int GetShootLeftTimer(ItemStack gunstack) {
+        CompoundTag compoundtag = gunstack.getTag();
+        if (compoundtag != null) return compoundtag.getInt("ShootLeftTimer");
+        return -1;
+    }
+
+    public static void SetShootRightTimer(ItemStack gunstack, int cooldown) {
+        CompoundTag compoundtag = gunstack.getOrCreateTag();
+        compoundtag.putInt("ShootRightTimer", cooldown);
+    }
+    public static int GetShootRightTimer(ItemStack gunstack) {
+        CompoundTag compoundtag = gunstack.getTag();
+        if (compoundtag != null) return compoundtag.getInt("ShootRightTimer");
+        return -1;
+    }
+
+
+
+
+
     @Override
     public ItemStack getaltammoitem(){
         return Items.DIAMOND.getDefaultInstance();
@@ -54,11 +78,11 @@ public class Displacer_cannon extends GunAltFireItem implements GeoItem {
 
    @Override
     public int getRightClickCooldown(){
-        return 50;
+        return 30;
     } //4
     @Override
     public int getLeftClickCooldown(){
-        return 50;
+        return 30;
     } //6
     @Override
     public int getReloadCooldown(){
@@ -75,19 +99,10 @@ public class Displacer_cannon extends GunAltFireItem implements GeoItem {
 
 
     public SoundEvent getShootingSound(){
-        switch (RandomSource.create().nextInt(1,4)) {
-            case 1:  return HalfLifeSounds.SMG_SHOT1.get();
-            case 2:  return HalfLifeSounds.SMG_SHOT2.get();
-            case 3:  return HalfLifeSounds.SMG_SHOT3.get();
-        }
-        return HalfLifeSounds.HEADCRAB_1_ALERT_1.get();
+        return HalfLifeSounds.DISPLACER_SPIN.get();
     }
     public SoundEvent getAltfireSound(){
-        switch (RandomSource.create().nextInt(1,3)) {
-            case 1:  return HalfLifeSounds.GLAUNCHER.get();
-            case 2:  return HalfLifeSounds.GLAUNCHER2.get();
-        }
-        return HalfLifeSounds.HEADCRAB_1_ALERT_1.get();
+        return HalfLifeSounds.DISPLACER_SPIN2.get();
     }
 
 
@@ -101,9 +116,10 @@ public class Displacer_cannon extends GunAltFireItem implements GeoItem {
                 return InteractionResultHolder.fail(itemstack);
             }
             if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
-            triggerAnim(pPlayer, GeoItem.getOrAssignId(pPlayer.getItemInHand(pHand), (ServerLevel) pLevel),"onetime", "altfire");
+            triggerAnim(pPlayer, GeoItem.getOrAssignId(pPlayer.getItemInHand(pHand), (ServerLevel) pLevel),"onetime", "shoot");
             pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), this.getAltfireSound(), SoundSource.NEUTRAL, 0.5F, 1F);
-            shootright(pLevel, pPlayer, pHand);
+            SetCooldow(pPlayer, this.getRightClickCooldown());
+            SetShootRightTimer(itemstack, 21);
         }
         return InteractionResultHolder.success(itemstack);
     }
@@ -119,16 +135,36 @@ public class Displacer_cannon extends GunAltFireItem implements GeoItem {
             if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
             triggerAnim(pPlayer, GeoItem.getOrAssignId(pPlayer.getItemInHand(pHand), (ServerLevel) pLevel),"onetime", "shoot");
             pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), getShootingSound(), SoundSource.NEUTRAL, 0.5F, 1F);
-            shootleft(pLevel, pPlayer, pHand);
+            SetCooldow(pPlayer, this.getLeftClickCooldown());
+            SetShootLeftTimer(itemstack, 21);
         }
         return InteractionResultHolder.success(itemstack);
     }
 
 
+    @Override
+    public SoundEvent shootleftsound() {
+        return HalfLifeSounds.DISPLACER_TELEPORT_PLAYER.get();
+    }
 
+    public SoundEvent startsound(){
+        return HalfLifeSounds.DISPLACER_START.get();
+    }
 
-
-
+    public SoundEvent selfportsound(){
+        return HalfLifeSounds.DISPLACER_SELF.get();
+    }
+    public void shootleft(Level pLevel, Player pPlayer, ItemStack itemstack) {
+        if (!pLevel.isClientSide) {
+            pPlayer.level.gameEvent(pPlayer, GameEvent.PROJECTILE_SHOOT, pPlayer.blockPosition());
+            pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), shootleftsound(), SoundSource.NEUTRAL, 0.9F, 1F);
+            TeleportingBullet snowball = new TeleportingBullet(pLevel, pPlayer);
+            snowball.setdamage(this.getgundamage());
+            snowball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 4F, 1.0F);
+            pLevel.addFreshEntity(snowball);
+        }
+        award(pPlayer);
+    }
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
@@ -145,8 +181,39 @@ public class Displacer_cannon extends GunAltFireItem implements GeoItem {
     }
 
 
+    @Override
+    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
+        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
+
+        if (pEntity instanceof Player pplayer) {
+            if (GetShootLeftTimer(pStack) > -1) {
+                int i = GetShootLeftTimer(pStack);
+                if (i == 1 && pIsSelected && !pLevel.isClientSide) {
+                    pLevel.playSound((Player) null, pEntity.getX(), pEntity.getY(), pEntity.getZ(), startsound(), SoundSource.NEUTRAL, 0.2F, 1F);
+                }
+                if (i == 0 && pIsSelected && !pLevel.isClientSide()) {
+                    shootleft(pLevel, (Player) pEntity, pStack);
+                }
+                SetShootLeftTimer(pStack, i-1);
+            }
+
+            if (GetShootRightTimer(pStack) > -3) {
+                int i = GetShootRightTimer(pStack);
+                if (i == 1 && pIsSelected && !pLevel.isClientSide) {
+                    pLevel.playSound((Player) null, pEntity.getX(), pEntity.getY(), pEntity.getZ(), startsound(), SoundSource.NEUTRAL, 0.2F, 1F);
+                }
+                if (i == 0 && pIsSelected && !pLevel.isClientSide()) {
+                    shootright(pLevel, (Player) pEntity, pStack);
+                }
+                if (i == -1 && pIsSelected && !pLevel.isClientSide()) {
+                    pLevel.playSound((Player) null, pEntity.getX(), pEntity.getY(), pEntity.getZ(), selfportsound(), SoundSource.NEUTRAL, 0.5F, 1F);
+                }
+                SetShootRightTimer(pStack, i-1);
+            }
+        }
 
 
+    }
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
@@ -175,17 +242,15 @@ public class Displacer_cannon extends GunAltFireItem implements GeoItem {
     }
 
 
-    @Override
-    public void shootright(Level pLevel, Player pPlayer, InteractionHand pHand) {
-        ItemStack itemstack = pPlayer.getItemInHand(pHand);
+
+    public void shootright(Level pLevel, Player pPlayer, ItemStack itemStack) {
         if (!pLevel.isClientSide) {
-            SetCooldow(itemstack, getRightClickCooldown());
             if (pPlayer.canChangeDimensions()) {
-                pPlayer.addTag("xenported");
                 handleHalfLifePortal(pPlayer, pPlayer.blockPosition());
         }
         award(pPlayer);
-    } }
+    }
+    }
 
 
     private void handleHalfLifePortal(Entity player, BlockPos pPos) {

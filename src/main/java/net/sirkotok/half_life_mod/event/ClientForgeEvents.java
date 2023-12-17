@@ -8,7 +8,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sirkotok.half_life_mod.HalfLifeMod;
-import net.sirkotok.half_life_mod.item.custom.gun.GunItem;
+import net.sirkotok.half_life_mod.item.custom.gun.base.GunItem;
 import net.sirkotok.half_life_mod.networking.HalfLifePackets;
 import net.sirkotok.half_life_mod.networking.packet.GunLeftC2SPacket;
 import net.sirkotok.half_life_mod.networking.packet.GunReloadC2SPacket;

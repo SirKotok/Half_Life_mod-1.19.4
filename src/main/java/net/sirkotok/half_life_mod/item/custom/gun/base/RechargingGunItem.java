@@ -1,4 +1,4 @@
-package net.sirkotok.half_life_mod.item.custom.gun;
+package net.sirkotok.half_life_mod.item.custom.gun.base;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -72,7 +72,7 @@ public class RechargingGunItem extends GunItem {
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
         if (GetCooldow(pStack)>0) {
             int i = GetCooldow(pStack);
-            SetCooldow(pStack, i-1);
+            SetupCooldow(pStack, i-1);
             if (GetTick(pStack) % 20 == 0) {SetTick(pStack, GetTick(pStack)+1);}
         } else {
         SetTick(pStack, GetTick(pStack)+1);

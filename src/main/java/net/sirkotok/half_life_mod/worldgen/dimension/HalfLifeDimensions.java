@@ -43,8 +43,8 @@ public class HalfLifeDimensions {
                 true, // bedWorks
                 false, // respawnAnchorWorks
                 0, // minY
-                300, // height
-                300, // logicalHeight
+                320, // height
+                320, // logicalHeight
                 BlockTags.INFINIBURN_OVERWORLD, // infiniburn
                 BuiltinDimensionTypes.OVERWORLD_EFFECTS, // effectsLocation
                 1.0f, // ambientLight

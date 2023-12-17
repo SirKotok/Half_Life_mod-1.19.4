@@ -15,6 +15,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.sirkotok.half_life_mod.entity.projectile.ShockProjectile;
 import net.sirkotok.half_life_mod.item.client.renderer.Shockroach_ItemRenderer;
+import net.sirkotok.half_life_mod.item.custom.gun.base.RechargingGunItem;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
@@ -85,7 +86,7 @@ public class Shockroach_Item extends RechargingGunItem implements GeoItem {
             pPlayer.level.gameEvent(pPlayer, GameEvent.PROJECTILE_SHOOT, pPlayer.blockPosition()); //TODO: not sure if it even works
             pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.SHOCKROACH_DRAW.get(), SoundSource.NEUTRAL, 0.5F, 1F);
             triggerAnim(pPlayer, GeoItem.getOrAssignId(pPlayer.getItemInHand(pHand), (ServerLevel) pLevel),"onetime", "idle");
-            SetCooldow(itemstack, getLeftClickCooldown());
+            SetCooldow(pPlayer, getLeftClickCooldown());
             return InteractionResultHolder.fail(itemstack);
         }
         return InteractionResultHolder.pass(itemstack);
@@ -128,7 +129,7 @@ public class Shockroach_Item extends RechargingGunItem implements GeoItem {
         if (!pLevel.isClientSide) {
             pPlayer.level.gameEvent(pPlayer, GameEvent.PROJECTILE_SHOOT, pPlayer.blockPosition());
             SetElectric(itemstack, getLeftClickCooldown()-2);
-            SetCooldow(itemstack, getLeftClickCooldown());
+            SetCooldow(pPlayer, getLeftClickCooldown());
             ShockProjectile snowball = new ShockProjectile(pLevel, pPlayer);
             snowball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 2F, 0.5F);
             pLevel.addFreshEntity(snowball);

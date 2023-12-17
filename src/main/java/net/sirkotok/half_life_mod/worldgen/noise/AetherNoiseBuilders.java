@@ -21,7 +21,7 @@ public class AetherNoiseBuilders {
     public static NoiseGeneratorSettings skylandsNoiseSettings(HolderGetter<DensityFunction> densityFunctions, HolderGetter<NormalNoise.NoiseParameters> noise) {
         BlockState standartblock = HalfLifeBlocks.XEN_ROCK.get().defaultBlockState();
         return new NoiseGeneratorSettings(
-                new NoiseSettings(0, 200, 2, 1), // noiseSettings
+                new NoiseSettings(16, 256, 2, 1), // noiseSettings
                 standartblock, // defaultBlock
                 Blocks.WATER.defaultBlockState(), // defaultFluid
                 makeNoiseRouter(densityFunctions, noise), // noiseRouter

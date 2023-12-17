@@ -11,6 +11,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.sirkotok.half_life_mod.item.client.renderer.Pistol_1_ItemRenderer;
+import net.sirkotok.half_life_mod.item.custom.gun.base.GunItem;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
@@ -66,7 +67,7 @@ public class Pistol_1_Item extends GunItem implements GeoItem {
             pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.PISTOL_RELOAD.get(), SoundSource.NEUTRAL, 0.5F, 1F);
             triggerAnim(pPlayer, GeoItem.getOrAssignId(pPlayer.getItemInHand(pHand), (ServerLevel) pLevel),"onetime", "reload");
             SetReloadTimer(itemstack, getReloadCooldown());
-            SetCooldow(itemstack, getReloadCooldown());
+            SetCooldow(pPlayer, getReloadCooldown());
         }}
         return InteractionResultHolder.success(itemstack);
     }

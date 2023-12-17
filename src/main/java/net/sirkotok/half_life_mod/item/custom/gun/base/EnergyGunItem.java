@@ -1,4 +1,4 @@
-package net.sirkotok.half_life_mod.item.custom.gun;
+package net.sirkotok.half_life_mod.item.custom.gun.base;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -7,6 +7,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
@@ -23,10 +24,15 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 
-public class GunAltFireItem extends GunItem {
+public class EnergyGunItem extends GunItem {
+
+
+    @Override public InteractionResultHolder<ItemStack> Reload(Level pLevel, Player pPlayer, InteractionHand pHand) {
+        return InteractionResultHolder.pass(pPlayer.getItemInHand(pHand));
+    }
 
     private static final String ALTAMMO = "AltAmmo";
-    public GunAltFireItem(Properties pProperties) {
+    public EnergyGunItem(Properties pProperties) {
         super(pProperties);
     }
 
@@ -71,7 +77,7 @@ public class GunAltFireItem extends GunItem {
     }
 
     public MutableComponent getAmmooutofMax(ItemStack pStack) {
-        return Component.literal("Ammo: "+GetAmmo(pStack)+"\\"+GetMaxAmmo() + " Granades: "+GetAltAmmo(pStack));
+        return Component.literal("Ammo: "+GetAltAmmo(pStack));
     }
 
 
@@ -98,23 +104,36 @@ public class GunAltFireItem extends GunItem {
         return InteractionResultHolder.pass(itemstack);
     }
 
-    @Override
-    public void shootright(Level pLevel, Player pPlayer, InteractionHand pHand) {
-        ItemStack itemstack = pPlayer.getItemInHand(pHand);
-        if (!pLevel.isClientSide) {
-            pPlayer.level.gameEvent(pPlayer, GameEvent.PROJECTILE_SHOOT, pPlayer.blockPosition());
-            SetCooldow(itemstack, getRightClickCooldown());
-            Bullet snowball = new Bullet(pLevel, pPlayer);
-            snowball.setdamage(this.getgundamage());
-            snowball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 4F, 6.0F);
-            pLevel.addFreshEntity(snowball);
-            if (!pPlayer.getAbilities().instabuild) {
-                shrinkSlotWithAltAmmo(pPlayer);
-            }
-        }
-        award(pPlayer);
 
+
+    @Override
+    public InteractionResultHolder<ItemStack> leftuse(Level pLevel, Player pPlayer, InteractionHand pHand) {
+        ItemStack itemstack = pPlayer.getItemInHand(pHand);
+        Inventory inventory = pPlayer.getInventory();
+        if ((GetAltAmmo(itemstack) == 0  || inventory.findSlotMatchingItem(getaltammoitem()) == -1) && !pPlayer.getAbilities().instabuild) {
+            pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
+            return InteractionResultHolder.fail(itemstack);
+        }
+        if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
+        pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.SNOWBALL_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (pLevel.getRandom().nextFloat() * 0.4F + 0.8F));
+        shootleft(pLevel, pPlayer, pHand);
+
+        return InteractionResultHolder.pass(itemstack);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
 

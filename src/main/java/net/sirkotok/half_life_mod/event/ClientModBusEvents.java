@@ -86,6 +86,7 @@ public class ClientModBusEvents {
         EntityRenderers.register(HalfLifeEntities.FLECHETTE.get(), Flechette_renderer::new);
         EntityRenderers.register(HalfLifeEntities.SHOCK_SHOT.get(), ThrownItemRenderer::new);
         EntityRenderers.register(HalfLifeEntities.BULLET_ONE.get(), ThrownItemRenderer::new);
+        EntityRenderers.register(HalfLifeEntities.BULLET_TP.get(), ThrownItemRenderer::new);
         EntityRenderers.register(HalfLifeEntities.ACID_THROWN.get(), ThrownItemRenderer::new);
         EntityRenderers.register(HalfLifeEntities.ACID_THROWNBM.get(), AcidThrownBMRenderer::new);
         EntityRenderers.register(HalfLifeEntities.UNDER_NADE.get(), Undernade_renderer::new);

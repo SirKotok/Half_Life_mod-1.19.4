@@ -17,6 +17,48 @@
       "half_life_mod:gon_die1"
     ]
   },
+  "displacer_impact": {
+    "subtitle": "sounds.half_life_mod.displacer_impact",
+    "sounds": [
+      "half_life_mod:displacer_impact"
+    ]
+  },
+  "displacer_self": {
+    "subtitle": "sounds.half_life_mod.displacer_self",
+    "sounds": [
+      "half_life_mod:displacer_self"
+    ]
+  },
+  "displacer_spin": {
+    "subtitle": "sounds.half_life_mod.displacer_spin",
+    "sounds": [
+      "half_life_mod:displacer_spin"
+    ]
+  },
+  "displacer_spin2": {
+    "subtitle": "sounds.half_life_mod.displacer_spin2",
+    "sounds": [
+      "half_life_mod:displacer_spin2"
+    ]
+  },
+  "displacer_start": {
+    "subtitle": "sounds.half_life_mod.displacer_start",
+    "sounds": [
+      "half_life_mod:displacer_start"
+    ]
+  },
+  "displacer_teleport": {
+    "subtitle": "sounds.half_life_mod.displacer_teleport",
+    "sounds": [
+      "half_life_mod:displacer_teleport"
+    ]
+  },
+  "displacer_teleport_player": {
+    "subtitle": "sounds.half_life_mod.displacer_teleport_player",
+    "sounds": [
+      "half_life_mod:displacer_teleport_player"
+    ]
+  },
   "body_medium_impact_hard1": {
     "subtitle": "sounds.half_life_mod.body_medium_impact_hard1",
     "sounds": [

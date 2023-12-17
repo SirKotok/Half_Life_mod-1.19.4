@@ -16,7 +16,36 @@ public class HalfLifeSounds {
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 
 
-    // SMG
+    // Displacer
+
+
+  public static final RegistryObject<SoundEvent> DISPLACER_IMPACT=
+          registerSoundEvent("displacer_impact");
+  public static final RegistryObject<SoundEvent> DISPLACER_SELF=
+          registerSoundEvent("displacer_self");
+  public static final RegistryObject<SoundEvent> DISPLACER_SPIN=
+          registerSoundEvent("displacer_spin");
+  public static final RegistryObject<SoundEvent> DISPLACER_SPIN2=
+          registerSoundEvent("displacer_spin2");
+  public static final RegistryObject<SoundEvent> DISPLACER_START=
+          registerSoundEvent("displacer_start");
+  public static final RegistryObject<SoundEvent> DISPLACER_TELEPORT=
+          registerSoundEvent("displacer_teleport");
+  public static final RegistryObject<SoundEvent> DISPLACER_TELEPORT_PLAYER=
+          registerSoundEvent("displacer_teleport_player");
+
+      /*    "sounds.half_life_mod.displacer_impact": "Displacer Cannon ",
+          "sounds.half_life_mod.displacer_self": "Displacer Cannon ",
+          "sounds.half_life_mod.displacer_spin": "Displacer Cannon ",
+          "sounds.half_life_mod.displacer_spin2": "Displacer Cannon ",
+          "sounds.half_life_mod.displacer_start": "Displacer Cannon ",
+          "sounds.half_life_mod.displacer_teleport": "Displacer Cannon ",
+          "sounds.half_life_mod.displacer_teleport_player": "Displacer Cannon ", */
+
+
+
+
+  // SMG
 
   public static final RegistryObject<SoundEvent> DRYFIRE1=
           registerSoundEvent("dryfire1");

@@ -33,7 +33,7 @@ public class ForgeEvents {
             if (entity.level.isClientSide()) return;
             if (event.isCanceled()) return;
 
-            if (entity.getTags().contains("xenported")) {
+            /*       if (entity.getTags().contains("xenported")) {
                 if (entity.isOnGround() && !entity.isInWall()) entity.removeTag("xenported");
                 else {
                     SquareRadius radius = new SquareRadius(25, 60);
@@ -48,7 +48,7 @@ public class ForgeEvents {
                     }
                    if (RandomSource.create().nextFloat() < 0.9f) entity.removeTag("xenported");
             }
-            }
+            } */
 
 
             if (entity.getTags().contains("barnaclefood")) {

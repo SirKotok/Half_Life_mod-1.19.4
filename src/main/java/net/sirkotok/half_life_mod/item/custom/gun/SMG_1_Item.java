@@ -16,6 +16,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.sirkotok.half_life_mod.entity.projectile.UnderbarrelGranade;
 import net.sirkotok.half_life_mod.item.client.renderer.SMG_1_ItemRenderer;
+import net.sirkotok.half_life_mod.item.custom.gun.base.GunAltFireItem;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
@@ -76,7 +77,7 @@ public class SMG_1_Item extends GunAltFireItem implements GeoItem {
             pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.SMG_RELOAD.get(), SoundSource.NEUTRAL, 0.5F, 1F);
             triggerAnim(pPlayer, GeoItem.getOrAssignId(pPlayer.getItemInHand(pHand), (ServerLevel) pLevel),"onetime", "reload");
             SetReloadTimer(itemstack, getReloadCooldown());
-            SetCooldow(itemstack, getReloadCooldown());
+            SetCooldow(pPlayer, getReloadCooldown());
         }}
         return InteractionResultHolder.success(itemstack);
     }
@@ -185,7 +186,7 @@ public class SMG_1_Item extends GunAltFireItem implements GeoItem {
     public void shootright(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         if (!pLevel.isClientSide) {
-            SetCooldow(itemstack, getRightClickCooldown());
+            SetCooldow(pPlayer, getRightClickCooldown());
             pPlayer.level.gameEvent(pPlayer, GameEvent.PROJECTILE_SHOOT, pPlayer.blockPosition());
             UnderbarrelGranade snowball = new UnderbarrelGranade(pLevel, pPlayer);
             snowball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1F, 1.0F);

@@ -1,9 +1,10 @@
-package net.sirkotok.half_life_mod.item.custom.gun;
+package net.sirkotok.half_life_mod.item.custom.gun.base;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.commands.SpreadPlayersCommand;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -11,6 +12,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -27,9 +29,12 @@ import java.util.List;
 
 public class GunItem extends Item {
 
-    private static final String ATTACK_COOLDOWN = "Cooldown";
+
+
+    private static final String ATTACK_COOLDOWN = "Cooldow";
     private static final String AMMO_COUNT = "Ammo";
     private static final String RELOAD_TIMER = "ReloadTimer";
+
     public ItemStack getammoitem(){
         return Items.BEDROCK.getDefaultInstance();
     }
@@ -46,6 +51,11 @@ public class GunItem extends Item {
 
 
 
+
+
+
+
+
     public int GetMaxAmmo() {
         return 17;
     }
@@ -59,9 +69,9 @@ public class GunItem extends Item {
         return Component.literal("Ammo: "+GetAmmo(pStack)+"\\"+GetMaxAmmo());
     }
 
-    public static void SetCooldow(ItemStack gunstack, int cooldown) {
+    public static void SetupCooldow(ItemStack gunstack, int cooldown) {
         CompoundTag compoundtag = gunstack.getOrCreateTag();
-        compoundtag.putInt("Cooldown", cooldown);
+        compoundtag.putInt("Cooldow", cooldown);
     }
 
     public static void SetReloadTimer(ItemStack gunstack, int cooldown) {
@@ -75,10 +85,17 @@ public class GunItem extends Item {
     }
 
 
+    public static void SetCooldow(Player pplayer, int cooldown){
+        Inventory playerinv = pplayer.getInventory();
+        for (ItemStack stack : playerinv.items) {
+            SetupCooldow(stack, cooldown);
+        }
+    }
+
 
     public static int GetCooldow(ItemStack gunstack) {
         CompoundTag compoundtag = gunstack.getTag();
-        if (compoundtag != null) return compoundtag.getInt("Cooldown");
+        if (compoundtag != null) return compoundtag.getInt("Cooldow");
         return 0;
     }
 
@@ -86,7 +103,6 @@ public class GunItem extends Item {
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-
         if (pEntity instanceof Player pPlayer && !pLevel.isClientSide() && pIsSelected) {
           ItemStack pPlayerItemStack =  pPlayer.getOffhandItem();
             if (!pPlayerItemStack.isEmpty() && pPlayerItemStack.is(Items.SHIELD) && pPlayer.isUsingItem()) {
@@ -96,17 +112,21 @@ public class GunItem extends Item {
                 }
         }
 
+
+
+        if (pEntity instanceof Player pplayer) {
         if (GetCooldow(pStack)>0) {
             int i = GetCooldow(pStack);
-            SetCooldow(pStack, i-1);
+            SetupCooldow(pStack, i-1);
         }
         if (GetReloadTimer(pStack) > -1) {
             int i = GetReloadTimer(pStack);
-            if (i == 0 && pIsSelected && pEntity instanceof Player && !pLevel.isClientSide()) {
+            if (i == 0 && pIsSelected && !pLevel.isClientSide()) {
                 reloadgun(pLevel, (Player) pEntity, pStack);
             }
             SetReloadTimer(pStack, i-1);
         }
+    }
     }
 
 
@@ -169,7 +189,7 @@ public class GunItem extends Item {
             if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
             SetReloadTimer(itemstack, getReloadCooldown());
             pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), this.reloadsound(), SoundSource.NEUTRAL, 0.5F, 1F);
-                SetCooldow(itemstack, getReloadCooldown());
+                SetCooldow(pPlayer, getReloadCooldown());
         }}
         return InteractionResultHolder.pass(itemstack);
     }
@@ -192,7 +212,7 @@ public class GunItem extends Item {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         if (!pLevel.isClientSide) {
             pPlayer.level.gameEvent(pPlayer, GameEvent.PROJECTILE_SHOOT, pPlayer.blockPosition());
-            SetCooldow(itemstack, getRightClickCooldown());
+            SetCooldow(pPlayer, getRightClickCooldown());
             Bullet snowball = new Bullet(pLevel, pPlayer);
             snowball.setdamage(this.getgundamage());
             snowball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 4F, 6.0F);
@@ -220,7 +240,7 @@ public class GunItem extends Item {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         if (!pLevel.isClientSide) {
             pPlayer.level.gameEvent(pPlayer, GameEvent.PROJECTILE_SHOOT, pPlayer.blockPosition());
-           SetCooldow(itemstack, getLeftClickCooldown());
+           SetCooldow(pPlayer, getLeftClickCooldown());
            Bullet snowball = new Bullet(pLevel, pPlayer);
             snowball.setdamage(this.getgundamage());
           snowball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 4F, 1.0F);
@@ -235,7 +255,7 @@ public class GunItem extends Item {
         {
             while (true) {
                 pPlayer.level.gameEvent(pPlayer, GameEvent.PROJECTILE_SHOOT, pPlayer.blockPosition());
-                SetCooldow(itemstack, getReloadCooldown());
+                SetCooldow(pPlayer, getReloadCooldown());
                 int slotwithitem = pPlayer.getInventory().findSlotMatchingItem(getammoitem());
                 if (slotwithitem == -1) break;
                 int sub = GetMaxAmmo() - GetAmmo(itemstack);
@@ -252,7 +272,7 @@ public class GunItem extends Item {
             }
         }
         if (pPlayer.getAbilities().instabuild) {
-            SetCooldow(itemstack, getReloadCooldown());
+            SetCooldow(pPlayer, getReloadCooldown());
             SetAmmo(itemstack,GetMaxAmmo());
         }
     }
