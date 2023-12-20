@@ -1,4 +1,4 @@
-// 1.19.4	2023-12-08T00:23:49.3135053	Item Models: half_life_mod
+// 1.19.4	2023-12-19T23:35:53.7241438	Item Models: half_life_mod
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/baby_headcrab_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/barnacle_1_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/barney_spawn_egg.json
@@ -23,6 +23,7 @@
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/manhack_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/penguin_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/pitdrone_spawn_egg.json
+e68d9f8c4c5484f53a012043baa46de7e05b6f61 assets/half_life_mod/models/item/portal_project.json
 dbe72b845f4b73852d0c4d2091299d93b8756e9e assets/half_life_mod/models/item/security_guard_chestplate.json
 5da4163924c3a0ba667da2f1dfe02b07cb4e7277 assets/half_life_mod/models/item/security_guard_helmet.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/shark_spawn_egg.json

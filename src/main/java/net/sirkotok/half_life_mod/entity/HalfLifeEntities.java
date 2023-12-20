@@ -17,7 +17,7 @@ import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.*;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
 import net.sirkotok.half_life_mod.entity.projectile.*;
 import net.sirkotok.half_life_mod.entity.projectile.arrowlike.Flechette;
-import net.sirkotok.half_life_mod.entity.projectile.client.TeleportingBullet;
+import net.sirkotok.half_life_mod.entity.projectile.TeleportingBullet;
 
 
 public class HalfLifeEntities {
@@ -301,7 +301,7 @@ public class HalfLifeEntities {
     public static final RegistryObject<EntityType<TeleportingBullet>> BULLET_TP =
             ENTITY_TYPES.register("bullet_tp",
                     () -> EntityType.Builder.<TeleportingBullet>of(TeleportingBullet::new, MobCategory.MISC)
-                            .sized(0.1F, 0.1F)
+                            .sized(0.3F, 0.3F)
                             .clientTrackingRange(20)
                             .updateInterval(1)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "bullet_tp").toString()));

@@ -8,7 +8,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
@@ -19,10 +18,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import net.sirkotok.half_life_mod.entity.projectile.client.TeleportingBullet;
+import net.sirkotok.half_life_mod.entity.projectile.TeleportingBullet;
 import net.sirkotok.half_life_mod.item.client.renderer.Displacer_cannon_renderer;
 import net.sirkotok.half_life_mod.item.custom.gun.base.EnergyGunItem;
-import net.sirkotok.half_life_mod.item.custom.gun.base.GunAltFireItem;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.worldgen.dimension.HalfLifeDimensions;
 import net.sirkotok.half_life_mod.worldgen.portal.XenTeleporter;
@@ -80,6 +78,12 @@ public class Displacer_cannon extends EnergyGunItem implements GeoItem {
     public int getRightClickCooldown(){
         return 30;
     } //4
+
+
+
+    public int getDestination(){
+        return 0;
+    }
     @Override
     public int getLeftClickCooldown(){
         return 30;
@@ -91,7 +95,7 @@ public class Displacer_cannon extends EnergyGunItem implements GeoItem {
 
     @Override
     public float getgundamage() {
-        return 1f;
+        return 40f;
     }
     @Override public int GetMaxAmmo() {
         return 50;
@@ -159,8 +163,9 @@ public class Displacer_cannon extends EnergyGunItem implements GeoItem {
             pPlayer.level.gameEvent(pPlayer, GameEvent.PROJECTILE_SHOOT, pPlayer.blockPosition());
             pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), shootleftsound(), SoundSource.NEUTRAL, 0.9F, 1F);
             TeleportingBullet snowball = new TeleportingBullet(pLevel, pPlayer);
+            snowball.setDestination(this.getDestination());
             snowball.setdamage(this.getgundamage());
-            snowball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 4F, 1.0F);
+            snowball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 0.7F, 1.0F);
             pLevel.addFreshEntity(snowball);
         }
         award(pPlayer);
@@ -253,7 +258,7 @@ public class Displacer_cannon extends EnergyGunItem implements GeoItem {
     }
 
 
-    private void handleHalfLifePortal(Entity player, BlockPos pPos) {
+    protected void handleHalfLifePortal(Entity player, BlockPos pPos) {
         if (player.level instanceof ServerLevel serverlevel) {
             MinecraftServer minecraftserver = serverlevel.getServer();
             ResourceKey<Level> resourcekey = player.level.dimension() == HalfLifeDimensions.HALFLIFE_LEVEL_KEY ?

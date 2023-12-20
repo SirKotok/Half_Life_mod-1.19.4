@@ -24,7 +24,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(HalfLifeItems.SECURITY_GUARD_HELMET);
         simpleItem(HalfLifeItems.SECURITY_GUARD_VEST);
         simpleItem(HalfLifeItems.FAKE_SHOCK);
-
+        simpleItem(HalfLifeItems.FAKE_PORTAL);
 
         withExistingParent(HalfLifeItems.HUNTER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(HalfLifeItems.SHARK_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));

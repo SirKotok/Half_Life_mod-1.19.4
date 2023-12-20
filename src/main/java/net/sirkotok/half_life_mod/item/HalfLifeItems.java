@@ -15,10 +15,7 @@ import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.item.custom.*;
 import net.sirkotok.half_life_mod.item.custom.armor.SecurityGuardArmorItem;
 import net.sirkotok.half_life_mod.item.custom.fake.FakeBulletItem;
-import net.sirkotok.half_life_mod.item.custom.gun.Displacer_cannon;
-import net.sirkotok.half_life_mod.item.custom.gun.Pistol_1_Item;
-import net.sirkotok.half_life_mod.item.custom.gun.SMG_1_Item;
-import net.sirkotok.half_life_mod.item.custom.gun.Shockroach_Item;
+import net.sirkotok.half_life_mod.item.custom.gun.*;
 import net.sirkotok.half_life_mod.item.custom.spawnegg.BarnacleSpawnEggItem;
 import net.sirkotok.half_life_mod.item.custom.spawnegg.VortigoreSpawnEggItem;
 
@@ -146,6 +143,8 @@ public class HalfLifeItems {
             () -> new FakeBulletItem(new Item.Properties()));
     public static final RegistryObject<Item> FAKE_SHOCK = ITEMS.register("shock",
             () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> FAKE_PORTAL = ITEMS.register("portal_project",
+            () -> new Item(new Item.Properties()));
 
 
     // Entity throwers
@@ -162,9 +161,12 @@ public class HalfLifeItems {
             () -> new Pistol_1_Item(new Item.Properties()));
     public static final RegistryObject<Item> SMG_HL1 = ITEMS.register("smg_hl1",
          () -> new SMG_1_Item(new Item.Properties()));
-
-  public static final RegistryObject<Item> DISPLACER = ITEMS.register("displacer_cannon",
+    public static final RegistryObject<Item> DISPLACER = ITEMS.register("displacer_cannon",
          () -> new Displacer_cannon(new Item.Properties()));
+    public static final RegistryObject<Item> DISPLACER_NETHER = ITEMS.register("displacer_nether",
+            () -> new Displacer_nether(new Item.Properties()));
+    public static final RegistryObject<Item> DISPLACER_END = ITEMS.register("displacer_end",
+            () -> new Displacer_end(new Item.Properties()));
     public static final RegistryObject<Item> SHOCKROACH_ITEM = ITEMS.register("shockroach_item",
             () -> new Shockroach_Item(new Item.Properties()));
 

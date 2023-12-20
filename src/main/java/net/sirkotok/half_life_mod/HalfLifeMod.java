@@ -138,6 +138,8 @@ public class HalfLifeMod
             event.accept(HalfLifeItems.SMG_HL1);
             event.accept(HalfLifeItems.SHOCKROACH_ITEM);
             event.accept(HalfLifeItems.DISPLACER);
+            event.accept(HalfLifeItems.DISPLACER_NETHER);
+            event.accept(HalfLifeItems.DISPLACER_END);
          //   items that throw entities
             event.accept(HalfLifeItems.CHUMTOAD_THROWER);
             event.accept(HalfLifeItems.SNARK_THROWER);

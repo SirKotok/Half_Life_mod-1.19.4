@@ -71,7 +71,8 @@ public class VoltigoreShock extends FireballNoTrail implements GeoEntity {
                 LivingEntity bullsquid = (LivingEntity) entity1;
 
                 entity.hurt(this.damageSources().mobProjectile(this, bullsquid), 15f);
-                HLperUtil.DisableShieldFor(entity, 1f, 300, serverlevel);
+                HLperUtil.DisableShieldFor(entity, 1f, 200, serverlevel);
+
                 int rad = 3;
                 List<LivingEntity> targets = EntityRetrievalUtil.getEntities((Level) serverlevel,
                         new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
@@ -79,7 +80,7 @@ public class VoltigoreShock extends FireballNoTrail implements GeoEntity {
 
                     for (LivingEntity entity2 : targets) {
                         if (entity2 != entity) {
-                            HLperUtil.DisableShieldFor(entity, 0.1f, 20, serverlevel);
+                            HLperUtil.DisableShieldFor(entity2, 0.1f, 20, serverlevel);
                             entity2.hurt(this.damageSources().mobProjectile(this, (LivingEntity) entity1 ), 2f);
                         }
                     }
