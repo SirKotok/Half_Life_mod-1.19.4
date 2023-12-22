@@ -37,7 +37,7 @@ public class EnergyGunItem extends GunItem {
     }
 
     public ItemStack getaltammoitem(){
-        return Items.BEDROCK.getDefaultInstance();
+        return Items.DIAMOND.getDefaultInstance();
     }
 
     public static int GetAltAmmo(ItemStack gunstack) {
@@ -49,6 +49,9 @@ public class EnergyGunItem extends GunItem {
         CompoundTag compoundtag = gunstack.getOrCreateTag();
         compoundtag.putInt("AltAmmo", ammo);
     }
+
+
+
 
 
     public void SetInventoryAltAmmo(Player pPlayer, ItemStack gunstack) {

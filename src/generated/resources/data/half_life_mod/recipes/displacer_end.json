@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:ender_eye"
+    },
+    "D": {
+      "item": "half_life_mod:displacer_cannon"
+    },
+    "S": {
+      "item": "minecraft:shulker_shell"
+    }
+  },
+  "pattern": [
+    "BSB",
+    "SDS",
+    "BSB"
+  ],
+  "result": {
+    "item": "half_life_mod:displacer_end"
+  },
+  "show_notification": true
+}

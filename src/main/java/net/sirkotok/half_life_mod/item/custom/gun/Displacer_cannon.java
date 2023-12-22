@@ -69,6 +69,9 @@ public class Displacer_cannon extends EnergyGunItem implements GeoItem {
     public ItemStack getaltammoitem(){
         return Items.DIAMOND.getDefaultInstance();
     }
+
+
+
     public Displacer_cannon(Properties pProperties) {
         super(pProperties);
         SingletonGeoAnimatable.registerSyncedAnimatable(this);
@@ -115,7 +118,7 @@ public class Displacer_cannon extends EnergyGunItem implements GeoItem {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         Inventory inventory = pPlayer.getInventory();
         if (!pLevel.isClientSide) {
-            if ((GetAltAmmo(itemstack) == 0  || inventory.findSlotMatchingItem(getaltammoitem()) == -1) && !pPlayer.getAbilities().instabuild) {
+            if ((GetAltAmmo(itemstack) == 0) && !pPlayer.getAbilities().instabuild) { //  || inventory.findSlotMatchingItem(getaltammoitem()) == -1
                 pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
                 return InteractionResultHolder.fail(itemstack);
             }
@@ -131,8 +134,14 @@ public class Displacer_cannon extends EnergyGunItem implements GeoItem {
     @Override
     public InteractionResultHolder<ItemStack> leftuse(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
+        Inventory inventory = pPlayer.getInventory();
+        int k = GetAltAmmo(itemstack);
+        boolean flag = k == 0;
+        boolean flag2 = false;// inventory.findSlotMatchingItem(getaltammoitem()) == -1;
+        boolean flaginsta = !pPlayer.getAbilities().instabuild;
+
         if (!pLevel.isClientSide) {
-            if (GetAmmo(itemstack) == 0 && !pPlayer.getAbilities().instabuild) {
+            if ((flag || flag2) && flaginsta) {
                 pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
                 return InteractionResultHolder.fail(itemstack);
             }

@@ -1,6 +1,8 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "all": "half_life_mod:block/xen_ground"
+    "bottom": "half_life_mod:block/xen_rock",
+    "side": "half_life_mod:block/xen_ground",
+    "top": "half_life_mod:block/xen_ground_top"
   }
 }

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:blaze_powder"
+    },
+    "D": {
+      "item": "half_life_mod:displacer_cannon"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "S": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "pattern": [
+    "OSO",
+    "ODO",
+    "BOB"
+  ],
+  "result": {
+    "item": "half_life_mod:displacer_nether"
+  },
+  "show_notification": true
+}
