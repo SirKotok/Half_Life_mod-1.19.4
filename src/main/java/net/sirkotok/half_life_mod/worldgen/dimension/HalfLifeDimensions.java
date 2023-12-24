@@ -16,7 +16,7 @@ import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import net.sirkotok.half_life_mod.HalfLifeMod;
-import net.sirkotok.half_life_mod.worldgen.noise.AetherNoiseSettings;
+import net.sirkotok.half_life_mod.worldgen.noise.HalfLifeNoiseSettings;
 
 import java.util.List;
 import java.util.OptionalLong;
@@ -113,7 +113,7 @@ public class HalfLifeDimensions {
                                         0.0F),
                                 biomeRegistry.getOrThrow(Biomes.BAMBOO_JUNGLE))
                                     ))),
-                noiseGenSettings.getOrThrow(AetherNoiseSettings.AETHER));
+                noiseGenSettings.getOrThrow(HalfLifeNoiseSettings.XEN_NS));
 
 
 

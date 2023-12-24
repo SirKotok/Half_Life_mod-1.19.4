@@ -10,8 +10,8 @@ import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import net.sirkotok.half_life_mod.HalfLifeMod;
 
-public class AetherNoiseSettings {
-    public static final ResourceKey<NoiseGeneratorSettings> AETHER = createKey("xen_ns");
+public class HalfLifeNoiseSettings {
+    public static final ResourceKey<NoiseGeneratorSettings> XEN_NS = createKey("xen_ns");
 
     private static ResourceKey<NoiseGeneratorSettings> createKey(String name) {
         return ResourceKey.create(Registries.NOISE_SETTINGS, new ResourceLocation(HalfLifeMod.MOD_ID, name));
@@ -20,6 +20,6 @@ public class AetherNoiseSettings {
     public static void bootstrap(BootstapContext<NoiseGeneratorSettings> context) {
         HolderGetter<DensityFunction> densityFunctions = context.lookup(Registries.DENSITY_FUNCTION);
         HolderGetter<NormalNoise.NoiseParameters> noise = context.lookup(Registries.NOISE);
-        context.register(AETHER, AetherNoiseBuilders.skylandsNoiseSettings(densityFunctions, noise));
+        context.register(XEN_NS, HalfLifeNoiseBuilders.XenNoiseSettings(densityFunctions, noise));
     }
 }

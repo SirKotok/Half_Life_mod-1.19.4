@@ -22,14 +22,33 @@ public class XenTeleporter implements ITeleporter {
         insideDimension = insideDim;
     }
 
+
+
+
+
+
+
     @Override
     public Entity placeEntity(Entity entity, ServerLevel currentWorld, ServerLevel destinationWorld,
                               float yaw, Function<Boolean, Entity> repositionEntity) {
         entity = repositionEntity.apply(false);
-        BlockPos destinationPos = entity.blockPosition();
+        BlockPos destinationP = entity.blockPosition();
+
+
+        double d = destinationWorld.dimensionType().coordinateScale();
+        double c = currentWorld.dimensionType().coordinateScale();
+
+        int x = (int) Math.round(destinationP.getX()*c/d);
+        int y = destinationP.getY();
+        int z = (int) Math.round(destinationP.getZ()*c/d);
+
+
+        BlockPos  destinationPos = new BlockPos(x, y, z);
+
+
         SquareRadius radius = new SquareRadius(25, 60);
         Boolean done = false;
-        for (BlockPos pos : BlockPos.betweenClosed(entity.blockPosition().subtract(radius.toVec3i()), entity.blockPosition().offset(radius.toVec3i()))) {
+        for (BlockPos pos : BlockPos.betweenClosed(destinationPos.subtract(radius.toVec3i()), destinationPos.offset(radius.toVec3i()))) {
             BlockState state = destinationWorld.getBlockState(pos);
             BlockState statebelow = destinationWorld.getBlockState(pos.below());
             BlockState stateabove = destinationWorld.getBlockState(pos.above());
@@ -42,7 +61,7 @@ public class XenTeleporter implements ITeleporter {
             }
         }
             if (!done) {
-                for (BlockPos pos : BlockPos.betweenClosed(entity.blockPosition().subtract(radius.toVec3i()), entity.blockPosition().offset(radius.toVec3i()))) {
+                for (BlockPos pos : BlockPos.betweenClosed(destinationPos.subtract(radius.toVec3i()), destinationPos.offset(radius.toVec3i()))) {
                     BlockState state = destinationWorld.getBlockState(pos);
                     BlockState statebelow = destinationWorld.getBlockState(pos.below());
                     BlockState stateabove = destinationWorld.getBlockState(pos.above());

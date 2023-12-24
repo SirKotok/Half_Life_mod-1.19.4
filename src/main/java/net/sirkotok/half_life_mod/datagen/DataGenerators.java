@@ -13,9 +13,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.worldgen.dimension.HalfLifeDimensions;
-import net.sirkotok.half_life_mod.worldgen.noise.AetherDensityFunctions;
-import net.sirkotok.half_life_mod.worldgen.noise.AetherNoiseSettings;
-import net.sirkotok.half_life_mod.worldgen.noise.AetherNoises;
+import net.sirkotok.half_life_mod.worldgen.noise.HalfLifeDensityFunctions;
+import net.sirkotok.half_life_mod.worldgen.noise.HalfLifeNoiseSettings;
+import net.sirkotok.half_life_mod.worldgen.noise.HalfLifeNoises;
 
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -30,9 +30,9 @@ public class DataGenerators {
             .add(Registries.DIMENSION_TYPE, HalfLifeDimensions::bootstrapType)
 
 
-            .add(Registries.DENSITY_FUNCTION, AetherDensityFunctions::bootstrap)
-            .add(Registries.NOISE, AetherNoises::bootstrap)
-            .add(Registries.NOISE_SETTINGS, AetherNoiseSettings::bootstrap)
+            .add(Registries.DENSITY_FUNCTION, HalfLifeDensityFunctions::bootstrap)
+            .add(Registries.NOISE, HalfLifeNoises::bootstrap)
+            .add(Registries.NOISE_SETTINGS, HalfLifeNoiseSettings::bootstrap)
             // ty Aether team for permission to use thouse!
             // TODO: not forget to give proper credit when the mod releases
 

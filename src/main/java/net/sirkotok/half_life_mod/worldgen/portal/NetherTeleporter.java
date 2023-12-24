@@ -22,16 +22,29 @@ public class NetherTeleporter implements ITeleporter {
     public Entity placeEntity(Entity entity, ServerLevel currentWorld, ServerLevel destinationWorld,
                               float yaw, Function<Boolean, Entity> repositionEntity) {
         entity = repositionEntity.apply(false);
-        BlockPos destinationPos;
-        if (!destinationWorld.isOutsideBuildHeight(entity.blockPosition())) destinationPos = entity.blockPosition();
-        else destinationPos = new BlockPos(entity.getBlockX(), destinationWorld.getLogicalHeight()/2, entity.getBlockZ());
-        SquareRadius radius = new SquareRadius(25, 60);
+        BlockPos destinationP;
+        if (entity.blockPosition().getY() < 100 || entity.blockPosition().getY() > 20) destinationP = entity.blockPosition();
+        else destinationP = new BlockPos(entity.getBlockX(), 74, entity.getBlockZ());
+
+        double d = destinationWorld.dimensionType().coordinateScale();
+        double c = currentWorld.dimensionType().coordinateScale();
+
+
+        int x = (int) Math.round(destinationP.getX()*c/d);
+        int y = (int) Math.round(destinationP.getY()*c/d);
+        int z = (int) Math.round(destinationP.getZ()*c/d);
+
+
+        BlockPos  destinationPos = new BlockPos( x, y, z);
+
+
+        SquareRadius radius = new SquareRadius(25, 90);
         Boolean done = false;
-        for (BlockPos pos : BlockPos.betweenClosed(entity.blockPosition().subtract(radius.toVec3i()), entity.blockPosition().offset(radius.toVec3i()))) {
+        for (BlockPos pos : BlockPos.betweenClosed(destinationPos.subtract(radius.toVec3i()), destinationPos.offset(radius.toVec3i()))) {
             BlockState state = destinationWorld.getBlockState(pos);
             BlockState statebelow = destinationWorld.getBlockState(pos.below());
             BlockState stateabove = destinationWorld.getBlockState(pos.above());
-            if (state.isAir() && !statebelow.isAir() && stateabove.isAir() && !destinationWorld.isOutsideBuildHeight(pos)) {
+            if (state.isAir() && !statebelow.isAir() && stateabove.isAir() && pos.getY() < 120) {
                 if (pos.getY() >= destinationPos.getY()) {
                     entity.moveTo(pos.getCenter());
                     done = true;
@@ -40,18 +53,18 @@ public class NetherTeleporter implements ITeleporter {
             }
         }
             if (!done) {
-                for (BlockPos pos : BlockPos.betweenClosed(entity.blockPosition().subtract(radius.toVec3i()), entity.blockPosition().offset(radius.toVec3i()))) {
+                for (BlockPos pos : BlockPos.betweenClosed(destinationPos.subtract(radius.toVec3i()), destinationPos.offset(radius.toVec3i()))) {
                     BlockState state = destinationWorld.getBlockState(pos);
                     BlockState statebelow = destinationWorld.getBlockState(pos.below());
                     BlockState stateabove = destinationWorld.getBlockState(pos.above());
-                    if (state.isAir() && !statebelow.isAir() && stateabove.isAir() && !destinationWorld.isOutsideBuildHeight(pos)) {
+                    if (state.isAir() && !statebelow.isAir() && stateabove.isAir() && pos.getY() < 120) {
                             entity.moveTo(pos.getCenter());
                         done = true;
                             break;
                         }
                     }
             }
-            if (!done) entity.moveTo(entity.getBlockX(), destinationWorld.getLogicalHeight()-50, entity.getBlockZ());
+            if (!done) entity.moveTo(destinationPos.getX(), 78, destinationPos.getZ());
 
         return entity;
     }
