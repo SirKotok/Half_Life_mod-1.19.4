@@ -16,50 +16,19 @@ import java.util.List;
 
 public class HalfLifeNoiseBuilders {
 
-    public static final float GLOBAL_OFFSET = -0.50375F;
-    private static final float ORE_THICKNESS = 0.08F;
-    private static final double VEININESS_FREQUENCY = 1.5D;
-    private static final double NOODLE_SPACING_AND_STRAIGHTNESS = 1.5D;
-    private static final double SURFACE_DENSITY_THRESHOLD = 1.5625D;
-    private static final double CHEESE_NOISE_TARGET = -0.703125D;
-    public static final int ISLAND_CHUNK_DISTANCE = 64;
-    public static final long ISLAND_CHUNK_DISTANCE_SQR = 4096L;
-    private static final DensityFunction BLENDING_FACTOR = DensityFunctions.constant(10.0D);
-    private static final DensityFunction BLENDING_JAGGEDNESS = DensityFunctions.zero();
-    private static final ResourceKey<DensityFunction> ZERO = createKey("zero");
-    private static final ResourceKey<DensityFunction> Y = createKey("y");
+
     private static final ResourceKey<DensityFunction> SHIFT_X = createKey("shift_x");
     private static final ResourceKey<DensityFunction> SHIFT_Z = createKey("shift_z");
-    private static final ResourceKey<DensityFunction> BASE_3D_NOISE_OVERWORLD = createKey("overworld/base_3d_noise");
-    private static final ResourceKey<DensityFunction> BASE_3D_NOISE_NETHER = createKey("nether/base_3d_noise");
-    private static final ResourceKey<DensityFunction> BASE_3D_NOISE_END = createKey("end/base_3d_noise");
-    public static final ResourceKey<DensityFunction> CONTINENTS = createKey("overworld/continents");
-    public static final ResourceKey<DensityFunction> EROSION = createKey("overworld/erosion");
-    public static final ResourceKey<DensityFunction> RIDGES = createKey("overworld/ridges");
-    public static final ResourceKey<DensityFunction> RIDGES_FOLDED = createKey("overworld/ridges_folded");
-    public static final ResourceKey<DensityFunction> OFFSET = createKey("overworld/offset");
-    public static final ResourceKey<DensityFunction> FACTOR = createKey("overworld/factor");
-    public static final ResourceKey<DensityFunction> JAGGEDNESS = createKey("overworld/jaggedness");
+
     public static final ResourceKey<DensityFunction> DEPTH = createKey("overworld/depth");
     private static final ResourceKey<DensityFunction> SLOPED_CHEESE = createKey("overworld/sloped_cheese");
     public static final ResourceKey<DensityFunction> CONTINENTS_LARGE = createKey("overworld_large_biomes/continents");
-    public static final ResourceKey<DensityFunction> EROSION_LARGE = createKey("overworld_large_biomes/erosion");
-    private static final ResourceKey<DensityFunction> OFFSET_LARGE = createKey("overworld_large_biomes/offset");
-    private static final ResourceKey<DensityFunction> FACTOR_LARGE = createKey("overworld_large_biomes/factor");
-    private static final ResourceKey<DensityFunction> JAGGEDNESS_LARGE = createKey("overworld_large_biomes/jaggedness");
-    private static final ResourceKey<DensityFunction> DEPTH_LARGE = createKey("overworld_large_biomes/depth");
-    private static final ResourceKey<DensityFunction> SLOPED_CHEESE_LARGE = createKey("overworld_large_biomes/sloped_cheese");
-    private static final ResourceKey<DensityFunction> OFFSET_AMPLIFIED = createKey("overworld_amplified/offset");
-    private static final ResourceKey<DensityFunction> FACTOR_AMPLIFIED = createKey("overworld_amplified/factor");
-    private static final ResourceKey<DensityFunction> JAGGEDNESS_AMPLIFIED = createKey("overworld_amplified/jaggedness");
-    private static final ResourceKey<DensityFunction> DEPTH_AMPLIFIED = createKey("overworld_amplified/depth");
-    private static final ResourceKey<DensityFunction> SLOPED_CHEESE_AMPLIFIED = createKey("overworld_amplified/sloped_cheese");
-    private static final ResourceKey<DensityFunction> SLOPED_CHEESE_END = createKey("end/sloped_cheese");
+    public static final ResourceKey<DensityFunction> CONTINENTS = createKey("overworld/continents");
     private static final ResourceKey<DensityFunction> SPAGHETTI_ROUGHNESS_FUNCTION = createKey("overworld/caves/spaghetti_roughness_function");
-    private static final ResourceKey<DensityFunction> ENTRANCES = createKey("overworld/caves/entrances");
+
     private static final ResourceKey<DensityFunction> NOODLE = createKey("overworld/caves/noodle");
     private static final ResourceKey<DensityFunction> PILLARS = createKey("overworld/caves/pillars");
-    private static final ResourceKey<DensityFunction> SPAGHETTI_2D_THICKNESS_MODULATOR = createKey("overworld/caves/spaghetti_2d_thickness_modulator");
+
     private static final ResourceKey<DensityFunction> SPAGHETTI_2D = createKey("overworld/caves/spaghetti_2d");
     private static ResourceKey<DensityFunction> createKey(String pLocation) {
         return ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(pLocation));
@@ -98,6 +67,7 @@ public class HalfLifeNoiseBuilders {
     }
 
     private static DensityFunction buildFinalDensity(HolderGetter<DensityFunction> densityFunctions, HolderGetter<NormalNoise.NoiseParameters> noise) {
+
         DensityFunction density = getFunction(densityFunctions, ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(HalfLifeMod.MOD_ID,"second_noise")));
         density = DensityFunctions.add(density, DensityFunctions.constant(-0.13));
         density = slide(density, 0, 128, 72, 0, -0.2, 8, 40, -0.1);
@@ -163,6 +133,8 @@ public class HalfLifeNoiseBuilders {
 
 
 
+
+
         density2 = DensityFunctions.add(density2, densitysub);
 
         function = DensityFunctions.add(density, function);
@@ -170,18 +142,43 @@ public class HalfLifeNoiseBuilders {
         density = DensityFunctions.min(density2, function);
 
 
+        DensityFunction density3 = getFunction(densityFunctions, ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(HalfLifeMod.MOD_ID,"second_noise")));
+        density3 = DensityFunctions.add(density3, DensityFunctions.constant(-0.13));
+        density3 = slide(density3, 0, 128, 72, 0, -0.2, 8, 40, -0.1);
+        density3 = DensityFunctions.add(density3, DensityFunctions.constant(-0.05));
+        density3 = DensityFunctions.blendDensity(density3);
+        density3 = DensityFunctions.interpolated(density3);
+        densitysub = DensityFunctions.interpolated(density3);
+        density3 = density3.squeeze();
+        densitysub = densitysub.squeeze();
 
-         DensityFunction densityfunction11 = getFunction(densityFunctions, SLOPED_CHEESE);
+        density3 = DensityFunctions.add(density3, densitysub);
+
+
+
+
+
+
+
+        DensityFunction minus = DensityFunctions.noise(noise.getOrThrow(Noises.CONTINENTALNESS), 0.2, 0.5);
+        DensityFunction plus = DensityFunctions.mul(minus, DensityFunctions.constant(-1));
+
+
+        density3 = DensityFunctions.min(density3, plus);
+        density = DensityFunctions.min(density, minus);
+
+        density = DensityFunctions.max(density, density3);
+
+
+
+        DensityFunction densityfunction11 = getFunction(densityFunctions, SLOPED_CHEESE);
         DensityFunction densityfunction13 = underground(densityFunctions, noise, densityfunction11);
         DensityFunction densityfunction14 = DensityFunctions.min(densityfunction13, getFunction(densityFunctions, NOODLE));
 
 
 
         DensityFunction result = DensityFunctions.min(density, densityfunction14);
-
-
-        return result;
-
+        return  result;
 
 
     }

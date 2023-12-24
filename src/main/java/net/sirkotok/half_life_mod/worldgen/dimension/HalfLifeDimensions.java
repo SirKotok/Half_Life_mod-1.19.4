@@ -16,6 +16,7 @@ import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import net.sirkotok.half_life_mod.HalfLifeMod;
+import net.sirkotok.half_life_mod.worldgen.dimension.specialeffects.XenSpecialEffects;
 import net.sirkotok.half_life_mod.worldgen.noise.HalfLifeNoiseSettings;
 
 import java.util.List;
@@ -36,7 +37,7 @@ public class HalfLifeDimensions {
         context.register(HALFLIFE_DIM_TYPE, new DimensionType(
                 OptionalLong.of(12000), // fixedTime
                 true, // hasSkylight
-                false, // hasCeiling
+                true, // hasCeiling
                 false, // ultraWarm
                 false   , // natural
                 1.0, // coordinateScale
@@ -46,9 +47,9 @@ public class HalfLifeDimensions {
                 320, // height
                 320, // logicalHeight
                 BlockTags.INFINIBURN_OVERWORLD, // infiniburn
-                BuiltinDimensionTypes.OVERWORLD_EFFECTS, // effectsLocation
-                1.0f, // ambientLight
-                new DimensionType.MonsterSettings(false, false, ConstantInt.of(0), 0)));
+                new ResourceLocation(HalfLifeMod.MOD_ID, "xen_effects"), // effectsLocation
+                0.1f, // ambientLight
+                new DimensionType.MonsterSettings(true, false, ConstantInt.of(0), 0)));
     }
 
     public static void bootstrapStem(BootstapContext<LevelStem> context) {

@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.client.event.RegisterDimensionSpecialEffectsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -17,6 +18,11 @@ import net.sirkotok.half_life_mod.util.KeyBinding;
 
 @Mod.EventBusSubscriber(modid = HalfLifeMod.MOD_ID, value = Dist.CLIENT)
 public class ClientForgeEvents {
+
+
+
+
+
     @SubscribeEvent
     public static void inputEvent(InputEvent.InteractionKeyMappingTriggered event) {
         if (event.isAttack() || event.isUseItem()) {

@@ -4,8 +4,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterDimensionSpecialEffectsEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -27,9 +29,15 @@ import net.sirkotok.half_life_mod.particle.HalfLifeParticles;
 import net.sirkotok.half_life_mod.particle.custom.projectile_impact.BigImpactParticle;
 import net.sirkotok.half_life_mod.particle.custom.projectile_impact.BulletHoleParticle;
 import net.sirkotok.half_life_mod.util.KeyBinding;
+import net.sirkotok.half_life_mod.worldgen.dimension.specialeffects.XenSpecialEffects;
+
+import java.util.logging.Level;
 
 @Mod.EventBusSubscriber(modid = HalfLifeMod.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientModBusEvents {
+
+
+
     @SubscribeEvent
     public static void onKeyRegister(RegisterKeyMappingsEvent event) {
         event.register(KeyBinding.RELOAD_KEY);
@@ -93,6 +101,13 @@ public class ClientModBusEvents {
         EntityRenderers.register(HalfLifeEntities.BARNACLE.get(), Barnacle_Renderer::new);
 
         BlockEntityRenderers.register(HalfLifeBlockEntities.VOLTIGORE_EGG_BLOCK_ENTITY.get(), VoltigoreEggRenderer::new);
+    }
+
+
+
+    @SubscribeEvent
+    public static void XenSpecificEffectsEvent(RegisterDimensionSpecialEffectsEvent event){
+        event.register(new ResourceLocation(HalfLifeMod.MOD_ID, "xen_effects"), new XenSpecialEffects());
     }
 
 

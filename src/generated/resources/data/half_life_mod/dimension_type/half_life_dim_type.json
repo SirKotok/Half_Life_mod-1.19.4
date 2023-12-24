@@ -1,10 +1,10 @@
 {
-  "ambient_light": 1.0,
+  "ambient_light": 0.1,
   "bed_works": true,
   "coordinate_scale": 1.0,
-  "effects": "minecraft:overworld",
+  "effects": "half_life_mod:xen_effects",
   "fixed_time": 12000,
-  "has_ceiling": false,
+  "has_ceiling": true,
   "has_raids": false,
   "has_skylight": true,
   "height": 320,
@@ -14,7 +14,7 @@
   "monster_spawn_block_light_limit": 0,
   "monster_spawn_light_level": 0,
   "natural": false,
-  "piglin_safe": false,
+  "piglin_safe": true,
   "respawn_anchor_works": false,
   "ultrawarm": false
 }
