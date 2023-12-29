@@ -69,7 +69,7 @@ public class SMG_1_Item extends GunAltFireItem implements GeoItem {
     @Override
     public InteractionResultHolder<ItemStack> Reload(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
-        int slotwithitem = pPlayer.getInventory().findSlotMatchingItem(getammoitem());
+        int slotwithitem = findSlotMatchingItem(pPlayer, getammoitem());
         if (slotwithitem == -1 && !pPlayer.getAbilities().instabuild) return InteractionResultHolder.fail(itemstack);
         if (!pLevel.isClientSide) {
             if (GetAmmo(itemstack) != GetMaxAmmo() || pPlayer.getAbilities().instabuild) {
@@ -109,7 +109,7 @@ public class SMG_1_Item extends GunAltFireItem implements GeoItem {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         Inventory inventory = pPlayer.getInventory();
         if (!pLevel.isClientSide) {
-            if ((GetAltAmmo(itemstack) == 0) && !pPlayer.getAbilities().instabuild) { //  || inventory.findSlotMatchingItem(getaltammoitem()) == -1
+            if (findSlotMatchingItem(pPlayer, getaltammoitem()) == -1 && !pPlayer.getAbilities().instabuild) { //  || inventory.findSlotMatchingItem(getaltammoitem()) == -1
                 pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
                 return InteractionResultHolder.fail(itemstack);
             }

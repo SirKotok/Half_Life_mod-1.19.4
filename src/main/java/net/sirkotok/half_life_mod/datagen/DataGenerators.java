@@ -12,6 +12,8 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sirkotok.half_life_mod.HalfLifeMod;
+import net.sirkotok.half_life_mod.worldgen.biome.HLCarvers;
+import net.sirkotok.half_life_mod.worldgen.biome.XenBiomes;
 import net.sirkotok.half_life_mod.worldgen.dimension.HalfLifeDimensions;
 import net.sirkotok.half_life_mod.worldgen.noise.HalfLifeDensityFunctions;
 import net.sirkotok.half_life_mod.worldgen.noise.HalfLifeNoiseSettings;
@@ -28,11 +30,15 @@ public class DataGenerators {
     private static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(Registries.DAMAGE_TYPE, ModDamageTypesBootstrap::bootstrap)
             .add(Registries.DIMENSION_TYPE, HalfLifeDimensions::bootstrapType)
+            .add(Registries.CONFIGURED_CARVER, HLCarvers::bootstrap)
+            .add(Registries.BIOME, XenBiomes::boostrap)
 
 
             .add(Registries.DENSITY_FUNCTION, HalfLifeDensityFunctions::bootstrap)
             .add(Registries.NOISE, HalfLifeNoises::bootstrap)
             .add(Registries.NOISE_SETTINGS, HalfLifeNoiseSettings::bootstrap)
+
+
             // ty Aether team for permission to use thouse!
             // TODO: not forget to give proper credit when the mod releases
 

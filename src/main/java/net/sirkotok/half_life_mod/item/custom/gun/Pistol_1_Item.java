@@ -59,7 +59,7 @@ public class Pistol_1_Item extends GunItem implements GeoItem {
     @Override
     public InteractionResultHolder<ItemStack> Reload(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
-        int slotwithitem = pPlayer.getInventory().findSlotMatchingItem(getammoitem());
+        int slotwithitem = findSlotMatchingItem(pPlayer, getammoitem());
         if (slotwithitem == -1 && !pPlayer.getAbilities().instabuild) return InteractionResultHolder.fail(itemstack);
         if (!pLevel.isClientSide) {
             if (GetAmmo(itemstack) != GetMaxAmmo() || pPlayer.getAbilities().instabuild) {

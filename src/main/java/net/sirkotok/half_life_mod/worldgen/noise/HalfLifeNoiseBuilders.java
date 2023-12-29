@@ -3,6 +3,7 @@ package net.sirkotok.half_life_mod.worldgen.noise;
 
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.SurfaceRuleData;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
@@ -19,6 +20,8 @@ public class HalfLifeNoiseBuilders {
 
     private static final ResourceKey<DensityFunction> SHIFT_X = createKey("shift_x");
     private static final ResourceKey<DensityFunction> SHIFT_Z = createKey("shift_z");
+
+
 
     public static final ResourceKey<DensityFunction> DEPTH = createKey("overworld/depth");
     private static final ResourceKey<DensityFunction> SLOPED_CHEESE = createKey("overworld/sloped_cheese");
@@ -57,8 +60,8 @@ public class HalfLifeNoiseBuilders {
         );
     }
 
-    public static SurfaceRules.RuleSource XenSurfaceRules() {
-        SurfaceRules.RuleSource surface = SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.waterBlockCheck(-1, 0), GRASS_BLOCK), DIRT);
+      public static SurfaceRules.RuleSource XenSurfaceRules() {
+       SurfaceRules.RuleSource surface = SurfaceRules.sequence(GRASS_BLOCK, DIRT); //SurfaceRules.ifTrue(SurfaceRules.waterBlockCheck(-1, 0),
         return SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, surface), SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DIRT));
     }
 
@@ -213,6 +216,12 @@ public class HalfLifeNoiseBuilders {
     private static NoiseRouter createNoiseRouter(HolderGetter<DensityFunction> pDensityFunctions, HolderGetter<NormalNoise.NoiseParameters> pNoiseParameters, DensityFunction finalDensity) {
 
 
+        DensityFunction densityfunction = DensityFunctions.noise(pNoiseParameters.getOrThrow(Noises.AQUIFER_BARRIER), 0.5D);
+        DensityFunction densityfunction1 = DensityFunctions.noise(pNoiseParameters.getOrThrow(Noises.AQUIFER_FLUID_LEVEL_FLOODEDNESS), 0.67D);
+        DensityFunction densityfunction2 = DensityFunctions.noise(pNoiseParameters.getOrThrow(Noises.AQUIFER_FLUID_LEVEL_SPREAD), 0.7142857142857143D);
+
+
+
         DensityFunction densityfunction4 = getFunction(pDensityFunctions, SHIFT_X);
         DensityFunction densityfunction5 = getFunction(pDensityFunctions, SHIFT_Z);
         DensityFunction temperature = DensityFunctions.shiftedNoise2d(densityfunction4, densityfunction5, 0.25D, pNoiseParameters.getOrThrow(Noises.TEMPERATURE));
@@ -225,9 +234,9 @@ public class HalfLifeNoiseBuilders {
 
 
         return new NoiseRouter(
-                DensityFunctions.zero(), // barrier noise
-                DensityFunctions.constant(1), // fluid level floodedness noise
-                DensityFunctions.constant(1), // fluid level spread noise
+                densityfunction, // barrier noise
+                densityfunction1, // fluid level floodedness noise
+                densityfunction2, // fluid level spread noise
                 DensityFunctions.zero(), // lava noise
                 temperature, // temperature
                 vegetation, // vegetation

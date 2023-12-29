@@ -30,6 +30,16 @@ import java.util.List;
 public class GunItem extends Item {
 
 
+    public static int findSlotMatchingItem(Player player, ItemStack pStack) {
+        Inventory inv = player.getInventory();
+        for(int i = 0; i < inv.items.size(); ++i) {
+            if (!inv.getItem(i).isEmpty() && ItemStack.isSame(pStack, inv.getItem(i))) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 
     private static final String ATTACK_COOLDOWN = "Cooldow";
     private static final String AMMO_COUNT = "Ammo";
@@ -182,7 +192,7 @@ public class GunItem extends Item {
 
     public InteractionResultHolder<ItemStack> Reload(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
-        int slotwithitem = pPlayer.getInventory().findSlotMatchingItem(getammoitem());
+        int slotwithitem = findSlotMatchingItem(pPlayer, getammoitem());
         if (slotwithitem == -1 && !pPlayer.getAbilities().instabuild) return InteractionResultHolder.fail(itemstack);
         if (!pLevel.isClientSide) {
             if (GetAmmo(itemstack) != GetMaxAmmo() || pPlayer.getAbilities().instabuild) {
@@ -256,7 +266,7 @@ public class GunItem extends Item {
             while (true) {
                 pPlayer.level.gameEvent(pPlayer, GameEvent.PROJECTILE_SHOOT, pPlayer.blockPosition());
                 SetCooldow(pPlayer, getReloadCooldown());
-                int slotwithitem = pPlayer.getInventory().findSlotMatchingItem(getammoitem());
+                int slotwithitem = findSlotMatchingItem(pPlayer, getammoitem());
                 if (slotwithitem == -1) break;
                 int sub = GetMaxAmmo() - GetAmmo(itemstack);
                 ItemStack inslot = pPlayer.getInventory().getItem(slotwithitem);

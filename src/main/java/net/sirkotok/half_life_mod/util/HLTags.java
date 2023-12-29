@@ -18,7 +18,7 @@ import net.sirkotok.half_life_mod.HalfLifeMod;
 public class HLTags {
     public static class Blocks {
         public static final TagKey<Block> HOUNDEYE_INTEREST = tag("houndeye_interest");
-
+        public static final TagKey<Block> XEN_CARVER_REPLACABLE = tag("xen_carver_replacable");
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(HalfLifeMod.MOD_ID, name));
         }

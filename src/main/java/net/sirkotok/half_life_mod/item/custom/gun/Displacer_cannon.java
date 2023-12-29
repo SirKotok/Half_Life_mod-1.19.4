@@ -118,7 +118,7 @@ public class Displacer_cannon extends EnergyGunItem implements GeoItem {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         Inventory inventory = pPlayer.getInventory();
         if (!pLevel.isClientSide) {
-            if ((GetAltAmmo(itemstack) == 0) && !pPlayer.getAbilities().instabuild) { //  || inventory.findSlotMatchingItem(getaltammoitem()) == -1
+            if (findSlotMatchingItem(pPlayer, getaltammoitem()) == -1 && !pPlayer.getAbilities().instabuild) { //  || inventory.findSlotMatchingItem(getaltammoitem()) == -1
                 pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
                 return InteractionResultHolder.fail(itemstack);
             }
@@ -137,7 +137,7 @@ public class Displacer_cannon extends EnergyGunItem implements GeoItem {
         Inventory inventory = pPlayer.getInventory();
         int k = GetAltAmmo(itemstack);
         boolean flag = k == 0;
-        boolean flag2 = false;// inventory.findSlotMatchingItem(getaltammoitem()) == -1;
+        boolean flag2 = findSlotMatchingItem(pPlayer, getaltammoitem()) == -1;
         boolean flaginsta = !pPlayer.getAbilities().instabuild;
 
         if (!pLevel.isClientSide) {

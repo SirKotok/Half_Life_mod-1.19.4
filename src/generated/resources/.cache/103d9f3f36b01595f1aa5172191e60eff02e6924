@@ -1,9 +1,10 @@
-// 1.19.4	2023-12-24T12:36:44.1185851	Registries
+// 1.19.4	2023-12-28T16:10:20.4118931	Registries
 698573fae8c46960807aca80c9117057700e9791 data/half_life_mod/damage_type/hl_bullet.json
-930eebb6a035315d95db3e943ec730ea1a2a6afc data/half_life_mod/dimension/half_life_dim.json
-87b25b9c0fd074cf9bd925f5fe7d8ebf953f15b4 data/half_life_mod/dimension_type/half_life_dim_type.json
+c3aa5b5042bdf2ee8ed8cfd71e961094573a979b data/half_life_mod/dimension/half_life_dim.json
+af9c50b72c13f90011d3c036a4bbf55b86182814 data/half_life_mod/dimension_type/half_life_dim_type.json
+ff14568f99626c0df363c3e2e5e40d2ec010886a data/half_life_mod/worldgen/biome/xen_basic_biome.json
 cbcc941f49c930aad17ab127ab87b90348b4bee9 data/half_life_mod/worldgen/density_function/base_3d_noise_halflife.json
 276b89f3cde07e23b455e0490341f9dcff6ba278 data/half_life_mod/worldgen/density_function/large_noise.json
 e5c76695e70795dac79545a997f1129e07ceee5a data/half_life_mod/worldgen/density_function/pit_3d_noise.json
 cbcc941f49c930aad17ab127ab87b90348b4bee9 data/half_life_mod/worldgen/density_function/second_noise.json
-a4178f28f5b1b9841503fd5eafba44d0442cd807 data/half_life_mod/worldgen/noise_settings/xen_ns.json
+ba7c4849fc6f5fdbcbe477b0115f9a1883f7d0b1 data/half_life_mod/worldgen/noise_settings/xen_ns.json

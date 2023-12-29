@@ -54,6 +54,8 @@ public class EnergyGunItem extends GunItem {
 
 
 
+
+
     public void SetInventoryAltAmmo(Player pPlayer, ItemStack gunstack) {
         int altammo = 0;
         Inventory inventory = pPlayer.getInventory();
@@ -86,7 +88,7 @@ public class EnergyGunItem extends GunItem {
 
     public void shrinkSlotWithAltAmmo(Player pPlayer){
         Inventory inventory = pPlayer.getInventory();
-        int slotwithitem = inventory.findSlotMatchingItem(getaltammoitem());
+        int slotwithitem = findSlotMatchingItem(pPlayer, getaltammoitem());
         ItemStack stack = inventory.getItem(slotwithitem);
         stack.shrink(1);
     }
@@ -96,7 +98,7 @@ public class EnergyGunItem extends GunItem {
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         Inventory inventory = pPlayer.getInventory();
-        if ((GetAltAmmo(itemstack) == 0  || inventory.findSlotMatchingItem(getaltammoitem()) == -1) && !pPlayer.getAbilities().instabuild) {
+        if ((GetAltAmmo(itemstack) == 0  || findSlotMatchingItem(pPlayer, getaltammoitem()) == -1) && !pPlayer.getAbilities().instabuild) {
             pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
             return InteractionResultHolder.fail(itemstack);
         }
@@ -113,7 +115,7 @@ public class EnergyGunItem extends GunItem {
     public InteractionResultHolder<ItemStack> leftuse(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         Inventory inventory = pPlayer.getInventory();
-        if ((GetAltAmmo(itemstack) == 0  || inventory.findSlotMatchingItem(getaltammoitem()) == -1) && !pPlayer.getAbilities().instabuild) {
+        if ((GetAltAmmo(itemstack) == 0  || findSlotMatchingItem(pPlayer, getaltammoitem()) == -1) && !pPlayer.getAbilities().instabuild) {
             pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
             return InteractionResultHolder.fail(itemstack);
         }

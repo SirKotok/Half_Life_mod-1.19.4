@@ -6,7 +6,7 @@
       "type": "minecraft:multi_noise",
       "biomes": [
         {
-          "biome": "minecraft:nether_wastes",
+          "biome": "half_life_mod:xen_basic_biome",
           "parameters": {
             "continentalness": 0.0,
             "depth": 0.0,
@@ -18,7 +18,7 @@
           }
         },
         {
-          "biome": "minecraft:desert",
+          "biome": "half_life_mod:xen_basic_biome",
           "parameters": {
             "continentalness": 0.0,
             "depth": 0.0,
@@ -30,7 +30,7 @@
           }
         },
         {
-          "biome": "minecraft:birch_forest",
+          "biome": "half_life_mod:xen_basic_biome",
           "parameters": {
             "continentalness": 0.4,
             "depth": 0.0,
@@ -42,7 +42,7 @@
           }
         },
         {
-          "biome": "minecraft:dripstone_caves",
+          "biome": "half_life_mod:xen_basic_biome",
           "parameters": {
             "continentalness": 0.0,
             "depth": 0.0,
@@ -54,7 +54,7 @@
           }
         },
         {
-          "biome": "minecraft:bamboo_jungle",
+          "biome": "half_life_mod:xen_basic_biome",
           "parameters": {
             "continentalness": 0.0,
             "depth": 0.0,

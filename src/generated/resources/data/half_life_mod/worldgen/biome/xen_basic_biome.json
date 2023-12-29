@@ -1,0 +1,70 @@
+{
+  "carvers": {},
+  "downfall": 0.8,
+  "effects": {
+    "fog_color": 2269670,
+    "foliage_color": 13763580,
+    "grass_color": 8324092,
+    "mood_sound": {
+      "block_search_extent": 8,
+      "offset": 2.0,
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000
+    },
+    "music": {
+      "max_delay": 24000,
+      "min_delay": 6000,
+      "replace_current_music": true,
+      "sound": "minecraft:music.end"
+    },
+    "sky_color": 3197208,
+    "water_color": 15216187,
+    "water_fog_color": 12524326
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:spring_water"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [
+      {
+        "type": "minecraft:wolf",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 5
+      }
+    ],
+    "misc": [],
+    "monster": [
+      {
+        "type": "half_life_mod:headcrab_1",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 12
+      },
+      {
+        "type": "half_life_mod:headcrab_2",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 12
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.7
+}
