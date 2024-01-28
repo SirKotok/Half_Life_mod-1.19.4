@@ -3,12 +3,15 @@ package net.sirkotok.half_life_mod.util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Pitdrone;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Shockroach;
 import net.tslat.smartbrainlib.util.BrainUtils;
@@ -29,6 +32,9 @@ public final class HLperUtil {
     }
 
 
+    public static void slowEntityFor(LivingEntity entity, int ticks) {
+        entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, ticks, 100, false, false, false));
+    }
 
     public static LivingEntity TargetOrThis(LivingEntity me){
         return BrainUtils.getTargetOfEntity(me) != null ? BrainUtils.getTargetOfEntity(me) : me;
@@ -38,11 +44,12 @@ public final class HLperUtil {
     public static boolean issameteam(LivingEntity one, LivingEntity two){
         boolean combine = (one.getType().is(HLTags.EntityTypes.FACTION_COMBINE) && two.getType().is(HLTags.EntityTypes.FACTION_COMBINE));
         boolean science_team = (one.getType().is(HLTags.EntityTypes.FACTION_SCIENCE_TEAM) && two.getType().is(HLTags.EntityTypes.FACTION_SCIENCE_TEAM));
+        boolean neutral_vs_enemy_player = (one instanceof HalfLifeNeutral neutral && two instanceof Player player && neutral.ismyenemy(player.getStringUUID())) || (two instanceof HalfLifeNeutral neutral2 && one instanceof Player player2 && neutral2.ismyenemy(player2.getStringUUID()));
         boolean race_x = (one.getType().is(HLTags.EntityTypes.FACTION_RACE_X) && two.getType().is(HLTags.EntityTypes.FACTION_RACE_X));
         boolean xen = (one.getType().is(HLTags.EntityTypes.FACTION_XEN) && two.getType().is(HLTags.EntityTypes.FACTION_XEN));
         boolean pitdrone_unique = !((one instanceof Pitdrone && two instanceof Shockroach) || (one instanceof Shockroach && two instanceof Pitdrone));
         boolean headcrab = (one.getType().is(HLTags.EntityTypes.FACTION_HEADCRAB) && two.getType().is(HLTags.EntityTypes.FACTION_HEADCRAB));
-        return (science_team || race_x || combine || headcrab || xen) && pitdrone_unique;
+        return (science_team || race_x || combine || headcrab || xen) && pitdrone_unique && !neutral_vs_enemy_player;
     }
 
 

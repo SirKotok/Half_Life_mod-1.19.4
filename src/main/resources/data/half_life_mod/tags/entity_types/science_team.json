@@ -1,5 +1,7 @@
 {
   "values": [
-    "half_life_mod:barney"
+    "half_life_mod:barney",
+    "half_life_mod:scientist",
+    "minecraft:player"
   ]
 }

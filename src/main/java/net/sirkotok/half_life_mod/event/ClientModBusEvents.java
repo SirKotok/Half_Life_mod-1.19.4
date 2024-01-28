@@ -31,8 +31,6 @@ import net.sirkotok.half_life_mod.particle.custom.projectile_impact.BulletHolePa
 import net.sirkotok.half_life_mod.util.KeyBinding;
 import net.sirkotok.half_life_mod.worldgen.dimension.specialeffects.XenSpecialEffects;
 
-import java.util.logging.Level;
-
 @Mod.EventBusSubscriber(modid = HalfLifeMod.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientModBusEvents {
 
@@ -82,6 +80,8 @@ public class ClientModBusEvents {
         EntityRenderers.register(HalfLifeEntities.VOLTIGORE.get(), VortigoreRenderer::new);
         EntityRenderers.register(HalfLifeEntities.SHOCKTROOPER.get(), ShocktrooperRenderer::new);
         EntityRenderers.register(HalfLifeEntities.BARNEY.get(), Barney_renderer::new);
+        EntityRenderers.register(HalfLifeEntities.SCIENTIST.get(), Scientist_renderer::new);
+        EntityRenderers.register(HalfLifeEntities.ZOMBIE_SCIENTIST_HL1.get(), Scientist_zombiehl1_renderer::new);
         EntityRenderers.register(HalfLifeEntities.COCKROACH.get(), CockroachRenderer::new);
         EntityRenderers.register(HalfLifeEntities.BABY_HEADCRAB.get(), BabyHeadcrab_renderer::new);
         EntityRenderers.register(HalfLifeEntities.MANHACK.get(), ManhackRenderer::new);

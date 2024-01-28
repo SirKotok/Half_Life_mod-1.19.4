@@ -5,7 +5,9 @@ package net.sirkotok.half_life_mod.entity.brain;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -29,7 +31,8 @@ public class ModMemoryModuleType {
     public static final RegistryObject<MemoryModuleType<Boolean>> JUMPING = MEMORY_MODULE_TYPES.register("jumping", () -> new MemoryModuleType<>(Optional.empty()));
     public static final RegistryObject<MemoryModuleType<Integer>> FOOD_ID = MEMORY_MODULE_TYPES.register("food_id", () -> new MemoryModuleType<>(Optional.of(Codec.INT)));
     public static final RegistryObject<MemoryModuleType<Boolean>> HUNGRY = MEMORY_MODULE_TYPES.register("hungry", () -> new MemoryModuleType<>(Optional.empty()));
-    public static final RegistryObject<MemoryModuleType<Boolean>> FOLLOWING_PLAYER = MEMORY_MODULE_TYPES.register("following_player", () -> new MemoryModuleType<>(Optional.empty()));
+    public static final RegistryObject<MemoryModuleType<LivingEntity>> FOLLOWING_PLAYER = MEMORY_MODULE_TYPES.register("following_player", () -> new MemoryModuleType<>(Optional.empty()));
+    public static final RegistryObject<MemoryModuleType<LivingEntity>> NEAREST_HEALABLE_ALLY = MEMORY_MODULE_TYPES.register("nearest_healable_ally", () -> new MemoryModuleType<>(Optional.empty()));
 
     public static final RegistryObject<MemoryModuleType<List<Vec3>>> FOOD_SMELL = MEMORY_MODULE_TYPES.register("food_smell", () -> new MemoryModuleType<>(Optional.empty()));
     public static final RegistryObject<MemoryModuleType<List<Pair<BlockPos, BlockState>>>> CHECKED_LOCATIONS = MEMORY_MODULE_TYPES.register("checked_locations", () -> new MemoryModuleType<>(Optional.empty()));

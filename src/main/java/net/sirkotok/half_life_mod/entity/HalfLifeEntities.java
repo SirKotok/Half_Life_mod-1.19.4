@@ -129,8 +129,21 @@ public class HalfLifeEntities {
     public static final RegistryObject<EntityType<Barney>> BARNEY =
             ENTITY_TYPES.register("barney",
                     () -> EntityType.Builder.of(Barney::new, MobCategory.MONSTER)
-                            .sized(0.6F, 1.95F)
+                            .sized(0.6F, 1.8F)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "barney").toString()));
+
+
+    public static final RegistryObject<EntityType<Scientist>> SCIENTIST =
+            ENTITY_TYPES.register("scientist",
+                    () -> EntityType.Builder.of(Scientist::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.8F)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "scientist").toString()));
+
+    public static final RegistryObject<EntityType<HL1ZombieScientist>> ZOMBIE_SCIENTIST_HL1 =
+            ENTITY_TYPES.register("zombie_scientist_hl1",
+                    () -> EntityType.Builder.of(HL1ZombieScientist::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.8F)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "zombie_scientist_hl1").toString()));
 
 
 

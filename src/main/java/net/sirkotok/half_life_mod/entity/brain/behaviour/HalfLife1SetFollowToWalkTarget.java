@@ -54,7 +54,7 @@ public class HalfLife1SetFollowToWalkTarget<E extends HalfLifeNeutral> extends E
     protected void start(E entity) {
         String id = entity.getFollowUUIDString();
         if (id.equals("")) {
-            if (Boolean.TRUE.equals(BrainUtils.getMemory(entity, ModMemoryModuleType.FOLLOWING_PLAYER.get()))) {
+            if (Boolean.TRUE.equals(BrainUtils.getMemory(entity, ModMemoryModuleType.FOLLOWING_PLAYER.get()) != null)) {
                 BrainUtils.clearMemory(entity, MemoryModuleType.WALK_TARGET);
                 BrainUtils.clearMemory(entity, ModMemoryModuleType.FOLLOWING_PLAYER.get());
             }
@@ -65,11 +65,11 @@ public class HalfLife1SetFollowToWalkTarget<E extends HalfLifeNeutral> extends E
         if (playerlist == null || playerlist.isEmpty()) return;
         for (Player target : playerlist) {
             if (target.getUUID().equals(uuid)) {
-                if (entity.getSensing().hasLineOfSight(target) && entity.distanceTo(target) < 4) {
+                if (entity.getSensing().hasLineOfSight(target) && entity.distanceTo(target) < 3) {
                     BrainUtils.clearMemory(entity, MemoryModuleType.WALK_TARGET);
                 }
                 else {
-                    BrainUtils.setMemory(entity, ModMemoryModuleType.FOLLOWING_PLAYER.get(), true);
+                    BrainUtils.setMemory(entity, ModMemoryModuleType.FOLLOWING_PLAYER.get(), target);
                     BrainUtils.setMemory(entity, MemoryModuleType.LOOK_TARGET, new EntityTracker(target, true));
                     BrainUtils.setMemory(entity, MemoryModuleType.WALK_TARGET, new WalkTarget(new EntityTracker(target, false), this.speedModifier, 0));
                 }

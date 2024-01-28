@@ -82,6 +82,9 @@ public class HalfLifeMod
             event.accept(HalfLifeItems.HEADCRAB_ALYX_SPAWN_EGG);
             event.accept(HalfLifeItems.HEADCRAB_ARMOR_SPAWN_EGG);
 
+            event.accept(HalfLifeItems.HL1_ZOMBIE_SCIENTIST_SPAWN_EGG);
+
+
 
             event.accept(HalfLifeItems.GONARCH_SPAWN_EGG);
             event.accept(HalfLifeItems.GONARCHBM_SPAWN_EGG);
@@ -111,7 +114,7 @@ public class HalfLifeMod
 
 
             event.accept(HalfLifeItems.BARNEY_SPAWN_EGG);
-
+            event.accept(HalfLifeItems.SCIENTIST_SPAWN_EGG);
 
             event.accept(HalfLifeItems.COCKROACH_SPAWN_EGG);
             event.accept(HalfLifeItems.LEECH_SPAWN_EGG);

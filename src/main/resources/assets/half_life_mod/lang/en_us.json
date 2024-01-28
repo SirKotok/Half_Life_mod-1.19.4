@@ -30,6 +30,7 @@
     "item.half_life_mod.penguin_spawn_egg": "Penguin Spawn Egg",
     "item.half_life_mod.barney_spawn_egg": "Security Guard Spawn Egg",
     "item.half_life_mod.snarknest_spawn_egg": "Snark Nest Spawn Egg",
+    "item.half_life_mod.scientist_spawn_egg": "Scientist Spawn Egg",
   "item.half_life_mod.snark_thrower": "Snark",
   "item.half_life_mod.penguin_thrower": "Penguin",
     "item.half_life_mod.pistol_one_item": "9mm Pistol",
@@ -38,14 +39,17 @@
     "item.half_life_mod.security_guard_chestplate": "Security Guard Vest",
     "item.half_life_mod.shockroach_item": "Shockroach",
 
-    "item.half_life_mod.displacer_end": "Displacer Cannon",
-    "item.half_life_mod.displacer_nether": "Displacer Cannon",
+    "item.half_life_mod.displacer_end": "Displacer Cannon (End)",
+    "item.half_life_mod.displacer_nether": "Displacer Cannon (Nether)",
     "item.half_life_mod.displacer_cannon": "Displacer Cannon",
 
 
     "item.half_life_mod.voltigore_egg_block_item": "Voltigore Egg",
     "block.half_life_mod.voltigore_nest": "Voltigore Nest",
     "block.half_life_mod.voltigore_egg_block": "Voltigore Egg",
+    "block.half_life_mod.xen_ground": "Xen Ground",
+    "block.half_life_mod.xen_rock": "Xen Rock",
+
 
 
   "creativemodetab.half_life_tab": "Half-Life Spawn Eggs",
@@ -54,6 +58,7 @@
     "key.half_life_mod.reload_gun": "Reload Gun",
 
     "entity.half_life_mod.hunter": "Hunter",
+    "entity.half_life_mod.scientist": "Scientist",
     "entity.half_life_mod.controller": "Alien Controller",
     "entity.half_life_mod.baby_headcrab": "Baby Headcrab",
     "entity.half_life_mod.gonarch": "Gonarch",

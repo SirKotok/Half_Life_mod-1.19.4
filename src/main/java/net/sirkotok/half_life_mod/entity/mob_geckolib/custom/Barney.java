@@ -21,10 +21,7 @@ import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
-import net.sirkotok.half_life_mod.entity.brain.behaviour.HalfLife1SetFollowToWalkTarget;
-import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
-import net.sirkotok.half_life_mod.entity.brain.behaviour.StopAndShoot;
-import net.sirkotok.half_life_mod.entity.brain.behaviour.TargetOrRetaliateHLT;
+import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.projectile.Bullet;
 import net.sirkotok.half_life_mod.item.HalfLifeItems;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
@@ -35,6 +32,7 @@ import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
 import net.tslat.smartbrainlib.api.core.behaviour.FirstApplicableBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.OneRandomBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.CustomBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomWalkTarget;
@@ -75,6 +73,11 @@ public class Barney extends HalfLifeNeutral implements GeoEntity, SmartBrainOwne
         super.defineSynchedData();
         this.entityData.define(IS_ANGRY, false);
     }
+
+    public boolean hlisangry() {
+        return this.entityData.get(IS_ANGRY);
+    }
+
 
 
     @Override
@@ -131,42 +134,7 @@ public class Barney extends HalfLifeNeutral implements GeoEntity, SmartBrainOwne
                 .add(Attributes.MOVEMENT_SPEED, 0.24f).build();
     }
 
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "move", 0, this::predicate));
-        controllerRegistrar.add(new AnimationController<>(this, "angry", 0, this::attackpredicate));
-        controllerRegistrar.add(new AnimationController<>(this, "attack", state -> PlayState.STOP)
-                .triggerableAnim("shoot", RawAnimation.begin().then("animation.human_model.shoot", Animation.LoopType.PLAY_ONCE)))
-        ;}
 
-    private <T extends GeoAnimatable> PlayState attackpredicate(AnimationState<T> tAnimationState) {
-        if(this.entityData.get(IS_ANGRY)) {
-            tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.human_model.gun_in_hand", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-        tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.human_model.idle", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
-    }
-
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
-
-
-        if(tAnimationState.isMoving()) {
-            tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.human_model.walk", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
-
-        tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.human_model.idle", Animation.LoopType.LOOP));
-
-        return PlayState.CONTINUE;
-
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
-    }
 
 
 
@@ -192,7 +160,7 @@ public class Barney extends HalfLifeNeutral implements GeoEntity, SmartBrainOwne
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<Barney>()
                         .setPredicate((target, entity) ->
-                                target instanceof Enemy));
+                                target instanceof Enemy || this.ismyenemy(target)));
     }
 
 
@@ -208,9 +176,11 @@ public class Barney extends HalfLifeNeutral implements GeoEntity, SmartBrainOwne
     public BrainActivityGroup<Barney> getIdleTasks() { // These are the tasks that run when the mob isn't doing anything else (usually)
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<Barney>(
+                        new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, false)).startCondition(entity -> this.entityData.get(IS_ANGRY).equals(true)),
                         new TargetOrRetaliateHLT<>(),
                         new SetPlayerLookTarget<>(),
-                        new SetRandomLookTarget<>()).whenStarting(entity -> this.entityData.set(IS_ANGRY, false)),
+                        new HL1FollowSpeedup<>().cooldownFor(entity -> 25),
+                        new SetRandomLookTarget<>()),
                 new HalfLife1SetFollowToWalkTarget<>().cooldownFor(entity -> 20),
                 new OneRandomBehaviour<>(
                         new SetRandomWalkTarget<>(),          // Set a random walk target to a nearby position
@@ -225,9 +195,10 @@ public class Barney extends HalfLifeNeutral implements GeoEntity, SmartBrainOwne
         return BrainActivityGroup.fightTasks(
                 new Retaliate<>(),
                 new InvalidateAttackTarget<>(),
-                new SetWalkTargetToAttackTarget<Barney>().whenStarting(entity -> this.entityData.set(IS_ANGRY, true)),
-                new StopAndShoot<Barney>(14, 0, 4f).startCondition(entity -> this.distanceTo(HLperUtil.TargetOrThis(this)) < 12)
-                                .whenStarting(entity -> triggerAnim("attack", "shoot"))
+                new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, true)).startCondition(entity -> this.entityData.get(IS_ANGRY).equals(false)),
+                new SetWalkTargetToRandomSpotAroundAttackTarget<Barney>().speedMod(1.3f),
+                new StopAndShoot<Barney>(16, 3, 4f).startCondition(entity -> this.distanceTo(HLperUtil.TargetOrThis(this)) < 12)
+                                .whenStarting(entity -> triggerAnim("attack", "shoot")).startCondition(entity -> this.entityData.get(IS_ANGRY))
         );
     }
 
@@ -265,5 +236,55 @@ public class Barney extends HalfLifeNeutral implements GeoEntity, SmartBrainOwne
         this.level.addFreshEntity(bullet);
 
     }
+
+
+
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<>(this, "noflash", 0, this::flashpredicate));
+        controllerRegistrar.add(new AnimationController<>(this, "move", 0, this::predicate));
+        controllerRegistrar.add(new AnimationController<>(this, "angry", 0, this::attackpredicate));
+        controllerRegistrar.add(new AnimationController<>(this, "attack", state -> PlayState.STOP)
+                .triggerableAnim("shoot", RawAnimation.begin().then("animation.guard.shoot", Animation.LoopType.PLAY_ONCE)))
+        ;}
+
+
+    private <T extends GeoAnimatable> PlayState flashpredicate(AnimationState<T> tAnimationState) {
+        tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.guard.no_flash", Animation.LoopType.LOOP));
+        return PlayState.CONTINUE;
+    }
+
+
+    private <T extends GeoAnimatable> PlayState attackpredicate(AnimationState<T> tAnimationState) {
+        if(this.entityData.get(IS_ANGRY)) {
+            tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.guard.aim_straight", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+        tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.guard.no_gun", Animation.LoopType.LOOP));
+        return PlayState.CONTINUE;
+    }
+
+    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
+
+
+        if(tAnimationState.isMoving()) {
+            tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.guard.walk", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+
+
+        tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.guard.idle", Animation.LoopType.LOOP));
+
+        return PlayState.CONTINUE;
+
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
+    }
+
+
 
 }
