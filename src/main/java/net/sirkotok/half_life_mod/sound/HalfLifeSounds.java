@@ -15,8 +15,161 @@ public class HalfLifeSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 
+  // Zombie HL2
 
-    // Displacer
+  public static final RegistryObject<SoundEvent> ZOMBIE_FOOT1=
+          registerSoundEvent("foot1");
+  public static final RegistryObject<SoundEvent> ZOMBIE_FOOT2=
+          registerSoundEvent("foot2");
+  public static final RegistryObject<SoundEvent> ZOMBIE_FOOT3=
+          registerSoundEvent("foot3");
+  public static final RegistryObject<SoundEvent> ZOMBIE_ALERT1=
+          registerSoundEvent("zombie_alert1");
+  public static final RegistryObject<SoundEvent> ZOMBIE_ALERT2=
+          registerSoundEvent("zombie_alert2");
+  public static final RegistryObject<SoundEvent> ZOMBIE_ALERT3=
+          registerSoundEvent("zombie_alert3");
+  public static final RegistryObject<SoundEvent> ZOMBIE_DIE1=
+          registerSoundEvent("zombie_die1");
+  public static final RegistryObject<SoundEvent> ZOMBIE_DIE2=
+          registerSoundEvent("zombie_die2");
+  public static final RegistryObject<SoundEvent> ZOMBIE_DIE3=
+          registerSoundEvent("zombie_die3");
+  public static final RegistryObject<SoundEvent> ZOMBIE_FOOT_SLIDE1=
+          registerSoundEvent("zombie_foot_slide1");
+  public static final RegistryObject<SoundEvent> ZOMBIE_FOOT_SLIDE2=
+          registerSoundEvent("zombie_foot_slide2");
+  public static final RegistryObject<SoundEvent> ZOMBIE_FOOT_SLIDE3=
+          registerSoundEvent("zombie_foot_slide3");
+  public static final RegistryObject<SoundEvent> ZOMBIE_HIT=
+          registerSoundEvent("zombie_hit");
+  public static final RegistryObject<SoundEvent> ZOMBIE_PAIN1=
+          registerSoundEvent("zombie_pain1");
+  public static final RegistryObject<SoundEvent> ZOMBIE_PAIN2=
+          registerSoundEvent("zombie_pain2");
+  public static final RegistryObject<SoundEvent> ZOMBIE_PAIN3=
+          registerSoundEvent("zombie_pain3");
+  public static final RegistryObject<SoundEvent> ZOMBIE_PAIN4=
+          registerSoundEvent("zombie_pain4");
+  public static final RegistryObject<SoundEvent> ZOMBIE_PAIN5=
+          registerSoundEvent("zombie_pain5");
+  public static final RegistryObject<SoundEvent> ZOMBIE_PAIN6=
+          registerSoundEvent("zombie_pain6");
+  public static final RegistryObject<SoundEvent> ZOMBIE_VOICE_IDLE1=
+          registerSoundEvent("zombie_voice_idle1");
+  public static final RegistryObject<SoundEvent> ZOMBIE_VOICE_IDLE10=
+          registerSoundEvent("zombie_voice_idle10");
+  public static final RegistryObject<SoundEvent> ZOMBIE_VOICE_IDLE11=
+          registerSoundEvent("zombie_voice_idle11");
+  public static final RegistryObject<SoundEvent> ZOMBIE_VOICE_IDLE12=
+          registerSoundEvent("zombie_voice_idle12");
+  public static final RegistryObject<SoundEvent> ZOMBIE_VOICE_IDLE13=
+          registerSoundEvent("zombie_voice_idle13");
+  public static final RegistryObject<SoundEvent> ZOMBIE_VOICE_IDLE14=
+          registerSoundEvent("zombie_voice_idle14");
+  public static final RegistryObject<SoundEvent> ZOMBIE_VOICE_IDLE2=
+          registerSoundEvent("zombie_voice_idle2");
+  public static final RegistryObject<SoundEvent> ZOMBIE_VOICE_IDLE3=
+          registerSoundEvent("zombie_voice_idle3");
+  public static final RegistryObject<SoundEvent> ZOMBIE_VOICE_IDLE4=
+          registerSoundEvent("zombie_voice_idle4");
+  public static final RegistryObject<SoundEvent> ZOMBIE_VOICE_IDLE5=
+          registerSoundEvent("zombie_voice_idle5");
+  public static final RegistryObject<SoundEvent> ZOMBIE_VOICE_IDLE6=
+          registerSoundEvent("zombie_voice_idle6");
+  public static final RegistryObject<SoundEvent> ZOMBIE_VOICE_IDLE7=
+          registerSoundEvent("zombie_voice_idle7");
+  public static final RegistryObject<SoundEvent> ZOMBIE_VOICE_IDLE8=
+          registerSoundEvent("zombie_voice_idle8");
+  public static final RegistryObject<SoundEvent> ZOMBIE_VOICE_IDLE9=
+          registerSoundEvent("zombie_voice_idle9");
+
+         /* "sounds.half_life_mod.foot1": "Zombie ",
+          "sounds.half_life_mod.foot2": "Zombie ",
+          "sounds.half_life_mod.foot3": "Zombie ",
+          "sounds.half_life_mod.zombie_alert1": "Zombie ",
+          "sounds.half_life_mod.zombie_alert2": "Zombie ",
+          "sounds.half_life_mod.zombie_alert3": "Zombie ",
+          "sounds.half_life_mod.zombie_die1": "Zombie ",
+          "sounds.half_life_mod.zombie_die2": "Zombie ",
+          "sounds.half_life_mod.zombie_die3": "Zombie ",
+          "sounds.half_life_mod.zombie_foot_slide1": "Zombie ",
+          "sounds.half_life_mod.zombie_foot_slide2": "Zombie ",
+          "sounds.half_life_mod.zombie_foot_slide3": "Zombie ",
+          "sounds.half_life_mod.zombie_hit": "Zombie ",
+          "sounds.half_life_mod.zombie_pain1": "Zombie ",
+          "sounds.half_life_mod.zombie_pain2": "Zombie ",
+          "sounds.half_life_mod.zombie_pain3": "Zombie ",
+          "sounds.half_life_mod.zombie_pain4": "Zombie ",
+          "sounds.half_life_mod.zombie_pain5": "Zombie ",
+          "sounds.half_life_mod.zombie_pain6": "Zombie ",
+          "sounds.half_life_mod.zombie_voice_idle1": "Zombie ",
+          "sounds.half_life_mod.zombie_voice_idle10": "Zombie ",
+          "sounds.half_life_mod.zombie_voice_idle11": "Zombie ",
+          "sounds.half_life_mod.zombie_voice_idle12": "Zombie ",
+          "sounds.half_life_mod.zombie_voice_idle13": "Zombie ",
+          "sounds.half_life_mod.zombie_voice_idle14": "Zombie ",
+          "sounds.half_life_mod.zombie_voice_idle2": "Zombie ",
+          "sounds.half_life_mod.zombie_voice_idle3": "Zombie ",
+          "sounds.half_life_mod.zombie_voice_idle4": "Zombie ",
+          "sounds.half_life_mod.zombie_voice_idle5": "Zombie ",
+          "sounds.half_life_mod.zombie_voice_idle6": "Zombie ",
+          "sounds.half_life_mod.zombie_voice_idle7": "Zombie ",
+          "sounds.half_life_mod.zombie_voice_idle8": "Zombie ",
+          "sounds.half_life_mod.zombie_voice_idle9": "Zombie ",
+*/
+
+
+
+  // Zombie HL1
+
+  public static final RegistryObject<SoundEvent> CLAW_MISS1=
+          registerSoundEvent("claw_miss1");
+  public static final RegistryObject<SoundEvent> CLAW_MISS2=
+          registerSoundEvent("claw_miss2");
+  public static final RegistryObject<SoundEvent> ZO_ALERT10=
+          registerSoundEvent("zo_alert10");
+  public static final RegistryObject<SoundEvent> ZO_ALERT20=
+          registerSoundEvent("zo_alert20");
+  public static final RegistryObject<SoundEvent> ZO_ALERT30=
+          registerSoundEvent("zo_alert30");
+  public static final RegistryObject<SoundEvent> ZO_ATTACK1=
+          registerSoundEvent("zo_attack1");
+  public static final RegistryObject<SoundEvent> ZO_ATTACK2=
+          registerSoundEvent("zo_attack2");
+  public static final RegistryObject<SoundEvent> ZO_IDLE1=
+          registerSoundEvent("zo_idle1");
+  public static final RegistryObject<SoundEvent> ZO_IDLE2=
+          registerSoundEvent("zo_idle2");
+  public static final RegistryObject<SoundEvent> ZO_IDLE3=
+          registerSoundEvent("zo_idle3");
+  public static final RegistryObject<SoundEvent> ZO_IDLE4=
+          registerSoundEvent("zo_idle4");
+  public static final RegistryObject<SoundEvent> ZO_PAIN1=
+          registerSoundEvent("zo_pain1");
+  public static final RegistryObject<SoundEvent> ZO_PAIN2=
+          registerSoundEvent("zo_pain2");
+
+
+
+   /*       "sounds.half_life_mod.claw_miss1": "Zombie ",
+          "sounds.half_life_mod.claw_miss2": "Zombie ",
+          "sounds.half_life_mod.zo_alert10": "Zombie ",
+          "sounds.half_life_mod.zo_alert20": "Zombie ",
+          "sounds.half_life_mod.zo_alert30": "Zombie ",
+          "sounds.half_life_mod.zo_attack1": "Zombie ",
+          "sounds.half_life_mod.zo_attack2": "Zombie ",
+          "sounds.half_life_mod.zo_idle1": "Zombie ",
+          "sounds.half_life_mod.zo_idle2": "Zombie ",
+          "sounds.half_life_mod.zo_idle3": "Zombie ",
+          "sounds.half_life_mod.zo_idle4": "Zombie ",
+          "sounds.half_life_mod.zo_pain1": "Zombie ",
+          "sounds.half_life_mod.zo_pain2": "Zombie ", */
+
+
+
+
+  // Displacer
 
 
   public static final RegistryObject<SoundEvent> DISPLACER_IMPACT=

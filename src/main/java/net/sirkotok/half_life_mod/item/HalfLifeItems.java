@@ -113,7 +113,11 @@ public class HalfLifeItems {
                  new Item.Properties()));
 
     public static final RegistryObject<Item> HL1_ZOMBIE_SCIENTIST_SPAWN_EGG = ITEMS.register("hl1_zombie_scientist_spawn_egg",
-            () -> new ForgeSpawnEggItem(HalfLifeEntities.ZOMBIE_SCIENTIST_HL1, 0xe7dada, 0xf40000   ,
+            () -> new ForgeSpawnEggItem(HalfLifeEntities.ZOMBIE_SCIENTIST_HL1, 0xaf3300, 0xdbd9d6   ,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> HL2_ZOMBIE_SPAWN_EGG = ITEMS.register("hl2_zombie_spawn_egg",
+            () -> new ForgeSpawnEggItem(HalfLifeEntities.ZOMBIE_HL2, 0xeca540, 0xdbd9d6   ,
                     new Item.Properties()));
     public static final RegistryObject<Item> GONARCH_SPAWN_EGG = ITEMS.register("gonarch_spawn_egg",
             () -> new ForgeSpawnEggItem(HalfLifeEntities.GONARCH, 0x5d573a, 0xf2e297   ,

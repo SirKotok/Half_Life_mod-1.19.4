@@ -13,14 +13,17 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sirkotok.half_life_mod.HalfLifeMod;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Chumtoad;
+import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.*;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
 import net.sirkotok.half_life_mod.worldgen.dimension.HalfLifeDimensions;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
@@ -46,22 +49,7 @@ public class ForgeEvents {
             if (entity.level.isClientSide()) return;
             if (event.isCanceled()) return;
 
-            /*       if (entity.getTags().contains("xenported")) {
-                if (entity.isOnGround() && !entity.isInWall()) entity.removeTag("xenported");
-                else {
-                    SquareRadius radius = new SquareRadius(25, 60);
-                    for (BlockPos pos : BlockPos.betweenClosed(entity.blockPosition().subtract(radius.toVec3i()), entity.blockPosition().offset(radius.toVec3i()))) {
-                        BlockState state = entity.level.getBlockState(pos);
-                        BlockState statebelow = entity.level.getBlockState(pos.below());
-                        BlockState stateabove = entity.level.getBlockState(pos.above());
-                        if (state.isAir() && !statebelow.isAir() && stateabove.isAir()) {
-                            entity.moveTo(pos.getCenter());
-                            break;
-                        }
-                    }
-                   if (RandomSource.create().nextFloat() < 0.9f) entity.removeTag("xenported");
-            }
-            } */
+
 
 
             if (entity.getTags().contains("barnaclefood")) {
@@ -114,6 +102,7 @@ public class ForgeEvents {
         public static void onLivingDeath(LivingDeathEvent event) {
             LivingEntity entity = event.getEntity();
             if (entity.level.isClientSide()) return;
+
             if (event.isCanceled()) return;
 
             if (event.getSource().getEntity() instanceof Barnacle barnacle) {
@@ -136,25 +125,71 @@ public class ForgeEvents {
 
             }
 
-            /* if (event.getSource().getEntity() instanceof LivingEntity) {
-                if (event.getSource().getEntity().getType().is(ModTags.EntityTypes.HEAD_CRAB)) {
-                    LivingEntity headcrab = (LivingEntity) event.getSource().getEntity();
-                    if (entity instanceof Player player) {
 
-                        EntityType<Headcrab_zombie_standart> type = ModEntities.HEADCRAB_ZOMBIE_1.get();
-                        Headcrab_zombie_standart zombie = type.create(player.getLevel());
+                if (event.getSource().getEntity() instanceof Headcrab_1 headcrab) {
+                    if (entity instanceof Scientist scientist) {
+                        HL1ZombieScientist zombie = HalfLifeEntities.ZOMBIE_SCIENTIST_HL1.get().create(scientist.level);
                         if (zombie != null) {
-                            zombie.setCustomName(player.getDisplayName());
-                            zombie.moveTo(player.getX(), player.getY(), player.getZ(), player.getYRot(), 0.0F);
-                            ForgeEventFactory.onFinalizeSpawn(zombie, (ServerLevelAccessor) zombie.getLevel(), zombie.getLevel().getCurrentDifficultyAt(zombie.blockPosition()), MobSpawnType.REINFORCEMENT, null, null);
+                            zombie.moveTo(scientist.position());
+                            zombie.setColor(scientist.getColor());
+                            zombie.settexture(scientist.gettexture());
+                            zombie.setShirt(scientist.getShirt());
                             headcrab.startRiding(zombie);
+                            ForgeEventFactory.onFinalizeSpawn((Mob) zombie, (ServerLevelAccessor) scientist.level, scientist.level.getCurrentDifficultyAt(zombie.blockPosition()), MobSpawnType.CONVERSION, null, null);
+                            zombie.getLevel().addFreshEntity(zombie);
+                            scientist.discard();
+                        }
+                    }
+                    if (entity instanceof Player player) {
+                        HL1ZombieScientist zombie = HalfLifeEntities.ZOMBIE_SCIENTIST_HL1.get().create(player.level);
+                        if (zombie != null) {
+                            zombie.moveTo(player.position());
+                            zombie.setCustomName(player.getDisplayName());
                             zombie.setPlayerName(player.getName().toString());
                             zombie.setPlayerUUID(player.getUUID().toString());
+                            headcrab.startRiding(zombie);
+                            ForgeEventFactory.onFinalizeSpawn((Mob) zombie, (ServerLevelAccessor) player.level, player.level.getCurrentDifficultyAt(zombie.blockPosition()), MobSpawnType.CONVERSION, null, null);
                             zombie.getLevel().addFreshEntity(zombie);
+                            player.discard();
                         }
                     }
                 }
-            } */
+
+
+            if (event.getSource().getEntity() instanceof Headcrab_2 headcrab) {
+                if (entity instanceof Scientist scientist) {
+                    HL2Zombie zombie = HalfLifeEntities.ZOMBIE_HL2.get().create(scientist.level);
+                    if (zombie != null) {
+                        zombie.moveTo(scientist.position());
+                        zombie.setColor(scientist.getColor());
+                        zombie.settexture(scientist.gettexture());
+                        zombie.setShirt(scientist.getShirt());
+                        headcrab.startRiding(zombie);
+                        ForgeEventFactory.onFinalizeSpawn((Mob) zombie, (ServerLevelAccessor) scientist.level, scientist.level.getCurrentDifficultyAt(zombie.blockPosition()), MobSpawnType.CONVERSION, null, null);
+                        zombie.getLevel().addFreshEntity(zombie);
+                        scientist.discard();
+                    }
+                }
+                if (entity instanceof Player player) {
+                    HL2Zombie zombie = HalfLifeEntities.ZOMBIE_HL2.get().create(player.level);
+                    if (zombie != null) {
+                        zombie.moveTo(player.position());
+                        zombie.setCustomName(player.getDisplayName());
+                        zombie.setPlayerName(player.getName().toString());
+                        zombie.setPlayerUUID(player.getUUID().toString());
+                        zombie.setPersistenceRequired();
+                        headcrab.startRiding(zombie);
+                        ForgeEventFactory.onFinalizeSpawn((Mob) zombie, (ServerLevelAccessor) player.level, player.level.getCurrentDifficultyAt(zombie.blockPosition()), MobSpawnType.CONVERSION, null, null);
+                        zombie.getLevel().addFreshEntity(zombie);
+                        player.discard();
+                    }
+                }
+            }
+
+
+
+
+
 
 
 
@@ -162,6 +197,12 @@ public class ForgeEvents {
     }
 
 
-
+/*                          zombie.setCustomName(player.getDisplayName());
+                            zombie.moveTo(player.getX(), player.getY(), player.getZ(), player.getYRot(), 0.0F);
+                            ForgeEventFactory.onFinalizeSpawn(zombie, (ServerLevelAccessor) zombie.getLevel(), zombie.getLevel().getCurrentDifficultyAt(zombie.blockPosition()), MobSpawnType.REINFORCEMENT, null, null);
+                            headcrab.startRiding(zombie);
+                            zombie.setPlayerName(player.getName().toString());
+                            zombie.setPlayerUUID(player.getUUID().toString());
+                            zombie.getLevel().addFreshEntity(zombie); */
 
 

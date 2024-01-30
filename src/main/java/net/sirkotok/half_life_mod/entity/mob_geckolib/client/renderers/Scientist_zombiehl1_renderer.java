@@ -1,9 +1,12 @@
 package net.sirkotok.half_life_mod.entity.mob_geckolib.client.renderers;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.resources.DefaultPlayerSkin;
+import net.minecraft.core.UUIDUtil;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.sirkotok.half_life_mod.HalfLifeMod;
@@ -103,30 +106,21 @@ public class Scientist_zombiehl1_renderer extends DynamicGeoEntityRenderer<HL1Zo
     }
 
 
-    @org.jetbrains.annotations.Nullable
-    @Override
-    protected RenderType getRenderTypeOverrideForBone(GeoBone bone, HL1ZombieScientist animatable, ResourceLocation texturePath, MultiBufferSource bufferSource, float partialTick) {
-
-        if (bone.getName().equals("bte") || bone.getName().equals("rate") || bone.getName().equals("late") || bone.getName().equals("hte") || bone.getName().equals("rlte") || bone.getName().equals("llte")) {
-            return RenderType.entityTranslucent(texturePath);
-        }
-        return super.getRenderTypeOverrideForBone(bone, animatable, texturePath, bufferSource, partialTick);
-    }
-
-    @Override
-    public Color getRenderColor(HL1ZombieScientist animatable, float partialTick, int packedLight) {
-        return super.getRenderColor(animatable, partialTick, packedLight);
-    }
 
     @Nullable
        @Override
      protected ResourceLocation getTextureOverrideForBone(GeoBone bone, HL1ZombieScientist animatable, float partialTick) {
 
+        if (animatable.getprofile() != null && (bone.getName().equals("oy") || bone.getName().equals("oldleftleg") || bone.getName().equals("oldrightleg") || bone.getName().equals("ou") || bone.getName().equals("oldleftcoatleg") || bone.getName().equals("oc") || bone.getName().equals("oldrightarm") || bone.getName().equals("oa"))) {
+            return DefaultPlayerSkin.getDefaultSkin(UUIDUtil.getOrCreatePlayerUUID(animatable.getprofile()));
+        }
+
+
 
 
        int i = animatable.gettexture();
        int j = animatable.getShirt();
-        if (bone.getName().equals("oldhead")) {
+        if (bone.getName().equals("oy")) {
         switch (i){
            case 1: return HEAD1;
            case 2: return HEAD2;
@@ -139,7 +133,7 @@ public class Scientist_zombiehl1_renderer extends DynamicGeoEntityRenderer<HL1Zo
             return j == 0 ? NORMALSP : HDSP;
            }
 
-           if (bone.getName().equals("oldbody") || bone.getName().equals("oldleftcoatleg") || bone.getName().equals("oldrightcoatleg") || bone.getName().equals("oldrightarm") || bone.getName().equals("oldleftarm")) {
+           if (bone.getName().equals("ou") || bone.getName().equals("oldleftcoatleg") || bone.getName().equals("oc") || bone.getName().equals("oldrightarm") || bone.getName().equals("oa")) {
                DyeColor color = animatable.getColor();
                int c = color.getId();
                switch(c){

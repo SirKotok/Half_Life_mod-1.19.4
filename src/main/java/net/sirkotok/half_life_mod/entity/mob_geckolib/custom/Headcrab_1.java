@@ -285,7 +285,7 @@ public class Headcrab_1 extends HalfLifeMonster implements GeoEntity, SmartBrain
      @Override
     public void tick() {
         super.tick();
-         if (!this.level.isClientSide && this.isPassenger() && (this.tickCount % 5) == 0) {
+         if (!this.level.isClientSide && this.isPassenger()) {
              Entity target = this.getVehicle();
              if (target instanceof LivingEntity){
                  if  (!((LivingEntity) target).getItemBySlot(EquipmentSlot.HEAD).isEmpty()) {
@@ -293,7 +293,7 @@ public class Headcrab_1 extends HalfLifeMonster implements GeoEntity, SmartBrain
                      if(target instanceof ServerPlayer player) {
                          player.connection.send(new ClientboundSetPassengersPacket(player)); } // automatically done in 1.20.1 so no need to do that
                  }
-                    if (target instanceof Headcrab_zombie_standart) {
+                    if (target instanceof HL1ZombieScientist) {
                      this.setYRot(target.getYRot());
                  }
              }
@@ -302,9 +302,9 @@ public class Headcrab_1 extends HalfLifeMonster implements GeoEntity, SmartBrain
         if (!this.level.isClientSide && this.isPassenger() && (this.tickCount % 35) == 0) {
             Entity target = this.getVehicle();
             if (target instanceof LivingEntity){
-                if (!(target instanceof Headcrab_zombie_standart)) {
+                if (!(target instanceof HL1ZombieScientist)) {
                 this.playSound(this.getBiteSound());
-                ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 50), this);
+                ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 50, 5, false, false), this);
                 this.doHurtTarget(target);}
             }
         }

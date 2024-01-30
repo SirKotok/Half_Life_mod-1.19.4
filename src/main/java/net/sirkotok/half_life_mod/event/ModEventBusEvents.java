@@ -24,6 +24,7 @@ public class ModEventBusEvents {
         event.put(HalfLifeEntities.BARNEY.get(), Barney.setAttributes());
         event.put(HalfLifeEntities.SCIENTIST.get(), Scientist.setAttributes());
         event.put(HalfLifeEntities.ZOMBIE_SCIENTIST_HL1.get(), HL1ZombieScientist.setAttributes());
+        event.put(HalfLifeEntities.ZOMBIE_HL2.get(), HL2Zombie.setAttributes());
         event.put(HalfLifeEntities.COCKROACH.get(), Cockroach.setAttributes());
         event.put(HalfLifeEntities.BABY_HEADCRAB.get(), Baby_Headcrab.setAttributes());
         event.put(HalfLifeEntities.MANHACK.get(), Manhack.setAttributes());

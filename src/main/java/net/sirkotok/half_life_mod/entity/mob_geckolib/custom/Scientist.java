@@ -342,7 +342,7 @@ public class Scientist extends HalfLifeNeutral implements GeoEntity, SmartBrainO
                 new InvalidateAttackTarget<>(),
                 new Retaliate<>(),
                 new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, true)).startCondition(entity -> this.entityData.get(IS_ANGRY).equals(false)),
-                new FleeTarget<>().speedModifier(1.6f).fleeDistance(10),
+                new FleeTarget<>().speedModifier(1.4f).fleeDistance(14),
                 new CustomBehaviour<>(entity -> this.entityData.set(STRING_UUID_FOLLOW, "")).startCondition(entity -> !this.entityData.get(STRING_UUID_FOLLOW).equals("")),
                 new CustomBehaviour<>(entity -> HLperUtil.slowEntityFor(this, 20))
                         .whenStarting(entity -> triggerAnim("onetime", "fear"))

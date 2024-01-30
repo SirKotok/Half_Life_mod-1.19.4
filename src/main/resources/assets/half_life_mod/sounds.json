@@ -17,6 +17,282 @@
       "half_life_mod:gon_die1"
     ]
   },
+  "claw_miss1": {
+    "subtitle": "sounds.half_life_mod.claw_miss1",
+    "sounds": [
+      "half_life_mod:claw_miss1"
+    ]
+  },
+  "claw_miss2": {
+    "subtitle": "sounds.half_life_mod.claw_miss2",
+    "sounds": [
+      "half_life_mod:claw_miss2"
+    ]
+  },
+  "zo_alert10": {
+    "subtitle": "sounds.half_life_mod.zo_alert10",
+    "sounds": [
+      "half_life_mod:zo_alert10"
+    ]
+  },
+  "zo_alert20": {
+    "subtitle": "sounds.half_life_mod.zo_alert20",
+    "sounds": [
+      "half_life_mod:zo_alert20"
+    ]
+  },
+  "zo_alert30": {
+    "subtitle": "sounds.half_life_mod.zo_alert30",
+    "sounds": [
+      "half_life_mod:zo_alert30"
+    ]
+  },
+  "zo_attack1": {
+    "subtitle": "sounds.half_life_mod.zo_attack1",
+    "sounds": [
+      "half_life_mod:zo_attack1"
+    ]
+  },
+  "zo_attack2": {
+    "subtitle": "sounds.half_life_mod.zo_attack2",
+    "sounds": [
+      "half_life_mod:zo_attack2"
+    ]
+  },
+  "zo_idle1": {
+    "subtitle": "sounds.half_life_mod.zo_idle1",
+    "sounds": [
+      "half_life_mod:zo_idle1"
+    ]
+  },
+  "zo_idle2": {
+    "subtitle": "sounds.half_life_mod.zo_idle2",
+    "sounds": [
+      "half_life_mod:zo_idle2"
+    ]
+  },
+  "foot1": {
+    "subtitle": "sounds.half_life_mod.foot1",
+    "sounds": [
+      "half_life_mod:foot1"
+    ]
+  },
+  "foot2": {
+    "subtitle": "sounds.half_life_mod.foot2",
+    "sounds": [
+      "half_life_mod:foot2"
+    ]
+  },
+  "foot3": {
+    "subtitle": "sounds.half_life_mod.foot3",
+    "sounds": [
+      "half_life_mod:foot3"
+    ]
+  },
+  "zombie_alert1": {
+    "subtitle": "sounds.half_life_mod.zombie_alert1",
+    "sounds": [
+      "half_life_mod:zombie_alert1"
+    ]
+  },
+  "zombie_alert2": {
+    "subtitle": "sounds.half_life_mod.zombie_alert2",
+    "sounds": [
+      "half_life_mod:zombie_alert2"
+    ]
+  },
+  "zombie_alert3": {
+    "subtitle": "sounds.half_life_mod.zombie_alert3",
+    "sounds": [
+      "half_life_mod:zombie_alert3"
+    ]
+  },
+  "zombie_die1": {
+    "subtitle": "sounds.half_life_mod.zombie_die1",
+    "sounds": [
+      "half_life_mod:zombie_die1"
+    ]
+  },
+  "zombie_die2": {
+    "subtitle": "sounds.half_life_mod.zombie_die2",
+    "sounds": [
+      "half_life_mod:zombie_die2"
+    ]
+  },
+  "zombie_die3": {
+    "subtitle": "sounds.half_life_mod.zombie_die3",
+    "sounds": [
+      "half_life_mod:zombie_die3"
+    ]
+  },
+  "zombie_foot_slide1": {
+    "subtitle": "sounds.half_life_mod.zombie_foot_slide1",
+    "sounds": [
+      "half_life_mod:zombie_foot_slide1"
+    ]
+  },
+  "zombie_foot_slide2": {
+    "subtitle": "sounds.half_life_mod.zombie_foot_slide2",
+    "sounds": [
+      "half_life_mod:zombie_foot_slide2"
+    ]
+  },
+  "zombie_foot_slide3": {
+    "subtitle": "sounds.half_life_mod.zombie_foot_slide3",
+    "sounds": [
+      "half_life_mod:zombie_foot_slide3"
+    ]
+  },
+  "zombie_hit": {
+    "subtitle": "sounds.half_life_mod.zombie_hit",
+    "sounds": [
+      "half_life_mod:zombie_hit"
+    ]
+  },
+  "zombie_pain1": {
+    "subtitle": "sounds.half_life_mod.zombie_pain1",
+    "sounds": [
+      "half_life_mod:zombie_pain1"
+    ]
+  },
+  "zombie_pain2": {
+    "subtitle": "sounds.half_life_mod.zombie_pain2",
+    "sounds": [
+      "half_life_mod:zombie_pain2"
+    ]
+  },
+  "zombie_pain3": {
+    "subtitle": "sounds.half_life_mod.zombie_pain3",
+    "sounds": [
+      "half_life_mod:zombie_pain3"
+    ]
+  },
+  "zombie_pain4": {
+    "subtitle": "sounds.half_life_mod.zombie_pain4",
+    "sounds": [
+      "half_life_mod:zombie_pain4"
+    ]
+  },
+  "zombie_pain5": {
+    "subtitle": "sounds.half_life_mod.zombie_pain5",
+    "sounds": [
+      "half_life_mod:zombie_pain5"
+    ]
+  },
+  "zombie_pain6": {
+    "subtitle": "sounds.half_life_mod.zombie_pain6",
+    "sounds": [
+      "half_life_mod:zombie_pain6"
+    ]
+  },
+  "zombie_voice_idle1": {
+    "subtitle": "sounds.half_life_mod.zombie_voice_idle1",
+    "sounds": [
+      "half_life_mod:zombie_voice_idle1"
+    ]
+  },
+  "zombie_voice_idle10": {
+    "subtitle": "sounds.half_life_mod.zombie_voice_idle10",
+    "sounds": [
+      "half_life_mod:zombie_voice_idle10"
+    ]
+  },
+  "zombie_voice_idle11": {
+    "subtitle": "sounds.half_life_mod.zombie_voice_idle11",
+    "sounds": [
+      "half_life_mod:zombie_voice_idle11"
+    ]
+  },
+  "zombie_voice_idle12": {
+    "subtitle": "sounds.half_life_mod.zombie_voice_idle12",
+    "sounds": [
+      "half_life_mod:zombie_voice_idle12"
+    ]
+  },
+  "zombie_voice_idle13": {
+    "subtitle": "sounds.half_life_mod.zombie_voice_idle13",
+    "sounds": [
+      "half_life_mod:zombie_voice_idle13"
+    ]
+  },
+  "zombie_voice_idle14": {
+    "subtitle": "sounds.half_life_mod.zombie_voice_idle14",
+    "sounds": [
+      "half_life_mod:zombie_voice_idle14"
+    ]
+  },
+  "zombie_voice_idle2": {
+    "subtitle": "sounds.half_life_mod.zombie_voice_idle2",
+    "sounds": [
+      "half_life_mod:zombie_voice_idle2"
+    ]
+  },
+  "zombie_voice_idle3": {
+    "subtitle": "sounds.half_life_mod.zombie_voice_idle3",
+    "sounds": [
+      "half_life_mod:zombie_voice_idle3"
+    ]
+  },
+  "zombie_voice_idle4": {
+    "subtitle": "sounds.half_life_mod.zombie_voice_idle4",
+    "sounds": [
+      "half_life_mod:zombie_voice_idle4"
+    ]
+  },
+  "zombie_voice_idle5": {
+    "subtitle": "sounds.half_life_mod.zombie_voice_idle5",
+    "sounds": [
+      "half_life_mod:zombie_voice_idle5"
+    ]
+  },
+  "zombie_voice_idle6": {
+    "subtitle": "sounds.half_life_mod.zombie_voice_idle6",
+    "sounds": [
+      "half_life_mod:zombie_voice_idle6"
+    ]
+  },
+  "zombie_voice_idle7": {
+    "subtitle": "sounds.half_life_mod.zombie_voice_idle7",
+    "sounds": [
+      "half_life_mod:zombie_voice_idle7"
+    ]
+  },
+  "zombie_voice_idle8": {
+    "subtitle": "sounds.half_life_mod.zombie_voice_idle8",
+    "sounds": [
+      "half_life_mod:zombie_voice_idle8"
+    ]
+  },
+  "zombie_voice_idle9": {
+    "subtitle": "sounds.half_life_mod.zombie_voice_idle9",
+    "sounds": [
+      "half_life_mod:zombie_voice_idle9"
+    ]
+  },
+  "zo_idle3": {
+    "subtitle": "sounds.half_life_mod.zo_idle3",
+    "sounds": [
+      "half_life_mod:zo_idle3"
+    ]
+  },
+  "zo_idle4": {
+    "subtitle": "sounds.half_life_mod.zo_idle4",
+    "sounds": [
+      "half_life_mod:zo_idle4"
+    ]
+  },
+  "zo_pain1": {
+    "subtitle": "sounds.half_life_mod.zo_pain1",
+    "sounds": [
+      "half_life_mod:zo_pain1"
+    ]
+  },
+  "zo_pain2": {
+    "subtitle": "sounds.half_life_mod.zo_pain2",
+    "sounds": [
+      "half_life_mod:zo_pain2"
+    ]
+  },
   "displacer_impact": {
     "subtitle": "sounds.half_life_mod.displacer_impact",
     "sounds": [

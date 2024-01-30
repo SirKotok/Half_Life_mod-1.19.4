@@ -1,4 +1,4 @@
-// 1.19.4	2024-01-28T04:03:56.3813496	Item Models: half_life_mod
+// 1.19.4	2024-01-30T09:44:57.3890287	Item Models: half_life_mod
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/baby_headcrab_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/barnacle_1_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/barney_spawn_egg.json
@@ -17,6 +17,7 @@
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/headcrab_poison_3_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/headcrab_zombie_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/hl1_zombie_scientist_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/hl2_zombie_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/hoteye_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/houndeye_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/hunter_spawn_egg.json

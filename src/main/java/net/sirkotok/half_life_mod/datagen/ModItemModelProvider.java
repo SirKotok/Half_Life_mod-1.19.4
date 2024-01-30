@@ -40,6 +40,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         withExistingParent(HalfLifeItems.BARNEY_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(HalfLifeItems.SCIENTIST_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(HalfLifeItems.HL1_ZOMBIE_SCIENTIST_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(HalfLifeItems.HL2_ZOMBIE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(HalfLifeItems.GONARCHBM_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(HalfLifeItems.GONARCH_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(HalfLifeItems.MANHACK_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
