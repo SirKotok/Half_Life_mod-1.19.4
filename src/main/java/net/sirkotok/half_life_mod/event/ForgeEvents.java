@@ -11,6 +11,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -126,6 +127,23 @@ public class ForgeEvents {
             }
 
 
+            if (event.getSource().getEntity() instanceof Headcrab_Fast headcrab) {
+                if (entity instanceof Scientist || entity instanceof AbstractVillager || entity instanceof Player) {
+                    HL2Zombie_fast zombie = HalfLifeEntities.ZOMBIE_FAST.get().create(entity.level);
+                    if (zombie != null) {
+                        zombie.moveTo(entity.position());
+                        if (entity.hasCustomName()) zombie.setCustomName(entity.getCustomName());
+                        if (entity instanceof Player player) zombie.setCustomName(player.getDisplayName());
+                        headcrab.startRiding(zombie);
+                        ForgeEventFactory.onFinalizeSpawn((Mob) zombie, (ServerLevelAccessor) entity.level, entity.level.getCurrentDifficultyAt(zombie.blockPosition()), MobSpawnType.CONVERSION, null, null);
+                        zombie.getLevel().addFreshEntity(zombie);
+                        entity.discard();
+                    }
+                }
+            }
+
+
+
                 if (event.getSource().getEntity() instanceof Headcrab_1 headcrab) {
                     if (entity instanceof Scientist scientist) {
                         HL1ZombieScientist zombie = HalfLifeEntities.ZOMBIE_SCIENTIST_HL1.get().create(scientist.level);
@@ -134,6 +152,7 @@ public class ForgeEvents {
                             zombie.setColor(scientist.getColor());
                             zombie.settexture(scientist.gettexture());
                             zombie.setShirt(scientist.getShirt());
+                            if (scientist.hasCustomName()) zombie.setCustomName(scientist.getCustomName());
                             headcrab.startRiding(zombie);
                             ForgeEventFactory.onFinalizeSpawn((Mob) zombie, (ServerLevelAccessor) scientist.level, scientist.level.getCurrentDifficultyAt(zombie.blockPosition()), MobSpawnType.CONVERSION, null, null);
                             zombie.getLevel().addFreshEntity(zombie);
@@ -164,6 +183,7 @@ public class ForgeEvents {
                         zombie.setColor(scientist.getColor());
                         zombie.settexture(scientist.gettexture());
                         zombie.setShirt(scientist.getShirt());
+                        if (scientist.hasCustomName()) zombie.setCustomName(scientist.getCustomName());
                         headcrab.startRiding(zombie);
                         ForgeEventFactory.onFinalizeSpawn((Mob) zombie, (ServerLevelAccessor) scientist.level, scientist.level.getCurrentDifficultyAt(zombie.blockPosition()), MobSpawnType.CONVERSION, null, null);
                         zombie.getLevel().addFreshEntity(zombie);

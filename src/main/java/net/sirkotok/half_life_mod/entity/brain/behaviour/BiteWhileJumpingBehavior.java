@@ -12,13 +12,15 @@ import net.minecraft.world.entity.LivingEntity;
 
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
+import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
+import net.sirkotok.half_life_mod.util.CommonSounds;
 import net.sirkotok.half_life_mod.util.HLTags;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.ConditionlessAttack;
 import net.tslat.smartbrainlib.util.BrainUtils;
 
 import java.util.List;
 
-public class BiteWhileJumpingBehavior<E extends LivingEntity> extends ConditionlessAttack<E> {
+public class BiteWhileJumpingBehavior<E extends HalfLifeMonster> extends ConditionlessAttack<E> {
     private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT));
     protected final RandomSource random = RandomSource.create();
     protected SoundEvent bitesound;
@@ -56,10 +58,11 @@ public class BiteWhileJumpingBehavior<E extends LivingEntity> extends Conditionl
     @Override
     protected void tick(E entity) {
         super.tick(entity);
+        if (this.target == null) return;
         if (!entity.isOnGround() && BrainUtils.getMemory(entity, MemoryModuleType.ATTACK_TARGET) != null) {
             if(canBite(entity))
             {
-                entity.playSound(this.bitesound, 0.3f, entity.getVoicePitch());
+                if (this.bitesound != null) CommonSounds.PlaySoundAsOwn(entity, this.bitesound);
                 entity.doHurtTarget(this.target);
                if (canSitOnHead() && (this.random.nextFloat()<this.sitchance)) {
                     entity.startRiding(this.target, true);

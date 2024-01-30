@@ -20,6 +20,7 @@ import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.Shockwaverenderer;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.SitRenderer;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.Voltigore_projectile_e_renderer;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.client.models.Zombiehl2_model_fast;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.client.renderers.*;
 import net.sirkotok.half_life_mod.entity.mob_normal.client.ModModelLayers;
 import net.sirkotok.half_life_mod.entity.mob_normal.client.models.Barnacle_Model;
@@ -63,7 +64,7 @@ public class ClientModBusEvents {
         EntityRenderers.register(HalfLifeEntities.HOUNDEYE.get(), Houndeyerenderer::new);
         EntityRenderers.register(HalfLifeEntities.SNARKNEST.get(), Snarknestrenderer::new);
         EntityRenderers.register(HalfLifeEntities.HEADCRAB_HL1.get(), Headcrab_1renderer::new);
-        EntityRenderers.register(HalfLifeEntities.HEADCRAB_ZOMBIE_1.get(), Headcrab_zombie_standart_renderer::new);
+
         EntityRenderers.register(HalfLifeEntities.HEADCRAB_HL2.get(), Headcrab_2renderer::new);
         EntityRenderers.register(HalfLifeEntities.HEADCRAB_POISON_HL2.get(), Headcrab_poison_2renderer::new);
         EntityRenderers.register(HalfLifeEntities.HEADCRAB_POISON_HLA.get(), Headcrab_poison_3renderer::new);
@@ -83,6 +84,7 @@ public class ClientModBusEvents {
         EntityRenderers.register(HalfLifeEntities.SCIENTIST.get(), Scientist_renderer::new);
         EntityRenderers.register(HalfLifeEntities.ZOMBIE_SCIENTIST_HL1.get(), Scientist_zombiehl1_renderer::new);
         EntityRenderers.register(HalfLifeEntities.ZOMBIE_HL2.get(), Zombiehl2_renderer::new);
+        EntityRenderers.register(HalfLifeEntities.ZOMBIE_FAST.get(), Fast_zombieRenderer::new);
         EntityRenderers.register(HalfLifeEntities.COCKROACH.get(), CockroachRenderer::new);
         EntityRenderers.register(HalfLifeEntities.BABY_HEADCRAB.get(), BabyHeadcrab_renderer::new);
         EntityRenderers.register(HalfLifeEntities.MANHACK.get(), ManhackRenderer::new);

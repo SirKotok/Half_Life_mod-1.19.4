@@ -318,7 +318,10 @@ public class Headcrab_2 extends HalfLifeMonster implements GeoEntity, SmartBrain
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
 
-
+        if (this.isPassenger()) {
+            tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.headcrab.zombie", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
 
         if(tAnimationState.isMoving() && this.isOnGround()) {
             tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.headcrab.walk2", Animation.LoopType.LOOP));

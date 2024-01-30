@@ -6,10 +6,12 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.util.CommonSounds;
+import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableMeleeAttack;
 import net.tslat.smartbrainlib.util.BrainUtils;
 
 import javax.annotation.Nullable;
+import java.util.function.Function;
 
 public class DoubleMeleeAttack<E extends HalfLifeMonster> extends AnimatableMeleeAttack<E> {
 
@@ -29,7 +31,7 @@ public class DoubleMeleeAttack<E extends HalfLifeMonster> extends AnimatableMele
     @Nullable
     protected SoundEvent startsound;
     protected boolean attacked;
-
+    protected int adddelay;
     @Nullable
     protected SoundEvent zombielong;
     @Nullable
@@ -52,6 +54,7 @@ public class DoubleMeleeAttack<E extends HalfLifeMonster> extends AnimatableMele
         this.zombielong = null;
         this.zombieshort = null;
         this.miss = null;
+        this.adddelay = 0;
     }
 
     public DoubleMeleeAttack(int delayTicks, int firsthitdelay, float disablechance, float modattack, float modknockback, @Nullable MobEffect effect, int effectduration, @Nullable SoundEvent onhit, @Nullable SoundEvent startsound, @Nullable SoundEvent miss, @Nullable SoundEvent zombielong, @Nullable SoundEvent zombieshort) {
@@ -67,7 +70,25 @@ public class DoubleMeleeAttack<E extends HalfLifeMonster> extends AnimatableMele
         this.zombielong = zombielong;
         this.zombieshort = zombieshort;
         this.miss = miss;
+        this.adddelay = 0;
     }
+
+    public DoubleMeleeAttack(int delayTicks, int firsthitdelay, float disablechance, float modattack, float modknockback, @Nullable MobEffect effect, int effectduration, @Nullable SoundEvent onhit, @Nullable SoundEvent startsound, @Nullable SoundEvent miss, @Nullable SoundEvent zombielong, @Nullable SoundEvent zombieshort, int adddelay) {
+        super(delayTicks);
+        this.attackmod = modattack;
+        this.knockbackmod = modknockback;
+        this.firsthitdelay = firsthitdelay;
+        this.effect = effect;
+        this.effectduration = effectduration;
+        this.disableshield = disablechance;
+        this.onhit = onhit;
+        this.startsound = startsound;
+        this.zombielong = zombielong;
+        this.zombieshort = zombieshort;
+        this.miss = miss;
+        this.adddelay = adddelay;
+    }
+
 
 
     @Override
@@ -122,12 +143,18 @@ public class DoubleMeleeAttack<E extends HalfLifeMonster> extends AnimatableMele
             this.playedlong = true;
          }
     }
-
+    protected Function<E, Integer> fastzombieintervalsupplier = entity -> 50;
     @Override
     protected void doDelayedAction(E entity) {
-        BrainUtils.setForgettableMemory(entity, MemoryModuleType.ATTACK_COOLING_DOWN, true, this.attackIntervalSupplier.apply(entity));
+        if (this.adddelay > 0) {
+            HLperUtil.slowEntityFor(entity, adddelay);
+            BrainUtils.setForgettableMemory(entity, MemoryModuleType.ATTACK_COOLING_DOWN, true, this.fastzombieintervalsupplier.apply(entity));
+        } else BrainUtils.setForgettableMemory(entity, MemoryModuleType.ATTACK_COOLING_DOWN, true, this.attackIntervalSupplier.apply(entity));
+
+
         if (this.target == null)
             return;
+
 
         if (entity.getSensing().hasLineOfSight(this.target) && entity.isWithinMeleeAttackRange(this.target)) {
             if (this.onhit != null) {

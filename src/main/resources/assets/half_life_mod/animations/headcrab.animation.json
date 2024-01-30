@@ -690,6 +690,37 @@
 					}
 				}
 			}
+		},
+		"animation.headcrab.zombie": {
+			"loop": true,
+			"animation_length": 0.04167,
+			"bones": {
+				"bodyrotation": {
+					"rotation": {
+						"vector": [-3, 0, 0]
+					}
+				},
+				"frontlegs": {
+					"rotation": {
+						"vector": [0, 0, -54]
+					}
+				},
+				"frongleg1": {
+					"rotation": {
+						"vector": [0, 3, 0]
+					}
+				},
+				"frontleg2": {
+					"rotation": {
+						"vector": [0, -4, 0]
+					}
+				},
+				"backlegs": {
+					"rotation": {
+						"vector": [0, 0, 6]
+					}
+				}
+			}
 		}
 	},
 	"geckolib_format_version": 2

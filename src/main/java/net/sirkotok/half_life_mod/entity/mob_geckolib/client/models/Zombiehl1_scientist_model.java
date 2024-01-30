@@ -23,6 +23,8 @@ public class Zombiehl1_scientist_model extends GeoModel<HL1ZombieScientist> {
     @Override
     public ResourceLocation getModelResource(HL1ZombieScientist animatable) {
         if (animatable.getprofile() != null) {
+            if (DefaultPlayerSkin.getSkinModelName(UUIDUtil.getOrCreatePlayerUUID(animatable.getprofile())).equals("slim"))
+                return new ResourceLocation(HalfLifeMod.MOD_ID, "geo/sz5_ps.geo.json");
             return new ResourceLocation(HalfLifeMod.MOD_ID, "geo/sz5_p.geo.json");
         }
         return new ResourceLocation(HalfLifeMod.MOD_ID, "geo/sz6.geo.json");

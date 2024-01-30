@@ -63,11 +63,6 @@ public class HalfLifeEntities {
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "barnacle").toString()));
 
 
-    public static final RegistryObject<EntityType<Headcrab_zombie_standart>> HEADCRAB_ZOMBIE_1 =
-            ENTITY_TYPES.register("headcrab_zombie_1",
-                    () -> EntityType.Builder.of(Headcrab_zombie_standart::new, MobCategory.MONSTER)
-                            .sized(0.8f, 1.7f)
-                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "headcrab_zombie_1").toString()));
     public static final RegistryObject<EntityType<Headcrab_Poison_2>> HEADCRAB_POISON_HL2 =
             ENTITY_TYPES.register("headcrab_poison_2",
                     () -> EntityType.Builder.of(Headcrab_Poison_2::new, MobCategory.MONSTER)
@@ -152,7 +147,11 @@ public class HalfLifeEntities {
                             .sized(0.6F, 1.85F)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "zombie_hl2").toString()));
 
-
+    public static final RegistryObject<EntityType<HL2Zombie_fast>> ZOMBIE_FAST =
+            ENTITY_TYPES.register("zombie_fast",
+                    () -> EntityType.Builder.of(HL2Zombie_fast::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.47F)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "zombie_fast").toString()));
 
 
 
@@ -165,12 +164,12 @@ public class HalfLifeEntities {
     public static final RegistryObject<EntityType<Baby_Headcrab>> BABY_HEADCRAB =
             ENTITY_TYPES.register("baby_headcrab",
                     () -> EntityType.Builder.of(Baby_Headcrab::new, MobCategory.MONSTER)
-                            .sized(0.3F, 0.3F)
+                            .sized(0.4F, 0.4F)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "baby_headcrab").toString()));
     public static final RegistryObject<EntityType<Leech>> LEECH =
             ENTITY_TYPES.register("leech",
                     () -> EntityType.Builder.of(Leech::new, MobCategory.MONSTER)
-                            .sized(0.2F, 0.2F)
+                            .sized(0.3F, 0.3F)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "leech").toString()));
     public static final RegistryObject<EntityType<Shark>> SHARK =
             ENTITY_TYPES.register("shark",

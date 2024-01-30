@@ -25,6 +25,7 @@ public class ModEventBusEvents {
         event.put(HalfLifeEntities.SCIENTIST.get(), Scientist.setAttributes());
         event.put(HalfLifeEntities.ZOMBIE_SCIENTIST_HL1.get(), HL1ZombieScientist.setAttributes());
         event.put(HalfLifeEntities.ZOMBIE_HL2.get(), HL2Zombie.setAttributes());
+        event.put(HalfLifeEntities.ZOMBIE_FAST.get(), HL2Zombie_fast.setAttributes());
         event.put(HalfLifeEntities.COCKROACH.get(), Cockroach.setAttributes());
         event.put(HalfLifeEntities.BABY_HEADCRAB.get(), Baby_Headcrab.setAttributes());
         event.put(HalfLifeEntities.MANHACK.get(), Manhack.setAttributes());
@@ -41,7 +42,7 @@ public class ModEventBusEvents {
         event.put(HalfLifeEntities.VOLTIGORE.get(), Voltigore.setAttributes());
         event.put(HalfLifeEntities.SHOCKTROOPER.get(), Shocktrooper.setAttributes());
         event.put(HalfLifeEntities.HEADCRAB_HL1.get(), Headcrab_1.setAttributes());
-        event.put(HalfLifeEntities.HEADCRAB_ZOMBIE_1.get(), Headcrab_zombie_standart.setAttributes());
+
         event.put(HalfLifeEntities.HEADCRAB_HL2.get(), Headcrab_2.setAttributes());
         event.put(HalfLifeEntities.HEADCRAB_HLA.get(), Headcrab_3.setAttributes());
         event.put(HalfLifeEntities.HEADCRAB_ARMORED.get(), Headcrab_Armored.setAttributes());
