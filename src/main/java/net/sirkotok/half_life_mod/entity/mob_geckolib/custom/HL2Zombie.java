@@ -45,6 +45,7 @@ import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
 import net.tslat.smartbrainlib.api.core.behaviour.FirstApplicableBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.OneRandomBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.CustomBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomWalkTarget;
@@ -353,9 +354,9 @@ public class HL2Zombie extends HalfLifeMonster implements GeoEntity, SmartBrainO
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<HL2Zombie>()
                         .setPredicate((target, entity) ->
-                            target instanceof Player ||
-                                    target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
-                            target instanceof AbstractVillager));
+                                target instanceof Player || (this.getFirstPassenger() instanceof HalfLifeMonster headcrab && target.equals(headcrab.getLastHurtByMob())) ||
+                                        target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
+                                        target instanceof AbstractVillager));
     }
 
 
@@ -373,6 +374,7 @@ public class HL2Zombie extends HalfLifeMonster implements GeoEntity, SmartBrainO
     public BrainActivityGroup<HL2Zombie> getIdleTasks() {
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<HL2Zombie>(
+                        new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, false)).startCondition(entity -> this.entityData.get(IS_ANGRY).equals(true)),
                         new TargetOrRetaliateHLT<>(),
                         new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>()),
@@ -388,7 +390,8 @@ public class HL2Zombie extends HalfLifeMonster implements GeoEntity, SmartBrainO
                 new InvalidateAttackTarget<>(),
                 new SetWalkTargetToAttackTarget<>(),
                 new Retaliate<>(),
-               new OneRandomBehaviour<>(
+                new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, true)).startCondition(entity -> this.entityData.get(IS_ANGRY).equals(false)),
+                new OneRandomBehaviour<>(
                new ConfigurableAnimatableMeleeAttack<HL2Zombie>(13, 0f, 1f, 1, null, 0, this.getHitSound(), null, this.getMissSound(), this.getLongSound(), this.getShortSound())
                 .whenStarting(entity -> triggerAnim("onetime", "big"))
                 .cooldownFor(entity -> random.nextInt(10, 15)),
@@ -413,7 +416,7 @@ public class HL2Zombie extends HalfLifeMonster implements GeoEntity, SmartBrainO
      @Override
     public void tick() {
          super.tick();
-         if (this.tickCount > 10 && (this.getPassengers().isEmpty() || !(this.getFirstPassenger() instanceof Headcrab_2))) {
+         if ((this.tickCount > 15 && (this.getPassengers().isEmpty())) || (this.getFirstPassenger() instanceof LivingEntity entity && entity.isDeadOrDying())) {
              this.setHealth(0);
          }
      }

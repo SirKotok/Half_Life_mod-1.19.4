@@ -6,6 +6,7 @@
     "item.half_life_mod.cockroach_spawn_egg": "Cockroach Spawn Egg",
     "item.half_life_mod.hoteye_spawn_egg": "Hoteye Spawn Egg",
     "item.half_life_mod.hl1_zombie_scientist_spawn_egg": "Headcrab Zombie HL1 Spawn Egg",
+    "item.half_life_mod.pzombie_spawn_egg": "Poison Zombie HL1 Spawn Egg",
     "item.half_life_mod.hl2_zombie_spawn_egg": "Headcrab Zombie HL2 Spawn Egg",
     "item.half_life_mod.gonarch_spawn_egg": "Gonarch Spawn Egg",
     "item.half_life_mod.gonarchbm_spawn_egg": "Gonarch (Black Mesa) Spawn Egg",
@@ -22,7 +23,8 @@
   "item.half_life_mod.headcrab_fast_spawn_egg": "Fast Headcrab Spawn Egg",
     "item.half_life_mod.leech_spawn_egg": "Leech Spawn Egg",
     "item.half_life_mod.shark_spawn_egg": "Ichthyosaur Spawn Egg",
-  "item.half_life_mod.headcrab_zombie_spawn_egg": "Headcrab Zombie Spawn Egg",
+  "item.half_life_mod.headcrab_zombie_fast_spawn_egg": "Fast Zombie Spawn Egg",
+    "item.half_life_mod.vzombie_spawn_egg": "Headcrab Zombie Villager Spawn Egg",
   "item.half_life_mod.bullsquid_spawn_egg": "Bullsquid Spawn Egg",
     "item.half_life_mod.barnacle_1_spawn_egg": "Barnacle Spawn Egg",
   "item.half_life_mod.chumtoad_spawn_egg": "Chumtoad Spawn Egg",
@@ -59,9 +61,11 @@
   "key.category.half_life_mod.half_life": "Half-Life Category",
     "key.half_life_mod.reload_gun": "Reload Gun",
 
-
+    "entity.half_life_mod.pzombie": "Poison Zombie",
     "entity.half_life_mod.zombie_scientist_hl1": "Headcrab Zombie",
     "entity.half_life_mod.zombie_hl2": "Headcrab Zombie",
+    "entity.half_life_mod.vzombie": "Headcrab Zombie Villager",
+    "entity.half_life_mod.zombie_fast": "Fast Zombie",
 
     "entity.half_life_mod.hunter": "Hunter",
     "entity.half_life_mod.scientist": "Scientist",

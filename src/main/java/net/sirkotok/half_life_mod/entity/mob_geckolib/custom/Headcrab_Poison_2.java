@@ -33,6 +33,7 @@ import net.sirkotok.half_life_mod.entity.brain.behaviour.BiteWhileJumpingBehavio
 import net.sirkotok.half_life_mod.entity.brain.behaviour.HeadCrabJumpBehavior;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
+import net.sirkotok.half_life_mod.util.HLTags;
 import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
@@ -321,7 +322,7 @@ public class Headcrab_Poison_2 extends HalfLifeMonster implements GeoEntity, Sma
                      if(target instanceof ServerPlayer player) {
                          player.connection.send(new ClientboundSetPassengersPacket(player)); } // automatically done in 1.20.1 so no need to do that
                  }
-                 if (target instanceof Headcrab_zombie_standart) {
+                 if (target.getType().is(HLTags.EntityTypes.FACTION_HEADCRAB)) {
                      this.setYRot(target.getYRot());
                  }
              }
@@ -331,7 +332,7 @@ public class Headcrab_Poison_2 extends HalfLifeMonster implements GeoEntity, Sma
          if (!this.level.isClientSide && this.isPassenger() && (this.tickCount % 35) == 0) {
              Entity target = this.getVehicle();
              if (target instanceof LivingEntity){
-                 if (!(target instanceof Headcrab_zombie_standart)) {
+                 if (!(target.getType().is(HLTags.EntityTypes.FACTION_HEADCRAB))) {
                      this.playSound(this.getBiteSound());
                      ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 50), this);
                      this.doHurtTarget(target);}

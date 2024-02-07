@@ -4,6 +4,9 @@
     "half_life_mod:gonarch",
     "half_life_mod:gonarchbm",
     "half_life_mod:zombie_scientist_hl1",
-    "half_life_mod:zombie_hl2"
+    "half_life_mod:zombie_hl2",
+    "half_life_mod:vzombie",
+    "half_life_mod:zombie_fast",
+    "half_life_mod:pzombie"
   ]
 }

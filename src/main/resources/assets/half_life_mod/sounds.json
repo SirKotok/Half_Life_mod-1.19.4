@@ -17,6 +17,162 @@
       "half_life_mod:gon_die1"
     ]
   },
+  "breathe_loop1": {
+    "subtitle": "sounds.half_life_mod.breathe_loop1",
+    "sounds": [
+      "half_life_mod:breathe_loop1"
+    ]
+  },
+  "pz_alert1": {
+    "subtitle": "sounds.half_life_mod.pz_alert1",
+    "sounds": [
+      "half_life_mod:pz_alert1"
+    ]
+  },
+  "pz_alert2": {
+    "subtitle": "sounds.half_life_mod.pz_alert2",
+    "sounds": [
+      "half_life_mod:pz_alert2"
+    ]
+  },
+  "pz_breathe_loop1": {
+    "subtitle": "sounds.half_life_mod.pz_breathe_loop1",
+    "sounds": [
+      "half_life_mod:pz_breathe_loop1"
+    ]
+  },
+  "pz_call1": {
+    "subtitle": "sounds.half_life_mod.pz_call1",
+    "sounds": [
+      "half_life_mod:pz_call1"
+    ]
+  },
+  "pz_die1": {
+    "subtitle": "sounds.half_life_mod.pz_die1",
+    "sounds": [
+      "half_life_mod:pz_die1"
+    ]
+  },
+  "pz_die2": {
+    "subtitle": "sounds.half_life_mod.pz_die2",
+    "sounds": [
+      "half_life_mod:pz_die2"
+    ]
+  },
+  "pz_idle2": {
+    "subtitle": "sounds.half_life_mod.pz_idle2",
+    "sounds": [
+      "half_life_mod:pz_idle2"
+    ]
+  },
+  "pz_idle3": {
+    "subtitle": "sounds.half_life_mod.pz_idle3",
+    "sounds": [
+      "half_life_mod:pz_idle3"
+    ]
+  },
+  "pz_idle4": {
+    "subtitle": "sounds.half_life_mod.pz_idle4",
+    "sounds": [
+      "half_life_mod:pz_idle4"
+    ]
+  },
+  "pz_pain1": {
+    "subtitle": "sounds.half_life_mod.pz_pain1",
+    "sounds": [
+      "half_life_mod:pz_pain1"
+    ]
+  },
+  "pz_pain2": {
+    "subtitle": "sounds.half_life_mod.pz_pain2",
+    "sounds": [
+      "half_life_mod:pz_pain2"
+    ]
+  },
+  "pz_pain3": {
+    "subtitle": "sounds.half_life_mod.pz_pain3",
+    "sounds": [
+      "half_life_mod:pz_pain3"
+    ]
+  },
+  "pz_throw2": {
+    "subtitle": "sounds.half_life_mod.pz_throw2",
+    "sounds": [
+      "half_life_mod:pz_throw2"
+    ]
+  },
+  "pz_throw3": {
+    "subtitle": "sounds.half_life_mod.pz_throw3",
+    "sounds": [
+      "half_life_mod:pz_throw3"
+    ]
+  },
+  "pz_warn1": {
+    "subtitle": "sounds.half_life_mod.pz_warn1",
+    "sounds": [
+      "half_life_mod:pz_warn1"
+    ]
+  },
+  "pz_warn2": {
+    "subtitle": "sounds.half_life_mod.pz_warn2",
+    "sounds": [
+      "half_life_mod:pz_warn2"
+    ]
+  },
+  "fz_alert_close1": {
+    "subtitle": "sounds.half_life_mod.fz_alert_close1",
+    "sounds": [
+      "half_life_mod:fz_alert_close1"
+    ]
+  },
+  "fz_alert_far1": {
+    "subtitle": "sounds.half_life_mod.fz_alert_far1",
+    "sounds": [
+      "half_life_mod:fz_alert_far1"
+    ]
+  },
+  "fz_frenzy1": {
+    "subtitle": "sounds.half_life_mod.fz_frenzy1",
+    "sounds": [
+      "half_life_mod:fz_frenzy1"
+    ]
+  },
+  "fz_scream1": {
+    "subtitle": "sounds.half_life_mod.fz_scream1",
+    "sounds": [
+      "half_life_mod:fz_scream1"
+    ]
+  },
+  "idle1": {
+    "subtitle": "sounds.half_life_mod.idle1",
+    "sounds": [
+      "half_life_mod:idle1"
+    ]
+  },
+  "idle2": {
+    "subtitle": "sounds.half_life_mod.idle2",
+    "sounds": [
+      "half_life_mod:idle2"
+    ]
+  },
+  "idle3": {
+    "subtitle": "sounds.half_life_mod.idle3",
+    "sounds": [
+      "half_life_mod:idle3"
+    ]
+  },
+  "leap1": {
+    "subtitle": "sounds.half_life_mod.leap1",
+    "sounds": [
+      "half_life_mod:leap1"
+    ]
+  },
+  "wake1": {
+    "subtitle": "sounds.half_life_mod.wake1",
+    "sounds": [
+      "half_life_mod:wake1"
+    ]
+  },
   "claw_miss1": {
     "subtitle": "sounds.half_life_mod.claw_miss1",
     "sounds": [

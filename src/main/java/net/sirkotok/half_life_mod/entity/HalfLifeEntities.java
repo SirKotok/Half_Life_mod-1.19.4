@@ -153,7 +153,17 @@ public class HalfLifeEntities {
                             .sized(0.6F, 1.47F)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "zombie_fast").toString()));
 
+    public static final RegistryObject<EntityType<Pzombie>> PZOMBIE =
+            ENTITY_TYPES.register("pzombie",
+                    () -> EntityType.Builder.of(Pzombie::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.63F)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "pzombie").toString()));
 
+    public static final RegistryObject<EntityType<HLZombieVillager>> VZOMBIE =
+            ENTITY_TYPES.register("vzombie",
+                    () -> EntityType.Builder.of(HLZombieVillager::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.7F)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "vzombie").toString()));
 
     public static final RegistryObject<EntityType<Cockroach>> COCKROACH =
             ENTITY_TYPES.register("cockroach",

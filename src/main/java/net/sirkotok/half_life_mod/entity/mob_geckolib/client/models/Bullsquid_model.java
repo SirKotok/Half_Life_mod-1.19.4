@@ -29,6 +29,9 @@ public class Bullsquid_model extends GeoModel<Bullsquid> {
         if (animatable.gettexture() == 51) {
             return new ResourceLocation(HalfLifeMod.MOD_ID, "textures/entity/bullsquid_t5.png"); }
 
+        if (animatable.gettexture() == 52 || animatable.gettexture() == 53 || animatable.gettexture() == 54) {
+            return new ResourceLocation(HalfLifeMod.MOD_ID, "textures/entity/bullsquid_t6.png"); }
+
         return new ResourceLocation(HalfLifeMod.MOD_ID, "textures/entity/bullsquid_t1.png");
     }
 

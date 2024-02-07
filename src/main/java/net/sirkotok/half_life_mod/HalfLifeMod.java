@@ -84,7 +84,12 @@ public class HalfLifeMod
 
             event.accept(HalfLifeItems.HL1_ZOMBIE_SCIENTIST_SPAWN_EGG);
             event.accept(HalfLifeItems.HL2_ZOMBIE_SPAWN_EGG);
+
+            event.accept(HalfLifeItems.VZOMBIE_SPAWN_EGG);
             event.accept(HalfLifeItems.HEADCRAB_ZOMBIE_FAST_SPAWN_EGG);
+            event.accept(HalfLifeItems.PZOMBIE_SPAWN_EGG);
+
+
 
             event.accept(HalfLifeItems.GONARCH_SPAWN_EGG);
             event.accept(HalfLifeItems.GONARCHBM_SPAWN_EGG);

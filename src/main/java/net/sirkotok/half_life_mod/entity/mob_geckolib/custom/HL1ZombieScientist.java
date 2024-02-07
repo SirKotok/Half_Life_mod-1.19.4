@@ -41,6 +41,7 @@ import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
 import net.tslat.smartbrainlib.api.core.behaviour.FirstApplicableBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.OneRandomBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.CustomBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomWalkTarget;
@@ -254,9 +255,9 @@ public class HL1ZombieScientist extends HalfLifeMonster implements GeoEntity, Sm
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<HL1ZombieScientist>()
                         .setPredicate((target, entity) ->
-                            target instanceof Player ||
-                                    target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
-                            target instanceof AbstractVillager));
+                                target instanceof Player || (this.getFirstPassenger() instanceof HalfLifeMonster headcrab && target.equals(headcrab.getLastHurtByMob())) ||
+                                        target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
+                                        target instanceof AbstractVillager));
     }
 
 
@@ -274,6 +275,7 @@ public class HL1ZombieScientist extends HalfLifeMonster implements GeoEntity, Sm
     public BrainActivityGroup<HL1ZombieScientist> getIdleTasks() {
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<HL1ZombieScientist>(
+                        new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, false)).startCondition(entity -> this.entityData.get(IS_ANGRY).equals(true)),
                         new TargetOrRetaliateHLT<>(),
                         new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>()),
@@ -287,6 +289,7 @@ public class HL1ZombieScientist extends HalfLifeMonster implements GeoEntity, Sm
     public BrainActivityGroup<HL1ZombieScientist> getFightTasks() { // These are the tasks that handle fighting
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>(),
+                new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, true)).startCondition(entity -> this.entityData.get(IS_ANGRY).equals(false)),
                 new SetWalkTargetToAttackTarget<>(),
                 new Retaliate<>(),
                new OneRandomBehaviour<>(
@@ -360,7 +363,7 @@ public class HL1ZombieScientist extends HalfLifeMonster implements GeoEntity, Sm
 
 
 
-         if (this.tickCount > 10 && (this.getPassengers().isEmpty() || !(this.getFirstPassenger() instanceof Headcrab_1))) {
+         if ((this.tickCount > 15 && (this.getPassengers().isEmpty())) || (this.getFirstPassenger() instanceof LivingEntity entity && entity.isDeadOrDying())) {
              this.setHealth(0);
          }
      }

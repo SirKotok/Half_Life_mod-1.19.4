@@ -1,4 +1,4 @@
-// 1.19.4	2024-01-30T09:44:57.3890287	Item Models: half_life_mod
+// 1.19.4	2024-02-07T04:30:12.8596129	Item Models: half_life_mod
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/baby_headcrab_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/barnacle_1_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/barney_spawn_egg.json
@@ -15,7 +15,7 @@
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/headcrab_fast_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/headcrab_poison_2_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/headcrab_poison_3_spawn_egg.json
-63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/headcrab_zombie_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/headcrab_zombie_fast_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/hl1_zombie_scientist_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/hl2_zombie_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/hoteye_spawn_egg.json
@@ -26,6 +26,7 @@
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/penguin_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/pitdrone_spawn_egg.json
 e68d9f8c4c5484f53a012043baa46de7e05b6f61 assets/half_life_mod/models/item/portal_project.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/pzombie_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/scientist_spawn_egg.json
 dbe72b845f4b73852d0c4d2091299d93b8756e9e assets/half_life_mod/models/item/security_guard_chestplate.json
 5da4163924c3a0ba667da2f1dfe02b07cb4e7277 assets/half_life_mod/models/item/security_guard_helmet.json
@@ -36,3 +37,4 @@ dbe72b845f4b73852d0c4d2091299d93b8756e9e assets/half_life_mod/models/item/securi
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/snarknest_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/snark_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/vortigore_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/vzombie_spawn_egg.json

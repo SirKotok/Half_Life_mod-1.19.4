@@ -11,6 +11,8 @@ import software.bernie.geckolib.model.GeoModel;
 
 public class Controller_model extends GeoModel<Controller> {
 
+
+
     @Override
     public ResourceLocation getModelResource(Controller animatable) {
         return new ResourceLocation(HalfLifeMod.MOD_ID, "geo/controller.geo.json");

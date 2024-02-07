@@ -22,7 +22,8 @@ public class Zombiehl2_renderer extends DynamicGeoEntityRenderer<HL2Zombie> {
     public Zombiehl2_renderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new Zombiehl2_model());
     }
-
+    private static final ResourceLocation BARNEY =
+            new ResourceLocation(HalfLifeMod.MOD_ID,"textures/entity/barney.png");
     private static final ResourceLocation BASE =
             new ResourceLocation(HalfLifeMod.MOD_ID,"textures/entity/hl2_zombie_base.png");
     private static final ResourceLocation HEAD1 =
@@ -114,10 +115,14 @@ public class Zombiehl2_renderer extends DynamicGeoEntityRenderer<HL2Zombie> {
             return DefaultPlayerSkin.getDefaultSkin(UUIDUtil.getOrCreatePlayerUUID(animatable.getprofile()));
         }
 
+        int i = animatable.gettexture();
+
+        if (i == -5 && (bone.getName().equals("oy") || bone.getName().equals("oldleftleg") || bone.getName().equals("oldrightleg") || bone.getName().equals("ou") || bone.getName().equals("oldleftcoatleg") || bone.getName().equals("oc") || bone.getName().equals("oldrightarm") || bone.getName().equals("oa"))) {
+            return BARNEY;
+        }
 
 
 
-       int i = animatable.gettexture();
 
 
         if (i == -1 && (bone.getName().equals("oy") || bone.getName().equals("oldleftleg") || bone.getName().equals("oldrightleg") || bone.getName().equals("ou") || bone.getName().equals("oldleftcoatleg") || bone.getName().equals("oc") || bone.getName().equals("oldrightarm") || bone.getName().equals("oa"))) {

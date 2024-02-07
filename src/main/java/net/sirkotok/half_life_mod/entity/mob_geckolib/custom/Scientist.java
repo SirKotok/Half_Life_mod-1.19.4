@@ -18,6 +18,7 @@ import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
@@ -261,6 +262,7 @@ public class Scientist extends HalfLifeNeutral implements GeoEntity, SmartBrainO
     public Scientist(EntityType type, Level level) {
         super(type, level);
         this.xpReward = 3;
+      //TODO: add opening doors  ((GroundPathNavigation)this.getNavigation()).setCanOpenDoors(true);
     }
 
 

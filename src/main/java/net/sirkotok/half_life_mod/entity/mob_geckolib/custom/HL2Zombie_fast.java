@@ -43,6 +43,7 @@ import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
 import net.tslat.smartbrainlib.api.core.behaviour.FirstApplicableBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.OneRandomBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
+import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.CustomBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomWalkTarget;
@@ -146,59 +147,28 @@ public class HL2Zombie_fast extends HalfLifeMonster implements GeoEntity, SmartB
 
     protected SoundEvent getHitSound() {return HalfLifeSounds.ZOMBIE_HIT.get();}
 
-    protected SoundEvent getLongSound() {return HalfLifeSounds.ZO_ATTACK1.get();}
-    protected SoundEvent getShortSound() {return HalfLifeSounds.ZO_ATTACK2.get();}
+    protected SoundEvent getFrenzySound() {return HalfLifeSounds.FZ_FRENZY1.get();}
+    protected SoundEvent getLoopSound() {return HalfLifeSounds.FZ_BREATHE_LOOP1.get();}
+    protected SoundEvent getJumpSound() {
+        return (random.nextFloat() < 0.2) ? HalfLifeSounds.FZ_SCREAM1.get() : HalfLifeSounds.FZ_LEAP1.get();
+    }
+
+    protected SoundEvent getHorrorSound() {
+        return (random.nextFloat() < 0.5) ? HalfLifeSounds.FZ_ALERT_CLOSE1.get() : HalfLifeSounds.FZ_ALERT_FAR1.get();
+    }
 
     protected SoundEvent getAmbientSound() {
-        if (this.isangry()) {
             switch (this.random.nextInt(1,4)) {
-                case 1:  return HalfLifeSounds.ZOMBIE_ALERT1.get();
-                case 2:  return HalfLifeSounds.ZOMBIE_ALERT2.get();
-                case 3:  return HalfLifeSounds.ZOMBIE_ALERT3.get();
+                case 1:  return HalfLifeSounds.FZ_IDLE1.get();
+                case 2:  return HalfLifeSounds.FZ_IDLE2.get();
+                case 3:  return HalfLifeSounds.FZ_IDLE3.get();
             }
-        }
-        switch (this.random.nextInt(1,15)) {
-            case 1:  return HalfLifeSounds.ZOMBIE_VOICE_IDLE1.get();
-            case 2:  return HalfLifeSounds.ZOMBIE_VOICE_IDLE2.get();
-            case 3:  return HalfLifeSounds.ZOMBIE_VOICE_IDLE3.get();
-            case 4:  return HalfLifeSounds.ZOMBIE_VOICE_IDLE4.get();
-            case 5:  return HalfLifeSounds.ZOMBIE_VOICE_IDLE5.get();
-            case 6:  return HalfLifeSounds.ZOMBIE_VOICE_IDLE6.get();
-            case 7:  return HalfLifeSounds.ZOMBIE_VOICE_IDLE7.get();
-            case 8:  return HalfLifeSounds.ZOMBIE_VOICE_IDLE8.get();
-            case 9:  return HalfLifeSounds.ZOMBIE_VOICE_IDLE9.get();
-            case 10:  return HalfLifeSounds.ZOMBIE_VOICE_IDLE10.get();
-            case 11:  return HalfLifeSounds.ZOMBIE_VOICE_IDLE11.get();
-            case 12:  return HalfLifeSounds.ZOMBIE_VOICE_IDLE12.get();
-            case 13:  return HalfLifeSounds.ZOMBIE_VOICE_IDLE13.get();
-            case 14:  return HalfLifeSounds.ZOMBIE_VOICE_IDLE14.get();
-        }
+
         return HalfLifeSounds.HEADCRAB_1_ALERT_1.get();
     }
 
 
-    protected SoundEvent getStepSound() {
-        switch (this.random.nextInt(1,7)) {
-            case 1:  return HalfLifeSounds.ZOMBIE_FOOT1.get();
-            case 2:  return HalfLifeSounds.ZOMBIE_FOOT2.get();
-            case 3:  return HalfLifeSounds.ZOMBIE_FOOT3.get();
-            case 4:  return HalfLifeSounds.ZOMBIE_FOOT_SLIDE1.get();
-            case 5:  return HalfLifeSounds.ZOMBIE_FOOT_SLIDE2.get();
-            case 6:  return HalfLifeSounds.ZOMBIE_FOOT_SLIDE3.get();
-        }
-        return SoundEvents.FROG_STEP;
-    }
 
-    @Override
-    protected void playStepSound(BlockPos pPos, BlockState pState) {
-        if (this.tickCount%3 == 0) {
-            BlockState blockstate = this.level.getBlockState(pPos.above());
-            boolean flag = blockstate.is(BlockTags.INSIDE_STEP_SOUND_BLOCKS);
-            if (flag || !pState.getMaterial().isLiquid()) {
-                this.playSound(getStepSound());
-            }
-        }
-    }
 
 
     @Override
@@ -278,9 +248,9 @@ public class HL2Zombie_fast extends HalfLifeMonster implements GeoEntity, SmartB
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<HL2Zombie_fast>()
                         .setPredicate((target, entity) ->
-                            target instanceof Player ||
-                                    target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
-                            target instanceof AbstractVillager));
+                                target instanceof Player || (this.getFirstPassenger() instanceof HalfLifeMonster headcrab && target.equals(headcrab.getLastHurtByMob())) ||
+                                        target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
+                                        target instanceof AbstractVillager));
     }
 
 
@@ -298,6 +268,7 @@ public class HL2Zombie_fast extends HalfLifeMonster implements GeoEntity, SmartB
     public BrainActivityGroup<HL2Zombie_fast> getIdleTasks() {
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<HL2Zombie_fast>(
+                        new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, false)).startCondition(entity -> this.entityData.get(IS_ANGRY).equals(true)),
                         new TargetOrRetaliateHLT<>(),
                         new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>()),
@@ -312,13 +283,14 @@ public class HL2Zombie_fast extends HalfLifeMonster implements GeoEntity, SmartB
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>(),
                 new SetWalkTargetToAttackTarget<>().speedMod(1.25f),
+                new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, true)).startCondition(entity -> this.entityData.get(IS_ANGRY).equals(false)).whenStarting(entity -> CommonSounds.PlaySoundAsOwn(this, this.getHorrorSound())),
                 new Retaliate<>(),
                 new BiteWhileJumpingBehavior<>(30, null, 0f).startCondition(entity -> !isOnGround()).cooldownFor(entity -> 20),
-                new HeadCrabJumpBehavior<>(2, null, null).SetMinDistance(5).whenStarting(entity -> triggerAnim("onetime", "jump")).cooldownFor(entity -> 100),
-                new DoubleMeleeAttack<HL2Zombie_fast>(14, 8, 0, 1, 1, null , 0,
-                        CommonSounds.getClawHitSound(), null, this.getMissSound(), this.getLongSound(), this.getShortSound(), 40)
+                new HeadCrabJumpBehavior<>(2, this.getJumpSound(), null).SetMinDistance(5).whenStarting(entity -> triggerAnim("onetime", "jump")).cooldownFor(entity -> 100),
+                new DoubleMeleeAttack<HL2Zombie_fast>(54, 8, 0, 1, 1, null , 0,
+                        CommonSounds.getClawHitSound(), null, this.getMissSound(), null, null, 40, this.getFrenzySound())
                                .whenStarting(entity ->triggerAnim("onetime", "double"))
-                               .cooldownFor(entity -> random.nextInt(10, 15))
+                               .cooldownFor(entity -> 12)
 
 
         );
@@ -335,7 +307,9 @@ public class HL2Zombie_fast extends HalfLifeMonster implements GeoEntity, SmartB
      @Override
     public void tick() {
          super.tick();
-         if (this.tickCount > 10 && (this.getPassengers().isEmpty() || !(this.getFirstPassenger() instanceof Headcrab_Fast))) {
+         if (tickCount % 60 == 0 && this.isangry())
+             CommonSounds.PlaySoundAsOwn(this, this.getLoopSound());
+         if ((this.tickCount > 15 && (this.getPassengers().isEmpty())) || (this.getFirstPassenger() instanceof LivingEntity entity && entity.isDeadOrDying())) {
              this.setHealth(0);
          }
      }

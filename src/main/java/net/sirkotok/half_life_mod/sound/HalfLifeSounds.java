@@ -15,6 +15,104 @@ public class HalfLifeSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 
+
+
+    //Poison zombie sounds
+    public static final RegistryObject<SoundEvent> PZ_ALERT1=
+            registerSoundEvent("pz_alert1");
+  public static final RegistryObject<SoundEvent> PZ_ALERT2=
+          registerSoundEvent("pz_alert2");
+  public static final RegistryObject<SoundEvent> PZ_BREATHE_LOOP1=
+          registerSoundEvent("pz_breathe_loop1");
+  public static final RegistryObject<SoundEvent> PZ_CALL1=
+          registerSoundEvent("pz_call1");
+  public static final RegistryObject<SoundEvent> PZ_DIE1=
+          registerSoundEvent("pz_die1");
+  public static final RegistryObject<SoundEvent> PZ_DIE2=
+          registerSoundEvent("pz_die2");
+  public static final RegistryObject<SoundEvent> PZ_IDLE1=
+          registerSoundEvent("pz_idle2");
+  public static final RegistryObject<SoundEvent> PZ_IDLE2=
+          registerSoundEvent("pz_idle3");
+  public static final RegistryObject<SoundEvent> PZ_IDLE3=
+          registerSoundEvent("pz_idle4");
+  public static final RegistryObject<SoundEvent> PZ_PAIN1=
+          registerSoundEvent("pz_pain1");
+  public static final RegistryObject<SoundEvent> PZ_PAIN2=
+          registerSoundEvent("pz_pain2");
+  public static final RegistryObject<SoundEvent> PZ_PAIN3=
+          registerSoundEvent("pz_pain3");
+  public static final RegistryObject<SoundEvent> PZ_THROW1=
+          registerSoundEvent("pz_throw2");
+  public static final RegistryObject<SoundEvent> PZ_THROW2=
+          registerSoundEvent("pz_throw3");
+  public static final RegistryObject<SoundEvent> PZ_WARN1=
+          registerSoundEvent("pz_warn1");
+  public static final RegistryObject<SoundEvent> PZ_WARN2=
+          registerSoundEvent("pz_warn2");
+
+      /*    "sounds.half_life_mod.pz_alert1": "Poison Zombie ",
+          "sounds.half_life_mod.pz_alert2": "Poison Zombie ",
+          "sounds.half_life_mod.pz_breathe_loop1": "Poison Zombie ",
+          "sounds.half_life_mod.pz_call1": "Poison Zombie ",
+          "sounds.half_life_mod.pz_die1": "Poison Zombie ",
+          "sounds.half_life_mod.pz_die2": "Poison Zombie ",
+          "sounds.half_life_mod.pz_idle2": "Poison Zombie ",
+          "sounds.half_life_mod.pz_idle3": "Poison Zombie ",
+          "sounds.half_life_mod.pz_idle4": "Poison Zombie ",
+          "sounds.half_life_mod.pz_pain1": "Poison Zombie ",
+          "sounds.half_life_mod.pz_pain2": "Poison Zombie ",
+          "sounds.half_life_mod.pz_pain3": "Poison Zombie ",
+          "sounds.half_life_mod.pz_throw2": "Poison Zombie ",
+          "sounds.half_life_mod.pz_throw3": "Poison Zombie ",
+          "sounds.half_life_mod.pz_warn1": "Poison Zombie ",
+          "sounds.half_life_mod.pz_warn2": "Poison Zombie ", */
+
+
+
+
+
+  // Fast zombie sounds
+
+  public static final RegistryObject<SoundEvent> FZ_BREATHE_LOOP1=
+          registerSoundEvent("breathe_loop1");
+  public static final RegistryObject<SoundEvent> FZ_ALERT_CLOSE1=
+          registerSoundEvent("fz_alert_close1");
+  public static final RegistryObject<SoundEvent> FZ_ALERT_FAR1=
+          registerSoundEvent("fz_alert_far1");
+  public static final RegistryObject<SoundEvent> FZ_FRENZY1=
+          registerSoundEvent("fz_frenzy1");
+  public static final RegistryObject<SoundEvent> FZ_SCREAM1=
+          registerSoundEvent("fz_scream1");
+  public static final RegistryObject<SoundEvent> FZ_IDLE1=
+          registerSoundEvent("idle1");
+  public static final RegistryObject<SoundEvent> FZ_IDLE2=
+          registerSoundEvent("idle2");
+  public static final RegistryObject<SoundEvent> FZ_IDLE3=
+          registerSoundEvent("idle3");
+  public static final RegistryObject<SoundEvent> FZ_LEAP1=
+          registerSoundEvent("leap1");
+  public static final RegistryObject<SoundEvent> FZ_WAKE1=
+          registerSoundEvent("wake1");
+
+  /*        "sounds.half_life_mod.breathe_loop1": "Fast Zombie ",
+          "sounds.half_life_mod.fz_alert_close1": "Fast Zombie ",
+          "sounds.half_life_mod.fz_alert_far1": "Fast Zombie ",
+          "sounds.half_life_mod.fz_frenzy1": "Fast Zombie ",
+          "sounds.half_life_mod.fz_scream1": "Fast Zombie ",
+          "sounds.half_life_mod.idle1": "Fast Zombie ",
+          "sounds.half_life_mod.idle2": "Fast Zombie ",
+          "sounds.half_life_mod.idle3": "Fast Zombie ",
+          "sounds.half_life_mod.leap1": "Fast Zombie ",
+          "sounds.half_life_mod.wake1": "Fast Zombie ", */
+
+
+
+
+
+
+
+
   // Zombie HL2
 
   public static final RegistryObject<SoundEvent> ZOMBIE_FOOT1=

@@ -93,8 +93,17 @@ public class HalfLifeItems {
                     new Item.Properties()));
 
 
-    public static final RegistryObject<Item> HEADCRAB_ZOMBIE_FAST_SPAWN_EGG = ITEMS.register("headcrab_zombie_spawn_egg",
-            () -> new ForgeSpawnEggItem(HalfLifeEntities.ZOMBIE_FAST, 0xf4eaeb, 0x4243f   ,
+    public static final RegistryObject<Item> HEADCRAB_ZOMBIE_FAST_SPAWN_EGG = ITEMS.register("headcrab_zombie_fast_spawn_egg",
+            () -> new ForgeSpawnEggItem(HalfLifeEntities.ZOMBIE_FAST, 0xf4ebae, 0xa2201c   ,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> PZOMBIE_SPAWN_EGG = ITEMS.register("pzombie_spawn_egg",
+            () -> new ForgeSpawnEggItem(HalfLifeEntities.PZOMBIE, 0x7f15b0, 0x16071d   ,
+                    new Item.Properties()));
+
+
+    public static final RegistryObject<Item> VZOMBIE_SPAWN_EGG = ITEMS.register("vzombie_spawn_egg",
+            () -> new ForgeSpawnEggItem(HalfLifeEntities.VZOMBIE, 0x975103, 0xff5600   ,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> BULLSQUID_SPAWN_EGG = ITEMS.register("bullsquid_spawn_egg",

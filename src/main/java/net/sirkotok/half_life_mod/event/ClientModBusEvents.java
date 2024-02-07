@@ -22,6 +22,7 @@ import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.SitRe
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.Voltigore_projectile_e_renderer;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.client.models.Zombiehl2_model_fast;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.client.renderers.*;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.HLZombieVillager;
 import net.sirkotok.half_life_mod.entity.mob_normal.client.ModModelLayers;
 import net.sirkotok.half_life_mod.entity.mob_normal.client.models.Barnacle_Model;
 import net.sirkotok.half_life_mod.entity.mob_normal.client.renderers.Barnacle_Renderer;
@@ -85,6 +86,8 @@ public class ClientModBusEvents {
         EntityRenderers.register(HalfLifeEntities.ZOMBIE_SCIENTIST_HL1.get(), Scientist_zombiehl1_renderer::new);
         EntityRenderers.register(HalfLifeEntities.ZOMBIE_HL2.get(), Zombiehl2_renderer::new);
         EntityRenderers.register(HalfLifeEntities.ZOMBIE_FAST.get(), Fast_zombieRenderer::new);
+        EntityRenderers.register(HalfLifeEntities.PZOMBIE.get(), pzombieRenderer::new);
+        EntityRenderers.register(HalfLifeEntities.VZOMBIE.get(), Zombiev_renderer::new);
         EntityRenderers.register(HalfLifeEntities.COCKROACH.get(), CockroachRenderer::new);
         EntityRenderers.register(HalfLifeEntities.BABY_HEADCRAB.get(), BabyHeadcrab_renderer::new);
         EntityRenderers.register(HalfLifeEntities.MANHACK.get(), ManhackRenderer::new);

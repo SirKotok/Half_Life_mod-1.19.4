@@ -12,6 +12,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.npc.AbstractVillager;
+import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -24,6 +25,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
+import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.*;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
 import net.sirkotok.half_life_mod.worldgen.dimension.HalfLifeDimensions;
@@ -127,8 +129,11 @@ public class ForgeEvents {
             }
 
 
+
+            if (entity.getItemBySlot(EquipmentSlot.HEAD).isEmpty()) {
             if (event.getSource().getEntity() instanceof Headcrab_Fast headcrab) {
-                if (entity instanceof Scientist || entity instanceof AbstractVillager || entity instanceof Player) {
+
+                if (entity instanceof HalfLifeNeutral || entity instanceof AbstractVillager || entity instanceof Player) {
                     HL2Zombie_fast zombie = HalfLifeEntities.ZOMBIE_FAST.get().create(entity.level);
                     if (zombie != null) {
                         zombie.moveTo(entity.position());
@@ -144,7 +149,40 @@ public class ForgeEvents {
 
 
 
+            if (entity instanceof Villager scientist) {
+                if (event.getSource().getEntity() instanceof Headcrab_1 || event.getSource().getEntity() instanceof Headcrab_2 || event.getSource().getEntity() instanceof Headcrab_3) {
+                    LivingEntity headcrab = (LivingEntity)event.getSource().getEntity();
+                    HLZombieVillager zombie = HalfLifeEntities.VZOMBIE.get().create(scientist.level);
+                    if (zombie != null) {
+                        zombie.moveTo(scientist.position());
+                        zombie.setVillagerData(scientist.getVillagerData());
+                        if (scientist.hasCustomName()) zombie.setCustomName(scientist.getCustomName());
+                        headcrab.startRiding(zombie);
+                        ForgeEventFactory.onFinalizeSpawn((Mob) zombie, (ServerLevelAccessor) scientist.level, scientist.level.getCurrentDifficultyAt(zombie.blockPosition()), MobSpawnType.CONVERSION, null, null);
+                        zombie.getLevel().addFreshEntity(zombie);
+                        scientist.discard();
+                    }
+                }
+            }
+
+
+
                 if (event.getSource().getEntity() instanceof Headcrab_1 headcrab) {
+
+                    if (entity instanceof Barney scientist) {
+                        HL1ZombieScientist zombie = HalfLifeEntities.ZOMBIE_SCIENTIST_HL1.get().create(scientist.level);
+                        if (zombie != null) {
+                            zombie.moveTo(scientist.position());
+                            zombie.settexture(-5);
+                            if (scientist.hasCustomName()) zombie.setCustomName(scientist.getCustomName());
+                            headcrab.startRiding(zombie);
+                            ForgeEventFactory.onFinalizeSpawn((Mob) zombie, (ServerLevelAccessor) scientist.level, scientist.level.getCurrentDifficultyAt(zombie.blockPosition()), MobSpawnType.CONVERSION, null, null);
+                            zombie.getLevel().addFreshEntity(zombie);
+                            scientist.discard();
+                        }
+                    }
+
+
                     if (entity instanceof Scientist scientist) {
                         HL1ZombieScientist zombie = HalfLifeEntities.ZOMBIE_SCIENTIST_HL1.get().create(scientist.level);
                         if (zombie != null) {
@@ -176,6 +214,21 @@ public class ForgeEvents {
 
 
             if (event.getSource().getEntity() instanceof Headcrab_2 headcrab) {
+
+                if (entity instanceof Barney scientist) {
+                    HL2Zombie zombie = HalfLifeEntities.ZOMBIE_HL2.get().create(scientist.level);
+                    if (zombie != null) {
+                        zombie.moveTo(scientist.position());
+                        zombie.settexture(-5);
+                        if (scientist.hasCustomName()) zombie.setCustomName(scientist.getCustomName());
+                        headcrab.startRiding(zombie);
+                        ForgeEventFactory.onFinalizeSpawn((Mob) zombie, (ServerLevelAccessor) scientist.level, scientist.level.getCurrentDifficultyAt(zombie.blockPosition()), MobSpawnType.CONVERSION, null, null);
+                        zombie.getLevel().addFreshEntity(zombie);
+                        scientist.discard();
+                    }
+                }
+
+
                 if (entity instanceof Scientist scientist) {
                     HL2Zombie zombie = HalfLifeEntities.ZOMBIE_HL2.get().create(scientist.level);
                     if (zombie != null) {
@@ -206,6 +259,7 @@ public class ForgeEvents {
                 }
             }
 
+            }
 
 
 
