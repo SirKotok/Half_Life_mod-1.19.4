@@ -42,6 +42,7 @@ public final class HLperUtil {
 
 
     public static boolean issameteam(LivingEntity one, LivingEntity two){
+        boolean antlion = (one.getType().is(HLTags.EntityTypes.FACTION_ANTLION) && two.getType().is(HLTags.EntityTypes.FACTION_ANTLION));
         boolean combine = (one.getType().is(HLTags.EntityTypes.FACTION_COMBINE) && two.getType().is(HLTags.EntityTypes.FACTION_COMBINE));
         boolean science_team = (one.getType().is(HLTags.EntityTypes.FACTION_SCIENCE_TEAM) && two.getType().is(HLTags.EntityTypes.FACTION_SCIENCE_TEAM));
         boolean neutral_vs_enemy_player = (one instanceof HalfLifeNeutral neutral && two instanceof Player player && neutral.ismyenemy(player.getStringUUID())) || (two instanceof HalfLifeNeutral neutral2 && one instanceof Player player2 && neutral2.ismyenemy(player2.getStringUUID()));
@@ -49,7 +50,7 @@ public final class HLperUtil {
         boolean xen = (one.getType().is(HLTags.EntityTypes.FACTION_XEN) && two.getType().is(HLTags.EntityTypes.FACTION_XEN));
         boolean pitdrone_unique = !((one instanceof Pitdrone && two instanceof Shockroach) || (one instanceof Shockroach && two instanceof Pitdrone));
         boolean headcrab = (one.getType().is(HLTags.EntityTypes.FACTION_HEADCRAB) && two.getType().is(HLTags.EntityTypes.FACTION_HEADCRAB));
-        return (science_team || race_x || combine || headcrab || xen) && pitdrone_unique && !neutral_vs_enemy_player;
+        return (antlion || science_team || race_x || combine || headcrab || xen) && pitdrone_unique && !neutral_vs_enemy_player;
     }
 
 

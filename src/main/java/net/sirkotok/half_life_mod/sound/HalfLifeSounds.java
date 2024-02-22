@@ -16,6 +16,78 @@ public class HalfLifeSounds {
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 
 
+    // Antlion
+
+  public static final RegistryObject<SoundEvent> ANTLION_ATTACK1=
+          registerSoundEvent("antlion_attack1");
+  public static final RegistryObject<SoundEvent> ANTLION_ATTACK2=
+          registerSoundEvent("antlion_attack2");
+  public static final RegistryObject<SoundEvent> ANTLION_ATTACK3=
+          registerSoundEvent("antlion_attack3");
+  public static final RegistryObject<SoundEvent> ANTLION_ATTACK4=
+          registerSoundEvent("antlion_attack4");
+  public static final RegistryObject<SoundEvent> ANTLION_ATTACK5=
+          registerSoundEvent("antlion_attack5");
+  public static final RegistryObject<SoundEvent> ANTLION_ATTACK6=
+          registerSoundEvent("antlion_attack6");
+  public static final RegistryObject<SoundEvent> ANTLION_BURST1=
+          registerSoundEvent("antlion_burst1");
+  public static final RegistryObject<SoundEvent> ANTLION_BURST2=
+          registerSoundEvent("antlion_burst2");
+  public static final RegistryObject<SoundEvent> ANTLION_SHOOT1=
+          registerSoundEvent("antlion_shoot1");
+  public static final RegistryObject<SoundEvent> ANTLION_SHOOT2=
+          registerSoundEvent("antlion_shoot2");
+  public static final RegistryObject<SoundEvent> ANTLION_SHOOT3=
+          registerSoundEvent("antlion_shoot3");
+  public static final RegistryObject<SoundEvent> ANT_DIGDOWN1=
+          registerSoundEvent("ant_digdown1");
+  public static final RegistryObject<SoundEvent> ANT_DIGUP1=
+          registerSoundEvent("ant_digup1");
+  public static final RegistryObject<SoundEvent> ANT_DISTRACT1=
+          registerSoundEvent("ant_distract1");
+  public static final RegistryObject<SoundEvent> ANT_FLY1=
+          registerSoundEvent("ant_fly1");
+  public static final RegistryObject<SoundEvent> ANT_IDLE1=
+          registerSoundEvent("ant_idle1");
+  public static final RegistryObject<SoundEvent> ANT_IDLE2=
+          registerSoundEvent("ant_idle2");
+  public static final RegistryObject<SoundEvent> ANT_IDLE3=
+          registerSoundEvent("ant_idle3");
+  public static final RegistryObject<SoundEvent> ANT_IDLE4=
+          registerSoundEvent("ant_idle4");
+  public static final RegistryObject<SoundEvent> ANT_IDLE5=
+          registerSoundEvent("ant_idle5");
+  public static final RegistryObject<SoundEvent> ANT_PAIN1=
+          registerSoundEvent("ant_pain1");
+  public static final RegistryObject<SoundEvent> ANT_PAIN2=
+          registerSoundEvent("ant_pain2");
+
+          /*
+          "sounds.half_life_mod.antlion_attack1": "Antlion ",
+          "sounds.half_life_mod.antlion_attack2": "Antlion ",
+          "sounds.half_life_mod.antlion_attack3": "Antlion ",
+          "sounds.half_life_mod.antlion_attack4": "Antlion ",
+          "sounds.half_life_mod.antlion_attack5": "Antlion ",
+          "sounds.half_life_mod.antlion_attack6": "Antlion ",
+          "sounds.half_life_mod.antlion_burst1": "Antlion ",
+          "sounds.half_life_mod.antlion_burst2": "Antlion ",
+          "sounds.half_life_mod.antlion_shoot1": "Antlion ",
+          "sounds.half_life_mod.antlion_shoot2": "Antlion ",
+          "sounds.half_life_mod.antlion_shoot3": "Antlion ",
+          "sounds.half_life_mod.ant_digdown1": "Antlion ",
+          "sounds.half_life_mod.ant_digup1": "Antlion ",
+          "sounds.half_life_mod.ant_distract1": "Antlion ",
+          "sounds.half_life_mod.ant_fly1": "Antlion ",
+          "sounds.half_life_mod.ant_idle1": "Antlion ",
+          "sounds.half_life_mod.ant_idle2": "Antlion ",
+          "sounds.half_life_mod.ant_idle3": "Antlion ",
+          "sounds.half_life_mod.ant_idle4": "Antlion ",
+          "sounds.half_life_mod.ant_idle5": "Antlion ",
+          "sounds.half_life_mod.ant_pain1": "Antlion ",
+          "sounds.half_life_mod.ant_pain2": "Antlion ",
+
+    */
 
     //Poison zombie sounds
     public static final RegistryObject<SoundEvent> PZ_ALERT1=

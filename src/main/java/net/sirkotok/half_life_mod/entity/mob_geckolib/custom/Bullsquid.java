@@ -503,7 +503,7 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
         RandomSource randomsource = p_33601_.getRandom();
         int i = randomsource.nextInt(101);
         int j = randomsource.nextInt(200);
-        if (j == 69) this.setterritorial(false);
+        if (j % 69 == 0) this.setterritorial(false);
         this.settexture(i);
         return super.finalizeSpawn(p_33601_, p_33602_, p_33603_, p_33604_, p_33605_);
     }

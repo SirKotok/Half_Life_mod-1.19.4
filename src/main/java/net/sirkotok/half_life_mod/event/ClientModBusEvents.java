@@ -65,7 +65,8 @@ public class ClientModBusEvents {
         EntityRenderers.register(HalfLifeEntities.HOUNDEYE.get(), Houndeyerenderer::new);
         EntityRenderers.register(HalfLifeEntities.SNARKNEST.get(), Snarknestrenderer::new);
         EntityRenderers.register(HalfLifeEntities.HEADCRAB_HL1.get(), Headcrab_1renderer::new);
-
+        EntityRenderers.register(HalfLifeEntities.ANTLION.get(), Antlion_renderer::new);
+        EntityRenderers.register(HalfLifeEntities.ANTLIONWORKER.get(), AntlionWorker_renderer::new);
         EntityRenderers.register(HalfLifeEntities.HEADCRAB_HL2.get(), Headcrab_2renderer::new);
         EntityRenderers.register(HalfLifeEntities.HEADCRAB_POISON_HL2.get(), Headcrab_poison_2renderer::new);
         EntityRenderers.register(HalfLifeEntities.HEADCRAB_POISON_HLA.get(), Headcrab_poison_3renderer::new);

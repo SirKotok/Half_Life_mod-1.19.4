@@ -117,13 +117,17 @@ public class HalfLifeMod
             event.accept(HalfLifeItems.PITDRONE_SPAWN_EGG);
 
 
-
             event.accept(HalfLifeItems.BARNEY_SPAWN_EGG);
             event.accept(HalfLifeItems.SCIENTIST_SPAWN_EGG);
 
             event.accept(HalfLifeItems.COCKROACH_SPAWN_EGG);
             event.accept(HalfLifeItems.LEECH_SPAWN_EGG);
             event.accept(HalfLifeItems.SHARK_SPAWN_EGG);
+
+
+            event.accept(HalfLifeItems.ANTLION_SPAWN_EGG);
+            event.accept(HalfLifeItems.ANTLIONWORKER_SPAWN_EGG);
+
             event.accept(HalfLifeItems.MANHACK_SPAWN_EGG);
             event.accept(HalfLifeItems.HUNTER_SPAWN_EGG);
 

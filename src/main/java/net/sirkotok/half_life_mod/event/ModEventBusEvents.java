@@ -53,6 +53,8 @@ public class ModEventBusEvents {
         event.put(HalfLifeEntities.HEADCRAB_POISON_HLA.get(), Headcrab_Poison_3.setAttributes());
         event.put(HalfLifeEntities.BULLSQUID.get(), Bullsquid.setAttributes());
         event.put(HalfLifeEntities.PITDRONE.get(), Pitdrone.setAttributes());
+        event.put(HalfLifeEntities.ANTLION.get(), Antlion.setAttributes());
+        event.put(HalfLifeEntities.ANTLIONWORKER.get(), AntlionWorker.setAttributes());
         event.put(HalfLifeEntities.GONARCHBM.get(), GonarchBM.setAttributes());
         event.put(HalfLifeEntities.GONARCH.get(), Gonarch.setAttributes());
         event.put(HalfLifeEntities.HOUNDEYE.get(), Houndeye.setAttributes());

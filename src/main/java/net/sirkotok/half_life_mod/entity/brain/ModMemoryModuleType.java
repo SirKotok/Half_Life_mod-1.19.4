@@ -45,9 +45,7 @@ public class ModMemoryModuleType {
     public static final RegistryObject<MemoryModuleType<Boolean>> RETALIATECOOLDOWN = MEMORY_MODULE_TYPES.register("retaliate_cooldown", () -> new MemoryModuleType<>(Optional.empty()));
     public static final RegistryObject<MemoryModuleType<Boolean>> RUSHING = MEMORY_MODULE_TYPES.register("rushing", () -> new MemoryModuleType<>(Optional.empty()));
 
-
-
-
+    public static final RegistryObject<MemoryModuleType<Vec3>> TARGET_LONGJUMP_LOCATION = MEMORY_MODULE_TYPES.register("target_longjump_location", () -> new MemoryModuleType<>(Optional.empty()));
 
 
 

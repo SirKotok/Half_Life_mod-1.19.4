@@ -29,6 +29,7 @@ import net.sirkotok.half_life_mod.entity.brain.behaviour.BiteWhileJumpingBehavio
 import net.sirkotok.half_life_mod.entity.brain.behaviour.HeadCrabJumpBehavior;
 
 import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
+import net.sirkotok.half_life_mod.entity.brain.behaviour.TargetOrRetaliateHLT;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.HLTags;
 import net.sirkotok.half_life_mod.util.HLperUtil;
@@ -247,7 +248,7 @@ public class Headcrab_2 extends HalfLifeMonster implements GeoEntity, SmartBrain
                 new FirstApplicableBehaviour<Headcrab_2>(
 
 
-                        new TargetOrRetaliate<>(),
+                        new TargetOrRetaliateHLT<>(),
                         new AvoidSun<>(),
                         new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>()),

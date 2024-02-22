@@ -121,6 +121,17 @@ public class HalfLifeEntities {
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "pitdrone").toString()));
 
 
+    public static final RegistryObject<EntityType<Antlion>> ANTLION =
+            ENTITY_TYPES.register("antlion",
+                    () -> EntityType.Builder.of(Antlion::new, MobCategory.MONSTER)
+                            .sized(0.6f, 1.1f)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "antlion").toString()));
+
+    public static final RegistryObject<EntityType<AntlionWorker>> ANTLIONWORKER =
+            ENTITY_TYPES.register("antlionworker",
+                    () -> EntityType.Builder.of(AntlionWorker::new, MobCategory.MONSTER)
+                            .sized(0.7f, 1f)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "antlionworker").toString()));
     public static final RegistryObject<EntityType<Barney>> BARNEY =
             ENTITY_TYPES.register("barney",
                     () -> EntityType.Builder.of(Barney::new, MobCategory.MONSTER)

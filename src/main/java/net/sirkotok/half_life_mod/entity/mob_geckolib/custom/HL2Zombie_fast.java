@@ -1,17 +1,12 @@
 package net.sirkotok.half_life_mod.entity.mob_geckolib.custom;
 
 
-import com.mojang.authlib.GameProfile;
-import com.mojang.util.UUIDTypeAdapter;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
@@ -24,10 +19,8 @@ import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
@@ -37,6 +30,7 @@ import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.CommonSounds;
 import net.sirkotok.half_life_mod.util.HLTags;
+import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -272,7 +266,10 @@ public class HL2Zombie_fast extends HalfLifeMonster implements GeoEntity, SmartB
                         new TargetOrRetaliateHLT<>(),
                         new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>()),
+                new SetJumpTargetToRandom<>().radius(15, 10).cooldownFor(entity -> 10),
                 new OneRandomBehaviour<>(
+                        new LongJumpToJumpTarget<>(20, 2F, this.getJumpSound()).whenStarting(entity -> triggerAnim("onetime", "jump"))
+                                .cooldownFor(entity -> random.nextInt(100, 600)).startCondition(entity -> this.tickCount > 100 && this.relocate),
                         new SetRandomWalkTarget<>().setRadius(16, 10),
                         new Idle<>().runFor(entity -> entity.getRandom().nextInt(10, 40))));
     }
@@ -285,6 +282,10 @@ public class HL2Zombie_fast extends HalfLifeMonster implements GeoEntity, SmartB
                 new SetWalkTargetToAttackTarget<>().speedMod(1.25f),
                 new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, true)).startCondition(entity -> this.entityData.get(IS_ANGRY).equals(false)).whenStarting(entity -> CommonSounds.PlaySoundAsOwn(this, this.getHorrorSound())),
                 new Retaliate<>(),
+                new SetJumpTargetToRandomSpotAroundAttackTarget<>(0).cooldownFor(entity -> 10),
+                new LongJumpToJumpTarget<>(20, 2F, this.getJumpSound()).whenStarting(entity -> triggerAnim("onetime", "jump"))
+                        .startCondition(entity -> entity.distanceTo(HLperUtil.TargetOrThis(entity)) > 5)
+                        .cooldownFor(entity -> random.nextInt(50, 300)),
                 new BiteWhileJumpingBehavior<>(30, null, 0f).startCondition(entity -> !isOnGround()).cooldownFor(entity -> 20),
                 new HeadCrabJumpBehavior<>(2, this.getJumpSound(), null).SetMinDistance(5).whenStarting(entity -> triggerAnim("onetime", "jump")).cooldownFor(entity -> 100),
                 new DoubleMeleeAttack<HL2Zombie_fast>(54, 8, 0, 1, 1, null , 0,
@@ -303,7 +304,7 @@ public class HL2Zombie_fast extends HalfLifeMonster implements GeoEntity, SmartB
     }
 
 
-
+    protected boolean relocate;
      @Override
     public void tick() {
          super.tick();
@@ -312,8 +313,13 @@ public class HL2Zombie_fast extends HalfLifeMonster implements GeoEntity, SmartB
          if ((this.tickCount > 15 && (this.getPassengers().isEmpty())) || (this.getFirstPassenger() instanceof LivingEntity entity && entity.isDeadOrDying())) {
              this.setHealth(0);
          }
-     }
 
+
+        if (this.tickCount % 50 == 0) this.relocate = this.random.nextFloat() < 0.05f;
+        if (this.tickCount % 100 == 0 && this.shouldDiscardFriction() && this.isOnGround()) {
+            this.setDiscardFriction(false); }
+
+    }
 
 
 

@@ -114,6 +114,12 @@ public class HalfLifeItems {
     public static final RegistryObject<Item> PITDRONE_SPAWN_EGG = ITEMS.register("pitdrone_spawn_egg",
             () -> new ForgeSpawnEggItem(HalfLifeEntities.PITDRONE, 0x7d4a10, 0x9b9b9b   ,
                     new Item.Properties()));
+    public static final RegistryObject<Item> ANTLION_SPAWN_EGG = ITEMS.register("antlion_spawn_egg",
+            () -> new ForgeSpawnEggItem(HalfLifeEntities.ANTLION, 0xa0e463, 0xd3c905   ,
+                    new Item.Properties()));
+    public static final RegistryObject<Item> ANTLIONWORKER_SPAWN_EGG = ITEMS.register("antlionworker_spawn_egg",
+            () -> new ForgeSpawnEggItem(HalfLifeEntities.ANTLIONWORKER, 0x6ffcbb, 0x656864   ,
+                    new Item.Properties()));
 
     public static final RegistryObject<Item> BARNEY_SPAWN_EGG = ITEMS.register("barney_spawn_egg",
             () -> new ForgeSpawnEggItem(HalfLifeEntities.BARNEY, 0x5352fa, 0x000000   ,

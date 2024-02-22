@@ -49,7 +49,7 @@ public class HLTags {
         public static final TagKey<EntityType<?>> FACTION_SCIENCE_TEAM = tag("science_team");
         public static final TagKey<EntityType<?>> FACTION_COMBINE = tag("combine");
 
-
+        public static final TagKey<EntityType<?>> FACTION_ANTLION = tag("antlion");
 
         public static final TagKey<EntityType<?>> HEAD_CRAB_TARGET = tag("can_be_headcrabbed");
         private static TagKey<EntityType<?>> tag(String name)

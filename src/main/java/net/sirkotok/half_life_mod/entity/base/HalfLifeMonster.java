@@ -35,6 +35,8 @@ public class HalfLifeMonster extends Monster {
 
     }
 
+
+
     private void maybeDisableShield(Player pPlayer, float f, ItemStack pPlayerItemStack) {
         if (!pPlayerItemStack.isEmpty() && pPlayerItemStack.is(Items.SHIELD)) {
             if (this.random.nextFloat() < f) {

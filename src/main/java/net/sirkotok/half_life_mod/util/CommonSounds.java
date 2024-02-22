@@ -4,10 +4,12 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
+import org.jetbrains.annotations.Nullable;
 
 public final class CommonSounds {
 
-    public static void PlaySoundAsOwn(HalfLifeMonster monster, SoundEvent soundEvent){
+    public static void PlaySoundAsOwn(HalfLifeMonster monster, @Nullable SoundEvent soundEvent){
+        if (soundEvent == null) return;
         monster.playSound(soundEvent, monster.getMonsterSoundVolume(), monster.getVoicePitch());
     }
 

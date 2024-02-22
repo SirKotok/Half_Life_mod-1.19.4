@@ -17,6 +17,138 @@
       "half_life_mod:gon_die1"
     ]
   },
+  "antlion_attack1": {
+    "subtitle": "sounds.half_life_mod.antlion_attack1",
+    "sounds": [
+      "half_life_mod:antlion_attack1"
+    ]
+  },
+  "antlion_attack2": {
+    "subtitle": "sounds.half_life_mod.antlion_attack2",
+    "sounds": [
+      "half_life_mod:antlion_attack2"
+    ]
+  },
+  "antlion_attack3": {
+    "subtitle": "sounds.half_life_mod.antlion_attack3",
+    "sounds": [
+      "half_life_mod:antlion_attack3"
+    ]
+  },
+  "antlion_attack4": {
+    "subtitle": "sounds.half_life_mod.antlion_attack4",
+    "sounds": [
+      "half_life_mod:antlion_attack4"
+    ]
+  },
+  "antlion_attack5": {
+    "subtitle": "sounds.half_life_mod.antlion_attack5",
+    "sounds": [
+      "half_life_mod:antlion_attack5"
+    ]
+  },
+  "antlion_attack6": {
+    "subtitle": "sounds.half_life_mod.antlion_attack6",
+    "sounds": [
+      "half_life_mod:antlion_attack6"
+    ]
+  },
+  "antlion_burst1": {
+    "subtitle": "sounds.half_life_mod.antlion_burst1",
+    "sounds": [
+      "half_life_mod:antlion_burst1"
+    ]
+  },
+  "antlion_burst2": {
+    "subtitle": "sounds.half_life_mod.antlion_burst2",
+    "sounds": [
+      "half_life_mod:antlion_burst2"
+    ]
+  },
+  "antlion_shoot1": {
+    "subtitle": "sounds.half_life_mod.antlion_shoot1",
+    "sounds": [
+      "half_life_mod:antlion_shoot1"
+    ]
+  },
+  "antlion_shoot2": {
+    "subtitle": "sounds.half_life_mod.antlion_shoot2",
+    "sounds": [
+      "half_life_mod:antlion_shoot2"
+    ]
+  },
+  "antlion_shoot3": {
+    "subtitle": "sounds.half_life_mod.antlion_shoot3",
+    "sounds": [
+      "half_life_mod:antlion_shoot3"
+    ]
+  },
+  "ant_digdown1": {
+    "subtitle": "sounds.half_life_mod.ant_digdown1",
+    "sounds": [
+      "half_life_mod:ant_digdown1"
+    ]
+  },
+  "ant_digup1": {
+    "subtitle": "sounds.half_life_mod.ant_digup1",
+    "sounds": [
+      "half_life_mod:ant_digup1"
+    ]
+  },
+  "ant_distract1": {
+    "subtitle": "sounds.half_life_mod.ant_distract1",
+    "sounds": [
+      "half_life_mod:ant_distract1"
+    ]
+  },
+  "ant_fly1": {
+    "subtitle": "sounds.half_life_mod.ant_fly1",
+    "sounds": [
+      "half_life_mod:ant_fly1"
+    ]
+  },
+  "ant_idle1": {
+    "subtitle": "sounds.half_life_mod.ant_idle1",
+    "sounds": [
+      "half_life_mod:ant_idle1"
+    ]
+  },
+  "ant_idle2": {
+    "subtitle": "sounds.half_life_mod.ant_idle2",
+    "sounds": [
+      "half_life_mod:ant_idle2"
+    ]
+  },
+  "ant_idle3": {
+    "subtitle": "sounds.half_life_mod.ant_idle3",
+    "sounds": [
+      "half_life_mod:ant_idle3"
+    ]
+  },
+  "ant_idle4": {
+    "subtitle": "sounds.half_life_mod.ant_idle4",
+    "sounds": [
+      "half_life_mod:ant_idle4"
+    ]
+  },
+  "ant_idle5": {
+    "subtitle": "sounds.half_life_mod.ant_idle5",
+    "sounds": [
+      "half_life_mod:ant_idle5"
+    ]
+  },
+  "ant_pain1": {
+    "subtitle": "sounds.half_life_mod.ant_pain1",
+    "sounds": [
+      "half_life_mod:ant_pain1"
+    ]
+  },
+  "ant_pain2": {
+    "subtitle": "sounds.half_life_mod.ant_pain2",
+    "sounds": [
+      "half_life_mod:ant_pain2"
+    ]
+  },
   "breathe_loop1": {
     "subtitle": "sounds.half_life_mod.breathe_loop1",
     "sounds": [

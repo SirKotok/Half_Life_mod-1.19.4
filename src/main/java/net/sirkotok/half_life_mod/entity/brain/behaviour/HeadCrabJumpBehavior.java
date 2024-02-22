@@ -92,7 +92,7 @@ public class HeadCrabJumpBehavior<E extends Monster>  extends ConditionlessAttac
             }
 
 
-        BrainUtils.setForgettableMemory(entity, ModMemoryModuleType.JUMPING.get(), true, 50);
+        BrainUtils.setForgettableMemory(entity, ModMemoryModuleType.JUMPING.get(), true, 150);
     }
 
 
