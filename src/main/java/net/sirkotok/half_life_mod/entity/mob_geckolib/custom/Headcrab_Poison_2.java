@@ -26,7 +26,7 @@ import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import net.sirkotok.half_life_mod.effect.ModEffects;
+import net.sirkotok.half_life_mod.effect.HalfLifeEffects;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.BiteWhileJumpingBehavior;
@@ -150,11 +150,18 @@ public class Headcrab_Poison_2 extends HalfLifeMonster implements GeoEntity, Sma
     }
 
     @Override
-    protected void actuallyHurt(DamageSource p_21240_, float p_21241_) {
-        if (p_21240_.is(DamageTypes.IN_WALL)) {
+    protected void playHurtSound(DamageSource source) {
+        if (source.is(DamageTypes.IN_WALL)) {
+            return; }
+        super.playHurtSound(source);
+    }
+
+    @Override
+    protected void actuallyHurt(DamageSource source, float number) {
+        if (source.is(DamageTypes.IN_WALL)) {
             return; }
 
-        super.actuallyHurt(p_21240_, p_21241_);
+        super.actuallyHurt(source, number*(this.getVehicle() != null && this.getVehicle().getType().is(HLTags.EntityTypes.FACTION_HEADCRAB) ? 0.5f : 1f));
     }
 
     protected SoundEvent getJumpSound() {
@@ -253,7 +260,7 @@ public class Headcrab_Poison_2 extends HalfLifeMonster implements GeoEntity, Sma
                 new NearbyLivingEntitySensor<Headcrab_Poison_2>()
                         .setPredicate((target, entity) ->
                             target instanceof Player || target instanceof IronGolem  ||  target instanceof HalfLifeNeutral ||
-                            target instanceof AbstractVillager));
+                            target instanceof AbstractVillager || target.getType().is(HLTags.EntityTypes.FACTION_ANTLION)));
     }
 
 
@@ -342,7 +349,7 @@ public class Headcrab_Poison_2 extends HalfLifeMonster implements GeoEntity, Sma
 
     @Override
     public boolean doHurtTarget(Entity entity) {
-        return this.ConfigurabledoHurtTarget(entity, 0, 0, 0, ModEffects.SET_HEALTH_TO_ONE.get(), 2, false);
+        return this.ConfigurabledoHurtTarget(entity, 0, 0, 0, HalfLifeEffects.SET_HEALTH_TO_ONE.get(), 2, false);
     }
 
     @Override

@@ -331,6 +331,17 @@ public class HalfLifeEntities {
                             .updateInterval(1)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "voltigore_shock").toString()));
 
+
+
+    public static final RegistryObject<EntityType<BugbaitProjectile>> BUGBAIT_PROJECTILE =
+            ENTITY_TYPES.register("bugbait_projectile",
+                    () -> EntityType.Builder.<BugbaitProjectile>of(BugbaitProjectile::new, MobCategory.MISC)
+                            .sized(0.2F, 0.2F)
+                            .clientTrackingRange(20)
+                            .updateInterval(1)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "bugbait_projectile").toString()));
+
+
     public static final RegistryObject<EntityType<Bullet>> BULLET_ONE =
             ENTITY_TYPES.register("bullet_one",
                     () -> EntityType.Builder.<Bullet>of(Bullet::new, MobCategory.MISC)

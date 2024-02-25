@@ -360,7 +360,7 @@ public class HLZombieVillager extends HalfLifeMonster implements GeoEntity, Smar
                         .setPredicate((target, entity) ->
                                 target instanceof Player || (this.getFirstPassenger() instanceof HalfLifeMonster headcrab && target.equals(headcrab.getLastHurtByMob())) ||
                                         target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
-                                        target instanceof AbstractVillager));
+                                        target instanceof AbstractVillager || target.getType().is(HLTags.EntityTypes.FACTION_ANTLION)));
     }
 
 

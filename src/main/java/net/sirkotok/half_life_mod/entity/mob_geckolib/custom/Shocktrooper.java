@@ -89,10 +89,13 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Do
 
     public Shocktrooper getLeader() {
        if (this.leader == null) return this;
-        return this.leader;
+       return this.leader;
        }
-    public void setLeader(Shocktrooper troop) {
-        this.leader = troop;
+
+
+
+    public void setLeader(LivingEntity troop) {
+        this.leader = (Shocktrooper) troop;
     }
 
     public List<Shocktrooper> getTroopers() {

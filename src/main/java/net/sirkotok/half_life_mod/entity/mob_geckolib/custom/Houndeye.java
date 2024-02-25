@@ -196,8 +196,10 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, HasLeaderMob
         if (this.leader == null) return this;
         return this.leader;
     }
-    public void setLeader(Houndeye dog) {
-        this.leader = dog;
+
+
+    public void setLeader(LivingEntity dog) {
+        this.leader = (Houndeye) dog;
     }
 
     public List<Houndeye> getDogs() {

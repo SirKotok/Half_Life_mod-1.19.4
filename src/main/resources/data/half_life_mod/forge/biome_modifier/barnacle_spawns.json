@@ -3,7 +3,7 @@
   "biomes": "#minecraft:is_overworld",
   "spawners": {
     "type": "half_life_mod:barnacle",
-    "weight": 100,
+    "weight": 10,
     "minCount": 1,
     "maxCount": 5
   }

@@ -145,11 +145,18 @@ public class Headcrab_2 extends HalfLifeMonster implements GeoEntity, SmartBrain
     }
 
     @Override
-    protected void actuallyHurt(DamageSource p_21240_, float p_21241_) {
-        if (p_21240_.is(DamageTypes.IN_WALL)) {
+    protected void playHurtSound(DamageSource source) {
+        if (source.is(DamageTypes.IN_WALL)) {
+            return; }
+        super.playHurtSound(source);
+    }
+
+    @Override
+    protected void actuallyHurt(DamageSource source, float number) {
+        if (source.is(DamageTypes.IN_WALL)) {
             return; }
 
-        super.actuallyHurt(p_21240_, p_21241_);
+        super.actuallyHurt(source, number*(this.getVehicle() != null && this.getVehicle().getType().is(HLTags.EntityTypes.FACTION_HEADCRAB) ? 0.5f : 1f));
     }
 
     protected SoundEvent getJumpSound() {
@@ -227,7 +234,7 @@ public class Headcrab_2 extends HalfLifeMonster implements GeoEntity, SmartBrain
                 new NearbyLivingEntitySensor<Headcrab_2>()
                         .setPredicate((target, entity) ->
                             target instanceof Player || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
-                            target instanceof AbstractVillager));
+                            target instanceof AbstractVillager || target.getType().is(HLTags.EntityTypes.FACTION_ANTLION)));
     }
 
 

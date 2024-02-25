@@ -188,6 +188,9 @@ public class HalfLifeItems {
     //Guns
     public static final RegistryObject<Item> PISTOL = ITEMS.register("pistol_one_item",
             () -> new Pistol_1_Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> BUGBAIT = ITEMS.register("bugbait",
+            () -> new BugbaitItem(new Item.Properties()));
     public static final RegistryObject<Item> SMG_HL1 = ITEMS.register("smg_hl1",
          () -> new SMG_1_Item(new Item.Properties()));
     public static final RegistryObject<Item> DISPLACER = ITEMS.register("displacer_cannon",

@@ -8,17 +8,15 @@ import net.minecraft.world.entity.ai.behavior.EntityTracker;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Houndeye;
 import net.sirkotok.half_life_mod.entity.modinterface.HasLeaderMob;
-import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.behaviour.ExtendedBehaviour;
 import net.tslat.smartbrainlib.util.BrainUtils;
 
 import java.util.List;
 
-public class FollowLeaderBehaviour<E extends Mob & HasLeaderMob<E>> extends ExtendedBehaviour<E> {
+public class FollowLeaderImmideatlyBehaviour<E extends Mob & HasLeaderMob<E>> extends ExtendedBehaviour<E> {
 
-    private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT), Pair.of(MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED));
+    private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED));
 
 
     protected float speedModifier = 1;
@@ -28,7 +26,7 @@ public class FollowLeaderBehaviour<E extends Mob & HasLeaderMob<E>> extends Exte
      * @param speedModifier The movespeed modifier/multiplier
      * @return this
      */
-    public FollowLeaderBehaviour<E> speedMod(float speedModifier) {
+    public FollowLeaderImmideatlyBehaviour<E> speedMod(float speedModifier) {
         this.speedModifier = speedModifier;
         return this;
     }

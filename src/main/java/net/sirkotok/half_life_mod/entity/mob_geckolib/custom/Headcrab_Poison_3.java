@@ -26,7 +26,7 @@ import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import net.sirkotok.half_life_mod.effect.ModEffects;
+import net.sirkotok.half_life_mod.effect.HalfLifeEffects;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.AlyxPoisoncrabJumpBehavior;
@@ -74,7 +74,12 @@ public class Headcrab_Poison_3 extends HalfLifeMonster implements GeoEntity, Sma
 
  //TODO: Change the jumpcode someday to be actually good
 
-
+    @Override
+    protected void playHurtSound(DamageSource source) {
+        if (source.is(DamageTypes.IN_WALL)) {
+            return; }
+        super.playHurtSound(source);
+    }
 
     @Override
     public boolean canBeLeashed(Player p_21418_) {
@@ -315,7 +320,7 @@ public class Headcrab_Poison_3 extends HalfLifeMonster implements GeoEntity, Sma
 
     @Override
     public boolean doHurtTarget(Entity entity) {
-        return this.ConfigurabledoHurtTarget(entity, 0, 0, 0, ModEffects.SET_HEALTH_TO_ONE.get(), 2, false);
+        return this.ConfigurabledoHurtTarget(entity, 0, 0, 0, HalfLifeEffects.SET_HEALTH_TO_ONE.get(), 2, false);
     }
 
 

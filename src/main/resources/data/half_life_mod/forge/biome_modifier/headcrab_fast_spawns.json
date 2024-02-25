@@ -3,7 +3,7 @@
   "biomes": "#minecraft:is_overworld",
   "spawners": {
     "type": "half_life_mod:headcrab_fast",
-    "weight": 11,
+    "weight": 9,
     "minCount": 1,
     "maxCount": 3
   }

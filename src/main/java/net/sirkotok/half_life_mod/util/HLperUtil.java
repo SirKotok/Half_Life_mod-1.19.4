@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.sirkotok.half_life_mod.effect.HalfLifeEffects;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Pitdrone;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Shockroach;
@@ -42,7 +43,10 @@ public final class HLperUtil {
 
 
     public static boolean issameteam(LivingEntity one, LivingEntity two){
-        boolean antlion = (one.getType().is(HLTags.EntityTypes.FACTION_ANTLION) && two.getType().is(HLTags.EntityTypes.FACTION_ANTLION));
+        boolean antlion = (one.getType().is(HLTags.EntityTypes.FACTION_ANTLION) && two.getType().is(HLTags.EntityTypes.FACTION_ANTLION))
+                || (one.hasEffect(HalfLifeEffects.ANTLION_PHEROMONE_FRIEND.get()) && two.getType().is(HLTags.EntityTypes.FACTION_ANTLION))
+                || (two.hasEffect(HalfLifeEffects.ANTLION_PHEROMONE_FRIEND.get()) && one.getType().is(HLTags.EntityTypes.FACTION_ANTLION))
+                ;
         boolean combine = (one.getType().is(HLTags.EntityTypes.FACTION_COMBINE) && two.getType().is(HLTags.EntityTypes.FACTION_COMBINE));
         boolean science_team = (one.getType().is(HLTags.EntityTypes.FACTION_SCIENCE_TEAM) && two.getType().is(HLTags.EntityTypes.FACTION_SCIENCE_TEAM));
         boolean neutral_vs_enemy_player = (one instanceof HalfLifeNeutral neutral && two instanceof Player player && neutral.ismyenemy(player.getStringUUID())) || (two instanceof HalfLifeNeutral neutral2 && one instanceof Player player2 && neutral2.ismyenemy(player2.getStringUUID()));

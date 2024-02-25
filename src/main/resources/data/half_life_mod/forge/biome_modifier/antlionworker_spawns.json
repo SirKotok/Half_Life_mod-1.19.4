@@ -1,0 +1,15 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": [
+    "minecraft:desert",
+    "minecraft:beach",
+    "minecraft:badlands",
+    "minecraft:eroded_badlands"
+  ],
+  "spawners": {
+    "type": "half_life_mod:antlionworker",
+    "weight": 1,
+    "minCount": 1,
+    "maxCount": 4
+  }
+}

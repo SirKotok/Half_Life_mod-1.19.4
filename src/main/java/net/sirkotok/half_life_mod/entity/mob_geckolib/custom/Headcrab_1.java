@@ -78,13 +78,19 @@ import java.util.List;
 public class Headcrab_1 extends HalfLifeMonster implements GeoEntity, SmartBrainOwner<Headcrab_1> {
 
 
+    @Override
+    protected void playHurtSound(DamageSource source) {
+        if (source.is(DamageTypes.IN_WALL)) {
+            return; }
+        super.playHurtSound(source);
+    }
 
     @Override
-    protected void actuallyHurt(DamageSource p_21240_, float p_21241_) {
-        if (p_21240_.is(DamageTypes.IN_WALL)) {
+    protected void actuallyHurt(DamageSource source, float number) {
+        if (source.is(DamageTypes.IN_WALL)) {
             return; }
 
-        super.actuallyHurt(p_21240_, p_21241_);
+        super.actuallyHurt(source, number*(this.getVehicle() != null && this.getVehicle().getType().is(HLTags.EntityTypes.FACTION_HEADCRAB) ? 0.5f : 1f));
     }
 
 

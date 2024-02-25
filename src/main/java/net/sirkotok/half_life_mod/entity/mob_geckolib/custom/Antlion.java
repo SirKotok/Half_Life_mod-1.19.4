@@ -12,10 +12,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -27,10 +24,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.AABB;
+import net.sirkotok.half_life_mod.effect.HalfLifeEffects;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
+import net.sirkotok.half_life_mod.entity.modinterface.HasLeaderMob;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.CommonSounds;
 import net.sirkotok.half_life_mod.util.HLTags;
@@ -59,6 +58,7 @@ import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -66,7 +66,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 
-public class Antlion extends HalfLifeMonster implements GeoEntity, SmartBrainOwner<Antlion> {
+public class Antlion extends HalfLifeMonster implements GeoEntity, HasLeaderMob<Antlion>, SmartBrainOwner<Antlion> {
 
     @Override
     protected float getSoundVolume() {
@@ -92,6 +92,21 @@ public class Antlion extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
 
         this.entityData.define(ID_TEXTURE, 1);
 
+    }
+
+
+    @Nullable
+    public LivingEntity leader;
+
+
+    public void setLeader(@Nullable LivingEntity entity) {
+        this.leader = entity;
+    }
+
+    @Override
+    @Nullable
+    public LivingEntity getLeader() {
+        return this.leader;
     }
 
 
@@ -201,6 +216,7 @@ public class Antlion extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
     @Override
     public void tick() {
         super.tick();
+        if (this.tickCount % 20 == 0 && this.getLeader() instanceof Player pl && pl.isSpectator()) this.setLeader(this);
         if (this.tickCount % 50 == 0) this.relocate = this.random.nextFloat() < 0.05f;
         if (this.tickCount % 100 == 0 && this.shouldDiscardFriction() && this.isOnGround()) {
             this.setDiscardFriction(false); }
@@ -232,13 +248,13 @@ public class Antlion extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<Antlion>()
                         .setPredicate((target, entity) ->
-                            target instanceof Player ||
+                                (target instanceof Player ||
                             target.getType().is(HLTags.EntityTypes.FACTION_HEADCRAB) ||
                             target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) ||
                             target instanceof IronGolem ||
                             target instanceof AbstractVillager ||
-                            target instanceof HalfLifeNeutral
-                            ));
+                            target instanceof HalfLifeNeutral || target.hasEffect(HalfLifeEffects.ANTLION_PHEROMONE_FOE.get())
+                            ) && !target.hasEffect(HalfLifeEffects.ANTLION_PHEROMONE_FRIEND.get())));
     }
 
 
@@ -246,6 +262,7 @@ public class Antlion extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
     @Override
     public BrainActivityGroup<Antlion> getCoreTasks() {
         return BrainActivityGroup.coreTasks(
+                new FollowLeaderImmideatlyBehaviour<Antlion>().cooldownFor(entity -> 5),
                 new LookAtTarget<>(),
                 new MoveToWalkTarget<>());
     }
@@ -257,7 +274,7 @@ public class Antlion extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
     public BrainActivityGroup<Antlion> getIdleTasks() {
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<Antlion>(
-                        new TargetOrRetaliateHLT<>(),
+                        new TargetOrRetaliateHLT<>().startCondition(entity -> this.getLeader() == null || this.getLeader() == this),
                         new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>()),
                         new SetJumpTargetToRandom<>().radius(15, 10).cooldownFor(entity -> 10),
@@ -273,8 +290,10 @@ public class Antlion extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
     @Override
     public BrainActivityGroup<Antlion> getFightTasks() {
         return BrainActivityGroup.fightTasks(
+                new InvalidateAttackTarget<>().invalidateIf((entity, target) -> this.getLeader() != null && this.getLeader() != this),
                 new InvalidateAttackTarget<>(),
-                new SetWalkTargetToAttackTarget<>().speedMod(1.15f),
+                new InvalidateAttackTarget<>().invalidateIf((entity, target) -> target.hasEffect(HalfLifeEffects.ANTLION_PHEROMONE_FRIEND.get()) || (this.getLeader() != null && this.getLeader().equals(target))),
+                new SetWalkTargetToAttackTargetIfNoLeader<Antlion>().speedMod(1.15f),
                 new Retaliate<>(),
                 new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, true)).startCondition(entity -> !this.entityData.get(IS_ANGRY)),
                 new SetJumpTargetToRandomSpotAroundAttackTarget<>(0).cooldownFor(entity -> 10),
@@ -370,6 +389,8 @@ public class Antlion extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
         this.settexture(i);
         return super.finalizeSpawn(p_33601_, p_33602_, p_33603_, p_33604_, p_33605_);
     }
+
+
 }
 
 

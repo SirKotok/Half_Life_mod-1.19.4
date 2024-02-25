@@ -4,5 +4,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 
 public interface HasLeaderMob<E extends Mob> {
-    E getLeader();
+    LivingEntity getLeader();
+    void setLeader(LivingEntity entity);
 }

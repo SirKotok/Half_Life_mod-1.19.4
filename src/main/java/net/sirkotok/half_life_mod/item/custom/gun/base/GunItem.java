@@ -158,6 +158,11 @@ public class GunItem extends Item {
         super(pProperties.stacksTo(1));
     }
 
+    public GunItem(Properties pProperties, int amogus) {
+        super(pProperties);
+    }
+
+
     public int getRightClickCooldown(){
         return 4;
     }

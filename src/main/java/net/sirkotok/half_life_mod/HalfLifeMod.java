@@ -13,7 +13,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.sirkotok.half_life_mod.block.HalfLifeBlocks;
 
 import net.sirkotok.half_life_mod.block.blockentity.HalfLifeBlockEntities;
-import net.sirkotok.half_life_mod.effect.ModEffects;
+import net.sirkotok.half_life_mod.effect.HalfLifeEffects;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.brain.ModSensorType;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
@@ -43,7 +43,7 @@ public class HalfLifeMod
         HalfLifeSounds.register(modEventBus);
         ModMemoryModuleType.register(modEventBus);
         ModSensorType.register(modEventBus);
-        ModEffects.register(modEventBus);
+        HalfLifeEffects.register(modEventBus);
         HalfLifeParticles.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
@@ -156,6 +156,9 @@ public class HalfLifeMod
             event.accept(HalfLifeItems.CHUMTOAD_THROWER);
             event.accept(HalfLifeItems.SNARK_THROWER);
             event.accept(HalfLifeItems.PENGUIN_THROWER);
+
+            event.accept(HalfLifeItems.BUGBAIT);
+
             event.accept(HalfLifeItems.SECURITY_GUARD_HELMET);
             event.accept(HalfLifeItems.SECURITY_GUARD_VEST);
         }
