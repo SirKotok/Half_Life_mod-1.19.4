@@ -675,7 +675,7 @@ public class GonarchBM extends HalfLifeMonster implements RushingMob, MultiMelee
                                 .whenStarting(entity -> triggerAnim("onetime", "double")).startCondition(entity -> this.getPhase() < 2)
                                 .cooldownFor(entity -> random.nextInt(10, 20))),
                new OneRandomBehaviour<>(
-                       new RushPushToTarget<>(200, 26, 0, 80, (entity, targetpos) -> 2.2f, false, null).whenStarting(entity -> triggerAnim("onetime", "rush")).cooldownFor(entity -> 500).startCondition(entity -> this.distanceTo(HLperUtil.TargetOrThis(this)) > 8 && this.random.nextFloat() < 0.1f && this.getPhase() < 2),
+                       new RushPushToTarget<>(76, 26, 0, 80, (entity, targetpos) -> 2.2f, false, null).whenStarting(entity -> triggerAnim("onetime", "rush")).cooldownFor(entity -> 500).startCondition(entity -> this.distanceTo(HLperUtil.TargetOrThis(this)) > 8 && this.random.nextFloat() < 0.1f && this.getPhase() < 2),
                        new StopAndShoot<GonarchBM>(5, 15, 1f).attackRadius(32f).cooldownFor(entity -> random.nextFloat() < 0.1f ? 220 : random.nextInt(20,45))
                                         .whenStarting(entity -> triggerAnim("onetime", "injureshot")).startCondition(entity -> this.getPhase() == 2),
                        new StopAndShoot<GonarchBM>(10, 15, 1f).attackRadius(32f).cooldownFor(entity -> random.nextFloat() < 0.1f ? 220 : random.nextInt(30, 60))

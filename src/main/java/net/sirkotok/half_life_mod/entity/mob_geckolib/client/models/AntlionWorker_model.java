@@ -43,8 +43,8 @@ public class AntlionWorker_model extends GeoModel<AntlionWorker> {
         if (head != null) {
             EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
 
-            head.setRotX(entityData.headPitch() * Mth.DEG_TO_RAD);
-            head.setRotY(entityData.netHeadYaw() * Mth.DEG_TO_RAD);
+            head.setRotX(entityData.headPitch()/2.3f * Mth.DEG_TO_RAD);
+            head.setRotY(entityData.netHeadYaw()/2.3f * Mth.DEG_TO_RAD);
         }
     }
 

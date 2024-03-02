@@ -1156,6 +1156,56 @@
 					}
 				}
 			}
+		},
+		"animation.headcrab.zombie": {
+			"loop": true,
+			"animation_length": 0.04167,
+			"bones": {
+				"bodyrotation": {
+					"rotation": {
+						"vector": [14, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, -1.1]
+					}
+				},
+				"actualbody": {
+					"position": {
+						"vector": [-0.3, 0.7, 0]
+					},
+					"scale": {
+						"vector": [1, 1.02, 1]
+					}
+				},
+				"backleg1": {
+					"rotation": {
+						"vector": [14.42041, -4.1735, 47.91928]
+					}
+				},
+				"lbl1p1": {
+					"rotation": {
+						"vector": [-13.45475, 6.96153, 43.81071]
+					}
+				},
+				"backleg2": {
+					"rotation": {
+						"vector": [59.89539, 30.28002, -29.11902]
+					}
+				},
+				"frongleg1": {
+					"rotation": {
+						"vector": [-25.47536, -30.01623, -86.95919]
+					}
+				},
+				"frontleg2": {
+					"rotation": {
+						"vector": [40.17983, 24.60373, -66.86948]
+					},
+					"position": {
+						"vector": [0, -0.6, 0]
+					}
+				}
+			}
 		}
 	},
 	"geckolib_format_version": 2

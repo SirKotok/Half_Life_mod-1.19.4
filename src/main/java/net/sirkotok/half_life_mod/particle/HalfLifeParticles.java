@@ -12,7 +12,12 @@ public class HalfLifeParticles {
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES =
             DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, HalfLifeMod.MOD_ID);
 
-
+    public static final RegistryObject<SimpleParticleType> VORT_LIGHTNING =
+            PARTICLE_TYPES.register("vort_lightning", () -> new SimpleParticleType(false));
+    public static final RegistryObject<SimpleParticleType> VORT_ARC_LIGHTNING =
+            PARTICLE_TYPES.register("vort_arc_lightning", () -> new SimpleParticleType(false));
+    public static final RegistryObject<SimpleParticleType> VOLT_LIGHTNING =
+            PARTICLE_TYPES.register("volt_lightning", () -> new SimpleParticleType(false));
 
     public static final RegistryObject<SimpleParticleType> BULLET_HOLE =
             PARTICLE_TYPES.register("bullet_hole", () -> new SimpleParticleType(true));

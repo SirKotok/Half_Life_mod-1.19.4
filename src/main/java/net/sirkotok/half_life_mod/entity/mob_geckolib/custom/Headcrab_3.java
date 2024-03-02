@@ -340,7 +340,7 @@ public class Headcrab_3 extends HalfLifeMonster implements GeoEntity, SmartBrain
 
 
 
-         if (!this.level.isClientSide && this.isPassenger() && (this.tickCount % 5) == 0) {
+         if (!this.level.isClientSide && this.isPassenger()) {
              this.triggerAnim("jump", "cancel");
              Entity target = this.getVehicle();
              if (target instanceof LivingEntity){

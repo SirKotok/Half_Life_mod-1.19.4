@@ -100,7 +100,9 @@ public class HalfLifeItems {
     public static final RegistryObject<Item> PZOMBIE_SPAWN_EGG = ITEMS.register("pzombie_spawn_egg",
             () -> new ForgeSpawnEggItem(HalfLifeEntities.PZOMBIE, 0x7f15b0, 0x16071d   ,
                     new Item.Properties()));
-
+    public static final RegistryObject<Item> VORTHL1_SPAWN_EGG = ITEMS.register("vorthl1_spawn_egg",
+            () -> new ForgeSpawnEggItem(HalfLifeEntities.VORTHL1, 0x6c4b07, 0x329b05   ,
+                    new Item.Properties()));
 
     public static final RegistryObject<Item> VZOMBIE_SPAWN_EGG = ITEMS.register("vzombie_spawn_egg",
             () -> new ForgeSpawnEggItem(HalfLifeEntities.VZOMBIE, 0x975103, 0xff5600   ,
@@ -170,12 +172,14 @@ public class HalfLifeItems {
     //Fake Items used for models/textures in projectiles lmao
     public static final RegistryObject<Item> FAKE_BULLET = ITEMS.register("bullet",
             () -> new FakeBulletItem(new Item.Properties()));
+
     public static final RegistryObject<Item> FAKE_SHOCK = ITEMS.register("shock",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> FAKE_PORTAL = ITEMS.register("portal_project",
             () -> new Item(new Item.Properties()));
 
-
+    public static final RegistryObject<Item> VORT_DEBUG = ITEMS.register("debug",
+            () -> new Debugitem(new Item.Properties()));
     // Entity throwers
 
     public static final RegistryObject<Item> CHUMTOAD_THROWER = ITEMS.register("chumtoad_thrower",

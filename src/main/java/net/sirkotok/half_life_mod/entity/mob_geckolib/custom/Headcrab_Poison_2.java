@@ -321,7 +321,7 @@ public class Headcrab_Poison_2 extends HalfLifeMonster implements GeoEntity, Sma
      @Override
     public void tick() {
          super.tick();
-         if (!this.level.isClientSide && this.isPassenger() && (this.tickCount % 5) == 0) {
+         if (!this.level.isClientSide && this.isPassenger()) {
              Entity target = this.getVehicle();
              if (target instanceof LivingEntity){
                  if  (!((LivingEntity) target).getItemBySlot(EquipmentSlot.HEAD).isEmpty()) {
@@ -365,6 +365,13 @@ public class Headcrab_Poison_2 extends HalfLifeMonster implements GeoEntity, Sma
 
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
+
+
+        if (this.isPassenger() && this.getVehicle() instanceof Pzombie) {
+            tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.headcrab.zombie", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+
 
         if(tAnimationState.isMoving() && this.isOnGround() && this.entityData.get(IS_SCARED)) {
             tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.headcrab.run", Animation.LoopType.LOOP));

@@ -27,6 +27,7 @@ import net.minecraft.world.phys.AABB;
 import net.sirkotok.half_life_mod.effect.HalfLifeEffects;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
+import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
 import net.sirkotok.half_life_mod.entity.modinterface.HasLeaderMob;
@@ -182,7 +183,7 @@ public class Antlion extends HalfLifeMonster implements GeoEntity, HasLeaderMob<
 
     protected SoundEvent getAmbientSound() {
 
-        if (this.isangry() && random.nextFloat() < 0.1) return HalfLifeSounds.ANT_DISTRACT1.get();
+        if (this.isangry() && random.nextFloat() < 0.05) return HalfLifeSounds.ANT_DISTRACT1.get();
 
         switch (this.random.nextInt(1,6)) {
             case 1:  return HalfLifeSounds.ANT_IDLE1.get();
@@ -263,6 +264,10 @@ public class Antlion extends HalfLifeMonster implements GeoEntity, HasLeaderMob<
     public BrainActivityGroup<Antlion> getCoreTasks() {
         return BrainActivityGroup.coreTasks(
                 new FollowLeaderImmideatlyBehaviour<Antlion>().cooldownFor(entity -> 5),
+                new SetJumpTargetToRandomSpotAroundLeader<Antlion>(0).cooldownFor(entity -> 10),
+                new LongJumpToJumpTarget<>(30, 1.5F, this.getFlySound()).whenStarting(entity -> triggerAnim("onetime", "fly"))
+                .startCondition(entity -> this.getLeader() != null && this.distanceTo(this.getLeader()) > 7)
+                .cooldownFor(entity -> random.nextInt(50, 300)),
                 new LookAtTarget<>(),
                 new MoveToWalkTarget<>());
     }
@@ -274,7 +279,7 @@ public class Antlion extends HalfLifeMonster implements GeoEntity, HasLeaderMob<
     public BrainActivityGroup<Antlion> getIdleTasks() {
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<Antlion>(
-                        new TargetOrRetaliateHLT<>().startCondition(entity -> this.getLeader() == null || this.getLeader() == this),
+                        new TargetOrRetaliateHLT<>().startCondition(entity -> (this.getLeader() == null || this.getLeader() == this) && BrainUtils.getMemory(this, ModMemoryModuleType.NOANTLIONATTACK.get()) == null),
                         new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>()),
                         new SetJumpTargetToRandom<>().radius(15, 10).cooldownFor(entity -> 10),

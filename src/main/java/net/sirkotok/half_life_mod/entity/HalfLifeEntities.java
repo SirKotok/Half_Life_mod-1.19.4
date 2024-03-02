@@ -170,6 +170,12 @@ public class HalfLifeEntities {
                             .sized(0.6F, 1.63F)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "pzombie").toString()));
 
+    public static final RegistryObject<EntityType<VortigauntHL1>> VORTHL1 =
+            ENTITY_TYPES.register("vorthl1",
+                    () -> EntityType.Builder.of(VortigauntHL1::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.8F)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "vorthl1").toString()));
+
     public static final RegistryObject<EntityType<HLZombieVillager>> VZOMBIE =
             ENTITY_TYPES.register("vzombie",
                     () -> EntityType.Builder.of(HLZombieVillager::new, MobCategory.MONSTER)
@@ -349,6 +355,15 @@ public class HalfLifeEntities {
                             .clientTrackingRange(20)
                             .updateInterval(1)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "bullet_one").toString()));
+
+
+    public static final RegistryObject<EntityType<VortLightningProjectile>> VORT_LIGHTNING_PROJETILE =
+            ENTITY_TYPES.register("vlp",
+                    () -> EntityType.Builder.<VortLightningProjectile>of(VortLightningProjectile::new, MobCategory.MISC)
+                            .sized(0.1F, 0.1F)
+                            .clientTrackingRange(20)
+                            .updateInterval(1)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "vlp").toString()));
 
 
     public static final RegistryObject<EntityType<TeleportingBullet>> BULLET_TP =

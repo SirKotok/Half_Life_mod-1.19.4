@@ -59,6 +59,8 @@ import java.util.List;
 
 public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwner<Manhack> {
 
+    // TODO: make yellow when hurt + add alarm sound when hurt
+
     private BlockPos targetPosition;
 
     @Override

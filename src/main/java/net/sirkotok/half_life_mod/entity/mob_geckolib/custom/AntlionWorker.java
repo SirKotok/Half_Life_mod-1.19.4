@@ -29,6 +29,7 @@ import net.minecraft.world.phys.AABB;
 import net.sirkotok.half_life_mod.effect.HalfLifeEffects;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
+import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
 import net.sirkotok.half_life_mod.entity.modinterface.HasLeaderMob;
@@ -181,7 +182,7 @@ public class AntlionWorker extends HalfLifeMonster implements RangedAttackMob, H
 
     protected SoundEvent getAmbientSound() {
 
-        if (this.isangry() && random.nextFloat() < 0.1) return HalfLifeSounds.ANT_DISTRACT1.get();
+        if (this.isangry() && random.nextFloat() < 0.01) return HalfLifeSounds.ANT_DISTRACT1.get();
 
         switch (this.random.nextInt(1,6)) {
             case 1:  return HalfLifeSounds.ANT_IDLE1.get();
@@ -223,7 +224,7 @@ public class AntlionWorker extends HalfLifeMonster implements RangedAttackMob, H
     @Override
     public void tick() {
         super.tick();
-        if (this.tickCount % 20 == 0 && this.getLeader() instanceof Player pl && pl.isSpectator()) this.setLeader(this);
+        if (this.tickCount % 20 == 0 && this.getLeader() instanceof Player pl && (pl.isSpectator() || !pl.hasEffect(HalfLifeEffects.ANTLION_PHEROMONE_FRIEND.get()))) this.setLeader(this);
         if (this.tickCount % 50 == 0) this.relocate = this.random.nextFloat() < 0.05f;
         if (this.tickCount % 100 == 0 && this.shouldDiscardFriction() && this.isOnGround()) {
         this.setDiscardFriction(false); }
@@ -270,6 +271,10 @@ public class AntlionWorker extends HalfLifeMonster implements RangedAttackMob, H
     public BrainActivityGroup<AntlionWorker> getCoreTasks() {
         return BrainActivityGroup.coreTasks(
                 new FollowLeaderImmideatlyBehaviour<AntlionWorker>().cooldownFor(entity -> 5),
+                new SetJumpTargetToRandomSpotAroundLeader<AntlionWorker>(0).cooldownFor(entity -> 10),
+                new LongJumpToJumpTarget<>(30, 1.5F, this.getFlySound()).whenStarting(entity -> triggerAnim("onetime", "fly"))
+                        .startCondition(entity -> this.getLeader() != null && this.distanceTo(this.getLeader()) > 7)
+                        .cooldownFor(entity -> random.nextInt(50, 300)),
                 new LookAtTarget<>(),
                 new MoveToWalkTarget<>());
     }
@@ -281,7 +286,7 @@ public class AntlionWorker extends HalfLifeMonster implements RangedAttackMob, H
     public BrainActivityGroup<AntlionWorker> getIdleTasks() {
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<AntlionWorker>(
-                        new TargetOrRetaliateHLT<>().startCondition(entity -> this.getLeader() == null || this.getLeader() == this),
+                        new TargetOrRetaliateHLT<>().startCondition(entity -> (this.getLeader() == null || this.getLeader() == this) && BrainUtils.getMemory(this, ModMemoryModuleType.NOANTLIONATTACK.get()) == null),
                         new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>()),
                 new SetJumpTargetToRandom<>().radius(15, 10).cooldownFor(entity -> 10),
@@ -381,6 +386,7 @@ public class AntlionWorker extends HalfLifeMonster implements RangedAttackMob, H
         return super.finalizeSpawn(p_33601_, p_33602_, p_33603_, p_33604_, p_33605_);
     }
 
+    // TODO: Correct projectile
     @Override
     public void performRangedAttack(LivingEntity livingentity, float p_33318_) {
 

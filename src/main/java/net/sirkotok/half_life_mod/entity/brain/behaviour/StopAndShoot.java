@@ -10,6 +10,7 @@ import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.VortigauntHL1;
 import net.sirkotok.half_life_mod.util.CommonSounds;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableRangedAttack;
 import net.tslat.smartbrainlib.util.BrainUtils;
@@ -19,6 +20,7 @@ import javax.annotation.Nullable;
 public class StopAndShoot<E extends LivingEntity & RangedAttackMob> extends AnimatableRangedAttack<E> {
     public float vel;
     public int ded;
+    public int count;
 
     @Nullable
     public SoundEvent startsound;
@@ -38,6 +40,8 @@ public class StopAndShoot<E extends LivingEntity & RangedAttackMob> extends Anim
 
     @Override
     protected void start(E entity) {
+        count = 0;
+        if (entity instanceof VortigauntHL1 vort) vort.setcharge(2);
         entity.swing(InteractionHand.MAIN_HAND);
         BehaviorUtils.lookAtEntity(entity, this.target);
         if (this.startsound != null && entity instanceof HalfLifeMonster monster) CommonSounds.PlaySoundAsOwn(monster, startsound);
@@ -48,7 +52,15 @@ public class StopAndShoot<E extends LivingEntity & RangedAttackMob> extends Anim
     @Override
     protected void tick(E entity) {
         super.tick(entity);
+        if (count > 4 && entity instanceof VortigauntHL1 vort && vort.getcharge() == 2 ) vort.setcharge(1);
+        count++;
         BehaviorUtils.lookAtEntity(entity, this.target);
+    }
+
+    @Override
+    protected void stop(E entity) {
+        if (entity instanceof VortigauntHL1 vort) vort.setcharge(0);
+        super.stop(entity);
     }
 
     @Override
@@ -56,6 +68,7 @@ public class StopAndShoot<E extends LivingEntity & RangedAttackMob> extends Anim
         if (this.target == null)
             return;
         entity.performRangedAttack(this.target, this.vel);
+
     }
 
 

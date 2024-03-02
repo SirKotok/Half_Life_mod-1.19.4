@@ -1,4 +1,4 @@
-// 1.19.4	2024-02-25T17:30:25.9497126	Item Models: half_life_mod
+// 1.19.4	2024-03-01T02:23:41.3650194	Item Models: half_life_mod
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/antlionworker_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/antlion_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/baby_headcrab_spawn_egg.json
@@ -39,5 +39,6 @@ dbe72b845f4b73852d0c4d2091299d93b8756e9e assets/half_life_mod/models/item/securi
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/shocktrooper_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/snarknest_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/snark_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/vorthl1_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/vortigore_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/vzombie_spawn_egg.json

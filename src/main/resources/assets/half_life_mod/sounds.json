@@ -11,6 +11,174 @@
       "half_life_mod:leech_bite1"
     ]
   },
+  "bugbait_impact1": {
+    "subtitle": "sounds.half_life_mod.bugbait_impact1",
+    "sounds": [
+      "half_life_mod:bugbait_impact1"
+    ]
+  },
+  "bugbait_impact3": {
+    "subtitle": "sounds.half_life_mod.bugbait_impact3",
+    "sounds": [
+      "half_life_mod:bugbait_impact3"
+    ]
+  },
+  "bugbait_squeeze1": {
+    "subtitle": "sounds.half_life_mod.bugbait_squeeze1",
+    "sounds": [
+      "half_life_mod:bugbait_squeeze1"
+    ]
+  },
+  "bugbait_squeeze2": {
+    "subtitle": "sounds.half_life_mod.bugbait_squeeze2",
+    "sounds": [
+      "half_life_mod:bugbait_squeeze2"
+    ]
+  },
+  "bugbait_squeeze3": {
+    "subtitle": "sounds.half_life_mod.bugbait_squeeze3",
+    "sounds": [
+      "half_life_mod:bugbait_squeeze3"
+    ]
+  },
+  "aslv_alert0": {
+    "subtitle": "sounds.half_life_mod.aslv_alert0",
+    "sounds": [
+      "half_life_mod:aslv_alert0"
+    ]
+  },
+  "aslv_alert1": {
+    "subtitle": "sounds.half_life_mod.aslv_alert1",
+    "sounds": [
+      "half_life_mod:aslv_alert1"
+    ]
+  },
+  "aslv_alert2": {
+    "subtitle": "sounds.half_life_mod.aslv_alert2",
+    "sounds": [
+      "half_life_mod:aslv_alert2"
+    ]
+  },
+  "aslv_alert3": {
+    "subtitle": "sounds.half_life_mod.aslv_alert3",
+    "sounds": [
+      "half_life_mod:aslv_alert3"
+    ]
+  },
+  "aslv_alert4": {
+    "subtitle": "sounds.half_life_mod.aslv_alert4",
+    "sounds": [
+      "half_life_mod:aslv_alert4"
+    ]
+  },
+  "aslv_alert5": {
+    "subtitle": "sounds.half_life_mod.aslv_alert5",
+    "sounds": [
+      "half_life_mod:aslv_alert5"
+    ]
+  },
+  "slv_arc": {
+    "subtitle": "sounds.half_life_mod.slv_arc",
+    "sounds": [
+      "half_life_mod:slv_arc"
+    ]
+  },
+  "slv_die1": {
+    "subtitle": "sounds.half_life_mod.slv_die1",
+    "sounds": [
+      "half_life_mod:slv_die1"
+    ]
+  },
+  "slv_die2": {
+    "subtitle": "sounds.half_life_mod.slv_die2",
+    "sounds": [
+      "half_life_mod:slv_die2"
+    ]
+  },
+  "slv_idle0": {
+    "subtitle": "sounds.half_life_mod.slv_idle0",
+    "sounds": [
+      "half_life_mod:slv_idle0"
+    ]
+  },
+  "slv_idle1": {
+    "subtitle": "sounds.half_life_mod.slv_idle1",
+    "sounds": [
+      "half_life_mod:slv_idle1"
+    ]
+  },
+  "slv_idle10": {
+    "subtitle": "sounds.half_life_mod.slv_idle10",
+    "sounds": [
+      "half_life_mod:slv_idle10"
+    ]
+  },
+  "slv_idle2": {
+    "subtitle": "sounds.half_life_mod.slv_idle2",
+    "sounds": [
+      "half_life_mod:slv_idle2"
+    ]
+  },
+  "slv_idle3": {
+    "subtitle": "sounds.half_life_mod.slv_idle3",
+    "sounds": [
+      "half_life_mod:slv_idle3"
+    ]
+  },
+  "slv_idle4": {
+    "subtitle": "sounds.half_life_mod.slv_idle4",
+    "sounds": [
+      "half_life_mod:slv_idle4"
+    ]
+  },
+  "slv_idle5": {
+    "subtitle": "sounds.half_life_mod.slv_idle5",
+    "sounds": [
+      "half_life_mod:slv_idle5"
+    ]
+  },
+  "slv_idle6": {
+    "subtitle": "sounds.half_life_mod.slv_idle6",
+    "sounds": [
+      "half_life_mod:slv_idle6"
+    ]
+  },
+  "slv_idle7": {
+    "subtitle": "sounds.half_life_mod.slv_idle7",
+    "sounds": [
+      "half_life_mod:slv_idle7"
+    ]
+  },
+  "slv_idle8": {
+    "subtitle": "sounds.half_life_mod.slv_idle8",
+    "sounds": [
+      "half_life_mod:slv_idle8"
+    ]
+  },
+  "slv_idle9": {
+    "subtitle": "sounds.half_life_mod.slv_idle9",
+    "sounds": [
+      "half_life_mod:slv_idle9"
+    ]
+  },
+  "slv_impact": {
+    "subtitle": "sounds.half_life_mod.slv_impact",
+    "sounds": [
+      "half_life_mod:slv_impact"
+    ]
+  },
+  "slv_pain1": {
+    "subtitle": "sounds.half_life_mod.slv_pain1",
+    "sounds": [
+      "half_life_mod:slv_pain1"
+    ]
+  },
+  "slv_pain2": {
+    "subtitle": "sounds.half_life_mod.slv_pain2",
+    "sounds": [
+      "half_life_mod:slv_pain2"
+    ]
+  },
   "gon_die1": {
     "subtitle": "sounds.half_life_mod.gon_die1",
     "sounds": [

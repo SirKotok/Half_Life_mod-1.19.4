@@ -2,6 +2,7 @@ package net.sirkotok.half_life_mod.util;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -11,6 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.effect.HalfLifeEffects;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Pitdrone;
@@ -39,6 +41,50 @@ public final class HLperUtil {
 
     public static LivingEntity TargetOrThis(LivingEntity me){
         return BrainUtils.getTargetOfEntity(me) != null ? BrainUtils.getTargetOfEntity(me) : me;
+    }
+
+
+    public static double xanglefromvec3(Vec3 vec3){
+        Vec3 vec2 = new Vec3(vec3.x, 0, vec3.z);
+        double L = vec3.length();
+        double Lxz = vec2.length();
+        double x = vec3.x;
+        double z = vec3.z;
+        return Math.acos(Lxz/L) * 180/Math.PI * Math.signum(vec3.y);
+    }
+
+    public static boolean anglecomapre(double ang1, double ang2, float margin) {
+        boolean normalflag = Mth.abs((float)(ang1 - ang2)) < margin;
+        boolean plus2Pi = Mth.abs((float)(ang1 - ang2+360)) < margin;
+        boolean minus2Pi = Mth.abs((float)(ang1 - ang2-360)) < margin;
+        return normalflag || plus2Pi || minus2Pi;
+    }
+
+    public static boolean cansee(LivingEntity vort, LivingEntity entity) {
+        float yrot = entity.getYRot();
+        float xrot = entity.getXRot();
+        Vec3 vec3 = new Vec3(entity.getX() - vort.getX(), entity.getEyeY() - vort.getEyeY(), entity.getZ() - vort.getZ());
+        double alpha = xanglefromvec3(vec3);
+        double beta = yanglefromvec3(vec3);
+        return anglecomapre(alpha, xrot, 75) && anglecomapre(beta, yrot, 90);
+    }
+
+
+    public static float RandomFloat(int upperbound){
+        return RandomSource.create().nextFloat()*upperbound*(RandomSource.create().nextFloat() < 0.5 ? 1 : -1);
+    }
+    public static double yanglefromvec3(Vec3 vec3){
+        Vec3 vec2 = new Vec3(vec3.x, 0, vec3.z);
+        double L = vec3.length();
+        double Lxz = vec2.length();
+        double x = vec3.x;
+        double z = vec3.z;
+        double beta = -Math.atan(x/z)* 180/Math.PI* Mth.sign(x);
+        if (z > 0 && beta < 0) beta = 180+beta;
+        else if (z < 0 && beta < 0) beta = -180 - beta;
+        else if (z < 0 && beta > 0) beta = -beta;
+        if ((z > 0 && x < 0) || (z < 0 && x > 0) && beta < 0) beta = -beta;
+        return beta;
     }
 
 

@@ -58,9 +58,16 @@ public abstract class EntityThrowingItem extends Item {
             Entity summon = getentitytype().create(pLevel);
             if (summon instanceof Mob){
                 float yrot = pPlayer.getYRot();
-            summon.moveTo(pPlayer.getX() - (double)(pPlayer.getBbWidth() + 1.0F) * 0.5D * (double)Mth.sin(pPlayer.yHeadRot * ((float)Math.PI / 180F)),
-                    pPlayer.getEyeY() - (double)0.2F* (double) Mth.sin((float)pPlayer.getXRot()* ((float)Math.PI / 180F)),
-                    pPlayer.getZ() + (double)(pPlayer.getBbWidth() + 1.0F) * 0.5D * (double) Mth.cos(pPlayer.yHeadRot* ((float)Math.PI / 180F)),
+                float yuserot = pPlayer.yHeadRot * ((float)Math.PI / 180F);
+                float xr = Math.min(pPlayer.getXRot(), 60);
+                float xrot = xr*((float)Math.PI / 180F);
+                double bb = (pPlayer.getBbWidth() + 1.0F) * 0.5D;
+                double dx = -bb * (double)Mth.sin(yuserot)*Mth.cos(xrot/1.5f)*1.2;
+                double dy = -0.8*(double) Mth.sin(xrot);
+                double dz = +bb * (double) Mth.cos(yuserot)*Mth.cos(xrot/1.5f)*1.2;
+            summon.moveTo(pPlayer.getX() + dx,
+                    pPlayer.getEyeY() + dy,
+                    pPlayer.getZ() + dz,
                     yrot, 0.0f);
             this.shootEntityFromRotation(summon, pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
             ForgeEventFactory.onFinalizeSpawn((Mob) summon, (ServerLevelAccessor) pLevel, pLevel.getCurrentDifficultyAt(summon.blockPosition()), MobSpawnType.REINFORCEMENT, null, null);

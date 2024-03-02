@@ -27,6 +27,7 @@ public class ModEventBusEvents {
         event.put(HalfLifeEntities.ZOMBIE_HL2.get(), HL2Zombie.setAttributes());
         event.put(HalfLifeEntities.ZOMBIE_FAST.get(), HL2Zombie_fast.setAttributes());
         event.put(HalfLifeEntities.PZOMBIE.get(), Pzombie.setAttributes());
+        event.put(HalfLifeEntities.VORTHL1.get(), VortigauntHL1.setAttributes());
         event.put(HalfLifeEntities.VZOMBIE.get(), HLZombieVillager.setAttributes());
         event.put(HalfLifeEntities.COCKROACH.get(), Cockroach.setAttributes());
         event.put(HalfLifeEntities.BABY_HEADCRAB.get(), Baby_Headcrab.setAttributes());
@@ -83,6 +84,8 @@ public class ModEventBusEvents {
         event.register(HalfLifeEntities.ZOMBIE_FAST.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(HalfLifeEntities.PZOMBIE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        event.register(HalfLifeEntities.VORTHL1.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(HalfLifeEntities.HEADCRAB_HL1.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);

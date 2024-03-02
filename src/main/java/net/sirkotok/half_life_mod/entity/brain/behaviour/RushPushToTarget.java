@@ -71,7 +71,7 @@ public class RushPushToTarget<E extends Mob & RushingMob> extends DelayedBehavio
         super.tick(entity);
         Vec3 pPos = entity.position();
         if (this.pushvec3 != null) {
-            this.setcorrectrotation(entity, pushvec3);
+            this.setcorrectrotation(entity, entity.getDeltaMovement());
             entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5, 100, false, false, false));
         }
         LivingEntity entity1 = BrainUtils.getTargetOfEntity(entity);

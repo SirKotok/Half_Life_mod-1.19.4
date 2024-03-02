@@ -32,6 +32,7 @@
   "item.half_life_mod.chumtoad_spawn_egg": "Chumtoad Spawn Egg",
     "item.half_life_mod.shockroach_spawn_egg": "Shockroach Spawn Egg",
   "item.half_life_mod.chumtoad_thrower": "Chumtoad",
+    "item.half_life_mod.vorthl1_spawn_egg": "Alien Slave Spawn Egg",
   "item.half_life_mod.snark_spawn_egg": "Snark Spawn Egg",
     "item.half_life_mod.penguin_spawn_egg": "Penguin Spawn Egg",
     "item.half_life_mod.barney_spawn_egg": "Security Guard Spawn Egg",
@@ -51,6 +52,7 @@
 
 
     "item.half_life_mod.voltigore_egg_block_item": "Voltigore Egg",
+    "item.half_life_mod.bugbait": "Pheropod",
     "block.half_life_mod.voltigore_nest": "Voltigore Nest",
     "block.half_life_mod.voltigore_egg_block": "Voltigore Egg",
     "block.half_life_mod.xen_ground": "Xen Ground",
@@ -63,7 +65,9 @@
   "key.category.half_life_mod.half_life": "Half-Life Category",
     "key.half_life_mod.reload_gun": "Reload Gun",
 
+    "entity.half_life_mod.vorthl1": "Alien Slave",
     "entity.half_life_mod.pzombie": "Poison Zombie",
+    "entity.half_life_mod.bugbait_projectile": "Pheropod",
     "entity.half_life_mod.antlion": "Antlion Soldier",
     "entity.half_life_mod.antlionworker": "Antlion Worker",
     "entity.half_life_mod.zombie_scientist_hl1": "Headcrab Zombie",

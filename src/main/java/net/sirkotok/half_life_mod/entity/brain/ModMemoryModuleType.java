@@ -7,7 +7,6 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -20,7 +19,6 @@ import net.sirkotok.half_life_mod.HalfLifeMod;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Supplier;
 
 
 public class ModMemoryModuleType {
@@ -46,6 +44,7 @@ public class ModMemoryModuleType {
     public static final RegistryObject<MemoryModuleType<Boolean>> RUSHING = MEMORY_MODULE_TYPES.register("rushing", () -> new MemoryModuleType<>(Optional.empty()));
 
     public static final RegistryObject<MemoryModuleType<Vec3>> TARGET_LONGJUMP_LOCATION = MEMORY_MODULE_TYPES.register("target_longjump_location", () -> new MemoryModuleType<>(Optional.empty()));
+    public static final RegistryObject<MemoryModuleType<Boolean>> NOANTLIONATTACK = MEMORY_MODULE_TYPES.register("noantlionattack", () -> new MemoryModuleType<>(Optional.empty()));
 
 
 

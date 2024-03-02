@@ -111,6 +111,8 @@ public class HalfLifeMod
 
             event.accept(HalfLifeItems.BARNACLE_ONE_SPAWN_EGG);
 
+            event.accept(HalfLifeItems.VORTHL1_SPAWN_EGG);
+
             event.accept(HalfLifeItems.SHOCKROACH_SPAWN_EGG);
             event.accept(HalfLifeItems.SHOCKTROOPER_SPAWN_EGG);
             event.accept(HalfLifeItems.VORTIGORE_SPAWN_EGG);
@@ -161,6 +163,9 @@ public class HalfLifeMod
 
             event.accept(HalfLifeItems.SECURITY_GUARD_HELMET);
             event.accept(HalfLifeItems.SECURITY_GUARD_VEST);
+
+
+            event.accept(HalfLifeItems.VORT_DEBUG);
         }
     }
 

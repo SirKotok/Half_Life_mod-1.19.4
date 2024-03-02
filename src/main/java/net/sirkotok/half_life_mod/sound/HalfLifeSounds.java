@@ -18,6 +18,26 @@ public class HalfLifeSounds {
 
     // Antlion
 
+
+  public static final RegistryObject<SoundEvent> BUGBAIT_IMPACT1=
+          registerSoundEvent("bugbait_impact1");
+  public static final RegistryObject<SoundEvent> BUGBAIT_IMPACT3=
+          registerSoundEvent("bugbait_impact3");
+  public static final RegistryObject<SoundEvent> BUGBAIT_SQUEEZE1=
+          registerSoundEvent("bugbait_squeeze1");
+  public static final RegistryObject<SoundEvent> BUGBAIT_SQUEEZE2=
+          registerSoundEvent("bugbait_squeeze2");
+  public static final RegistryObject<SoundEvent> BUGBAIT_SQUEEZE3=
+          registerSoundEvent("bugbait_squeeze3");
+
+     /*     "sounds.half_life_mod.bugbait_impact1": "Pheropod ",
+          "sounds.half_life_mod.bugbait_impact3": "Pheropod ",
+          "sounds.half_life_mod.bugbait_squeeze1": "Pheropod ",
+          "sounds.half_life_mod.bugbait_squeeze2": "Pheropod ",
+          "sounds.half_life_mod.bugbait_squeeze3": "Pheropod ",
+          */
+
+
   public static final RegistryObject<SoundEvent> ANTLION_ATTACK1=
           registerSoundEvent("antlion_attack1");
   public static final RegistryObject<SoundEvent> ANTLION_ATTACK2=
@@ -46,6 +66,77 @@ public class HalfLifeSounds {
           registerSoundEvent("ant_digup1");
   public static final RegistryObject<SoundEvent> ANT_DISTRACT1=
           registerSoundEvent("ant_distract1");
+
+  public static final RegistryObject<SoundEvent> ASLV_ALERT0=
+          registerSoundEvent("aslv_alert0");
+  public static final RegistryObject<SoundEvent> ASLV_ALERT1=
+          registerSoundEvent("aslv_alert1");
+  public static final RegistryObject<SoundEvent> ASLV_ALERT2=
+          registerSoundEvent("aslv_alert2");
+  public static final RegistryObject<SoundEvent> ASLV_ALERT3=
+          registerSoundEvent("aslv_alert3");
+  public static final RegistryObject<SoundEvent> ASLV_ALERT4=
+          registerSoundEvent("aslv_alert4");
+  public static final RegistryObject<SoundEvent> ASLV_ALERT5=
+          registerSoundEvent("aslv_alert5");
+  public static final RegistryObject<SoundEvent> SLV_ARC=
+          registerSoundEvent("slv_arc");
+  public static final RegistryObject<SoundEvent> SLV_DIE1=
+          registerSoundEvent("slv_die1");
+  public static final RegistryObject<SoundEvent> SLV_DIE2=
+          registerSoundEvent("slv_die2");
+  public static final RegistryObject<SoundEvent> SLV_IDLE0=
+          registerSoundEvent("slv_idle0");
+  public static final RegistryObject<SoundEvent> SLV_IDLE1=
+          registerSoundEvent("slv_idle1");
+  public static final RegistryObject<SoundEvent> SLV_IDLE10=
+          registerSoundEvent("slv_idle10");
+  public static final RegistryObject<SoundEvent> SLV_IDLE2=
+          registerSoundEvent("slv_idle2");
+  public static final RegistryObject<SoundEvent> SLV_IDLE3=
+          registerSoundEvent("slv_idle3");
+  public static final RegistryObject<SoundEvent> SLV_IDLE4=
+          registerSoundEvent("slv_idle4");
+  public static final RegistryObject<SoundEvent> SLV_IDLE5=
+          registerSoundEvent("slv_idle5");
+  public static final RegistryObject<SoundEvent> SLV_IDLE6=
+          registerSoundEvent("slv_idle6");
+  public static final RegistryObject<SoundEvent> SLV_IDLE7=
+          registerSoundEvent("slv_idle7");
+  public static final RegistryObject<SoundEvent> SLV_IDLE8=
+          registerSoundEvent("slv_idle8");
+  public static final RegistryObject<SoundEvent> SLV_IDLE9=
+          registerSoundEvent("slv_idle9");
+  public static final RegistryObject<SoundEvent> SLV_IMPACT=
+          registerSoundEvent("slv_impact");
+  public static final RegistryObject<SoundEvent> SLV_PAIN1=
+          registerSoundEvent("slv_pain1");
+  public static final RegistryObject<SoundEvent> SLV_PAIN2=
+          registerSoundEvent("slv_pain2");
+
+   /*       "sounds.half_life_mod.aslv_alert0": "Alien Slave ",
+          "sounds.half_life_mod.aslv_alert1": "Alien Slave ",
+          "sounds.half_life_mod.aslv_alert2": "Alien Slave ",
+          "sounds.half_life_mod.aslv_alert3": "Alien Slave ",
+          "sounds.half_life_mod.aslv_alert4": "Alien Slave ",
+          "sounds.half_life_mod.aslv_alert5": "Alien Slave ",
+          "sounds.half_life_mod.slv_arc": "Alien Slave ",
+          "sounds.half_life_mod.slv_die1": "Alien Slave ",
+          "sounds.half_life_mod.slv_die2": "Alien Slave ",
+          "sounds.half_life_mod.slv_idle0": "Alien Slave ",
+          "sounds.half_life_mod.slv_idle1": "Alien Slave ",
+          "sounds.half_life_mod.slv_idle10": "Alien Slave ",
+          "sounds.half_life_mod.slv_idle2": "Alien Slave ",
+          "sounds.half_life_mod.slv_idle3": "Alien Slave ",
+          "sounds.half_life_mod.slv_idle4": "Alien Slave ",
+          "sounds.half_life_mod.slv_idle5": "Alien Slave ",
+          "sounds.half_life_mod.slv_idle6": "Alien Slave ",
+          "sounds.half_life_mod.slv_idle7": "Alien Slave ",
+          "sounds.half_life_mod.slv_idle8": "Alien Slave ",
+          "sounds.half_life_mod.slv_idle9": "Alien Slave ",
+          "sounds.half_life_mod.slv_impact": "Alien Slave ",
+          "sounds.half_life_mod.slv_pain1": "Alien Slave ",
+          "sounds.half_life_mod.slv_pain2": "Alien Slave ", */
   public static final RegistryObject<SoundEvent> ANT_FLY1=
           registerSoundEvent("ant_fly1");
   public static final RegistryObject<SoundEvent> ANT_IDLE1=

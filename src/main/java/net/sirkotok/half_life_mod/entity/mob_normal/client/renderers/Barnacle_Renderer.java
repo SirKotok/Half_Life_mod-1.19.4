@@ -1,7 +1,10 @@
 package net.sirkotok.half_life_mod.entity.mob_normal.client.renderers;
 
+import com.github.alexthe666.citadel.client.render.LightningBoltData;
+import com.github.alexthe666.citadel.client.render.LightningRender;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -10,15 +13,22 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.HalfLifeMod;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.VortigauntHL1;
 import net.sirkotok.half_life_mod.entity.mob_normal.client.ModModelLayers;
 import net.sirkotok.half_life_mod.entity.mob_normal.client.models.Barnacle_Model;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
+import net.sirkotok.half_life_mod.util.HLperUtil;
+import org.joml.Vector4f;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class Barnacle_Renderer extends MobRenderer<Barnacle, Barnacle_Model<Barnacle>> {
 
@@ -78,7 +88,6 @@ public class Barnacle_Renderer extends MobRenderer<Barnacle, Barnacle_Model<Barn
         }
 
     }
-
     @Override
     public void render(Barnacle pEntity, float pEntityYaw, float pPartialTicks, PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight) {
         this.model.prepareMobModel(pEntity);

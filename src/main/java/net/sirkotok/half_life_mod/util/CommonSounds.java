@@ -13,6 +13,12 @@ public final class CommonSounds {
         monster.playSound(soundEvent, monster.getMonsterSoundVolume(), monster.getVoicePitch());
     }
 
+    public static void PlaySoundQuiet(HalfLifeMonster monster, @Nullable SoundEvent soundEvent){
+        if (soundEvent == null) return;
+        monster.playSound(soundEvent, 0.2f, monster.getVoicePitch());
+    }
+
+
     public static SoundEvent getHL1Explosion(){
         switch (RandomSource.create().nextInt(1,4)) {
             case 1:  return HalfLifeSounds.EXPLODE3.get();

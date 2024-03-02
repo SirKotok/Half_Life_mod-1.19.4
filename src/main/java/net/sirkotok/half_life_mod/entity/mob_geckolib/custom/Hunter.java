@@ -79,6 +79,7 @@ public class Hunter extends HalfLifeMonster implements RushingMob, GeoEntity, Ra
         super.defineSynchedData();
         this.entityData.define(ISRUSHING, false);
         this.entityData.define(ISANGRY, false);
+
         this.entityData.define(ISDEFENDINGSTRIDER, false);
     }
 
@@ -116,9 +117,15 @@ public class Hunter extends HalfLifeMonster implements RushingMob, GeoEntity, Ra
     }
 
 
+
+
     @Override
     public void tick() {
         super.tick();
+
+
+
+
         this.setRushing(BrainUtils.getMemory(this, ModMemoryModuleType.RUSHING.get()) != null);
     }
 
@@ -406,7 +413,7 @@ public class Hunter extends HalfLifeMonster implements RushingMob, GeoEntity, Ra
                                          .cooldownFor(entity -> random.nextInt(40, 90))
                         ),
                         new OneRandomBehaviour<>(
-                         new RushPushToTarget<>(200, 26, 25, 32, (entity, targetpos) -> 1.5f, true, getChargeSound()).whenStarting(entity -> triggerAnim("onetime", "startrun")).cooldownFor(entity -> 400).startCondition(entity -> this.distanceTo(HLperUtil.TargetOrThis(this)) > 8 && this.random.nextFloat() < 0.1f && this.getphase() < 5),
+                         new RushPushToTarget<>(60, 26, 25, 32, (entity, targetpos) -> 1.5f, true, getChargeSound()).whenStarting(entity -> triggerAnim("onetime", "startrun")).cooldownFor(entity -> 400).startCondition(entity -> this.distanceTo(HLperUtil.TargetOrThis(this)) > 8 && this.random.nextFloat() < 0.1f && this.getphase() < 5),
                          new StopAndShootOverTime<>(50, 1, 12, 40, 2, 3.2f, true, getFireLoopSound(), getPreFlechetteSound()).cooldownFor(entity -> random.nextInt(100, 200))
                                 .whenStarting(entity -> triggerAnim("onetime", "shoot")),
                          new StopAndShootOverTime<>(50, 1, 12, 40, 2, 3.2f, false, getFireLoopSound(), getPreFlechetteSound()).cooldownFor(entity -> random.nextInt(100, 200))
@@ -521,6 +528,8 @@ public class Hunter extends HalfLifeMonster implements RushingMob, GeoEntity, Ra
         this.triggerAnim("onetime", "wall");
         this.playSound(this.getImpactSound(), this.getSoundVolume(), this.getVoicePitch());
     }
+
+
 
     @Override
     public AABB getrushingbox() {

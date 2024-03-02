@@ -8,10 +8,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.*;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.base.FireballNoTrail;
@@ -96,6 +93,17 @@ public class VoltigoreShock extends FireballNoTrail implements GeoEntity {
 
             }
         }
+    }
+
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (random.nextFloat() < 0.2 || this.tickCount % 5 == 0) {
+        Vec3 startPos = this.position();
+        this.level.addParticle(HalfLifeParticles.VOLT_LIGHTNING.get(), startPos.x, startPos.y, startPos.z, 1, 0, 0);
+        }
+
     }
 
     protected void onHitBlock(BlockHitResult blockhit) {

@@ -30,6 +30,9 @@ import net.sirkotok.half_life_mod.entity.projectile.client.renderer.*;
 import net.sirkotok.half_life_mod.particle.HalfLifeParticles;
 import net.sirkotok.half_life_mod.particle.custom.projectile_impact.BigImpactParticle;
 import net.sirkotok.half_life_mod.particle.custom.projectile_impact.BulletHoleParticle;
+import net.sirkotok.half_life_mod.particle.lightning.VoltigoreLightningParticle;
+import net.sirkotok.half_life_mod.particle.lightning.VortArcLightningParticle;
+import net.sirkotok.half_life_mod.particle.lightning.VortLightningParticle;
 import net.sirkotok.half_life_mod.util.KeyBinding;
 import net.sirkotok.half_life_mod.worldgen.dimension.specialeffects.XenSpecialEffects;
 
@@ -51,6 +54,9 @@ public class ClientModBusEvents {
                 BigImpactParticle.Provider::new);
         Minecraft.getInstance().particleEngine.register(HalfLifeParticles.SHOCK_IMPACT.get(),
                 BigImpactParticle.Provider::new);
+        event.registerSpecial(HalfLifeParticles.VORT_LIGHTNING.get(), new VortLightningParticle.Factory());
+        event.registerSpecial(HalfLifeParticles.VOLT_LIGHTNING.get(), new VoltigoreLightningParticle.Factory());
+        event.registerSpecial(HalfLifeParticles.VORT_ARC_LIGHTNING.get(), new VortArcLightningParticle.Factory());
     }
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event)
@@ -88,6 +94,7 @@ public class ClientModBusEvents {
         EntityRenderers.register(HalfLifeEntities.ZOMBIE_HL2.get(), Zombiehl2_renderer::new);
         EntityRenderers.register(HalfLifeEntities.ZOMBIE_FAST.get(), Fast_zombieRenderer::new);
         EntityRenderers.register(HalfLifeEntities.PZOMBIE.get(), pzombieRenderer::new);
+        EntityRenderers.register(HalfLifeEntities.VORTHL1.get(), VortHL1_renderer::new);
         EntityRenderers.register(HalfLifeEntities.VZOMBIE.get(), Zombiev_renderer::new);
         EntityRenderers.register(HalfLifeEntities.COCKROACH.get(), CockroachRenderer::new);
         EntityRenderers.register(HalfLifeEntities.BABY_HEADCRAB.get(), BabyHeadcrab_renderer::new);
@@ -107,6 +114,9 @@ public class ClientModBusEvents {
         EntityRenderers.register(HalfLifeEntities.ACID_THROWNBM.get(), AcidThrownBMRenderer::new);
         EntityRenderers.register(HalfLifeEntities.UNDER_NADE.get(), Undernade_renderer::new);
         EntityRenderers.register(HalfLifeEntities.BARNACLE.get(), Barnacle_Renderer::new);
+
+        EntityRenderers.register(HalfLifeEntities.VORT_LIGHTNING_PROJETILE.get(), NoRenderer::new);
+
 
         BlockEntityRenderers.register(HalfLifeBlockEntities.VOLTIGORE_EGG_BLOCK_ENTITY.get(), VoltigoreEggRenderer::new);
     }
