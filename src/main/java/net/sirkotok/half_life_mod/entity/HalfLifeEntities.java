@@ -175,6 +175,11 @@ public class HalfLifeEntities {
                     () -> EntityType.Builder.of(VortigauntHL1::new, MobCategory.MONSTER)
                             .sized(0.6F, 1.8F)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "vorthl1").toString()));
+    public static final RegistryObject<EntityType<VortigauntHL2>> VORTHL2 =
+            ENTITY_TYPES.register("vorthl2",
+                    () -> EntityType.Builder.of(VortigauntHL2::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.8F)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "vorthl2").toString()));
 
     public static final RegistryObject<EntityType<HLZombieVillager>> VZOMBIE =
             ENTITY_TYPES.register("vzombie",

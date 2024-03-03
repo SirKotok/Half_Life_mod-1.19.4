@@ -30,9 +30,7 @@ import net.sirkotok.half_life_mod.entity.projectile.client.renderer.*;
 import net.sirkotok.half_life_mod.particle.HalfLifeParticles;
 import net.sirkotok.half_life_mod.particle.custom.projectile_impact.BigImpactParticle;
 import net.sirkotok.half_life_mod.particle.custom.projectile_impact.BulletHoleParticle;
-import net.sirkotok.half_life_mod.particle.lightning.VoltigoreLightningParticle;
-import net.sirkotok.half_life_mod.particle.lightning.VortArcLightningParticle;
-import net.sirkotok.half_life_mod.particle.lightning.VortLightningParticle;
+import net.sirkotok.half_life_mod.particle.lightning.*;
 import net.sirkotok.half_life_mod.util.KeyBinding;
 import net.sirkotok.half_life_mod.worldgen.dimension.specialeffects.XenSpecialEffects;
 
@@ -57,6 +55,10 @@ public class ClientModBusEvents {
         event.registerSpecial(HalfLifeParticles.VORT_LIGHTNING.get(), new VortLightningParticle.Factory());
         event.registerSpecial(HalfLifeParticles.VOLT_LIGHTNING.get(), new VoltigoreLightningParticle.Factory());
         event.registerSpecial(HalfLifeParticles.VORT_ARC_LIGHTNING.get(), new VortArcLightningParticle.Factory());
+        event.registerSpecial(HalfLifeParticles.VORT2_ARC_LIGHTNING.get(), new Vort2ArcLightningParticle.Factory());
+
+
+        event.registerSpecial(HalfLifeParticles.ORANGEGLOW.get(), new OrangeGlowParticle.Factory());
     }
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event)
@@ -95,6 +97,7 @@ public class ClientModBusEvents {
         EntityRenderers.register(HalfLifeEntities.ZOMBIE_FAST.get(), Fast_zombieRenderer::new);
         EntityRenderers.register(HalfLifeEntities.PZOMBIE.get(), pzombieRenderer::new);
         EntityRenderers.register(HalfLifeEntities.VORTHL1.get(), VortHL1_renderer::new);
+        EntityRenderers.register(HalfLifeEntities.VORTHL2.get(), VortHL2_renderer::new);
         EntityRenderers.register(HalfLifeEntities.VZOMBIE.get(), Zombiev_renderer::new);
         EntityRenderers.register(HalfLifeEntities.COCKROACH.get(), CockroachRenderer::new);
         EntityRenderers.register(HalfLifeEntities.BABY_HEADCRAB.get(), BabyHeadcrab_renderer::new);

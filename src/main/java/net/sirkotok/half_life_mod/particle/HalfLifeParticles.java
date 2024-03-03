@@ -14,8 +14,14 @@ public class HalfLifeParticles {
 
     public static final RegistryObject<SimpleParticleType> VORT_LIGHTNING =
             PARTICLE_TYPES.register("vort_lightning", () -> new SimpleParticleType(false));
+
+    public static final RegistryObject<SimpleParticleType> ORANGEGLOW =
+            PARTICLE_TYPES.register("orangeglow", () -> new SimpleParticleType(false));
     public static final RegistryObject<SimpleParticleType> VORT_ARC_LIGHTNING =
             PARTICLE_TYPES.register("vort_arc_lightning", () -> new SimpleParticleType(false));
+
+    public static final RegistryObject<SimpleParticleType> VORT2_ARC_LIGHTNING =
+            PARTICLE_TYPES.register("vort2_arc_lightning", () -> new SimpleParticleType(false));
     public static final RegistryObject<SimpleParticleType> VOLT_LIGHTNING =
             PARTICLE_TYPES.register("volt_lightning", () -> new SimpleParticleType(false));
 

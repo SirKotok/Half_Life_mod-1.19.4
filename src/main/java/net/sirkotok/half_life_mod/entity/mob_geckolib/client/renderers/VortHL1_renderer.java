@@ -53,7 +53,3 @@ public class VortHL1_renderer extends GeoEntityRenderer<VortigauntHL1> {
 }
 
 
-//   @Override
-//   public ResourceLocation getTextureLocation(PigDogBoogeyman animatable) {
-//      return new ResourceLocation(PactMod.MOD_ID, "textures/entity/pigdogother1.png");
-//   }

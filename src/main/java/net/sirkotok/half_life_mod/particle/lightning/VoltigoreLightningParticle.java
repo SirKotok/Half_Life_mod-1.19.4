@@ -32,12 +32,12 @@ public class VoltigoreLightningParticle extends Particle {
         this.xd = 0;
         this.yd = 0;
         this.zd = 0;
-        Vec3 lightningTo = findLightningToPos(world, x, y, z, 5);
+        Vec3 lightningTo = findLightningToPos(world, x, y, z, random.nextInt(4,6));
         Vec3 to = lightningTo.subtract(x, y, z);
         this.lifetime = (int) Math.ceil(to.length());
         int sections = 6 * this.lifetime;
 
-        LightningBoltData.BoltRenderInfo boltData = new LightningBoltData.BoltRenderInfo(0.0F, 0.15F, 0.1F, 0.02F, new Vector4f(0.5F , 0.01F, 0.99F, 0.3F), 0.6F);
+        LightningBoltData.BoltRenderInfo boltData = new LightningBoltData.BoltRenderInfo(0.01F, 0.15F, 0.1F, 0.05F, new Vector4f(0.5F , 0.01F, 0.99F, 0.3F), 0.6F);
         LightningBoltData bolt = new LightningBoltData(boltData, Vec3.ZERO, to, sections)
                 .size(0.1F + random.nextFloat() * 0.1F)
                 .lifespan(5)

@@ -104,6 +104,11 @@ public class HalfLifeItems {
             () -> new ForgeSpawnEggItem(HalfLifeEntities.VORTHL1, 0x6c4b07, 0x329b05   ,
                     new Item.Properties()));
 
+    public static final RegistryObject<Item> VORTHL2_SPAWN_EGG = ITEMS.register("vorthl2_spawn_egg",
+            () -> new ForgeSpawnEggItem(HalfLifeEntities.VORTHL2, 0x808759, 0x329b05   ,
+                    new Item.Properties()));
+
+
     public static final RegistryObject<Item> VZOMBIE_SPAWN_EGG = ITEMS.register("vzombie_spawn_egg",
             () -> new ForgeSpawnEggItem(HalfLifeEntities.VZOMBIE, 0x975103, 0xff5600   ,
                     new Item.Properties()));

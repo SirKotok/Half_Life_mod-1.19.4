@@ -137,7 +137,7 @@ public class Headcrab_2 extends HalfLifeMonster implements GeoEntity, SmartBrain
 
     public static AttributeSupplier setAttributes() {
         return Monster.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 10D)
+                .add(Attributes.MAX_HEALTH, 8D)
                 .add(Attributes.ATTACK_DAMAGE, 3f)
                 .add(Attributes.ATTACK_SPEED, 1.0f)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.0f)
@@ -278,7 +278,7 @@ public class Headcrab_2 extends HalfLifeMonster implements GeoEntity, SmartBrain
                 new FleeTarget<>().fleeDistance(3).startCondition(entity -> distanceTo(HLperUtil.TargetOrThis(this)) < 3.5), // .stopIf(entity -> distanceTo(BrainUtils.getTargetOfEntity(this)) > 3.5),
           //      new StrafeTarget<>().strafeDistance(3.5f).stopStrafingWhen(entity -> distanceTo(BrainUtils.getTargetOfEntity(this)) > 3.5),
                 new BiteWhileJumpingBehavior<>(30, getBiteSound(), 0.2f).startCondition(entity -> !isOnGround()).cooldownFor(entity -> 20),
-                new HeadCrabJumpBehavior<>(14, getJumpSound(), null).SetMinDistance(3).whenStarting(entity -> triggerAnim("jump", "jump")).cooldownFor(entity -> 80)
+                new HeadCrabJumpBehavior<>(14, getJumpSound(), null).SetMinDistance(3).whenStarting(entity -> triggerAnim("jump", "jump")).cooldownFor(entity -> 65)
         );
 
     }

@@ -20,47 +20,29 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.joml.Vector4f;
 
-public class VortLightningParticle extends Particle {
+public class Vort2ArcLightningParticle extends Particle {
+
     private LightningRender lightningRender = new LightningRender();
+    private static final Vector4f LIGHTNING_COLOR = new Vector4f(1F , 1F, 1F, 0.3F);
 
-
-    public VortLightningParticle(ClientLevel world, double x, double y, double z, double x1, double yd, double zd) {
+    public Vort2ArcLightningParticle(ClientLevel world, double x, double y, double z, double xd, double yd, double zd) {
         super(world, x, y, z);
-        this.setSize(1.0F, 1.0F);
+        this.setSize(6.0F, 6.0F);
         this.x = x;
         this.y = y;
         this.z = z;
-        this.xd = 0;
-        this.yd = 0;
-        this.zd = 0;
-
-
-        int range;
-        Vector4f color;
-        float size;
-
-
-
-        if (x1 == 2) {
-            range = 7;
-            size = 0.1F + random.nextFloat() * 0.1F;
-            color = new Vector4f(0.9F , 0.9F, 0.9F, 0.2F);
-        } else {
-            range = 5;
-            size = 0.1F + random.nextFloat() * 0.1F;
-            color = new Vector4f(0.1F , 0.8F, 0.1F, 0.3F);
-        }
-
-        Vec3 lightningTo = findLightningToPos(world, x, y, z, range);
-        Vec3 to = lightningTo.subtract(x, y, z);
-        this.lifetime = (int) Math.ceil(to.length());
-        int sections = 4 * this.lifetime;
-
-        LightningBoltData.BoltRenderInfo boltData = new LightningBoltData.BoltRenderInfo(0.0F, 0.15F, 0.1F, 0.02F, color, 0.5F);
-        LightningBoltData bolt = new LightningBoltData(boltData, Vec3.ZERO, to, sections)
-                .size(size)
-                .lifespan(5)
-                .spawn(LightningBoltData.SpawnFunction.delay(3));
+    //    Vec3 to = findLightningToPos (this.level, x, y, z, new Vec3(xd, yd, zd)); //.add(x, y, z)
+    //    Vec3 lightningTo  = to.subtract(x, y, z);
+    //    lightningTo = lightningTo.add(lightningTo.scale(0.1f));
+        Vec3 lightningTo = new Vec3(xd, yd, zd);
+        this.lifetime = (int) Math.ceil(lightningTo.length());
+        int sections = 2 * this.lifetime;
+        LightningBoltData.BoltRenderInfo boltData = new LightningBoltData.BoltRenderInfo(0.00F, 0.00F, 0.0F, 0.0F, LIGHTNING_COLOR, 0.0F);
+        LightningBoltData bolt = new LightningBoltData(boltData, Vec3.ZERO, new Vec3(xd, yd, zd), sections)
+                .size(0.2F + random.nextFloat() * 0.2F)
+                .fade(LightningBoltData.FadeFunction.fade(0.5F))
+                .lifespan(this.lifetime + 1)
+                .spawn(LightningBoltData.SpawnFunction.delay(2));  //LightningBoltData.SpawnFunction.NO_DELAY
         lightningRender.update(this, bolt, 1.0F);
     }
 
@@ -68,16 +50,22 @@ public class VortLightningParticle extends Particle {
         return false;
     }
 
-    private Vec3 findLightningToPos(ClientLevel world, double x, double y, double z, int range) {
+
+    private Vec3 findLightningToPos(ClientLevel world, double x, double y, double z, Vec3 pos) {
         Vec3 vec3 = new Vec3(x, y, z);
-        for (int i = 0; i < 10; i++) {
-            Vec3 vec31 = vec3.add(random.nextFloat() * range - range / 2F, random.nextFloat() * range - range / 2F, random.nextFloat() * range - range / 2F);
+        int j = 10;
+        double  dx = (pos.x - vec3.x)/j;
+        double  dy = (pos.y - vec3.y)/j;
+        double  dz = (pos.z - vec3.z)/j;
+        for (int i = 0; i < j; i++) {
+            Vec3 vec31 = vec3.add(dx, dy, dz);
             if (canSeeBlock(vec3, vec31)) {
                 return vec31;
             }
         }
         return vec3;
     }
+
 
     private boolean canSeeBlock(Vec3 from, Vec3 to) {
         BlockHitResult result = this.level.clip(new ClipContext(from, to, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, null));
@@ -128,9 +116,7 @@ public class VortLightningParticle extends Particle {
         }
 
         public Particle createParticle(SimpleParticleType typeIn, ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-            return new VortLightningParticle(worldIn, x, y, z, xSpeed, ySpeed, zSpeed);
+            return new Vort2ArcLightningParticle(worldIn, x, y, z, xSpeed, ySpeed, zSpeed);
         }
     }
-
-
 }

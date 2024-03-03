@@ -10,7 +10,9 @@ import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Controller;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.VortigauntHL1;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.VortigauntHL2;
 import net.sirkotok.half_life_mod.util.CommonSounds;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableRangedAttack;
 import net.tslat.smartbrainlib.util.BrainUtils;
@@ -42,6 +44,7 @@ public class StopAndShoot<E extends LivingEntity & RangedAttackMob> extends Anim
     protected void start(E entity) {
         count = 0;
         if (entity instanceof VortigauntHL1 vort) vort.setcharge(2);
+        if (entity instanceof VortigauntHL2 vort) vort.setcharge(2);
         entity.swing(InteractionHand.MAIN_HAND);
         BehaviorUtils.lookAtEntity(entity, this.target);
         if (this.startsound != null && entity instanceof HalfLifeMonster monster) CommonSounds.PlaySoundAsOwn(monster, startsound);
@@ -53,6 +56,9 @@ public class StopAndShoot<E extends LivingEntity & RangedAttackMob> extends Anim
     protected void tick(E entity) {
         super.tick(entity);
         if (count > 4 && entity instanceof VortigauntHL1 vort && vort.getcharge() == 2 ) vort.setcharge(1);
+        if (count > 4 && entity instanceof VortigauntHL2 vort && vort.getcharge() == 2 ) vort.setcharge(1);
+        if (count > 5 && count < 10 && entity instanceof Controller vort && vort.getcharge() == 0 ) vort.setcharge(2);
+        if (count > 10 && entity instanceof Controller vort && vort.getcharge() == 2 ) vort.setcharge(0);
         count++;
         BehaviorUtils.lookAtEntity(entity, this.target);
     }
@@ -60,6 +66,7 @@ public class StopAndShoot<E extends LivingEntity & RangedAttackMob> extends Anim
     @Override
     protected void stop(E entity) {
         if (entity instanceof VortigauntHL1 vort) vort.setcharge(0);
+        if (entity instanceof VortigauntHL2 vort) vort.setcharge(0);
         super.stop(entity);
     }
 

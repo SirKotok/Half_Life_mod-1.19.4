@@ -13,17 +13,11 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.animal.IronGolem;
-import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.level.NoteBlockEvent;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Houndeye;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Scientist;
-import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.util.BrainUtils;
 import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
 
@@ -37,6 +31,10 @@ public class HalfLifeNeutral extends PathfinderMob implements NeutralMob {
         super(pEntityType, pLevel);
     }
 
+
+    public float getNeutralSoundVolume(){
+        return this.getSoundVolume();
+    }
     public static final EntityDataAccessor<String> STRING_UUID_SUS = SynchedEntityData.defineId(HalfLifeNeutral.class, EntityDataSerializers.STRING);
     public static final EntityDataAccessor<Integer> SUS_TIMESTAMP = SynchedEntityData.defineId(HalfLifeNeutral.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<String> STRING_UUID_ENEMY1 = SynchedEntityData.defineId(HalfLifeNeutral.class, EntityDataSerializers.STRING);

@@ -8,8 +8,10 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeAnimatedEffect;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Houndeye;
+import net.sirkotok.half_life_mod.particle.HalfLifeParticles;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -46,6 +48,10 @@ public class VoltigoreProjectileAftereffect extends HalfLifeAnimatedEffect imple
     @Override
     public void tick() {
         super.tick();
+        if (random.nextFloat() < 0.3 || this.tickCount % 4 == 0) {
+            Vec3 startPos = this.position();
+            this.level.addParticle(HalfLifeParticles.VOLT_LIGHTNING.get(), startPos.x, startPos.y, startPos.z, 1, 0, 0);
+        }
         this.setDeltaMovement(0, 0, 0);
         this.setPos(this.getX(), this.getY(), this.getZ());
         if (this.tickCount > remainingticks()) this.discard();

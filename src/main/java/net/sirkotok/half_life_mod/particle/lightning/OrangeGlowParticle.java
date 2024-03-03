@@ -20,11 +20,11 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.joml.Vector4f;
 
-public class VortLightningParticle extends Particle {
+public class OrangeGlowParticle extends Particle {
     private LightningRender lightningRender = new LightningRender();
 
 
-    public VortLightningParticle(ClientLevel world, double x, double y, double z, double x1, double yd, double zd) {
+    public OrangeGlowParticle(ClientLevel world, double x, double y, double z, double xd, double yd, double zd) {
         super(world, x, y, z);
         this.setSize(1.0F, 1.0F);
         this.x = x;
@@ -33,34 +33,17 @@ public class VortLightningParticle extends Particle {
         this.xd = 0;
         this.yd = 0;
         this.zd = 0;
-
-
-        int range;
-        Vector4f color;
-        float size;
-
-
-
-        if (x1 == 2) {
-            range = 7;
-            size = 0.1F + random.nextFloat() * 0.1F;
-            color = new Vector4f(0.9F , 0.9F, 0.9F, 0.2F);
-        } else {
-            range = 5;
-            size = 0.1F + random.nextFloat() * 0.1F;
-            color = new Vector4f(0.1F , 0.8F, 0.1F, 0.3F);
-        }
-
-        Vec3 lightningTo = findLightningToPos(world, x, y, z, range);
+        int i = xd == 0 ? 2 : 3;
+        Vec3 lightningTo = findLightningToPos(world, x, y, z, i);
         Vec3 to = lightningTo.subtract(x, y, z);
         this.lifetime = (int) Math.ceil(to.length());
         int sections = 4 * this.lifetime;
 
-        LightningBoltData.BoltRenderInfo boltData = new LightningBoltData.BoltRenderInfo(0.0F, 0.15F, 0.1F, 0.02F, color, 0.5F);
+        LightningBoltData.BoltRenderInfo boltData = new LightningBoltData.BoltRenderInfo(0.2F, 0.15F, 0.1F, 0.2F, new Vector4f(0.99F , 0.64F, 0.01F, 0.3F), 0.5F);
         LightningBoltData bolt = new LightningBoltData(boltData, Vec3.ZERO, to, sections)
-                .size(size)
+                .size(0.2F + random.nextFloat() * 0.1F)
                 .lifespan(5)
-                .spawn(LightningBoltData.SpawnFunction.delay(3));
+                .spawn(LightningBoltData.SpawnFunction.CONSECUTIVE);
         lightningRender.update(this, bolt, 1.0F);
     }
 
@@ -128,7 +111,7 @@ public class VortLightningParticle extends Particle {
         }
 
         public Particle createParticle(SimpleParticleType typeIn, ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-            return new VortLightningParticle(worldIn, x, y, z, xSpeed, ySpeed, zSpeed);
+            return new OrangeGlowParticle(worldIn, x, y, z, xSpeed, ySpeed, zSpeed);
         }
     }
 

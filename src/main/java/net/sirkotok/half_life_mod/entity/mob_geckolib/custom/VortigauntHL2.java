@@ -7,35 +7,31 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.animal.IronGolem;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
-import net.sirkotok.half_life_mod.entity.projectile.Bullet;
 import net.sirkotok.half_life_mod.entity.projectile.VortLightningProjectile;
 import net.sirkotok.half_life_mod.particle.HalfLifeParticles;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
@@ -65,16 +61,14 @@ import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
-import java.util.Objects;
 
 
-public class VortigauntHL1 extends HalfLifeMonster implements RangedAttackMob, GeoEntity, SmartBrainOwner<VortigauntHL1> {
+public class VortigauntHL2 extends HalfLifeNeutral implements RangedAttackMob, GeoEntity, SmartBrainOwner<VortigauntHL2> {
 
     @Override
     protected float getSoundVolume() {
@@ -87,26 +81,25 @@ public class VortigauntHL1 extends HalfLifeMonster implements RangedAttackMob, G
 
 
 
-    public static final EntityDataAccessor<Boolean> IS_ANGRY = SynchedEntityData.defineId(VortigauntHL1.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> IS_ANGRY = SynchedEntityData.defineId(VortigauntHL2.class, EntityDataSerializers.BOOLEAN);
 
-    public static final EntityDataAccessor<Integer> CHARGE = SynchedEntityData.defineId(VortigauntHL1.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> CHARGE = SynchedEntityData.defineId(VortigauntHL2.class, EntityDataSerializers.INT);
 
-    public static final EntityDataAccessor<Boolean> CAN_RANGED_ATTACK = SynchedEntityData.defineId(VortigauntHL1.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<Integer> ARC_PARTICLES = SynchedEntityData.defineId(VortigauntHL1.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> MAX_ARC_PARTICLES = SynchedEntityData.defineId(VortigauntHL1.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Float> TARGET_X = SynchedEntityData.defineId(VortigauntHL1.class, EntityDataSerializers.FLOAT);
-    public static final EntityDataAccessor<Float> TARGET_Y = SynchedEntityData.defineId(VortigauntHL1.class, EntityDataSerializers.FLOAT);
-    public static final EntityDataAccessor<Float> TARGET_Z = SynchedEntityData.defineId(VortigauntHL1.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Integer> ARC_PARTICLES = SynchedEntityData.defineId(VortigauntHL2.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> MAX_ARC_PARTICLES = SynchedEntityData.defineId(VortigauntHL2.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Float> TARGET_X = SynchedEntityData.defineId(VortigauntHL2.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Float> TARGET_Y = SynchedEntityData.defineId(VortigauntHL2.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Float> TARGET_Z = SynchedEntityData.defineId(VortigauntHL2.class, EntityDataSerializers.FLOAT);
 
-    public static final EntityDataAccessor<Float> START_X = SynchedEntityData.defineId(VortigauntHL1.class, EntityDataSerializers.FLOAT);
-    public static final EntityDataAccessor<Float> START_Y = SynchedEntityData.defineId(VortigauntHL1.class, EntityDataSerializers.FLOAT);
-    public static final EntityDataAccessor<Float> START_Z = SynchedEntityData.defineId(VortigauntHL1.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Float> START_X = SynchedEntityData.defineId(VortigauntHL2.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Float> START_Y = SynchedEntityData.defineId(VortigauntHL2.class, EntityDataSerializers.FLOAT);
+    public static final EntityDataAccessor<Float> START_Z = SynchedEntityData.defineId(VortigauntHL2.class, EntityDataSerializers.FLOAT);
 
 
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(IS_ANGRY, false);
-        this.entityData.define(CAN_RANGED_ATTACK, false);
+
         this.entityData.define(CHARGE, 0);
         this.entityData.define(TARGET_Y, 0F);
         this.entityData.define(TARGET_Z, 0F);
@@ -158,10 +151,17 @@ public class VortigauntHL1 extends HalfLifeMonster implements RangedAttackMob, G
     }
 
 
+    private float length(){
+        return this.getBbWidth()/2;
+    }
 
-
-
-
+    private Vec3 rotvec(int angledegree){
+        float i = length();
+        double yrot = (this.yBodyRot+angledegree)/180*Math.PI;
+        double d1 = Math.sin(yrot);
+        double d2 = Math.cos(yrot);
+        return new Vec3((float)this.getX()-i*d1, this.getY()+1.4f, (float)this.getZ()+i*d2);
+    }
 
 
 
@@ -192,10 +192,6 @@ public class VortigauntHL1 extends HalfLifeMonster implements RangedAttackMob, G
                 this.level.addFreshEntity(bullet);
             }
 
-         //   if (this.getarcp() == 1) {
-         //       if (target!= null && this.getSensing().hasLineOfSight(target)) {
-          //      this.ConfigurabledoHurtTarget(target, 0, 1.5f, 1, null, 0, false);
-         //       }
 
 
             this.setarcp(this.getarcp()-1);
@@ -212,18 +208,19 @@ public class VortigauntHL1 extends HalfLifeMonster implements RangedAttackMob, G
                 Vec3 to = vec3.subtract(from);
                 to = to.add(to.normalize().scale(0.5));
              //   to = vec3;
-                level.addParticle(HalfLifeParticles.VORT_ARC_LIGHTNING.get(), from.x, from.y, from.z, to.x, to.y, to.z);
+                level.addParticle(HalfLifeParticles.VORT2_ARC_LIGHTNING.get(), from.x, from.y, from.z, to.x, to.y, to.z);
             }
         }
 
        if (level.isClientSide && this.getcharge() > 0 && this.tickCount % 3 == 0) {
-            Vec3 startPos = new Vec3(this.getX(), this.getY() + 1.4f, this.getZ());
-            this.level.addParticle(HalfLifeParticles.VORT_LIGHTNING.get(), startPos.x, startPos.y, startPos.z, 1, 0, 0);
+          Vec3 startPos1 = this.getEyePosition();
+     //       Vec3 startPos1 = rotvec(90);
+     //      Vec3 startPos2 = rotvec(-90);
+           this.level.addParticle(HalfLifeParticles.VORT_LIGHTNING.get(), startPos1.x, startPos1.y, startPos1.z, 2, 0, 0);
+      //      this.level.addParticle(HalfLifeParticles.VORT_LIGHTNING.get(), startPos2.x, startPos2.y, startPos2.z, 1, 0, 0);
        }
 
-        if (this.tickCount % 10 == 0) {
-            this.entityData.set(CAN_RANGED_ATTACK, (!this.isScared() || (random.nextFloat() < 0.15f && this.isScared() && !HLperUtil.cansee(this, HLperUtil.TargetOrThis(this)))));
-        }
+
 
         if (this.tickCount % 100 == 0 && !this.level.isClientSide()) {
             ServerLevel pLevel = (ServerLevel) this.level;
@@ -231,8 +228,8 @@ public class VortigauntHL1 extends HalfLifeMonster implements RangedAttackMob, G
             int rad = 20;
             List<Mob> xen_fac = EntityRetrievalUtil.getEntities((Level) pLevel,
                     new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
-                            pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj.getType().is(HLTags.EntityTypes.FACTION_XEN));
-            if (BrainUtils.getTargetOfEntity(this) != null && !(BrainUtils.getTargetOfEntity(this) instanceof Shockroach)) {
+                            pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj instanceof HalfLifeNeutral);
+            if (BrainUtils.getTargetOfEntity(this) != null) {
                 for (Mob x : xen_fac) {
                     if (BrainUtils.getTargetOfEntity(x) == null) {
                         BrainUtils.setTargetOfEntity(x, BrainUtils.getTargetOfEntity(this));
@@ -251,7 +248,7 @@ public class VortigauntHL1 extends HalfLifeMonster implements RangedAttackMob, G
         return this.entityData.get(IS_ANGRY);
     }
 
-    public VortigauntHL1(EntityType type, Level level) {
+    public VortigauntHL2(EntityType type, Level level) {
         super(type, level);
         this.xpReward = 10;
          this.setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1F);
@@ -289,25 +286,21 @@ public class VortigauntHL1 extends HalfLifeMonster implements RangedAttackMob, G
 
 
     @Override
-    public List<ExtendedSensor<VortigauntHL1>> getSensors() {
+    public List<ExtendedSensor<VortigauntHL2>> getSensors() {
         return ObjectArrayList.of(
                 new SmellSensor<>(),
                 new HurtBySensor<>(),
                 new NearbyPlayersSensor<>(),
-                new NearbyLivingEntitySensor<VortigauntHL1>()
+                new NearbyLivingEntitySensor<VortigauntHL2>()
                         .setPredicate((target, entity) ->
-                            target instanceof Player ||
-                            target instanceof IronGolem ||
-                            target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) ||
-                            target instanceof AbstractVillager ||
-                            target instanceof HalfLifeNeutral
+                            target instanceof Enemy
                             ));
     }
 
 
 
     @Override
-    public BrainActivityGroup<VortigauntHL1> getCoreTasks() {
+    public BrainActivityGroup<VortigauntHL2> getCoreTasks() {
         return BrainActivityGroup.coreTasks(
                 new LookAtTarget<>(),
                 new MoveToWalkTarget<>());
@@ -317,9 +310,9 @@ public class VortigauntHL1 extends HalfLifeMonster implements RangedAttackMob, G
 
 
     @Override
-    public BrainActivityGroup<VortigauntHL1> getIdleTasks() {
+    public BrainActivityGroup<VortigauntHL2> getIdleTasks() {
         return BrainActivityGroup.idleTasks(
-                new FirstApplicableBehaviour<VortigauntHL1>(
+                new FirstApplicableBehaviour<VortigauntHL2>(
                         new TargetOrRetaliateHLT<>(),
                         new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>()),
@@ -329,9 +322,6 @@ public class VortigauntHL1 extends HalfLifeMonster implements RangedAttackMob, G
                                 .whenStarting(entity -> this.entityData.set(IS_ANGRY, false))));
     }
 
-    public boolean isScared(){
-        return this.getHealth()/this.getMaxHealth() < 0.2f;
-    }
 
 
     protected SoundEvent getMissSound() {
@@ -343,36 +333,29 @@ public class VortigauntHL1 extends HalfLifeMonster implements RangedAttackMob, G
     }
 
 
-    public boolean canattack(){
-        return this.entityData.get(CAN_RANGED_ATTACK);
-    }
+
 
 
     @Override
-    public BrainActivityGroup<VortigauntHL1> getFightTasks() {
+    public BrainActivityGroup<VortigauntHL2> getFightTasks() {
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>(),
                 new Retaliate<>(),
-                new SetWalkTargetToRandomSpotAroundAttackTarget<>().speedMod(1.1f).startCondition(entity -> !this.isScared() && this.distanceTo(HLperUtil.TargetOrThis(this))  > 5),
+                new SetWalkTargetToRandomSpotAroundAttackTarget<>().speedMod(1.1f).startCondition(entity -> this.distanceTo(HLperUtil.TargetOrThis(this))  > 5),
                 new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, true)).startCondition(entity -> !this.isangry()),
                 new OneRandomBehaviour<>(
                         new SetRandomWalkTarget<>().setRadius(8, 4).cooldownFor(entity -> 100),
                         new SetWalkTargetToRandomSpotAroundAttackTarget<>().speedMod(1.1f),
                         new SetWalkTargetToRandomSpotAroundAttackTarget<>().speedMod(1.2f),
                         new SetWalkTargetToRandomSpotAroundAttackTarget<>().radius(5, 4)
-                         ).startCondition(entity -> !this.isScared()),
-                new FleeTarget<>().fleeDistance(10).speedModifier(1f).startCondition(entity -> this.isScared()),
-                new SetRandomWalkTarget<>().setRadius(8, 4).startCondition(entity -> this.isScared()),
-                new FirstApplicableBehaviour<>(
-                new TripleMeleeAttack<>(15, 7, 11, 0, 1, 1, null, 0, CommonSounds.getClawHitSound(), null, this.getMissSound())
-                        .whenStarting(entity -> triggerAnim("onetime", "triple")),
-                new StopAndShoot<VortigauntHL1>(30, 3, 1f, HalfLifeSounds.SLV_ARC.get()).cooldownFor(entity -> random.nextInt(20, 60) * (this.isScared() ? 2 : 1))
-                .whenStarting(entity -> triggerAnim("onetime", "easy"))
-                .startCondition(entity -> this.canattack() && !this.level.getDifficulty().equals(Difficulty.HARD)),
-                new StopAndShoot<VortigauntHL1>(20, 3, 1f, HalfLifeSounds.SLV_ARC.get()).cooldownFor(entity -> random.nextInt(50, 90) * (this.isScared() ? 2 : 1))
-                .whenStarting(entity -> triggerAnim("onetime", "hard"))
-                .startCondition(entity -> this.canattack() && this.level.getDifficulty().equals(Difficulty.HARD))
-                ));
+                ),
+              //  new FirstApplicableBehaviour<>(
+                new StopAndShoot<VortigauntHL2>(20, 3, 1f, null)
+                        .cooldownFor(entity -> random.nextInt(40, 60))
+                .whenStarting(entity -> triggerAnim("onetime", "shoot"))
+
+             //   )
+        );
 
 
     }
@@ -383,9 +366,8 @@ public class VortigauntHL1 extends HalfLifeMonster implements RangedAttackMob, G
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<>(this, "mainloop", 0, this::mainpredicate));
         controllerRegistrar.add(new AnimationController<>(this, "onetime", state -> PlayState.STOP)
-                .triggerableAnim("triple", RawAnimation.begin().then("animation.vort.melee3", Animation.LoopType.PLAY_ONCE))
-                .triggerableAnim("easy", RawAnimation.begin().then("animation.vort.easyshot", Animation.LoopType.PLAY_ONCE))
-                .triggerableAnim("hard", RawAnimation.begin().then("animation.vort.hardshot", Animation.LoopType.PLAY_ONCE))
+                .triggerableAnim("blast", RawAnimation.begin().then("animation.vort.meleeblast", Animation.LoopType.PLAY_ONCE))
+                .triggerableAnim("shoot", RawAnimation.begin().then("animation.vort.shoot", Animation.LoopType.PLAY_ONCE))
         );
 
     }
@@ -439,6 +421,7 @@ public class VortigauntHL1 extends HalfLifeMonster implements RangedAttackMob, G
         return HalfLifeSounds.SLV_IMPACT.get();
     }
 
+   /*
     protected SoundEvent getDeathSound() {
         switch (this.random.nextInt(1,3)) {
             case 1:  return HalfLifeSounds.SLV_DIE1.get();
@@ -446,6 +429,7 @@ public class VortigauntHL1 extends HalfLifeMonster implements RangedAttackMob, G
         }
         return HalfLifeSounds.HEADCRAB_1_DIE_1.get();
     }
+
 
     @Override
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
@@ -455,7 +439,6 @@ public class VortigauntHL1 extends HalfLifeMonster implements RangedAttackMob, G
         }
         return HalfLifeSounds.HEADCRAB_1_DIE_1.get();
     }
-
 
 
 
@@ -481,7 +464,7 @@ public class VortigauntHL1 extends HalfLifeMonster implements RangedAttackMob, G
             case 17:  return HalfLifeSounds.ASLV_ALERT5.get();
         }
         return SoundEvents.FROG_STEP;
-    }
+    } */
 
 
 

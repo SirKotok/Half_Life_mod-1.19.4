@@ -99,7 +99,7 @@ public class VoltigoreShock extends FireballNoTrail implements GeoEntity {
     @Override
     public void tick() {
         super.tick();
-        if (random.nextFloat() < 0.2 || this.tickCount % 5 == 0) {
+        if (random.nextFloat() < 0.3 || this.tickCount % 4 == 0) {
         Vec3 startPos = this.position();
         this.level.addParticle(HalfLifeParticles.VOLT_LIGHTNING.get(), startPos.x, startPos.y, startPos.z, 1, 0, 0);
         }

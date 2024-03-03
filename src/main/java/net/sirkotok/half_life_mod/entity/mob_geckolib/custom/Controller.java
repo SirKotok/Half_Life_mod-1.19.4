@@ -3,6 +3,9 @@ package net.sirkotok.half_life_mod.entity.mob_geckolib.custom;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -26,6 +29,7 @@ import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.modinterface.VariableRangedMob;
 import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
+import net.sirkotok.half_life_mod.particle.HalfLifeParticles;
 import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.sirkotok.half_life_mod.util.HLTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
@@ -76,13 +80,36 @@ public class Controller extends HalfLifeMonster implements GeoEntity, RangedAtta
 
 
 
+    public static final EntityDataAccessor<Integer> CHARGE = SynchedEntityData.defineId(VortigauntHL1.class, EntityDataSerializers.INT);
 
 
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(CHARGE, 0);
+    }
 
+    public int getcharge(){
+        return this.entityData.get(CHARGE);
+    }
+    public void setcharge(int i){
+        this.entityData.set(CHARGE, i);
+    }
 
     @Override
     public void tick() {
         super.tick();
+
+        if (this.level.isClientSide() && this.getcharge() == 1) {
+            Vec3 startPos = new Vec3(this.getX() - (double)(this.getBbWidth() + 1.0F) * 0.5D * (double)Mth.sin(this.yBodyRot * ((float)Math.PI / 180F)), this.getEyeY() - (double)0.1F, this.getZ() + (double)(this.getBbWidth() + 1.0F) * 0.5D * (double) Mth.cos(this.yBodyRot * ((float)Math.PI / 180F)));
+            this.level.addParticle(HalfLifeParticles.ORANGEGLOW.get(), startPos.x, startPos.y, startPos.z, 0, 0, 0);
+        }
+        if (this.level.isClientSide() && this.getcharge() == 2) {
+            Vec3 startPos = this.position().add(0, this.getBbHeight(), 0);
+            this.level.addParticle(HalfLifeParticles.ORANGEGLOW.get(), startPos.x, startPos.y, startPos.z, 1, 0, 0);
+        }
+
+
+
     }
 
 
@@ -172,6 +199,10 @@ public class Controller extends HalfLifeMonster implements GeoEntity, RangedAtta
     }
 
  */
+
+
+
+
 
     @Override
     public void knockback(double pStrength, double pX, double pZ) {

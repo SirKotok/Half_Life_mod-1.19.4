@@ -112,6 +112,10 @@ public class HalfLifeMod
             event.accept(HalfLifeItems.BARNACLE_ONE_SPAWN_EGG);
 
             event.accept(HalfLifeItems.VORTHL1_SPAWN_EGG);
+            event.accept(HalfLifeItems.VORTHL2_SPAWN_EGG);
+
+            event.accept(HalfLifeItems.BARNEY_SPAWN_EGG);
+            event.accept(HalfLifeItems.SCIENTIST_SPAWN_EGG);
 
             event.accept(HalfLifeItems.SHOCKROACH_SPAWN_EGG);
             event.accept(HalfLifeItems.SHOCKTROOPER_SPAWN_EGG);
@@ -119,8 +123,7 @@ public class HalfLifeMod
             event.accept(HalfLifeItems.PITDRONE_SPAWN_EGG);
 
 
-            event.accept(HalfLifeItems.BARNEY_SPAWN_EGG);
-            event.accept(HalfLifeItems.SCIENTIST_SPAWN_EGG);
+
 
             event.accept(HalfLifeItems.COCKROACH_SPAWN_EGG);
             event.accept(HalfLifeItems.LEECH_SPAWN_EGG);

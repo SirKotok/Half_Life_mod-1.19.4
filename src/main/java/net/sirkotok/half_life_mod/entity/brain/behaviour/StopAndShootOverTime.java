@@ -7,6 +7,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.monster.RangedAttackMob;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Controller;
 import net.sirkotok.half_life_mod.entity.modinterface.VariableRangedMob;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableRangedAttack;
 
@@ -57,6 +58,7 @@ public class StopAndShootOverTime<E extends LivingEntity & VariableRangedMob & R
             return;
         BehaviorUtils.lookAtEntity(entity, this.target);
         if (this.ticks > this.firstticks && this.ticks < this.secondticks ){
+            if (entity instanceof Controller controller) controller.setcharge(1);
             if (this.startsound != null && !done) {
                 entity.playSound(this.startsound, 0.6f, entity.getVoicePitch());
                 done = true;
@@ -67,8 +69,15 @@ public class StopAndShootOverTime<E extends LivingEntity & VariableRangedMob & R
             }
             tickint++;
         }
+        if (this.ticks > this.secondticks && entity instanceof Controller controller) controller.setcharge(0);
         ticks++;
 
+    }
+
+    @Override
+    protected void stop(E entity) {
+        if (entity instanceof Controller controller) controller.setcharge(0);
+        super.stop(entity);
     }
 
     @Override
