@@ -24,6 +24,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.effect.HalfLifeEffects;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
@@ -31,6 +32,7 @@ import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
 import net.sirkotok.half_life_mod.entity.modinterface.HasLeaderMob;
+import net.sirkotok.half_life_mod.particle.HalfLifeParticles;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.CommonSounds;
 import net.sirkotok.half_life_mod.util.HLTags;
@@ -84,13 +86,19 @@ public class Antlion extends HalfLifeMonster implements GeoEntity, HasLeaderMob<
     public static final EntityDataAccessor<Boolean> IS_ANGRY = SynchedEntityData.defineId(Antlion.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Integer> ID_TEXTURE = SynchedEntityData.defineId(Antlion.class, EntityDataSerializers.INT);
 
+    public static final EntityDataAccessor<Integer> FLIP_OVER_TIMESTAMP = SynchedEntityData.defineId(Antlion.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> VORTED = SynchedEntityData.defineId(Antlion.class, EntityDataSerializers.INT);
+
+
+
 
 
     protected void defineSynchedData() {
         super.defineSynchedData();
 
         this.entityData.define(IS_ANGRY, false);
-
+        this.entityData.define(FLIP_OVER_TIMESTAMP, -50);
+        this.entityData.define(VORTED, 0);
         this.entityData.define(ID_TEXTURE, 1);
 
     }
@@ -98,6 +106,22 @@ public class Antlion extends HalfLifeMonster implements GeoEntity, HasLeaderMob<
 
     @Nullable
     public LivingEntity leader;
+
+
+    public boolean isflippedover() {
+        return (this.tickCount - this.entityData.get(FLIP_OVER_TIMESTAMP)) < 38;
+    }
+    public void flipover(int vort) {
+        this.triggerAnim("onetime", "flip");
+        this.entityData.set(FLIP_OVER_TIMESTAMP, this.tickCount);
+        HLperUtil.slowEntityFor(this, 38);
+        this.entityData.set(VORTED, vort);
+    }
+
+    public int getvort() {
+       return this.entityData.get(VORTED);
+    }
+
 
 
     public void setLeader(@Nullable LivingEntity entity) {
@@ -206,7 +230,7 @@ public class Antlion extends HalfLifeMonster implements GeoEntity, HasLeaderMob<
 
     @Override
     protected void customServerAiStep() {
-        if (!this.isInWaterOrBubble() || this.isOnGround()) {
+        if ((!this.isInWaterOrBubble() || this.isOnGround()) && !this.isflippedover()) {
             tickBrain(this);}
     }
 
@@ -217,6 +241,15 @@ public class Antlion extends HalfLifeMonster implements GeoEntity, HasLeaderMob<
     @Override
     public void tick() {
         super.tick();
+
+        if (this.isflippedover() && level.isClientSide()) {
+            if (this.getvort() > 0 && this.tickCount % 2 == 0) {
+                Vec3 startPos = new Vec3(this.getX(), this.getY()+0.6, this.getZ());
+                this.level.addParticle(HalfLifeParticles.VORT_LIGHTNING.get(), startPos.x, startPos.y, startPos.z, this.getvort(), 0, 0);
+            }
+        }
+
+
         if (this.tickCount % 20 == 0 && this.getLeader() instanceof Player pl && pl.isSpectator()) this.setLeader(this);
         if (this.tickCount % 50 == 0) this.relocate = this.random.nextFloat() < 0.05f;
         if (this.tickCount % 100 == 0 && this.shouldDiscardFriction() && this.isOnGround()) {
@@ -337,6 +370,7 @@ public class Antlion extends HalfLifeMonster implements GeoEntity, HasLeaderMob<
                 .triggerableAnim("attack2", RawAnimation.begin().then("animation.antlion.attack2", Animation.LoopType.PLAY_ONCE))
                 .triggerableAnim("attack3", RawAnimation.begin().then("animation.antlion.attack3", Animation.LoopType.PLAY_ONCE))
                 .triggerableAnim("borrow", RawAnimation.begin().then("animation.antlion.borrow", Animation.LoopType.PLAY_ONCE))
+                .triggerableAnim("flip", RawAnimation.begin().then("animation.antlion.fallandstand", Animation.LoopType.PLAY_ONCE))
                 .triggerableAnim("unborrow", RawAnimation.begin().then("animation.antlion.unborrow", Animation.LoopType.PLAY_ONCE))
                 .triggerableAnim("fly", RawAnimation.begin().then("animation.antlion.fly", Animation.LoopType.PLAY_ONCE))
 

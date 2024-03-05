@@ -67,6 +67,106 @@ public class HalfLifeSounds {
   public static final RegistryObject<SoundEvent> ANT_DISTRACT1=
           registerSoundEvent("ant_distract1");
 
+  // VORT HL2
+
+  public static final RegistryObject<SoundEvent> VORTIGESE02=
+          registerSoundEvent("vortigese02");
+  public static final RegistryObject<SoundEvent> VORTIGESE03=
+          registerSoundEvent("vortigese03");
+  public static final RegistryObject<SoundEvent> VORTIGESE04=
+          registerSoundEvent("vortigese04");
+  public static final RegistryObject<SoundEvent> VORTIGESE05=
+          registerSoundEvent("vortigese05");
+  public static final RegistryObject<SoundEvent> VORTIGESE07=
+          registerSoundEvent("vortigese07");
+  public static final RegistryObject<SoundEvent> VORTIGESE08=
+          registerSoundEvent("vortigese08");
+  public static final RegistryObject<SoundEvent> VORTIGESE09=
+          registerSoundEvent("vortigese09");
+  public static final RegistryObject<SoundEvent> VORTIGESE11=
+          registerSoundEvent("vortigese11");
+  public static final RegistryObject<SoundEvent> VORTIGESE12=
+          registerSoundEvent("vortigese12");
+  public static final RegistryObject<SoundEvent> VORT_ACCOMPANY1=
+          registerSoundEvent("vort_accompany1");
+  public static final RegistryObject<SoundEvent> VORT_ACCOMPANY10=
+          registerSoundEvent("vort_accompany10");
+  public static final RegistryObject<SoundEvent> VORT_ACCOMPANY11=
+          registerSoundEvent("vort_accompany11");
+  public static final RegistryObject<SoundEvent> VORT_ACCOMPANY2=
+          registerSoundEvent("vort_accompany2");
+  public static final RegistryObject<SoundEvent> VORT_ACCOMPANY3=
+          registerSoundEvent("vort_accompany3");
+  public static final RegistryObject<SoundEvent> VORT_ACCOMPANY4=
+          registerSoundEvent("vort_accompany4");
+  public static final RegistryObject<SoundEvent> VORT_ACCOMPANY5=
+          registerSoundEvent("vort_accompany5");
+  public static final RegistryObject<SoundEvent> VORT_ACCOMPANY6=
+          registerSoundEvent("vort_accompany6");
+  public static final RegistryObject<SoundEvent> VORT_ACCOMPANY7=
+          registerSoundEvent("vort_accompany7");
+  public static final RegistryObject<SoundEvent> VORT_ACCOMPANY8=
+          registerSoundEvent("vort_accompany8");
+  public static final RegistryObject<SoundEvent> VORT_ACCOMPANY9=
+          registerSoundEvent("vort_accompany9");
+  public static final RegistryObject<SoundEvent> VORT_REGRET1=
+          registerSoundEvent("vort_regret1");
+  public static final RegistryObject<SoundEvent> VORT_REGRET2=
+          registerSoundEvent("vort_regret2");
+  public static final RegistryObject<SoundEvent> VORT_STAY1=
+          registerSoundEvent("vort_stay1");
+  public static final RegistryObject<SoundEvent> VORT_STAY2=
+          registerSoundEvent("vort_stay2");
+  public static final RegistryObject<SoundEvent> VORT_STAY3=
+          registerSoundEvent("vort_stay3");
+  public static final RegistryObject<SoundEvent> VORT_STAY4=
+          registerSoundEvent("vort_stay4");
+  public static final RegistryObject<SoundEvent> VORT_STAY5=
+          registerSoundEvent("vort_stay5");
+  public static final RegistryObject<SoundEvent> VORT_STAY6=
+          registerSoundEvent("vort_stay6");
+  public static final RegistryObject<SoundEvent> VORT_WANTSTOKILL=
+          registerSoundEvent("vort_wantstokill");
+  public static final RegistryObject<SoundEvent> VORT_WANTSTOKILL2=
+          registerSoundEvent("vort_wantstokill2");
+  public static final RegistryObject<SoundEvent> VORT_WANTSTOKILL3=
+          registerSoundEvent("vort_wantstokill3");
+
+  /*        "sounds.half_life_mod.vortigese02": "Vortigaunt ",
+          "sounds.half_life_mod.vortigese03": "Vortigaunt ",
+          "sounds.half_life_mod.vortigese04": "Vortigaunt ",
+          "sounds.half_life_mod.vortigese05": "Vortigaunt ",
+          "sounds.half_life_mod.vortigese07": "Vortigaunt ",
+          "sounds.half_life_mod.vortigese08": "Vortigaunt ",
+          "sounds.half_life_mod.vortigese09": "Vortigaunt ",
+          "sounds.half_life_mod.vortigese11": "Vortigaunt ",
+          "sounds.half_life_mod.vortigese12": "Vortigaunt ",
+          "sounds.half_life_mod.vort_accompany1": "Vortigaunt ",
+          "sounds.half_life_mod.vort_accompany10": "Vortigaunt ",
+          "sounds.half_life_mod.vort_accompany11": "Vortigaunt ",
+          "sounds.half_life_mod.vort_accompany2": "Vortigaunt ",
+          "sounds.half_life_mod.vort_accompany3": "Vortigaunt ",
+          "sounds.half_life_mod.vort_accompany4": "Vortigaunt ",
+          "sounds.half_life_mod.vort_accompany5": "Vortigaunt ",
+          "sounds.half_life_mod.vort_accompany6": "Vortigaunt ",
+          "sounds.half_life_mod.vort_accompany7": "Vortigaunt ",
+          "sounds.half_life_mod.vort_accompany8": "Vortigaunt ",
+          "sounds.half_life_mod.vort_accompany9": "Vortigaunt ",
+          "sounds.half_life_mod.vort_regret1": "Vortigaunt ",
+          "sounds.half_life_mod.vort_regret2": "Vortigaunt ",
+          "sounds.half_life_mod.vort_stay1": "Vortigaunt ",
+          "sounds.half_life_mod.vort_stay2": "Vortigaunt ",
+          "sounds.half_life_mod.vort_stay3": "Vortigaunt ",
+          "sounds.half_life_mod.vort_stay4": "Vortigaunt ",
+          "sounds.half_life_mod.vort_stay5": "Vortigaunt ",
+          "sounds.half_life_mod.vort_stay6": "Vortigaunt ",
+          "sounds.half_life_mod.vort_wantstokill": "Vortigaunt ",
+          "sounds.half_life_mod.vort_wantstokill2": "Vortigaunt ",
+          "sounds.half_life_mod.vort_wantstokill3": "Vortigaunt ", */
+
+
+
+  // VORT hl1
   public static final RegistryObject<SoundEvent> ASLV_ALERT0=
           registerSoundEvent("aslv_alert0");
   public static final RegistryObject<SoundEvent> ASLV_ALERT1=

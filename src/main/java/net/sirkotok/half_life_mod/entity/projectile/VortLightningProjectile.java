@@ -15,7 +15,10 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.base.FireballNoTrail;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Antlion;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.AntlionWorker;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.VortigauntHL1;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.VortigauntHL2;
 import net.sirkotok.half_life_mod.item.HalfLifeItems;
 import net.sirkotok.half_life_mod.particle.HalfLifeParticles;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
@@ -92,6 +95,13 @@ public class VortLightningProjectile extends FireballNoTrail {
             Entity entity1 = this.getOwner();
             if (entity1 instanceof LivingEntity) {
                 LivingEntity shooter = (LivingEntity) entity1;
+                if (random.nextFloat() < 0.5f) {
+                int i = 0;
+                if (shooter instanceof VortigauntHL1) i = 1;
+                if (shooter instanceof VortigauntHL2) i = 2;
+                if (entity instanceof AntlionWorker) ((AntlionWorker) entity).flipover(i);
+                if (entity instanceof Antlion) ((Antlion) entity).flipover(i);
+                }
                 entity.hurt(this.damageSources().mobProjectile(this, shooter), this.getdamage());
             }
         }

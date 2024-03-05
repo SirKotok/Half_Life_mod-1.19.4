@@ -8,16 +8,24 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Voltigore;
 import net.tslat.smartbrainlib.util.BrainUtils;
 import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
 
@@ -190,6 +198,75 @@ public class HalfLifeNeutral extends PathfinderMob implements NeutralMob {
     }
 
 
+    private void maybeDisableShield(Player pPlayer, float f, ItemStack pPlayerItemStack) {
+        if (!pPlayerItemStack.isEmpty() && pPlayerItemStack.is(Items.SHIELD)) {
+            if (this.random.nextFloat() < f) {
+                pPlayer.getCooldowns().addCooldown(Items.SHIELD, 100);
+                this.level.broadcastEntityEvent(pPlayer, (byte)30);
+                pPlayer.stopUsingItem();
+            }
+        }
+
+    }
+
+    public boolean ConfigurabledoHurtTarget(Entity entity, float disablechance, float attack_modifier, float knockback_modifier, @Nullable MobEffect effect, int duration, boolean visible) {
+        return ConfigurabledoHurtTargetShieldBoolean(true, entity, disablechance, attack_modifier, knockback_modifier, effect, duration, visible);
+    }
+    public boolean ConfigurabledoHurtTargetShieldBoolean(boolean after, Entity entity, float disablechance, float attack_modifier, float knockback_modifier, @Nullable MobEffect effect, int duration, boolean visible) {
+        float p = (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE);
+        float f = attack_modifier*p;
+        float f1 = (float) this.getAttributeValue(Attributes.ATTACK_KNOCKBACK);
+        f1 = knockback_modifier*f1;
+
+
+        if (entity instanceof Player && disablechance>0 && !after) {
+            Player player = (Player)entity;
+            this.maybeDisableShield(player, disablechance, player.isUsingItem() ? player.getUseItem() : ItemStack.EMPTY);
+        }
+
+
+
+        if (entity instanceof LivingEntity) {
+            f += EnchantmentHelper.getDamageBonus(this.getMainHandItem(), ((LivingEntity) entity).getMobType());
+            f1 += (float) EnchantmentHelper.getKnockbackBonus(this);
+        }
+
+        int i = EnchantmentHelper.getFireAspect(this);
+        if (i > 0) {
+            entity.setSecondsOnFire(i * 4);
+        }
+
+
+        if (entity instanceof LivingEntity && effect != null) {
+            float t = this.level.getCurrentDifficultyAt(this.blockPosition()).getEffectiveDifficulty();
+            ((LivingEntity)entity).addEffect(new MobEffectInstance(effect, duration, 0, false, visible), this);
+        }
+        boolean flag;
+        flag = entity.hurt(this.damageSources().mobAttack(this), f);
+        if (flag) {
+            if (f1 > 0.0F && entity instanceof LivingEntity) {
+                ((LivingEntity) entity).knockback((double) (f1 * 0.5F), (double) Mth.sin(this.getYRot() * ((float) Math.PI / 180F)), (double) (-Mth.cos(this.getYRot() * ((float) Math.PI / 180F))));
+                this.setDeltaMovement(this.getDeltaMovement().multiply(0.6D, 1.0D, 0.6D));
+            }
+
+
+            this.doEnchantDamageEffects(this, entity);
+            this.setLastHurtMob(entity);
+        }
+
+        if (entity instanceof Player && disablechance>0 && after) {
+            Player player = (Player)entity;
+            this.maybeDisableShield(player, disablechance, player.isUsingItem() ? player.getUseItem() : ItemStack.EMPTY);
+        }
+
+
+
+
+        return flag;
+    }
+
+
+
 
 
     public SoundEvent getStartFollowingSound() {
@@ -204,6 +281,7 @@ public class HalfLifeNeutral extends PathfinderMob implements NeutralMob {
     public InteractionResult interactAt(Player pPlayer, Vec3 pVec, InteractionHand pHand) {
         String string = pPlayer.getStringUUID();
         String second = this.getFollowUUIDString();
+        if (this.ismyenemy(pPlayer)) return InteractionResult.FAIL;
         if (second.equals(string) && (this.tickCount - this.entityData.get(TIME_STAMP)>40) && this.tickCount-this.entityData.get(TIME_STAMP_2)>40) {
             this.playSound(getStopFollowingSound(), this.getSoundVolume(), 1f);
             this.entityData.set(STRING_UUID_FOLLOW, "");

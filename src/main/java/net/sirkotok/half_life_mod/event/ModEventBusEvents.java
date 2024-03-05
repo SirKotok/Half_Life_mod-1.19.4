@@ -12,6 +12,7 @@ import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.ShockWaveEffect;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.SitThenBlowUpEffect;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.VoltigoreProjectileAftereffect;
+import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.VortShockWaveEffect;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.*;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
 
@@ -40,6 +41,7 @@ public class ModEventBusEvents {
         event.put(HalfLifeEntities.SNARK.get(), Snark.setAttributes());
         event.put(HalfLifeEntities.SHOCKWAVEEFFECT.get(), ShockWaveEffect.setAttributes());
         event.put(HalfLifeEntities.SITBLOWUP.get(), SitThenBlowUpEffect.setAttributes());
+        event.put(HalfLifeEntities.VORTSHOCKWAVEEFFECT.get(), VortShockWaveEffect.setAttributes());
         event.put(HalfLifeEntities.VOLTIGOREPROJECTEFFECT.get(), VoltigoreProjectileAftereffect.setAttributes());
         event.put(HalfLifeEntities.SNARKNEST.get(), Snarknest.setAttributes());
         event.put(HalfLifeEntities.PENGUIN.get(), Snark.setAttributes());

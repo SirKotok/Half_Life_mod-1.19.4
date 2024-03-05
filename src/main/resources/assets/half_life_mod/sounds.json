@@ -17,6 +17,192 @@
       "half_life_mod:bugbait_impact1"
     ]
   },
+  "vortigese02": {
+    "subtitle": "sounds.half_life_mod.vortigese02",
+    "sounds": [
+      "half_life_mod:vortigese02"
+    ]
+  },
+  "vortigese03": {
+    "subtitle": "sounds.half_life_mod.vortigese03",
+    "sounds": [
+      "half_life_mod:vortigese03"
+    ]
+  },
+  "vortigese04": {
+    "subtitle": "sounds.half_life_mod.vortigese04",
+    "sounds": [
+      "half_life_mod:vortigese04"
+    ]
+  },
+  "vortigese05": {
+    "subtitle": "sounds.half_life_mod.vortigese05",
+    "sounds": [
+      "half_life_mod:vortigese05"
+    ]
+  },
+  "vortigese07": {
+    "subtitle": "sounds.half_life_mod.vortigese07",
+    "sounds": [
+      "half_life_mod:vortigese07"
+    ]
+  },
+  "vortigese08": {
+    "subtitle": "sounds.half_life_mod.vortigese08",
+    "sounds": [
+      "half_life_mod:vortigese08"
+    ]
+  },
+  "vortigese09": {
+    "subtitle": "sounds.half_life_mod.vortigese09",
+    "sounds": [
+      "half_life_mod:vortigese09"
+    ]
+  },
+  "vortigese11": {
+    "subtitle": "sounds.half_life_mod.vortigese11",
+    "sounds": [
+      "half_life_mod:vortigese11"
+    ]
+  },
+  "vortigese12": {
+    "subtitle": "sounds.half_life_mod.vortigese12",
+    "sounds": [
+      "half_life_mod:vortigese12"
+    ]
+  },
+  "vort_accompany1": {
+    "subtitle": "sounds.half_life_mod.vort_accompany1",
+    "sounds": [
+      "half_life_mod:vort_accompany1"
+    ]
+  },
+  "vort_accompany10": {
+    "subtitle": "sounds.half_life_mod.vort_accompany10",
+    "sounds": [
+      "half_life_mod:vort_accompany10"
+    ]
+  },
+  "vort_accompany11": {
+    "subtitle": "sounds.half_life_mod.vort_accompany11",
+    "sounds": [
+      "half_life_mod:vort_accompany11"
+    ]
+  },
+  "vort_accompany2": {
+    "subtitle": "sounds.half_life_mod.vort_accompany2",
+    "sounds": [
+      "half_life_mod:vort_accompany2"
+    ]
+  },
+  "vort_accompany3": {
+    "subtitle": "sounds.half_life_mod.vort_accompany3",
+    "sounds": [
+      "half_life_mod:vort_accompany3"
+    ]
+  },
+  "vort_accompany4": {
+    "subtitle": "sounds.half_life_mod.vort_accompany4",
+    "sounds": [
+      "half_life_mod:vort_accompany4"
+    ]
+  },
+  "vort_accompany5": {
+    "subtitle": "sounds.half_life_mod.vort_accompany5",
+    "sounds": [
+      "half_life_mod:vort_accompany5"
+    ]
+  },
+  "vort_accompany6": {
+    "subtitle": "sounds.half_life_mod.vort_accompany6",
+    "sounds": [
+      "half_life_mod:vort_accompany6"
+    ]
+  },
+  "vort_accompany7": {
+    "subtitle": "sounds.half_life_mod.vort_accompany7",
+    "sounds": [
+      "half_life_mod:vort_accompany7"
+    ]
+  },
+  "vort_accompany8": {
+    "subtitle": "sounds.half_life_mod.vort_accompany8",
+    "sounds": [
+      "half_life_mod:vort_accompany8"
+    ]
+  },
+  "vort_accompany9": {
+    "subtitle": "sounds.half_life_mod.vort_accompany9",
+    "sounds": [
+      "half_life_mod:vort_accompany9"
+    ]
+  },
+  "vort_regret1": {
+    "subtitle": "sounds.half_life_mod.vort_regret1",
+    "sounds": [
+      "half_life_mod:vort_regret1"
+    ]
+  },
+  "vort_regret2": {
+    "subtitle": "sounds.half_life_mod.vort_regret2",
+    "sounds": [
+      "half_life_mod:vort_regret2"
+    ]
+  },
+  "vort_stay1": {
+    "subtitle": "sounds.half_life_mod.vort_stay1",
+    "sounds": [
+      "half_life_mod:vort_stay1"
+    ]
+  },
+  "vort_stay2": {
+    "subtitle": "sounds.half_life_mod.vort_stay2",
+    "sounds": [
+      "half_life_mod:vort_stay2"
+    ]
+  },
+  "vort_stay3": {
+    "subtitle": "sounds.half_life_mod.vort_stay3",
+    "sounds": [
+      "half_life_mod:vort_stay3"
+    ]
+  },
+  "vort_stay4": {
+    "subtitle": "sounds.half_life_mod.vort_stay4",
+    "sounds": [
+      "half_life_mod:vort_stay4"
+    ]
+  },
+  "vort_stay5": {
+    "subtitle": "sounds.half_life_mod.vort_stay5",
+    "sounds": [
+      "half_life_mod:vort_stay5"
+    ]
+  },
+  "vort_stay6": {
+    "subtitle": "sounds.half_life_mod.vort_stay6",
+    "sounds": [
+      "half_life_mod:vort_stay6"
+    ]
+  },
+  "vort_wantstokill": {
+    "subtitle": "sounds.half_life_mod.vort_wantstokill",
+    "sounds": [
+      "half_life_mod:vort_wantstokill"
+    ]
+  },
+  "vort_wantstokill2": {
+    "subtitle": "sounds.half_life_mod.vort_wantstokill2",
+    "sounds": [
+      "half_life_mod:vort_wantstokill2"
+    ]
+  },
+  "vort_wantstokill3": {
+    "subtitle": "sounds.half_life_mod.vort_wantstokill3",
+    "sounds": [
+      "half_life_mod:vort_wantstokill3"
+    ]
+  },
   "bugbait_impact3": {
     "subtitle": "sounds.half_life_mod.bugbait_impact3",
     "sounds": [

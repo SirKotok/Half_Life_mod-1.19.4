@@ -20,6 +20,7 @@ import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.Shockwaverenderer;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.SitRenderer;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.Voltigore_projectile_e_renderer;
+import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.VortShockwaverenderer;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.client.models.Zombiehl2_model_fast;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.client.renderers.*;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.HLZombieVillager;
@@ -65,6 +66,7 @@ public class ClientModBusEvents {
     {
         EntityRenderers.register(HalfLifeEntities.VOLTIGOREPROJECTEFFECT.get(), Voltigore_projectile_e_renderer::new);
         EntityRenderers.register(HalfLifeEntities.SHOCKWAVEEFFECT.get(), Shockwaverenderer::new);
+        EntityRenderers.register(HalfLifeEntities.VORTSHOCKWAVEEFFECT.get(), VortShockwaverenderer::new);
         EntityRenderers.register(HalfLifeEntities.SITBLOWUP.get(), SitRenderer::new);
         EntityRenderers.register(HalfLifeEntities.SPORESHOT.get(), Spore_renderer::new);
         EntityRenderers.register(HalfLifeEntities.HOTEYE.get(), Hoteyerenderer::new);

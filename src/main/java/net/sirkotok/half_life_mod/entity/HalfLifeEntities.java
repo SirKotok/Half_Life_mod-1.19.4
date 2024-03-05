@@ -13,6 +13,7 @@ import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.ShockWaveEffect;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.SitThenBlowUpEffect;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.VoltigoreProjectileAftereffect;
+import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.VortShockWaveEffect;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.*;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
 import net.sirkotok.half_life_mod.entity.projectile.*;
@@ -262,6 +263,12 @@ public class HalfLifeEntities {
                     () -> EntityType.Builder.of(ShockWaveEffect::new, MobCategory.MONSTER)
                             .sized(0.6f, 0.6f)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "shockwave_effect").toString()));
+
+    public static final RegistryObject<EntityType<VortShockWaveEffect>> VORTSHOCKWAVEEFFECT =
+            ENTITY_TYPES.register("vshockwave_effect",
+                    () -> EntityType.Builder.of(VortShockWaveEffect::new, MobCategory.MONSTER)
+                            .sized(0.6f, 0.6f)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "vshockwave_effect").toString()));
 
     public static final RegistryObject<EntityType<SitThenBlowUpEffect>> SITBLOWUP =
             ENTITY_TYPES.register("blow_up_effect",

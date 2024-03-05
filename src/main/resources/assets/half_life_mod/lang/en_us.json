@@ -33,6 +33,7 @@
     "item.half_life_mod.shockroach_spawn_egg": "Shockroach Spawn Egg",
   "item.half_life_mod.chumtoad_thrower": "Chumtoad",
     "item.half_life_mod.vorthl1_spawn_egg": "Alien Slave Spawn Egg",
+    "item.half_life_mod.vorthl2_spawn_egg": "Vortigaunt Spawn Egg",
   "item.half_life_mod.snark_spawn_egg": "Snark Spawn Egg",
     "item.half_life_mod.penguin_spawn_egg": "Penguin Spawn Egg",
     "item.half_life_mod.barney_spawn_egg": "Security Guard Spawn Egg",
@@ -65,6 +66,8 @@
   "key.category.half_life_mod.half_life": "Half-Life Category",
     "key.half_life_mod.reload_gun": "Reload Gun",
 
+
+    "entity.half_life_mod.vorthl2": "Vortigaunt",
     "entity.half_life_mod.vorthl1": "Alien Slave",
     "entity.half_life_mod.pzombie": "Poison Zombie",
     "entity.half_life_mod.bugbait_projectile": "Pheropod",

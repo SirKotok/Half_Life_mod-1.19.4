@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -293,7 +294,7 @@ public class VortigauntHL2 extends HalfLifeNeutral implements RangedAttackMob, G
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<VortigauntHL2>()
                         .setPredicate((target, entity) ->
-                            target instanceof Enemy
+                                target instanceof Enemy || this.ismyenemy(target)
                             ));
     }
 
@@ -316,6 +317,7 @@ public class VortigauntHL2 extends HalfLifeNeutral implements RangedAttackMob, G
                         new TargetOrRetaliateHLT<>(),
                         new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>()),
+                new HalfLife1SetFollowToWalkTarget<>().cooldownFor(entity -> 20),
                 new OneRandomBehaviour<>(
                         new SetRandomWalkTarget<>(),
                         new Idle<>().runFor(entity -> entity.getRandom().nextInt(10, 40))
@@ -349,15 +351,31 @@ public class VortigauntHL2 extends HalfLifeNeutral implements RangedAttackMob, G
                         new SetWalkTargetToRandomSpotAroundAttackTarget<>().speedMod(1.2f),
                         new SetWalkTargetToRandomSpotAroundAttackTarget<>().radius(5, 4)
                 ),
-              //  new FirstApplicableBehaviour<>(
+                new FirstApplicableBehaviour<>(
                 new StopAndShoot<VortigauntHL2>(20, 3, 1f, null)
                         .cooldownFor(entity -> random.nextInt(40, 60))
-                .whenStarting(entity -> triggerAnim("onetime", "shoot"))
+                .whenStarting(entity -> triggerAnim("onetime", "shoot")),
+                 new VortWaveattackbehavior<>(25, null, null).cooldownFor(entity -> 60 + RandomSource.create().nextInt(60))
 
-             //   )
+                )
         );
 
 
+    }
+
+
+    public void performattack() {
+        Level pLevel = this.getLevel();
+        BlockPos pBlockPos = this.blockPosition();
+        float radius = 5f;
+        List<LivingEntity> entities = EntityRetrievalUtil.getEntities(pLevel,
+                new AABB(pBlockPos.getX() - radius, pBlockPos.getY() - radius, pBlockPos.getZ() - radius,
+                        pBlockPos.getX() + radius, pBlockPos.getY() + radius, pBlockPos.getZ() + radius), obj -> obj instanceof LivingEntity && ((BrainUtils.getTargetOfEntity(this) != null && obj == BrainUtils.getTargetOfEntity(this)) || !obj.getType().is(HLTags.EntityTypes.FACTION_SCIENCE_TEAM)));
+        for (LivingEntity entity : entities) {
+            this.ConfigurabledoHurtTargetShieldBoolean(false, entity, 1f, 1.5f, 2, null, 0, false);
+            if (entity instanceof AntlionWorker) ((AntlionWorker) entity).flipover(2);
+            if (entity instanceof Antlion) ((Antlion) entity).flipover(2);
+        }
     }
 
 
@@ -440,31 +458,75 @@ public class VortigauntHL2 extends HalfLifeNeutral implements RangedAttackMob, G
         return HalfLifeSounds.HEADCRAB_1_DIE_1.get();
     }
 
+ */
 
 
-    protected SoundEvent getAmbientSound() {
-        int f = this.isangry() ? random.nextInt(1, 12) : random.nextInt(12, 18);
+
+    public SoundEvent getStartFollowingSound() {
+        int f = random.nextInt(1, 12);
         switch (f) {
-            case 1:  return HalfLifeSounds.SLV_IDLE0.get();
-            case 2:  return HalfLifeSounds.SLV_IDLE2.get();
-            case 3:  return HalfLifeSounds.SLV_IDLE3.get();
-            case 4:  return HalfLifeSounds.SLV_IDLE7.get();
-            case 5:  return HalfLifeSounds.SLV_IDLE8.get();
-            case 6:  return HalfLifeSounds.SLV_IDLE9.get();
-            case 7:  return HalfLifeSounds.SLV_IDLE1.get();
-            case 8:  return HalfLifeSounds.SLV_IDLE4.get();
-            case 9:  return HalfLifeSounds.SLV_IDLE5.get();
-            case 10:  return HalfLifeSounds.SLV_IDLE6.get();
-            case 11:  return HalfLifeSounds.SLV_IDLE10.get();
-            case 12:  return HalfLifeSounds.ASLV_ALERT0.get();
-            case 13:  return HalfLifeSounds.ASLV_ALERT1.get();
-            case 14:  return HalfLifeSounds.ASLV_ALERT2.get();
-            case 15:  return HalfLifeSounds.ASLV_ALERT3.get();
-            case 16:  return HalfLifeSounds.ASLV_ALERT4.get();
-            case 17:  return HalfLifeSounds.ASLV_ALERT5.get();
+            case 1:  return HalfLifeSounds.VORT_ACCOMPANY1.get();
+            case 2:  return HalfLifeSounds.VORT_ACCOMPANY2.get();
+            case 3:  return HalfLifeSounds.VORT_ACCOMPANY3.get();
+            case 4:  return HalfLifeSounds.VORT_ACCOMPANY4.get();
+            case 5:  return HalfLifeSounds.VORT_ACCOMPANY5.get();
+            case 6:  return HalfLifeSounds.VORT_ACCOMPANY6.get();
+            case 7:  return HalfLifeSounds.VORT_ACCOMPANY7.get();
+            case 8:  return HalfLifeSounds.VORT_ACCOMPANY8.get();
+            case 9:  return HalfLifeSounds.VORT_ACCOMPANY9.get();
+            case 10:  return HalfLifeSounds.VORT_ACCOMPANY10.get();
+            case 11:  return HalfLifeSounds.VORT_ACCOMPANY11.get();
         }
         return SoundEvents.FROG_STEP;
-    } */
+    }
+    public SoundEvent getStopFollowingSound() {
+        int f = random.nextInt(1, 7);
+        switch (f) {
+            case 1:  return HalfLifeSounds.VORT_STAY1.get();
+            case 2:  return HalfLifeSounds.VORT_STAY2.get();
+            case 3:  return HalfLifeSounds.VORT_STAY3.get();
+            case 4:  return HalfLifeSounds.VORT_STAY4.get();
+            case 5:  return HalfLifeSounds.VORT_STAY5.get();
+            case 6:  return HalfLifeSounds.VORT_STAY6.get();
+        }
+        return SoundEvents.FROG_STEP;
+    }
+
+
+    public SoundEvent getWarningSound() {
+        int f = random.nextInt(1, 3);
+        switch (f) {
+            case 1:  return HalfLifeSounds.VORT_REGRET1.get();
+            case 2:  return HalfLifeSounds.VORT_REGRET2.get();
+        }
+        return SoundEvents.FROG_STEP;
+    }
+
+    public SoundEvent getAttackReactionSound() {
+        int f = random.nextInt(1, 4);
+        switch (f) {
+            case 1:  return HalfLifeSounds.VORT_WANTSTOKILL.get();
+            case 2:  return HalfLifeSounds.VORT_WANTSTOKILL2.get();
+            case 3:  return HalfLifeSounds.VORT_WANTSTOKILL3.get();
+        }
+        return SoundEvents.FROG_STEP;
+    }
+
+    protected SoundEvent getAmbientSound() {
+        int f = random.nextInt(2, 11);
+        switch (f) {
+            case 2:  return HalfLifeSounds.VORTIGESE02.get();
+            case 3:  return HalfLifeSounds.VORTIGESE03.get();
+            case 4:  return HalfLifeSounds.VORTIGESE04.get();
+            case 5:  return HalfLifeSounds.VORTIGESE05.get();
+            case 6:  return HalfLifeSounds.VORTIGESE07.get();
+            case 7:  return HalfLifeSounds.VORTIGESE08.get();
+            case 8:  return HalfLifeSounds.VORTIGESE09.get();
+            case 9:  return HalfLifeSounds.VORTIGESE11.get();
+            case 10:  return HalfLifeSounds.VORTIGESE12.get();
+        }
+        return SoundEvents.FROG_STEP;
+    }
 
 
 
