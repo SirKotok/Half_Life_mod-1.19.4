@@ -352,11 +352,10 @@ public class VortigauntHL2 extends HalfLifeNeutral implements RangedAttackMob, G
                         new SetWalkTargetToRandomSpotAroundAttackTarget<>().radius(5, 4)
                 ),
                 new FirstApplicableBehaviour<>(
-                new StopAndShoot<VortigauntHL2>(20, 3, 1f, null)
-                        .cooldownFor(entity -> random.nextInt(40, 60))
+                new StopAndShoot<VortigauntHL2>(11, 14, 1f, this.getzapsound())
+                        .cooldownFor(entity -> random.nextInt(30, 60))
                 .whenStarting(entity -> triggerAnim("onetime", "shoot")),
-                 new VortWaveattackbehavior<>(25, null, null).cooldownFor(entity -> 60 + RandomSource.create().nextInt(60))
-
+                 new VortWaveattackbehavior<>(11, null, this.getzapsound()).cooldownFor(entity -> 60 + RandomSource.create().nextInt(80))
                 )
         );
 
@@ -384,7 +383,7 @@ public class VortigauntHL2 extends HalfLifeNeutral implements RangedAttackMob, G
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<>(this, "mainloop", 0, this::mainpredicate));
         controllerRegistrar.add(new AnimationController<>(this, "onetime", state -> PlayState.STOP)
-                .triggerableAnim("blast", RawAnimation.begin().then("animation.vort.meleeblast", Animation.LoopType.PLAY_ONCE))
+                .triggerableAnim("blast", RawAnimation.begin().then("animation.vort.meleeblast2", Animation.LoopType.PLAY_ONCE))
                 .triggerableAnim("shoot", RawAnimation.begin().then("animation.vort.shoot", Animation.LoopType.PLAY_ONCE))
         );
 
@@ -424,7 +423,6 @@ public class VortigauntHL2 extends HalfLifeNeutral implements RangedAttackMob, G
             this.settargetvec(BrainUtils.getTargetOfEntity(this).getEyePosition());
             this.setstartvec(this.getEyePosition());
         }
-            CommonSounds.PlaySoundAsOwn(this, getzapsound());
             this.setarcp((int) 5+l);
             this.setMAX((int) 5+l);
     }
@@ -436,7 +434,7 @@ public class VortigauntHL2 extends HalfLifeNeutral implements RangedAttackMob, G
 
 
     public SoundEvent getzapsound() {
-        return HalfLifeSounds.SLV_IMPACT.get();
+        return HalfLifeSounds.VORT2_ATTACK.get();
     }
 
    /*
@@ -459,6 +457,8 @@ public class VortigauntHL2 extends HalfLifeNeutral implements RangedAttackMob, G
     }
 
  */
+
+
 
 
 
@@ -527,8 +527,6 @@ public class VortigauntHL2 extends HalfLifeNeutral implements RangedAttackMob, G
         }
         return SoundEvents.FROG_STEP;
     }
-
-
 
 
 }

@@ -4,6 +4,7 @@ package net.sirkotok.half_life_mod.entity.mob_geckolib.custom;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -24,6 +25,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.animal.IronGolem;
+import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
@@ -736,23 +738,38 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
     }
 
 
-    public static boolean checkSharkSpawnRules(EntityType<Shark> pType, ServerLevelAccessor pServerLevel, MobSpawnType pMobSpawnType, BlockPos pPos, RandomSource pRandom) {
-       return true;
-      /*   if (!pServerLevel.getFluidState(pPos.below()).is(FluidTags.WATER)) {
-            return false;
-        } else {
-            Holder<Biome> holder = pServerLevel.getBiome(pPos);
-            boolean flag = pServerLevel.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(pServerLevel, pPos, pRandom) && (pMobSpawnType == MobSpawnType.SPAWNER || pServerLevel.getFluidState(pPos).is(FluidTags.WATER));
-            if (holder.is(BiomeTags.MORE_FREQUENT_DROWNED_SPAWNS)) {
-                return flag;
-            } else {
-                return isDeepEnoughToSpawn(pServerLevel, pPos) && flag; //pRandom.nextInt(20) == 0  &&
-            }
-        } */
-    }
+    /* public static boolean checkSharkSpawnRules(EntityType<Shark> pType, ServerLevelAccessor pServerLevel, MobSpawnType pMobSpawnType, BlockPos pPos, RandomSource pRandom) {
+       BlockPos pos1 = pPos.offset(new Vec3i(1,-1,1));
+        BlockPos pos2 = pPos.offset(new Vec3i(0,-1,1));
+        BlockPos pos3 = pPos.offset(new Vec3i(-1,-1,1));
+        BlockPos pos4 = pPos.offset(new Vec3i(1,-1,-1));
+        BlockPos pos5 = pPos.offset(new Vec3i(1,-1,0));
+        BlockPos pos6 = pPos.offset(new Vec3i(-1,-1,-1));
+        BlockPos pos7 = pPos.offset(new Vec3i(-1,-1,1));
+        BlockPos pos8 = pPos.offset(new Vec3i(0,-1,-1));
 
-    private static boolean isDeepEnoughToSpawn(LevelAccessor pLevel, BlockPos pPos) {
-        return pPos.getY() < pLevel.getSeaLevel() - 5;
+
+        boolean flag0 = pServerLevel.getFluidState(pPos.below()).is(FluidTags.WATER);
+        boolean flag1 = pServerLevel.getFluidState(pos1).is(FluidTags.WATER);
+        boolean flag2 = pServerLevel.getFluidState(pos2).is(FluidTags.WATER);
+        boolean flag3 = pServerLevel.getFluidState(pos3).is(FluidTags.WATER);
+        boolean flag4 = pServerLevel.getFluidState(pos4).is(FluidTags.WATER);
+        boolean flag5 = pServerLevel.getFluidState(pos5).is(FluidTags.WATER);
+        boolean flag6 = pServerLevel.getFluidState(pos6).is(FluidTags.WATER);
+        boolean flag7 = pServerLevel.getFluidState(pos7).is(FluidTags.WATER);
+        boolean flag8 = pServerLevel.getFluidState(pos8).is(FluidTags.WATER);
+
+        boolean flag9 = pServerLevel.getFluidState(pPos.below()).is(FluidTags.WATER);
+        boolean flag10 = pServerLevel.getFluidState(pPos.below().below()).is(FluidTags.WATER);
+        boolean flag11 = pServerLevel.getFluidState(pPos.below(4)).is(FluidTags.WATER);
+        boolean flag12 = pServerLevel.getFluidState(pPos.below(7)).is(FluidTags.WATER);
+
+        return pRandom.nextInt(20) == 0 && flag0 && flag1 && flag2 && flag3 && flag4 && flag5 && flag6 && flag7 && flag8 && flag9 && flag10 && flag11 && !pServerLevel.getDifficulty().equals(Difficulty.PEACEFUL) && flag12 && isDarkEnoughToSpawn(pServerLevel, pPos, pRandom);
+    } */
+
+
+    public static boolean checkSharkSpawnRules(EntityType<? extends LivingEntity> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource randomSource) {
+        return level.getFluidState(pos).is(FluidTags.WATER) && pos.getY() < level.getSeaLevel() - 25;
     }
 
 }

@@ -17,6 +17,12 @@
       "half_life_mod:bugbait_impact1"
     ]
   },
+  "vorthl2attack": {
+    "subtitle": "sounds.half_life_mod.vorthl2attack",
+    "sounds": [
+      "half_life_mod:vorthl2attack"
+    ]
+  },
   "vortigese02": {
     "subtitle": "sounds.half_life_mod.vortigese02",
     "sounds": [

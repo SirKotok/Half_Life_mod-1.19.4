@@ -265,7 +265,10 @@ public class HalfLifeNeutral extends PathfinderMob implements NeutralMob {
         return flag;
     }
 
-
+    @Override
+    public int getAmbientSoundInterval() {
+        return random.nextInt(130, 900);
+    }
 
 
 

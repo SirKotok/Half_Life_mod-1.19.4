@@ -10,6 +10,7 @@ import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
+import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Controller;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.VortigauntHL1;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.VortigauntHL2;
@@ -47,7 +48,8 @@ public class StopAndShoot<E extends LivingEntity & RangedAttackMob> extends Anim
         if (entity instanceof VortigauntHL2 vort) vort.setcharge(2);
         entity.swing(InteractionHand.MAIN_HAND);
         BehaviorUtils.lookAtEntity(entity, this.target);
-        if (this.startsound != null && entity instanceof HalfLifeMonster monster) CommonSounds.PlaySoundAsOwn(monster, startsound);
+        if (entity instanceof HalfLifeMonster monster) CommonSounds.PlaySoundAsOwn(monster, startsound);
+        if (entity instanceof HalfLifeNeutral monster) CommonSounds.PlaySoundAsOwn(monster, startsound);
         BrainUtils.setForgettableMemory(entity, MemoryModuleType.SNIFFER_HAPPY, true, delayTime+10);
         entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, delayTime+3+this.ded, 100, false, false, false));
     }
@@ -74,6 +76,7 @@ public class StopAndShoot<E extends LivingEntity & RangedAttackMob> extends Anim
     protected void doDelayedAction(E entity) {
         if (this.target == null)
             return;
+        BrainUtils.setForgettableMemory(entity, MemoryModuleType.ATTACK_COOLING_DOWN, true, this.ded);
         entity.performRangedAttack(this.target, this.vel);
 
     }

@@ -114,8 +114,11 @@ public class ModEventBusEvents {
                 Snarknest::checkNestSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(HalfLifeEntities.BARNACLE.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING,
                 Barnacle::checkBarnacleSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        event.register(HalfLifeEntities.VORTHL1.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+
         event.register(HalfLifeEntities.SHARK.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                Shark::checkSharkSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+                Shark::checkSharkSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
 
     }
 

@@ -125,6 +125,9 @@ public class HalfLifeSounds {
           registerSoundEvent("vort_stay5");
   public static final RegistryObject<SoundEvent> VORT_STAY6=
           registerSoundEvent("vort_stay6");
+
+  public static final RegistryObject<SoundEvent> VORT2_ATTACK=
+          registerSoundEvent("vorthl2attack");
   public static final RegistryObject<SoundEvent> VORT_WANTSTOKILL=
           registerSoundEvent("vort_wantstokill");
   public static final RegistryObject<SoundEvent> VORT_WANTSTOKILL2=
@@ -132,7 +135,8 @@ public class HalfLifeSounds {
   public static final RegistryObject<SoundEvent> VORT_WANTSTOKILL3=
           registerSoundEvent("vort_wantstokill3");
 
-  /*        "sounds.half_life_mod.vortigese02": "Vortigaunt ",
+  /*      "sounds.half_life_mod.vortigese02": "Vortigaunt ",
+          "sounds.half_life_mod.vorthl2attack": "Vortigaunt ",
           "sounds.half_life_mod.vortigese03": "Vortigaunt ",
           "sounds.half_life_mod.vortigese04": "Vortigaunt ",
           "sounds.half_life_mod.vortigese05": "Vortigaunt ",

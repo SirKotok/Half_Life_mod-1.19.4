@@ -131,5 +131,6 @@ public class VortWaveattackbehavior<E extends VortigauntHL2> extends Conditionle
     @Override
     protected void doDelayedAction(E entity) {
          entity.performattack();
+        BrainUtils.setForgettableMemory(entity, MemoryModuleType.ATTACK_COOLING_DOWN, true, 20);
     }
 }
