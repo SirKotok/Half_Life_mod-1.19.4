@@ -21,13 +21,12 @@ import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.Shock
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.SitRenderer;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.Voltigore_projectile_e_renderer;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.VortShockwaverenderer;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.client.models.Zombiehl2_model_fast;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.client.renderers.*;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.HLZombieVillager;
 import net.sirkotok.half_life_mod.entity.mob_normal.client.ModModelLayers;
 import net.sirkotok.half_life_mod.entity.mob_normal.client.models.Barnacle_Model;
 import net.sirkotok.half_life_mod.entity.mob_normal.client.renderers.Barnacle_Renderer;
 import net.sirkotok.half_life_mod.entity.projectile.client.renderer.*;
+import net.sirkotok.half_life_mod.particle.custom.Glowparticle;
 import net.sirkotok.half_life_mod.particle.HalfLifeParticles;
 import net.sirkotok.half_life_mod.particle.custom.projectile_impact.BigImpactParticle;
 import net.sirkotok.half_life_mod.particle.custom.projectile_impact.BulletHoleParticle;
@@ -53,10 +52,14 @@ public class ClientModBusEvents {
                 BigImpactParticle.Provider::new);
         Minecraft.getInstance().particleEngine.register(HalfLifeParticles.SHOCK_IMPACT.get(),
                 BigImpactParticle.Provider::new);
+        Minecraft.getInstance().particleEngine.register(HalfLifeParticles.STAT_GLOW.get(),
+                Glowparticle.Provider::new);
+
         event.registerSpecial(HalfLifeParticles.VORT_LIGHTNING.get(), new VortLightningParticle.Factory());
         event.registerSpecial(HalfLifeParticles.VOLT_LIGHTNING.get(), new VoltigoreLightningParticle.Factory());
         event.registerSpecial(HalfLifeParticles.VORT_ARC_LIGHTNING.get(), new VortArcLightningParticle.Factory());
         event.registerSpecial(HalfLifeParticles.VORT2_ARC_LIGHTNING.get(), new Vort2ArcLightningParticle.Factory());
+
 
 
         event.registerSpecial(HalfLifeParticles.ORANGEGLOW.get(), new OrangeGlowParticle.Factory());
@@ -119,6 +122,10 @@ public class ClientModBusEvents {
         EntityRenderers.register(HalfLifeEntities.ACID_THROWNBM.get(), AcidThrownBMRenderer::new);
         EntityRenderers.register(HalfLifeEntities.UNDER_NADE.get(), Undernade_renderer::new);
         EntityRenderers.register(HalfLifeEntities.BARNACLE.get(), Barnacle_Renderer::new);
+
+
+        EntityRenderers.register(HalfLifeEntities.CON_BIG_PROJECTILE.get(), BigItemRenderer::new);
+        EntityRenderers.register(HalfLifeEntities.CON_PROJECTILE.get(), ThrownItemRenderer::new);
 
         EntityRenderers.register(HalfLifeEntities.VORT_LIGHTNING_PROJETILE.get(), NoRenderer::new);
 

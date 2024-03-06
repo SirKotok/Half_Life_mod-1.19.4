@@ -769,7 +769,8 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
 
 
     public static boolean checkSharkSpawnRules(EntityType<? extends LivingEntity> type, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, RandomSource randomSource) {
-        return level.getFluidState(pos).is(FluidTags.WATER) && pos.getY() < level.getSeaLevel() - 25;
+        return true;
     }
 
+  //  level.getFluidState(pos).is(FluidTags.WATER) && pos.getY() < level.getSeaLevel() - 25
 }

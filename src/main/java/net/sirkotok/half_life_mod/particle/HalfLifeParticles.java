@@ -33,6 +33,11 @@ public class HalfLifeParticles {
     public static final RegistryObject<SimpleParticleType> SHOCK_IMPACT =
             PARTICLE_TYPES.register("shock_impact", () -> new SimpleParticleType(true));
 
+    public static final RegistryObject<SimpleParticleType> STAT_GLOW = PARTICLE_TYPES.register("stationary_glow", () -> new SimpleParticleType(true));
+
+
+
+
     public static void register(IEventBus eventBus){
         PARTICLE_TYPES.register(eventBus);
     }

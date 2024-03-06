@@ -66,6 +66,10 @@ public class BigImpactParticle extends TextureSheetParticle {
         }
     }
 
+
+
+
+
     // Ordering index for D-U-N-S-W-E (DOWN UP NORTH SOUTH WEST EAST)
     public Quaternionf getRotation(int i) {
         Quaternionf quaternionf;

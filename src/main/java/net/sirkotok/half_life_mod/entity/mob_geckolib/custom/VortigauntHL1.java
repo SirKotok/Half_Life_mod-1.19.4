@@ -460,7 +460,7 @@ public class VortigauntHL1 extends HalfLifeMonster implements RangedAttackMob, G
 
 
     protected SoundEvent getAmbientSound() {
-        int f = this.isangry() ? random.nextInt(1, 12) : random.nextInt(12, 18);
+        int f = !this.isangry() ? random.nextInt(1, 12) : random.nextInt(random.nextFloat() < 0.2f ? 0 : 12, 18);
         switch (f) {
             case 1:  return HalfLifeSounds.SLV_IDLE0.get();
             case 2:  return HalfLifeSounds.SLV_IDLE2.get();

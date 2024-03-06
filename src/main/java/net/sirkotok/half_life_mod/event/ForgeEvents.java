@@ -1,6 +1,7 @@
 package net.sirkotok.half_life_mod.event;
 
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.client.CloudStatus;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,18 +35,27 @@ import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.object.SquareRadius;
 import net.tslat.smartbrainlib.util.BrainUtils;
 import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
+import org.slf4j.Logger;
 
 import java.util.List;
 import java.util.ListIterator;
 
 
+
 @Mod.EventBusSubscriber(modid = HalfLifeMod.MOD_ID)
 public class ForgeEvents {
 
+/*
+    private static final Logger LOGGER = LogUtils.getLogger();
+        @SubscribeEvent
+        public static void onEntityJoinEvent(EntityJoinLevelEvent event) {
+            Entity entity = event.getEntity();
+            if (entity instanceof Shark) {
+                LOGGER.debug("Sharktriedtospawn");
+            }
+        }
 
-
-
-
+ */
 
         @SubscribeEvent
         public static void  onLivingChangeTick(LivingEvent.LivingTickEvent event) {

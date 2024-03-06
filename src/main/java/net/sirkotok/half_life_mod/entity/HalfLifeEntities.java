@@ -42,7 +42,7 @@ public class HalfLifeEntities {
     public static final RegistryObject<EntityType<Controller>> CONTROLLER =
             ENTITY_TYPES.register("controller",
                     () -> EntityType.Builder.of(Controller::new, MobCategory.MONSTER)
-                            .sized(1f, 1.6f)
+                            .sized(1f, 2.0f)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "controller").toString()));
 
 
@@ -395,6 +395,20 @@ public class HalfLifeEntities {
                             .updateInterval(1)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "shock_shot").toString()));
 
+    public static final RegistryObject<EntityType<ControllerBaseProjectile>> CON_PROJECTILE =
+            ENTITY_TYPES.register("con_projectile",
+                    () -> EntityType.Builder.<ControllerBaseProjectile>of(ControllerBaseProjectile::new, MobCategory.MISC)
+                            .sized(0.25F, 0.25F)
+                            .clientTrackingRange(20)
+                            .updateInterval(1)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "con_projectile").toString()));
+    public static final RegistryObject<EntityType<ControllerBigProjectile>> CON_BIG_PROJECTILE =
+            ENTITY_TYPES.register("con_b_projectile",
+                    () -> EntityType.Builder.<ControllerBigProjectile>of(ControllerBigProjectile::new, MobCategory.MISC)
+                            .sized(0.25F, 0.25F)
+                            .clientTrackingRange(20)
+                            .updateInterval(1)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "con_b_projectile").toString()));
 
 
     public static void register(IEventBus eventBus) {

@@ -175,10 +175,15 @@ public class HalfLifeItems {
 
 
     //Fake Items used for models/textures in projectiles lmao
+
+    //TODO: remove this shit and change it into normal textures/models with a normal renderer, there is literally no benefit to doing it this way and not that way
     public static final RegistryObject<Item> FAKE_BULLET = ITEMS.register("bullet",
             () -> new FakeBulletItem(new Item.Properties()));
 
     public static final RegistryObject<Item> FAKE_SHOCK = ITEMS.register("shock",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> FAKE_CON = ITEMS.register("con_shock",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> FAKE_PORTAL = ITEMS.register("portal_project",
             () -> new Item(new Item.Properties()));

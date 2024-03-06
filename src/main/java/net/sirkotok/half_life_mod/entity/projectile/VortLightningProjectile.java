@@ -13,6 +13,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.base.FireballNoTrail;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Antlion;
@@ -90,6 +91,10 @@ public class VortLightningProjectile extends FireballNoTrail {
 
     protected void onHitEntity(EntityHitResult pResult) {
         super.onHitEntity(pResult);
+        if (this.level.isClientSide && this.getOwner() instanceof VortigauntHL2) {
+            Vec3 vec31 = pResult.getLocation();
+            this.level.addParticle(HalfLifeParticles.STAT_GLOW.get(), vec31.x, vec31.y, vec31.z, 1, 1d, 10);
+        }
         if (!this.level.isClientSide) {
             Entity entity = pResult.getEntity();
             Entity entity1 = this.getOwner();
@@ -112,16 +117,19 @@ public class VortLightningProjectile extends FireballNoTrail {
 
     protected void onHitBlock(BlockHitResult blockhit) {
         super.onHitBlock(blockhit);
-        if (this.level.isClientSide()){
+        if (!this.level.isClientSide()){
         this.discard();
     }}
 
     protected void onHit(HitResult pResult) {
+
         HitResult.Type hitresult$type = pResult.getType();
         if (hitresult$type == HitResult.Type.ENTITY) {
             EntityHitResult result = (EntityHitResult)pResult;
             if (result.getEntity() == this.getOwner() && this.getOwner() instanceof VortigauntHL1) return;
         }
+
+
 
         super.onHit(pResult);
         if (!this.level.isClientSide) {

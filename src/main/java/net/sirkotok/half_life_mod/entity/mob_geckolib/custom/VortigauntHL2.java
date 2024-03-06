@@ -153,7 +153,7 @@ public class VortigauntHL2 extends HalfLifeNeutral implements RangedAttackMob, G
 
 
     private float length(){
-        return this.getBbWidth()/2;
+        return this.getBbWidth()/2+0.88f;
     }
 
     private Vec3 rotvec(int angledegree){
@@ -161,7 +161,7 @@ public class VortigauntHL2 extends HalfLifeNeutral implements RangedAttackMob, G
         double yrot = (this.yBodyRot+angledegree)/180*Math.PI;
         double d1 = Math.sin(yrot);
         double d2 = Math.cos(yrot);
-        return new Vec3((float)this.getX()-i*d1, this.getY()+1.4f, (float)this.getZ()+i*d2);
+        return new Vec3((float)this.getX()-i*d1, this.getY()+1.67f, (float)this.getZ()+i*d2);
     }
 
 
@@ -187,7 +187,7 @@ public class VortigauntHL2 extends HalfLifeNeutral implements RangedAttackMob, G
                 double d2 = target.getEyeY() - this.getEyeY()+0.1D;
                 double d3 = target.getZ() - this.getZ();
                 VortLightningProjectile bullet = new VortLightningProjectile(this.level, this, d1, d2, d3);
-                bullet.setPos(this.getX() - (double)(this.getBbWidth() + 1.0F) * 0.5D * (double) Mth.sin(this.yBodyRot * ((float)Math.PI / 180F)), this.getEyeY() - (double)0.1F, this.getZ() + (double)(this.getBbWidth() + 1.0F) * 0.5D * (double) Mth.cos(this.yBodyRot * ((float)Math.PI / 180F)));
+                bullet.setPos(this.getX() - (double)((this.getBbWidth()+0.5f) + 1.0F) * 0.5D * (double) Mth.sin(this.yBodyRot * ((float)Math.PI / 180F)), this.getEyeY() - (double)0.1F, this.getZ() + (double)((this.getBbWidth()+0.5f) + 1.0F) * 0.5D * (double) Mth.cos(this.yBodyRot * ((float)Math.PI / 180F)));
                 bullet.shoot(d1, d2, d3, 2, 1.0f);
                 bullet.setTime(3+time);
                 this.level.addFreshEntity(bullet);
@@ -208,17 +208,21 @@ public class VortigauntHL2 extends HalfLifeNeutral implements RangedAttackMob, G
                 Vec3 vec3 = this.gettargetvec();
                 Vec3 to = vec3.subtract(from);
                 to = to.add(to.normalize().scale(0.5));
-             //   to = vec3;
                 level.addParticle(HalfLifeParticles.VORT2_ARC_LIGHTNING.get(), from.x, from.y, from.z, to.x, to.y, to.z);
+                Vec3 vec31 = new Vec3 (this.getX() - (double)(this.getBbWidth() + 2.2F) * 0.5D * (double) Mth.sin(this.yBodyRot * ((float)Math.PI / 180F)), this.getEyeY() - (double)0.4F, this.getZ() + (double)(this.getBbWidth() + 2.2F) * 0.5D * (double) Mth.cos(this.yBodyRot * ((float)Math.PI / 180F)));
+                this.level.addParticle(HalfLifeParticles.STAT_GLOW.get(), vec31.x, vec31.y, vec31.z, 1, 1d, this.getMAX() - this.getarcp());
             }
         }
 
-       if (level.isClientSide && this.getcharge() > 0 && this.tickCount % 3 == 0) {
+       if (level.isClientSide && this.getcharge() > 0) {
+           if (this.tickCount % 3 == 0) {
           Vec3 startPos1 = this.getEyePosition();
-     //       Vec3 startPos1 = rotvec(90);
-     //      Vec3 startPos2 = rotvec(-90);
-           this.level.addParticle(HalfLifeParticles.VORT_LIGHTNING.get(), startPos1.x, startPos1.y, startPos1.z, 2, 0, 0);
-      //      this.level.addParticle(HalfLifeParticles.VORT_LIGHTNING.get(), startPos2.x, startPos2.y, startPos2.z, 1, 0, 0);
+          this.level.addParticle(HalfLifeParticles.VORT_LIGHTNING.get(), startPos1.x, startPos1.y, startPos1.z, 2, 0, 0);
+           }
+           Vec3 startPos2 = rotvec(70);
+           Vec3 startPos3 = rotvec(-70);
+           this.level.addParticle(HalfLifeParticles.STAT_GLOW.get(), startPos2.x, startPos2.y, startPos2.z, 1, 0.65d, 0);
+           this.level.addParticle(HalfLifeParticles.STAT_GLOW.get(), startPos3.x, startPos3.y, startPos3.z, 1, 0.65d, 0);
        }
 
 

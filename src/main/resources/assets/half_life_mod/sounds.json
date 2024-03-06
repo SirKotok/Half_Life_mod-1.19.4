@@ -17,6 +17,108 @@
       "half_life_mod:bugbait_impact1"
     ]
   },
+  "con_alert1": {
+    "subtitle": "sounds.half_life_mod.con_alert1",
+    "sounds": [
+      "half_life_mod:con_alert1"
+    ]
+  },
+  "con_alert2": {
+    "subtitle": "sounds.half_life_mod.con_alert2",
+    "sounds": [
+      "half_life_mod:con_alert2"
+    ]
+  },
+  "con_alert3": {
+    "subtitle": "sounds.half_life_mod.con_alert3",
+    "sounds": [
+      "half_life_mod:con_alert3"
+    ]
+  },
+  "con_attack1": {
+    "subtitle": "sounds.half_life_mod.con_attack1",
+    "sounds": [
+      "half_life_mod:con_attack1"
+    ]
+  },
+  "con_attack2": {
+    "subtitle": "sounds.half_life_mod.con_attack2",
+    "sounds": [
+      "half_life_mod:con_attack2"
+    ]
+  },
+  "con_attack3": {
+    "subtitle": "sounds.half_life_mod.con_attack3",
+    "sounds": [
+      "half_life_mod:con_attack3"
+    ]
+  },
+  "con_die1": {
+    "subtitle": "sounds.half_life_mod.con_die1",
+    "sounds": [
+      "half_life_mod:con_die1"
+    ]
+  },
+  "con_die2": {
+    "subtitle": "sounds.half_life_mod.con_die2",
+    "sounds": [
+      "half_life_mod:con_die2"
+    ]
+  },
+  "con_electro4": {
+    "subtitle": "sounds.half_life_mod.con_electro4",
+    "sounds": [
+      "half_life_mod:con_electro4"
+    ]
+  },
+  "con_idle1": {
+    "subtitle": "sounds.half_life_mod.con_idle1",
+    "sounds": [
+      "half_life_mod:con_idle1"
+    ]
+  },
+  "con_idle2": {
+    "subtitle": "sounds.half_life_mod.con_idle2",
+    "sounds": [
+      "half_life_mod:con_idle2"
+    ]
+  },
+  "con_idle3": {
+    "subtitle": "sounds.half_life_mod.con_idle3",
+    "sounds": [
+      "half_life_mod:con_idle3"
+    ]
+  },
+  "con_idle4": {
+    "subtitle": "sounds.half_life_mod.con_idle4",
+    "sounds": [
+      "half_life_mod:con_idle4"
+    ]
+  },
+  "con_idle5": {
+    "subtitle": "sounds.half_life_mod.con_idle5",
+    "sounds": [
+      "half_life_mod:con_idle5"
+    ]
+  },
+  "con_pain1": {
+    "subtitle": "sounds.half_life_mod.con_pain1",
+    "sounds": [
+      "half_life_mod:con_pain1"
+    ]
+  },
+  "con_pain2": {
+    "subtitle": "sounds.half_life_mod.con_pain2",
+    "sounds": [
+      "half_life_mod:con_pain2"
+    ]
+  },
+  "con_pain3": {
+    "subtitle": "sounds.half_life_mod.con_pain3",
+    "sounds": [
+      "half_life_mod:con_pain3"
+    ]
+  },
   "vorthl2attack": {
     "subtitle": "sounds.half_life_mod.vorthl2attack",
     "sounds": [

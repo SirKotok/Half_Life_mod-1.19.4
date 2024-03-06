@@ -6,6 +6,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -28,8 +30,10 @@ import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.modinterface.VariableRangedMob;
-import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
+import net.sirkotok.half_life_mod.entity.projectile.ControllerBaseProjectile;
+import net.sirkotok.half_life_mod.entity.projectile.ControllerBigProjectile;
 import net.sirkotok.half_life_mod.particle.HalfLifeParticles;
+import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.sirkotok.half_life_mod.util.HLTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
@@ -80,11 +84,12 @@ public class Controller extends HalfLifeMonster implements GeoEntity, RangedAtta
 
 
 
-    public static final EntityDataAccessor<Integer> CHARGE = SynchedEntityData.defineId(VortigauntHL1.class, EntityDataSerializers.INT);
-
+    public static final EntityDataAccessor<Integer> CHARGE = SynchedEntityData.defineId(Controller.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> IS_ANGRY = SynchedEntityData.defineId(Controller.class, EntityDataSerializers.BOOLEAN);
 
     protected void defineSynchedData() {
         super.defineSynchedData();
+        this.entityData.define(IS_ANGRY, false);
         this.entityData.define(CHARGE, 0);
     }
 
@@ -99,19 +104,23 @@ public class Controller extends HalfLifeMonster implements GeoEntity, RangedAtta
     public void tick() {
         super.tick();
 
+     //   if (this.tickCount % 75 == 0) this.triggerAnim("onetime", "idle");
+
         if (this.level.isClientSide() && this.getcharge() == 1) {
-            Vec3 startPos = new Vec3(this.getX() - (double)(this.getBbWidth() + 1.0F) * 0.5D * (double)Mth.sin(this.yBodyRot * ((float)Math.PI / 180F)), this.getEyeY() - (double)0.1F, this.getZ() + (double)(this.getBbWidth() + 1.0F) * 0.5D * (double) Mth.cos(this.yBodyRot * ((float)Math.PI / 180F)));
-            this.level.addParticle(HalfLifeParticles.ORANGEGLOW.get(), startPos.x, startPos.y, startPos.z, 0, 0, 0);
+            Vec3 startPos = new Vec3(this.getX() - (double)(this.getBbWidth() + 1.0F) * 0.5D * (double)Mth.sin(this.yBodyRot * ((float)Math.PI / 180F)), this.getEyeY() - (double)0.4F, this.getZ() + (double)(this.getBbWidth() + 1.0F) * 0.5D * (double) Mth.cos(this.yBodyRot * ((float)Math.PI / 180F)));
+            this.level.addParticle(HalfLifeParticles.STAT_GLOW.get(), startPos.x, startPos.y, startPos.z, 0, 1d, 0);
         }
         if (this.level.isClientSide() && this.getcharge() == 2) {
-            Vec3 startPos = this.position().add(0, this.getBbHeight(), 0);
-            this.level.addParticle(HalfLifeParticles.ORANGEGLOW.get(), startPos.x, startPos.y, startPos.z, 1, 0, 0);
+            Vec3 startPos = this.position().add(0, this.getBbHeight()-0.2f, 0);
+            this.level.addParticle(HalfLifeParticles.STAT_GLOW.get(), startPos.x, startPos.y, startPos.z, 0, 3d, 0);
         }
 
 
 
     }
-
+    protected boolean isangry() {
+        return this.entityData.get(IS_ANGRY);
+    }
 
     @Override
     public boolean isNoGravity() {
@@ -183,23 +192,50 @@ public class Controller extends HalfLifeMonster implements GeoEntity, RangedAtta
 
 
 
-   /*
-    @Override
-    protected SoundEvent getAmbientSound() {
-        if (random.nextFloat() < 0.5f) return ModSounds.MANHACK_LOOP1.get();
-        return ModSounds.MANHACK_LOOP2.get();
-    }
-
-    @Override
-    public void playAmbientSound() {
-        SoundEvent soundevent = this.getAmbientSound();
-        if (soundevent != null) {
-            this.playSound(soundevent, this.getSoundVolume()/4, this.getVoicePitch());
+    public SoundEvent getattacksound() {
+        switch (this.random.nextInt(1,4)) {
+            case 1:  return HalfLifeSounds.CON_ATTACK1.get();
+            case 2:  return HalfLifeSounds.CON_ATTACK2.get();
+            case 3:  return HalfLifeSounds.CON_ATTACK3.get();
         }
+        return HalfLifeSounds.HEADCRAB_1_DIE_1.get();
     }
 
- */
+    protected SoundEvent getDeathSound() {
+        switch (this.random.nextInt(1,3)) {
+            case 1:  return HalfLifeSounds.CON_DIE1.get();
+            case 2:  return HalfLifeSounds.CON_DIE2.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_DIE_1.get();
+    }
 
+    @Override
+    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+        switch (this.random.nextInt(1,4)) {
+            case 1:  return HalfLifeSounds.CON_PAIN1.get();
+            case 2:  return HalfLifeSounds.CON_PAIN2.get();
+            case 3:  return HalfLifeSounds.CON_PAIN3.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_DIE_1.get();
+    }
+
+
+
+
+    protected SoundEvent getAmbientSound() {
+        int f = !this.isangry() ? random.nextInt(1, 6) : random.nextInt(random.nextFloat() < 0.2f ? 0 : 6, 8);
+        switch (f) {
+            case 1:  return HalfLifeSounds.CON_IDLE1.get();
+            case 2:  return HalfLifeSounds.CON_IDLE2.get();
+            case 3:  return HalfLifeSounds.CON_IDLE3.get();
+            case 4:  return HalfLifeSounds.CON_IDLE4.get();
+            case 5:  return HalfLifeSounds.CON_IDLE5.get();
+            case 6:  return HalfLifeSounds.CON_ALERT1.get();
+            case 7:  return HalfLifeSounds.CON_ALERT2.get();
+            case 8:  return HalfLifeSounds.CON_ALERT3.get();
+        }
+        return SoundEvents.FROG_STEP;
+    }
 
 
 
@@ -301,6 +337,7 @@ public class Controller extends HalfLifeMonster implements GeoEntity, RangedAtta
                        new TargetOrRetaliateHLT<>(),
                          new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>()),
+                        new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, false)).startCondition(entity -> this.entityData.get(IS_ANGRY)),
                         new SetRandomWalkTarget<>().startCondition(entity -> this.getairemountbelow() > 14),
                         new OneRandomBehaviour<>(
                              new SetRandomWalkTarget<>(),
@@ -326,6 +363,7 @@ public class Controller extends HalfLifeMonster implements GeoEntity, RangedAtta
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>(),
                 new Retaliate<>(),
+                new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, true)).startCondition(entity -> !this.entityData.get(IS_ANGRY)),
                 new SetLookTargetToAttackTarget<>(),
                 new SetWalkTargetToAttackTarget<>().startCondition(entity -> this.distanceTo(HLperUtil.TargetOrThis(this)) > 10 || this.vert(HLperUtil.TargetOrThis(this)) > 7).cooldownFor(entity -> 5),
                 new CustomBehaviour<>(entity -> BrainUtils.clearMemory(this, MemoryModuleType.WALK_TARGET)).startCondition(entity -> this.distanceTo(HLperUtil.TargetOrThis(this)) < 6 || this.horiz(HLperUtil.TargetOrThis(this)) < 13).cooldownFor(entity -> 5),
@@ -336,9 +374,9 @@ public class Controller extends HalfLifeMonster implements GeoEntity, RangedAtta
                         new SetBlockToWalkTargetNoInterest<>()
                 ),
                 new OneRandomBehaviour<>(
-                     new StopAndShoot<>(16, 5, 1).cooldownFor(entity -> random.nextInt(100, 200))
+                     new StopAndShoot<>(16, 5, 0.5f, this.getattacksound()).cooldownFor(entity -> random.nextInt(100, 200))
                              .whenStarting(entity -> triggerAnim("onetime", "bigshoot")),
-                     new StopAndShootOverTime<>(60, 1, 22, 57, 4, 2, false, null, null).cooldownFor(entity -> random.nextInt(40, 100))
+                     new StopAndShootOverTime<>(60, 1, 22, 57, 4, 2, false, this.getattacksound(), null).cooldownFor(entity -> random.nextInt(40, 100))
                              .whenStarting(entity -> triggerAnim("onetime", "shoot"))
                 )
                 );
@@ -350,24 +388,18 @@ public class Controller extends HalfLifeMonster implements GeoEntity, RangedAtta
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "noattack", 0, this::allways));
-        controllerRegistrar.add(new AnimationController<>(this, "idle", 0, this::idle));
-        controllerRegistrar.add(new AnimationController<>(this, "open", 0, state -> PlayState.STOP)
-                .triggerableAnim("open", RawAnimation.begin().then("animation.controller.openslightly", Animation.LoopType.PLAY_ONCE)));
+        controllerRegistrar.add(new AnimationController<>(this, "allways", 0, this::allways));
         controllerRegistrar.add(new AnimationController<>(this, "onetime", state -> PlayState.STOP)
                 .triggerableAnim("shoot", RawAnimation.begin().then("animation.controller.normalattack", Animation.LoopType.PLAY_ONCE)) //1.125 to 2.875 interval 0.24
                 .triggerableAnim("bigshoot", RawAnimation.begin().then("animation.controller.bigattack", Animation.LoopType.PLAY_ONCE)) // 0.75
+                .triggerableAnim("idle", RawAnimation.begin().then("animation.controller.wierdidle", Animation.LoopType.PLAY_ONCE)) // 0.75
         );
     }
 
-    private <T extends GeoAnimatable> PlayState idle(AnimationState<T> tAnimationState) {
-        tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.controller.idle", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
-    }
 
 
     private <T extends GeoAnimatable> PlayState allways(AnimationState<T> tAnimationState) {
-        tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.controller.noattack", Animation.LoopType.LOOP));
+        tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.controller.wierdidle", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
     }
 
@@ -386,8 +418,9 @@ public class Controller extends HalfLifeMonster implements GeoEntity, RangedAtta
         double d2 = pTarget.getY(0.4D) - this.getY(0.4D);
         double d3 = pTarget.getZ() - this.getZ();
         double d4 = Math.sqrt(Math.sqrt(d0)) * 0.5D;
-        AcidBall acidBall = new AcidBall(this.level, this, d1, d2, d3);
+        ControllerBigProjectile acidBall = new ControllerBigProjectile(this.level, this, d1, d2, d3, pTarget);
         acidBall.setPos(this.getX() - (double)(this.getBbWidth() + 1.0F) * 0.5D * (double)Mth.sin(this.yBodyRot * ((float)Math.PI / 180F)), this.getEyeY() - (double)0.1F, this.getZ() + (double)(this.getBbWidth() + 1.0F) * 0.5D * (double) Mth.cos(this.yBodyRot * ((float)Math.PI / 180F)));
+        acidBall.shoot(d1, d2, d3, pVelocity, 1f);
         this.level.addFreshEntity(acidBall);
     }
 
@@ -398,8 +431,8 @@ public class Controller extends HalfLifeMonster implements GeoEntity, RangedAtta
         double d2 = pTarget.getY(0.4D) - this.getY(0.4D);
         double d3 = pTarget.getZ() - this.getZ();
         double d4 = Math.sqrt(Math.sqrt(d0)) * 0.5D;
-        AcidBall acidBall = new AcidBall(this.level, this, d1, d2, d3);
-        acidBall.setPos(this.getX() - (double)(this.getBbWidth() + 1.0F) * 0.5D * (double)Mth.sin(this.yBodyRot * ((float)Math.PI / 180F)), this.getEyeY() - (double)0.1F, this.getZ() + (double)(this.getBbWidth() + 1.0F) * 0.5D * (double) Mth.cos(this.yBodyRot * ((float)Math.PI / 180F)));
+        ControllerBaseProjectile acidBall = new ControllerBaseProjectile(this.level, this, d1, d2, d3);
+        acidBall.setPos(this.getX() - (double)(this.getBbWidth() + 1.0F) * 0.5D * (double)Mth.sin(this.yBodyRot * ((float)Math.PI / 180F)), this.getEyeY() - (double)0.5F, this.getZ() + (double)(this.getBbWidth() + 1.0F) * 0.5D * (double) Mth.cos(this.yBodyRot * ((float)Math.PI / 180F)));
         this.level.addFreshEntity(acidBall);
     }
 }

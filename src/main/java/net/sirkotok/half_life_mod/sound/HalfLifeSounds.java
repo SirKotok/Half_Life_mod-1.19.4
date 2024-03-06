@@ -16,6 +16,62 @@ public class HalfLifeSounds {
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 
 
+    // Controller
+
+  public static final RegistryObject<SoundEvent> CON_ALERT1=
+          registerSoundEvent("con_alert1");
+  public static final RegistryObject<SoundEvent> CON_ALERT2=
+          registerSoundEvent("con_alert2");
+  public static final RegistryObject<SoundEvent> CON_ALERT3=
+          registerSoundEvent("con_alert3");
+  public static final RegistryObject<SoundEvent> CON_ATTACK1=
+          registerSoundEvent("con_attack1");
+  public static final RegistryObject<SoundEvent> CON_ATTACK2=
+          registerSoundEvent("con_attack2");
+  public static final RegistryObject<SoundEvent> CON_ATTACK3=
+          registerSoundEvent("con_attack3");
+  public static final RegistryObject<SoundEvent> CON_DIE1=
+          registerSoundEvent("con_die1");
+  public static final RegistryObject<SoundEvent> CON_DIE2=
+          registerSoundEvent("con_die2");
+  public static final RegistryObject<SoundEvent> CON_ELECTRO4=
+          registerSoundEvent("con_electro4");
+  public static final RegistryObject<SoundEvent> CON_IDLE1=
+          registerSoundEvent("con_idle1");
+  public static final RegistryObject<SoundEvent> CON_IDLE2=
+          registerSoundEvent("con_idle2");
+  public static final RegistryObject<SoundEvent> CON_IDLE3=
+          registerSoundEvent("con_idle3");
+  public static final RegistryObject<SoundEvent> CON_IDLE4=
+          registerSoundEvent("con_idle4");
+  public static final RegistryObject<SoundEvent> CON_IDLE5=
+          registerSoundEvent("con_idle5");
+  public static final RegistryObject<SoundEvent> CON_PAIN1=
+          registerSoundEvent("con_pain1");
+  public static final RegistryObject<SoundEvent> CON_PAIN2=
+          registerSoundEvent("con_pain2");
+  public static final RegistryObject<SoundEvent> CON_PAIN3=
+          registerSoundEvent("con_pain3");
+
+    /*      "sounds.half_life_mod.con_alert1": "Controller ",
+          "sounds.half_life_mod.con_alert2": "Controller ",
+          "sounds.half_life_mod.con_alert3": "Controller ",
+          "sounds.half_life_mod.con_attack1": "Controller ",
+          "sounds.half_life_mod.con_attack2": "Controller ",
+          "sounds.half_life_mod.con_attack3": "Controller ",
+          "sounds.half_life_mod.con_die1": "Controller ",
+          "sounds.half_life_mod.con_die2": "Controller ",
+          "sounds.half_life_mod.con_electro4": "Controller ",
+          "sounds.half_life_mod.con_idle1": "Controller ",
+          "sounds.half_life_mod.con_idle2": "Controller ",
+          "sounds.half_life_mod.con_idle3": "Controller ",
+          "sounds.half_life_mod.con_idle4": "Controller ",
+          "sounds.half_life_mod.con_idle5": "Controller ",
+          "sounds.half_life_mod.con_pain1": "Controller ",
+          "sounds.half_life_mod.con_pain2": "Controller ",
+          "sounds.half_life_mod.con_pain3": "Controller ", */
+
+
     // Antlion
 
 

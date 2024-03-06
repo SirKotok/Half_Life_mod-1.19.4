@@ -459,41 +459,6 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
     }
 
 
-  /*  private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
-        int i = this.getTilt();
-        switch(i){
-            case 0:
-                tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.rotstraight", Animation.LoopType.LOOP));
-                return PlayState.CONTINUE;
-            case 1:
-                tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.rotforward", Animation.LoopType.LOOP));
-                return PlayState.CONTINUE;
-            case 2:
-                tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.rotfs1", Animation.LoopType.LOOP));
-                return PlayState.CONTINUE;
-            case 3:
-                tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.rotside1", Animation.LoopType.LOOP));
-                return PlayState.CONTINUE;
-            case 4:
-                tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.rotbs1", Animation.LoopType.LOOP));
-                return PlayState.CONTINUE;
-            case 5:
-                tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.rotback", Animation.LoopType.LOOP));
-                return PlayState.CONTINUE;
-            case 6:
-                tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.rotbs2", Animation.LoopType.LOOP));
-                return PlayState.CONTINUE;
-            case 7:
-                tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.rotside2", Animation.LoopType.LOOP));
-                return PlayState.CONTINUE;
-            case 8:
-                tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.rotfs2", Animation.LoopType.LOOP));
-                return PlayState.CONTINUE;
-        }
-
-        tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.manhack.rotstraight", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
-  } */
 
 
     private <T extends GeoAnimatable> PlayState allways(AnimationState<T> tAnimationState) {
