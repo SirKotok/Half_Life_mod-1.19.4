@@ -35,6 +35,7 @@ import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.CommonSounds;
 import net.sirkotok.half_life_mod.util.HLTags;
+import net.sirkotok.half_life_mod.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -255,9 +256,9 @@ public class HL1ZombieScientist extends HalfLifeMonster implements GeoEntity, Sm
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<HL1ZombieScientist>()
                         .setPredicate((target, entity) ->
-                                target instanceof Player || (this.getFirstPassenger() instanceof HalfLifeMonster headcrab && target.equals(headcrab.getLastHurtByMob())) ||
-                                        target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
-                                        target instanceof AbstractVillager || target.getType().is(HLTags.EntityTypes.FACTION_ANTLION)));
+                                (this.getFirstPassenger() instanceof HalfLifeMonster headcrab && target.equals(headcrab.getLastHurtByMob())) ||
+                                InfightingUtil.HeadcrabFactionSpecific(target) || InfightingUtil.commonenemy(target)
+                        ));
     }
 
 

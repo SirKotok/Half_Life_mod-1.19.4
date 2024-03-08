@@ -15,6 +15,7 @@ import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Controller;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.VortigauntHL1;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.VortigauntHL2;
 import net.sirkotok.half_life_mod.util.CommonSounds;
+import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableRangedAttack;
 import net.tslat.smartbrainlib.util.BrainUtils;
 
@@ -57,12 +58,14 @@ public class StopAndShoot<E extends LivingEntity & RangedAttackMob> extends Anim
     @Override
     protected void tick(E entity) {
         super.tick(entity);
+
         if (count > 4 && entity instanceof VortigauntHL1 vort && vort.getcharge() == 2 ) vort.setcharge(1);
         if (count > 4 && entity instanceof VortigauntHL2 vort && vort.getcharge() == 2 ) vort.setcharge(1);
         if (count > 5 && count < 10 && entity instanceof Controller vort && vort.getcharge() == 0 ) vort.setcharge(2);
         if (count > 10 && entity instanceof Controller vort && vort.getcharge() == 2 ) vort.setcharge(0);
         count++;
         BehaviorUtils.lookAtEntity(entity, this.target);
+        HLperUtil.rotateToTarget(entity);
     }
 
     @Override

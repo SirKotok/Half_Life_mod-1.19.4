@@ -80,44 +80,144 @@ public class Barney extends HalfLifeNeutral implements GeoEntity, SmartBrainOwne
 
 
 
+
+    public SoundEvent getQuestionSound() {
+        switch (this.random.nextInt(1,9)) {
+            case 1:  return HalfLifeSounds.BA_IDLE_Q1.get();
+            case 2:  return HalfLifeSounds.BA_IDLE_Q2.get();
+            case 3:  return HalfLifeSounds.BA_IDLE_Q3.get();
+            case 4:  return HalfLifeSounds.BA_IDLE_Q4.get();
+            case 5:  return HalfLifeSounds.BA_IDLE_Q6.get();
+            case 6:  return HalfLifeSounds.BA_IDLE_Q7.get();
+            case 7:  return HalfLifeSounds.BA_IDLE_Q8.get();
+            case 8:  return HalfLifeSounds.BA_IDLE_Q5.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
+    }
+    public SoundEvent getIdleCommentSound() {
+        switch (this.random.nextInt(1,9)) {
+            case 1:  return HalfLifeSounds.BA_IDLE_C1.get();
+            case 2:  return HalfLifeSounds.BA_IDLE_C2.get();
+            case 3:  return HalfLifeSounds.BA_IDLE_C3.get();
+            case 4:  return HalfLifeSounds.BA_IDLE_C4.get();
+            case 5:  return HalfLifeSounds.BA_IDLE_C6.get();
+            case 6:  return HalfLifeSounds.BA_IDLE_C7.get();
+            case 7:  return HalfLifeSounds.BA_IDLE_C8.get();
+            case 8:  return HalfLifeSounds.BA_IDLE_C5.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
+    }
+    public SoundEvent getAnswerSound() {
+        switch (this.random.nextInt(1,8)) {
+            case 1:  return HalfLifeSounds.BA_IDLE_A1.get();
+            case 2:  return HalfLifeSounds.BA_IDLE_A2.get();
+            case 3:  return HalfLifeSounds.BA_IDLE_A3.get();
+            case 4:  return HalfLifeSounds.BA_IDLE_A4.get();
+            case 5:  return HalfLifeSounds.BA_IDLE_A5.get();
+            case 6:  return HalfLifeSounds.BA_IDLE_A6.get();
+            case 7:  return HalfLifeSounds.BA_IDLE_A7.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
+    }
+    public SoundEvent getIdleHurtSound() {
+        switch (this.random.nextInt(1,3)) {
+            case 1:  return HalfLifeSounds.BA_IDLE_HURT1.get();
+            case 2:  return HalfLifeSounds.BA_IDLE_HURT2.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
+    }
+    public SoundEvent getIdlePLHurtSound() {
+        switch (this.random.nextInt(1,3)) {
+            case 1:  return HalfLifeSounds.BA_IDLE_PL_HURT1.get();
+            case 2:  return HalfLifeSounds.BA_IDLE_PL_HURT2.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
+    }
+    public SoundEvent getKillReactionSound() {
+        switch (this.random.nextInt(1,7)) {
+            case 1:  return HalfLifeSounds.BA_KILL1.get();
+            case 2:  return HalfLifeSounds.BA_KILL2.get();
+            case 3:  return HalfLifeSounds.BA_KILL3.get();
+            case 4:  return HalfLifeSounds.BA_KILL4.get();
+            case 5:  return HalfLifeSounds.BA_KILL5.get();
+            case 6:  return HalfLifeSounds.BA_KILL6.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
+    }
+
+
+    @Override
+    public SoundEvent getWarningSound() {
+        switch (this.random.nextInt(1,6)) {
+            case 1:  return HalfLifeSounds.BA_WARN1.get();
+            case 2:  return HalfLifeSounds.BA_WARN2.get();
+            case 3:  return HalfLifeSounds.BA_WARN3.get();
+            case 4:  return HalfLifeSounds.BA_WARN4.get();
+            case 5:  return HalfLifeSounds.BA_WARN6.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
+    }
+
+    @Override
+    public SoundEvent getAttackReactionSound() {
+        switch (this.random.nextInt(1,5)) {
+            case 1:  return HalfLifeSounds.BA_AP1.get();
+            case 2:  return HalfLifeSounds.BA_AP2.get();
+            case 3:  return HalfLifeSounds.BA_AP3.get();
+            case 4:  return HalfLifeSounds.BA_AP4.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
+    }
+
+
+
     @Override
     public SoundEvent getStartFollowingSound() {
-        switch (this.random.nextInt(1,7)) {
-            case 1:  return HalfLifeSounds.GUARD_FOLLOW_1.get();
-            case 2:  return HalfLifeSounds.GUARD_FOLLOW_2.get();
-            case 3:  return HalfLifeSounds.GUARD_FOLLOW_3.get();
-            case 4:  return HalfLifeSounds.GUARD_FOLLOW_4.get();
-            case 5:  return HalfLifeSounds.GUARD_FOLLOW_5.get();
-            case 6:  return HalfLifeSounds.GUARD_FOLLOW_6.get();
+        switch (this.random.nextInt(1,8)) {
+            case 1:  return HalfLifeSounds.BA_FOLLOW1.get();
+            case 2:  return HalfLifeSounds.BA_FOLLOW2.get();
+            case 3:  return HalfLifeSounds.BA_FOLLOW3.get();
+            case 4:  return HalfLifeSounds.BA_FOLLOW4.get();
+            case 5:  return HalfLifeSounds.BA_FOLLOW5.get();
+            case 6:  return HalfLifeSounds.BA_FOLLOW6.get();
+            case 7:  return HalfLifeSounds.BA_FOLLOW7.get();
         }
         return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
     }
     @Override
     public SoundEvent getStopFollowingSound() {
-        switch (this.random.nextInt(1,7)) {
-            case 1:  return HalfLifeSounds.GUARD_STAY_1.get();
-            case 2:  return HalfLifeSounds.GUARD_STAY_2.get();
-            case 3:  return HalfLifeSounds.GUARD_STAY_3.get();
-            case 4:  return HalfLifeSounds.GUARD_STAY_4.get();
-            case 5:  return HalfLifeSounds.GUARD_STAY_5.get();
-            case 6:  return HalfLifeSounds.GUARD_STAY_6.get();
+        switch (this.random.nextInt(1,8)) {
+            case 1:  return HalfLifeSounds.BA_STAY1.get();
+            case 2:  return HalfLifeSounds.BA_STAY2.get();
+            case 3:  return HalfLifeSounds.BA_STAY3.get();
+            case 4:  return HalfLifeSounds.BA_STAY4.get();
+            case 5:  return HalfLifeSounds.BA_STAY5.get();
+            case 6:  return HalfLifeSounds.BA_STAY6.get();
+            case 7:  return HalfLifeSounds.BA_STAY7.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
+    }
+
+
+
+    @Nullable
+    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+        switch (this.random.nextInt(1,4)) {
+            case 1:  return HalfLifeSounds.GUARD_PAIN_1.get();
+            case 2:  return HalfLifeSounds.GUARD_PAIN_2.get();
+            case 3:  return HalfLifeSounds.GUARD_PAIN_3.get();
         }
         return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
     }
 
     @Nullable
-    protected SoundEvent getAmbientSound() {
-        return SoundEvents.FROG_AMBIENT;
-    }
-
-    @Nullable
-    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
-        return SoundEvents.FROG_HURT;
-    }
-
-    @Nullable
     protected SoundEvent getDeathSound() {
-        return SoundEvents.FROG_DEATH;
+        switch (this.random.nextInt(1,4)) {
+            case 1:  return HalfLifeSounds.BA_DIE1.get();
+            case 2:  return HalfLifeSounds.BA_DIE2.get();
+            case 3:  return HalfLifeSounds.BA_DIE3.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
     }
 
 

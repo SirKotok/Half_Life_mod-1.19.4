@@ -10,6 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.brain.ModSensorType;
 import net.sirkotok.half_life_mod.util.HLperUtil;
+import net.sirkotok.half_life_mod.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.PredicateSensor;
 import net.tslat.smartbrainlib.object.SquareRadius;
@@ -71,7 +72,7 @@ public class NearestHealableAllySensor<E extends LivingEntity> extends Predicate
 
             radius = new SquareRadius(dist, dist);
         }
-        List<LivingEntity> entities = EntityRetrievalUtil.getEntities(level, entity.getBoundingBox().inflate(radius.xzRadius(), radius.yRadius(), radius.xzRadius()), obj -> obj instanceof LivingEntity livingEntity && !(obj instanceof Player) && HLperUtil.issameteam(livingEntity, entity) && predicate().test(livingEntity, entity));
+        List<LivingEntity> entities = EntityRetrievalUtil.getEntities(level, entity.getBoundingBox().inflate(radius.xzRadius(), radius.yRadius(), radius.xzRadius()), obj -> obj instanceof LivingEntity livingEntity && !(obj instanceof Player) && InfightingUtil.issameteam(livingEntity, entity) && predicate().test(livingEntity, entity));
         entities.sort(Comparator.comparingDouble(entity::distanceToSqr));
         if (!entities.isEmpty()) {
             LivingEntity entit = entities.get(0);

@@ -8,6 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.sirkotok.half_life_mod.entity.modinterface.DoubleRangedMob;
+import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableRangedAttack;
 
 import javax.annotation.Nullable;
@@ -46,6 +47,7 @@ public class StopAndSecondShootx3<E extends LivingEntity & DoubleRangedMob> exte
     @Override
     protected void tick(E entity) {
         super.tick(entity);
+        HLperUtil.rotateToTarget(entity);
         if (this.target == null)
             return;
         BehaviorUtils.lookAtEntity(entity, this.target);

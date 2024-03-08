@@ -36,6 +36,7 @@ import net.sirkotok.half_life_mod.entity.projectile.arrowlike.Flechette;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.sirkotok.half_life_mod.util.HLTags;
+import net.sirkotok.half_life_mod.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -345,8 +346,8 @@ public class Hunter extends HalfLifeMonster implements RushingMob, GeoEntity, Ra
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<Hunter>()
                         .setPredicate((target, entity) ->
-                            target instanceof Player || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
-                            target instanceof AbstractVillager || (target instanceof Enemy && !target.getType().is(HLTags.EntityTypes.FACTION_COMBINE))));
+                                        InfightingUtil.CombineSpecific(target) || InfightingUtil.commonenemy(target)
+                        ));
     }
 
 
@@ -388,7 +389,7 @@ public class Hunter extends HalfLifeMonster implements RushingMob, GeoEntity, Ra
     public BrainActivityGroup<Hunter> getFightTasks() { // These are the tasks that handle fighting
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>(),
-                new InvalidateAttackTarget<>().invalidateIf((entity, target) -> HLperUtil.issameteam(entity, target)),
+                new InvalidateAttackTarget<>().invalidateIf((entity, target) -> InfightingUtil.issameteam(entity, target)),
                 new CustomBehaviour<>(entity -> this.setAngry(true)).startCondition(entity -> !this.getAngry() && this.random.nextFloat() < 0.1f).whenStarting(entity -> playSound(getEnemySpotSound(), this.getSoundVolume(), this.getVoicePitch())),
                 new CustomBehaviour<>(entity -> BrainUtils.clearMemory(this, MemoryModuleType.WALK_TARGET)).cooldownFor(entity -> 200),
                 new Retaliate<>(),

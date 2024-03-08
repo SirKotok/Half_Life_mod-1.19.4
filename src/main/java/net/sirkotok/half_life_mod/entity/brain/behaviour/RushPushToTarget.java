@@ -19,6 +19,7 @@ import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.modinterface.RushingMob;
 import net.sirkotok.half_life_mod.util.HLperUtil;
+import net.sirkotok.half_life_mod.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.core.behaviour.DelayedBehaviour;
 import net.tslat.smartbrainlib.util.BrainUtils;
 
@@ -81,7 +82,7 @@ public class RushPushToTarget<E extends Mob & RushingMob> extends DelayedBehavio
                         new Vec3(entity1.getX() - entity.getX(), 0, entity1.getZ() - entity.getZ()).normalize();
 
                 entity.setDeltaMovement(entity1.getDeltaMovement().add(pushvec3));
-                List<Entity> list = ((ServerLevel) entity.level).getEntities(entity, entity.getrushingbox(), obj -> !(obj.equals(entity)) && obj instanceof LivingEntity living && !HLperUtil.issameteam(entity, living));
+                List<Entity> list = ((ServerLevel) entity.level).getEntities(entity, entity.getrushingbox(), obj -> !(obj.equals(entity)) && obj instanceof LivingEntity living && !InfightingUtil.issameteam(entity, living));
                 if (!list.isEmpty()) {
                     for (Entity entity2 : list) {
                         if (entity2 instanceof LivingEntity alive && ticks % 4 == 0) {

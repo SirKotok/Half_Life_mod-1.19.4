@@ -36,6 +36,7 @@ import net.sirkotok.half_life_mod.particle.HalfLifeParticles;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.sirkotok.half_life_mod.util.HLTags;
+import net.sirkotok.half_life_mod.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -274,7 +275,14 @@ public class Controller extends HalfLifeMonster implements GeoEntity, RangedAtta
     protected void customServerAiStep() {
         tickBrain(this);
 
-
+        if (BrainUtils.getTargetOfEntity(this) != null) {
+            Vec3 vec31 =  BrainUtils.getTargetOfEntity(this).position();
+            Vec3 vec3 = this.position();
+            Vec3 between = vec3.subtract(vec31);
+            this.setYRot((float) HLperUtil.yanglefromvec3(between));
+            this.setXRot((float) HLperUtil.yanglefromvec3(between));
+            return;
+        }
 
         if (this.targetPosition != null && (!this.level.isEmptyBlock(this.targetPosition) || this.targetPosition.getY() <= this.level.getMinBuildHeight())) {
             this.targetPosition = null;
@@ -311,9 +319,8 @@ public class Controller extends HalfLifeMonster implements GeoEntity, RangedAtta
                 new NearbyPlayersSensor<>(),
                 new NearbyBlocksSensor<Controller>().setRadius(16D, 6D).setPredicate((state, entity) -> state.isAir()),
                 new NearbyLivingEntitySensor<Controller>()
-                        .setPredicate((target, entity) ->
-                            target instanceof Player || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
-                            target instanceof AbstractVillager || target.getType().is(HLTags.EntityTypes.FACTION_COMBINE)));
+                        .setPredicate((target, entity) -> InfightingUtil.commonenemy(target) || InfightingUtil.XenForcesSpecific(target)
+                              ));
     }
 
 

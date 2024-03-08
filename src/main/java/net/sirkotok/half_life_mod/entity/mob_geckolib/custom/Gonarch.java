@@ -52,6 +52,7 @@ import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.CommonSounds;
 import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.sirkotok.half_life_mod.util.HLTags;
+import net.sirkotok.half_life_mod.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -598,13 +599,9 @@ public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, Ranged
                 new HurtBySensor<>(),
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<Gonarch>()
-                        .setPredicate((target, entity) ->
-                            target instanceof Player ||
-                            target instanceof IronGolem ||
-                            target instanceof AbstractVillager ||
-                            target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) ||
-                            target instanceof HalfLifeNeutral // || target instanceof GonarchBM
-                            ));
+                        .setPredicate((target, entity)  ->
+                                InfightingUtil.HeadcrabFactionSpecific(target) || InfightingUtil.commonenemy(target)
+                        ));
     }
 
 

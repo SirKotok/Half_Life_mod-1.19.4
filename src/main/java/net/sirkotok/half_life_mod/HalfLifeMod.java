@@ -6,13 +6,16 @@ import net.minecraftforge.common.MinecraftForge;
 
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import net.sirkotok.half_life_mod.block.HalfLifeBlocks;
 
 import net.sirkotok.half_life_mod.block.blockentity.HalfLifeBlockEntities;
+import net.sirkotok.half_life_mod.config.HalfLifeCommonConfigs;
 import net.sirkotok.half_life_mod.effect.HalfLifeEffects;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.brain.ModSensorType;
@@ -48,6 +51,8 @@ public class HalfLifeMod
 
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, HalfLifeCommonConfigs.SPEC, "half-life-infighting.toml");
 
     }
 
@@ -169,7 +174,9 @@ public class HalfLifeMod
 
 
             event.accept(HalfLifeItems.VORT_DEBUG);
+
         }
+
     }
 
 

@@ -14,6 +14,7 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.memory.NearestVisibleLivingEntities;
 import net.minecraft.world.entity.player.Player;
 import net.sirkotok.half_life_mod.util.HLperUtil;
+import net.sirkotok.half_life_mod.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.core.behaviour.ExtendedBehaviour;
 import net.tslat.smartbrainlib.util.BrainUtils;
 import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
@@ -104,7 +105,7 @@ public class TargetOrRetaliateHLT<E extends Mob> extends ExtendedBehaviour<E> {
         this.toTarget = BrainUtils.getMemory(brain, this.priorityTargetMemory);
         boolean flag = false;
         if (this.toTarget != null) {
-            flag = HLperUtil.issameteam(owner, this.toTarget);
+            flag = InfightingUtil.issameteam(owner, this.toTarget);
         } else {
             this.toTarget = BrainUtils.getMemory(brain, MemoryModuleType.HURT_BY_ENTITY);
 
@@ -112,7 +113,7 @@ public class TargetOrRetaliateHLT<E extends Mob> extends ExtendedBehaviour<E> {
 
             if (this.toTarget != null && this.canAttackPredicate.test(this.toTarget)) {
 
-                flag = HLperUtil.issameteam(owner, this.toTarget);
+                flag = InfightingUtil.issameteam(owner, this.toTarget);
                 if (flag) return false;
 
                 if (this.alertAlliesPredicate.test(owner, this.toTarget))
@@ -125,7 +126,7 @@ public class TargetOrRetaliateHLT<E extends Mob> extends ExtendedBehaviour<E> {
 
                 if (nearbyEntities != null)
                     this.toTarget = nearbyEntities.findClosest(this.canAttackPredicate).orElse(null);
-                if (this.toTarget != null) flag = HLperUtil.issameteam(owner, this.toTarget);
+                if (this.toTarget != null) flag = InfightingUtil.issameteam(owner, this.toTarget);
                 return this.toTarget != null && this.canAttackPredicate.test(this.toTarget) && !flag;
             }
         }

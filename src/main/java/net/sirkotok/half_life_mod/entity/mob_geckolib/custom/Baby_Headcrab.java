@@ -25,6 +25,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraftforge.event.ForgeEventFactory;
+import net.sirkotok.half_life_mod.effect.HalfLifeEffects;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
@@ -34,6 +35,7 @@ import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.SetWalkTargetToRandomSpotAroundAttackTarget;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.HLTags;
+import net.sirkotok.half_life_mod.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -225,10 +227,9 @@ public class Baby_Headcrab extends HalfLifeMonster implements GeoEntity, SmartBr
                 new HurtBySensor<>(),
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<Baby_Headcrab>()
-                        .setPredicate((target, entity) ->
-                            target instanceof Player ||
-                                    target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
-                            target instanceof AbstractVillager));
+                        .setPredicate((target, entity)  ->
+                                InfightingUtil.HeadcrabFactionSpecific(target) || InfightingUtil.commonenemy(target)
+                        ));
     }
 
 

@@ -9,6 +9,7 @@ import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.sirkotok.half_life_mod.entity.modinterface.DoubleRangedMob;
 import net.sirkotok.half_life_mod.entity.modinterface.TripleRangedMob;
+import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.tslat.smartbrainlib.util.BrainUtils;
 
 import javax.annotation.Nullable;
@@ -36,6 +37,7 @@ public class StopAndThirdShoot<E extends LivingEntity & TripleRangedMob> extends
     protected void tick(E entity) {
         super.tick(entity);
         BehaviorUtils.lookAtEntity(entity, this.target);
+        HLperUtil.rotateToTarget(entity);
     }
 
     @Override

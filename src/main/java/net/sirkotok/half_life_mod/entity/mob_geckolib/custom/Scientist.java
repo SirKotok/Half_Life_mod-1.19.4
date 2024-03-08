@@ -11,6 +11,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
@@ -37,6 +38,7 @@ import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.NearestHealableAllySensor;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
+import net.sirkotok.half_life_mod.util.HLTags;
 import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
@@ -169,28 +171,191 @@ public class Scientist extends HalfLifeNeutral implements GeoEntity, SmartBrainO
     }
 
 
+
+
+
+    public SoundEvent getQuestionSound() {
+        switch (this.random.nextInt(1,15)) {
+            case 1:  return HalfLifeSounds.S_Q1.get();
+            case 2:  return HalfLifeSounds.S_Q2.get();
+            case 3:  return HalfLifeSounds.S_Q3.get();
+            case 4:  return HalfLifeSounds.S_Q4.get();
+            case 5:  return HalfLifeSounds.S_Q5.get();
+            case 6:  return HalfLifeSounds.S_Q7.get();
+            case 7:  return HalfLifeSounds.S_Q8.get();
+            case 8:  return HalfLifeSounds.S_Q6.get();
+            case 9:  return HalfLifeSounds.S_Q14.get();
+            case 10:  return HalfLifeSounds.S_Q13.get();
+            case 11:  return HalfLifeSounds.S_Q12.get();
+            case 12:  return HalfLifeSounds.S_Q11.get();
+            case 13:  return HalfLifeSounds.S_Q10.get();
+            case 14:  return HalfLifeSounds.S_Q9.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
+    }
+    public SoundEvent getIdleCommentSound() {
+        switch (this.random.nextInt(1,15)) {
+            case 1:  return HalfLifeSounds.S_C1.get();
+            case 2:  return HalfLifeSounds.S_C2.get();
+            case 3:  return HalfLifeSounds.S_C3.get();
+            case 4:  return HalfLifeSounds.S_C4.get();
+            case 5:  return HalfLifeSounds.S_C5.get();
+            case 6:  return HalfLifeSounds.S_C7.get();
+            case 7:  return HalfLifeSounds.S_C8.get();
+            case 8:  return HalfLifeSounds.S_C6.get();
+            case 9:  return HalfLifeSounds.S_C14.get();
+            case 10:  return HalfLifeSounds.S_C13.get();
+            case 11:  return HalfLifeSounds.S_C12.get();
+            case 12:  return HalfLifeSounds.S_C11.get();
+            case 13:  return HalfLifeSounds.S_C10.get();
+            case 14:  return HalfLifeSounds.S_C9.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
+    }
+
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        if (this.isAngry()) {
+            switch (this.random.nextInt(1,13)) {
+                case 1:  return HalfLifeSounds.SCI_FEAR1.get();
+                case 2:  return HalfLifeSounds.SCI_FEAR2.get();
+                case 3:  return HalfLifeSounds.SCI_FEAR3.get();
+                case 4:  return HalfLifeSounds.SCI_FEAR4.get();
+                case 5:  return HalfLifeSounds.SCI_FEAR5.get();
+                case 6:  return HalfLifeSounds.SCI_FEAR6.get();
+                case 7:  return HalfLifeSounds.SCI_FEAR7.get();
+                case 8:  return HalfLifeSounds.SCI_FEAR8.get();
+            }
+        }
+        return null;
+    }
+
+    @Nullable
+    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+        if (this.getVehicle() instanceof LivingEntity entity && entity.getType().is(HLTags.EntityTypes.HEADCRAB) && random.nextFloat() < 0.01) return HalfLifeSounds.SCIENTIST_HEADCRABONHEAD.get();
+        switch (this.random.nextInt(1,11)) {
+            case 1:  return HalfLifeSounds.SCI_PAIN1.get();
+            case 2:  return HalfLifeSounds.SCI_PAIN2.get();
+            case 3:  return HalfLifeSounds.SCI_PAIN3.get();
+            case 4:  return HalfLifeSounds.SCI_PAIN4.get();
+            case 5:  return HalfLifeSounds.SCI_PAIN5.get();
+            case 6:  return HalfLifeSounds.SCI_PAIN7.get();
+            case 7:  return HalfLifeSounds.SCI_PAIN8.get();
+            case 8:  return HalfLifeSounds.SCI_PAIN6.get();
+            case 9:  return HalfLifeSounds.SCI_PAIN9.get();
+            case 10:  return HalfLifeSounds.SCI_PAIN10.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
+    }
+
+    @Nullable
+    protected SoundEvent getDeathSound() {
+        switch (this.random.nextInt(1,5)) {
+            case 1:  return HalfLifeSounds.SCI_DIE1.get();
+            case 2:  return HalfLifeSounds.SCI_DIE2.get();
+            case 3:  return HalfLifeSounds.SCI_DIE3.get();
+            case 4:  return HalfLifeSounds.SCI_DIE4.get();
+            case 5:  return HalfLifeSounds.SCI_DIE5.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
+    }
+
+    public SoundEvent getAnswerSound() {
+        switch (this.random.nextInt(1,22)) {
+            case 1:  return HalfLifeSounds.S_AN1.get();
+            case 2:  return HalfLifeSounds.S_AN2.get();
+            case 3:  return HalfLifeSounds.S_AN3.get();
+            case 4:  return HalfLifeSounds.S_AN4.get();
+            case 5:  return HalfLifeSounds.S_AN5.get();
+            case 6:  return HalfLifeSounds.S_AN7.get();
+            case 7:  return HalfLifeSounds.S_AN8.get();
+            case 8:  return HalfLifeSounds.S_AN6.get();
+            case 9:  return HalfLifeSounds.S_AN14.get();
+            case 10:  return HalfLifeSounds.S_AN13.get();
+            case 11:  return HalfLifeSounds.S_AN12.get();
+            case 12:  return HalfLifeSounds.S_AN11.get();
+            case 13:  return HalfLifeSounds.S_AN10.get();
+            case 14:  return HalfLifeSounds.S_AN9.get();
+            case 15:  return HalfLifeSounds.S_AN17.get();
+            case 16:  return HalfLifeSounds.S_AN15.get();
+            case 17:  return HalfLifeSounds.S_AN16.get();
+            case 18:  return HalfLifeSounds.S_AN18.get();
+            case 19:  return HalfLifeSounds.S_AN19.get();
+            case 20:  return HalfLifeSounds.S_AN20.get();
+            case 21:  return HalfLifeSounds.S_AN21.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
+    }
+    public SoundEvent getIdleHurtSound() {
+        switch (this.random.nextInt(1,5)) {
+            case 1:  return HalfLifeSounds.S_HURT1.get();
+            case 2:  return HalfLifeSounds.S_HURT2.get();
+            case 3:  return HalfLifeSounds.S_HURT3.get();
+            case 4:  return HalfLifeSounds.S_HURT4.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
+    }
+    public SoundEvent getIdlePLHurtSound() {
+        switch (this.random.nextInt(1,5)) {
+            case 1:  return HalfLifeSounds.S_PL_HURT1.get();
+            case 2:  return HalfLifeSounds.S_PL_HURT2.get();
+            case 3:  return HalfLifeSounds.S_PL_HURT3.get();
+            case 4:  return HalfLifeSounds.S_PL_HURT4.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
+    }
+
+    @Override
+    public SoundEvent getWarningSound() {
+        switch (this.random.nextInt(1,7)) {
+            case 1:  return HalfLifeSounds.S_WARN1.get();
+            case 2:  return HalfLifeSounds.S_WARN2.get();
+            case 3:  return HalfLifeSounds.S_WARN3.get();
+            case 4:  return HalfLifeSounds.S_WARN4.get();
+            case 5:  return HalfLifeSounds.S_WARN6.get();
+            case 6:  return HalfLifeSounds.S_WARN5.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
+    }
+
+    @Override
+    public SoundEvent getAttackReactionSound() {
+        switch (this.random.nextInt(1,3)) {
+            case 1:  return HalfLifeSounds.S_AP1.get();
+            case 2:  return HalfLifeSounds.S_AP2.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
+    }
+
+
+
     @Override
     public SoundEvent getStartFollowingSound() {
-        switch (this.random.nextInt(1,7)) {
-            case 1:  return HalfLifeSounds.GUARD_FOLLOW_1.get();
-            case 2:  return HalfLifeSounds.GUARD_FOLLOW_2.get();
-            case 3:  return HalfLifeSounds.GUARD_FOLLOW_3.get();
-            case 4:  return HalfLifeSounds.GUARD_FOLLOW_4.get();
-            case 5:  return HalfLifeSounds.GUARD_FOLLOW_5.get();
-            case 6:  return HalfLifeSounds.GUARD_FOLLOW_6.get();
+        switch (this.random.nextInt(1,10)) {
+            case 1:  return HalfLifeSounds.S_FOLLOW1.get();
+            case 2:  return HalfLifeSounds.S_FOLLOW2.get();
+            case 3:  return HalfLifeSounds.S_FOLLOW3.get();
+            case 4:  return HalfLifeSounds.S_FOLLOW4.get();
+            case 5:  return HalfLifeSounds.S_FOLLOW5.get();
+            case 6:  return HalfLifeSounds.S_FOLLOW6.get();
+            case 7:  return HalfLifeSounds.S_FOLLOW7.get();
+            case 8:  return HalfLifeSounds.S_FOLLOW8.get();
+            case 9:  return HalfLifeSounds.S_FOLLOW9.get();
         }
         return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
     }
 
 
     public SoundEvent getHealingSound() {
-        switch (this.random.nextInt(1,7)) {
-            case 1:  return HalfLifeSounds.GUARD_FOLLOW_1.get();
-            case 2:  return HalfLifeSounds.GUARD_FOLLOW_2.get();
-            case 3:  return HalfLifeSounds.GUARD_FOLLOW_3.get();
-            case 4:  return HalfLifeSounds.GUARD_FOLLOW_4.get();
-            case 5:  return HalfLifeSounds.GUARD_FOLLOW_5.get();
-            case 6:  return HalfLifeSounds.GUARD_FOLLOW_6.get();
+        switch (this.random.nextInt(1,8)) {
+            case 1:  return HalfLifeSounds.S_HEAL1.get();
+            case 2:  return HalfLifeSounds.S_HEAL2.get();
+            case 3:  return HalfLifeSounds.S_HEAL3.get();
+            case 4:  return HalfLifeSounds.S_HEAL4.get();
+            case 5:  return HalfLifeSounds.S_HEAL5.get();
+            case 6:  return HalfLifeSounds.S_HEAL6.get();
+            case 7:  return HalfLifeSounds.S_HEAL7.get();
         }
         return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
     }
@@ -202,13 +367,21 @@ public class Scientist extends HalfLifeNeutral implements GeoEntity, SmartBrainO
 
     @Override
     public SoundEvent getStopFollowingSound() {
-        switch (this.random.nextInt(1,7)) {
-            case 1:  return HalfLifeSounds.GUARD_STAY_1.get();
-            case 2:  return HalfLifeSounds.GUARD_STAY_2.get();
-            case 3:  return HalfLifeSounds.GUARD_STAY_3.get();
-            case 4:  return HalfLifeSounds.GUARD_STAY_4.get();
-            case 5:  return HalfLifeSounds.GUARD_STAY_5.get();
-            case 6:  return HalfLifeSounds.GUARD_STAY_6.get();
+        switch (this.random.nextInt(1,15)) {
+            case 1:  return HalfLifeSounds.S_STAY1.get();
+            case 2:  return HalfLifeSounds.S_STAY2.get();
+            case 3:  return HalfLifeSounds.S_STAY3.get();
+            case 4:  return HalfLifeSounds.S_STAY4.get();
+            case 5:  return HalfLifeSounds.S_STAY5.get();
+            case 6:  return HalfLifeSounds.S_STAY6.get();
+            case 7:  return HalfLifeSounds.S_STAY7.get();
+            case 8:  return HalfLifeSounds.S_STAY8.get();
+            case 9:  return HalfLifeSounds.S_STAY14.get();
+            case 10:  return HalfLifeSounds.S_STAY13.get();
+            case 11:  return HalfLifeSounds.S_STAY12.get();
+            case 12:  return HalfLifeSounds.S_STAY11.get();
+            case 13:  return HalfLifeSounds.S_STAY10.get();
+            case 14:  return HalfLifeSounds.S_STAY9.get();
         }
         return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
     }
@@ -344,7 +517,8 @@ public class Scientist extends HalfLifeNeutral implements GeoEntity, SmartBrainO
                 new InvalidateAttackTarget<>(),
                 new Retaliate<>(),
                 new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, true)).startCondition(entity -> this.entityData.get(IS_ANGRY).equals(false)),
-                new FleeTarget<>().speedModifier(1.4f).fleeDistance(14),
+                new SetRandomWalkTarget<>(),
+                new FleeTarget<>().speedModifier(1.4f).fleeDistance(7),
                 new CustomBehaviour<>(entity -> this.entityData.set(STRING_UUID_FOLLOW, "")).startCondition(entity -> !this.entityData.get(STRING_UUID_FOLLOW).equals("")),
                 new CustomBehaviour<>(entity -> HLperUtil.slowEntityFor(this, 20))
                         .whenStarting(entity -> triggerAnim("onetime", "fear"))

@@ -12,6 +12,7 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.player.Player;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.util.HLperUtil;
+import net.sirkotok.half_life_mod.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.core.behaviour.ExtendedBehaviour;
 import net.tslat.smartbrainlib.util.BrainUtils;
 
@@ -42,7 +43,7 @@ public class Retaliate<E extends Mob> extends ExtendedBehaviour<E> {
     protected boolean checkExtraStartConditions(ServerLevel level, E entity) {
         LivingEntity target = BrainUtils.getMemory(entity, MemoryModuleType.HURT_BY_ENTITY);
         if (target == null) return false;
-        boolean flag = HLperUtil.issameteam(entity, target);
+        boolean flag = InfightingUtil.issameteam(entity, target);
 
         return this.canTargetPredicate.test(entity) && !flag;
     }

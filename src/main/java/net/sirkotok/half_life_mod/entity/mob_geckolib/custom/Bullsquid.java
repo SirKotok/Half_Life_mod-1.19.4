@@ -30,6 +30,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.fluids.FluidType;
+import net.sirkotok.half_life_mod.config.HalfLifeCommonConfigs;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
@@ -39,6 +40,7 @@ import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.sirkotok.half_life_mod.util.HLTags;
+import net.sirkotok.half_life_mod.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -335,15 +337,11 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<Bullsquid>()
                         .setPredicate((target, entity) ->
-                            target instanceof Player ||
-                            target.getType().is(HLTags.EntityTypes.HEADCRAB) ||
-                            (target.getType().getCategory().getName().equals("creature") && !(target instanceof Cockroach)) ||
-                            target instanceof IronGolem ||
-                            target instanceof AbstractVillager ||
-                            target instanceof Pitdrone ||
-                            target instanceof Slime ||
-                            (target instanceof Bullsquid bullsquid && bullsquid.isterritorial() && this.isterritorial()) ||
-                            target instanceof HalfLifeNeutral
+                            InfightingUtil.nonfactionSpecific(target) ||
+                            (target.getType().is(HLTags.EntityTypes.HEADCRAB) && HalfLifeCommonConfigs.INFIGHTING_BULLSQUID_HUNTS_HEADCRABS.get()) ||
+                            (target.getType().getCategory().getName().equals("creature") && HalfLifeCommonConfigs.INFIGHTING_BULLSQUID_HUNTS_ANIMALS.get() && !(target instanceof Cockroach)) ||
+                            (target instanceof Pitdrone && HalfLifeCommonConfigs.INFIGHTING_BULLSQUID_PITDRONE.get()) ||
+                            (target instanceof Bullsquid bullsquid && bullsquid.isterritorial() && this.isterritorial() && HalfLifeCommonConfigs.INFIGHTING_BULLSQUID.get())
                             ));
     }
 

@@ -7,6 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.monster.RangedAttackMob;
+import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableRangedAttack;
 import net.tslat.smartbrainlib.util.BrainUtils;
 
@@ -40,6 +41,7 @@ public class StopAndShootx3<E extends LivingEntity & RangedAttackMob> extends An
     @Override
     protected void tick(E entity) {
         super.tick(entity);
+        HLperUtil.rotateToTarget(entity);
         if (this.target == null)
             return;
         BehaviorUtils.lookAtEntity(entity, this.target);

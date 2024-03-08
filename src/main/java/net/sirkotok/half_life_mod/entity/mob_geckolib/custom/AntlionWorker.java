@@ -40,6 +40,7 @@ import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.CommonSounds;
 import net.sirkotok.half_life_mod.util.HLTags;
 import net.sirkotok.half_life_mod.util.HLperUtil;
+import net.sirkotok.half_life_mod.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -281,13 +282,8 @@ public class AntlionWorker extends HalfLifeMonster implements RangedAttackMob, H
                 new HurtBySensor<>(),
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<AntlionWorker>()
-                        .setPredicate((target, entity) ->
-                                (target instanceof Player ||
-                                        target.getType().is(HLTags.EntityTypes.FACTION_HEADCRAB) ||
-                                        target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) ||
-                                        target instanceof IronGolem ||
-                                        target instanceof AbstractVillager ||
-                                        target instanceof HalfLifeNeutral || target.hasEffect(HalfLifeEffects.ANTLION_PHEROMONE_FOE.get())
+                        .setPredicate((target, entity)  ->
+                                (InfightingUtil.AntlionSpecific(target) || InfightingUtil.commonenemy(target) || target.hasEffect(HalfLifeEffects.ANTLION_PHEROMONE_FOE.get())
                                 ) && !target.hasEffect(HalfLifeEffects.ANTLION_PHEROMONE_FRIEND.get())));
     }
 

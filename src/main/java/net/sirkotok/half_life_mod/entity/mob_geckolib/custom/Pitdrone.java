@@ -31,6 +31,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.AABB;
+import net.sirkotok.half_life_mod.config.HalfLifeCommonConfigs;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
@@ -40,6 +41,7 @@ import net.sirkotok.half_life_mod.entity.projectile.PitdroneSpike;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.sirkotok.half_life_mod.util.HLTags;
+import net.sirkotok.half_life_mod.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -208,14 +210,10 @@ public class Pitdrone extends HalfLifeMonster implements AmmoCountMob, RangedAtt
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<Pitdrone>()
                         .setPredicate((target, entity) ->
-                            target instanceof Player ||
-                            target.getType().is(HLTags.EntityTypes.HEADCRAB) ||
-                            target instanceof IronGolem ||
-                            target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) ||
-                            target instanceof AbstractVillager ||
-                            target instanceof Shockroach ||
-                            target instanceof Bullsquid ||
-                            target instanceof HalfLifeNeutral
+                            InfightingUtil.RaceXSpecific(target) || InfightingUtil.commonenemy(target) ||
+                            (target.getType().is(HLTags.EntityTypes.HEADCRAB) && HalfLifeCommonConfigs.INFIGHTING_PITDRONE_HUNTS_HEADCRABS.get()) ||
+                           (target instanceof Shockroach && HalfLifeCommonConfigs.INFIGHTING_PITDRONE_HUNTS_SHOCKROACH.get()) ||
+                           (target instanceof Bullsquid && HalfLifeCommonConfigs.INFIGHTING_BULLSQUID_PITDRONE.get())
                             ));
     }
 

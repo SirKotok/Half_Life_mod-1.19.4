@@ -73,7 +73,7 @@ public class VortigauntHL2 extends HalfLifeNeutral implements RangedAttackMob, G
 
     @Override
     protected float getSoundVolume() {
-        return 0.6f;
+        return 0.4f;
     }
 
 
@@ -464,6 +464,60 @@ public class VortigauntHL2 extends HalfLifeNeutral implements RangedAttackMob, G
 
 
 
+    public SoundEvent getIdleCommentSound() {
+        float f = random.nextFloat();
+        if (f<0.1f) return this.getAmbientSound();
+        switch (this.random.nextInt(1, 8)) {
+            case 1: return HalfLifeSounds.V_C1.get();
+            case 2: return HalfLifeSounds.V_C2.get();
+            case 3: return HalfLifeSounds.V_C3.get();
+            case 4: return HalfLifeSounds.V_C4.get();
+            case 5: return HalfLifeSounds.V_C5.get();
+            case 6: return HalfLifeSounds.V_C7.get();
+        }
+        return SoundEvents.FROG_STEP;
+    }
+
+    public SoundEvent getAnswerSound() {
+        float f = random.nextFloat();
+        if (f<0.1f) return this.getAmbientSound();
+        switch (this.random.nextInt(1,24)) {
+            case 1:  return HalfLifeSounds.V_AN1.get();
+            case 2:  return HalfLifeSounds.V_AN2.get();
+            case 3:  return HalfLifeSounds.V_AN3.get();
+            case 4:  return HalfLifeSounds.V_AN4.get();
+            case 5:  return HalfLifeSounds.V_AN5.get();
+            case 6:  return HalfLifeSounds.VANSWER01.get();
+            case 7:  return HalfLifeSounds.VANSWER02.get();
+            case 8:  return HalfLifeSounds.VANSWER03.get();
+            case 9:  return HalfLifeSounds.VANSWER04.get();
+            case 10:  return HalfLifeSounds.VANSWER05.get();
+            case 11:  return HalfLifeSounds.VANSWER06.get();
+            case 12:  return HalfLifeSounds.VANSWER07.get();
+            case 13:  return HalfLifeSounds.VANSWER08.get();
+            case 14:  return HalfLifeSounds.VANSWER09.get();
+            case 15:  return HalfLifeSounds.VANSWER10.get();
+            case 16:  return HalfLifeSounds.VANSWER15.get();
+            case 17:  return HalfLifeSounds.VANSWER16.get();
+            case 18:  return HalfLifeSounds.VANSWER18.get();
+            case 19:  return HalfLifeSounds.VANSWER17.get();
+            case 20:  return HalfLifeSounds.VANSWER13.get();
+            case 21:  return HalfLifeSounds.VANSWER14.get();
+            case 22:  return HalfLifeSounds.VANSWER12.get();
+            case 23:  return HalfLifeSounds.VANSWER11.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
+    }
+
+    public SoundEvent getKillReactionSound() {
+        float f = random.nextFloat();
+        if (f<0.1f) return this.getAmbientSound();
+        switch (this.random.nextInt(1,3)) {
+            case 1:  return HalfLifeSounds.V_KILL1.get();
+            case 2:  return HalfLifeSounds.V_KILL2.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_ATTACK_1.get();
+    }
 
 
     public SoundEvent getStartFollowingSound() {

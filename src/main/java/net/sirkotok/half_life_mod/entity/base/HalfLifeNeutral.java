@@ -1,13 +1,18 @@
 package net.sirkotok.half_life_mod.entity.base;
 
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.stats.Stats;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -15,8 +20,10 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -26,6 +33,9 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Voltigore;
+import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.VortigauntHL2;
+import net.sirkotok.half_life_mod.util.CommonSounds;
+import net.sirkotok.half_life_mod.util.HLperUtil;
 import net.tslat.smartbrainlib.util.BrainUtils;
 import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
 
@@ -54,6 +64,7 @@ public class HalfLifeNeutral extends PathfinderMob implements NeutralMob {
     public static final EntityDataAccessor<Integer> TIME_STAMP = SynchedEntityData.defineId(HalfLifeNeutral.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> TIME_STAMP_2 = SynchedEntityData.defineId(HalfLifeNeutral.class, EntityDataSerializers.INT);
 
+    public static final EntityDataAccessor<Integer> SOUNDTYPE = SynchedEntityData.defineId(HalfLifeNeutral.class, EntityDataSerializers.INT);
 
     protected void defineSynchedData() {
         super.defineSynchedData();
@@ -65,8 +76,17 @@ public class HalfLifeNeutral extends PathfinderMob implements NeutralMob {
         this.entityData.define(STRING_UUID_ENEMY5, "");
         this.entityData.define(STRING_UUID_FOLLOW, "");
         this.entityData.define(TIME_STAMP, -30);
+        this.entityData.define(SOUNDTYPE, 0);
         this.entityData.define(SUS_TIMESTAMP, 0);
         this.entityData.define(TIME_STAMP_2, -30);
+    }
+
+    public void setSoundType(int i){
+        this.entityData.set(SOUNDTYPE, i);
+    }
+
+    public int getSoundType(){
+        return this.entityData.get(SOUNDTYPE);
     }
 
 
@@ -87,19 +107,18 @@ public class HalfLifeNeutral extends PathfinderMob implements NeutralMob {
         }
     }
 
-    public SoundEvent getWarningSound() {
-        return SoundEvents.COW_AMBIENT;
-    }
-
-    public SoundEvent getAttackReactionSound() {
-        return SoundEvents.COW_DEATH;
-    }
-
 
     @Override
+    public float getVoicePitch() {
+        return 1;
+    }
+
+
     public boolean hurt(DamageSource pSource, float pAmount) {
         Entity source = pSource.getEntity();
-        if (source instanceof Player player) {
+        boolean u = false;
+        if (!this.isDeadOrDying() && source instanceof Player player && !player.getAbilities().instabuild) {
+           u = true;
             String uuid_string = player.getStringUUID();
             if (!this.ismyenemy(uuid_string)) {
                 if (uuid_string.equals(this.getSUS()) && (this.tickCount - this.entityData.get(SUS_TIMESTAMP) < 600)) {
@@ -113,6 +132,14 @@ public class HalfLifeNeutral extends PathfinderMob implements NeutralMob {
             }
         }
         return super.hurt(pSource, pAmount);
+    }
+
+
+    @Override
+    protected void playHurtSound(DamageSource pSource) {
+        Entity source = pSource.getEntity();
+        boolean x = (source instanceof Player player && !this.ismyenemy(player) && !player.getAbilities().instabuild);
+        if (!x) super.playHurtSound(pSource);
     }
 
     @Override
@@ -265,12 +292,150 @@ public class HalfLifeNeutral extends PathfinderMob implements NeutralMob {
         return flag;
     }
 
-    @Override
-    public int getAmbientSoundInterval() {
-        return random.nextInt(130, 900);
+    public boolean friendaround(){
+        ServerLevel pLevel = (ServerLevel) this.level;
+        BlockPos pBlockPos = this.blockPosition();
+        int rad = 8;
+        List<HalfLifeNeutral> friends = EntityRetrievalUtil.getEntities((Level) pLevel,
+                new AABB(pBlockPos.getX() - 15, pBlockPos.getY() - 15, pBlockPos.getZ() - 15,
+                        pBlockPos.getX() + 15, pBlockPos.getY() + 15, pBlockPos.getZ() + 15), obj -> (obj != this) && ((obj instanceof Player p && !this.ismyenemy(p)) || (obj instanceof HalfLifeNeutral neutral && !(this instanceof VortigauntHL2)) || ((this instanceof VortigauntHL2) && obj instanceof HalfLifeNeutral && !(obj instanceof VortigauntHL2))));
+        return !friends.isEmpty();
     }
 
 
+    public int count;
+    public HalfLifeNeutral answerto = null;
+
+    public void setAnswerto(HalfLifeNeutral e) {
+        this.answerto = e;
+    }
+
+    public HalfLifeNeutral getAnswerto() {
+       return this.answerto;
+    }
+
+    public HalfLifeNeutral askto = null;
+
+    public void setAskto(HalfLifeNeutral e) {
+        this.askto = e;
+    }
+
+    public HalfLifeNeutral getAskto() {
+        return this.askto;
+    }
+
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (this.ambientSoundTime == 0 && !this.level.isClientSide()) {
+            this.choosesoundtype();
+        }
+
+        if (random.nextFloat() > 0.1 && this.tickCount % 20 == 0 && !this.level.isClientSide() && (this.getTarget() == null || random.nextFloat() < 0.1f || (this.getTarget() != null && this.getTarget().isDeadOrDying()))) {
+            ServerLevel pLevel = (ServerLevel) this.level;
+            BlockPos pBlockPos = this.blockPosition();
+            int rad = 20;
+            List<LivingEntity> dead = EntityRetrievalUtil.getEntities((Level) pLevel,
+                    new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
+                            pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj instanceof LivingEntity living && living.isDeadOrDying() && living.getLastAttacker() == this);
+            if (!dead.isEmpty()) {
+                CommonSounds.PlaySoundAsOwn(this, this.getKillReactionSound());
+                this.ambientSoundTime = -this.getAmbientSoundInterval();
+            }
+        }
+
+
+        if (this.getTarget() != null && !this.level.isClientSide()) {
+            this.setAskto(null);
+            this.setAnswerto(null);
+        }
+        if (this.getTarget() == null && this.tickCount % 3 == 0  && !this.level.isClientSide()) {
+            if (this.getAnswerto() != null) {
+                if (this.tickCount % 9 == 0) HLperUtil.slowEntityFor(this, 13);
+                this.setXRot((float) HLperUtil.xanglefromvec3(this.getAnswerto().position().subtract(this.position())));
+                this.setYRot((float) HLperUtil.yanglefromvec3(this.getAnswerto().position().subtract(this.position())));
+            } else if (this.getAskto() != null) {
+                if (this.tickCount % 9 == 0) HLperUtil.slowEntityFor(this, 13);
+                this.setXRot((float) HLperUtil.xanglefromvec3(this.getAskto().position().subtract(this.position())));
+                this.setYRot((float) HLperUtil.yanglefromvec3(this.getAskto().position().subtract(this.position())));
+            }
+        }
+    }
+
+
+
+    protected SoundEvent getAmbientSoundS() {
+        return null;
+    }
+    @Override
+    protected SoundEvent getAmbientSound() {
+        int i = this.getSoundType();
+        switch (i) {
+            case 0:
+                return super.getAmbientSound();
+            case 1:
+                return this.getIdleCommentSound();
+            case 2:
+                return this.getIdleHurtSound();
+            case 3:
+                return this.getIdlePLHurtSound();
+        }
+        return super.getAmbientSound();
+    }
+
+
+        public void choosesoundtype(){
+        if (BrainUtils.getMemory(this, MemoryModuleType.ATTACK_TARGET) != null) this.setSoundType(0);
+        if (random.nextFloat() > 0.8 || this instanceof VortigauntHL2 && (!friendaround() || random.nextFloat() > 0.5)) {this.setSoundType(0); return;}
+        if (random.nextFloat() < 0.25 && this.getHealth() < this.getMaxHealth()*0.3) {this.setSoundType(2); return;}
+        if (random.nextFloat() > 0.7) this.setSoundType(1);
+       if (random.nextFloat() < 0.25) {
+           ServerLevel pLevel = (ServerLevel) this.level;
+           BlockPos pBlockPos = this.blockPosition();
+           int rad = 7;
+           List<LivingEntity> friend = EntityRetrievalUtil.getEntities((Level) pLevel,
+                   new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
+                           pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> (obj != this && obj instanceof LivingEntity living && living.getHealth() < living.getMaxHealth() * 0.3) && (obj instanceof HalfLifeNeutral || (obj instanceof Player player && !this.ismyenemy(player))));
+       if (!friend.isEmpty()){this.setSoundType(3); return;}
+       }
+            this.setSoundType(0);
+        }
+
+    @Override
+    public int getAmbientSoundInterval() {
+        if (this.getSoundType() == 0) return random.nextInt(120, 900);
+        else return random.nextInt(400, 1800);
+    }
+
+
+
+    public SoundEvent getQuestionSound() {
+        return null;
+    }
+    public SoundEvent getIdleCommentSound() {
+        return null;
+    }
+    public SoundEvent getAnswerSound() {
+        return null;
+    }
+    public SoundEvent getIdleHurtSound() {
+        return null;
+    }
+    public SoundEvent getIdlePLHurtSound() {
+        return null;
+    }
+    public SoundEvent getKillReactionSound() {
+        return null;
+    }
+
+    public SoundEvent getWarningSound() {
+        return SoundEvents.COW_AMBIENT;
+    }
+
+    public SoundEvent getAttackReactionSound() {
+        return SoundEvents.COW_DEATH;
+    }
 
     public SoundEvent getStartFollowingSound() {
         return SoundEvents.PIG_AMBIENT;

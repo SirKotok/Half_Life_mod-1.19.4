@@ -30,6 +30,7 @@ import net.sirkotok.half_life_mod.entity.brain.behaviour.TargetOrRetaliateHLT;
 import net.sirkotok.half_life_mod.item.HalfLifeItems;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.HLTags;
+import net.sirkotok.half_life_mod.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -192,9 +193,7 @@ public class Shockroach extends CatchableMonster implements GeoEntity, SmartBrai
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<Shockroach>()
                         .setPredicate((target, entity) ->
-                            target instanceof Player ||
-                                    target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) || target instanceof IronGolem || target instanceof HalfLifeNeutral ||
-                            target instanceof AbstractVillager));
+                                InfightingUtil.RaceXSpecific(target) || InfightingUtil.commonenemy(target)));
     }
 
 

@@ -1686,44 +1686,655 @@ public class HalfLifeSounds {
     public static final RegistryObject<SoundEvent> BULLET_HIT_2 =
             registerSoundEvent("bullet_hit2");
 
-    // BARNEY
+    // NEUTRAL
     public static final RegistryObject<SoundEvent> GUARD_PAIN_1 =
             registerSoundEvent("ba_pain1");
     public static final RegistryObject<SoundEvent> GUARD_PAIN_2 =
             registerSoundEvent("ba_pain2");
     public static final RegistryObject<SoundEvent> GUARD_PAIN_3 =
             registerSoundEvent("ba_pain3");
-    public static final RegistryObject<SoundEvent> GUARD_STAY_1 =
-            registerSoundEvent("ba_leave1");
-    public static final RegistryObject<SoundEvent> GUARD_FOLLOW_1 =
-            registerSoundEvent("ba_follow1");
-    public static final RegistryObject<SoundEvent> GUARD_STAY_2 =
-            registerSoundEvent("ba_leave2");
-    public static final RegistryObject<SoundEvent> GUARD_FOLLOW_2 =
-            registerSoundEvent("ba_follow2");
-    public static final RegistryObject<SoundEvent> GUARD_STAY_3 =
-            registerSoundEvent("ba_leave3");
-    public static final RegistryObject<SoundEvent> GUARD_FOLLOW_3 =
-            registerSoundEvent("ba_follow3");
-    public static final RegistryObject<SoundEvent> GUARD_STAY_4 =
-            registerSoundEvent("ba_leave4");
-    public static final RegistryObject<SoundEvent> GUARD_FOLLOW_4 =
-            registerSoundEvent("ba_follow4");
-    public static final RegistryObject<SoundEvent> GUARD_STAY_5 =
-            registerSoundEvent("ba_leave5");
-    public static final RegistryObject<SoundEvent> GUARD_FOLLOW_5 =
-            registerSoundEvent("ba_follow5");
-    public static final RegistryObject<SoundEvent> GUARD_STAY_6 =
-            registerSoundEvent("ba_leave6");
-    public static final RegistryObject<SoundEvent> GUARD_FOLLOW_6 =
-            registerSoundEvent("ba_follow6");
+
+
+  public static final RegistryObject<SoundEvent> BA_AP1=
+          registerSoundEvent("ba_ap1");
+  public static final RegistryObject<SoundEvent> BA_AP2=
+          registerSoundEvent("ba_ap2");
+  public static final RegistryObject<SoundEvent> BA_AP3=
+          registerSoundEvent("ba_ap3");
+  public static final RegistryObject<SoundEvent> BA_AP4=
+          registerSoundEvent("ba_ap4");
+  public static final RegistryObject<SoundEvent> BA_DIE1=
+          registerSoundEvent("ba_die1");
+  public static final RegistryObject<SoundEvent> BA_DIE2=
+          registerSoundEvent("ba_die2");
+  public static final RegistryObject<SoundEvent> BA_DIE3=
+          registerSoundEvent("ba_die3");
+  public static final RegistryObject<SoundEvent> BA_FOLLOW1=
+          registerSoundEvent("ba_follow1");
+  public static final RegistryObject<SoundEvent> BA_FOLLOW2=
+          registerSoundEvent("ba_follow2");
+  public static final RegistryObject<SoundEvent> BA_FOLLOW3=
+          registerSoundEvent("ba_follow3");
+  public static final RegistryObject<SoundEvent> BA_FOLLOW4=
+          registerSoundEvent("ba_follow4");
+  public static final RegistryObject<SoundEvent> BA_FOLLOW5=
+          registerSoundEvent("ba_follow5");
+  public static final RegistryObject<SoundEvent> BA_FOLLOW6=
+          registerSoundEvent("ba_follow6");
+  public static final RegistryObject<SoundEvent> BA_FOLLOW7=
+          registerSoundEvent("ba_follow7");
+  public static final RegistryObject<SoundEvent> BA_IDLE_A1=
+          registerSoundEvent("ba_idle_a1");
+  public static final RegistryObject<SoundEvent> BA_IDLE_A2=
+          registerSoundEvent("ba_idle_a2");
+  public static final RegistryObject<SoundEvent> BA_IDLE_A3=
+          registerSoundEvent("ba_idle_a3");
+  public static final RegistryObject<SoundEvent> BA_IDLE_A4=
+          registerSoundEvent("ba_idle_a4");
+  public static final RegistryObject<SoundEvent> BA_IDLE_A5=
+          registerSoundEvent("ba_idle_a5");
+  public static final RegistryObject<SoundEvent> BA_IDLE_A6=
+          registerSoundEvent("ba_idle_a6");
+  public static final RegistryObject<SoundEvent> BA_IDLE_A7=
+          registerSoundEvent("ba_idle_a7");
+  public static final RegistryObject<SoundEvent> BA_IDLE_C1=
+          registerSoundEvent("ba_idle_c1");
+  public static final RegistryObject<SoundEvent> BA_IDLE_C2=
+          registerSoundEvent("ba_idle_c2");
+  public static final RegistryObject<SoundEvent> BA_IDLE_C3=
+          registerSoundEvent("ba_idle_c3");
+  public static final RegistryObject<SoundEvent> BA_IDLE_C4=
+          registerSoundEvent("ba_idle_c4");
+  public static final RegistryObject<SoundEvent> BA_IDLE_C5=
+          registerSoundEvent("ba_idle_c5");
+  public static final RegistryObject<SoundEvent> BA_IDLE_C6=
+          registerSoundEvent("ba_idle_c6");
+  public static final RegistryObject<SoundEvent> BA_IDLE_C7=
+          registerSoundEvent("ba_idle_c7");
+  public static final RegistryObject<SoundEvent> BA_IDLE_C8=
+          registerSoundEvent("ba_idle_c8");
+  public static final RegistryObject<SoundEvent> BA_IDLE_HURT1=
+          registerSoundEvent("ba_idle_hurt1");
+  public static final RegistryObject<SoundEvent> BA_IDLE_HURT2=
+          registerSoundEvent("ba_idle_hurt2");
+  public static final RegistryObject<SoundEvent> BA_IDLE_PL_HURT1=
+          registerSoundEvent("ba_idle_pl_hurt1");
+  public static final RegistryObject<SoundEvent> BA_IDLE_PL_HURT2=
+          registerSoundEvent("ba_idle_pl_hurt2");
+  public static final RegistryObject<SoundEvent> BA_IDLE_Q1=
+          registerSoundEvent("ba_idle_q1");
+  public static final RegistryObject<SoundEvent> BA_IDLE_Q2=
+          registerSoundEvent("ba_idle_q2");
+  public static final RegistryObject<SoundEvent> BA_IDLE_Q3=
+          registerSoundEvent("ba_idle_q3");
+  public static final RegistryObject<SoundEvent> BA_IDLE_Q4=
+          registerSoundEvent("ba_idle_q4");
+  public static final RegistryObject<SoundEvent> BA_IDLE_Q5=
+          registerSoundEvent("ba_idle_q5");
+  public static final RegistryObject<SoundEvent> BA_IDLE_Q6=
+          registerSoundEvent("ba_idle_q6");
+  public static final RegistryObject<SoundEvent> BA_IDLE_Q7=
+          registerSoundEvent("ba_idle_q7");
+  public static final RegistryObject<SoundEvent> BA_IDLE_Q8=
+          registerSoundEvent("ba_idle_q8");
+  public static final RegistryObject<SoundEvent> BA_KILL1=
+          registerSoundEvent("ba_kill1");
+  public static final RegistryObject<SoundEvent> BA_KILL2=
+          registerSoundEvent("ba_kill2");
+  public static final RegistryObject<SoundEvent> BA_KILL3=
+          registerSoundEvent("ba_kill3");
+  public static final RegistryObject<SoundEvent> BA_KILL4=
+          registerSoundEvent("ba_kill4");
+  public static final RegistryObject<SoundEvent> BA_KILL5=
+          registerSoundEvent("ba_kill5");
+  public static final RegistryObject<SoundEvent> BA_KILL6=
+          registerSoundEvent("ba_kill6");
+  public static final RegistryObject<SoundEvent> BA_STAY1=
+          registerSoundEvent("ba_stay1");
+  public static final RegistryObject<SoundEvent> BA_STAY2=
+          registerSoundEvent("ba_stay2");
+  public static final RegistryObject<SoundEvent> BA_STAY3=
+          registerSoundEvent("ba_stay3");
+  public static final RegistryObject<SoundEvent> BA_STAY4=
+          registerSoundEvent("ba_stay4");
+  public static final RegistryObject<SoundEvent> BA_STAY5=
+          registerSoundEvent("ba_stay5");
+  public static final RegistryObject<SoundEvent> BA_STAY6=
+          registerSoundEvent("ba_stay6");
+  public static final RegistryObject<SoundEvent> BA_STAY7=
+          registerSoundEvent("ba_stay7");
+  public static final RegistryObject<SoundEvent> BA_WARN1=
+          registerSoundEvent("ba_warn1");
+  public static final RegistryObject<SoundEvent> BA_WARN2=
+          registerSoundEvent("ba_warn2");
+  public static final RegistryObject<SoundEvent> BA_WARN3=
+          registerSoundEvent("ba_warn3");
+  public static final RegistryObject<SoundEvent> BA_WARN4=
+          registerSoundEvent("ba_warn4");
+  public static final RegistryObject<SoundEvent> BA_WARN6=
+          registerSoundEvent("ba_warn6");
+  public static final RegistryObject<SoundEvent> SCIENTIST_HEADCRABONHEAD=
+          registerSoundEvent("scientist_headcrabonhead");
+  public static final RegistryObject<SoundEvent> SCI_DIE1=
+          registerSoundEvent("sci_die1");
+  public static final RegistryObject<SoundEvent> SCI_DIE2=
+          registerSoundEvent("sci_die2");
+  public static final RegistryObject<SoundEvent> SCI_DIE3=
+          registerSoundEvent("sci_die3");
+  public static final RegistryObject<SoundEvent> SCI_DIE4=
+          registerSoundEvent("sci_die4");
+  public static final RegistryObject<SoundEvent> SCI_DIE5=
+          registerSoundEvent("sci_die5");
+  public static final RegistryObject<SoundEvent> SCI_PAIN1=
+          registerSoundEvent("sci_pain1");
+  public static final RegistryObject<SoundEvent> SCI_PAIN10=
+          registerSoundEvent("sci_pain10");
+  public static final RegistryObject<SoundEvent> SCI_PAIN2=
+          registerSoundEvent("sci_pain2");
+  public static final RegistryObject<SoundEvent> SCI_PAIN3=
+          registerSoundEvent("sci_pain3");
+  public static final RegistryObject<SoundEvent> SCI_PAIN4=
+          registerSoundEvent("sci_pain4");
+  public static final RegistryObject<SoundEvent> SCI_PAIN5=
+          registerSoundEvent("sci_pain5");
+  public static final RegistryObject<SoundEvent> SCI_PAIN6=
+          registerSoundEvent("sci_pain6");
+  public static final RegistryObject<SoundEvent> SCI_PAIN7=
+          registerSoundEvent("sci_pain7");
+  public static final RegistryObject<SoundEvent> SCI_PAIN8=
+          registerSoundEvent("sci_pain8");
+  public static final RegistryObject<SoundEvent> SCI_PAIN9=
+          registerSoundEvent("sci_pain9");
+  public static final RegistryObject<SoundEvent> S_AN1=
+          registerSoundEvent("s_an1");
+  public static final RegistryObject<SoundEvent> S_AN10=
+          registerSoundEvent("s_an10");
+  public static final RegistryObject<SoundEvent> S_AN11=
+          registerSoundEvent("s_an11");
+  public static final RegistryObject<SoundEvent> S_AN12=
+          registerSoundEvent("s_an12");
+  public static final RegistryObject<SoundEvent> S_AN13=
+          registerSoundEvent("s_an13");
+  public static final RegistryObject<SoundEvent> S_AN14=
+          registerSoundEvent("s_an14");
+  public static final RegistryObject<SoundEvent> S_AN15=
+          registerSoundEvent("s_an15");
+  public static final RegistryObject<SoundEvent> S_AN16=
+          registerSoundEvent("s_an16");
+  public static final RegistryObject<SoundEvent> S_AN17=
+          registerSoundEvent("s_an17");
+  public static final RegistryObject<SoundEvent> S_AN18=
+          registerSoundEvent("s_an18");
+  public static final RegistryObject<SoundEvent> S_AN19=
+          registerSoundEvent("s_an19");
+  public static final RegistryObject<SoundEvent> S_AN2=
+          registerSoundEvent("s_an2");
+  public static final RegistryObject<SoundEvent> S_AN20=
+          registerSoundEvent("s_an20");
+  public static final RegistryObject<SoundEvent> S_AN21=
+          registerSoundEvent("s_an21");
+  public static final RegistryObject<SoundEvent> S_AN3=
+          registerSoundEvent("s_an3");
+  public static final RegistryObject<SoundEvent> S_AN4=
+          registerSoundEvent("s_an4");
+  public static final RegistryObject<SoundEvent> S_AN5=
+          registerSoundEvent("s_an5");
+  public static final RegistryObject<SoundEvent> S_AN6=
+          registerSoundEvent("s_an6");
+  public static final RegistryObject<SoundEvent> S_AN7=
+          registerSoundEvent("s_an7");
+  public static final RegistryObject<SoundEvent> S_AN8=
+          registerSoundEvent("s_an8");
+  public static final RegistryObject<SoundEvent> S_AN9=
+          registerSoundEvent("s_an9");
+  public static final RegistryObject<SoundEvent> S_AP1=
+          registerSoundEvent("s_ap1");
+  public static final RegistryObject<SoundEvent> S_AP2=
+          registerSoundEvent("s_ap2");
+  public static final RegistryObject<SoundEvent> S_C1=
+          registerSoundEvent("s_c1");
+  public static final RegistryObject<SoundEvent> S_C10=
+          registerSoundEvent("s_c10");
+  public static final RegistryObject<SoundEvent> S_C11=
+          registerSoundEvent("s_c11");
+  public static final RegistryObject<SoundEvent> S_C12=
+          registerSoundEvent("s_c12");
+  public static final RegistryObject<SoundEvent> S_C13=
+          registerSoundEvent("s_c13");
+  public static final RegistryObject<SoundEvent> S_C14=
+          registerSoundEvent("s_c14");
+  public static final RegistryObject<SoundEvent> S_C2=
+          registerSoundEvent("s_c2");
+  public static final RegistryObject<SoundEvent> S_C3=
+          registerSoundEvent("s_c3");
+  public static final RegistryObject<SoundEvent> S_C4=
+          registerSoundEvent("s_c4");
+  public static final RegistryObject<SoundEvent> S_C5=
+          registerSoundEvent("s_c5");
+  public static final RegistryObject<SoundEvent> S_C6=
+          registerSoundEvent("s_c6");
+  public static final RegistryObject<SoundEvent> S_C7=
+          registerSoundEvent("s_c7");
+  public static final RegistryObject<SoundEvent> S_C8=
+          registerSoundEvent("s_c8");
+  public static final RegistryObject<SoundEvent> S_C9=
+          registerSoundEvent("s_c9");
+  public static final RegistryObject<SoundEvent> S_FOLLOW1=
+          registerSoundEvent("s_follow1");
+  public static final RegistryObject<SoundEvent> S_FOLLOW2=
+          registerSoundEvent("s_follow2");
+  public static final RegistryObject<SoundEvent> S_FOLLOW3=
+          registerSoundEvent("s_follow3");
+  public static final RegistryObject<SoundEvent> S_FOLLOW4=
+          registerSoundEvent("s_follow4");
+  public static final RegistryObject<SoundEvent> S_FOLLOW5=
+          registerSoundEvent("s_follow5");
+  public static final RegistryObject<SoundEvent> S_FOLLOW6=
+          registerSoundEvent("s_follow6");
+  public static final RegistryObject<SoundEvent> S_FOLLOW7=
+          registerSoundEvent("s_follow7");
+  public static final RegistryObject<SoundEvent> S_FOLLOW8=
+          registerSoundEvent("s_follow8");
+  public static final RegistryObject<SoundEvent> S_FOLLOW9=
+          registerSoundEvent("s_follow9");
+  public static final RegistryObject<SoundEvent> S_HEAL1=
+          registerSoundEvent("s_heal1");
+  public static final RegistryObject<SoundEvent> S_HEAL2=
+          registerSoundEvent("s_heal2");
+  public static final RegistryObject<SoundEvent> S_HEAL3=
+          registerSoundEvent("s_heal3");
+  public static final RegistryObject<SoundEvent> S_HEAL4=
+          registerSoundEvent("s_heal4");
+  public static final RegistryObject<SoundEvent> S_HEAL5=
+          registerSoundEvent("s_heal5");
+  public static final RegistryObject<SoundEvent> S_HEAL6=
+          registerSoundEvent("s_heal6");
+  public static final RegistryObject<SoundEvent> S_HEAL7=
+          registerSoundEvent("s_heal7");
+  public static final RegistryObject<SoundEvent> S_HURT1=
+          registerSoundEvent("s_hurt1");
+  public static final RegistryObject<SoundEvent> S_HURT2=
+          registerSoundEvent("s_hurt2");
+  public static final RegistryObject<SoundEvent> S_HURT3=
+          registerSoundEvent("s_hurt3");
+  public static final RegistryObject<SoundEvent> S_HURT4=
+          registerSoundEvent("s_hurt4");
+  public static final RegistryObject<SoundEvent> S_PL_HURT1=
+          registerSoundEvent("s_pl_hurt1");
+  public static final RegistryObject<SoundEvent> S_PL_HURT2=
+          registerSoundEvent("s_pl_hurt2");
+  public static final RegistryObject<SoundEvent> S_PL_HURT3=
+          registerSoundEvent("s_pl_hurt3");
+  public static final RegistryObject<SoundEvent> S_PL_HURT4=
+          registerSoundEvent("s_pl_hurt4");
+  public static final RegistryObject<SoundEvent> S_Q1=
+          registerSoundEvent("s_q1");
+  public static final RegistryObject<SoundEvent> S_Q10=
+          registerSoundEvent("s_q10");
+  public static final RegistryObject<SoundEvent> S_Q11=
+          registerSoundEvent("s_q11");
+  public static final RegistryObject<SoundEvent> S_Q12=
+          registerSoundEvent("s_q12");
+  public static final RegistryObject<SoundEvent> S_Q13=
+          registerSoundEvent("s_q13");
+  public static final RegistryObject<SoundEvent> S_Q14=
+          registerSoundEvent("s_q14");
+  public static final RegistryObject<SoundEvent> S_Q2=
+          registerSoundEvent("s_q2");
+  public static final RegistryObject<SoundEvent> S_Q3=
+          registerSoundEvent("s_q3");
+  public static final RegistryObject<SoundEvent> S_Q4=
+          registerSoundEvent("s_q4");
+  public static final RegistryObject<SoundEvent> S_Q5=
+          registerSoundEvent("s_q5");
+  public static final RegistryObject<SoundEvent> S_Q6=
+          registerSoundEvent("s_q6");
+  public static final RegistryObject<SoundEvent> S_Q7=
+          registerSoundEvent("s_q7");
+  public static final RegistryObject<SoundEvent> S_Q8=
+          registerSoundEvent("s_q8");
+  public static final RegistryObject<SoundEvent> S_Q9=
+          registerSoundEvent("s_q9");
+  public static final RegistryObject<SoundEvent> S_STAY1=
+          registerSoundEvent("s_stay1");
+  public static final RegistryObject<SoundEvent> S_STAY10=
+          registerSoundEvent("s_stay10");
+  public static final RegistryObject<SoundEvent> S_STAY11=
+          registerSoundEvent("s_stay11");
+  public static final RegistryObject<SoundEvent> S_STAY12=
+          registerSoundEvent("s_stay12");
+  public static final RegistryObject<SoundEvent> S_STAY13=
+          registerSoundEvent("s_stay13");
+  public static final RegistryObject<SoundEvent> S_STAY14=
+          registerSoundEvent("s_stay14");
+  public static final RegistryObject<SoundEvent> S_STAY2=
+          registerSoundEvent("s_stay2");
+  public static final RegistryObject<SoundEvent> S_STAY3=
+          registerSoundEvent("s_stay3");
+  public static final RegistryObject<SoundEvent> S_STAY4=
+          registerSoundEvent("s_stay4");
+  public static final RegistryObject<SoundEvent> S_STAY5=
+          registerSoundEvent("s_stay5");
+  public static final RegistryObject<SoundEvent> S_STAY6=
+          registerSoundEvent("s_stay6");
+  public static final RegistryObject<SoundEvent> S_STAY7=
+          registerSoundEvent("s_stay7");
+  public static final RegistryObject<SoundEvent> S_STAY8=
+          registerSoundEvent("s_stay8");
+  public static final RegistryObject<SoundEvent> S_STAY9=
+          registerSoundEvent("s_stay9");
+  public static final RegistryObject<SoundEvent> S_WARN1=
+          registerSoundEvent("s_warn1");
+  public static final RegistryObject<SoundEvent> S_WARN2=
+          registerSoundEvent("s_warn2");
+  public static final RegistryObject<SoundEvent> S_WARN3=
+          registerSoundEvent("s_warn3");
+  public static final RegistryObject<SoundEvent> S_WARN4=
+          registerSoundEvent("s_warn4");
+  public static final RegistryObject<SoundEvent> S_WARN5=
+          registerSoundEvent("s_warn5");
+  public static final RegistryObject<SoundEvent> S_WARN6=
+          registerSoundEvent("s_warn6");
+  public static final RegistryObject<SoundEvent> VANSWER01=
+          registerSoundEvent("vanswer01");
+  public static final RegistryObject<SoundEvent> VANSWER02=
+          registerSoundEvent("vanswer02");
+  public static final RegistryObject<SoundEvent> VANSWER03=
+          registerSoundEvent("vanswer03");
+  public static final RegistryObject<SoundEvent> VANSWER04=
+          registerSoundEvent("vanswer04");
+  public static final RegistryObject<SoundEvent> VANSWER05=
+          registerSoundEvent("vanswer05");
+  public static final RegistryObject<SoundEvent> VANSWER06=
+          registerSoundEvent("vanswer06");
+  public static final RegistryObject<SoundEvent> VANSWER07=
+          registerSoundEvent("vanswer07");
+  public static final RegistryObject<SoundEvent> VANSWER08=
+          registerSoundEvent("vanswer08");
+  public static final RegistryObject<SoundEvent> VANSWER09=
+          registerSoundEvent("vanswer09");
+  public static final RegistryObject<SoundEvent> VANSWER10=
+          registerSoundEvent("vanswer10");
+  public static final RegistryObject<SoundEvent> VANSWER11=
+          registerSoundEvent("vanswer11");
+  public static final RegistryObject<SoundEvent> VANSWER12=
+          registerSoundEvent("vanswer12");
+  public static final RegistryObject<SoundEvent> VANSWER13=
+          registerSoundEvent("vanswer13");
+  public static final RegistryObject<SoundEvent> VANSWER14=
+          registerSoundEvent("vanswer14");
+  public static final RegistryObject<SoundEvent> VANSWER15=
+          registerSoundEvent("vanswer15");
+  public static final RegistryObject<SoundEvent> VANSWER16=
+          registerSoundEvent("vanswer16");
+  public static final RegistryObject<SoundEvent> VANSWER17=
+          registerSoundEvent("vanswer17");
+  public static final RegistryObject<SoundEvent> VANSWER18=
+          registerSoundEvent("vanswer18");
+  public static final RegistryObject<SoundEvent> V_AN1=
+          registerSoundEvent("v_an1");
+  public static final RegistryObject<SoundEvent> V_AN2=
+          registerSoundEvent("v_an2");
+  public static final RegistryObject<SoundEvent> V_AN3=
+          registerSoundEvent("v_an3");
+  public static final RegistryObject<SoundEvent> V_AN4=
+          registerSoundEvent("v_an4");
+  public static final RegistryObject<SoundEvent> V_AN5=
+          registerSoundEvent("v_an5");
+
+  public static final RegistryObject<SoundEvent> SCI_FEAR1=
+          registerSoundEvent("sci_fear1");
+  public static final RegistryObject<SoundEvent> SCI_FEAR2=
+          registerSoundEvent("sci_fear2");
+  public static final RegistryObject<SoundEvent> SCI_FEAR3=
+          registerSoundEvent("sci_fear3");
+  public static final RegistryObject<SoundEvent> SCI_FEAR4=
+          registerSoundEvent("sci_fear4");
+  public static final RegistryObject<SoundEvent> SCI_FEAR5=
+          registerSoundEvent("sci_fear5");
+  public static final RegistryObject<SoundEvent> SCI_FEAR6=
+          registerSoundEvent("sci_fear6");
+  public static final RegistryObject<SoundEvent> SCI_FEAR7=
+          registerSoundEvent("sci_fear7");
+  public static final RegistryObject<SoundEvent> SCI_FEAR8=
+          registerSoundEvent("sci_fear8");
+
+  /*         "sounds.half_life_mod.sci_fear1": "Scientist ",
+          "sounds.half_life_mod.sci_fear2": "Scientist ",
+          "sounds.half_life_mod.sci_fear3": "Scientist ",
+          "sounds.half_life_mod.sci_fear4": "Scientist ",
+          "sounds.half_life_mod.sci_fear5": "Scientist ",
+          "sounds.half_life_mod.sci_fear6": "Scientist ",
+          "sounds.half_life_mod.sci_fear7": "Scientist ",
+          "sounds.half_life_mod.sci_fear8": "Scientist ", */
+
+  public static final RegistryObject<SoundEvent> V_C1=
+          registerSoundEvent("v_c1");
+  public static final RegistryObject<SoundEvent> V_C2=
+          registerSoundEvent("v_c2");
+  public static final RegistryObject<SoundEvent> V_C3=
+          registerSoundEvent("v_c3");
+  public static final RegistryObject<SoundEvent> V_C4=
+          registerSoundEvent("v_c4");
+  public static final RegistryObject<SoundEvent> V_C5=
+          registerSoundEvent("v_c5");
+  public static final RegistryObject<SoundEvent> V_C6=
+          registerSoundEvent("v_c6");
+  public static final RegistryObject<SoundEvent> V_C7=
+          registerSoundEvent("v_c7");
+  public static final RegistryObject<SoundEvent> V_KILL1=
+          registerSoundEvent("v_kill1");
+  public static final RegistryObject<SoundEvent> V_KILL2=
+          registerSoundEvent("v_kill2");
+
+    /*      "sounds.half_life_mod.ba_ap1": " ",
+          "sounds.half_life_mod.ba_ap2": " ",
+          "sounds.half_life_mod.ba_ap3": " ",
+          "sounds.half_life_mod.ba_ap4": " ",
+          "sounds.half_life_mod.ba_die1": " ",
+          "sounds.half_life_mod.ba_die2": " ",
+          "sounds.half_life_mod.ba_die3": " ",
+          "sounds.half_life_mod.ba_follow1": " ",
+          "sounds.half_life_mod.ba_follow2": " ",
+          "sounds.half_life_mod.ba_follow3": " ",
+          "sounds.half_life_mod.ba_follow4": " ",
+          "sounds.half_life_mod.ba_follow5": " ",
+          "sounds.half_life_mod.ba_follow6": " ",
+          "sounds.half_life_mod.ba_follow7": " ",
+          "sounds.half_life_mod.ba_idle_a1": " ",
+          "sounds.half_life_mod.ba_idle_a2": " ",
+          "sounds.half_life_mod.ba_idle_a3": " ",
+          "sounds.half_life_mod.ba_idle_a4": " ",
+          "sounds.half_life_mod.ba_idle_a5": " ",
+          "sounds.half_life_mod.ba_idle_a6": " ",
+          "sounds.half_life_mod.ba_idle_a7": " ",
+          "sounds.half_life_mod.ba_idle_c1": " ",
+          "sounds.half_life_mod.ba_idle_c2": " ",
+          "sounds.half_life_mod.ba_idle_c3": " ",
+          "sounds.half_life_mod.ba_idle_c4": " ",
+          "sounds.half_life_mod.ba_idle_c5": " ",
+          "sounds.half_life_mod.ba_idle_c6": " ",
+          "sounds.half_life_mod.ba_idle_c7": " ",
+          "sounds.half_life_mod.ba_idle_c8": " ",
+          "sounds.half_life_mod.ba_idle_hurt1": " ",
+          "sounds.half_life_mod.ba_idle_hurt2": " ",
+          "sounds.half_life_mod.ba_idle_pl_hurt1": " ",
+          "sounds.half_life_mod.ba_idle_pl_hurt2": " ",
+          "sounds.half_life_mod.ba_idle_q1": " ",
+          "sounds.half_life_mod.ba_idle_q2": " ",
+          "sounds.half_life_mod.ba_idle_q3": " ",
+          "sounds.half_life_mod.ba_idle_q4": " ",
+          "sounds.half_life_mod.ba_idle_q5": " ",
+          "sounds.half_life_mod.ba_idle_q6": " ",
+          "sounds.half_life_mod.ba_idle_q7": " ",
+          "sounds.half_life_mod.ba_idle_q8": " ",
+          "sounds.half_life_mod.ba_kill1": " ",
+          "sounds.half_life_mod.ba_kill2": " ",
+          "sounds.half_life_mod.ba_kill3": " ",
+          "sounds.half_life_mod.ba_kill4": " ",
+          "sounds.half_life_mod.ba_kill5": " ",
+          "sounds.half_life_mod.ba_kill6": " ",
+          "sounds.half_life_mod.ba_stay1": " ",
+          "sounds.half_life_mod.ba_stay2": " ",
+          "sounds.half_life_mod.ba_stay3": " ",
+          "sounds.half_life_mod.ba_stay4": " ",
+          "sounds.half_life_mod.ba_stay5": " ",
+          "sounds.half_life_mod.ba_stay6": " ",
+          "sounds.half_life_mod.ba_stay7": " ",
+          "sounds.half_life_mod.ba_warn1": " ",
+          "sounds.half_life_mod.ba_warn2": " ",
+          "sounds.half_life_mod.ba_warn3": " ",
+          "sounds.half_life_mod.ba_warn4": " ",
+          "sounds.half_life_mod.ba_warn6": " ",
+          "sounds.half_life_mod.scientist_headcrabonhead": " ",
+          "sounds.half_life_mod.sci_die1": " ",
+          "sounds.half_life_mod.sci_die2": " ",
+          "sounds.half_life_mod.sci_die3": " ",
+          "sounds.half_life_mod.sci_die4": " ",
+          "sounds.half_life_mod.sci_die5": " ",
+          "sounds.half_life_mod.sci_pain1": " ",
+          "sounds.half_life_mod.sci_pain10": " ",
+          "sounds.half_life_mod.sci_pain2": " ",
+          "sounds.half_life_mod.sci_pain3": " ",
+          "sounds.half_life_mod.sci_pain4": " ",
+          "sounds.half_life_mod.sci_pain5": " ",
+          "sounds.half_life_mod.sci_pain6": " ",
+          "sounds.half_life_mod.sci_pain7": " ",
+          "sounds.half_life_mod.sci_pain8": " ",
+          "sounds.half_life_mod.sci_pain9": " ",
+          "sounds.half_life_mod.s_an1": " ",
+          "sounds.half_life_mod.s_an10": " ",
+          "sounds.half_life_mod.s_an11": " ",
+          "sounds.half_life_mod.s_an12": " ",
+          "sounds.half_life_mod.s_an13": " ",
+          "sounds.half_life_mod.s_an14": " ",
+          "sounds.half_life_mod.s_an15": " ",
+          "sounds.half_life_mod.s_an16": " ",
+          "sounds.half_life_mod.s_an17": " ",
+          "sounds.half_life_mod.s_an18": " ",
+          "sounds.half_life_mod.s_an19": " ",
+          "sounds.half_life_mod.s_an2": " ",
+          "sounds.half_life_mod.s_an20": " ",
+          "sounds.half_life_mod.s_an21": " ",
+          "sounds.half_life_mod.s_an3": " ",
+          "sounds.half_life_mod.s_an4": " ",
+          "sounds.half_life_mod.s_an5": " ",
+          "sounds.half_life_mod.s_an6": " ",
+          "sounds.half_life_mod.s_an7": " ",
+          "sounds.half_life_mod.s_an8": " ",
+          "sounds.half_life_mod.s_an9": " ",
+          "sounds.half_life_mod.s_ap1": " ",
+          "sounds.half_life_mod.s_ap2": " ",
+          "sounds.half_life_mod.s_c1": " ",
+          "sounds.half_life_mod.s_c10": " ",
+          "sounds.half_life_mod.s_c11": " ",
+          "sounds.half_life_mod.s_c12": " ",
+          "sounds.half_life_mod.s_c13": " ",
+          "sounds.half_life_mod.s_c14": " ",
+          "sounds.half_life_mod.s_c2": " ",
+          "sounds.half_life_mod.s_c3": " ",
+          "sounds.half_life_mod.s_c4": " ",
+          "sounds.half_life_mod.s_c5": " ",
+          "sounds.half_life_mod.s_c6": " ",
+          "sounds.half_life_mod.s_c7": " ",
+          "sounds.half_life_mod.s_c8": " ",
+          "sounds.half_life_mod.s_c9": " ",
+          "sounds.half_life_mod.s_follow1": " ",
+          "sounds.half_life_mod.s_follow2": " ",
+          "sounds.half_life_mod.s_follow3": " ",
+          "sounds.half_life_mod.s_follow4": " ",
+          "sounds.half_life_mod.s_follow5": " ",
+          "sounds.half_life_mod.s_follow6": " ",
+          "sounds.half_life_mod.s_follow7": " ",
+          "sounds.half_life_mod.s_follow8": " ",
+          "sounds.half_life_mod.s_follow9": " ",
+          "sounds.half_life_mod.s_heal1": " ",
+          "sounds.half_life_mod.s_heal2": " ",
+          "sounds.half_life_mod.s_heal3": " ",
+          "sounds.half_life_mod.s_heal4": " ",
+          "sounds.half_life_mod.s_heal5": " ",
+          "sounds.half_life_mod.s_heal6": " ",
+          "sounds.half_life_mod.s_heal7": " ",
+          "sounds.half_life_mod.s_hurt1": " ",
+          "sounds.half_life_mod.s_hurt2": " ",
+          "sounds.half_life_mod.s_hurt3": " ",
+          "sounds.half_life_mod.s_hurt4": " ",
+          "sounds.half_life_mod.s_pl_hurt1": " ",
+          "sounds.half_life_mod.s_pl_hurt2": " ",
+          "sounds.half_life_mod.s_pl_hurt3": " ",
+          "sounds.half_life_mod.s_pl_hurt4": " ",
+          "sounds.half_life_mod.s_q1": " ",
+          "sounds.half_life_mod.s_q10": " ",
+          "sounds.half_life_mod.s_q11": " ",
+          "sounds.half_life_mod.s_q12": " ",
+          "sounds.half_life_mod.s_q13": " ",
+          "sounds.half_life_mod.s_q14": " ",
+          "sounds.half_life_mod.s_q2": " ",
+          "sounds.half_life_mod.s_q3": " ",
+          "sounds.half_life_mod.s_q4": " ",
+          "sounds.half_life_mod.s_q5": " ",
+          "sounds.half_life_mod.s_q6": " ",
+          "sounds.half_life_mod.s_q7": " ",
+          "sounds.half_life_mod.s_q8": " ",
+          "sounds.half_life_mod.s_q9": " ",
+          "sounds.half_life_mod.s_stay1": " ",
+          "sounds.half_life_mod.s_stay10": " ",
+          "sounds.half_life_mod.s_stay11": " ",
+          "sounds.half_life_mod.s_stay12": " ",
+          "sounds.half_life_mod.s_stay13": " ",
+          "sounds.half_life_mod.s_stay14": " ",
+          "sounds.half_life_mod.s_stay2": " ",
+          "sounds.half_life_mod.s_stay3": " ",
+          "sounds.half_life_mod.s_stay4": " ",
+          "sounds.half_life_mod.s_stay5": " ",
+          "sounds.half_life_mod.s_stay6": " ",
+          "sounds.half_life_mod.s_stay7": " ",
+          "sounds.half_life_mod.s_stay8": " ",
+          "sounds.half_life_mod.s_stay9": " ",
+          "sounds.half_life_mod.s_warn1": " ",
+          "sounds.half_life_mod.s_warn2": " ",
+          "sounds.half_life_mod.s_warn3": " ",
+          "sounds.half_life_mod.s_warn4": " ",
+          "sounds.half_life_mod.s_warn5": " ",
+          "sounds.half_life_mod.s_warn6": " ",
+          "sounds.half_life_mod.vanswer01": " ",
+          "sounds.half_life_mod.vanswer02": " ",
+          "sounds.half_life_mod.vanswer03": " ",
+          "sounds.half_life_mod.vanswer04": " ",
+          "sounds.half_life_mod.vanswer05": " ",
+          "sounds.half_life_mod.vanswer06": " ",
+          "sounds.half_life_mod.vanswer07": " ",
+          "sounds.half_life_mod.vanswer08": " ",
+          "sounds.half_life_mod.vanswer09": " ",
+          "sounds.half_life_mod.vanswer10": " ",
+          "sounds.half_life_mod.vanswer11": " ",
+          "sounds.half_life_mod.vanswer12": " ",
+          "sounds.half_life_mod.vanswer13": " ",
+          "sounds.half_life_mod.vanswer14": " ",
+          "sounds.half_life_mod.vanswer15": " ",
+          "sounds.half_life_mod.vanswer16": " ",
+          "sounds.half_life_mod.vanswer17": " ",
+          "sounds.half_life_mod.vanswer18": " ",
+          "sounds.half_life_mod.v_an1": " ",
+          "sounds.half_life_mod.v_an2": " ",
+          "sounds.half_life_mod.v_an3": " ",
+          "sounds.half_life_mod.v_an4": " ",
+          "sounds.half_life_mod.v_an5": " ",
+          "sounds.half_life_mod.v_c1": " ",
+          "sounds.half_life_mod.v_c2": " ",
+          "sounds.half_life_mod.v_c3": " ",
+          "sounds.half_life_mod.v_c4": " ",
+          "sounds.half_life_mod.v_c5": " ",
+          "sounds.half_life_mod.v_c6": " ",
+          "sounds.half_life_mod.v_c7": " ",
+          "sounds.half_life_mod.v_kill1": " ",
+          "sounds.half_life_mod.v_kill2": " ", */
 
 
 
 
 
-
-    private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
+  private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
         ResourceLocation id = new ResourceLocation(HalfLifeMod.MOD_ID, name);
         return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(id));
     }

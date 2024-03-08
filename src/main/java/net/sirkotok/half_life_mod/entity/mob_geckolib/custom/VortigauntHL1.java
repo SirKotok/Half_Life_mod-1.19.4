@@ -42,6 +42,7 @@ import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.CommonSounds;
 import net.sirkotok.half_life_mod.util.HLTags;
 import net.sirkotok.half_life_mod.util.HLperUtil;
+import net.sirkotok.half_life_mod.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -296,12 +297,7 @@ public class VortigauntHL1 extends HalfLifeMonster implements RangedAttackMob, G
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<VortigauntHL1>()
                         .setPredicate((target, entity) ->
-                            target instanceof Player ||
-                            target instanceof IronGolem ||
-                            target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) ||
-                            target instanceof AbstractVillager ||
-                            target instanceof HalfLifeNeutral
-                            ));
+                                InfightingUtil.XenForcesSpecific(target) || InfightingUtil.commonenemy(target)));
     }
 
 
@@ -353,15 +349,15 @@ public class VortigauntHL1 extends HalfLifeMonster implements RangedAttackMob, G
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>(),
                 new Retaliate<>(),
-                new SetWalkTargetToRandomSpotAroundAttackTarget<>().speedMod(1.1f).startCondition(entity -> !this.isScared() && this.distanceTo(HLperUtil.TargetOrThis(this))  > 5),
+                new SetWalkTargetToRandomSpotAroundAttackTarget<>().speedMod(1.1f).startCondition(entity -> !this.isScared() && this.distanceTo(HLperUtil.TargetOrThis(this))  > 10),
                 new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, true)).startCondition(entity -> !this.isangry()),
                 new OneRandomBehaviour<>(
-                        new SetRandomWalkTarget<>().setRadius(8, 4).cooldownFor(entity -> 100),
-                        new SetWalkTargetToRandomSpotAroundAttackTarget<>().speedMod(1.1f),
-                        new SetWalkTargetToRandomSpotAroundAttackTarget<>().speedMod(1.2f),
-                        new SetWalkTargetToRandomSpotAroundAttackTarget<>().radius(5, 4)
+                        new SetRandomWalkTarget<>().setRadius(10, 4).cooldownFor(entity -> 100),
+                        new SetWalkTargetToRandomSpotAroundAttackTarget<>().radius(10, 4).speedMod(1.1f),
+                        new SetWalkTargetToRandomSpotAroundAttackTarget<>().radius(10, 4).speedMod(1.2f),
+                        new SetWalkTargetToRandomSpotAroundAttackTarget<>().radius(10, 4)
                          ).startCondition(entity -> !this.isScared()),
-                new FleeTarget<>().fleeDistance(10).speedModifier(1f).startCondition(entity -> this.isScared()),
+                new FleeTarget<>().fleeDistance(7).startCondition(entity -> this.isScared()),
                 new SetRandomWalkTarget<>().setRadius(8, 4).startCondition(entity -> this.isScared()),
                 new FirstApplicableBehaviour<>(
                 new TripleMeleeAttack<>(15, 7, 11, 0, 1, 1, null, 0, CommonSounds.getClawHitSound(), null, this.getMissSound())
