@@ -274,6 +274,11 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
         super.aiStep();
         tickMouth(this.mouth);
 
+        if (this.tickCount % 4 == 0 && this.getwateremountbelow() > 0 && !this.isInWaterOrBubble()) {
+            this.setDeltaMovement(this.getDeltaMovement().add(0, -0.2f, 0));
+            if (this.random.nextFloat() < 0.1f) BrainUtils.clearMemory(this, MemoryModuleType.WALK_TARGET);
+        }
+
         if (this.tickCount % 30 == 0) {
             this.resettitlRl();
         }
@@ -515,11 +520,17 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
                         new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>(),
                         new SetBlockToWalkTargetNoInterest<>(),
-                        new PushToWalkTarget<>()
-                                .setXZMoveSpeedMod(entity -> 0.2f)
-                                .startCondition(entity -> this.isInWaterOrBubble())
-                                .cooldownFor(entity -> entity.getRandom().nextInt(1, 2))
+                        new FirstApplicableBehaviour<>(
+                                new PushToWalkTarget<>(true)
+                                        .setXZMoveSpeedMod(entity -> 0.3f)
+                                        .startCondition(entity -> (this.isInWaterOrBubble() || !this.isOnGround()) && this.getwateremountbelow() < 3)
+                                        .cooldownFor(entity -> 1),
+                                new PushToWalkTarget<>()
+                                        .setXZMoveSpeedMod(entity -> 0.2f)
+                                        .startCondition(entity -> this.isInWaterOrBubble())
+                                        .cooldownFor(entity -> entity.getRandom().nextInt(1, 2)))
                 )
+
         );
 
     }
@@ -553,14 +564,18 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
                 new SetWalkTargetToAttackTarget<>().whenStarting(entity -> this.setAttackbehaviour(1)).startCondition(entity -> this.distanceTo(HLperUtil.TargetOrThis(this)) > 24),
                 new SetWalkTargetToAttackTarget<>().whenStarting(entity -> this.setAttackbehaviour(1)).startCondition(entity -> this.getLastHurtByMob() != null).cooldownFor(entity -> 600),
                 new FirstApplicableBehaviour<>(
+                        new PushToWalkTarget<>(true)
+                                .setXZMoveSpeedMod(entity -> 0.3f)
+                                .startCondition(entity -> (this.isInWaterOrBubble() || !this.isOnGround()) && this.attackbehaviour == 0 && this.getwateremountbelow() < 3)
+                                .cooldownFor(entity -> 1),
                         new PushToWalkTarget<>()
                                 .setXZMoveSpeedMod(entity -> 0.3f)
-                                .startCondition(entity -> (this.isInWaterOrBubble() || !this.isOnGround()) && this.attackbehaviour == 0)
-                                .cooldownFor(entity -> entity.getRandom().nextInt(1, 2)),
+                                .startCondition(entity -> (this.isInWaterOrBubble() || !this.isOnGround()) && this.attackbehaviour == 0 )
+                                .cooldownFor(entity -> 1),
                         new PushToWalkTargetDontStop<>()
                                 .setXZMoveSpeedMod(entity -> 0.33f)
                                 .startCondition(entity -> (this.isInWaterOrBubble() || !this.isOnGround()) && this.attackbehaviour != 0)
-                                .cooldownFor(entity -> entity.getRandom().nextInt(1, 2))
+                                .cooldownFor(entity -> 1)
                 ),
                 new OneRandomBehaviour<>(
                         new ConfigurableAnimatableMeleeAttack<Shark>(9, 0.3f, 1.4f, 1.7f, null, 0, this.getBiteSound(), null) //this.getBiteSound(), this.getAttackGrowlSound())

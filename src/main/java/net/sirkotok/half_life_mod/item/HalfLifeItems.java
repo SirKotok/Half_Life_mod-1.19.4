@@ -168,6 +168,10 @@ public class HalfLifeItems {
          () -> new ForgeSpawnEggItem(HalfLifeEntities.SHARK, 0x71a549, 0xb22c2a   ,
                  new Item.Properties()));
 
+    public static final RegistryObject<Item> ARCHER_SPAWN_EGG = ITEMS.register("archerfish_spawn_egg",
+            () -> new ForgeSpawnEggItem(HalfLifeEntities.ARCHER, 0xe91e1e, 0x01a7ff   ,
+                    new Item.Properties()));
+
     public static final RegistryObject<Item> MANHACK_SPAWN_EGG = ITEMS.register("manhack_spawn_egg",
             () -> new ForgeSpawnEggItem(HalfLifeEntities.MANHACK, 0x6d6161, 0xf20b0b   ,
                     new Item.Properties()));

@@ -32,7 +32,7 @@ public class Flechette_renderer extends GeoEntityRenderer<Flechette> {
     @Override
     public void preRender(PoseStack poseStack, Flechette animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue,
                           float alpha) {
-        this.entityRenderTranslations = new Matrix4f(poseStack.last().pose());
+ //       this.entityRenderTranslations = new Matrix4f(poseStack.last().pose());
         this.scaleModelForRender(0.6f, 0.6f, poseStack, animatable, model, isReRender, partialTick, packedLight, packedOverlay);
     }
 

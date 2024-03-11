@@ -13,9 +13,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import net.sirkotok.half_life_mod.damagesource.ModDamageTypes;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.base.FireballNoTrail;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.VortigauntHL1;
 import net.sirkotok.half_life_mod.item.HalfLifeItems;
 import net.sirkotok.half_life_mod.particle.HalfLifeParticles;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
@@ -86,16 +87,13 @@ public class Bullet extends FireballNoTrail {
         if (!this.level.isClientSide) {
             Entity entity = pResult.getEntity();
             Entity entity1 = this.getOwner();
-            if (entity1 instanceof LivingEntity) {
-                LivingEntity shooter = (LivingEntity) entity1;
-                entity.hurt(this.damageSources().mobProjectile(this, shooter), this.getdamage());
+            if (entity1 instanceof LivingEntity shooter) {
+                Vec3 amogus = entity.getDeltaMovement();
+                entity.hurt(ModDamageTypes.bulletdamage(level.registryAccess(), this, shooter), this.getdamage());
+                entity.setDeltaMovement(amogus);
             }
         }
     }
-    // entity.hurt( new DamageSource(getHolderOrThro(ModDamageTypes.HL_BULLET), getdamage());
- // new DamageSource(this.damageTypes.getHolderOrThrow(pDamageTypeKey));
- // ModDamageSources.shotbullet(this, shooter)
-// this.level.damageSources().source(ModDamageTypes.HL_BULLET)
 
     public void makeParticle(int direction, BlockHitResult blockhit){
         switch(direction){

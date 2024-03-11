@@ -126,34 +126,8 @@ public class RushPushToTarget<E extends Mob & RushingMob> extends DelayedBehavio
     //TODO: fix rotaiton
 
    protected void setcorrectrotation(E entity, Vec3 vec3){
-       double d0 = vec3.x;
-       double d1 = vec3.z;
-       float f9 = (float)(Mth.atan2(d1, d0) * (double)(180F / (float)Math.PI)) - 90.0F;
-       entity.setYRot(this.rotlerp(entity.getYRot(), f9, 90.0F));
-       entity.yBodyRot = f9;
+      HLperUtil.rotateToOppositeVec3(entity, vec3);
    }
-
-    protected float rotlerp(float pSourceAngle, float pTargetAngle, float pMaximumChange) {
-        float f = Mth.wrapDegrees(pTargetAngle - pSourceAngle);
-        if (f > pMaximumChange) {
-            f = pMaximumChange;
-        }
-
-        if (f < -pMaximumChange) {
-            f = -pMaximumChange;
-        }
-
-        float f1 = pSourceAngle + f;
-        if (f1 < 0.0F) {
-            f1 += 360.0F;
-        } else if (f1 > 360.0F) {
-            f1 -= 360.0F;
-        }
-
-        return f1;
-    }
-
-
 
 
 }

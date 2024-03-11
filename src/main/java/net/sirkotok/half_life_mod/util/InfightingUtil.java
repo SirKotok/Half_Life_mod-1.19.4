@@ -37,7 +37,12 @@ public class InfightingUtil {
     }
 
     public static boolean nonfactionSpecific(LivingEntity target) {
-        return commonenemy(target) || (iscombine(target) && HalfLifeCommonConfigs.INFIGHTING_COMBINE_VS_NORMAL.get());
+        boolean combine = (iscombine(target) && HalfLifeCommonConfigs.INFIGHTING_COMBINE_VS_NORMAL.get());
+        boolean racex = (isracex(target) && HalfLifeCommonConfigs.INFIGHTING_RACEX_NORMAL.get());
+        boolean antlion = (isantlion(target) && HalfLifeCommonConfigs.INFIGHTING_ANTLION_NORMAL.get());
+        boolean headcrab = (isfactionheadcrab(target) && HalfLifeCommonConfigs.INFIGHTING_HEADCRAB_NORMAL.get());
+        boolean xen = (isxenforces(target) && HalfLifeCommonConfigs.INFIGHTING_XEN_NORMAL.get());
+        return commonenemy(target) || combine || racex ||  antlion || headcrab || xen;
     }
 
     public static boolean iscombine(LivingEntity target) {

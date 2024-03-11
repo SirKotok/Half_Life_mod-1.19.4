@@ -37,6 +37,7 @@ public class ModEventBusEvents {
         event.put(HalfLifeEntities.HUNTER.get(), Hunter.setAttributes());
         event.put(HalfLifeEntities.LEECH.get(), Leech.setAttributes());
         event.put(HalfLifeEntities.SHARK.get(), Shark.setAttributes());
+        event.put(HalfLifeEntities.ARCHER.get(), Archer.setAttributes());
         event.put(HalfLifeEntities.BARNACLE.get(), Barnacle.setAttributes());
         event.put(HalfLifeEntities.SNARK.get(), Snark.setAttributes());
         event.put(HalfLifeEntities.SHOCKWAVEEFFECT.get(), ShockWaveEffect.setAttributes());

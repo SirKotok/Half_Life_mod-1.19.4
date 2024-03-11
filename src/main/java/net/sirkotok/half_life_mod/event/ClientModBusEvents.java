@@ -110,6 +110,7 @@ public class ClientModBusEvents {
         EntityRenderers.register(HalfLifeEntities.HUNTER.get(), Hunter_renderer::new);
         EntityRenderers.register(HalfLifeEntities.LEECH.get(), Leechrenderer::new);
         EntityRenderers.register(HalfLifeEntities.SHARK.get(), SharkRenderer::new);
+        EntityRenderers.register(HalfLifeEntities.ARCHER.get(), Archerrenderer::new);
         EntityRenderers.register(HalfLifeEntities.ACID_BALL.get(), ThrownItemRenderer::new);
         EntityRenderers.register(HalfLifeEntities.VOLTIGORE_SHOCK.get(), Voltigore_projectile_renderer::new);
         EntityRenderers.register(HalfLifeEntities.PITDRONE_SPIKE.get(), Pitdrone_spike_renderer::new);

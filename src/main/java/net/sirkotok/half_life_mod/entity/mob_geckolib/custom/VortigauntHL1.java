@@ -79,7 +79,7 @@ public class VortigauntHL1 extends HalfLifeMonster implements RangedAttackMob, G
 
     @Override
     protected float getSoundVolume() {
-        return 0.6f;
+        return 0.9f;
     }
 
 

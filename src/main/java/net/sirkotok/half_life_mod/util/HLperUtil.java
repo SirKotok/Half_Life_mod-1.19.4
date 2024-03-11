@@ -35,12 +35,25 @@ public final class HLperUtil {
     }
 
 
-    public static void rotateTTT(LivingEntity currentone, LivingEntity to) {
+    public static void rotateTTT(Entity currentone, LivingEntity to) {
         Vec3 vec31 =  to.position();
         Vec3 vec3 = currentone.position();
         Vec3 between = vec3.subtract(vec31);
+        rotateToVec3(currentone, between);
         currentone.setYRot((float) HLperUtil.yanglefromvec3(between));
         currentone.setXRot((float) HLperUtil.yanglefromvec3(between));
+    }
+
+
+    public static void rotateToVec3(Entity entity, Vec3 vec3) {
+        entity.setYRot((float) HLperUtil.yanglefromvec3(vec3));
+        entity.setXRot((float) HLperUtil.yanglefromvec3(vec3));
+    }
+
+    public static void rotateToOppositeVec3(Entity entity, Vec3 vec31) {
+        Vec3 vec3 = vec31.scale(-1);
+        entity.setYRot((float) HLperUtil.yanglefromvec3(vec3));
+        entity.setXRot((float) HLperUtil.yanglefromvec3(vec3));
     }
 
     public static void rotateToTarget(LivingEntity currentone) {

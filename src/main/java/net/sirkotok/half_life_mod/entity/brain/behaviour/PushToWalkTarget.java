@@ -20,9 +20,15 @@ public class PushToWalkTarget<E extends PathfinderMob> extends DelayedBehaviour<
     private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_PRESENT));
     protected Function<E, Float> SpeedXZModProvider = entity -> 1f;
     protected Function<E, Float> SpeedYModProvider = entity -> 1f;
+    public boolean down;
     public PushToWalkTarget() {
+        this(false);
+    }
+
+    public PushToWalkTarget(boolean k) {
         super(0);
         cooldownFor(entity -> entity.getRandom().nextInt(1, 20));
+        this.down = k;
     }
 
 
@@ -79,7 +85,8 @@ public class PushToWalkTarget<E extends PathfinderMob> extends DelayedBehaviour<
         if (BrainUtils.getMemory(entity, MemoryModuleType.WALK_TARGET) != null) {
             Vec3 targetpos = BrainUtils.getMemory(entity, MemoryModuleType.WALK_TARGET).getTarget().currentPosition();
             Vec3 pos = new Vec3(entity.getX(), entity.getY(), entity.getZ());
-           float f = BrainUtils.getTargetOfEntity(entity) != null ? BrainUtils.getTargetOfEntity(entity).getEyeHeight() : RandomSource.create().nextFloat()*2;
+            float f = BrainUtils.getTargetOfEntity(entity) != null ? BrainUtils.getTargetOfEntity(entity).getEyeHeight() : RandomSource.create().nextFloat()*2;
+            if (this.down) f = 0;
             Vec3 direction = new Vec3(targetpos.x() - pos.x(), targetpos.y() - pos.y() + f, targetpos.z() - pos.z());
             float f1 = this.getXZSpeedMod(entity);
             float f2 = this.getYSpeedMod(entity);

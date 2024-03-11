@@ -133,7 +133,7 @@ public class HalfLifeMod
             event.accept(HalfLifeItems.COCKROACH_SPAWN_EGG);
             event.accept(HalfLifeItems.LEECH_SPAWN_EGG);
             event.accept(HalfLifeItems.SHARK_SPAWN_EGG);
-
+            event.accept(HalfLifeItems.ARCHER_SPAWN_EGG);
 
             event.accept(HalfLifeItems.ANTLION_SPAWN_EGG);
             event.accept(HalfLifeItems.ANTLIONWORKER_SPAWN_EGG);

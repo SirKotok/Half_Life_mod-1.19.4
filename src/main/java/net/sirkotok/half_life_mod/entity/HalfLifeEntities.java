@@ -131,7 +131,7 @@ public class HalfLifeEntities {
     public static final RegistryObject<EntityType<AntlionWorker>> ANTLIONWORKER =
             ENTITY_TYPES.register("antlionworker",
                     () -> EntityType.Builder.of(AntlionWorker::new, MobCategory.MONSTER)
-                            .sized(0.7f, 1f)
+                            .sized(1.1f, 1f)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "antlionworker").toString()));
     public static final RegistryObject<EntityType<Barney>> BARNEY =
             ENTITY_TYPES.register("barney",
@@ -209,6 +209,13 @@ public class HalfLifeEntities {
                     () -> EntityType.Builder.of(Shark::new, MobCategory.MONSTER)
                             .sized(2F, 1.5F)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "shark").toString()));
+
+    public static final RegistryObject<EntityType<Archer>> ARCHER =
+            ENTITY_TYPES.register("archerfish",
+                    () -> EntityType.Builder.of(Archer::new, MobCategory.MONSTER)
+                            .sized(1F, 1F)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "archerfish").toString()));
+
 
     public static final RegistryObject<EntityType<Manhack>> MANHACK =
             ENTITY_TYPES.register("manhack",
