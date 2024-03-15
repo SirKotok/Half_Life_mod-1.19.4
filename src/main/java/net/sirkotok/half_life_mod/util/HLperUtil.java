@@ -34,6 +34,10 @@ public final class HLperUtil {
       return max;
     }
 
+    public static int RandomIntWithNegative(int positivebarrier) {
+        return RandomSource.create().nextInt(positivebarrier)*(RandomSource.create().nextFloat() < 0.5 ? 1 : -1);
+    }
+
 
     public static void rotateTTT(Entity currentone, LivingEntity to) {
         Vec3 vec31 =  to.position();

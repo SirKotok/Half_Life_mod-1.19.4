@@ -10,6 +10,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.sirkotok.half_life_mod.HalfLifeMod;
+import net.sirkotok.half_life_mod.entity.fallingblock.GravityGunFallingBlockEntity;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.ShockWaveEffect;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.SitThenBlowUpEffect;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.VoltigoreProjectileAftereffect;
@@ -24,6 +25,16 @@ import net.sirkotok.half_life_mod.entity.projectile.TeleportingBullet;
 public class HalfLifeEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
             DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, HalfLifeMod.MOD_ID);
+
+
+
+    public static final RegistryObject<EntityType<GravityGunFallingBlockEntity>> GG_BLOCK =
+            ENTITY_TYPES.register("gravitygun_block",
+                    () -> EntityType.Builder.<GravityGunFallingBlockEntity>of(GravityGunFallingBlockEntity::new, MobCategory.MISC)
+                    .sized(0.98F, 0.98F)
+                    .clientTrackingRange(30)
+                    .updateInterval(1)
+                    .build(new ResourceLocation(HalfLifeMod.MOD_ID, "gravitygun_block").toString()));
 
 
     public static final RegistryObject<EntityType<Houndeye>> HOUNDEYE =
@@ -59,7 +70,8 @@ public class HalfLifeEntities {
 
     public static final RegistryObject<EntityType<Barnacle>> BARNACLE =
             ENTITY_TYPES.register("barnacle",
-                    () -> EntityType.Builder.of((EntityType<Barnacle> pEntityType, Level pLevel) -> new Barnacle(pEntityType, pLevel), MobCategory.MONSTER)
+                    () -> EntityType.Builder.of((EntityType<Barnacle> pEntityType, Level pLevel) ->
+                            new Barnacle(pEntityType, pLevel), MobCategory.MONSTER)
                             .sized(1f, 1f)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "barnacle").toString()));
 

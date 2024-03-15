@@ -17,6 +17,7 @@ import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.block.blockentity.HalfLifeBlockEntities;
 import net.sirkotok.half_life_mod.block.blockentity.client.VoltigoreEggRenderer;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
+import net.sirkotok.half_life_mod.entity.fallingblock.GravityGunBlockRenderer;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.Shockwaverenderer;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.SitRenderer;
 import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.Voltigore_projectile_e_renderer;
@@ -67,6 +68,7 @@ public class ClientModBusEvents {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event)
     {
+        EntityRenderers.register(HalfLifeEntities.GG_BLOCK.get(), GravityGunBlockRenderer::new);
         EntityRenderers.register(HalfLifeEntities.VOLTIGOREPROJECTEFFECT.get(), Voltigore_projectile_e_renderer::new);
         EntityRenderers.register(HalfLifeEntities.SHOCKWAVEEFFECT.get(), Shockwaverenderer::new);
         EntityRenderers.register(HalfLifeEntities.VORTSHOCKWAVEEFFECT.get(), VortShockwaverenderer::new);

@@ -162,13 +162,15 @@ public class HalfLifeMod
             event.accept(HalfLifeItems.DISPLACER);
             event.accept(HalfLifeItems.DISPLACER_NETHER);
             event.accept(HalfLifeItems.DISPLACER_END);
+            // gravity gun
+            event.accept(HalfLifeItems.GRAVITYGUN);
          //   items that throw entities
             event.accept(HalfLifeItems.CHUMTOAD_THROWER);
             event.accept(HalfLifeItems.SNARK_THROWER);
             event.accept(HalfLifeItems.PENGUIN_THROWER);
-
+            //has something to do with entities
             event.accept(HalfLifeItems.BUGBAIT);
-
+            // armor
             event.accept(HalfLifeItems.SECURITY_GUARD_HELMET);
             event.accept(HalfLifeItems.SECURITY_GUARD_VEST);
 
