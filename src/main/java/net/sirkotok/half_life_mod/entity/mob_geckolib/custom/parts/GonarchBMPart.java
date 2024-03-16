@@ -8,8 +8,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.Pose;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.GonarchBM;
-import net.sirkotok.half_life_mod.util.CommonSounds;
-import net.sirkotok.half_life_mod.util.HLTags;
+import net.sirkotok.half_life_mod.misc.util.CommonSounds;
+import net.sirkotok.half_life_mod.misc.util.HLTags;
 
 public class GonarchBMPart extends net.minecraftforge.entity.PartEntity<GonarchBM> {
     public final GonarchBM parentMob;

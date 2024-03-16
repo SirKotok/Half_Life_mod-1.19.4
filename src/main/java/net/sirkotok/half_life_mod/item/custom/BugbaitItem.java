@@ -1,6 +1,5 @@
 package net.sirkotok.half_life_mod.item.custom;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
@@ -12,14 +11,12 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.sirkotok.half_life_mod.effect.HalfLifeEffects;
+import net.sirkotok.half_life_mod.misc.effect.HalfLifeEffects;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Antlion;
@@ -28,13 +25,12 @@ import net.sirkotok.half_life_mod.entity.modinterface.HasLeaderMob;
 import net.sirkotok.half_life_mod.entity.projectile.BugbaitProjectile;
 import net.sirkotok.half_life_mod.item.custom.gun.base.GunItem;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
-import net.sirkotok.half_life_mod.util.CommonSounds;
+import net.sirkotok.half_life_mod.misc.util.CommonSounds;
 import net.tslat.smartbrainlib.util.BrainUtils;
 import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Random;
 
 public class BugbaitItem extends GunItem {
     public BugbaitItem(Properties pProperties) {

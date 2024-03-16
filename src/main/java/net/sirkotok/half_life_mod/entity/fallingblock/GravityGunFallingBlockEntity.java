@@ -18,7 +18,6 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 
@@ -38,13 +37,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.*;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
-import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.GonarchBM;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Shark;
 import net.sirkotok.half_life_mod.item.HalfLifeItems;
-import net.sirkotok.half_life_mod.util.HLTags;
-import net.sirkotok.half_life_mod.util.HLperUtil;
-import net.tslat.smartbrainlib.util.BrainUtils;
 import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
 import org.slf4j.Logger;
 
@@ -470,7 +463,7 @@ public class GravityGunFallingBlockEntity extends FallingBlockEntity {
         int rad = 5;
         List<Player> players = EntityRetrievalUtil.getEntities((Level) pLevel,
                 new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
-                        pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj instanceof Player player && player.getMainHandItem().is(HalfLifeItems.GRAVITYGUN.get()));
+                        pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj instanceof Player player && (player.getMainHandItem().is(HalfLifeItems.GRAVITYGUN.get()) || player.getMainHandItem().is(HalfLifeItems.SUPERGRAVITYGUN.get())));
         if (!players.isEmpty()) {
             for (Player p : players) {
                String s1 = p.getUUID().toString();

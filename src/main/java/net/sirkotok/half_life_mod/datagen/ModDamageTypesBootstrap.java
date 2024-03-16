@@ -2,7 +2,7 @@ package net.sirkotok.half_life_mod.datagen;
 
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.world.damagesource.DamageType;
-import net.sirkotok.half_life_mod.damagesource.ModDamageTypes;
+import net.sirkotok.half_life_mod.misc.damagesource.ModDamageTypes;
 
 public class ModDamageTypesBootstrap {
     protected static void bootstrap(BootstapContext<DamageType> context)

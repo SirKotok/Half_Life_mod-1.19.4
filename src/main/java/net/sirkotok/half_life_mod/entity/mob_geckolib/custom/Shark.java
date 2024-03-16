@@ -3,19 +3,14 @@ package net.sirkotok.half_life_mod.entity.mob_geckolib.custom;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
-import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.tags.BiomeTags;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
@@ -25,14 +20,11 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.animal.IronGolem;
-import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
@@ -44,9 +36,10 @@ import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.parts.SharkPart;
+import net.sirkotok.half_life_mod.misc.gamerules.HalfLifeGameRules;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
-import net.sirkotok.half_life_mod.util.HLperUtil;
-import net.sirkotok.half_life_mod.util.HLTags;
+import net.sirkotok.half_life_mod.misc.util.HLperUtil;
+import net.sirkotok.half_life_mod.misc.util.HLTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -450,6 +443,7 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
 
     @Override
     protected void customServerAiStep() {
+        if (!this.level.getGameRules().getRule(HalfLifeGameRules.HALF_LIFE_AI_IS_ON).get()) return;
         tickBrain(this);
 
         this.setMouthPose(this.attackbehaviour == 1 ? 1 : 0);

@@ -11,8 +11,7 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 
 import net.minecraft.world.entity.player.Player;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
-import net.sirkotok.half_life_mod.util.HLperUtil;
-import net.sirkotok.half_life_mod.util.InfightingUtil;
+import net.sirkotok.half_life_mod.misc.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.core.behaviour.ExtendedBehaviour;
 import net.tslat.smartbrainlib.util.BrainUtils;
 

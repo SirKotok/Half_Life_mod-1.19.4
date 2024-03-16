@@ -21,6 +21,7 @@ import net.minecraftforge.fluids.FluidType;
 import net.sirkotok.half_life_mod.entity.base.CatchableMonster;
 
 import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
+import net.sirkotok.half_life_mod.misc.gamerules.HalfLifeGameRules;
 import net.sirkotok.half_life_mod.item.HalfLifeItems;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
@@ -185,6 +186,7 @@ public class Chumtoad extends CatchableMonster implements GeoEntity, SmartBrainO
 
     @Override
     protected void customServerAiStep() {
+        if (!this.level.getGameRules().getRule(HalfLifeGameRules.HALF_LIFE_AI_IS_ON).get()) return;
         tickBrain(this);
     }
 

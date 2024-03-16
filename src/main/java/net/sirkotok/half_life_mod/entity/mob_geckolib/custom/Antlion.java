@@ -16,28 +16,26 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.sirkotok.half_life_mod.effect.HalfLifeEffects;
+import net.sirkotok.half_life_mod.misc.effect.HalfLifeEffects;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
-import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
 import net.sirkotok.half_life_mod.entity.modinterface.HasLeaderMob;
-import net.sirkotok.half_life_mod.particle.HalfLifeParticles;
+import net.sirkotok.half_life_mod.misc.gamerules.HalfLifeGameRules;
+import net.sirkotok.half_life_mod.entity.particle.HalfLifeParticles;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
-import net.sirkotok.half_life_mod.util.CommonSounds;
-import net.sirkotok.half_life_mod.util.HLTags;
-import net.sirkotok.half_life_mod.util.HLperUtil;
-import net.sirkotok.half_life_mod.util.InfightingUtil;
+import net.sirkotok.half_life_mod.misc.util.CommonSounds;
+import net.sirkotok.half_life_mod.misc.util.HLTags;
+import net.sirkotok.half_life_mod.misc.util.HLperUtil;
+import net.sirkotok.half_life_mod.misc.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -48,7 +46,6 @@ import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.CustomBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomWalkTarget;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetWalkTargetToAttackTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.InvalidateAttackTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetPlayerLookTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTarget;
@@ -231,6 +228,7 @@ public class Antlion extends HalfLifeMonster implements GeoEntity, HasLeaderMob<
 
     @Override
     protected void customServerAiStep() {
+        if (!this.level.getGameRules().getRule(HalfLifeGameRules.HALF_LIFE_AI_IS_ON).get()) return;
         if ((!this.isInWaterOrBubble() || this.isOnGround()) && !this.isflippedover()) {
             tickBrain(this);}
     }

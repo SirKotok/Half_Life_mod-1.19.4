@@ -18,25 +18,21 @@ import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
-import net.minecraft.world.entity.npc.AbstractVillager;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
-import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.modinterface.VariableRangedMob;
 import net.sirkotok.half_life_mod.entity.projectile.ControllerBaseProjectile;
 import net.sirkotok.half_life_mod.entity.projectile.ControllerBigProjectile;
-import net.sirkotok.half_life_mod.particle.HalfLifeParticles;
+import net.sirkotok.half_life_mod.misc.gamerules.HalfLifeGameRules;
+import net.sirkotok.half_life_mod.entity.particle.HalfLifeParticles;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
-import net.sirkotok.half_life_mod.util.HLperUtil;
-import net.sirkotok.half_life_mod.util.HLTags;
-import net.sirkotok.half_life_mod.util.InfightingUtil;
+import net.sirkotok.half_life_mod.misc.util.HLperUtil;
+import net.sirkotok.half_life_mod.misc.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -273,6 +269,7 @@ public class Controller extends HalfLifeMonster implements GeoEntity, RangedAtta
 
     @Override
     protected void customServerAiStep() {
+        if (!this.level.getGameRules().getRule(HalfLifeGameRules.HALF_LIFE_AI_IS_ON).get()) return;
         tickBrain(this);
 
         if (BrainUtils.getTargetOfEntity(this) != null) {

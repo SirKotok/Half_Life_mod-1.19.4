@@ -15,15 +15,16 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.sirkotok.half_life_mod.block.HalfLifeBlocks;
 
 import net.sirkotok.half_life_mod.block.blockentity.HalfLifeBlockEntities;
-import net.sirkotok.half_life_mod.config.HalfLifeCommonConfigs;
-import net.sirkotok.half_life_mod.effect.HalfLifeEffects;
+import net.sirkotok.half_life_mod.misc.config.HalfLifeCommonConfigs;
+import net.sirkotok.half_life_mod.misc.effect.HalfLifeEffects;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.brain.ModSensorType;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
+import net.sirkotok.half_life_mod.misc.gamerules.HalfLifeGameRules;
 import net.sirkotok.half_life_mod.item.HalfLifeCreativeModeTabs;
 import net.sirkotok.half_life_mod.item.HalfLifeItems;
 import net.sirkotok.half_life_mod.networking.HalfLifePackets;
-import net.sirkotok.half_life_mod.particle.HalfLifeParticles;
+import net.sirkotok.half_life_mod.entity.particle.HalfLifeParticles;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import org.slf4j.Logger;
 
@@ -48,6 +49,9 @@ public class HalfLifeMod
         ModSensorType.register(modEventBus);
         HalfLifeEffects.register(modEventBus);
         HalfLifeParticles.register(modEventBus);
+
+        MinecraftForge.EVENT_BUS.register(new HalfLifeGameRules());
+
 
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
@@ -164,6 +168,7 @@ public class HalfLifeMod
             event.accept(HalfLifeItems.DISPLACER_END);
             // gravity gun
             event.accept(HalfLifeItems.GRAVITYGUN);
+            event.accept(HalfLifeItems.SUPERGRAVITYGUN);
          //   items that throw entities
             event.accept(HalfLifeItems.CHUMTOAD_THROWER);
             event.accept(HalfLifeItems.SNARK_THROWER);

@@ -6,7 +6,6 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
@@ -23,9 +22,10 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.projectile.Bullet;
+import net.sirkotok.half_life_mod.misc.gamerules.HalfLifeGameRules;
 import net.sirkotok.half_life_mod.item.HalfLifeItems;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
-import net.sirkotok.half_life_mod.util.HLperUtil;
+import net.sirkotok.half_life_mod.misc.util.HLperUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -36,7 +36,6 @@ import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.CustomBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.misc.Idle;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.move.MoveToWalkTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomWalkTarget;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetWalkTargetToAttackTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.InvalidateAttackTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetPlayerLookTarget;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTarget;
@@ -248,6 +247,7 @@ public class Barney extends HalfLifeNeutral implements GeoEntity, SmartBrainOwne
 
     @Override
     protected void customServerAiStep() {
+        if (!this.level.getGameRules().getRule(HalfLifeGameRules.HALF_LIFE_AI_IS_ON).get()) return;
         tickBrain(this);
     }
 

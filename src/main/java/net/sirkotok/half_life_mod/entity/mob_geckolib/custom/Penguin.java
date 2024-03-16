@@ -4,7 +4,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
-import net.sirkotok.half_life_mod.util.CommonSounds;
+import net.sirkotok.half_life_mod.misc.util.CommonSounds;
 
 public class Penguin extends Snark {
     public Penguin(EntityType type, Level level) {

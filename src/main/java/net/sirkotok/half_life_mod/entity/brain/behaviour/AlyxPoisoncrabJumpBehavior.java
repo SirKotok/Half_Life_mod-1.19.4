@@ -15,7 +15,7 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Headcrab_Poison_3;
-import net.sirkotok.half_life_mod.util.HLTags;
+import net.sirkotok.half_life_mod.misc.util.HLTags;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.ConditionlessAttack;
 import net.tslat.smartbrainlib.util.BrainUtils;
 

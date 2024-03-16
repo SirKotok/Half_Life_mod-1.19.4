@@ -6,7 +6,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
@@ -20,22 +19,16 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.animal.IronGolem;
-import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
-import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
-import net.sirkotok.half_life_mod.entity.fallingblock.GravityGunFallingBlockEntity;
-import net.sirkotok.half_life_mod.item.HalfLifeItems;
+import net.sirkotok.half_life_mod.misc.gamerules.HalfLifeGameRules;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
-import net.sirkotok.half_life_mod.util.HLTags;
-import net.sirkotok.half_life_mod.util.InfightingUtil;
+import net.sirkotok.half_life_mod.misc.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -52,7 +45,6 @@ import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyPlayersSensor;
 import net.tslat.smartbrainlib.util.BrainUtils;
-import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -61,7 +53,6 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
-import java.util.UUID;
 
 
 public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwner<Manhack> {
@@ -466,6 +457,7 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
 
     @Override
     protected void customServerAiStep() {
+        if (!this.level.getGameRules().getRule(HalfLifeGameRules.HALF_LIFE_AI_IS_ON).get()) return;
         tickBrain(this);
 
 

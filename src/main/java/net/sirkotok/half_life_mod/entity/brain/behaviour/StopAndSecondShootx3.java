@@ -6,10 +6,8 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
-import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.sirkotok.half_life_mod.entity.modinterface.DoubleRangedMob;
-import net.sirkotok.half_life_mod.util.HLperUtil;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableRangedAttack;
+import net.sirkotok.half_life_mod.misc.util.HLperUtil;
 
 import javax.annotation.Nullable;
 

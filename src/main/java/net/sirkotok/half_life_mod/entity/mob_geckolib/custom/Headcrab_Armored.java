@@ -12,8 +12,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
-import net.sirkotok.half_life_mod.util.CommonSounds;
-import net.sirkotok.half_life_mod.util.HLTags;
+import net.sirkotok.half_life_mod.misc.util.CommonSounds;
+import net.sirkotok.half_life_mod.misc.util.HLTags;
 
 public class Headcrab_Armored extends Headcrab_3{
 

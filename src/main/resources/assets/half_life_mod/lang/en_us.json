@@ -47,6 +47,7 @@
     "item.half_life_mod.security_guard_helmet": "Security Guard Helmet",
     "item.half_life_mod.security_guard_chestplate": "Security Guard Vest",
     "item.half_life_mod.shockroach_item": "Shockroach",
+    "item.half_life_mod.gravitygun": "Gravity Gun",
 
     "item.half_life_mod.displacer_end": "Displacer Cannon (End)",
     "item.half_life_mod.displacer_nether": "Displacer Cannon (Nether)",
@@ -59,6 +60,8 @@
     "block.half_life_mod.voltigore_egg_block": "Voltigore Egg",
     "block.half_life_mod.xen_ground": "Xen Ground",
     "block.half_life_mod.xen_rock": "Xen Rock",
+
+    "gamerule.halflifehasai": "Is the AI turned on for most of the half-life entities",
 
     "death.attack.hl_bullet_0": "%s was shot to death",
     "death.attack.hl_bullet_0.entity": "%s was shot to death by %s",

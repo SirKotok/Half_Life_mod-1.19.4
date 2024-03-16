@@ -48,11 +48,12 @@ import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.parts.GonarchPart;
 import net.sirkotok.half_life_mod.entity.modinterface.DoubleRangedMob;
 import net.sirkotok.half_life_mod.entity.modinterface.MultiMeleeEntity;
 import net.sirkotok.half_life_mod.entity.projectile.AcidThrown;
+import net.sirkotok.half_life_mod.misc.gamerules.HalfLifeGameRules;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
-import net.sirkotok.half_life_mod.util.CommonSounds;
-import net.sirkotok.half_life_mod.util.HLperUtil;
-import net.sirkotok.half_life_mod.util.HLTags;
-import net.sirkotok.half_life_mod.util.InfightingUtil;
+import net.sirkotok.half_life_mod.misc.util.CommonSounds;
+import net.sirkotok.half_life_mod.misc.util.HLperUtil;
+import net.sirkotok.half_life_mod.misc.util.HLTags;
+import net.sirkotok.half_life_mod.misc.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -537,6 +538,7 @@ public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, Ranged
 
     @Override
     protected void customServerAiStep() {
+        if (!this.level.getGameRules().getRule(HalfLifeGameRules.HALF_LIFE_AI_IS_ON).get()) return;
         tickBrain(this);
  /*
         if (this.destroyBlocksTick > 0 && !this.runround &&

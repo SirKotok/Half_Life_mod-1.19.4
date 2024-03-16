@@ -5,7 +5,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ConstantFloat;
 import net.minecraft.util.valueproviders.TrapezoidFloat;
 import net.minecraft.util.valueproviders.UniformFloat;
@@ -14,7 +13,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.carver.*;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
-import net.sirkotok.half_life_mod.util.HLTags;
+import net.sirkotok.half_life_mod.misc.util.HLTags;
 
 public class HLCarvers {
     public static final ResourceKey<ConfiguredWorldCarver<?>> CAVE_XEN = createKey("cave_xen");

@@ -13,9 +13,9 @@ import net.minecraft.world.phys.HitResult;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.base.FireballNoTrail;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.GonarchBM;
-import net.sirkotok.half_life_mod.particle.HalfLifeParticles;
+import net.sirkotok.half_life_mod.entity.particle.HalfLifeParticles;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
-import net.sirkotok.half_life_mod.util.HLTags;
+import net.sirkotok.half_life_mod.misc.util.HLTags;
 
 public class AcidBall extends FireballNoTrail {
     public AcidBall(EntityType<AcidBall> pEntityType, Level pLevel) {

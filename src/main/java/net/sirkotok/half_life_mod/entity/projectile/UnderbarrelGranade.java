@@ -8,7 +8,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
-import net.sirkotok.half_life_mod.util.CommonSounds;
+import net.sirkotok.half_life_mod.misc.util.CommonSounds;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;

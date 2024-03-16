@@ -1,27 +1,6 @@
 package net.sirkotok.half_life_mod.item.custom;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
-import net.sirkotok.half_life_mod.entity.fallingblock.GravityGunFallingBlockEntity;
-import net.sirkotok.half_life_mod.item.HalfLifeItems;
-import net.sirkotok.half_life_mod.util.HLperUtil;
-import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
-
-import java.util.List;
 
 public class Debugitem extends Item {
 

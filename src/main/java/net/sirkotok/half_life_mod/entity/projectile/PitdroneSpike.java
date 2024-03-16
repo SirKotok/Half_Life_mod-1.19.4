@@ -11,7 +11,7 @@ import net.minecraft.world.phys.HitResult;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.base.FireballNoTrail;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
-import net.sirkotok.half_life_mod.util.HLperUtil;
+import net.sirkotok.half_life_mod.misc.util.HLperUtil;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;

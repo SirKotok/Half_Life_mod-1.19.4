@@ -3,7 +3,6 @@ package net.sirkotok.half_life_mod.entity.projectile;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -21,8 +20,7 @@ import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.AntlionWorker;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.VortigauntHL1;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.VortigauntHL2;
 import net.sirkotok.half_life_mod.item.HalfLifeItems;
-import net.sirkotok.half_life_mod.particle.HalfLifeParticles;
-import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
+import net.sirkotok.half_life_mod.entity.particle.HalfLifeParticles;
 
 public class VortLightningProjectile extends FireballNoTrail {
 

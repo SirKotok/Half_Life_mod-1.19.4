@@ -16,21 +16,19 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 
-import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidType;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
-import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.BiteWhileJumpingBehavior;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.HeadCrabJumpBehavior;
 
 import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
+import net.sirkotok.half_life_mod.misc.gamerules.HalfLifeGameRules;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
-import net.sirkotok.half_life_mod.util.HLTags;
-import net.sirkotok.half_life_mod.util.InfightingUtil;
+import net.sirkotok.half_life_mod.misc.util.HLTags;
+import net.sirkotok.half_life_mod.misc.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
@@ -235,6 +233,7 @@ public class Headcrab_1 extends HalfLifeMonster implements GeoEntity, SmartBrain
 
     @Override
     protected void customServerAiStep() {
+        if (!this.level.getGameRules().getRule(HalfLifeGameRules.HALF_LIFE_AI_IS_ON).get()) return;
         tickBrain(this);
     }
 

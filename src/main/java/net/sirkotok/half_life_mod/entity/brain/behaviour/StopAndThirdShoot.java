@@ -7,9 +7,8 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.sirkotok.half_life_mod.entity.modinterface.DoubleRangedMob;
 import net.sirkotok.half_life_mod.entity.modinterface.TripleRangedMob;
-import net.sirkotok.half_life_mod.util.HLperUtil;
+import net.sirkotok.half_life_mod.misc.util.HLperUtil;
 import net.tslat.smartbrainlib.util.BrainUtils;
 
 import javax.annotation.Nullable;

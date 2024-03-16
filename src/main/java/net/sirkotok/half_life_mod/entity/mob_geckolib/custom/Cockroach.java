@@ -27,6 +27,7 @@ import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.EatingBehavior;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.SetFoodToWalkTarget;
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
+import net.sirkotok.half_life_mod.misc.gamerules.HalfLifeGameRules;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
@@ -209,6 +210,7 @@ public class Cockroach extends Animal implements GeoEntity, SmartBrainOwner<Cock
 
     @Override
     protected void customServerAiStep() {
+        if (!this.level.getGameRules().getRule(HalfLifeGameRules.HALF_LIFE_AI_IS_ON).get()) return;
         tickBrain(this);
     }
 

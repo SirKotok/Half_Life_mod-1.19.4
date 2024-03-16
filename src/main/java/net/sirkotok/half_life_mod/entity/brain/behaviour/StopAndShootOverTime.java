@@ -9,7 +9,7 @@ import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Controller;
 import net.sirkotok.half_life_mod.entity.modinterface.VariableRangedMob;
-import net.sirkotok.half_life_mod.util.HLperUtil;
+import net.sirkotok.half_life_mod.misc.util.HLperUtil;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableRangedAttack;
 
 import javax.annotation.Nullable;

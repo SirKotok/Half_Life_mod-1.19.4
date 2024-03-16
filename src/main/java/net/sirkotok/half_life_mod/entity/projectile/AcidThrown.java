@@ -13,7 +13,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
-import net.sirkotok.half_life_mod.util.HLTags;
+import net.sirkotok.half_life_mod.misc.util.HLTags;
 
 public class AcidThrown extends ThrowableItemProjectile {
     public AcidThrown(EntityType<AcidThrown> pEntityType, Level pLevel) {

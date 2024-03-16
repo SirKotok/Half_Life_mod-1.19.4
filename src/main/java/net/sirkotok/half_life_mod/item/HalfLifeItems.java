@@ -209,6 +209,8 @@ public class HalfLifeItems {
 
     public static final RegistryObject<Item> GRAVITYGUN = ITEMS.register("gravitygun",
             () -> new GravityGun(new Item.Properties()));
+    public static final RegistryObject<Item> SUPERGRAVITYGUN = ITEMS.register("supergravitygun",
+            () -> new SuperGravityGun(new Item.Properties()));
 
     public static final RegistryObject<Item> BUGBAIT = ITEMS.register("bugbait",
             () -> new BugbaitItem(new Item.Properties()));

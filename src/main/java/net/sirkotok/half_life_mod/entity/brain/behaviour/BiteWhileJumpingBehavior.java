@@ -8,13 +8,12 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
-import net.sirkotok.half_life_mod.util.CommonSounds;
-import net.sirkotok.half_life_mod.util.HLTags;
+import net.sirkotok.half_life_mod.misc.util.CommonSounds;
+import net.sirkotok.half_life_mod.misc.util.HLTags;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.ConditionlessAttack;
 import net.tslat.smartbrainlib.util.BrainUtils;
 

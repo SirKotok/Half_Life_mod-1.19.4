@@ -28,8 +28,9 @@ import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
+import net.sirkotok.half_life_mod.misc.gamerules.HalfLifeGameRules;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
-import net.sirkotok.half_life_mod.util.HLTags;
+import net.sirkotok.half_life_mod.misc.util.HLTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -200,6 +201,7 @@ public class Leech extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
 
     @Override
     protected void customServerAiStep() {
+        if (!this.level.getGameRules().getRule(HalfLifeGameRules.HALF_LIFE_AI_IS_ON).get()) return;
         tickBrain(this);
         int i = this.getAirSupply();
         handleAirSupply(i);

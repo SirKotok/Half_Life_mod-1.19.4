@@ -14,11 +14,11 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.sirkotok.half_life_mod.damagesource.ModDamageTypes;
+import net.sirkotok.half_life_mod.misc.damagesource.ModDamageTypes;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.base.FireballNoTrail;
 import net.sirkotok.half_life_mod.item.HalfLifeItems;
-import net.sirkotok.half_life_mod.particle.HalfLifeParticles;
+import net.sirkotok.half_life_mod.entity.particle.HalfLifeParticles;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 
 public class Bullet extends FireballNoTrail {

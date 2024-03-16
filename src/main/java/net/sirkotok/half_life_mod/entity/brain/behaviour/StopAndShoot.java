@@ -14,8 +14,8 @@ import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Controller;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.VortigauntHL1;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.VortigauntHL2;
-import net.sirkotok.half_life_mod.util.CommonSounds;
-import net.sirkotok.half_life_mod.util.HLperUtil;
+import net.sirkotok.half_life_mod.misc.util.CommonSounds;
+import net.sirkotok.half_life_mod.misc.util.HLperUtil;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableRangedAttack;
 import net.tslat.smartbrainlib.util.BrainUtils;
 

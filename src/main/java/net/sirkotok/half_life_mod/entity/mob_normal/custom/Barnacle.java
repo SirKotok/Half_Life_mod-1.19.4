@@ -37,7 +37,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Headcrab_Poison_2;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
-import net.sirkotok.half_life_mod.util.HLperUtil;
+import net.sirkotok.half_life_mod.misc.util.HLperUtil;
 import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
 import org.joml.Vector3f;
 

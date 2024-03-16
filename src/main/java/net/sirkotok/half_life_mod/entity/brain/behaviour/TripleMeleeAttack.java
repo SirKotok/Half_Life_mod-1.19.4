@@ -1,17 +1,15 @@
 package net.sirkotok.half_life_mod.entity.brain.behaviour;
 
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
-import net.sirkotok.half_life_mod.util.CommonSounds;
-import net.sirkotok.half_life_mod.util.HLperUtil;
+import net.sirkotok.half_life_mod.misc.util.CommonSounds;
+import net.sirkotok.half_life_mod.misc.util.HLperUtil;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableMeleeAttack;
 import net.tslat.smartbrainlib.util.BrainUtils;
 
 import javax.annotation.Nullable;
-import java.util.function.Function;
 
 public class TripleMeleeAttack<E extends HalfLifeMonster> extends AnimatableMeleeAttack<E> {
 

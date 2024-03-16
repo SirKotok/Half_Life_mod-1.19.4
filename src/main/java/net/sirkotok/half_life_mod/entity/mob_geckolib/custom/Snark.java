@@ -17,8 +17,9 @@ import net.sirkotok.half_life_mod.entity.brain.behaviour.BiteWhileJumpingBehavio
 import net.sirkotok.half_life_mod.entity.brain.behaviour.HeadCrabJumpBehavior;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.LeapTowardTargetBehavior;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.Retaliate;
+import net.sirkotok.half_life_mod.misc.gamerules.HalfLifeGameRules;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
-import net.sirkotok.half_life_mod.util.CommonSounds;
+import net.sirkotok.half_life_mod.misc.util.CommonSounds;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
@@ -198,6 +199,7 @@ public class Snark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
 
     @Override
     protected void customServerAiStep() {
+        if (!this.level.getGameRules().getRule(HalfLifeGameRules.HALF_LIFE_AI_IS_ON).get()) return;
         tickBrain(this);
     }
 

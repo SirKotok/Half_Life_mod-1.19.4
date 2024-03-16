@@ -25,7 +25,7 @@ import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.base.FireballNoTrail;
 import net.sirkotok.half_life_mod.item.HalfLifeItems;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
-import net.sirkotok.half_life_mod.util.HLperUtil;
+import net.sirkotok.half_life_mod.misc.util.HLperUtil;
 import net.sirkotok.half_life_mod.worldgen.dimension.HalfLifeDimensions;
 import net.sirkotok.half_life_mod.worldgen.portal.NetherTeleporter;
 import net.sirkotok.half_life_mod.worldgen.portal.XenTeleporter;
