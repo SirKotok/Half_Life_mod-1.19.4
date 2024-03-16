@@ -60,7 +60,7 @@ public class ClientModBusEvents {
         event.registerSpecial(HalfLifeParticles.VOLT_LIGHTNING.get(), new VoltigoreLightningParticle.Factory());
         event.registerSpecial(HalfLifeParticles.VORT_ARC_LIGHTNING.get(), new VortArcLightningParticle.Factory());
         event.registerSpecial(HalfLifeParticles.VORT2_ARC_LIGHTNING.get(), new Vort2ArcLightningParticle.Factory());
-
+        event.registerSpecial(HalfLifeParticles.GRAV_GUN_ORANGE_LIGHTNING.get(), new GravGunParticleOrange.Factory());
 
 
         event.registerSpecial(HalfLifeParticles.ORANGEGLOW.get(), new OrangeGlowParticle.Factory());

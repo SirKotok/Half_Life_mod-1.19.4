@@ -5,6 +5,10 @@ import net.minecraftforge.common.ForgeConfigSpec;
 public class HalfLifeCommonConfigs  {
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec SPEC;
+  //  public static final ForgeConfigSpec SPEC2;
+
+
+  //  public static final ForgeConfigSpec.ConfigValue<String> GRAVITY_GUN_BLACKLIST;
 
     public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_RACEX_XEN;
     public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_RACEX_NORMAL;
@@ -29,7 +33,10 @@ public class HalfLifeCommonConfigs  {
     public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_BULLSQUID_PITDRONE;
 
     static {
-        BUILDER.push("Configs for HalfLifeMod");
+        BUILDER.push("InfightingConfig");
+        BUILDER.comment("This Config defines the infighting between factions of enemies, as well as some factionless entities (bullsquids).");
+        BUILDER.comment("The \"Normal\" category includes any creature that is an enemy, but isnt from one of the factions. " +
+                "That includes normal enemies like Zombies and Skeletons, as well as new enemies like Houndeyes. It will also include most enemies from other mods.");
         INFIGHTING_RACEX_XEN = BUILDER.comment("Do Race X and Xen forces fight")
                    .define("racexvsxen", true);
         INFIGHTING_RACEX_HEADCRAB = BUILDER.comment("Do Race X and Headcrabs fight")
@@ -76,4 +83,13 @@ public class HalfLifeCommonConfigs  {
         BUILDER.pop();
         SPEC = BUILDER.build();
     }
+
+   /* static {
+        BUILDER.push("Weopons Config");
+        BUILDER.comment("This config determines things related to weopons.");
+        GRAVITY_GUN_BLACKLIST = BUILDER.comment("A blacklist for any blocks that shouldnt be pickable by the gravity gun")
+                .define("gravitygunblacklist", "#minecraft");
+        BUILDER.pop();
+        SPEC2 = BUILDER.build();
+    } */
 }

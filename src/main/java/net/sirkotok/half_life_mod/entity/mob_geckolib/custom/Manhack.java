@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
@@ -25,10 +26,13 @@ import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
+import net.sirkotok.half_life_mod.entity.fallingblock.GravityGunFallingBlockEntity;
+import net.sirkotok.half_life_mod.item.HalfLifeItems;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.util.HLTags;
 import net.sirkotok.half_life_mod.util.InfightingUtil;
@@ -48,6 +52,7 @@ import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyPlayersSensor;
 import net.tslat.smartbrainlib.util.BrainUtils;
+import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -56,6 +61,7 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
+import java.util.UUID;
 
 
 public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwner<Manhack> {
@@ -63,7 +69,7 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
     // TODO: make yellow when hurt + add alarm sound when hurt
 
     private BlockPos targetPosition;
-
+    public Player player;
     @Override
     protected void actuallyHurt(DamageSource p_21240_, float p_21241_) {
         if (p_21240_.is(DamageTypes.IN_WALL)) {
@@ -72,8 +78,34 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
         super.actuallyHurt(p_21240_, p_21241_);
     }
 
+ /*
+    protected static final EntityDataAccessor<String> PLAYER_STRING_UUID = SynchedEntityData.defineId(Manhack.class, EntityDataSerializers.STRING);
+    protected static final EntityDataAccessor<Integer> PLAYER_NOTFIND_COUNTER = SynchedEntityData.defineId(Manhack.class, EntityDataSerializers.INT);
+
+    public void setPlayerStringUuid(UUID uuid) {
+        this.entityData.set(PLAYER_STRING_UUID, uuid.toString());
+    }
+    public void setPlayerStringUuid(String uuid) {
+        this.entityData.set(PLAYER_STRING_UUID, uuid);
+    }
+
+    public String getPlayerStringUUID() {
+        return this.entityData.get(PLAYER_STRING_UUID);
+    }
+
+    public boolean getHasPlayer() {
+        return !this.entityData.get(PLAYER_STRING_UUID).equals("");
+    }
+    public void setPlayerNoFindCounter(int count) {
+        this.entityData.set(PLAYER_NOTFIND_COUNTER, count);
+    }
+
+    public int getPlayerNoFindCounter() {
+        return this.entityData.get(PLAYER_NOTFIND_COUNTER);
+    }
 
 
+ */
 
 
     @Override
@@ -93,6 +125,8 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
     public static final EntityDataAccessor<Boolean> ISOPEN = SynchedEntityData.defineId(Manhack.class, EntityDataSerializers.BOOLEAN);
     protected void defineSynchedData() {
         super.defineSynchedData();
+     //   this.entityData.define(PLAYER_STRING_UUID, "");
+     //   this.entityData.define(PLAYER_NOTFIND_COUNTER, 0);
         this.entityData.define(ISOPEN, false);
         this.entityData.define(CAN_CONTROL_TIMESTAMP, 0);
         this.entityData.define(TILTDIRECTION, 0);
@@ -112,13 +146,91 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
         this.entityData.set(TILTDIRECTION, tilt);
     }
 
+/*
+    public void makemyplayer() {
+        if (this.level.isClientSide()) return;
+        BlockPos pBlockPos = new BlockPos(this.getBlockX(), this.getBlockY(), this.getBlockZ());
+        ServerLevel pLevel = (ServerLevel)this.level;
+        int rad = 5;
+        List<Player> players = EntityRetrievalUtil.getEntities((Level) pLevel,
+                new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
+                        pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj instanceof Player player && player.getMainHandItem().is(HalfLifeItems.GRAVITYGUN.get()));
+        if (!players.isEmpty()) {
+            for (Player p : players) {
+                String s1 = p.getUUID().toString();
+                String s2 = this.getPlayerStringUUID();
+                if (s1.equals(s2)) {
+                    this.player = p;
+                    return;
+                }
+            }
+        }
+        this.player = null;
+    }
+    public void nullmyplayer() {
+        if (this.level.isClientSide()) return;
+        BlockPos pBlockPos = new BlockPos(this.getBlockX(), this.getBlockY(), this.getBlockZ());
+        ServerLevel pLevel = (ServerLevel)this.level;
+        int rad = 5;
+        List<Player> players = EntityRetrievalUtil.getEntities((Level) pLevel,
+                new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
+                        pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj instanceof Player player && player.getMainHandItem().is(HalfLifeItems.VORT_DEBUG.get()));
+        if (!players.isEmpty()) {
+            for (Player p : players) {
+                String s1 = p.getUUID().toString();
+                String s2 = this.getPlayerStringUUID();
+                if (s1.equals(s2)) {
+                    //   this.player = p;
+                    return;
+                }
+            }
+        }
+        this.player = null;
+    }
 
+    public void setnoplayer() {
+        this.setPlayerNoFindCounter(0);
+        this.setPlayerStringUuid("");
+        this.player = null;
+    }
 
-
-
+    public Vec3 findpos(Player pPlayer) {
+        if (pPlayer == null) return this.position();
+        return GravityGunFallingBlockEntity.findposstat(pPlayer);
+    } */
     @Override
     public void tick() {
         super.tick();
+ /*
+        if (this.getPlayerNoFindCounter() > 5 || !this.getHasPlayer()) {
+            this.setnoplayer();
+        }
+
+        if (this.getHasPlayer() && this.player == null) {
+            this.makemyplayer();
+            if (this.getHasPlayer() && this.player == null) {
+                this.setPlayerNoFindCounter(this.getPlayerNoFindCounter()+1);
+            }
+        } else this.setPlayerNoFindCounter(0);
+
+        if (this.player != null) {
+            if (this.tickCount % 10 == 0)  this.nullmyplayer();
+            if (this.player != null) {
+                Vec3 vec3 = findpos(player);
+                Vec3 vec31 = this.position();
+                Vec3 movement = vec3.subtract(vec31);
+                if (movement.length() < 0.5f) movement.scale(0.3f);
+                if (this.player.getDeltaMovement().length() < 0.01f) {
+                    this.player.setDeltaMovement(this.player.getDeltaMovement().add(this.player.position().subtract(this.position()).normalize().scale(0.1f)));
+                }
+                this.setDeltaMovement(movement);
+            }
+        }
+
+
+ */
+
+
         LivingEntity entity = this.getTarget();
         if (entity != null) {
             float f = this.distanceTo(entity);
@@ -210,6 +322,7 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
     }
 
     public void ricochete(float a) {
+    //    if (this.getHasPlayer()) return;
         int i = random.nextFloat() < 0.5f ? 1 : -1;
         int j = random.nextFloat() < 0.5f ? 1 : -1;
         int k = random.nextFloat() < 0.5f ? 1 : -1;

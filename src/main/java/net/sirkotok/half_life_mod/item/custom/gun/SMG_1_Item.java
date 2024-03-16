@@ -111,6 +111,7 @@ public class SMG_1_Item extends GunAltFireItem implements GeoItem {
         if (!pLevel.isClientSide) {
             if (findSlotMatchingItem(pPlayer, getaltammoitem()) == -1 && !pPlayer.getAbilities().instabuild) { //  || inventory.findSlotMatchingItem(getaltammoitem()) == -1
                 pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
+                SetCooldow(pPlayer, 10);
                 return InteractionResultHolder.fail(itemstack);
             }
             if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
@@ -126,6 +127,7 @@ public class SMG_1_Item extends GunAltFireItem implements GeoItem {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         if (!pLevel.isClientSide) {
             if (GetAmmo(itemstack) == 0 && !pPlayer.getAbilities().instabuild) {
+                SetCooldow(pPlayer, 10);
                 pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
                 return InteractionResultHolder.fail(itemstack);
             }

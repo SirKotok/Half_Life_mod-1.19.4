@@ -2,8 +2,7 @@ package net.sirkotok.half_life_mod.item.client.model;
 
 import net.minecraft.resources.ResourceLocation;
 import net.sirkotok.half_life_mod.HalfLifeMod;
-import net.sirkotok.half_life_mod.item.custom.GravityGun;
-import net.sirkotok.half_life_mod.item.custom.gun.Displacer_cannon;
+import net.sirkotok.half_life_mod.item.custom.gun.GravityGun;
 import software.bernie.geckolib.model.GeoModel;
 
 public class GravityGun_model<T extends GravityGun> extends GeoModel<T> {

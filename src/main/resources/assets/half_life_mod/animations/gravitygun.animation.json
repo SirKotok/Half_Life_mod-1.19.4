@@ -54,7 +54,7 @@
 		},
 		"animation.gravitygun.normal": {
 			"loop": true,
-			"animation_length": 0.08333,
+			"animation_length": 0.1,
 			"bones": {
 				"t11": {
 					"rotation": {

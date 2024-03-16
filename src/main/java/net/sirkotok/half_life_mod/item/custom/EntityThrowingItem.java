@@ -33,9 +33,6 @@ public abstract class EntityThrowingItem extends Item {
     public void shoot(Entity projectile, double pX, double pY, double pZ, float pVelocity, float pInaccuracy) {
         Vec3 vec3 = (new Vec3(pX, pY, pZ)).normalize().add(RandomSource.create().triangle(0.0D, 0.0172275D * (double)pInaccuracy), RandomSource.create().triangle(0.0D, 0.0172275D * (double)pInaccuracy), RandomSource.create().triangle(0.0D, 0.0172275D * (double)pInaccuracy)).scale((double)pVelocity);
         projectile.setDeltaMovement(vec3);
-        double d0 = vec3.horizontalDistance();
-     //   projectile.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * (double)(180F / (float)Math.PI)));
-     //   projectile.setXRot((float)(Mth.atan2(vec3.y, d0) * (double)(180F / (float)Math.PI)));
         projectile.yRotO = projectile.getYRot();
         projectile.xRotO = projectile.getXRot();
     }

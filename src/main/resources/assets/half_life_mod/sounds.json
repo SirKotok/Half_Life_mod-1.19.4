@@ -23,6 +23,108 @@
       "half_life_mod:con_alert1"
     ]
   },
+  "physcannon_charge": {
+    "subtitle": "sounds.half_life_mod.physcannon_charge",
+    "sounds": [
+      "half_life_mod:physcannon_charge"
+    ]
+  },
+  "physcannon_claws_close": {
+    "subtitle": "sounds.half_life_mod.physcannon_claws_close",
+    "sounds": [
+      "half_life_mod:physcannon_claws_close"
+    ]
+  },
+  "physcannon_claws_open": {
+    "subtitle": "sounds.half_life_mod.physcannon_claws_open",
+    "sounds": [
+      "half_life_mod:physcannon_claws_open"
+    ]
+  },
+  "physcannon_drop": {
+    "subtitle": "sounds.half_life_mod.physcannon_drop",
+    "sounds": [
+      "half_life_mod:physcannon_drop"
+    ]
+  },
+  "physcannon_dryfire": {
+    "subtitle": "sounds.half_life_mod.physcannon_dryfire",
+    "sounds": [
+      "half_life_mod:physcannon_dryfire"
+    ]
+  },
+  "physcannon_hold_loop": {
+    "subtitle": "sounds.half_life_mod.physcannon_hold_loop",
+    "sounds": [
+      "half_life_mod:physcannon_hold_loop"
+    ]
+  },
+  "physcannon_pickup": {
+    "subtitle": "sounds.half_life_mod.physcannon_pickup",
+    "sounds": [
+      "half_life_mod:physcannon_pickup"
+    ]
+  },
+  "physcannon_tooheavy": {
+    "subtitle": "sounds.half_life_mod.physcannon_tooheavy",
+    "sounds": [
+      "half_life_mod:physcannon_tooheavy"
+    ]
+  },
+  "superphys_hold_loop": {
+    "subtitle": "sounds.half_life_mod.superphys_hold_loop",
+    "sounds": [
+      "half_life_mod:superphys_hold_loop"
+    ]
+  },
+  "superphys_launch1": {
+    "subtitle": "sounds.half_life_mod.superphys_launch1",
+    "sounds": [
+      "half_life_mod:superphys_launch1"
+    ]
+  },
+  "superphys_launch2": {
+    "subtitle": "sounds.half_life_mod.superphys_launch2",
+    "sounds": [
+      "half_life_mod:superphys_launch2"
+    ]
+  },
+  "superphys_launch3": {
+    "subtitle": "sounds.half_life_mod.superphys_launch3",
+    "sounds": [
+      "half_life_mod:superphys_launch3"
+    ]
+  },
+  "superphys_launch4": {
+    "subtitle": "sounds.half_life_mod.superphys_launch4",
+    "sounds": [
+      "half_life_mod:superphys_launch4"
+    ]
+  },
+  "superphys_small_zap1": {
+    "subtitle": "sounds.half_life_mod.superphys_small_zap1",
+    "sounds": [
+      "half_life_mod:superphys_small_zap1"
+    ]
+  },
+  "superphys_small_zap2": {
+    "subtitle": "sounds.half_life_mod.superphys_small_zap2",
+    "sounds": [
+      "half_life_mod:superphys_small_zap2"
+    ]
+  },
+  "superphys_small_zap3": {
+    "subtitle": "sounds.half_life_mod.superphys_small_zap3",
+    "sounds": [
+      "half_life_mod:superphys_small_zap3"
+    ]
+  },
+  "superphys_small_zap4": {
+    "subtitle": "sounds.half_life_mod.superphys_small_zap4",
+    "sounds": [
+      "half_life_mod:superphys_small_zap4"
+    ]
+  },
   "con_alert2": {
     "subtitle": "sounds.half_life_mod.con_alert2",
     "sounds": [

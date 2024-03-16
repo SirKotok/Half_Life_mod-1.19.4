@@ -22,7 +22,7 @@ public class XenBiomes {
     }
 
     public static void globalGeneration(BiomeGenerationSettings.Builder builder) {
-      //    HalfLifeBiomeFeatures.addcarversandlakes(builder);
+          HalfLifeBiomeFeatures.addcarversandlakes(builder);
      //   BiomeDefaultFeatures.addDefaultCrystalFormations(builder);
      //   BiomeDefaultFeatures.addDefaultMonsterRoom(builder);
     //    BiomeDefaultFeatures.addDefaultUndergroundVariety(builder);

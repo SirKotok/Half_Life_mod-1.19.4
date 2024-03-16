@@ -4,10 +4,12 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.sirkotok.half_life_mod.item.client.renderer.Pistol_1_ItemRenderer;
@@ -73,6 +75,7 @@ public class Pistol_1_Item extends GunItem implements GeoItem {
     }
 
 
+
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
@@ -80,6 +83,7 @@ public class Pistol_1_Item extends GunItem implements GeoItem {
         if (!pLevel.isClientSide) {
             if (GetAmmo(itemstack) == 0 && !pPlayer.getAbilities().instabuild) {
                 pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
+                SetCooldow(pPlayer, 10);
                 return InteractionResultHolder.fail(itemstack);
             }
             if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
@@ -95,6 +99,7 @@ public class Pistol_1_Item extends GunItem implements GeoItem {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         if (!pLevel.isClientSide) {
             if (GetAmmo(itemstack) == 0 && !pPlayer.getAbilities().instabuild) {
+                SetCooldow(pPlayer, 10);
                 pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
                 return InteractionResultHolder.fail(itemstack);
             }

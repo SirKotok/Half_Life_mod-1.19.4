@@ -16,7 +16,63 @@ public class HalfLifeSounds {
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 
 
-    // Controller
+    // Gravity Gun
+    public static final RegistryObject<SoundEvent> PHYSCANNON_CHARGE=
+            registerSoundEvent("physcannon_charge");
+  public static final RegistryObject<SoundEvent> PHYSCANNON_CLAWS_CLOSE=
+          registerSoundEvent("physcannon_claws_close");
+  public static final RegistryObject<SoundEvent> PHYSCANNON_CLAWS_OPEN=
+          registerSoundEvent("physcannon_claws_open");
+  public static final RegistryObject<SoundEvent> PHYSCANNON_DROP=
+          registerSoundEvent("physcannon_drop");
+  public static final RegistryObject<SoundEvent> PHYSCANNON_DRYFIRE=
+          registerSoundEvent("physcannon_dryfire");
+  public static final RegistryObject<SoundEvent> PHYSCANNON_HOLD_LOOP=
+          registerSoundEvent("physcannon_hold_loop");
+  public static final RegistryObject<SoundEvent> PHYSCANNON_PICKUP=
+          registerSoundEvent("physcannon_pickup");
+  public static final RegistryObject<SoundEvent> PHYSCANNON_TOOHEAVY=
+          registerSoundEvent("physcannon_tooheavy");
+  public static final RegistryObject<SoundEvent> SUPERPHYS_HOLD_LOOP=
+          registerSoundEvent("superphys_hold_loop");
+  public static final RegistryObject<SoundEvent> SUPERPHYS_LAUNCH1=
+          registerSoundEvent("superphys_launch1");
+  public static final RegistryObject<SoundEvent> SUPERPHYS_LAUNCH2=
+          registerSoundEvent("superphys_launch2");
+  public static final RegistryObject<SoundEvent> SUPERPHYS_LAUNCH3=
+          registerSoundEvent("superphys_launch3");
+  public static final RegistryObject<SoundEvent> SUPERPHYS_LAUNCH4=
+          registerSoundEvent("superphys_launch4");
+  public static final RegistryObject<SoundEvent> SUPERPHYS_SMALL_ZAP1=
+          registerSoundEvent("superphys_small_zap1");
+  public static final RegistryObject<SoundEvent> SUPERPHYS_SMALL_ZAP2=
+          registerSoundEvent("superphys_small_zap2");
+  public static final RegistryObject<SoundEvent> SUPERPHYS_SMALL_ZAP3=
+          registerSoundEvent("superphys_small_zap3");
+  public static final RegistryObject<SoundEvent> SUPERPHYS_SMALL_ZAP4=
+          registerSoundEvent("superphys_small_zap4");
+
+      /*    "sounds.half_life_mod.physcannon_charge": "Gravity Gun ",
+          "sounds.half_life_mod.physcannon_claws_close": "Gravity Gun ",
+          "sounds.half_life_mod.physcannon_claws_open": "Gravity Gun ",
+          "sounds.half_life_mod.physcannon_drop": "Gravity Gun ",
+          "sounds.half_life_mod.physcannon_dryfire": "Gravity Gun ",
+          "sounds.half_life_mod.physcannon_hold_loop": "Gravity Gun ",
+          "sounds.half_life_mod.physcannon_pickup": "Gravity Gun ",
+          "sounds.half_life_mod.physcannon_tooheavy": "Gravity Gun ",
+          "sounds.half_life_mod.superphys_hold_loop": "Gravity Gun ",
+          "sounds.half_life_mod.superphys_launch1": "Gravity Gun ",
+          "sounds.half_life_mod.superphys_launch2": "Gravity Gun ",
+          "sounds.half_life_mod.superphys_launch3": "Gravity Gun ",
+          "sounds.half_life_mod.superphys_launch4": "Gravity Gun ",
+          "sounds.half_life_mod.superphys_small_zap1": "Gravity Gun ",
+          "sounds.half_life_mod.superphys_small_zap2": "Gravity Gun ",
+          "sounds.half_life_mod.superphys_small_zap3": "Gravity Gun ",
+          "sounds.half_life_mod.superphys_small_zap4": "Gravity Gun ", */
+
+
+
+  // Controller
 
   public static final RegistryObject<SoundEvent> CON_ALERT1=
           registerSoundEvent("con_alert1");
