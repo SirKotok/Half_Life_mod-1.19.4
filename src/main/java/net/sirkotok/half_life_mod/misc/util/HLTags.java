@@ -18,6 +18,7 @@ import net.sirkotok.half_life_mod.HalfLifeMod;
 public class HLTags {
     public static class Blocks {
         public static final TagKey<Block> HOUNDEYE_INTEREST = tag("houndeye_interest");
+        public static final TagKey<Block> EXPLOSION = tag("hl_explosion_blocks");
         public static final TagKey<Block> XEN_CARVER_REPLACABLE = tag("xen_carver_replacable");
         public static final TagKey<Block> GRAVITY_GUN_BLACKLIST = tag("gravity_gun_blacklist");
         public static final TagKey<Block> SUPER_GRAVITY_GUN_BLACKLIST = tag("supergrav_gun_blacklist");
@@ -42,7 +43,9 @@ public class HLTags {
     }
 
     public static class EntityTypes {
-
+        public static final TagKey<EntityType<?>> GRAVITY_GUN_EXPLOSION = tag("gravity_gun_explosion");
+        public static final TagKey<EntityType<?>> GRAVITY_GUN_CATCHABLE = tag("gravity_gun_catchable");
+        public static final TagKey<EntityType<?>> GRAVITY_GUN_IMMUNE = tag("gravity_gun_immune");
         public static final TagKey<EntityType<?>> HEADCRAB = tag("headcrab");
         public static final TagKey<EntityType<?>> FACTION_HEADCRAB = tag("fac_headcrab");
 

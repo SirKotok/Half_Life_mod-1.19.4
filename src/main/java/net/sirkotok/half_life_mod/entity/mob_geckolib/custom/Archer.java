@@ -3,9 +3,13 @@ package net.sirkotok.half_life_mod.entity.mob_geckolib.custom;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.BiomeTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
@@ -15,6 +19,10 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
@@ -470,6 +478,30 @@ public class Archer extends HalfLifeMonster implements GeoEntity, RangedAttackMo
         acidBall.setPos(this.getX() - (double)(this.getBbWidth() + 1.0F) * 0.5D * (double) Mth.sin(this.yBodyRot * ((float)Math.PI / 180F)), this.getEyeY() - (double)0.1F, this.getZ() + (double)(this.getBbWidth() + 1.0F) * 0.5D * (double) Mth.cos(this.yBodyRot * ((float)Math.PI / 180F)));
         this.level.addFreshEntity(acidBall);
 
+    }
+
+
+
+    public static boolean checkSharkSpawnRules(EntityType<Archer> pDrowned, ServerLevelAccessor pServerLevel, MobSpawnType pMobSpawnType, BlockPos pPos, RandomSource pRandom) {
+        if (!pServerLevel.getFluidState(pPos.below()).is(FluidTags.WATER)) {
+            return false;
+        } else {
+            Holder<Biome> holder = pServerLevel.getBiome(pPos);
+            boolean flag = pServerLevel.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(pServerLevel, pPos, pRandom) && (pMobSpawnType == MobSpawnType.SPAWNER || pServerLevel.getFluidState(pPos).is(FluidTags.WATER));
+            if (holder.is(BiomeTags.MORE_FREQUENT_DROWNED_SPAWNS)) {
+                return pRandom.nextInt(50) == 0 && flag;
+            } else {
+                return pRandom.nextInt(50) == 0 && isDeepEnoughToSpawn(pServerLevel, pPos) && flag;
+            }
+        }
+    }
+
+    private static boolean isDeepEnoughToSpawn(LevelAccessor pLevel, BlockPos pPos) {
+        return pPos.getY() < pLevel.getSeaLevel() - 5;
+    }
+
+    public boolean checkSpawnObstruction(LevelReader pLevel) {
+        return pLevel.isUnobstructed(this);
     }
 
 

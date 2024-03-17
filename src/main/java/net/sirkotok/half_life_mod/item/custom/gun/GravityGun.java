@@ -90,10 +90,7 @@ public class GravityGun extends GunItem implements GeoItem {
         }
         return false;
     }
-    private boolean canSeeBlock(Vec3 from, Vec3 to, Level pLevel, float distance) {
-        BlockHitResult result = pLevel.clip(new ClipContext(from, to, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, null));
-        return Vec3.atCenterOf(result.getBlockPos()).distanceTo(to) < distance-1.5f;
-    }
+
 
     public int getrange() {
         return 4;
@@ -139,31 +136,36 @@ public class GravityGun extends GunItem implements GeoItem {
         } else return false;
     }
 
-  /*  public boolean entityCatch(Player pPlayer) {
+    public boolean isentitycatchable(Entity pEntity){
+        if (pEntity.getType().is(HLTags.EntityTypes.GRAVITY_GUN_CATCHABLE)) {
+                return !pEntity.isPassenger();
+        }
+        return false;
+    }
+
+
+
+    public boolean entityCatch(Player pPlayer) {
         Vec3 vec3 = pPlayer.getEyePosition(1.0f);
-        Vec3 vec31 = pPlayer.getViewVector(1.0F);
-        double d0 = 16;
-        double d1 = 16;
+        Vec3 vec31 = pPlayer.getViewVector(1.0F).scale(3);
+        double d0 = 32;
+        double d1 = 32;
         Vec3 vec32 = vec3.add(vec31.x * d0, vec31.y * d0, vec31.z * d0);
         float f = 1.0F;
-        AABB aabb = pPlayer.getBoundingBox().inflate(3d).expandTowards(vec31.scale(d0)).inflate(16.0D, 16.0D, 16.0D);
+        AABB aabb = pPlayer.getBoundingBox().inflate(4d).expandTowards(vec31.scale(d0)).inflate(32D, 32D, 32D);
         EntityHitResult entityhitresult = ProjectileUtil.getEntityHitResult(pPlayer, vec3, vec32, aabb, (entity) -> {
-            return entity.isPickable();
+            return isentitycatchable(entity) && entity.isPickable() && !entity.getTags().contains("ggcaught");
         }, d1);
         if (entityhitresult != null) {
             Entity entity1 = entityhitresult.getEntity();
-            if (entity1 instanceof Manhack fb) {
-            boolean flag = canSeeBlock(vec3, vec32, entity1.level, pPlayer.distanceTo(entity1));
-            if (flag) return false;
+            entity1.addTag("caughtby"+pPlayer.getStringUUID());
+            entity1.addTag("ggcaught");
+            entity1.moveTo(GravityGunFallingBlockEntity.findposstat(pPlayer));
             pPlayer.level.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.PHYSCANNON_PICKUP.get(), SoundSource.NEUTRAL, 0.5F, 1F);
-            fb.moveTo(GravityGunFallingBlockEntity.findposstat(pPlayer));
-            fb.setPlayerStringUuid(pPlayer.getStringUUID());
-            fb.setNoGravity(true);
             SetCooldow(pPlayer, getRightClickCooldown());
             return true;
         } else return false;
-        } else return false;
-    } */
+    }
 
 
 
@@ -200,7 +202,7 @@ public class GravityGun extends GunItem implements GeoItem {
              int rad = 5;
             List<Entity> blocks = EntityRetrievalUtil.getEntities((Level) pLevel,
                     new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
-                            pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> (obj instanceof GravityGunFallingBlockEntity block && block.getPlayerStringUUID().equals(pPlayer.getStringUUID())));
+                            pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> (obj instanceof GravityGunFallingBlockEntity block && block.getPlayerStringUUID().equals(pPlayer.getStringUUID())) || (obj.getTags().contains("ggcaught") && obj.getTags().contains("caughtby"+pPlayer.getStringUUID())));
             SetHolding(pStack, !blocks.isEmpty());
             SetHoldingCheck(pStack, 0);
     }
@@ -241,20 +243,36 @@ public class GravityGun extends GunItem implements GeoItem {
          //   boolean flag = entityCatch(pPlayer);
          //   if (flag) return;
 
+
+
+
             BlockPos pBlockPos = pPlayer.blockPosition();
             int rad = 5;
             List<Entity> blocks = EntityRetrievalUtil.getEntities((Level) pLevel,
                     new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
-                            pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> (obj instanceof GravityGunFallingBlockEntity block && block.getPlayerStringUUID().equals(pPlayer.getStringUUID())));
+                            pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> (obj instanceof GravityGunFallingBlockEntity block && block.getPlayerStringUUID().equals(pPlayer.getStringUUID())) || (obj.getTags().contains("ggcaught") && obj.getTags().contains("caughtby"+pPlayer.getStringUUID())));
             if (!blocks.isEmpty()) {
                 for (Entity block : blocks) {
                     if (block instanceof GravityGunFallingBlockEntity gblock) gblock.setnoplayer();
+                    else {
+                        block.removeTag("ggcaught");
+                        block.removeTag("caughtby"+pPlayer.getStringUUID());
+                    }
                 //    if (block instanceof Manhack gblock) gblock.setnoplayer();
                     SetCooldow(pPlayer, getRightClickCooldown());
                     SetHolding(stack, false);
                     pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.PHYSCANNON_DROP.get(), SoundSource.NEUTRAL, 0.5F, 1F);
                 }
             } else {
+
+                boolean flag = entityCatch(pPlayer);
+                if (flag) {
+                    SetCooldow(pPlayer, 20);
+                    return;
+                }
+
+
+
                 BlockHitResult result = getPlayerPOVHitResult(pLevel, pPlayer, ClipContext.Fluid.NONE);
                 BlockPos pPos = result.getBlockPos();
 
@@ -319,13 +337,20 @@ public class GravityGun extends GunItem implements GeoItem {
             int rad = 5;
             List<Entity> blocks = EntityRetrievalUtil.getEntities((Level) pLevel,
                     new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
-                            pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> (obj instanceof GravityGunFallingBlockEntity block && block.getPlayerStringUUID().equals(pPlayer.getStringUUID())));
+                            pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> (obj instanceof GravityGunFallingBlockEntity block && block.getPlayerStringUUID().equals(pPlayer.getStringUUID())) || (obj.getTags().contains("ggcaught") && obj.getTags().contains("caughtby"+pPlayer.getStringUUID())));
             if (!blocks.isEmpty()) {
                 for (Entity block : blocks) {
 
                   if (block instanceof GravityGunFallingBlockEntity gblock) {
                     gblock.setnoplayer();
                     gblock.setLaunched(); }
+                  else {
+                   //   block.hurt(block.level.damageSources().playerAttack(pPlayer), this.getgundamage()/4);
+                      block.removeTag("ggcaught");
+                      block.removeTag("caughtby"+pPlayer.getStringUUID());
+                      block.addTag("gglaunched");
+                      block.addTag("launchedby"+pPlayer.getStringUUID());
+                  }
 
                //     if (block instanceof Manhack gblock) {
               //          gblock.setnoplayer();

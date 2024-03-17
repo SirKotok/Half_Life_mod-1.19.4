@@ -38,6 +38,13 @@ public class SuperGravityGun extends GravityGun{
         return false;
     }
 
+    public boolean isentitycatchable(Entity pEntity){
+        if (!pEntity.getType().is(HLTags.EntityTypes.GRAVITY_GUN_IMMUNE)) {
+            return !pEntity.isPassenger();
+        }
+        return false;
+    }
+
 
     @Override
     public float getgundamage() {

@@ -119,7 +119,9 @@ public class ModEventBusEvents {
                 Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
 
         event.register(HalfLifeEntities.SHARK.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                Shark::checkSharkSpawnRules, SpawnPlacementRegisterEvent.Operation.AND);
+                Shark::checkSharkSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        event.register(HalfLifeEntities.ARCHER.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Archer::checkSharkSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
 
     }
 

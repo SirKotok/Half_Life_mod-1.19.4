@@ -43,7 +43,7 @@ public class UnderbarrelGranade extends ThrowableItemProjectile implements GeoEn
         super.onHit(pResult);
         if (!this.level.isClientSide) {
             playSound(CommonSounds.getHL1Explosion(), 0.6f, 1f);
-            this.level.explode(this.getOwner(), this.getX(), this.getY(), this.getZ(), 3f, Level.ExplosionInteraction.MOB);
+            this.level.explode(this, this.getX(), this.getY(), this.getZ(), 3f, Level.ExplosionInteraction.MOB);
             this.discard();
         }
 

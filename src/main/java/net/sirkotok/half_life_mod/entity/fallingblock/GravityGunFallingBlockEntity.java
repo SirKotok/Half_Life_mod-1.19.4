@@ -38,6 +38,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.*;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.item.HalfLifeItems;
+import net.sirkotok.half_life_mod.misc.util.HLTags;
 import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
 import org.slf4j.Logger;
 
@@ -206,6 +207,11 @@ public class GravityGunFallingBlockEntity extends FallingBlockEntity {
 
     protected void onHit(HitResult pResult) {
         HitResult.Type hitresult$type = pResult.getType();
+        if (this.blockState.is(HLTags.Blocks.EXPLOSION)) {
+            this.level.explode(this, this.getX(), this.getY(), this.getZ(), 3f, Level.ExplosionInteraction.TNT);
+            this.discard();
+            return;
+        }
         if (hitresult$type == HitResult.Type.ENTITY) {
             this.onHitEntity((EntityHitResult)pResult);
             this.level.gameEvent(GameEvent.PROJECTILE_LAND, pResult.getLocation(), GameEvent.Context.of(this, (BlockState)null));
@@ -215,7 +221,6 @@ public class GravityGunFallingBlockEntity extends FallingBlockEntity {
             BlockPos blockpos = blockhitresult.getBlockPos();
             this.level.gameEvent(GameEvent.PROJECTILE_LAND, blockpos, GameEvent.Context.of(this, this.level.getBlockState(blockpos)));
         }
-
     }
 
 
@@ -223,7 +228,9 @@ public class GravityGunFallingBlockEntity extends FallingBlockEntity {
     protected void onHitEntity(EntityHitResult pResult) {
     //    super.onHitEntity(pResult);
         if (!this.level.isClientSide) {
-            int damage = (int) this.getDeltaMovement().scale(2).length();
+
+
+            int damage = (int) this.getDeltaMovement().scale(4).length();
            DamageSource damagesource = this.damageSources().fallingBlock(this);
             Entity entity = pResult.getEntity();
             if (entity == player) return;
