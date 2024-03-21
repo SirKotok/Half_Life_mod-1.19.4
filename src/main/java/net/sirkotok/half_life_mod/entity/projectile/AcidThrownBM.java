@@ -15,7 +15,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
-import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.SitThenBlowUpEffect;
+import net.sirkotok.half_life_mod.entity.mob.mob_effect_entity.custom.SitThenBlowUpEffect;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.misc.util.HLTags;
 import software.bernie.geckolib.animatable.GeoEntity;

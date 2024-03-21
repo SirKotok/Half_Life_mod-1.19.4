@@ -1,16 +1,12 @@
 package net.sirkotok.half_life_mod.entity.brain.behaviour;
 
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.monster.RangedAttackMob;
-import net.sirkotok.half_life_mod.entity.modinterface.AmmoCountMob;
+import net.sirkotok.half_life_mod.entity.mob.modinterface.AmmoCountMob;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableRangedAttack;
-import net.tslat.smartbrainlib.util.BrainUtils;
 import org.jetbrains.annotations.Nullable;
 
 public class StopAndReload<E extends LivingEntity & AmmoCountMob & RangedAttackMob> extends AnimatableRangedAttack<E> {

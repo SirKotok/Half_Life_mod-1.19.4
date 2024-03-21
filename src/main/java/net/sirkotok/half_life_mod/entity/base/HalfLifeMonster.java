@@ -18,7 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Voltigore;
+import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.Voltigore;
 
 import javax.annotation.Nullable;
 

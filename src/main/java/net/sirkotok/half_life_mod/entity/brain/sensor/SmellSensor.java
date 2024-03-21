@@ -1,7 +1,6 @@
 package net.sirkotok.half_life_mod.entity.brain.sensor;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -11,7 +10,7 @@ import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.brain.ModSensorType;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Cockroach;
+import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.Cockroach;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.PredicateSensor;
 
@@ -21,11 +20,9 @@ import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.function.BiPredicate;
-import java.util.function.Function;
 
 public class SmellSensor<E extends LivingEntity> extends PredicateSensor<LivingEntity, E> {
     @Nullable

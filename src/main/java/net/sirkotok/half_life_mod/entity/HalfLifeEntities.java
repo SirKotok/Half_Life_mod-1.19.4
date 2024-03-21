@@ -11,12 +11,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.entity.fallingblock.GravityGunFallingBlockEntity;
-import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.ShockWaveEffect;
-import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.SitThenBlowUpEffect;
-import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.VoltigoreProjectileAftereffect;
-import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.VortShockWaveEffect;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.*;
-import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
+import net.sirkotok.half_life_mod.entity.mob.mob_effect_entity.custom.ShockWaveEffect;
+import net.sirkotok.half_life_mod.entity.mob.mob_effect_entity.custom.SitThenBlowUpEffect;
+import net.sirkotok.half_life_mod.entity.mob.mob_effect_entity.custom.VoltigoreProjectileAftereffect;
+import net.sirkotok.half_life_mod.entity.mob.mob_effect_entity.custom.VortShockWaveEffect;
+import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.*;
+import net.sirkotok.half_life_mod.entity.mob.mob_normal.custom.Barnacle;
+import net.sirkotok.half_life_mod.entity.mob.mob_procedural_effect.HLHydra;
 import net.sirkotok.half_life_mod.entity.projectile.*;
 import net.sirkotok.half_life_mod.entity.projectile.arrowlike.Flechette;
 import net.sirkotok.half_life_mod.entity.projectile.TeleportingBullet;
@@ -221,6 +222,13 @@ public class HalfLifeEntities {
                     () -> EntityType.Builder.of(Shark::new, MobCategory.MONSTER)
                             .sized(2F, 1.5F)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "shark").toString()));
+
+
+    public static final RegistryObject<EntityType<HLHydra>> HYDRA =
+            ENTITY_TYPES.register("hl_hydra",
+                    () -> EntityType.Builder.of(HLHydra::new, MobCategory.MONSTER)
+                            .sized(1F, 1F)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "hl_hydra").toString()));
 
     public static final RegistryObject<EntityType<Archer>> ARCHER =
             ENTITY_TYPES.register("archerfish",

@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.block.HalfLifeBlocks;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Voltigore;
+import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.Voltigore;
 import net.tslat.smartbrainlib.api.core.behaviour.DelayedBehaviour;
 import net.tslat.smartbrainlib.util.BrainUtils;
 

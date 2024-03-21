@@ -15,7 +15,7 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
-import net.sirkotok.half_life_mod.entity.modinterface.RushingMob;
+import net.sirkotok.half_life_mod.entity.mob.modinterface.RushingMob;
 import net.sirkotok.half_life_mod.misc.util.HLperUtil;
 import net.sirkotok.half_life_mod.misc.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.core.behaviour.DelayedBehaviour;

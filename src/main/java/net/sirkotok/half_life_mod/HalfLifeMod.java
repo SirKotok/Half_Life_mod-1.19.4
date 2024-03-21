@@ -146,6 +146,9 @@ public class HalfLifeMod
             event.accept(HalfLifeItems.HUNTER_SPAWN_EGG);
 
 
+
+            event.accept(HalfLifeItems.HYDRA_SPAWN_EGG);
+
         }
 
         if(event.getTab().equals(HalfLifeCreativeModeTabs.HALF_LIFE_BLOCKS_TAB)) {

@@ -21,6 +21,18 @@ public class Glowparticle extends TextureSheetParticle {
         this.rCol = 0.1F;
         this.gCol = 0.8F;
         this.bCol = 0.1F; }
+       else if (ColorID == 2) {
+            this.rCol = 0.8F;
+            this.gCol = 0.1F;
+            this.bCol = 0.1F; }
+       else if (ColorID == 3) {
+            this.rCol = 0.1F;
+            this.gCol = 0.1F;
+            this.bCol = 0.8F; }
+       else if (ColorID == 4) {
+            this.rCol = 0.1F;
+            this.gCol = 0.8F;
+            this.bCol = 0.8F; }
         else  {
             this.rCol = 0.99F;
             this.gCol = 0.64F;

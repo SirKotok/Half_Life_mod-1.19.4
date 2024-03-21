@@ -8,8 +8,8 @@ import net.minecraft.world.entity.player.Player;
 import net.sirkotok.half_life_mod.misc.config.HalfLifeCommonConfigs;
 import net.sirkotok.half_life_mod.misc.effect.HalfLifeEffects;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Pitdrone;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Shockroach;
+import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.Pitdrone;
+import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.Shockroach;
 
 public class InfightingUtil {
 

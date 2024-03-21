@@ -26,7 +26,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.VortigauntHL2;
+import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.VortigauntHL2;
 import net.sirkotok.half_life_mod.misc.util.CommonSounds;
 import net.sirkotok.half_life_mod.misc.util.HLperUtil;
 import net.tslat.smartbrainlib.util.BrainUtils;

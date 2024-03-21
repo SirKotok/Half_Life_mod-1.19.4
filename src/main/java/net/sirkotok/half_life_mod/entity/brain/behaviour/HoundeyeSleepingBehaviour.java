@@ -8,7 +8,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Houndeye;
+import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.Houndeye;
 import net.tslat.smartbrainlib.api.core.behaviour.DelayedBehaviour;
 import net.tslat.smartbrainlib.util.BrainUtils;
 

@@ -9,10 +9,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
-import net.minecraft.world.entity.monster.RangedAttackMob;
-import net.sirkotok.half_life_mod.entity.modinterface.DoubleRangedMob;
+import net.sirkotok.half_life_mod.entity.mob.modinterface.DoubleRangedMob;
 import net.tslat.smartbrainlib.api.core.behaviour.DelayedBehaviour;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableRangedAttack;
 import net.tslat.smartbrainlib.util.BrainUtils;
 import org.jetbrains.annotations.Nullable;
 

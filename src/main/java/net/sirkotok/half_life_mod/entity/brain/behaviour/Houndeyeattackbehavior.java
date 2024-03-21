@@ -14,9 +14,9 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
-import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.ShockWaveEffect;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Hoteye;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Houndeye;
+import net.sirkotok.half_life_mod.entity.mob.mob_effect_entity.custom.ShockWaveEffect;
+import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.Hoteye;
+import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.Houndeye;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.ConditionlessAttack;
 import net.tslat.smartbrainlib.util.BrainUtils;
 

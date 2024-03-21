@@ -6,7 +6,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
-import net.sirkotok.half_life_mod.entity.modinterface.DoubleRangedMob;
+import net.sirkotok.half_life_mod.entity.mob.modinterface.DoubleRangedMob;
 import net.sirkotok.half_life_mod.misc.util.HLperUtil;
 
 import javax.annotation.Nullable;

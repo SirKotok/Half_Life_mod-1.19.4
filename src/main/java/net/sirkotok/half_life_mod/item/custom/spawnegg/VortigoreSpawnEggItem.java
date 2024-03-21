@@ -7,7 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Voltigore;
+import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.Voltigore;
 
 import java.util.Optional;
 import java.util.function.Supplier;

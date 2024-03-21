@@ -18,14 +18,14 @@ import net.sirkotok.half_life_mod.block.blockentity.HalfLifeBlockEntities;
 import net.sirkotok.half_life_mod.block.blockentity.client.VoltigoreEggRenderer;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.fallingblock.GravityGunBlockRenderer;
-import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.Shockwaverenderer;
-import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.SitRenderer;
-import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.Voltigore_projectile_e_renderer;
-import net.sirkotok.half_life_mod.entity.mob_effect_entity.client.renderer.VortShockwaverenderer;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.client.renderers.*;
-import net.sirkotok.half_life_mod.entity.mob_normal.client.ModModelLayers;
-import net.sirkotok.half_life_mod.entity.mob_normal.client.models.Barnacle_Model;
-import net.sirkotok.half_life_mod.entity.mob_normal.client.renderers.Barnacle_Renderer;
+import net.sirkotok.half_life_mod.entity.mob.mob_effect_entity.client.renderer.Shockwaverenderer;
+import net.sirkotok.half_life_mod.entity.mob.mob_effect_entity.client.renderer.SitRenderer;
+import net.sirkotok.half_life_mod.entity.mob.mob_effect_entity.client.renderer.Voltigore_projectile_e_renderer;
+import net.sirkotok.half_life_mod.entity.mob.mob_effect_entity.client.renderer.VortShockwaverenderer;
+import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.client.renderers.*;
+import net.sirkotok.half_life_mod.entity.mob.mob_normal.client.ModModelLayers;
+import net.sirkotok.half_life_mod.entity.mob.mob_normal.client.models.Barnacle_Model;
+import net.sirkotok.half_life_mod.entity.mob.mob_normal.client.renderers.Barnacle_Renderer;
 import net.sirkotok.half_life_mod.entity.particle.lightning.*;
 import net.sirkotok.half_life_mod.entity.projectile.client.renderer.*;
 import net.sirkotok.half_life_mod.entity.particle.custom.Glowparticle;
@@ -125,6 +125,9 @@ public class ClientModBusEvents {
         EntityRenderers.register(HalfLifeEntities.ACID_THROWNBM.get(), AcidThrownBMRenderer::new);
         EntityRenderers.register(HalfLifeEntities.UNDER_NADE.get(), Undernade_renderer::new);
         EntityRenderers.register(HalfLifeEntities.BARNACLE.get(), Barnacle_Renderer::new);
+
+
+        EntityRenderers.register(HalfLifeEntities.HYDRA.get(), NoRenderer::new);
 
 
         EntityRenderers.register(HalfLifeEntities.CON_BIG_PROJECTILE.get(), BigItemRenderer::new);

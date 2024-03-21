@@ -13,7 +13,7 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.util.RandomPos;
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
-import net.sirkotok.half_life_mod.entity.modinterface.HasLeaderMob;
+import net.sirkotok.half_life_mod.entity.mob.modinterface.HasLeaderMob;
 import net.tslat.smartbrainlib.api.core.behaviour.ExtendedBehaviour;
 import net.tslat.smartbrainlib.object.SquareRadius;
 import net.tslat.smartbrainlib.util.BrainUtils;

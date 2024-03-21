@@ -20,7 +20,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.block.blockentity.HalfLifeBlockEntities;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Voltigore;
+import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.Voltigore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoBlockEntity;

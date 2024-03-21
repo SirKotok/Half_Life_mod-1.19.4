@@ -1,21 +1,14 @@
 package net.sirkotok.half_life_mod.entity.brain.behaviour;
 
-import com.mojang.datafixers.util.Pair;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
-import net.sirkotok.half_life_mod.entity.modinterface.MultiMeleeEntity;
+import net.sirkotok.half_life_mod.entity.mob.modinterface.MultiMeleeEntity;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableMeleeAttack;
 import net.tslat.smartbrainlib.util.BrainUtils;
 
 import javax.annotation.Nullable;
-import java.util.List;
-import java.util.function.Function;
 
 public class MultiMeleeAttack<E extends HalfLifeMonster & MultiMeleeEntity> extends AnimatableMeleeAttack<E> {
 

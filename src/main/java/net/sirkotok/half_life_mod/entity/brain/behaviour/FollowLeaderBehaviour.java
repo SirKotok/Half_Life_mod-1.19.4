@@ -8,9 +8,7 @@ import net.minecraft.world.entity.ai.behavior.EntityTracker;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.Houndeye;
-import net.sirkotok.half_life_mod.entity.modinterface.HasLeaderMob;
-import net.tslat.smartbrainlib.api.SmartBrainOwner;
+import net.sirkotok.half_life_mod.entity.mob.modinterface.HasLeaderMob;
 import net.tslat.smartbrainlib.api.core.behaviour.ExtendedBehaviour;
 import net.tslat.smartbrainlib.util.BrainUtils;
 

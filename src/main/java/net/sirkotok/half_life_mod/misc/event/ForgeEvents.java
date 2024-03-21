@@ -1,16 +1,9 @@
 package net.sirkotok.half_life_mod.misc.event;
 
 
-import com.mojang.logging.LogUtils;
-import net.minecraft.client.CloudStatus;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.Options;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.dedicated.Settings;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
@@ -25,8 +18,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.*;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -35,17 +26,14 @@ import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.fallingblock.GravityGunFallingBlockEntity;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.client.renderers.CockroachRenderer;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.*;
-import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
+import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.*;
+import net.sirkotok.half_life_mod.entity.mob.mob_normal.custom.Barnacle;
 import net.sirkotok.half_life_mod.item.HalfLifeItems;
 import net.sirkotok.half_life_mod.misc.util.HLTags;
-import net.sirkotok.half_life_mod.worldgen.dimension.HalfLifeDimensions;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.object.SquareRadius;
 import net.tslat.smartbrainlib.util.BrainUtils;
 import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
-import org.slf4j.Logger;
 
 import java.util.List;
 import java.util.ListIterator;

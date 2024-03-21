@@ -9,12 +9,13 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
-import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.ShockWaveEffect;
-import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.SitThenBlowUpEffect;
-import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.VoltigoreProjectileAftereffect;
-import net.sirkotok.half_life_mod.entity.mob_effect_entity.custom.VortShockWaveEffect;
-import net.sirkotok.half_life_mod.entity.mob_geckolib.custom.*;
-import net.sirkotok.half_life_mod.entity.mob_normal.custom.Barnacle;
+import net.sirkotok.half_life_mod.entity.mob.mob_effect_entity.custom.ShockWaveEffect;
+import net.sirkotok.half_life_mod.entity.mob.mob_effect_entity.custom.SitThenBlowUpEffect;
+import net.sirkotok.half_life_mod.entity.mob.mob_effect_entity.custom.VoltigoreProjectileAftereffect;
+import net.sirkotok.half_life_mod.entity.mob.mob_effect_entity.custom.VortShockWaveEffect;
+import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.*;
+import net.sirkotok.half_life_mod.entity.mob.mob_normal.custom.Barnacle;
+import net.sirkotok.half_life_mod.entity.mob.mob_procedural_effect.HLHydra;
 
 @Mod.EventBusSubscriber(modid = HalfLifeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEventBusEvents {
@@ -38,6 +39,7 @@ public class ModEventBusEvents {
         event.put(HalfLifeEntities.LEECH.get(), Leech.setAttributes());
         event.put(HalfLifeEntities.SHARK.get(), Shark.setAttributes());
         event.put(HalfLifeEntities.ARCHER.get(), Archer.setAttributes());
+        event.put(HalfLifeEntities.HYDRA.get(), HLHydra.setAttributes());
         event.put(HalfLifeEntities.BARNACLE.get(), Barnacle.setAttributes());
         event.put(HalfLifeEntities.SNARK.get(), Snark.setAttributes());
         event.put(HalfLifeEntities.SHOCKWAVEEFFECT.get(), ShockWaveEffect.setAttributes());
