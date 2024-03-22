@@ -17,8 +17,8 @@ import net.sirkotok.half_life_mod.block.HalfLifeBlocks;
 import net.sirkotok.half_life_mod.block.blockentity.HalfLifeBlockEntities;
 import net.sirkotok.half_life_mod.misc.config.HalfLifeCommonConfigs;
 import net.sirkotok.half_life_mod.misc.effect.HalfLifeEffects;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
-import net.sirkotok.half_life_mod.entity.brain.ModSensorType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeSensorType;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.misc.gamerules.HalfLifeGameRules;
 import net.sirkotok.half_life_mod.item.HalfLifeCreativeModeTabs;
@@ -45,8 +45,8 @@ public class HalfLifeMod
         HalfLifeBlockEntities.register(modEventBus);
         HalfLifeEntities.register(modEventBus);
         HalfLifeSounds.register(modEventBus);
-        ModMemoryModuleType.register(modEventBus);
-        ModSensorType.register(modEventBus);
+        HalfLifeMemoryModuleType.register(modEventBus);
+        HalfLifeSensorType.register(modEventBus);
         HalfLifeEffects.register(modEventBus);
         HalfLifeParticles.register(modEventBus);
 
@@ -110,7 +110,7 @@ public class HalfLifeMod
             event.accept(HalfLifeItems.HOUNDEYE_SPAWN_EGG);
             event.accept(HalfLifeItems.HOTEYE_SPAWN_EGG);
 
-            event.accept(HalfLifeItems.CONTROLLER_SPAWN_EGG);
+
 
 
             event.accept(HalfLifeItems.SNARKNEST_SPAWN_EGG);
@@ -120,6 +120,8 @@ public class HalfLifeMod
 
             event.accept(HalfLifeItems.BARNACLE_ONE_SPAWN_EGG);
 
+            event.accept(HalfLifeItems.CONTROLLER_SPAWN_EGG);
+            event.accept(HalfLifeItems.ALIENGRUNT_SPAWN_EGG);
             event.accept(HalfLifeItems.VORTHL1_SPAWN_EGG);
             event.accept(HalfLifeItems.VORTHL2_SPAWN_EGG);
 
@@ -165,7 +167,9 @@ public class HalfLifeMod
             // items that are guns
             event.accept(HalfLifeItems.PISTOL);
             event.accept(HalfLifeItems.SMG_HL1);
+            event.accept(HalfLifeItems.HIVEHAND_ITEM);
             event.accept(HalfLifeItems.SHOCKROACH_ITEM);
+
             event.accept(HalfLifeItems.DISPLACER);
             event.accept(HalfLifeItems.DISPLACER_NETHER);
             event.accept(HalfLifeItems.DISPLACER_END);

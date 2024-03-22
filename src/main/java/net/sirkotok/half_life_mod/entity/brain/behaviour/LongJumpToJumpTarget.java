@@ -12,7 +12,7 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
 import net.sirkotok.half_life_mod.misc.util.CommonSounds;
 import net.sirkotok.half_life_mod.misc.util.HLperUtil;
 import net.tslat.smartbrainlib.api.core.behaviour.DelayedBehaviour;
@@ -24,7 +24,7 @@ import java.util.List;
 
 public class LongJumpToJumpTarget<E extends HalfLifeMonster> extends DelayedBehaviour<E> {
 
-    private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(ModMemoryModuleType.JUMPING.get(), MemoryStatus.VALUE_ABSENT), Pair.of(ModMemoryModuleType.TARGET_LONGJUMP_LOCATION.get(), MemoryStatus.VALUE_PRESENT));
+    private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(HalfLifeMemoryModuleType.JUMPING.get(), MemoryStatus.VALUE_ABSENT), Pair.of(HalfLifeMemoryModuleType.TARGET_LONGJUMP_LOCATION.get(), MemoryStatus.VALUE_PRESENT));
     private static final List<Integer> ALLOWED_ANGLES = Lists.newArrayList(65, 70, 75, 80);
     protected final float maxJumpVelocity;
     @Nullable
@@ -54,7 +54,7 @@ public class LongJumpToJumpTarget<E extends HalfLifeMonster> extends DelayedBeha
         this.optimal_jump_vector = null;
 
 
-        this.targetPos = BrainUtils.getMemory(entity, ModMemoryModuleType.TARGET_LONGJUMP_LOCATION.get());
+        this.targetPos = BrainUtils.getMemory(entity, HalfLifeMemoryModuleType.TARGET_LONGJUMP_LOCATION.get());
         if (targetPos == null && BrainUtils.getTargetOfEntity(entity) != null) targetPos = BrainUtils.getTargetOfEntity(entity).position();
         if (targetPos == null) return false;
         this.optimal_jump_vector = this.calculateOptimalJumpVector(entity, targetPos);

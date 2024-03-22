@@ -24,7 +24,7 @@ import net.minecraft.world.phys.HitResult;
 import net.sirkotok.half_life_mod.misc.effect.HalfLifeEffects;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.Antlion;
 import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.AntlionWorker;
 import net.sirkotok.half_life_mod.entity.mob.modinterface.HasLeaderMob;
@@ -98,7 +98,7 @@ public class BugbaitProjectile extends ThrowableItemProjectile {
                 if (y instanceof HasLeaderMob<?> x){
                 x.setLeader(y);
                 BrainUtils.clearMemory(y, MemoryModuleType.WALK_TARGET);
-                BrainUtils.clearMemory(y, ModMemoryModuleType.NOANTLIONATTACK.get());
+                BrainUtils.clearMemory(y, HalfLifeMemoryModuleType.NOANTLIONATTACK.get());
                 BrainUtils.setMemory(y, MemoryModuleType.ATTACK_TARGET, enemy);
                     if (RandomSource.create().nextFloat() < f) {
                         CommonSounds.PlaySoundQuiet(y, HalfLifeSounds.ANT_DISTRACT1.get());
@@ -125,7 +125,7 @@ public class BugbaitProjectile extends ThrowableItemProjectile {
                 if (y instanceof HasLeaderMob<?> x){
                     x.setLeader(y);
                     BrainUtils.setMemory(y, MemoryModuleType.WALK_TARGET, new WalkTarget(pBlockPos, 1.2f, 1));
-                    BrainUtils.setForgettableMemory(y, ModMemoryModuleType.NOANTLIONATTACK.get(), true, 200);
+                    BrainUtils.setForgettableMemory(y, HalfLifeMemoryModuleType.NOANTLIONATTACK.get(), true, 200);
                     BrainUtils.clearMemory(y, MemoryModuleType.ATTACK_TARGET);
                     if (RandomSource.create().nextFloat() < f) {
                         CommonSounds.PlaySoundQuiet(y, HalfLifeSounds.ANT_DISTRACT1.get());

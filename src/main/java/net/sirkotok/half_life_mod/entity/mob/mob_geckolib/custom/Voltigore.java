@@ -27,7 +27,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.sirkotok.half_life_mod.block.HalfLifeBlocks;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.NearbySecondBlocksSensor;
 import net.sirkotok.half_life_mod.entity.projectile.VoltigoreShock;
@@ -375,7 +375,7 @@ public class Voltigore extends HalfLifeMonster implements GeoEntity, SmartBrainO
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<Voltigore>(
                         new TargetOrRetaliateHLT<>(),
-                        new CustomBehaviour<>(entity -> BrainUtils.clearMemory(this, ModMemoryModuleType.CHECKED_LOCATIONS.get())).cooldownFor(entity -> 3000),
+                        new CustomBehaviour<>(entity -> BrainUtils.clearMemory(this, HalfLifeMemoryModuleType.CHECKED_LOCATIONS.get())).cooldownFor(entity -> 3000),
                         new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, false)).startCondition(entity -> this.isangry()),
                         new SetPlayerLookTarget<>(),
                         new VortigoreLayAnEggBehavior<>().startCondition(entity -> !this.isBB() && this.getvround() < 10 ),

@@ -7,7 +7,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.Houndeye;
 import net.tslat.smartbrainlib.api.core.behaviour.DelayedBehaviour;
 import net.tslat.smartbrainlib.util.BrainUtils;
@@ -15,7 +15,7 @@ import net.tslat.smartbrainlib.util.BrainUtils;
 import java.util.List;
 
 public class HoundeyeSleepingBehaviour<E extends Houndeye> extends DelayedBehaviour<E> {
-    private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_ABSENT), Pair.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT), Pair.of(ModMemoryModuleType.HUNGRY.get(), MemoryStatus.VALUE_ABSENT));
+    private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_ABSENT), Pair.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT), Pair.of(HalfLifeMemoryModuleType.HUNGRY.get(), MemoryStatus.VALUE_ABSENT));
 
     public HoundeyeSleepingBehaviour() {
         super(0);
@@ -57,7 +57,7 @@ public class HoundeyeSleepingBehaviour<E extends Houndeye> extends DelayedBehavi
     @Override
     protected void doDelayedAction(E entity) {
 
-        BrainUtils.setForgettableMemory(entity, ModMemoryModuleType.HUNGRY.get(), false, 5000);
+        BrainUtils.setForgettableMemory(entity, HalfLifeMemoryModuleType.HUNGRY.get(), false, 5000);
 
         List<Houndeye> dogs = entity.getDogs();
         for (Houndeye dog : dogs) {

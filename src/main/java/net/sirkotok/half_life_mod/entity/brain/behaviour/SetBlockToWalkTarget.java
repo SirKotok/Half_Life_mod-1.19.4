@@ -10,7 +10,7 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
 import net.tslat.smartbrainlib.api.core.behaviour.ExtendedBehaviour;
 import net.tslat.smartbrainlib.registry.SBLMemoryTypes;
 import net.tslat.smartbrainlib.util.BrainUtils;
@@ -23,7 +23,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 public class SetBlockToWalkTarget<E extends PathfinderMob> extends ExtendedBehaviour<E> {
-    private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT), Pair.of(SBLMemoryTypes.NEARBY_BLOCKS.get(), MemoryStatus.VALUE_PRESENT), Pair.of(ModMemoryModuleType.CHECKED_LOCATIONS.get(), MemoryStatus.REGISTERED));
+    private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT), Pair.of(SBLMemoryTypes.NEARBY_BLOCKS.get(), MemoryStatus.VALUE_PRESENT), Pair.of(HalfLifeMemoryModuleType.CHECKED_LOCATIONS.get(), MemoryStatus.REGISTERED));
 
 
     protected BiFunction<E, Vec3, Float> speedModifier = (entity, targetPos) -> 1f;
@@ -109,7 +109,7 @@ public class SetBlockToWalkTarget<E extends PathfinderMob> extends ExtendedBehav
     protected Vec3 getTargetPos(E entity) {
         List<Pair<BlockPos, BlockState>> list = BrainUtils.getMemory(entity, SBLMemoryTypes.NEARBY_BLOCKS.get());
         assert list != null;
-        List<Pair<BlockPos, BlockState>> list2 = BrainUtils.getMemory(entity, ModMemoryModuleType.CHECKED_LOCATIONS.get());
+        List<Pair<BlockPos, BlockState>> list2 = BrainUtils.getMemory(entity, HalfLifeMemoryModuleType.CHECKED_LOCATIONS.get());
         if (list2 != null && !list2.isEmpty()) {
         for (Pair<BlockPos, BlockState> pair : list2) {
             if (list.contains(pair)) list.remove(pair);
@@ -120,8 +120,8 @@ public class SetBlockToWalkTarget<E extends PathfinderMob> extends ExtendedBehav
             Pair<BlockPos, BlockState> interest = list.get(RandomSource.create().nextInt(0, list.size()));
             if (list2 == null) list2 = new ArrayList<>();
             list2.add(interest);
-            BrainUtils.setMemory(entity, ModMemoryModuleType.CHECKED_LOCATIONS.get(), list2);
-            BrainUtils.setMemory(entity, ModMemoryModuleType.LOCATION_OF_INTEREST.get(), interest);
+            BrainUtils.setMemory(entity, HalfLifeMemoryModuleType.CHECKED_LOCATIONS.get(), list2);
+            BrainUtils.setMemory(entity, HalfLifeMemoryModuleType.LOCATION_OF_INTEREST.get(), interest);
         BlockPos pos = interest.getFirst();
             vec3 = pos.getCenter();
         }

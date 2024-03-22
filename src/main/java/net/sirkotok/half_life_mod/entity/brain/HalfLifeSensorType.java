@@ -14,7 +14,7 @@ import net.sirkotok.half_life_mod.entity.brain.sensor.NearestHealableAllySensor;
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
 
 
-public class ModSensorType {
+public class HalfLifeSensorType {
 
     public static final DeferredRegister<SensorType<?>> SENSOR_TYPES =
             DeferredRegister.create(ForgeRegistries.SENSOR_TYPES, HalfLifeMod.MOD_ID);

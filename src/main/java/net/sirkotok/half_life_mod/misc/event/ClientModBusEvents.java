@@ -26,6 +26,7 @@ import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.client.renderers.*;
 import net.sirkotok.half_life_mod.entity.mob.mob_normal.client.ModModelLayers;
 import net.sirkotok.half_life_mod.entity.mob.mob_normal.client.models.Barnacle_Model;
 import net.sirkotok.half_life_mod.entity.mob.mob_normal.client.renderers.Barnacle_Renderer;
+import net.sirkotok.half_life_mod.entity.particle.custom.trail.BeeTrailParticle;
 import net.sirkotok.half_life_mod.entity.particle.lightning.*;
 import net.sirkotok.half_life_mod.entity.projectile.client.renderer.*;
 import net.sirkotok.half_life_mod.entity.particle.custom.Glowparticle;
@@ -55,7 +56,10 @@ public class ClientModBusEvents {
                 BigImpactParticle.Provider::new);
         Minecraft.getInstance().particleEngine.register(HalfLifeParticles.STAT_GLOW.get(),
                 Glowparticle.Provider::new);
+        Minecraft.getInstance().particleEngine.register(HalfLifeParticles.BEE_GLOW.get(),
+                Glowparticle.BeeProvider::new);
 
+        event.registerSpecial(HalfLifeParticles.BEETRAIL.get(), new BeeTrailParticle.Factory());
         event.registerSpecial(HalfLifeParticles.VORT_LIGHTNING.get(), new VortLightningParticle.Factory());
         event.registerSpecial(HalfLifeParticles.VOLT_LIGHTNING.get(), new VoltigoreLightningParticle.Factory());
         event.registerSpecial(HalfLifeParticles.VORT_ARC_LIGHTNING.get(), new VortArcLightningParticle.Factory());
@@ -112,10 +116,12 @@ public class ClientModBusEvents {
         EntityRenderers.register(HalfLifeEntities.HUNTER.get(), Hunter_renderer::new);
         EntityRenderers.register(HalfLifeEntities.LEECH.get(), Leechrenderer::new);
         EntityRenderers.register(HalfLifeEntities.SHARK.get(), SharkRenderer::new);
+        EntityRenderers.register(HalfLifeEntities.ALIENGRUNT.get(), AliengruntRenderer::new);
         EntityRenderers.register(HalfLifeEntities.ARCHER.get(), Archerrenderer::new);
         EntityRenderers.register(HalfLifeEntities.ACID_BALL.get(), ThrownItemRenderer::new);
         EntityRenderers.register(HalfLifeEntities.VOLTIGORE_SHOCK.get(), Voltigore_projectile_renderer::new);
         EntityRenderers.register(HalfLifeEntities.PITDRONE_SPIKE.get(), Pitdrone_spike_renderer::new);
+        EntityRenderers.register(HalfLifeEntities.BEE_PROJECTILE.get(), BeeProjectileRenderer::new);
         EntityRenderers.register(HalfLifeEntities.FLECHETTE.get(), Flechette_renderer::new);
         EntityRenderers.register(HalfLifeEntities.SHOCK_SHOT.get(), ThrownItemRenderer::new);
         EntityRenderers.register(HalfLifeEntities.BULLET_ONE.get(), ThrownItemRenderer::new);

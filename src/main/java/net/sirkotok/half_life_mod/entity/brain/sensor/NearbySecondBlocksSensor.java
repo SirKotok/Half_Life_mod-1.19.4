@@ -8,15 +8,13 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
-import net.sirkotok.half_life_mod.entity.brain.ModSensorType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeSensorType;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.PredicateSensor;
-import net.tslat.smartbrainlib.api.core.sensor.custom.NearbyBlocksSensor;
 import net.tslat.smartbrainlib.util.BrainUtils;
 import net.tslat.smartbrainlib.object.SquareRadius;
 import net.tslat.smartbrainlib.registry.SBLMemoryTypes;
-import net.tslat.smartbrainlib.registry.SBLSensors;
 
 import java.util.List;
 
@@ -29,7 +27,7 @@ import java.util.List;
  * </ul>
  */
 public class  NearbySecondBlocksSensor<E extends LivingEntity> extends PredicateSensor<BlockState, E> {
-    private static final List<MemoryModuleType<?>> MEMORIES = ObjectArrayList.of(ModMemoryModuleType.NEARBY_BLOCKS_TWO.get());
+    private static final List<MemoryModuleType<?>> MEMORIES = ObjectArrayList.of(HalfLifeMemoryModuleType.NEARBY_BLOCKS_TWO.get());
 
     protected SquareRadius radius = new SquareRadius(1, 1);
 
@@ -44,7 +42,7 @@ public class  NearbySecondBlocksSensor<E extends LivingEntity> extends Predicate
 
     @Override
     public SensorType<? extends ExtendedSensor<?>> type() {
-        return ModSensorType.NEARBY_SECOND_BLOCKS_SENSOR.get();
+        return HalfLifeSensorType.NEARBY_SECOND_BLOCKS_SENSOR.get();
     }
 
     /**
@@ -80,10 +78,10 @@ public class  NearbySecondBlocksSensor<E extends LivingEntity> extends Predicate
         }
 
         if (blocks.isEmpty()) {
-            BrainUtils.clearMemory(entity, ModMemoryModuleType.NEARBY_BLOCKS_TWO.get());
+            BrainUtils.clearMemory(entity, HalfLifeMemoryModuleType.NEARBY_BLOCKS_TWO.get());
         }
         else {
-            BrainUtils.setMemory(entity, ModMemoryModuleType.NEARBY_BLOCKS_TWO.get(), blocks);
+            BrainUtils.setMemory(entity, HalfLifeMemoryModuleType.NEARBY_BLOCKS_TWO.get(), blocks);
         }
     }
 }

@@ -14,7 +14,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.sirkotok.half_life_mod.misc.damagesource.ModDamageTypes;
+import net.sirkotok.half_life_mod.misc.damagesource.HalfLifeDamageTypes;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.base.FireballNoTrail;
 import net.sirkotok.half_life_mod.item.HalfLifeItems;
@@ -89,7 +89,7 @@ public class Bullet extends FireballNoTrail {
             Entity entity1 = this.getOwner();
             if (entity1 instanceof LivingEntity shooter) {
                 Vec3 amogus = entity.getDeltaMovement();
-                entity.hurt(ModDamageTypes.bulletdamage(level.registryAccess(), this, shooter), this.getdamage());
+                entity.hurt(HalfLifeDamageTypes.bulletdamage(level.registryAccess(), this, shooter), this.getdamage());
                 entity.setDeltaMovement(amogus);
             }
         }

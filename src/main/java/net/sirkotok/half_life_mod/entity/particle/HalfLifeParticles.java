@@ -14,7 +14,8 @@ public class HalfLifeParticles {
 
     public static final RegistryObject<SimpleParticleType> VORT_LIGHTNING =
             PARTICLE_TYPES.register("vort_lightning", () -> new SimpleParticleType(false));
-
+    public static final RegistryObject<SimpleParticleType> BEETRAIL =
+            PARTICLE_TYPES.register("beetrail", () -> new SimpleParticleType(false));
     public static final RegistryObject<SimpleParticleType> ORANGEGLOW =
             PARTICLE_TYPES.register("orangeglow", () -> new SimpleParticleType(false));
     public static final RegistryObject<SimpleParticleType> VORT_ARC_LIGHTNING =
@@ -38,6 +39,7 @@ public class HalfLifeParticles {
             PARTICLE_TYPES.register("shock_impact", () -> new SimpleParticleType(true));
 
     public static final RegistryObject<SimpleParticleType> STAT_GLOW = PARTICLE_TYPES.register("stationary_glow", () -> new SimpleParticleType(true));
+    public static final RegistryObject<SimpleParticleType> BEE_GLOW = PARTICLE_TYPES.register("bee_glow", () -> new SimpleParticleType(true));
 
 
 

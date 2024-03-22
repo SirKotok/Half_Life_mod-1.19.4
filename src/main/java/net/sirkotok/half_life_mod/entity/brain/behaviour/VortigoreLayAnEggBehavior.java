@@ -12,7 +12,7 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.block.HalfLifeBlocks;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.Voltigore;
 import net.tslat.smartbrainlib.api.core.behaviour.DelayedBehaviour;
 import net.tslat.smartbrainlib.util.BrainUtils;
@@ -20,7 +20,7 @@ import net.tslat.smartbrainlib.util.BrainUtils;
 import java.util.List;
 
 public class VortigoreLayAnEggBehavior<E extends Voltigore> extends DelayedBehaviour<E> {
-    private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(ModMemoryModuleType.LOCATION_OF_INTEREST.get(), MemoryStatus.VALUE_PRESENT), Pair.of(ModMemoryModuleType.NEARBY_BLOCKS_TWO.get(), MemoryStatus.REGISTERED));
+    private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(HalfLifeMemoryModuleType.LOCATION_OF_INTEREST.get(), MemoryStatus.VALUE_PRESENT), Pair.of(HalfLifeMemoryModuleType.NEARBY_BLOCKS_TWO.get(), MemoryStatus.REGISTERED));
 
     public VortigoreLayAnEggBehavior() {
         super(8);
@@ -38,13 +38,13 @@ public class VortigoreLayAnEggBehavior<E extends Voltigore> extends DelayedBehav
 
     @Override
     protected boolean checkExtraStartConditions(ServerLevel level, E entity) {
-        BlockPos pos = BrainUtils.getMemory(entity, ModMemoryModuleType.LOCATION_OF_INTEREST.get()).getFirst();
+        BlockPos pos = BrainUtils.getMemory(entity, HalfLifeMemoryModuleType.LOCATION_OF_INTEREST.get()).getFirst();
         BlockPos pos2 = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
         Vec3 location = pos2.getCenter();
         BlockState blockstate = level.getBlockState(pos2);
 
-        if (BrainUtils.getMemory(entity, ModMemoryModuleType.NEARBY_BLOCKS_TWO.get()) != null) {
-            if (BrainUtils.getMemory(entity, ModMemoryModuleType.NEARBY_BLOCKS_TWO.get()).size() > 10) return false;
+        if (BrainUtils.getMemory(entity, HalfLifeMemoryModuleType.NEARBY_BLOCKS_TWO.get()) != null) {
+            if (BrainUtils.getMemory(entity, HalfLifeMemoryModuleType.NEARBY_BLOCKS_TWO.get()).size() > 10) return false;
         }
 
         return entity.distanceToSqr(location) < 1f && blockstate.isAir();
@@ -67,7 +67,7 @@ public class VortigoreLayAnEggBehavior<E extends Voltigore> extends DelayedBehav
 
     @Override
     protected void doDelayedAction(E entity) {
-        BlockPos pos = BrainUtils.getMemory(entity, ModMemoryModuleType.LOCATION_OF_INTEREST.get()).getFirst();
+        BlockPos pos = BrainUtils.getMemory(entity, HalfLifeMemoryModuleType.LOCATION_OF_INTEREST.get()).getFirst();
         BlockPos pos2 = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
         BlockState blockstate = entity.level.getBlockState(pos2);
 
@@ -76,6 +76,6 @@ public class VortigoreLayAnEggBehavior<E extends Voltigore> extends DelayedBehav
         entity.playSound(SoundEvents.TURTLE_LAY_EGG);
         entity.setPersistenceRequired();
         }
-        BrainUtils.clearMemory(entity, ModMemoryModuleType.LOCATION_OF_INTEREST.get());
+        BrainUtils.clearMemory(entity, HalfLifeMemoryModuleType.LOCATION_OF_INTEREST.get());
     }
 }

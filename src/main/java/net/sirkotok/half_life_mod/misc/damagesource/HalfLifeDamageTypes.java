@@ -18,7 +18,7 @@ import net.minecraft.network.chat.Component;
 import javax.annotation.Nullable;
 
 
-public class ModDamageTypes {
+public class HalfLifeDamageTypes {
     public static final DeferredRegister<DamageType> DAMAGE_TYPES =
             DeferredRegister.create(Registries.DAMAGE_TYPE, HalfLifeMod.MOD_ID);
 

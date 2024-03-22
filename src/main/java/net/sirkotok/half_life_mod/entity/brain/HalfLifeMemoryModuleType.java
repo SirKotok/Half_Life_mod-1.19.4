@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-public class ModMemoryModuleType {
+public class HalfLifeMemoryModuleType {
 
     public static final DeferredRegister<MemoryModuleType<?>> MEMORY_MODULE_TYPES =
             DeferredRegister.create(ForgeRegistries.MEMORY_MODULE_TYPES, HalfLifeMod.MOD_ID);

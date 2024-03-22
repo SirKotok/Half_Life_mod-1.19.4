@@ -12,7 +12,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.util.RandomPos;
 import net.minecraft.world.phys.Vec3;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.mob.modinterface.HasLeaderMob;
 import net.tslat.smartbrainlib.api.core.behaviour.ExtendedBehaviour;
 import net.tslat.smartbrainlib.object.SquareRadius;
@@ -24,7 +24,7 @@ import java.util.function.ToDoubleFunction;
 
 public class SetJumpTargetToRandomSpotAroundLeader<E extends PathfinderMob & HasLeaderMob<E>> extends ExtendedBehaviour<E> {
 
-    private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(ModMemoryModuleType.TARGET_LONGJUMP_LOCATION.get(), MemoryStatus.REGISTERED));
+    private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(HalfLifeMemoryModuleType.TARGET_LONGJUMP_LOCATION.get(), MemoryStatus.REGISTERED));
     protected SquareRadius radius = new SquareRadius(5, 3);
     protected float speedModifier = 1;
     public final int self012;
@@ -65,10 +65,10 @@ public class SetJumpTargetToRandomSpotAroundLeader<E extends PathfinderMob & Has
         Vec3 targetPos = getTargetPos(entity);
 
             if (targetPos == null) {
-                BrainUtils.clearMemory(entity, ModMemoryModuleType.TARGET_LONGJUMP_LOCATION.get());
+                BrainUtils.clearMemory(entity, HalfLifeMemoryModuleType.TARGET_LONGJUMP_LOCATION.get());
             }
             else {
-                BrainUtils.setForgettableMemory(entity, ModMemoryModuleType.TARGET_LONGJUMP_LOCATION.get(), targetPos, 50);
+                BrainUtils.setForgettableMemory(entity, HalfLifeMemoryModuleType.TARGET_LONGJUMP_LOCATION.get(), targetPos, 50);
             }
 
     }

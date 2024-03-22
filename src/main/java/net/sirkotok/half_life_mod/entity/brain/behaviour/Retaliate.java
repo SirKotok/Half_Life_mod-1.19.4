@@ -10,7 +10,7 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 
 
 import net.minecraft.world.entity.player.Player;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
 import net.sirkotok.half_life_mod.misc.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.core.behaviour.ExtendedBehaviour;
 import net.tslat.smartbrainlib.util.BrainUtils;
@@ -22,7 +22,7 @@ import java.util.function.Predicate;
 public class Retaliate<E extends Mob> extends ExtendedBehaviour<E> {
     // The generic type E here represents the minimum entity type of the entities that could use this behaviour. Other examples might be Mob, or PathfinderMob
 
-    private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(MemoryModuleType.HURT_BY_ENTITY, MemoryStatus.VALUE_PRESENT), Pair.of(ModMemoryModuleType.RETALIATECOOLDOWN.get(), MemoryStatus.VALUE_ABSENT));
+    private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(MemoryModuleType.HURT_BY_ENTITY, MemoryStatus.VALUE_PRESENT), Pair.of(HalfLifeMemoryModuleType.RETALIATECOOLDOWN.get(), MemoryStatus.VALUE_ABSENT));
 
 
     protected Predicate<LivingEntity> targetPredicate = entity -> entity.isAlive() && (!(entity instanceof Player player) || !player.isCreative()); // Predicate that determines an applicable target
@@ -63,7 +63,7 @@ public class Retaliate<E extends Mob> extends ExtendedBehaviour<E> {
 
         // If we have a valid target then, Target found, set the target in memory, and reset the unreachable target timer
         if (target != null && this.targetPredicate.test(target)) {
-            BrainUtils.setForgettableMemory(entity, ModMemoryModuleType.RETALIATECOOLDOWN.get(), true, this.cooldowntime.apply(entity));
+            BrainUtils.setForgettableMemory(entity, HalfLifeMemoryModuleType.RETALIATECOOLDOWN.get(), true, this.cooldowntime.apply(entity));
             BrainUtils.setMemory(entity, MemoryModuleType.ATTACK_TARGET, target);
             BrainUtils.clearMemory(entity, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE);
         }

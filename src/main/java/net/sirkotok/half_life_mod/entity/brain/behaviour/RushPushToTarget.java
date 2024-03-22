@@ -14,7 +14,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.mob.modinterface.RushingMob;
 import net.sirkotok.half_life_mod.misc.util.HLperUtil;
 import net.sirkotok.half_life_mod.misc.util.InfightingUtil;
@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.function.BiFunction;
 
 public class RushPushToTarget<E extends Mob & RushingMob> extends DelayedBehaviour<E> {
-    private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(MemoryModuleType.WALK_TARGET, MemoryStatus.REGISTERED), Pair.of(MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED), Pair.of(ModMemoryModuleType.RUSHING.get(), MemoryStatus.REGISTERED), Pair.of(MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT));
+    private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(MemoryModuleType.WALK_TARGET, MemoryStatus.REGISTERED), Pair.of(MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED), Pair.of(HalfLifeMemoryModuleType.RUSHING.get(), MemoryStatus.REGISTERED), Pair.of(MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT));
 
     protected BiFunction<E, Vec3, Float> speedModifier; // = (entity, targetPos) -> 1f;
     public int startticks;
@@ -61,7 +61,7 @@ public class RushPushToTarget<E extends Mob & RushingMob> extends DelayedBehavio
         this.ticks = 0;
         if (this.rushsound != null) entity.playSound(rushsound, 0.6f, entity.getVoicePitch());
         BrainUtils.clearMemory(entity, MemoryModuleType.WALK_TARGET);
-        BrainUtils.setForgettableMemory(entity, ModMemoryModuleType.RUSHING.get(), true, delayTime+3);
+        BrainUtils.setForgettableMemory(entity, HalfLifeMemoryModuleType.RUSHING.get(), true, delayTime+3);
         entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, startticks+1, 100, false, false, false));
     }
 

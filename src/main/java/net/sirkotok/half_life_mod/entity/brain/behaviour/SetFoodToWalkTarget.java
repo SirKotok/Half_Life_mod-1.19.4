@@ -3,18 +3,13 @@ package net.sirkotok.half_life_mod.entity.brain.behaviour;
 import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
-import net.minecraft.world.entity.ai.util.DefaultRandomPos;
-import net.minecraft.world.entity.ai.util.LandRandomPos;
 import net.minecraft.world.phys.Vec3;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
 import net.tslat.smartbrainlib.api.core.behaviour.ExtendedBehaviour;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetRandomWalkTarget;
-import net.tslat.smartbrainlib.object.SquareRadius;
 import net.tslat.smartbrainlib.util.BrainUtils;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,7 +19,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 public class SetFoodToWalkTarget<E extends PathfinderMob> extends ExtendedBehaviour<E> {
-    private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT), Pair.of(ModMemoryModuleType.FOOD_SMELL.get(), MemoryStatus.VALUE_PRESENT));
+    private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT), Pair.of(HalfLifeMemoryModuleType.FOOD_SMELL.get(), MemoryStatus.VALUE_PRESENT));
 
 
     protected BiFunction<E, Vec3, Float> speedModifier = (entity, targetPos) -> 1f;
@@ -108,7 +103,7 @@ public class SetFoodToWalkTarget<E extends PathfinderMob> extends ExtendedBehavi
 
     @Nullable
     protected Vec3 getTargetPos(E entity) {
-        List<Vec3> list = BrainUtils.getMemory(entity, ModMemoryModuleType.FOOD_SMELL.get());
+        List<Vec3> list = BrainUtils.getMemory(entity, HalfLifeMemoryModuleType.FOOD_SMELL.get());
         if (list != null && !list.isEmpty())
         {
             int i = -1;
@@ -118,15 +113,15 @@ public class SetFoodToWalkTarget<E extends PathfinderMob> extends ExtendedBehavi
                 if (entity.distanceToSqr(Clostestlocation) > entity.distanceToSqr(location))
                     Clostestlocation = location;
             }
-            BrainUtils.setMemory(entity, ModMemoryModuleType.FOOD_ID.get(), i);
-            BrainUtils.setMemory(entity, ModMemoryModuleType.RNG_COMPARITOR_1.get(), RandomSource.create().nextInt(1000));
+            BrainUtils.setMemory(entity, HalfLifeMemoryModuleType.FOOD_ID.get(), i);
+            BrainUtils.setMemory(entity, HalfLifeMemoryModuleType.RNG_COMPARITOR_1.get(), RandomSource.create().nextInt(1000));
             return Clostestlocation;
         }
         else {
-            int index = RandomSource.create().nextInt(BrainUtils.getMemory(entity, ModMemoryModuleType.FOOD_SMELL.get()).size());
-        Vec3 targetpos = BrainUtils.getMemory(entity, ModMemoryModuleType.FOOD_SMELL.get()).get(index);
-        BrainUtils.setMemory(entity, ModMemoryModuleType.FOOD_ID.get(), index);
-        BrainUtils.setMemory(entity, ModMemoryModuleType.RNG_COMPARITOR_1.get(), RandomSource.create().nextInt(1000));
+            int index = RandomSource.create().nextInt(BrainUtils.getMemory(entity, HalfLifeMemoryModuleType.FOOD_SMELL.get()).size());
+        Vec3 targetpos = BrainUtils.getMemory(entity, HalfLifeMemoryModuleType.FOOD_SMELL.get()).get(index);
+        BrainUtils.setMemory(entity, HalfLifeMemoryModuleType.FOOD_ID.get(), index);
+        BrainUtils.setMemory(entity, HalfLifeMemoryModuleType.RNG_COMPARITOR_1.get(), RandomSource.create().nextInt(1000));
         return targetpos;
     }}
 }

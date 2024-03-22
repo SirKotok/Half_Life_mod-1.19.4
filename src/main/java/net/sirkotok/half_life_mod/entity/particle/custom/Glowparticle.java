@@ -17,6 +17,11 @@ public class Glowparticle extends TextureSheetParticle {
         this.xd *= 0;
         this.yd *= 0;
         this.zd *= 0;
+        if (ColorID == -1) {
+            this.rCol = 0.89F+random.nextFloat()*0.1f;
+            this.gCol = 0.54F+random.nextFloat()*0.1f;
+            this.bCol = 0.01F+random.nextFloat()*0.1f;
+        } else
         if (ColorID == 1) {
         this.rCol = 0.1F;
         this.gCol = 0.8F;
@@ -91,6 +96,23 @@ public class Glowparticle extends TextureSheetParticle {
 
         }
     }
+
+    @OnlyIn(Dist.CLIENT)
+    public static class BeeProvider implements ParticleProvider<SimpleParticleType> {
+        private final SpriteSet sprites;
+
+        public BeeProvider(SpriteSet spriteSet) {
+            this.sprites = spriteSet;
+        }
+
+        @Override
+        public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double Color_ID, double Size, double zSpeed) {
+            return new Glowparticle(level, this.sprites,
+                    x, y, z, -1, 0.01, 2);
+
+        }
+    }
+
 
 
 

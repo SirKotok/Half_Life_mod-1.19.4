@@ -28,7 +28,7 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.fluids.FluidType;
 import net.sirkotok.half_life_mod.misc.config.HalfLifeCommonConfigs;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
 import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
@@ -359,7 +359,7 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<Bullsquid>(
                     //    new InvalidateFoodLocation<>().cooldownFor(entity -> 200), // not used because null pointer, the behavior needs rewrite
-                        new CustomBehaviour<>(entity -> BrainUtils.clearMemory(this, ModMemoryModuleType.HUNGRY.get()))
+                        new CustomBehaviour<>(entity -> BrainUtils.clearMemory(this, HalfLifeMemoryModuleType.HUNGRY.get()))
                                 .startCondition(entity -> ((this.getHealth() + 2) < this.getMaxHealth())).cooldownFor(entity -> 400),
                         new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, true))
                                 .startCondition(entity -> this.getLastAttacker() != null)

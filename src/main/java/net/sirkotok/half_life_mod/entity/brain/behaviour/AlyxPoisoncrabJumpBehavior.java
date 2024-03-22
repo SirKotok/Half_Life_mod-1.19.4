@@ -13,7 +13,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.phys.Vec3;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.Headcrab_Poison_3;
 import net.sirkotok.half_life_mod.misc.util.HLTags;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.ConditionlessAttack;
@@ -146,7 +146,7 @@ public class AlyxPoisoncrabJumpBehavior<E extends Headcrab_Poison_3>  extends Co
                 this.headcrabjumped = true;
                 entity.playSound(this.jumpsound, 0.3f, 1);
             }
-            BrainUtils.setForgettableMemory(entity, ModMemoryModuleType.JUMPING.get(), true, 50);
+            BrainUtils.setForgettableMemory(entity, HalfLifeMemoryModuleType.JUMPING.get(), true, 50);
         }
 
 

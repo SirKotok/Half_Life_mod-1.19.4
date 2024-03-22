@@ -40,6 +40,8 @@
     "item.half_life_mod.barney_spawn_egg": "Security Guard Spawn Egg",
     "item.half_life_mod.snarknest_spawn_egg": "Snark Nest Spawn Egg",
     "item.half_life_mod.scientist_spawn_egg": "Scientist Spawn Egg",
+    "item.half_life_mod.hl_hydra_spawn_egg": "Hydra Spawn Egg",
+    "item.half_life_mod.aliengrunt_spawn_egg": "Alien Grunt Spawn Egg",
   "item.half_life_mod.snark_thrower": "Snark",
   "item.half_life_mod.penguin_thrower": "Penguin",
     "item.half_life_mod.pistol_one_item": "9mm Pistol",
@@ -78,6 +80,8 @@
   "key.category.half_life_mod.half_life": "Half-Life Category",
     "key.half_life_mod.reload_gun": "Reload Gun",
 
+    "entity.half_life_mod.hl_hydra": "Hydra",
+    "entity.half_life_mod.aliengrunt": "Alien Grunt",
     "entity.half_life_mod.archerfish": "Archer",
     "entity.half_life_mod.vorthl2": "Vortigaunt",
     "entity.half_life_mod.vorthl1": "Alien Slave",

@@ -28,7 +28,7 @@ import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.mob.modinterface.HasLeaderMob;
 import net.sirkotok.half_life_mod.misc.effect.HalfLifeEffects;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
 import net.sirkotok.half_life_mod.entity.projectile.AcidBall;
@@ -307,7 +307,7 @@ public class AntlionWorker extends HalfLifeMonster implements RangedAttackMob, H
     public BrainActivityGroup<AntlionWorker> getIdleTasks() {
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<AntlionWorker>(
-                        new TargetOrRetaliateHLT<>().startCondition(entity -> (this.getLeader() == null || this.getLeader() == this) && BrainUtils.getMemory(this, ModMemoryModuleType.NOANTLIONATTACK.get()) == null),
+                        new TargetOrRetaliateHLT<>().startCondition(entity -> (this.getLeader() == null || this.getLeader() == this) && BrainUtils.getMemory(this, HalfLifeMemoryModuleType.NOANTLIONATTACK.get()) == null),
                         new SetPlayerLookTarget<>(),
                         new SetRandomLookTarget<>()),
                 new SetJumpTargetToRandom<>().radius(15, 10).cooldownFor(entity -> 10),

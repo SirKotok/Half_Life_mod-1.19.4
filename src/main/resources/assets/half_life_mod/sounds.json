@@ -17,6 +17,222 @@
       "half_life_mod:bugbait_impact1"
     ]
   },
+  "ag_alert1": {
+    "subtitle": "sounds.half_life_mod.ag_alert1",
+    "sounds": [
+      "half_life_mod:ag_alert1"
+    ]
+  },
+  "ag_alert2": {
+    "subtitle": "sounds.half_life_mod.ag_alert2",
+    "sounds": [
+      "half_life_mod:ag_alert2"
+    ]
+  },
+  "ag_alert3": {
+    "subtitle": "sounds.half_life_mod.ag_alert3",
+    "sounds": [
+      "half_life_mod:ag_alert3"
+    ]
+  },
+  "ag_alert4": {
+    "subtitle": "sounds.half_life_mod.ag_alert4",
+    "sounds": [
+      "half_life_mod:ag_alert4"
+    ]
+  },
+  "ag_alert5": {
+    "subtitle": "sounds.half_life_mod.ag_alert5",
+    "sounds": [
+      "half_life_mod:ag_alert5"
+    ]
+  },
+  "ag_attack1": {
+    "subtitle": "sounds.half_life_mod.ag_attack1",
+    "sounds": [
+      "half_life_mod:ag_attack1"
+    ]
+  },
+  "ag_attack2": {
+    "subtitle": "sounds.half_life_mod.ag_attack2",
+    "sounds": [
+      "half_life_mod:ag_attack2"
+    ]
+  },
+  "ag_attack3": {
+    "subtitle": "sounds.half_life_mod.ag_attack3",
+    "sounds": [
+      "half_life_mod:ag_attack3"
+    ]
+  },
+  "ag_die1": {
+    "subtitle": "sounds.half_life_mod.ag_die1",
+    "sounds": [
+      "half_life_mod:ag_die1"
+    ]
+  },
+  "ag_die2": {
+    "subtitle": "sounds.half_life_mod.ag_die2",
+    "sounds": [
+      "half_life_mod:ag_die2"
+    ]
+  },
+  "ag_die3": {
+    "subtitle": "sounds.half_life_mod.ag_die3",
+    "sounds": [
+      "half_life_mod:ag_die3"
+    ]
+  },
+  "ag_die4": {
+    "subtitle": "sounds.half_life_mod.ag_die4",
+    "sounds": [
+      "half_life_mod:ag_die4"
+    ]
+  },
+  "ag_die5": {
+    "subtitle": "sounds.half_life_mod.ag_die5",
+    "sounds": [
+      "half_life_mod:ag_die5"
+    ]
+  },
+  "ag_fire1": {
+    "subtitle": "sounds.half_life_mod.ag_fire1",
+    "sounds": [
+      "half_life_mod:ag_fire1"
+    ]
+  },
+  "ag_fire2": {
+    "subtitle": "sounds.half_life_mod.ag_fire2",
+    "sounds": [
+      "half_life_mod:ag_fire2"
+    ]
+  },
+  "ag_fire3": {
+    "subtitle": "sounds.half_life_mod.ag_fire3",
+    "sounds": [
+      "half_life_mod:ag_fire3"
+    ]
+  },
+  "ag_idle1": {
+    "subtitle": "sounds.half_life_mod.ag_idle1",
+    "sounds": [
+      "half_life_mod:ag_idle1"
+    ]
+  },
+  "ag_idle2": {
+    "subtitle": "sounds.half_life_mod.ag_idle2",
+    "sounds": [
+      "half_life_mod:ag_idle2"
+    ]
+  },
+  "ag_idle3": {
+    "subtitle": "sounds.half_life_mod.ag_idle3",
+    "sounds": [
+      "half_life_mod:ag_idle3"
+    ]
+  },
+  "ag_idle4": {
+    "subtitle": "sounds.half_life_mod.ag_idle4",
+    "sounds": [
+      "half_life_mod:ag_idle4"
+    ]
+  },
+  "ag_idle5": {
+    "subtitle": "sounds.half_life_mod.ag_idle5",
+    "sounds": [
+      "half_life_mod:ag_idle5"
+    ]
+  },
+  "ag_pain1": {
+    "subtitle": "sounds.half_life_mod.ag_pain1",
+    "sounds": [
+      "half_life_mod:ag_pain1"
+    ]
+  },
+  "ag_step1": {
+    "subtitle": "sounds.half_life_mod.ag_step1",
+    "sounds": [
+      "half_life_mod:ag_step1"
+    ]
+  },
+  "ag_step2": {
+    "subtitle": "sounds.half_life_mod.ag_step2",
+    "sounds": [
+      "half_life_mod:ag_step2"
+    ]
+  },
+  "ag_step3": {
+    "subtitle": "sounds.half_life_mod.ag_step3",
+    "sounds": [
+      "half_life_mod:ag_step3"
+    ]
+  },
+  "ag_step4": {
+    "subtitle": "sounds.half_life_mod.ag_step4",
+    "sounds": [
+      "half_life_mod:ag_step4"
+    ]
+  },
+  "ag_buzz1": {
+    "subtitle": "sounds.half_life_mod.ag_buzz1",
+    "sounds": [
+      "half_life_mod:ag_buzz1"
+    ]
+  },
+  "ag_buzz2": {
+    "subtitle": "sounds.half_life_mod.ag_buzz2",
+    "sounds": [
+      "half_life_mod:ag_buzz2"
+    ]
+  },
+  "ag_buzz3": {
+    "subtitle": "sounds.half_life_mod.ag_buzz3",
+    "sounds": [
+      "half_life_mod:ag_buzz3"
+    ]
+  },
+  "ag_hornethit1": {
+    "subtitle": "sounds.half_life_mod.ag_hornethit1",
+    "sounds": [
+      "half_life_mod:ag_hornethit1"
+    ]
+  },
+  "ag_hornethit2": {
+    "subtitle": "sounds.half_life_mod.ag_hornethit2",
+    "sounds": [
+      "half_life_mod:ag_hornethit2"
+    ]
+  },
+  "ag_hornethit3": {
+    "subtitle": "sounds.half_life_mod.ag_hornethit3",
+    "sounds": [
+      "half_life_mod:ag_hornethit3"
+    ]
+  },
+  "ag_pain2": {
+    "subtitle": "sounds.half_life_mod.ag_pain2",
+    "sounds": [
+      "half_life_mod:ag_pain2"
+    ]
+  },
+  "ag_pain3": {
+    "subtitle": "sounds.half_life_mod.ag_pain3",
+    "sounds": [
+      "half_life_mod:ag_pain3"
+    ]
+  },
+  "ag_pain4": {
+    "subtitle": "sounds.half_life_mod.ag_pain4",
+    "sounds": [
+      "half_life_mod:ag_pain4"
+    ]
+  },
+  "ag_pain5": {
+    "subtitle": "sounds.half_life_mod.ag_pain5",
+    "sounds": [
+      "half_life_mod:ag_pain5"
+    ]
+  },
   "con_alert1": {
     "subtitle": "sounds.half_life_mod.con_alert1",
     "sounds": [

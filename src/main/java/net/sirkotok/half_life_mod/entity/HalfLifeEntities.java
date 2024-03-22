@@ -217,6 +217,13 @@ public class HalfLifeEntities {
                     () -> EntityType.Builder.of(Leech::new, MobCategory.MONSTER)
                             .sized(0.3F, 0.3F)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "leech").toString()));
+
+    public static final RegistryObject<EntityType<AlienGrunt>> ALIENGRUNT =
+            ENTITY_TYPES.register("aliengrunt",
+                    () -> EntityType.Builder.of(AlienGrunt::new, MobCategory.MONSTER)
+                            .sized(1.2F, 2.7F)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "aliengrunt").toString()));
+
     public static final RegistryObject<EntityType<Shark>> SHARK =
             ENTITY_TYPES.register("shark",
                     () -> EntityType.Builder.of(Shark::new, MobCategory.MONSTER)
@@ -357,6 +364,13 @@ public class HalfLifeEntities {
                             .clientTrackingRange(20)
                             .updateInterval(1)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "pit_spike").toString()));
+    public static final RegistryObject<EntityType<BeeProjectile>> BEE_PROJECTILE =
+            ENTITY_TYPES.register("bee_projectile",
+                    () -> EntityType.Builder.<BeeProjectile>of(BeeProjectile::new, MobCategory.MISC)
+                            .sized(0.2F, 0.2F)
+                            .clientTrackingRange(20)
+                            .updateInterval(1)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "bee_projectile").toString()));
 
 
     public static final RegistryObject<EntityType<Flechette>> FLECHETTE =

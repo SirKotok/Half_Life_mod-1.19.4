@@ -4,6 +4,7 @@ package net.sirkotok.half_life_mod.misc.event;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
@@ -18,6 +19,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.*;
 import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -29,6 +31,7 @@ import net.sirkotok.half_life_mod.entity.fallingblock.GravityGunFallingBlockEnti
 import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.*;
 import net.sirkotok.half_life_mod.entity.mob.mob_normal.custom.Barnacle;
 import net.sirkotok.half_life_mod.item.HalfLifeItems;
+import net.sirkotok.half_life_mod.misc.damagesource.HalfLifeDamageTypes;
 import net.sirkotok.half_life_mod.misc.util.HLTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.object.SquareRadius;
@@ -117,13 +120,41 @@ public class ForgeEvents {
     }
 
 
+    @SubscribeEvent
+    public static void  onDamagedEvent(LivingDamageEvent event) {
+        DamageSource source = event.getSource();
+        LivingEntity entity = event.getEntity();
+        if (source.is(HalfLifeDamageTypes.HL_BULLET) && !entity.isSilent()) {
+            entity.addTag("gunsilencedfor11");
+        }
 
+    }
 
         @SubscribeEvent
         public static void  onLivingChangeTick(LivingEvent.LivingTickEvent event) {
             LivingEntity entity = event.getEntity();
             if (entity.level.isClientSide()) return;
             if (event.isCanceled()) return;
+
+            if (entity.getTags().contains("gunsilencedfor0")) {
+                entity.setSilent(false);
+                entity.removeTag("gunsilencedfor0");
+            }
+
+            if (entity.getTags().contains("gunsilencedfor10")) {
+                entity.setSilent(true);
+            }
+
+            int p = 1;
+            while (p<12) {
+            if (entity.getTags().contains("gunsilencedfor"+p)) {
+                entity.removeTag("gunsilencedfor"+p);
+                entity.addTag("gunsilencedfor"+(p-1));
+                break;
+            }
+                p++;
+            }
+
 
             if (entity.getTags().contains("gglaunched")) {
                 HitResult hitresult = ProjectileUtil.getHitResult(entity, ForgeEvents::canHitEntity);

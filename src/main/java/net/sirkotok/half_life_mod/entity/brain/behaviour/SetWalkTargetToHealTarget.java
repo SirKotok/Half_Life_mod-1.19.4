@@ -10,15 +10,14 @@ import net.minecraft.world.entity.ai.behavior.EntityTracker;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
 import net.tslat.smartbrainlib.api.core.behaviour.ExtendedBehaviour;
-import net.tslat.smartbrainlib.api.core.behaviour.custom.path.SetWalkTargetToAttackTarget;
 import net.tslat.smartbrainlib.util.BrainUtils;
 
 import java.util.List;
 
 public class SetWalkTargetToHealTarget<E extends Mob> extends ExtendedBehaviour<E> {
-    private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(MemoryModuleType.WALK_TARGET, MemoryStatus.REGISTERED), Pair.of(MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED), Pair.of(ModMemoryModuleType.NEAREST_HEALABLE_ALLY.get(), MemoryStatus.VALUE_PRESENT));
+    private static final List<Pair<MemoryModuleType<?>, MemoryStatus>> MEMORY_REQUIREMENTS = ObjectArrayList.of(Pair.of(MemoryModuleType.WALK_TARGET, MemoryStatus.REGISTERED), Pair.of(MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED), Pair.of(HalfLifeMemoryModuleType.NEAREST_HEALABLE_ALLY.get(), MemoryStatus.VALUE_PRESENT));
 
     protected float speedModifier = 1;
 
@@ -41,7 +40,7 @@ public class SetWalkTargetToHealTarget<E extends Mob> extends ExtendedBehaviour<
     @Override
     protected void start(E entity) {
         Brain<?> brain = entity.getBrain();
-        LivingEntity target = BrainUtils.getMemory(brain, ModMemoryModuleType.NEAREST_HEALABLE_ALLY.get());
+        LivingEntity target = BrainUtils.getMemory(brain, HalfLifeMemoryModuleType.NEAREST_HEALABLE_ALLY.get());
         if (target == null) return;
 
         if (entity.getSensing().hasLineOfSight(target) && BehaviorUtils.isWithinAttackRange(entity, target, 1)) {

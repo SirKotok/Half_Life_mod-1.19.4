@@ -8,8 +8,8 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 
 import net.minecraft.world.phys.Vec3;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
-import net.sirkotok.half_life_mod.entity.brain.ModSensorType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeSensorType;
 import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.Cockroach;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.PredicateSensor;
@@ -40,7 +40,7 @@ public class SmellSensor<E extends LivingEntity> extends PredicateSensor<LivingE
 
 
 
-    private static final List<MemoryModuleType<?>> MEMORIES = ObjectArrayList.of(ModMemoryModuleType.FOOD_SMELL.get());
+    private static final List<MemoryModuleType<?>> MEMORIES = ObjectArrayList.of(HalfLifeMemoryModuleType.FOOD_SMELL.get());
 
     @Override
     public List<MemoryModuleType<?>> memoriesUsed()  {
@@ -49,7 +49,7 @@ public class SmellSensor<E extends LivingEntity> extends PredicateSensor<LivingE
 
     @Override
     public SensorType<? extends ExtendedSensor<?>> type() {
-        return ModSensorType.SMELL_SENSOR.get();
+        return HalfLifeSensorType.SMELL_SENSOR.get();
     }
 
     @Override
@@ -76,11 +76,11 @@ public class SmellSensor<E extends LivingEntity> extends PredicateSensor<LivingE
                 iterator = entities.listIterator();
 
         while (iterator.hasNext()) {
-            food = BrainUtils.getMemory(entity, ModMemoryModuleType.FOOD_SMELL.get());
+            food = BrainUtils.getMemory(entity, HalfLifeMemoryModuleType.FOOD_SMELL.get());
             if (food == null) {food = new ArrayList<Vec3>();}
             LivingEntity foodsource = iterator.next();
             food.add(getPosition(foodsource));
-            BrainUtils.setMemory(entity, ModMemoryModuleType.FOOD_SMELL.get(), food);
+            BrainUtils.setMemory(entity, HalfLifeMemoryModuleType.FOOD_SMELL.get(), food);
             }
         }
 

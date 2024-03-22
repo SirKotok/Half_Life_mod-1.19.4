@@ -7,8 +7,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.player.Player;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
-import net.sirkotok.half_life_mod.entity.brain.ModSensorType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeSensorType;
 import net.sirkotok.half_life_mod.misc.util.InfightingUtil;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.PredicateSensor;
@@ -21,7 +21,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class NearestHealableAllySensor<E extends LivingEntity> extends PredicateSensor<LivingEntity, E> {
-    private static final List<MemoryModuleType<?>> MEMORIES = ObjectArrayList.of(ModMemoryModuleType.NEAREST_HEALABLE_ALLY.get());
+    private static final List<MemoryModuleType<?>> MEMORIES = ObjectArrayList.of(HalfLifeMemoryModuleType.NEAREST_HEALABLE_ALLY.get());
 
     @Nullable
     protected SquareRadius radius = null;
@@ -60,7 +60,7 @@ public class NearestHealableAllySensor<E extends LivingEntity> extends Predicate
 
     @Override
     public SensorType<? extends ExtendedSensor<?>> type() {
-        return ModSensorType.NEAREST_HEALABLE_ALLY_SENSOR.get();
+        return HalfLifeSensorType.NEAREST_HEALABLE_ALLY_SENSOR.get();
     }
 
     @Override
@@ -75,7 +75,7 @@ public class NearestHealableAllySensor<E extends LivingEntity> extends Predicate
         entities.sort(Comparator.comparingDouble(entity::distanceToSqr));
         if (!entities.isEmpty()) {
             LivingEntity entit = entities.get(0);
-            BrainUtils.setMemory(entity, ModMemoryModuleType.NEAREST_HEALABLE_ALLY.get(), entit);
+            BrainUtils.setMemory(entity, HalfLifeMemoryModuleType.NEAREST_HEALABLE_ALLY.get(), entit);
         }
     }
 }

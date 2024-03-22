@@ -23,7 +23,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.mob.modinterface.RushingMob;
 import net.sirkotok.half_life_mod.entity.mob.modinterface.VariableRangedMob;
@@ -122,7 +122,7 @@ public class Hunter extends HalfLifeMonster implements RushingMob, GeoEntity, Ra
 
 
 
-        this.setRushing(BrainUtils.getMemory(this, ModMemoryModuleType.RUSHING.get()) != null);
+        this.setRushing(BrainUtils.getMemory(this, HalfLifeMemoryModuleType.RUSHING.get()) != null);
     }
 
     public static AttributeSupplier setAttributes() {

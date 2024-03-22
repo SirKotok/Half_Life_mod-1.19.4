@@ -25,6 +25,15 @@ public final class CommonSounds {
     }
 
 
+    public static SoundEvent getClawMissSound() {
+        switch (RandomSource.create().nextInt(1,3)) {
+            case 1:  return HalfLifeSounds.CLAW_MISS1.get();
+            case 2:  return HalfLifeSounds.CLAW_MISS2.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_PAIN_1.get();
+    }
+
+
     public static SoundEvent getHL1Explosion(){
         switch (RandomSource.create().nextInt(1,4)) {
             case 1:  return HalfLifeSounds.EXPLODE3.get();

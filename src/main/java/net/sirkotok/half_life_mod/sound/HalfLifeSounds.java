@@ -16,7 +16,123 @@ public class HalfLifeSounds {
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 
 
-    // Gravity Gun
+    //
+    public static final RegistryObject<SoundEvent> AG_ALERT1=
+            registerSoundEvent("ag_alert1");
+  public static final RegistryObject<SoundEvent> AG_ALERT2=
+          registerSoundEvent("ag_alert2");
+  public static final RegistryObject<SoundEvent> AG_ALERT3=
+          registerSoundEvent("ag_alert3");
+  public static final RegistryObject<SoundEvent> AG_ALERT4=
+          registerSoundEvent("ag_alert4");
+  public static final RegistryObject<SoundEvent> AG_ALERT5=
+          registerSoundEvent("ag_alert5");
+  public static final RegistryObject<SoundEvent> AG_ATTACK1=
+          registerSoundEvent("ag_attack1");
+  public static final RegistryObject<SoundEvent> AG_ATTACK2=
+          registerSoundEvent("ag_attack2");
+  public static final RegistryObject<SoundEvent> AG_ATTACK3=
+          registerSoundEvent("ag_attack3");
+  public static final RegistryObject<SoundEvent> AG_DIE1=
+          registerSoundEvent("ag_die1");
+  public static final RegistryObject<SoundEvent> AG_DIE2=
+          registerSoundEvent("ag_die2");
+  public static final RegistryObject<SoundEvent> AG_DIE3=
+          registerSoundEvent("ag_die3");
+  public static final RegistryObject<SoundEvent> AG_DIE4=
+          registerSoundEvent("ag_die4");
+  public static final RegistryObject<SoundEvent> AG_DIE5=
+          registerSoundEvent("ag_die5");
+  public static final RegistryObject<SoundEvent> AG_FIRE1=
+          registerSoundEvent("ag_fire1");
+  public static final RegistryObject<SoundEvent> AG_FIRE2=
+          registerSoundEvent("ag_fire2");
+  public static final RegistryObject<SoundEvent> AG_FIRE3=
+          registerSoundEvent("ag_fire3");
+  public static final RegistryObject<SoundEvent> AG_IDLE1=
+          registerSoundEvent("ag_idle1");
+  public static final RegistryObject<SoundEvent> AG_IDLE2=
+          registerSoundEvent("ag_idle2");
+  public static final RegistryObject<SoundEvent> AG_IDLE3=
+          registerSoundEvent("ag_idle3");
+  public static final RegistryObject<SoundEvent> AG_IDLE4=
+          registerSoundEvent("ag_idle4");
+  public static final RegistryObject<SoundEvent> AG_IDLE5=
+          registerSoundEvent("ag_idle5");
+  public static final RegistryObject<SoundEvent> AG_PAIN1=
+          registerSoundEvent("ag_pain1");
+  public static final RegistryObject<SoundEvent> AG_PAIN2=
+          registerSoundEvent("ag_pain2");
+  public static final RegistryObject<SoundEvent> AG_PAIN3=
+          registerSoundEvent("ag_pain3");
+  public static final RegistryObject<SoundEvent> AG_PAIN4=
+          registerSoundEvent("ag_pain4");
+  public static final RegistryObject<SoundEvent> AG_PAIN5=
+          registerSoundEvent("ag_pain5");
+
+  public static final RegistryObject<SoundEvent> AG_STEP1=
+          registerSoundEvent("ag_step1");
+  public static final RegistryObject<SoundEvent> AG_STEP2=
+          registerSoundEvent("ag_step2");
+  public static final RegistryObject<SoundEvent> AG_STEP3=
+          registerSoundEvent("ag_step3");
+  public static final RegistryObject<SoundEvent> AG_STEP4=
+          registerSoundEvent("ag_step4");
+  public static final RegistryObject<SoundEvent> AG_BUZZ1=
+          registerSoundEvent("ag_buzz1");
+  public static final RegistryObject<SoundEvent> AG_BUZZ2=
+          registerSoundEvent("ag_buzz2");
+  public static final RegistryObject<SoundEvent> AG_BUZZ3=
+          registerSoundEvent("ag_buzz3");
+  public static final RegistryObject<SoundEvent> AG_HORNETHIT1=
+          registerSoundEvent("ag_hornethit1");
+  public static final RegistryObject<SoundEvent> AG_HORNETHIT2=
+          registerSoundEvent("ag_hornethit2");
+  public static final RegistryObject<SoundEvent> AG_HORNETHIT3=
+          registerSoundEvent("ag_hornethit3");
+
+
+       /*  "sounds.half_life_mod.ag_buzz1": "Hornet ",
+          "sounds.half_life_mod.ag_buzz2": "Hornet ",
+          "sounds.half_life_mod.ag_buzz3": "Hornet ",
+          "sounds.half_life_mod.ag_hornethit1": "Hornet ",
+          "sounds.half_life_mod.ag_hornethit2": "Hornet ",
+          "sounds.half_life_mod.ag_hornethit3": "Hornet ",
+
+          "sounds.half_life_mod.ag_step1": "Alien Grunt ",
+          "sounds.half_life_mod.ag_step2": "Alien Grunt ",
+          "sounds.half_life_mod.ag_step3": "Alien Grunt ",
+          "sounds.half_life_mod.ag_step4": "Alien Grunt ",
+
+         "sounds.half_life_mod.ag_alert1": "Alien Grunt ",
+          "sounds.half_life_mod.ag_alert2": "Alien Grunt ",
+          "sounds.half_life_mod.ag_alert3": "Alien Grunt ",
+          "sounds.half_life_mod.ag_alert4": "Alien Grunt ",
+          "sounds.half_life_mod.ag_alert5": "Alien Grunt ",
+          "sounds.half_life_mod.ag_attack1": "Alien Grunt ",
+          "sounds.half_life_mod.ag_attack2": "Alien Grunt ",
+          "sounds.half_life_mod.ag_attack3": "Alien Grunt ",
+          "sounds.half_life_mod.ag_die1": "Alien Grunt ",
+          "sounds.half_life_mod.ag_die2": "Alien Grunt ",
+          "sounds.half_life_mod.ag_die3": "Alien Grunt ",
+          "sounds.half_life_mod.ag_die4": "Alien Grunt ",
+          "sounds.half_life_mod.ag_die5": "Alien Grunt ",
+          "sounds.half_life_mod.ag_fire1": "Alien Grunt ",
+          "sounds.half_life_mod.ag_fire2": "Alien Grunt ",
+          "sounds.half_life_mod.ag_fire3": "Alien Grunt ",
+          "sounds.half_life_mod.ag_idle1": "Alien Grunt ",
+          "sounds.half_life_mod.ag_idle2": "Alien Grunt ",
+          "sounds.half_life_mod.ag_idle3": "Alien Grunt ",
+          "sounds.half_life_mod.ag_idle4": "Alien Grunt ",
+          "sounds.half_life_mod.ag_idle5": "Alien Grunt ",
+          "sounds.half_life_mod.ag_pain1": "Alien Grunt ",
+          "sounds.half_life_mod.ag_pain2": "Alien Grunt ",
+          "sounds.half_life_mod.ag_pain3": "Alien Grunt ",
+          "sounds.half_life_mod.ag_pain4": "Alien Grunt ",
+          "sounds.half_life_mod.ag_pain5": "Alien Grunt ", */
+
+
+  // Gravity Gun
     public static final RegistryObject<SoundEvent> PHYSCANNON_CHARGE=
             registerSoundEvent("physcannon_charge");
   public static final RegistryObject<SoundEvent> PHYSCANNON_CLAWS_CLOSE=

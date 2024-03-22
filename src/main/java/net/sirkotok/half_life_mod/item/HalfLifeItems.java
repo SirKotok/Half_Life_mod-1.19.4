@@ -161,6 +161,9 @@ public class HalfLifeItems {
     public static final RegistryObject<Item> LEECH_SPAWN_EGG = ITEMS.register("leech_spawn_egg",
             () -> new ForgeSpawnEggItem(HalfLifeEntities.LEECH, 0xeeeddb, 0xaba76b   ,
                     new Item.Properties()));
+    public static final RegistryObject<Item> ALIENGRUNT_SPAWN_EGG = ITEMS.register("aliengrunt_spawn_egg",
+            () -> new ForgeSpawnEggItem(HalfLifeEntities.ALIENGRUNT, 0xc6590c, 0x8d8d8d   ,
+                    new Item.Properties()));
     public static final RegistryObject<Item> HUNTER_SPAWN_EGG = ITEMS.register("hunter_spawn_egg",
             () -> new ForgeSpawnEggItem(HalfLifeEntities.HUNTER, 0xc3898, 0x18fce3   ,
                     new Item.Properties()));
@@ -229,6 +232,8 @@ public class HalfLifeItems {
             () -> new Displacer_end(new Item.Properties()));
     public static final RegistryObject<Item> SHOCKROACH_ITEM = ITEMS.register("shockroach_item",
             () -> new Shockroach_Item(new Item.Properties()));
+    public static final RegistryObject<Item> HIVEHAND_ITEM = ITEMS.register("hivegun",
+            () -> new Hivehand_Item(new Item.Properties()));
 
     //Armor
     public static final RegistryObject<Item> SECURITY_GUARD_HELMET = ITEMS.register("security_guard_helmet",

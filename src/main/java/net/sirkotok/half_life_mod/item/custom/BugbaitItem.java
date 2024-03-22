@@ -18,7 +18,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.sirkotok.half_life_mod.misc.effect.HalfLifeEffects;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
-import net.sirkotok.half_life_mod.entity.brain.ModMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.Antlion;
 import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.AntlionWorker;
 import net.sirkotok.half_life_mod.entity.mob.modinterface.HasLeaderMob;
@@ -72,7 +72,7 @@ public class BugbaitItem extends GunItem {
             for (HalfLifeMonster y : antlions) {
                 if (y instanceof HasLeaderMob<?> x){
                     x.setLeader(y);
-                    BrainUtils.clearMemory(y, ModMemoryModuleType.NOANTLIONATTACK.get());
+                    BrainUtils.clearMemory(y, HalfLifeMemoryModuleType.NOANTLIONATTACK.get());
                     if (RandomSource.create().nextFloat() < f) {
                         CommonSounds.PlaySoundQuiet(y, HalfLifeSounds.ANT_DISTRACT1.get());
                         f = f*0.7f;
@@ -139,7 +139,7 @@ public class BugbaitItem extends GunItem {
             for (HalfLifeMonster y : antlions) {
                 if (y instanceof HasLeaderMob<?> x){
                     x.setLeader(pPlayer);
-                    BrainUtils.clearMemory(y, ModMemoryModuleType.NOANTLIONATTACK.get());
+                    BrainUtils.clearMemory(y, HalfLifeMemoryModuleType.NOANTLIONATTACK.get());
 
                     if (RandomSource.create().nextFloat() < f) {
                     CommonSounds.PlaySoundQuiet(y, HalfLifeSounds.ANT_DISTRACT1.get());

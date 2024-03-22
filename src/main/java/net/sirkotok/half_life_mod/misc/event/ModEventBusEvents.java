@@ -38,6 +38,7 @@ public class ModEventBusEvents {
         event.put(HalfLifeEntities.HUNTER.get(), Hunter.setAttributes());
         event.put(HalfLifeEntities.LEECH.get(), Leech.setAttributes());
         event.put(HalfLifeEntities.SHARK.get(), Shark.setAttributes());
+        event.put(HalfLifeEntities.ALIENGRUNT.get(), AlienGrunt.setAttributes());
         event.put(HalfLifeEntities.ARCHER.get(), Archer.setAttributes());
         event.put(HalfLifeEntities.HYDRA.get(), HLHydra.setAttributes());
         event.put(HalfLifeEntities.BARNACLE.get(), Barnacle.setAttributes());
@@ -118,6 +119,8 @@ public class ModEventBusEvents {
         event.register(HalfLifeEntities.BARNACLE.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING,
                 Barnacle::checkBarnacleSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(HalfLifeEntities.VORTHL1.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        event.register(HalfLifeEntities.ALIENGRUNT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
 
         event.register(HalfLifeEntities.SHARK.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,

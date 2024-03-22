@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.sirkotok.half_life_mod.entity.projectile.arrowlike.Flechette;
 import net.sirkotok.half_life_mod.entity.projectile.client.model.Flechette_model;
+import org.joml.Quaternionf;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;
@@ -22,6 +23,9 @@ public class Flechette_renderer extends GeoEntityRenderer<Flechette> {
     public void render(Flechette entity, float entityYaw,
                        float partialTick, PoseStack poseStack,
                        MultiBufferSource bufferSource, int packedLight) {
+
+        float yRot = entity.getYRot();
+        poseStack.rotateAround(new Quaternionf().rotationY(-yRot), 0, 0, 0);
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 
