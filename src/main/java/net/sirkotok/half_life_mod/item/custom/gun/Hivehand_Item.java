@@ -18,6 +18,7 @@ import net.sirkotok.half_life_mod.entity.projectile.BeeProjectile;
 import net.sirkotok.half_life_mod.entity.projectile.ShockProjectile;
 import net.sirkotok.half_life_mod.item.client.renderer.HivehandRenderer;
 import net.sirkotok.half_life_mod.item.client.renderer.Shockroach_ItemRenderer;
+import net.sirkotok.half_life_mod.item.custom.gun.base.GunItem;
 import net.sirkotok.half_life_mod.item.custom.gun.base.RechargingGunItem;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -41,8 +42,10 @@ public class Hivehand_Item extends RechargingGunItem implements GeoItem {
         return 8;
     }
     public static void SetElectric(ItemStack gunstack, int time) {
+        if (gunstack.getItem() instanceof GunItem) {
         CompoundTag compoundtag = gunstack.getOrCreateTag();
         compoundtag.putInt("Electric", time);
+        }
     }
     public static int GetElectric(ItemStack gunstack) {
         CompoundTag compoundtag = gunstack.getTag();

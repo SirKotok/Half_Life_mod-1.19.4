@@ -115,10 +115,20 @@ public class GravityGun extends GunItem implements GeoItem {
         float f = 1.0F;
         AABB aabb = pPlayer.getBoundingBox().inflate(getrange()).expandTowards(vec31.scale(d0)).inflate(getrange2(), getrange2(), getrange2());
         EntityHitResult entityhitresult = ProjectileUtil.getEntityHitResult(pPlayer, vec3, vec32, aabb, (entity) -> {
-            return (isentityhittablewithggun(entity) ||entity instanceof Antlion || entity instanceof Manhack || entity instanceof AntlionWorker || entity.getType().is(HLTags.EntityTypes.HEADCRAB)) && entity.isPickable();
+            return (entity instanceof GravityGunFallingBlockEntity || isentityhittablewithggun(entity) ||entity instanceof Antlion || entity instanceof Manhack || entity instanceof AntlionWorker || entity.getType().is(HLTags.EntityTypes.HEADCRAB)) && entity.isPickable();
         }, d1);
         if (entityhitresult != null) {
             Entity entity1 = entityhitresult.getEntity();
+            if (entity1 instanceof  GravityGunFallingBlockEntity) {
+                Vec3 from = pPlayer.getEyePosition().subtract(0, 0.3, 0);
+                Vec3 vec33 = new Vec3(entity1.getX(), entity1.getEyeY(), entity1.getZ());
+                Vec3 to = vec33.subtract(from);
+                this.sendparticles(pPlayer, from, to);
+                this.shootEntityFromRotation(entity1,pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 2F, 1.0F);
+                pPlayer.level.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), getLaunchSound(), SoundSource.NEUTRAL, 0.5F, 1F);
+                return true;
+            }
+
             if (entity1 instanceof Antlion ant) {
                 ant.flipover(0);
             }
@@ -154,16 +164,27 @@ public class GravityGun extends GunItem implements GeoItem {
         float f = 1.0F;
         AABB aabb = pPlayer.getBoundingBox().inflate(4d).expandTowards(vec31.scale(d0)).inflate(32D, 32D, 32D);
         EntityHitResult entityhitresult = ProjectileUtil.getEntityHitResult(pPlayer, vec3, vec32, aabb, (entity) -> {
-            return isentitycatchable(entity) && entity.isPickable() && !entity.getTags().contains("ggcaught");
+            return isentitycatchable(entity) && entity.isPickable() && !entity.getTags().contains("ggcaught") || (entity instanceof GravityGunFallingBlockEntity);
         }, d1);
         if (entityhitresult != null) {
             Entity entity1 = entityhitresult.getEntity();
+            if (entity1 instanceof  GravityGunFallingBlockEntity fb) {
+                fb.moveTo(GravityGunFallingBlockEntity.findposstat(pPlayer));
+                fb.setPlayerStringUuid(pPlayer.getStringUUID());
+                fb.setNoGravity(true);
+                fb.setOwner(pPlayer);
+                pPlayer.level.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.PHYSCANNON_PICKUP.get(), SoundSource.NEUTRAL, 0.5F, 1F);
+                SetCooldow(pPlayer, getRightClickCooldown());
+                return true;
+            }
+            else {
             entity1.addTag("caughtby"+pPlayer.getStringUUID());
             entity1.addTag("ggcaught");
             entity1.moveTo(GravityGunFallingBlockEntity.findposstat(pPlayer));
             pPlayer.level.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.PHYSCANNON_PICKUP.get(), SoundSource.NEUTRAL, 0.5F, 1F);
             SetCooldow(pPlayer, getRightClickCooldown());
             return true;
+            }
         } else return false;
     }
 
@@ -207,7 +228,7 @@ public class GravityGun extends GunItem implements GeoItem {
             SetHoldingCheck(pStack, 0);
     }
         if (IsHolding(pStack)) {
-            if (j % 2 == 0) pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), this.getLoopSound() , SoundSource.NEUTRAL, 0.2F, 1F);
+            if (j % 2 == 0) pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), this.getLoopSound() , SoundSource.NEUTRAL, 0.02F, 1F);
             if (j % 4 == 0) triggerAnim(pPlayer, GeoItem.getOrAssignId(pStack, (ServerLevel) pLevel),"idle", "hold");
         } else if (j % 2 == 0) triggerAnim(pPlayer, GeoItem.getOrAssignId(pStack, (ServerLevel) pLevel),"idle", "normal");
         }
@@ -340,11 +361,13 @@ public class GravityGun extends GunItem implements GeoItem {
                             pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> (obj instanceof GravityGunFallingBlockEntity block && block.getPlayerStringUUID().equals(pPlayer.getStringUUID())) || (obj.getTags().contains("ggcaught") && obj.getTags().contains("caughtby"+pPlayer.getStringUUID())));
             if (!blocks.isEmpty()) {
                 for (Entity block : blocks) {
+                    award(pPlayer);
 
                   if (block instanceof GravityGunFallingBlockEntity gblock) {
                     gblock.setnoplayer();
                     gblock.setLaunched(); }
                   else {
+
                    //   block.hurt(block.level.damageSources().playerAttack(pPlayer), this.getgundamage()/4);
                       block.removeTag("ggcaught");
                       block.removeTag("caughtby"+pPlayer.getStringUUID());
@@ -370,11 +393,14 @@ public class GravityGun extends GunItem implements GeoItem {
 
                 }
             } else {
+
                 boolean flag = entityHit(pPlayer);
                 if (!flag) {
                     SetCooldow(pPlayer, 10);
                     pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.PHYSCANNON_DRYFIRE.get(), SoundSource.NEUTRAL, 0.5F, 1F);
-                } else  SetCooldow(pPlayer, 20);
+                } else  {
+                    SetCooldow(pPlayer, 20);
+                    award(pPlayer);}
             }
         }
    }

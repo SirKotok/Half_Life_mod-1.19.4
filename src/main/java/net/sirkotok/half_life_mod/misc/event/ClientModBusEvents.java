@@ -44,6 +44,8 @@ public class ClientModBusEvents {
     @SubscribeEvent
     public static void onKeyRegister(RegisterKeyMappingsEvent event) {
         event.register(KeyBinding.RELOAD_KEY);
+       // event.register(KeyBinding.LEFT_CLICK);
+      //  event.register(KeyBinding.RIGHT_CLICK);
     }
 
     @SubscribeEvent

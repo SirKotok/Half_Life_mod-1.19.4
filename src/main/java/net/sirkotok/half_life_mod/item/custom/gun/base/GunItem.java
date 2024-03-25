@@ -41,17 +41,16 @@ public class GunItem extends Item {
         return -1;
     }
 
-    private static final String ATTACK_COOLDOWN = "Cooldow";
-    private static final String AMMO_COUNT = "Ammo";
-    private static final String RELOAD_TIMER = "ReloadTimer";
+
 
     public ItemStack getammoitem(){
         return Items.BEDROCK.getDefaultInstance();
     }
 
     public static void SetAmmo(ItemStack gunstack, int ammo) {
+        if (gunstack.getItem() instanceof GunItem) {
         CompoundTag compoundtag = gunstack.getOrCreateTag();
-        compoundtag.putInt("Ammo", ammo);
+        compoundtag.putInt("Ammo", ammo); }
     }
     public static int GetAmmo(ItemStack gunstack) {
         CompoundTag compoundtag = gunstack.getTag();
@@ -80,13 +79,15 @@ public class GunItem extends Item {
     }
 
     public static void SetupCooldow(ItemStack gunstack, int cooldown) {
+        if (gunstack.getItem() instanceof GunItem) {
         CompoundTag compoundtag = gunstack.getOrCreateTag();
-        compoundtag.putInt("Cooldow", cooldown);
+        compoundtag.putInt("Cooldow", cooldown); }
     }
 
     public static void SetReloadTimer(ItemStack gunstack, int cooldown) {
+        if (gunstack.getItem() instanceof GunItem) {
         CompoundTag compoundtag = gunstack.getOrCreateTag();
-        compoundtag.putInt("ReloadTimer", cooldown);
+        compoundtag.putInt("ReloadTimer", cooldown); }
     }
     public static int GetReloadTimer(ItemStack gunstack) {
         CompoundTag compoundtag = gunstack.getTag();
@@ -98,7 +99,9 @@ public class GunItem extends Item {
     public static void SetCooldow(Player pplayer, int cooldown){
         Inventory playerinv = pplayer.getInventory();
         for (ItemStack stack : playerinv.items) {
-            SetupCooldow(stack, cooldown);
+            if (stack.getItem() instanceof GunItem) {
+                SetupCooldow(stack, cooldown);
+            }
         }
     }
 
@@ -106,7 +109,7 @@ public class GunItem extends Item {
     public static int GetCooldow(ItemStack gunstack) {
         CompoundTag compoundtag = gunstack.getTag();
         if (compoundtag != null) return compoundtag.getInt("Cooldow");
-        return 0;
+        return 5;
     }
 
 

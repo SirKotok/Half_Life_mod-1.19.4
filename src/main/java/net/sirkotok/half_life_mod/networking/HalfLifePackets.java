@@ -22,7 +22,7 @@ public class HalfLifePackets {
     public static void  register() {
         SimpleChannel net = NetworkRegistry.ChannelBuilder
                 .named(new ResourceLocation(HalfLifeMod.MOD_ID, "messege"))
-                .networkProtocolVersion(() -> "1.1")
+                .networkProtocolVersion(() -> "1.3")
                 .clientAcceptedVersions(s -> true)
                 .serverAcceptedVersions(s -> true)
                 .simpleChannel();

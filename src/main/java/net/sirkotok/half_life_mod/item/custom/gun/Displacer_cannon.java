@@ -21,6 +21,7 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.sirkotok.half_life_mod.entity.projectile.TeleportingBullet;
 import net.sirkotok.half_life_mod.item.client.renderer.Displacer_cannon_renderer;
 import net.sirkotok.half_life_mod.item.custom.gun.base.EnergyGunItem;
+import net.sirkotok.half_life_mod.item.custom.gun.base.GunItem;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.worldgen.dimension.HalfLifeDimensions;
 import net.sirkotok.half_life_mod.worldgen.portal.XenTeleporter;
@@ -39,26 +40,51 @@ public class Displacer_cannon extends EnergyGunItem implements GeoItem {
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
+    public static void SetNo(ItemStack gunstack) {
+        if (gunstack.getItem() instanceof GunItem) {
+        CompoundTag compoundtag = gunstack.getOrCreateTag();
+        compoundtag.putBoolean("NoShooting", true);}
+    }
+    public static void SetYes(ItemStack gunstack) {
+        if (gunstack.getItem() instanceof GunItem) {
+            CompoundTag compoundtag = gunstack.getOrCreateTag();
+            compoundtag.putBoolean("YesShooting", false);
+        }
 
+    }
+
+    public static boolean GetNo(ItemStack gunstack) {
+        CompoundTag compoundtag = gunstack.getTag();
+        if (compoundtag != null) return compoundtag.getBoolean("NoShooting");
+        return false;
+    }
+
+    public static boolean GetYes(ItemStack gunstack) {
+        CompoundTag compoundtag = gunstack.getTag();
+        if (compoundtag != null) return compoundtag.getBoolean("YesShooting");
+        return true;
+    }
 
     public static void SetShootLeftTimer(ItemStack gunstack, int cooldown) {
+        if (gunstack.getItem() instanceof GunItem) {
         CompoundTag compoundtag = gunstack.getOrCreateTag();
-        compoundtag.putInt("ShootLeftTimer", cooldown);
+        compoundtag.putInt("ShootLeftTimer", cooldown); }
     }
     public static int GetShootLeftTimer(ItemStack gunstack) {
         CompoundTag compoundtag = gunstack.getTag();
         if (compoundtag != null) return compoundtag.getInt("ShootLeftTimer");
-        return -1;
+        return -5;
     }
 
     public static void SetShootRightTimer(ItemStack gunstack, int cooldown) {
+        if (gunstack.getItem() instanceof GunItem) {
         CompoundTag compoundtag = gunstack.getOrCreateTag();
-        compoundtag.putInt("ShootRightTimer", cooldown);
+        compoundtag.putInt("ShootRightTimer", cooldown); }
     }
     public static int GetShootRightTimer(ItemStack gunstack) {
         CompoundTag compoundtag = gunstack.getTag();
         if (compoundtag != null) return compoundtag.getInt("ShootRightTimer");
-        return -1;
+        return -5;
     }
 
 
@@ -168,6 +194,9 @@ public class Displacer_cannon extends EnergyGunItem implements GeoItem {
         return HalfLifeSounds.DISPLACER_SELF.get();
     }
     public void shootleft(Level pLevel, Player pPlayer, ItemStack itemstack) {
+        boolean yes = GetYes(itemstack);
+        boolean no = GetNo(itemstack);
+        if (!yes && no) {
         if (!pLevel.isClientSide) {
             pPlayer.level.gameEvent(pPlayer, GameEvent.PROJECTILE_SHOOT, pPlayer.blockPosition());
             pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), shootleftsound(), SoundSource.NEUTRAL, 0.9F, 1F);
@@ -176,8 +205,9 @@ public class Displacer_cannon extends EnergyGunItem implements GeoItem {
             snowball.setdamage(this.getgundamage());
             snowball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 0.7F, 1.0F);
             pLevel.addFreshEntity(snowball);
+            award(pPlayer);
         }
-        award(pPlayer);
+        }
     }
 
     @Override
@@ -199,7 +229,9 @@ public class Displacer_cannon extends EnergyGunItem implements GeoItem {
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
 
+
         if (pEntity instanceof Player pplayer) {
+            getyesno(pStack);
             if (GetShootLeftTimer(pStack) > -1) {
                 int i = GetShootLeftTimer(pStack);
                 if (i == 1 && pIsSelected && !pLevel.isClientSide) {
@@ -256,13 +288,31 @@ public class Displacer_cannon extends EnergyGunItem implements GeoItem {
     }
 
 
+    public static boolean getyesno(ItemStack itemStack) {
+        boolean yes = GetYes(itemStack);
+        boolean no = GetNo(itemStack);
+        if (!(!yes && no)) {
+            SetShootLeftTimer(itemStack, -4);
+            SetShootRightTimer(itemStack, -4);
+            SetYes(itemStack);
+            SetNo(itemStack);
+            return false;
+        } return true;
+    }
+
+
+
+
+
+
 
     public void shootright(Level pLevel, Player pPlayer, ItemStack itemStack) {
         if (!pLevel.isClientSide) {
+            if (getyesno(itemStack)) {
+                award(pPlayer);
             if (pPlayer.canChangeDimensions()) {
-                handleHalfLifePortal(pPlayer, pPlayer.blockPosition());
+                handleHalfLifePortal(pPlayer, pPlayer.blockPosition()); }
         }
-        award(pPlayer);
     }
     }
 

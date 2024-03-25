@@ -108,7 +108,7 @@ public class Glowparticle extends TextureSheetParticle {
         @Override
         public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double Color_ID, double Size, double zSpeed) {
             return new Glowparticle(level, this.sprites,
-                    x, y, z, -1, 0.01, 2);
+                    x, y, z, 0, 0.1, 3);
 
         }
     }

@@ -26,10 +26,15 @@ public class ClientForgeEvents {
     public static void inputEvent(InputEvent.InteractionKeyMappingTriggered event) {
         if (event.isAttack() || event.isUseItem()) {
             LocalPlayer localPlayer = Minecraft.getInstance().player;
-            if (localPlayer != null && localPlayer.getMainHandItem().getItem() instanceof GunItem) {
+            boolean holdingGun = localPlayer.getMainHandItem().getItem() instanceof GunItem;
+            if (localPlayer != null && holdingGun) {
                 event.setSwingHand(false);
                 event.setCanceled(true);
+           //     if (event.isAttack()) HalfLifePackets.sendToServer(new GunLeftC2SPacket());
+                if (event.isUseItem()) HalfLifePackets.sendToServer(new GunRightC2SPacket());
             }
+
+
         }
     }
 
@@ -45,6 +50,24 @@ public class ClientForgeEvents {
                 }
             }
         }
+     /*   if (KeyBinding.RIGHT_CLICK.consumeClick()) {
+            LocalPlayer localPlayer = Minecraft.getInstance().player;
+            if (localPlayer != null) {
+                boolean holdingGun = localPlayer.getMainHandItem().getItem() instanceof GunItem;
+                if (holdingGun) {
+                    HalfLifePackets.sendToServer(new GunRightC2SPacket());
+                }
+            }
+        }
+        if (KeyBinding.LEFT_CLICK.consumeClick()) {
+            LocalPlayer localPlayer = Minecraft.getInstance().player;
+            if (localPlayer != null) {
+                boolean holdingGun = localPlayer.getMainHandItem().getItem() instanceof GunItem;
+                if (holdingGun) {
+                    HalfLifePackets.sendToServer(new GunLeftC2SPacket());
+                }
+            }
+        } */
     }
 
 
@@ -54,14 +77,14 @@ public class ClientForgeEvents {
             LocalPlayer localPlayer = Minecraft.getInstance().player;
             if (localPlayer != null) {
                 boolean leftMouse = Minecraft.getInstance().mouseHandler.isLeftPressed();
-                boolean rightMouse = Minecraft.getInstance().mouseHandler.isRightPressed();
+           //     boolean rightMouse = Minecraft.getInstance().mouseHandler.isRightPressed();
                 boolean holdingGun = localPlayer.getMainHandItem().getItem() instanceof GunItem;
                 if (holdingGun && leftMouse) {
                     HalfLifePackets.sendToServer(new GunLeftC2SPacket());
                 }
-                if (holdingGun && rightMouse) {
-                    HalfLifePackets.sendToServer(new GunRightC2SPacket());
-                }
+           //     if (holdingGun && rightMouse) {
+          //          HalfLifePackets.sendToServer(new GunRightC2SPacket());
+           //     }
             }
         }
     }

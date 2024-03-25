@@ -1,6 +1,13 @@
 package net.sirkotok.half_life_mod.item.custom;
 
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class Debugitem extends Item {
 
@@ -9,6 +16,20 @@ public class Debugitem extends Item {
     }
 
 
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+
+        ItemStack stack = pPlayer.getItemInHand(InteractionHand.OFF_HAND);
+        CompoundTag tag = stack.getTag();
+        if (tag != null) {
+        String s = tag.toString();
+        pPlayer.sendSystemMessage(Component.literal(s));
+        } else pPlayer.sendSystemMessage(Component.literal("no tag"));
+
+
+
+        return super.use(pLevel, pPlayer, pUsedHand);
+    }
 }
 
 /*

@@ -15,6 +15,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.sirkotok.half_life_mod.entity.projectile.ShockProjectile;
 import net.sirkotok.half_life_mod.item.client.renderer.Shockroach_ItemRenderer;
+import net.sirkotok.half_life_mod.item.custom.gun.base.GunItem;
 import net.sirkotok.half_life_mod.item.custom.gun.base.RechargingGunItem;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -31,11 +32,12 @@ import java.util.function.Consumer;
 public class Shockroach_Item extends RechargingGunItem implements GeoItem {
 
 
-    private static final String ELECTRIC_TIMER = "Electric";
 
     public static void SetElectric(ItemStack gunstack, int time) {
-        CompoundTag compoundtag = gunstack.getOrCreateTag();
-        compoundtag.putInt("Electric", time);
+        if (gunstack.getItem() instanceof GunItem) {
+            CompoundTag compoundtag = gunstack.getOrCreateTag();
+            compoundtag.putInt("Electric", time);
+        }
     }
     public static int GetElectric(ItemStack gunstack) {
         CompoundTag compoundtag = gunstack.getTag();

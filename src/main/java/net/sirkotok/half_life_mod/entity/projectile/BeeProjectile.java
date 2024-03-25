@@ -72,9 +72,8 @@ public class BeeProjectile extends FireballNoTrail implements GeoEntity {
 
       if (this.previouspos == null) this.previouspos = this.position();
 
-        if (this.tickCount % 3 == 0) {
-            level.addParticle(HalfLifeParticles.BEETRAIL.get(), this.position().x(), this.position().y(), this.position().z(), previouspos.x(), previouspos.y(), previouspos.z());
-        }
+
+      level.addParticle(HalfLifeParticles.STAT_GLOW.get(), this.position().x(), this.position().y(), this.position().z(), 0, 0.1, 3);
 
 
 
@@ -94,7 +93,7 @@ public class BeeProjectile extends FireballNoTrail implements GeoEntity {
                 if (k < 1) k = 1;
                 vec3 = vec3.normalize().add(target.getEyePosition().subtract(this.position()).normalize()).normalize().scale(k);
                 this.setDeltaMovement(vec3);
-                this.previouspos = this.position();
+           //     this.previouspos = this.position();
             }
         }
         HLperUtil.rotateToOppositeVec3(this, this.getDeltaMovement());
