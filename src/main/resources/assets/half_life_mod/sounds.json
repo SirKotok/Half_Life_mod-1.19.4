@@ -17,6 +17,66 @@
       "half_life_mod:bugbait_impact1"
     ]
   },
+  "splauncher_altfire": {
+    "subtitle": "sounds.half_life_mod.splauncher_altfire",
+    "sounds": [
+      "half_life_mod:splauncher_altfire"
+    ]
+  },
+  "splauncher_bounce": {
+    "subtitle": "sounds.half_life_mod.splauncher_bounce",
+    "sounds": [
+      "half_life_mod:splauncher_bounce"
+    ]
+  },
+  "splauncher_fire": {
+    "subtitle": "sounds.half_life_mod.splauncher_fire",
+    "sounds": [
+      "half_life_mod:splauncher_fire"
+    ]
+  },
+  "splauncher_impact": {
+    "subtitle": "sounds.half_life_mod.splauncher_impact",
+    "sounds": [
+      "half_life_mod:splauncher_impact"
+    ]
+  },
+  "splauncher_pet": {
+    "subtitle": "sounds.half_life_mod.splauncher_pet",
+    "sounds": [
+      "half_life_mod:splauncher_pet"
+    ]
+  },
+  "splauncher_reload": {
+    "subtitle": "sounds.half_life_mod.splauncher_reload",
+    "sounds": [
+      "half_life_mod:splauncher_reload"
+    ]
+  },
+  "spore_ammo": {
+    "subtitle": "sounds.half_life_mod.spore_ammo",
+    "sounds": [
+      "half_life_mod:spore_ammo"
+    ]
+  },
+  "spore_hit1": {
+    "subtitle": "sounds.half_life_mod.spore_hit1",
+    "sounds": [
+      "half_life_mod:spore_hit1"
+    ]
+  },
+  "spore_hit2": {
+    "subtitle": "sounds.half_life_mod.spore_hit2",
+    "sounds": [
+      "half_life_mod:spore_hit2"
+    ]
+  },
+  "spore_hit3": {
+    "subtitle": "sounds.half_life_mod.spore_hit3",
+    "sounds": [
+      "half_life_mod:spore_hit3"
+    ]
+  },
   "ag_alert1": {
     "subtitle": "sounds.half_life_mod.ag_alert1",
     "sounds": [

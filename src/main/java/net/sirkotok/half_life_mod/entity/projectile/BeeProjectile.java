@@ -165,8 +165,6 @@ public class BeeProjectile extends FireballNoTrail implements GeoEntity {
 
     protected void onHit(HitResult pResult) {
         super.onHit(pResult);
-
-
     }
 
     /**

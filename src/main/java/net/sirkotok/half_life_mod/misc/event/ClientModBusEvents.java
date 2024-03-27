@@ -26,6 +26,7 @@ import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.client.renderers.*;
 import net.sirkotok.half_life_mod.entity.mob.mob_normal.client.ModModelLayers;
 import net.sirkotok.half_life_mod.entity.mob.mob_normal.client.models.Barnacle_Model;
 import net.sirkotok.half_life_mod.entity.mob.mob_normal.client.renderers.Barnacle_Renderer;
+import net.sirkotok.half_life_mod.entity.particle.custom.YellowSmokeParticle;
 import net.sirkotok.half_life_mod.entity.particle.custom.trail.BeeTrailParticle;
 import net.sirkotok.half_life_mod.entity.particle.lightning.*;
 import net.sirkotok.half_life_mod.entity.projectile.client.renderer.*;
@@ -60,6 +61,8 @@ public class ClientModBusEvents {
                 Glowparticle.Provider::new);
         Minecraft.getInstance().particleEngine.register(HalfLifeParticles.BEE_GLOW.get(),
                 Glowparticle.BeeProvider::new);
+        Minecraft.getInstance().particleEngine.register(HalfLifeParticles.YELLOW_SMOKE.get(),
+                YellowSmokeParticle.Factory::new);
 
         event.registerSpecial(HalfLifeParticles.BEETRAIL.get(), new BeeTrailParticle.Factory());
         event.registerSpecial(HalfLifeParticles.VORT_LIGHTNING.get(), new VortLightningParticle.Factory());

@@ -38,7 +38,9 @@ import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
 import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
 import net.sirkotok.half_life_mod.entity.mob.modinterface.DoubleRangedMob;
 import net.sirkotok.half_life_mod.entity.mob.modinterface.HasLeaderMob;
+import net.sirkotok.half_life_mod.entity.projectile.AcidThrown;
 import net.sirkotok.half_life_mod.entity.projectile.ShockProjectile;
+import net.sirkotok.half_life_mod.entity.projectile.SporeShot;
 import net.sirkotok.half_life_mod.misc.gamerules.HalfLifeGameRules;
 import net.sirkotok.half_life_mod.misc.util.CommonSounds;
 import net.sirkotok.half_life_mod.misc.util.InfightingUtil;
@@ -332,7 +334,10 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Do
                         .cooldownFor(entity -> random.nextInt(10, 15)),
                 new StopAndShoot<Shocktrooper>(3, 3, 1.6f).startCondition(entity -> this.getcanattack())
                         .whenStarting(entity -> triggerAnim("onetime", "shoot"))
-                        .cooldownFor(entity -> this.shotdelay % 3 == 0 ? 14 : 3)
+                        .cooldownFor(entity -> this.shotdelay % 3 == 0 ? 14 : 3),
+                new StopAndSecondShoot<Shocktrooper>(11, 10, 0.7f, HalfLifeSounds.SHOCKTROOPER_THROW.get()).startCondition(entity -> this.getcanattack() && this.random.nextFloat() < 0.01f)
+                        .whenStarting(entity -> triggerAnim("onetime", "spore"))
+                        .cooldownFor(entity -> 200 + random.nextInt(300))
                 )
         );
 
@@ -423,9 +428,20 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Do
     }
 
     @Override
-    public void performSecondRangedAttack(LivingEntity livingentity, float p_33318_) {
-    }
-
+    public void performSecondRangedAttack(LivingEntity pTarget, float p_33318_)   {
+        Vec3 vec3 = pTarget.getDeltaMovement();
+        double d0 = pTarget.getX() + vec3.x - this.getX();
+        double d1 = pTarget.getEyeY() - this.getY()-this.getBbHeight();
+        double d2 = pTarget.getZ() + vec3.z - this.getZ();
+        double d3 = Math.sqrt(d0 * d0 + d2 * d2);
+       // this.playSound(getSpitSound(), this.getSoundVolume(), this.getVoicePitch());
+        SporeShot spore = new SporeShot(this.level, this);
+        spore.minus = -0.93f;
+        spore.maxrichochet = 25;
+        spore.setXRot(spore.getXRot() - -20.0F);
+        spore.shoot(d0+0.2, d1+1+d3 * (d3 > 15 ? 1f : 2*d3/10), d2+0.2, 0.7f, 1.0F);
+        this.level.addFreshEntity(spore);
+}
         @Override
     public void performRangedAttack(LivingEntity pTarget, float p_33318_) {
 

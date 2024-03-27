@@ -29,7 +29,8 @@ public class HalfLifeParticles {
             PARTICLE_TYPES.register("gravgun_blue_lightning", () -> new SimpleParticleType(false));
     public static final RegistryObject<SimpleParticleType> VOLT_LIGHTNING =
             PARTICLE_TYPES.register("volt_lightning", () -> new SimpleParticleType(false));
-
+    public static final RegistryObject<SimpleParticleType> YELLOW_SMOKE =
+            PARTICLE_TYPES.register("yellowsmokeparticle", () -> new SimpleParticleType(true));
     public static final RegistryObject<SimpleParticleType> BULLET_HOLE =
             PARTICLE_TYPES.register("bullet_hole", () -> new SimpleParticleType(true));
     public static final RegistryObject<SimpleParticleType> SPIT_HIT =

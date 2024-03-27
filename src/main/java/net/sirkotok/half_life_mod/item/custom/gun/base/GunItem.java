@@ -21,6 +21,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.sirkotok.half_life_mod.entity.projectile.Bullet;
+import net.sirkotok.half_life_mod.entity.projectile.SporeShot;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import org.jetbrains.annotations.Nullable;
 

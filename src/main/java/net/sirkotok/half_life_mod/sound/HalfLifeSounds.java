@@ -15,6 +15,41 @@ public class HalfLifeSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 
+    // Spore
+
+  public static final RegistryObject<SoundEvent> SPLAUNCHER_ALTFIRE=
+          registerSoundEvent("splauncher_altfire");
+  public static final RegistryObject<SoundEvent> SPLAUNCHER_BOUNCE=
+          registerSoundEvent("splauncher_bounce");
+  public static final RegistryObject<SoundEvent> SPLAUNCHER_FIRE=
+          registerSoundEvent("splauncher_fire");
+  public static final RegistryObject<SoundEvent> SPLAUNCHER_IMPACT=
+          registerSoundEvent("splauncher_impact");
+  public static final RegistryObject<SoundEvent> SPLAUNCHER_PET=
+          registerSoundEvent("splauncher_pet");
+  public static final RegistryObject<SoundEvent> SPLAUNCHER_RELOAD=
+          registerSoundEvent("splauncher_reload");
+  public static final RegistryObject<SoundEvent> SPORE_AMMO=
+          registerSoundEvent("spore_ammo");
+  public static final RegistryObject<SoundEvent> SPORE_HIT1=
+          registerSoundEvent("spore_hit1");
+  public static final RegistryObject<SoundEvent> SPORE_HIT2=
+          registerSoundEvent("spore_hit2");
+  public static final RegistryObject<SoundEvent> SPORE_HIT3=
+          registerSoundEvent("spore_hit3");
+
+       /*    "sounds.half_life_mod.splauncher_altfire": "Spore ",
+          "sounds.half_life_mod.splauncher_bounce": "Spore ",
+          "sounds.half_life_mod.splauncher_fire": "Spore ",
+          "sounds.half_life_mod.splauncher_impact": "Spore ",
+          "sounds.half_life_mod.splauncher_pet": "Spore ",
+          "sounds.half_life_mod.splauncher_reload": "Spore ",
+          "sounds.half_life_mod.spore_ammo": "Spore ",
+          "sounds.half_life_mod.spore_hit1": "Spore ",
+          "sounds.half_life_mod.spore_hit2": "Spore ",
+          "sounds.half_life_mod.spore_hit3": "Spore ", */
+
+
 
     //
     public static final RegistryObject<SoundEvent> AG_ALERT1=
