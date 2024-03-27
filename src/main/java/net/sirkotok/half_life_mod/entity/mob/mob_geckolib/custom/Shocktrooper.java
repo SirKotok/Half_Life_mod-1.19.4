@@ -18,6 +18,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.behavior.SetWalkTargetAwayFrom;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
@@ -28,6 +29,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
@@ -38,6 +40,8 @@ import net.sirkotok.half_life_mod.entity.mob.modinterface.DoubleRangedMob;
 import net.sirkotok.half_life_mod.entity.mob.modinterface.HasLeaderMob;
 import net.sirkotok.half_life_mod.entity.projectile.ShockProjectile;
 import net.sirkotok.half_life_mod.misc.gamerules.HalfLifeGameRules;
+import net.sirkotok.half_life_mod.misc.util.CommonSounds;
+import net.sirkotok.half_life_mod.misc.util.InfightingUtil;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.misc.util.HLperUtil;
 import net.sirkotok.half_life_mod.misc.util.HLTags;
@@ -75,52 +79,12 @@ import java.util.List;
 import java.util.UUID;
 
 
-public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, DoubleRangedMob, HasLeaderMob<Shocktrooper>, GeoEntity, SmartBrainOwner<Shocktrooper> {
-    //TODO: implement the spore launcher projectile thing so it works. Fix the position of the shooting from the shockroach.
+public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, DoubleRangedMob, GeoEntity, SmartBrainOwner<Shocktrooper> {
+
     @Override
     protected float getSoundVolume() {
         return 0.5f;
     }
-
-
-
-    public Shocktrooper leader;
-    public List<Shocktrooper> shocktroopers;
-
-
-    public Shocktrooper getLeader() {
-       if (this.leader == null) return this;
-       return this.leader;
-       }
-
-
-
-    public void setLeader(LivingEntity troop) {
-        this.leader = (Shocktrooper) troop;
-    }
-
-    public List<Shocktrooper> getTroopers() {
-        if (this.shocktroopers == null) return new ArrayList<>();
-        return this.shocktroopers;
-    }
-    public void setShocktroopers(List<Shocktrooper> list) {
-        this.shocktroopers = list;
-    }
-
-    public void addTroopertoTroopers(Shocktrooper troop) {
-        if (this.shocktroopers == null) this.shocktroopers = new ArrayList<>();
-        if (this.getTroopers().contains(troop)) return;
-        this.shocktroopers.add(troop);
-    }
-
-
-    public void removeTrooperfromTroopers(Shocktrooper troop) {
-        if (this.shocktroopers == null) this.shocktroopers = new ArrayList<>();
-        if (!this.getTroopers().contains(troop)) return;
-        this.shocktroopers.remove(troop);
-    }
-
-
 
 
 
@@ -144,22 +108,11 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Do
     }
 
     private AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-
-
-    public static final EntityDataAccessor<Boolean> IS_LEADER = SynchedEntityData.defineId(Shocktrooper.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> IS_SITTING = SynchedEntityData.defineId(Shocktrooper.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> IS_ANGRY = SynchedEntityData.defineId(Shocktrooper.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<Integer> RACE_X_AROUND = SynchedEntityData.defineId(Shocktrooper.class, EntityDataSerializers.INT);
-
     public static final EntityDataAccessor<Integer> ORDER_ID = SynchedEntityData.defineId(Shocktrooper.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> CURRENT_ORDER_ID = SynchedEntityData.defineId(Shocktrooper.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> CAN_ATTACK = SynchedEntityData.defineId(Shocktrooper.class, EntityDataSerializers.BOOLEAN);
-    // ORDER LIST:
-    // 0 - stand ground
-    // 1 - retreat
-    // 2 - charge enemy
-    // 3 - sit down
-    // 4 - change position
+
 
 
 
@@ -170,145 +123,29 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Do
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(CAN_ATTACK, true);
-        this.entityData.define(IS_LEADER, false);
         this.entityData.define(IS_SITTING, false);
         this.entityData.define(IS_ANGRY, false);
-        this.entityData.define(RACE_X_AROUND, 0);
-        this.entityData.define(ORDER_ID, 0);
-        this.entityData.define(CURRENT_ORDER_ID, 0);
+        this.entityData.define(ORDER_ID, 1);
     }
 
-    public void setxround(int emount) {
-        this.entityData.set(RACE_X_AROUND, emount);
-    }
-    public int getxround() {
-        return this.entityData.get(RACE_X_AROUND);
-    }
+
 
 
     public int getorder(){
         return this.entityData.get(ORDER_ID);
     }
+
     public void setorder(int order){
         this.entityData.set(ORDER_ID, order);
     }
-    public int getcurrentorder(){
-        return this.entityData.get(CURRENT_ORDER_ID);
-    }
-    public void setcurrentorder(int order){
-        this.entityData.set(CURRENT_ORDER_ID, order);
-    }
 
     public boolean getcanattack() {
-        return this.entityData.get(CAN_ATTACK);
-    }
-    public void setCanAttack(boolean b){
-        this.entityData.set(CAN_ATTACK, b);
+        return this.getorder() == 1;
     }
 
 
 
 
-    public boolean isleader() {
-        return this.entityData.get(IS_LEADER);
-    }
-    protected void setthistoleader(boolean yes) {
-        this.entityData.set(IS_LEADER, yes);
-    }
-
-
-    @Override
-    public void tick() {
-        super.tick();
-        if (!this.level.isClientSide()) {
-            if (RandomSource.create().nextFloat() < 0.002f) this.triggerAnim("blink", "blink");
-            ServerLevel pLevel = (ServerLevel) this.level;
-            BlockPos pBlockPos = this.blockPosition();
-            if (this.tickCount % 100 == 0) {
-
-                int rad = 20;
-                List<Mob> race_x = EntityRetrievalUtil.getEntities((Level) pLevel,
-                        new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
-                                pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj.getType().is(HLTags.EntityTypes.FACTION_RACE_X));
-                this.setxround(race_x.size());
-                if (BrainUtils.getTargetOfEntity(this) != null) {
-                    for (Mob x : race_x) {
-                        if (BrainUtils.getTargetOfEntity(x) == null) {
-                            BrainUtils.setTargetOfEntity(x, BrainUtils.getTargetOfEntity(this));
-                        }
-                    }
-                }
-            }
-
-
-            if (this.isDeadOrDying() && this.tickCount % 20 == 0) {
-                for (Shocktrooper shocktrooper : this.getTroopers()) {
-                    if (shocktrooper != null && shocktrooper.isAlive() && (BrainUtils.getTargetOfEntity(shocktrooper) == null
-                            || this.isleader())) {
-                        BrainUtils.setTargetOfEntity(shocktrooper, this.getKillCredit());
-                    }
-                }
-
-
-                int radius = 100;
-                List<Shocktrooper > shocktroopers = EntityRetrievalUtil.getEntities((Level) pLevel,
-                        new AABB(pBlockPos.getX() - radius, pBlockPos.getY() - radius, pBlockPos.getZ() - radius,
-                                pBlockPos.getX() + radius, pBlockPos.getY() + radius, pBlockPos.getZ() + radius), obj -> obj instanceof Shocktrooper);
-
-                for (Shocktrooper trooper : shocktroopers) {
-                    trooper.removeTrooperfromTroopers(this);
-                }
-
-            }
-
-            if(this.getLeader().isDeadOrDying()) {
-                this.setLeader(this);
-                List<Shocktrooper> a = new ArrayList<>();
-                a.add(this);
-                this.setShocktroopers(a);
-                this.setthistoleader(false);
-            }
-
-
-            if (this.tickCount % 20 == 0 && !this.isDeadOrDying()) {
-                this.addTroopertoTroopers(this);
-                int radius = 20;
-                List<Shocktrooper> shocktroopers = EntityRetrievalUtil.getEntities((Level) pLevel,
-                        new AABB(pBlockPos.getX() - radius, pBlockPos.getY() - radius, pBlockPos.getZ() - radius,
-                                pBlockPos.getX() + radius, pBlockPos.getY() + radius, pBlockPos.getZ() + radius), obj -> obj instanceof Shocktrooper && !((Shocktrooper) obj).isDeadOrDying());
-                List<UUID> uuids = new ArrayList<>();
-                for (Shocktrooper trooper : shocktroopers) {
-                    uuids.add(trooper.getUUID());
-                }
-                int max = HLperUtil.getMaxUUIDnumber(uuids);
-                this.setLeader(shocktroopers.get(max));
-                this.getLeader().addTroopertoTroopers(this);
-                this.setShocktroopers(this.getLeader().getTroopers());
-
-
-                if (this.isleader() && shocktroopers.size() < 2) {
-                    List<Shocktrooper> a = new ArrayList<>();
-                    a.add(this);
-                    this.setShocktroopers(a);
-                }
-
-                if (this.getLeader() == this) {
-                    this.setthistoleader(true);
-                } else  {
-                    this.setthistoleader(false);
-                }
-
-                if (BrainUtils.getTargetOfEntity(this) != null) {
-                    for (Shocktrooper trooper : this.getTroopers()) {
-                        if (trooper != null && trooper.isAlive() && (BrainUtils.getTargetOfEntity(trooper) == null
-                                || (this.isleader() && this.tickCount - this.getLastHurtByMobTimestamp() < 400))) {
-                            BrainUtils.setTargetOfEntity(trooper, BrainUtils.getTargetOfEntity(this));
-                        }
-                    }
-                }
-            }
-        }
-    }
 
 
 
@@ -319,8 +156,6 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Do
     public boolean getIssitting() {
         return this.entityData.get(IS_SITTING);
     }
-
-
 
     protected boolean isangry() {
         return this.entityData.get(IS_ANGRY);
@@ -336,13 +171,14 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Do
 
     public static AttributeSupplier setAttributes() {
         return Monster.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 45D)
+                .add(Attributes.MAX_HEALTH, 55D)
                 .add(Attributes.ATTACK_DAMAGE, 10f)
                 .add(Attributes.ATTACK_SPEED, 1.0f)
                 .add(Attributes.ATTACK_KNOCKBACK, 1f)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.2f)
-                .add(Attributes.ARMOR, 5f)
-                .add(Attributes.MOVEMENT_SPEED, 0.33f).build();
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.25f)
+                .add(Attributes.ARMOR, 8f)
+                .add(Attributes.ARMOR_TOUGHNESS, 5f)
+                .add(Attributes.MOVEMENT_SPEED, 0.34f).build();
     }
 
 
@@ -354,66 +190,63 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Do
         return new SmartBrainProvider<>(this);
     }
 
-    // ORDER LIST:
-    // 0 - stand ground
-    // 1 - retreat
-    // 2 - charge enemy
-    // 3 - sit down
-    // 4 - change position
-    // 5 - group up
-    // 6 - go melee
+    // ORDERS: 1 = stay; 2 = change position;
+
+    int hit = 0;
+    int track = 200;
+
+    public void changeorder(){
+        if (track < 200) return;
+        if (random.nextFloat() < 0.1f) return;
+        if (this.getorder() != 1) this.setorder(1); else setorder(0);
+        this.hit = 0;
+        track = 0;
+    }
+
+
+    @Override
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        if (!this.getcanattack()) this.changeorder();
+        return super.hurt(pSource, pAmount);
+    }
+
     @Override
     public void aiStep() {
         super.aiStep();
+        if (BrainUtils.getTargetOfEntity(this) != null) {
+        if (!this.getcanattack() && !this.level.isClientSide() && this.tickCount % (70) == 0) {
+            ServerLevel pLevel = (ServerLevel) this.level;
+            BlockPos pBlockPos = this.blockPosition();
+            int rad = 15;
+            List<Mob> myfaction = EntityRetrievalUtil.getEntities((Level) pLevel,
+                    new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
+                            pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj instanceof Shocktrooper trooper && trooper.getcanattack() && !obj.equals(this));
+            int size = myfaction.size();
+            this.hit+=(14-Math.min(size, 13))+1;
+            if (this.random.nextInt(100) < Math.min(hit, 80)) this.changeorder();
+        }
+        if (!this.level.isClientSide() && this.getcanattack() && this.tickCount % (150+random.nextInt(200)) == 0) {
+        ServerLevel pLevel = (ServerLevel) this.level;
+        BlockPos pBlockPos = this.blockPosition();
+        int rad = 15;
+        List<Mob> myfaction = EntityRetrievalUtil.getEntities((Level) pLevel,
+                new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
+                        pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj instanceof Shocktrooper trooper && trooper.getcanattack() && !obj.equals(this));
 
-        if ((this.isleader() && this.tickCount % 100 == 0)) {
-        List<Shocktrooper> army = this.getTroopers();
-            if (army != null && !army.isEmpty()) {
-                int j = army.size();
-                int i = random.nextInt(0, j);
-                int k = random.nextInt(0, j);
-                if (k == i) k = random.nextInt(0, j);
-                int f = 0;
-                for (Shocktrooper soldier : army) {
-                    if (random.nextFloat() < 0.05f) {
-                        return;
-                    }
-                    int l = random.nextInt(0, 7);
-
-                    if (f == i || f == k || random.nextFloat() > 0.99f) {
-                        soldier.setCanAttack(true);
-                    } else  {
-                        soldier.setCanAttack(false);
-                        if (l == 0 || l == 3) l = random.nextInt(0, 7);
-                        if ((l == 0 || l == 3) && random.nextFloat() < 0.2f) l = random.nextInt(0, 7);
-                    }
-
-                    LivingEntity target = BrainUtils.getTargetOfEntity(soldier);
-                    if (target != null) {
-                        if (this.distanceTo(target) > 8f) soldier.setorder(2);
-                        if (this.distanceTo(target) < 3f && random.nextFloat() > 0.5f)  {
-                            l = 1;
-                        }
-                        if (this.distanceTo(target) < 5f && random.nextFloat() > 0.9f)  {
-                            l = 6;
-                        }
-                        if (this.distanceTo(target) > 9f || this.distanceTo(target) < 4f && random.nextFloat() < 0.1f) soldier.setCanAttack(true);
-                    }
-                    soldier.setorder(l);
-                    f++;
-
-
-                    int dedebug = soldier.isleader() ? 1 : 0;
-                    int debug = soldier.getcanattack() ? 1 : 0;
-                    soldier.setCustomName(Component.literal(soldier.getorder() + "shoot" + debug + "lead" + dedebug + "army" + j));
-
-
-                }
-
-            }
+        int size = myfaction.size();
+        this.hit+=size+1;
+        if (this.random.nextInt(100) < Math.min(hit, 70)) this.changeorder();
+    }
+    }
+    }
+    @Override
+    public void tick() {
+        track++;
+        super.tick();
+        if (this.tickCount % 50 == 0) {
+            InfightingUtil.alertsameteam(this);
         }
     }
-
 
 
 
@@ -431,16 +264,11 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Do
     @Override
     public List<ExtendedSensor<Shocktrooper>> getSensors() {
         return ObjectArrayList.of(
-                new SmellSensor<>(),
                 new HurtBySensor<>(),
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<Shocktrooper>()
                         .setPredicate((target, entity) ->
-                            target instanceof Player ||
-                                    target.getType().is(HLTags.EntityTypes.FACTION_COMBINE) ||
-                            target instanceof IronGolem ||
-                            target instanceof AbstractVillager ||
-                            target instanceof HalfLifeNeutral
+                                InfightingUtil.commonenemy(target) || InfightingUtil.RaceXSpecific(target)
                             ));
     }
 
@@ -450,7 +278,8 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Do
     public BrainActivityGroup<Shocktrooper> getCoreTasks() {
         return BrainActivityGroup.coreTasks(
                 new LookAtTarget<>(),
-                new MoveToWalkTarget<>());
+                new MoveToWalkTarget<>(),
+                new CustomBehaviour<>(entity -> setorder(random.nextInt(2))).cooldownFor(entity -> random.nextInt(300, 1000)));
     }
 
 
@@ -460,49 +289,50 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Do
     public BrainActivityGroup<Shocktrooper> getIdleTasks() {
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<Shocktrooper>(
+                        new FirstApplicableBehaviour<>(
+                                new CustomBehaviour<>(entity -> setIsSitting(random.nextBoolean())).startCondition(entity -> !getIssitting() && getorder() == 1),
+                                new CustomBehaviour<>(entity -> setIsSitting(false)).startCondition(entity -> getIssitting())
+                        ).cooldownFor(entity -> 200+random.nextInt(200)),
                         new TargetOrRetaliateHLT<>(),
                         new SetPlayerLookTarget<>(),
                         new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, false)).startCondition(entity -> this.isangry()),
                         new SetRandomLookTarget<>()),
                 new OneRandomBehaviour<>(
-                        new FollowLeaderBehaviour<Shocktrooper>().startCondition(entity -> (this.getLeader() != null) && (this.distanceTo(this.getLeader()) > 10)),
                         new SetRandomWalkTarget<>(),
                         new Idle<>().runFor(entity -> entity.getRandom().nextInt(10, 20)),
                         new Idle<>().runFor(entity -> entity.getRandom().nextInt(10, 90))
                 ));
     }
 
-    // ORDER LIST:
-    // 0 - stand ground
-    // 1 - retreat
-    // 2 - charge enemy
-    // 3 - sit down
-    // 4 - change position
+
+
+    int shotdelay = 0;
+
 
     @Override
     public BrainActivityGroup<Shocktrooper> getFightTasks() {
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>(),
                 new Retaliate<>(),
-                new CustomBehaviour<>(entity -> this.setIsSitting(false)).startCondition(entity -> this.getorder() != 3),
-                new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, true)).startCondition(entity -> !this.isangry()),
-                new CustomBehaviour<>(entity -> BrainUtils.clearMemory(this, MemoryModuleType.WALK_TARGET)).startCondition(entity -> this.getcurrentorder() != this.getorder()),
-                new CustomBehaviour<>(entity -> this.setcurrentorder(this.getorder())).startCondition(entity -> this.getcurrentorder() != this.getorder()),
+                new SetWalkTargetToRandomSpotAroundAttackTarget<>().startCondition(entity -> distanceTo(HLperUtil.TargetOrThis(this)) > 15),
+                new SetWalkTargetToRandomSpotAwayFromAttackTarget<>().startCondition(entity -> distanceTo(HLperUtil.TargetOrThis(this)) < 4),
+                new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, true)).whenStarting(entity -> CommonSounds.PlaySoundAsOwn(this, this.getSpotSound(HLperUtil.TargetOrThis(this) instanceof Player))).startCondition(entity -> !this.isangry()),
                 new FirstApplicableBehaviour<>(
-                     new FollowLeaderBehaviour<Shocktrooper>().startCondition(entity -> this.getorder() == 5 && (this.getLeader() != null) && (this.distanceTo(this.getLeader()) > 8)),
-                     new SetWalkTargetToRandomSpotAroundAttackTarget<Shocktrooper>().startCondition(entity -> this.getorder() == 2),
-                     new SetRandomWalkTarget<>().startCondition(entity -> this.getorder() == 4),
-                     new CustomBehaviour<>(entity -> entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200, 100, false, false, false))).startCondition(entity -> this.getorder() == 3).whenStarting(entity -> setIsSitting(true)),
-                     new FleeTarget<>().fleeDistance(7).speedModifier(1.2f).startCondition(entity -> this.getorder() == 1),
-                     new SetWalkTargetToAttackTarget<>().startCondition(entity -> this.getorder() == 6)
-                ),
+                new CustomBehaviour<>(entity -> setIsSitting(random.nextBoolean())).startCondition(entity -> !getIssitting() && getorder() == 1),
+                new CustomBehaviour<>(entity -> setIsSitting(false)).startCondition(entity -> getIssitting())
+                ).cooldownFor(entity -> 200),
+                new FirstApplicableBehaviour<Shocktrooper>(
+                        new SetWalkTargetToRandomSpotAroundAttackTarget<>().startCondition(entity -> distanceTo(HLperUtil.TargetOrThis(this)) > 10).whenStarting(entity -> CommonSounds.PlaySoundAsOwn(this, HalfLifeSounds.SHOCKTROOPER_CHARGE.get())),
+                        new SetWalkTargetToRandomSpotAwayFromAttackTarget<>().startCondition(entity -> distanceTo(HLperUtil.TargetOrThis(this)) < 8),
+                        new SetRandomWalkTarget<>()
+                ).startCondition(entity -> !entity.getcanattack()),
                 new FirstApplicableBehaviour<>(
                 new DoubleMeleeAttack<Shocktrooper>(10, 6, 0.1f, 1, 1, null , 0, null, this.getDoubleAttackSound())
                         .whenStarting(entity ->triggerAnim("onetime", "doubleattack"))
                         .cooldownFor(entity -> random.nextInt(10, 15)),
-                new StopAndShoot<Shocktrooper>(3, 8, 1.6f).startCondition(entity -> this.getcanattack())
+                new StopAndShoot<Shocktrooper>(3, 3, 1.6f).startCondition(entity -> this.getcanattack())
                         .whenStarting(entity -> triggerAnim("onetime", "shoot"))
-                        .cooldownFor(entity -> random.nextFloat() < 0.05f ? 100 : 7)
+                        .cooldownFor(entity -> this.shotdelay % 3 == 0 ? 14 : 3)
                 )
         );
 
@@ -579,24 +409,37 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Do
     }
 
 
+
+    private float length(){
+        return this.getBbWidth()/2+0.5f;
+    }
+
+    private Vec3 rotvec(int angledegree){
+        float i = length();
+        double yrot = (this.yBodyRot+angledegree)/180*Math.PI;
+        double d1 = Math.sin(yrot);
+        double d2 = Math.cos(yrot);
+        return new Vec3((float)this.getX()-i*d1, this.getY()+(this.getIssitting() ? 1.20 : 1.35f), (float)this.getZ()+i*d2);
+    }
+
     @Override
     public void performSecondRangedAttack(LivingEntity livingentity, float p_33318_) {
     }
 
         @Override
-    public void performRangedAttack(LivingEntity livingentity, float p_33318_) {
+    public void performRangedAttack(LivingEntity pTarget, float p_33318_) {
 
-        double d0 = this.distanceToSqr(livingentity);
-        double d1 = livingentity.getX() - this.getX();
-        double d2 = livingentity.getY(0.4D) - this.getY(0.4D);
-        double d3 = livingentity.getZ() - this.getZ();
-        double d4 = Math.sqrt(Math.sqrt(d0)) * 0.5D;
+        Vec3 attackpos = this.rotvec(36);
+        double d1 = pTarget.getX() - attackpos.x();
+        double d2 = pTarget.getY(0.4D) - attackpos.y();
+        double d3 = pTarget.getZ() - attackpos.z();
+       shotdelay++;
 
         this.playSound(getShootSound(), this.getSoundVolume(), this.getVoicePitch());
 
 
        ShockProjectile acidBall = new ShockProjectile(this.level, this, d1, d2, d3);
-        acidBall.setPos(this.getX() - (double)(this.getBbWidth() + 1.0F) * 0.5D * (double)Mth.sin(this.yBodyRot * ((float)Math.PI / 180F)), this.getEyeY() - (double)0.1F, this.getZ() + (double)(this.getBbWidth() + 1.0F) * 0.5D * (double) Mth.cos(this.yBodyRot * ((float)Math.PI / 180F)));
+        acidBall.setPos(attackpos);
         acidBall.shoot(d1, d2, d3, p_33318_, 1f);
         this.level.addFreshEntity(acidBall);
 
@@ -628,7 +471,7 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Do
 
     @Override
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
-        switch (this.random.nextInt(1,5)) {
+        switch (this.random.nextInt(1,6)) {
             case 1:  return HalfLifeSounds.SHOCKTROOPER_PAIN1.get();
             case 2:  return HalfLifeSounds.SHOCKTROOPER_PAIN2.get();
             case 3:  return HalfLifeSounds.SHOCKTROOPER_PAIN3.get();
@@ -644,29 +487,46 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Do
     }
 
     protected SoundEvent getAmbientSound() {
-        return HalfLifeSounds.SHOCKTROOPER_IDLE.get();
+        boolean a = this.isangry();
+        int f = a ? random.nextInt(1, 6) : random.nextFloat() < 0.3 ? 6 : random.nextInt(1, 4);
+        switch (f) {
+            case 1:
+                return HalfLifeSounds.SHOCKTROOPER_IDLE.get();
+            case 2:
+                return HalfLifeSounds.SHOCKTROOPER_IDLE_A.get();
+            case 3:
+                return HalfLifeSounds.SHOCKTROOPER_IDLE_Q.get();
+            case 4:
+                return HalfLifeSounds.SHOCKTROOPER_IDLE_CHECK_IN.get();
+            case 5:
+                return HalfLifeSounds.SHOCKTROOPER_IDLE_CLEAR.get();
+            case 6:
+                return HalfLifeSounds.SHOCKTROOPER_TAUNT.get();
+        }
+        return HalfLifeSounds.HEADCRAB_1_DIE_1.get();
+    }
+
+    protected SoundEvent getSpotSound(Boolean yes) {
+        if (yes && random.nextFloat() < 0.8f) {
+        int f = random.nextInt(1, 4);
+        switch (f) {
+            case 1:
+                return HalfLifeSounds.SHOCKTROOPER_PL_SPOT1.get();
+            case 2:
+                return HalfLifeSounds.SHOCKTROOPER_PL_SPOT2.get();
+            case 3:
+                return HalfLifeSounds.SHOCKTROOPER_PL_SPOT3.get();
+        }
+        }
+        return HalfLifeSounds.SHOCKTROOPER_ENEMY_SPOT.get();
+    }
+
+
     }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
 
 
 

@@ -63,7 +63,9 @@ public class RechargingGunItem extends GunItem {
     public boolean needshand() {
         return true;
     }
-
+    public int reachargetime() {
+        return 15;
+    }
     public boolean hasrechargesound(){
         return true;
     }
@@ -78,7 +80,7 @@ public class RechargingGunItem extends GunItem {
         SetTick(pStack, GetTick(pStack)+1);
         }
 
-        if (GetAmmo(pStack) < GetMaxAmmo() && GetTick(pStack) % 20 == 0 &&(!this.needshand() || pIsSelected)) {
+        if (GetAmmo(pStack) < GetMaxAmmo() && GetTick(pStack) % reachargetime() == 0 &&(!this.needshand() || pIsSelected)) {
             SetAmmo(pStack, GetAmmo(pStack)+1);
             if (this.hasrechargesound()) pLevel.playSound((Player) null, pEntity.getX(), pEntity.getY(), pEntity.getZ(), this.getRechargeSound(), SoundSource.NEUTRAL, 0.5F, 1F);
         }

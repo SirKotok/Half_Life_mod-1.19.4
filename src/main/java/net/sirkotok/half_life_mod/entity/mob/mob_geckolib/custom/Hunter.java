@@ -498,9 +498,9 @@ public class Hunter extends HalfLifeMonster implements RushingMob, GeoEntity, Ra
     @Override
     public void performVariableRangedAttack(LivingEntity livingentity, float pVelocity, float down) {
         double d0 = this.distanceToSqr(livingentity);
-        double d1 = (livingentity.getX()*(1 - down*0.05*Math.signum(livingentity.getX())) - this.getX());
+        double d1 = (livingentity.getX() - this.getX());
         double d2 = (livingentity.getY(0.4D)*(1 - down*0.05*Math.signum(livingentity.getY())) - this.getY(0.4D));
-        double d3 = (livingentity.getZ()*(1 - down*0.05*Math.signum(livingentity.getZ())) - this.getZ());
+        double d3 = (livingentity.getZ() - this.getZ());
         double d4 = Math.sqrt(Math.sqrt(d0)) * 0.5D;
         this.playSound(this.getFireSound(), this.getSoundVolume(), this.getVoicePitch());
         Flechette flechette = new Flechette(this.level, this); //this.getRandom().triangle(d1, 2.297D * d4)

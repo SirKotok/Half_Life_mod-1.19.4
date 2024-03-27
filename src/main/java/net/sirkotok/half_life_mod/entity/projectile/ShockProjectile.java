@@ -55,7 +55,7 @@ public class ShockProjectile extends FireballNoTrail {
 
 
     public float getDamageEmount(){
-        return 1.7f;
+        return 2.5f;
     }
 
 

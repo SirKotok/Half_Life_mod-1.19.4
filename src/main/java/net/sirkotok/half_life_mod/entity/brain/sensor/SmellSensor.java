@@ -10,6 +10,7 @@ import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.brain.HalfLifeSensorType;
+import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.AlienGrunt;
 import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.Cockroach;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import net.tslat.smartbrainlib.api.core.sensor.PredicateSensor;
@@ -54,7 +55,7 @@ public class SmellSensor<E extends LivingEntity> extends PredicateSensor<LivingE
 
     @Override
     protected BiPredicate<LivingEntity, E> predicate() {
-        return (target, entity) -> target.isDeadOrDying() && !(target instanceof Cockroach);
+        return (target, entity) -> target.isDeadOrDying() && !(target instanceof Cockroach) && (!(entity instanceof AlienGrunt) || target.getLastAttacker() == entity);
     }
     protected Vec3 getPosition(LivingEntity entity){
         return new Vec3(entity.getX(), entity.getY(), entity.getZ());

@@ -162,7 +162,7 @@ public class HalfLifeItems {
             () -> new ForgeSpawnEggItem(HalfLifeEntities.LEECH, 0xeeeddb, 0xaba76b   ,
                     new Item.Properties()));
     public static final RegistryObject<Item> ALIENGRUNT_SPAWN_EGG = ITEMS.register("aliengrunt_spawn_egg",
-            () -> new ForgeSpawnEggItem(HalfLifeEntities.ALIENGRUNT, 0xc6590c, 0x8d8d8d   ,
+            () -> new ForgeSpawnEggItem(HalfLifeEntities.ALIENGRUNT, 0x664e2b, 0x925cf4   ,
                     new Item.Properties()));
     public static final RegistryObject<Item> HUNTER_SPAWN_EGG = ITEMS.register("hunter_spawn_egg",
             () -> new ForgeSpawnEggItem(HalfLifeEntities.HUNTER, 0xc3898, 0x18fce3   ,

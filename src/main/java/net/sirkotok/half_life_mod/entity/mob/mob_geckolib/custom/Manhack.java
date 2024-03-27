@@ -333,6 +333,7 @@ public class Manhack extends HalfLifeMonster implements GeoEntity, SmartBrainOwn
             this.ricochete(random.nextFloat()*random.nextFloat());
         }
 
+            if (!this.level.getGameRules().getRule(HalfLifeGameRules.HALF_LIFE_AI_IS_ON).get()) return;
         if (this.tickCount % 4 == 0) {
             int m = random.nextFloat() < 0.5f ? 1 : -1;
         if (BrainUtils.getMemory(this, MemoryModuleType.WALK_TARGET) == null) this.setDeltaMovement(this.getDeltaMovement().x(), 0.2f * m * random.nextFloat(), this.getDeltaMovement().z());

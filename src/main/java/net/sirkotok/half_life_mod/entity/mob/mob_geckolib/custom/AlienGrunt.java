@@ -14,6 +14,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -29,7 +31,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
+import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
 import net.sirkotok.half_life_mod.entity.brain.behaviour.*;
+import net.sirkotok.half_life_mod.entity.brain.sensor.SmellSensor;
 import net.sirkotok.half_life_mod.entity.mob.modinterface.VariableRangedMob;
 import net.sirkotok.half_life_mod.entity.particle.HalfLifeParticles;
 import net.sirkotok.half_life_mod.entity.projectile.BeeProjectile;
@@ -84,6 +88,9 @@ public class AlienGrunt extends HalfLifeMonster implements GeoEntity, RangedAtta
     private AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
 
+    public static final EntityDataAccessor<Boolean> AI_STOP = SynchedEntityData.defineId(AlienGrunt.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> AI_STOP_TIMESTAMP = SynchedEntityData.defineId(AlienGrunt.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> AI_STOP_DELAY = SynchedEntityData.defineId(AlienGrunt.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> IS_EATING = SynchedEntityData.defineId(AlienGrunt.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> IS_ANGRY = SynchedEntityData.defineId(AlienGrunt.class, EntityDataSerializers.BOOLEAN);
 
@@ -91,12 +98,38 @@ public class AlienGrunt extends HalfLifeMonster implements GeoEntity, RangedAtta
         super.defineSynchedData();
         this.entityData.define(IS_ANGRY, false);
         this.entityData.define(IS_EATING, false);
+        this.entityData.define(AI_STOP, false);
+        this.entityData.define(AI_STOP_TIMESTAMP, 0);
+        this.entityData.define(AI_STOP_DELAY, 0);
+    }
+
+    public void stopAiFor(int delay) {
+        this.entityData.set(AI_STOP_TIMESTAMP, this.tickCount);
+        this.entityData.set(AI_STOP, true);
+        this.entityData.set(AI_STOP_DELAY, delay);
+        this.entityData.set(IS_EATING, true);
+    }
+
+    public int ai_stop_timestamp() {
+        return this.entityData.get(AI_STOP_TIMESTAMP);
+    }
+    public boolean aistopped() {
+        return this.entityData.get(AI_STOP);
+    }
+    public int ai_stop_remaining() {
+        return this.entityData.get(AI_STOP_DELAY);
     }
 
 
     @Override
     public void tick() {
         super.tick();
+
+        if (this.hasEffect(MobEffects.LUCK) && BrainUtils.getTargetOfEntity(this) != null) {
+            this.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
+            this.removeEffect(MobEffects.LUCK);
+        }
+
 
         if (this.tickCount % 100 == 0 && !this.level.isClientSide()) {
             ServerLevel pLevel = (ServerLevel) this.level;
@@ -113,6 +146,8 @@ public class AlienGrunt extends HalfLifeMonster implements GeoEntity, RangedAtta
                 }
             }
         }
+        if (aistopped() && ((this.tickCount - ai_stop_timestamp() > ai_stop_remaining()) || this.getLastAttacker() != null)) {this.entityData.set(AI_STOP, false);}
+
 
     }
 
@@ -130,7 +165,17 @@ public class AlienGrunt extends HalfLifeMonster implements GeoEntity, RangedAtta
     }
 
 
+    private float length(){
+        return this.getBbWidth()/2+1.3f;
+    }
 
+    private Vec3 rotvec(int angledegree){
+        float i = length();
+        double yrot = (this.yBodyRot+angledegree)/180*Math.PI;
+        double d1 = Math.sin(yrot);
+        double d2 = Math.cos(yrot);
+        return new Vec3((float)this.getX()-i*d1, this.getY()+1.67f, (float)this.getZ()+i*d2);
+    }
 
 
 
@@ -144,6 +189,7 @@ public class AlienGrunt extends HalfLifeMonster implements GeoEntity, RangedAtta
                 .add(Attributes.ATTACK_SPEED, 1.0f)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.0f)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5f)
+                .add(Attributes.FOLLOW_RANGE, 64)
                 .add(Attributes.MOVEMENT_SPEED, 0.22f).build();
     }
 
@@ -258,7 +304,8 @@ public class AlienGrunt extends HalfLifeMonster implements GeoEntity, RangedAtta
     @Override
     protected void customServerAiStep() {
         if (!this.level.getGameRules().getRule(HalfLifeGameRules.HALF_LIFE_AI_IS_ON).get()) return;
-        tickBrain(this);
+        if (!aistopped()) {
+            tickBrain(this);}
 
     }
 
@@ -267,6 +314,7 @@ public class AlienGrunt extends HalfLifeMonster implements GeoEntity, RangedAtta
     @Override
     public List<ExtendedSensor<AlienGrunt>> getSensors() {
         return ObjectArrayList.of(
+                new SmellSensor<>(),
                 new HurtBySensor<>(),
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<AlienGrunt>()
@@ -288,11 +336,19 @@ public class AlienGrunt extends HalfLifeMonster implements GeoEntity, RangedAtta
     public BrainActivityGroup<AlienGrunt> getIdleTasks() { // These are the tasks that run when the mob isn't doing anything else (usually)
         return BrainActivityGroup.idleTasks(
                   new FirstApplicableBehaviour<AlienGrunt>(
+                                new CustomBehaviour<>(entity -> BrainUtils.clearMemory(this, HalfLifeMemoryModuleType.HUNGRY.get()))
+                                  .startCondition(entity -> ((this.getHealth() + 2) < this.getMaxHealth())).cooldownFor(entity -> 400),
                                 new TargetOrRetaliateHLT<>(),
                                 new SetPlayerLookTarget<>(),
                                 new SetRandomLookTarget<>()),
+                                new EatingBehavior<>().callback(entity -> this.entityData.set(IS_EATING, true)).startCondition(entity -> BrainUtils.getMemory(this, HalfLifeMemoryModuleType.HUNGRY.get()) == null)
+                                  .whenStopping(entity -> this.entityData.set(IS_EATING, false)),
+
                   new OneRandomBehaviour<>(
-                                new SetRandomWalkTarget<>(),
+                            new FirstApplicableBehaviour<AlienGrunt>(
+                                    new SetFoodToWalkTarget<>().cooldownFor(entity -> 100),
+                                    new SetRandomWalkTarget<>()
+                            ),
                                 new Idle<>().runFor(entity -> entity.getRandom().nextInt(10, 40))
                                         .whenStarting(entity -> this.entityData.set(IS_ANGRY, false))));
 
@@ -390,26 +446,21 @@ public class AlienGrunt extends HalfLifeMonster implements GeoEntity, RangedAtta
 
     @Override
     public void performRangedAttack(LivingEntity pTarget, float pVelocity) {
-        double d0 = this.distanceToSqr(pTarget);
-        double d1 = pTarget.getX() - this.getX();
-        double d2 = pTarget.getY(0.4D) - this.getY(0.4D);
-        double d3 = pTarget.getZ() - this.getZ();
-        ControllerBigProjectile acidBall = new ControllerBigProjectile(this.level, this, d1, d2, d3, pTarget);
-        acidBall.setPos(this.getX() - (double)(this.getBbWidth() + 1.0F) * 0.5D * (double)Mth.sin(this.yBodyRot * ((float)Math.PI / 180F)), this.getEyeY() - (double)0.1F, this.getZ() + (double)(this.getBbWidth() + 1.0F) * 0.5D * (double) Mth.cos(this.yBodyRot * ((float)Math.PI / 180F)));
-        acidBall.shoot(d1, d2, d3, pVelocity, 1f);
-        this.level.addFreshEntity(acidBall);
     }
 
     @Override
     public void performVariableRangedAttack(LivingEntity pTarget, float pVelocity, float down) {
-        double d0 = this.distanceToSqr(pTarget);
-        double d1 = pTarget.getX() - this.getX();
-        double d2 = pTarget.getY(0.4D) - this.getY(0.4D);
-        double d3 = pTarget.getZ() - this.getZ();
+        Vec3 attackpos = this.rotvec(38);
+        double d1 = pTarget.getX() - attackpos.x();
+        double d2 = pTarget.getY(0.4D) - attackpos.y();
+        double d3 = pTarget.getZ() - attackpos.z();
         CommonSounds.PlaySoundAsOwn(this, this.getfiresound());
         BeeProjectile acidBall = new BeeProjectile(this.level, this, d1, d2, d3);
-        acidBall.setPos(this.getX() - (double)(this.getBbWidth() + 1.0F) * 0.5D * (double)Mth.sin(this.yBodyRot * ((float)Math.PI / 180F)), this.getEyeY() - (double)0.5F, this.getZ() + (double)(this.getBbWidth() + 1.0F) * 0.5D * (double) Mth.cos(this.yBodyRot * ((float)Math.PI / 180F)));
+        acidBall.setPos(attackpos);
         this.level.addFreshEntity(acidBall);
     }
+
+
+
 }
 

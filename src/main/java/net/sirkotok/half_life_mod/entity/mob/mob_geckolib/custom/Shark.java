@@ -272,6 +272,7 @@ public class Shark extends HalfLifeMonster implements GeoEntity, SmartBrainOwner
     @Override
     public void aiStep() {
         super.aiStep();
+        if (!this.level.getGameRules().getRule(HalfLifeGameRules.HALF_LIFE_AI_IS_ON).get()) return;
         tickMouth(this.mouth);
 
         if (this.tickCount % 4 == 0 && this.getwateremountbelow() > 0 && !this.isInWaterOrBubble()) {

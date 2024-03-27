@@ -112,9 +112,11 @@ public class BeeProjectile extends FireballNoTrail implements GeoEntity {
             this.playSound(this.getHitSound());
             Entity entity = pResult.getEntity();
             Entity entity1 = this.getOwner();
+            if (!(entity1 == entity)) {
             if (entity1 instanceof LivingEntity) {
                 LivingEntity bullsquid = (LivingEntity) entity1;
                 entity.hurt(this.damageSources().mobProjectile(this, bullsquid), 3f);
+            }
             }
         }
         if (!this.level.isClientSide) {

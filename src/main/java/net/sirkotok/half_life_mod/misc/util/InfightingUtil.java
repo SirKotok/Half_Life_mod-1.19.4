@@ -1,15 +1,25 @@
 package net.sirkotok.half_life_mod.misc.util;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
+import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.misc.config.HalfLifeCommonConfigs;
 import net.sirkotok.half_life_mod.misc.effect.HalfLifeEffects;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeNeutral;
 import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.Pitdrone;
 import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.Shockroach;
+import net.tslat.smartbrainlib.util.BrainUtils;
+import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
+
+import java.util.List;
 
 public class InfightingUtil {
 
@@ -26,6 +36,25 @@ public class InfightingUtil {
         boolean pitdrone_unique = !((one instanceof Pitdrone && two instanceof Shockroach) || (one instanceof Shockroach && two instanceof Pitdrone));
         boolean headcrab = (one.getType().is(HLTags.EntityTypes.FACTION_HEADCRAB) && two.getType().is(HLTags.EntityTypes.FACTION_HEADCRAB));
         return (antlion || science_team || race_x || combine || headcrab || xen) && pitdrone_unique && !neutral_vs_enemy_player;
+    }
+
+
+
+    public static void alertsameteam(LivingEntity me) {
+        if (me.level.isClientSide()) return;
+        ServerLevel pLevel = (ServerLevel) me.level;
+        BlockPos pBlockPos = me.blockPosition();
+        int rad = 15;
+        List<Mob> myfaction = EntityRetrievalUtil.getEntities((Level) pLevel,
+                new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
+                        pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj instanceof HalfLifeMonster them && issameteam(me, them));
+        if (BrainUtils.getTargetOfEntity(me) != null) {
+            for (Mob x : myfaction) {
+                if (BrainUtils.getTargetOfEntity(x) == null) {
+                    BrainUtils.setTargetOfEntity(x, BrainUtils.getTargetOfEntity(me));
+                }
+            }
+        }
     }
 
 

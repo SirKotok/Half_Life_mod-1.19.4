@@ -11,6 +11,7 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 
 import net.minecraft.world.phys.Vec3;
 import net.sirkotok.half_life_mod.entity.brain.HalfLifeMemoryModuleType;
+import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.AlienGrunt;
 import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.Bullsquid;
 import net.tslat.smartbrainlib.api.core.behaviour.DelayedBehaviour;
 import net.tslat.smartbrainlib.util.BrainUtils;
@@ -59,9 +60,14 @@ public class EatingBehavior<E extends PathfinderMob> extends DelayedBehaviour<E>
             } else {
                 squid.stopAiFor(95);
             }
-        } else {
+        } else if (entity instanceof  AlienGrunt grunt) {
+            entity.heal(entity.getMaxHealth());
+            grunt.stopAiFor(260);
+            entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 260, 100, false, false, false));
+            entity.addEffect(new MobEffectInstance(MobEffects.LUCK, 260, 100, false, false, false));
+        }
+        else {
             entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 200, 100, false, false, false));
-
         }
 
     }
@@ -79,6 +85,13 @@ public class EatingBehavior<E extends PathfinderMob> extends DelayedBehaviour<E>
             }
             else squid.triggerAnim("onetime", "nothungry");
         }
+
+        if (entity instanceof AlienGrunt squid) {
+            if (BrainUtils.getMemory(entity, HalfLifeMemoryModuleType.HUNGRY.get()) == null) {
+                squid.triggerAnim("onetime", "eat");
+            }
+        }
+
             this.callback.accept(entity);
             this.StopAiBasedOnHunger(entity);
 

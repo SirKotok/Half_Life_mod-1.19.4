@@ -329,7 +329,6 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
     public List<ExtendedSensor<Bullsquid>> getSensors() {
         return ObjectArrayList.of(
                 new SmellSensor<>(),
-             //   new NearbyBlocksSensor<Bullsquid>().setRadius(16D, 4D).setPredicate((state, entity) -> state.is(Blocks.WATER)),
                 new HurtBySensor<>(),
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<Bullsquid>()

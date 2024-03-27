@@ -170,7 +170,7 @@ public class Controller extends HalfLifeMonster implements GeoEntity, RangedAtta
     @Override
     public void aiStep() {
         super.aiStep();
-
+        if (!this.level.getGameRules().getRule(HalfLifeGameRules.HALF_LIFE_AI_IS_ON).get()) return;
         if (!this.level.isClientSide) {
         if (this.tickCount % 4 == 0) {
             int m = random.nextFloat() < 0.5f ? 1 : -1;
