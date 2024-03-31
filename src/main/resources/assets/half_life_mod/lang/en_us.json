@@ -4,6 +4,7 @@
     "item.half_life_mod.houndeye_spawn_egg": "Houndeye Spawn Egg",
     "item.half_life_mod.vortigore_spawn_egg": "Voltigore Spawn Egg",
     "item.half_life_mod.cockroach_spawn_egg": "Cockroach Spawn Egg",
+    "item.half_life_mod.garg_spawn_egg": "Gargantua Spawn Egg",
     "item.half_life_mod.hoteye_spawn_egg": "Hoteye Spawn Egg",
     "item.half_life_mod.hl1_zombie_scientist_spawn_egg": "Headcrab Zombie HL1 Spawn Egg",
     "item.half_life_mod.pzombie_spawn_egg": "Poison Zombie HL1 Spawn Egg",
@@ -77,6 +78,14 @@
     "death.attack.hl_bullet_3": "%s was gunned down",
     "death.attack.hl_bullet_3.entity": "%s was gunned down by %s",
 
+    "death.attack.hl_electric_0": "%s was fried",
+    "death.attack.hl_electric_0.entity": "%s was fried by %s",
+    "death.attack.hl_electric_1": "%s was electrocuted",
+    "death.attack.hl_electric_1.entity": "%s was electrocuted by %s",
+    "death.attack.hl_electric_2": "%s was fatally shocked",
+    "death.attack.hl_electric_2.entity": "%s was fatally shocked by %s",
+
+
   "creativemodetab.half_life_tab": "Half-Life Spawn Eggs",
     "creativemodetab.half_life_weopon_tab": "Half-Life Weapons",
   "key.category.half_life_mod.half_life": "Half-Life Category",
@@ -84,6 +93,7 @@
     "key.half_life_mod.rc_gun": "Right Click Gun",
     "key.half_life_mod.lc_gun": "Left Click Gun",
 
+    "entity.half_life_mod.garg": "Gargantua",
     "entity.half_life_mod.hl_hydra": "Hydra",
     "entity.half_life_mod.aliengrunt": "Alien Grunt",
     "entity.half_life_mod.archerfish": "Archer",

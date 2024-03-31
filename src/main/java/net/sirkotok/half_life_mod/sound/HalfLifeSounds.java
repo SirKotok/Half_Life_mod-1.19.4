@@ -15,6 +15,89 @@ public class HalfLifeSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 
+    // GARG
+    public static final RegistryObject<SoundEvent> MINE_CHARGE=
+            registerSoundEvent("mine_charge");
+  public static final RegistryObject<SoundEvent> GAR_ALERT1=
+          registerSoundEvent("gar_alert1");
+  public static final RegistryObject<SoundEvent> GAR_ALERT2=
+          registerSoundEvent("gar_alert2");
+  public static final RegistryObject<SoundEvent> GAR_ALERT3=
+          registerSoundEvent("gar_alert3");
+  public static final RegistryObject<SoundEvent> GAR_ATTACK1=
+          registerSoundEvent("gar_attack1");
+  public static final RegistryObject<SoundEvent> GAR_ATTACK2=
+          registerSoundEvent("gar_attack2");
+  public static final RegistryObject<SoundEvent> GAR_ATTACK3=
+          registerSoundEvent("gar_attack3");
+  public static final RegistryObject<SoundEvent> GAR_BREATHE1=
+          registerSoundEvent("gar_breathe1");
+  public static final RegistryObject<SoundEvent> GAR_BREATHE2=
+          registerSoundEvent("gar_breathe2");
+  public static final RegistryObject<SoundEvent> GAR_BREATHE3=
+          registerSoundEvent("gar_breathe3");
+  public static final RegistryObject<SoundEvent> GAR_DIE1=
+          registerSoundEvent("gar_die1");
+  public static final RegistryObject<SoundEvent> GAR_DIE2=
+          registerSoundEvent("gar_die2");
+  public static final RegistryObject<SoundEvent> GAR_FLAMEOFF1=
+          registerSoundEvent("gar_flameoff1");
+  public static final RegistryObject<SoundEvent> GAR_FLAMEON1=
+          registerSoundEvent("gar_flameon1");
+  public static final RegistryObject<SoundEvent> GAR_FLAMERUN1=
+          registerSoundEvent("gar_flamerun1");
+  public static final RegistryObject<SoundEvent> GAR_IDLE1=
+          registerSoundEvent("gar_idle1");
+  public static final RegistryObject<SoundEvent> GAR_IDLE2=
+          registerSoundEvent("gar_idle2");
+  public static final RegistryObject<SoundEvent> GAR_IDLE3=
+          registerSoundEvent("gar_idle3");
+  public static final RegistryObject<SoundEvent> GAR_IDLE4=
+          registerSoundEvent("gar_idle4");
+  public static final RegistryObject<SoundEvent> GAR_IDLE5=
+          registerSoundEvent("gar_idle5");
+  public static final RegistryObject<SoundEvent> GAR_PAIN1=
+          registerSoundEvent("gar_pain1");
+  public static final RegistryObject<SoundEvent> GAR_PAIN2=
+          registerSoundEvent("gar_pain2");
+  public static final RegistryObject<SoundEvent> GAR_PAIN3=
+          registerSoundEvent("gar_pain3");
+  public static final RegistryObject<SoundEvent> GAR_STEP1=
+          registerSoundEvent("gar_step1");
+  public static final RegistryObject<SoundEvent> GAR_STEP2=
+          registerSoundEvent("gar_step2");
+  public static final RegistryObject<SoundEvent> GAR_STOMP1=
+          registerSoundEvent("gar_stomp1");
+
+      /*    "sounds.half_life_mod.gar_alert1": "Gargantua ",
+          "sounds.half_life_mod.gar_alert2": "Gargantua ",
+          "sounds.half_life_mod.gar_alert3": "Gargantua ",
+          "sounds.half_life_mod.gar_attack1": "Gargantua ",
+          "sounds.half_life_mod.gar_attack2": "Gargantua ",
+          "sounds.half_life_mod.gar_attack3": "Gargantua ",
+          "sounds.half_life_mod.gar_breathe1": "Gargantua ",
+          "sounds.half_life_mod.gar_breathe2": "Gargantua ",
+          "sounds.half_life_mod.gar_breathe3": "Gargantua ",
+          "sounds.half_life_mod.gar_die1": "Gargantua ",
+          "sounds.half_life_mod.gar_die2": "Gargantua ",
+          "sounds.half_life_mod.gar_flameoff1": "Gargantua ",
+          "sounds.half_life_mod.gar_flameon1": "Gargantua ",
+          "sounds.half_life_mod.gar_flamerun1": "Gargantua ",
+          "sounds.half_life_mod.gar_idle1": "Gargantua ",
+          "sounds.half_life_mod.gar_idle2": "Gargantua ",
+          "sounds.half_life_mod.gar_idle3": "Gargantua ",
+          "sounds.half_life_mod.gar_idle4": "Gargantua ",
+          "sounds.half_life_mod.gar_idle5": "Gargantua ",
+          "sounds.half_life_mod.gar_pain1": "Gargantua ",
+          "sounds.half_life_mod.gar_pain2": "Gargantua ",
+          "sounds.half_life_mod.gar_pain3": "Gargantua ",
+          "sounds.half_life_mod.gar_step1": "Gargantua ",
+          "sounds.half_life_mod.gar_step2": "Gargantua ",
+          "sounds.half_life_mod.gar_stomp1": "Gargantua ", */
+
+
+
+
     // Spore
 
   public static final RegistryObject<SoundEvent> SPLAUNCHER_ALTFIRE=

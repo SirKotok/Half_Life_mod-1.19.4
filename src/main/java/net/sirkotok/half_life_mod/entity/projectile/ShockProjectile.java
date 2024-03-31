@@ -14,6 +14,7 @@ import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.base.FireballNoTrail;
 import net.sirkotok.half_life_mod.item.HalfLifeItems;
 import net.sirkotok.half_life_mod.entity.particle.HalfLifeParticles;
+import net.sirkotok.half_life_mod.misc.damagesource.HalfLifeDamageTypes;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 
 public class ShockProjectile extends FireballNoTrail {
@@ -83,7 +84,7 @@ public class ShockProjectile extends FireballNoTrail {
             Entity entity1 = this.getOwner();
             if (entity1 instanceof LivingEntity) {
                 LivingEntity shooter = (LivingEntity) entity1;
-                entity.hurt(this.damageSources().mobProjectile(this, shooter), getDamageEmount());
+                entity.hurt(HalfLifeDamageTypes.electricdamage(level.registryAccess(), this, shooter), getDamageEmount());
             }
         }
     }

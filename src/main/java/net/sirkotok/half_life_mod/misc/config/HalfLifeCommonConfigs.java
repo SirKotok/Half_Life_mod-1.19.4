@@ -4,9 +4,10 @@ import net.minecraftforge.common.ForgeConfigSpec;
 
 public class HalfLifeCommonConfigs  {
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
-    public static final ForgeConfigSpec SPEC;
+    public static final ForgeConfigSpec.Builder BUILDER2 = new ForgeConfigSpec.Builder();
+    public static final ForgeConfigSpec INFIGHTINGSPEC;
   //  public static final ForgeConfigSpec SPEC2;
-
+    public static final ForgeConfigSpec ENTITYSPEC;
 
   //  public static final ForgeConfigSpec.ConfigValue<String> GRAVITY_GUN_BLACKLIST;
 
@@ -31,6 +32,9 @@ public class HalfLifeCommonConfigs  {
     public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_PITDRONE_HUNTS_SHOCKROACH;
     public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_BULLSQUID;
     public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_BULLSQUID_PITDRONE;
+
+    public static final ForgeConfigSpec.ConfigValue<Float> GARG_SETFIRE_CHANCE;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> CHUMTOAD_LINE_OF_SIGHT;
 
     static {
         BUILDER.push("InfightingConfig");
@@ -81,7 +85,7 @@ public class HalfLifeCommonConfigs  {
                 .define("bullsquidvspitdrone", true);
 
         BUILDER.pop();
-        SPEC = BUILDER.build();
+        INFIGHTINGSPEC = BUILDER.build();
     }
 
    /* static {
@@ -92,4 +96,18 @@ public class HalfLifeCommonConfigs  {
         BUILDER.pop();
         SPEC2 = BUILDER.build();
     } */
+
+
+      static {
+        BUILDER2.push("Entity Config");
+        BUILDER2.comment("This config determines some specific paramers related to different entities");
+          GARG_SETFIRE_CHANCE = BUILDER2.comment("A chance per tick per block that it will be set on fire by gargantua's flames")
+                  .define("garg_fire_chance", 0.01f);
+          CHUMTOAD_LINE_OF_SIGHT = BUILDER2.comment("Does a mob need to be able to see the chumtoad to get distracted by it")
+                  .define("chumtoadsight", true);
+        BUILDER2.pop();
+        ENTITYSPEC = BUILDER2.build();
+    }
+
+
 }

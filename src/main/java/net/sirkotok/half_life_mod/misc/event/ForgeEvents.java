@@ -31,6 +31,7 @@ import net.sirkotok.half_life_mod.entity.fallingblock.GravityGunFallingBlockEnti
 import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.*;
 import net.sirkotok.half_life_mod.entity.mob.mob_normal.custom.Barnacle;
 import net.sirkotok.half_life_mod.item.HalfLifeItems;
+import net.sirkotok.half_life_mod.misc.config.HalfLifeCommonConfigs;
 import net.sirkotok.half_life_mod.misc.damagesource.HalfLifeDamageTypes;
 import net.sirkotok.half_life_mod.misc.util.HLTags;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
@@ -124,6 +125,7 @@ public class ForgeEvents {
     public static void  onDamagedEvent(LivingDamageEvent event) {
         DamageSource source = event.getSource();
         LivingEntity entity = event.getEntity();
+        if (entity instanceof Creeper creeper && source.is(HalfLifeDamageTypes.HL_ELECTRIC)) creeper.ignite(); //TODO make it power the creeper
         if (source.is(HalfLifeDamageTypes.HL_BULLET) && !entity.isSilent()) {
             entity.addTag("gunsilencedfor11");
         }
@@ -237,7 +239,7 @@ public class ForgeEvents {
 
                 if (!entity.isDeadOrDying()) {
                     SquareRadius radius = new SquareRadius(20, 7);
-                    List<Mob> targets = EntityRetrievalUtil.getEntities(entity.level, entity.getBoundingBox().inflate(radius.xzRadius(), radius.yRadius(), radius.xzRadius()), obj -> ((obj instanceof Mob target) && !(obj instanceof Chumtoad)));
+                    List<Mob> targets = EntityRetrievalUtil.getEntities(entity.level, entity.getBoundingBox().inflate(radius.xzRadius(), radius.yRadius(), radius.xzRadius()), obj -> ((obj instanceof Mob target && (target.hasLineOfSight(entity) || !HalfLifeCommonConfigs.CHUMTOAD_LINE_OF_SIGHT.get())) && !(obj instanceof Chumtoad)));
                     if (!targets.isEmpty()) {
                         for (Mob entity1 : targets) {
                             if (!(entity1.getTarget() instanceof Chumtoad)) {

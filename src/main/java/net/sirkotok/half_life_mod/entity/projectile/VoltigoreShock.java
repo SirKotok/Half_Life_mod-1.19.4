@@ -15,6 +15,7 @@ import net.sirkotok.half_life_mod.entity.base.FireballNoTrail;
 import net.sirkotok.half_life_mod.entity.mob.mob_effect_entity.custom.VoltigoreProjectileAftereffect;
 import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.Voltigore;
 import net.sirkotok.half_life_mod.entity.particle.HalfLifeParticles;
+import net.sirkotok.half_life_mod.misc.damagesource.HalfLifeDamageTypes;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.misc.util.HLperUtil;
 import net.tslat.smartbrainlib.util.EntityRetrievalUtil;
@@ -67,7 +68,7 @@ public class VoltigoreShock extends FireballNoTrail implements GeoEntity {
             if (entity1 instanceof LivingEntity) {
                 LivingEntity bullsquid = (LivingEntity) entity1;
 
-                entity.hurt(this.damageSources().mobProjectile(this, bullsquid), 15f);
+                entity.hurt(HalfLifeDamageTypes.electricdamage(level.registryAccess(), this, bullsquid), 15f);
                 HLperUtil.DisableShieldFor(entity, 1f, 200, serverlevel);
 
                 int rad = 3;
@@ -151,7 +152,7 @@ public class VoltigoreShock extends FireballNoTrail implements GeoEntity {
         if (entity1 instanceof LivingEntity) {
             for (LivingEntity entity : targets) {
             HLperUtil.DisableShieldFor(entity, 0.1f, 20, serverlevel);
-            entity.hurt(this.damageSources().mobProjectile(this, (LivingEntity) entity1 ), 5f); }
+                entity.hurt(HalfLifeDamageTypes.electricdamage(level.registryAccess(), this, (LivingEntity) entity1), 5); }
         }}
         }
 

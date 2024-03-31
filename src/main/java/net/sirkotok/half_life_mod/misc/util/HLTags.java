@@ -30,11 +30,11 @@ public class HLTags {
 
     public static class DamageTypes {
         public static final TagKey<DamageType> HEADCRAB_ARMOR_PROTECTS_FROM = tag("headcrab_armor_protects_from");
+        public static final TagKey<DamageType> ARMORPIERCING = tag("armorpiercing");
         private static TagKey<DamageType> tag(String name) {
             return TagKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(HalfLifeMod.MOD_ID, name));
         }
     }
-
     public static class Items {
 
         private static TagKey<Item> tag(String name) {

@@ -21,6 +21,7 @@ import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.VortigauntHL1;
 import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.VortigauntHL2;
 import net.sirkotok.half_life_mod.item.HalfLifeItems;
 import net.sirkotok.half_life_mod.entity.particle.HalfLifeParticles;
+import net.sirkotok.half_life_mod.misc.damagesource.HalfLifeDamageTypes;
 
 public class VortLightningProjectile extends FireballNoTrail {
 
@@ -105,7 +106,7 @@ public class VortLightningProjectile extends FireballNoTrail {
                 if (entity instanceof AntlionWorker) ((AntlionWorker) entity).flipover(i);
                 if (entity instanceof Antlion) ((Antlion) entity).flipover(i);
                 }
-                entity.hurt(this.damageSources().mobProjectile(this, shooter), this.getdamage());
+                entity.hurt(HalfLifeDamageTypes.electricdamage(level.registryAccess(), this, shooter), this.getdamage());
             }
         }
     }

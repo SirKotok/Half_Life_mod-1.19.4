@@ -26,6 +26,7 @@ import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.client.renderers.*;
 import net.sirkotok.half_life_mod.entity.mob.mob_normal.client.ModModelLayers;
 import net.sirkotok.half_life_mod.entity.mob.mob_normal.client.models.Barnacle_Model;
 import net.sirkotok.half_life_mod.entity.mob.mob_normal.client.renderers.Barnacle_Renderer;
+import net.sirkotok.half_life_mod.entity.particle.custom.MovingGlow;
 import net.sirkotok.half_life_mod.entity.particle.custom.YellowSmokeParticle;
 import net.sirkotok.half_life_mod.entity.particle.custom.trail.BeeTrailParticle;
 import net.sirkotok.half_life_mod.entity.particle.lightning.*;
@@ -59,6 +60,8 @@ public class ClientModBusEvents {
                 BigImpactParticle.Provider::new);
         Minecraft.getInstance().particleEngine.register(HalfLifeParticles.STAT_GLOW.get(),
                 Glowparticle.Provider::new);
+        Minecraft.getInstance().particleEngine.register(HalfLifeParticles.GARG_GLOW.get(),
+                MovingGlow.Provider::new);
         Minecraft.getInstance().particleEngine.register(HalfLifeParticles.BEE_GLOW.get(),
                 Glowparticle.BeeProvider::new);
         Minecraft.getInstance().particleEngine.register(HalfLifeParticles.YELLOW_SMOKE.get(),
@@ -122,6 +125,7 @@ public class ClientModBusEvents {
         EntityRenderers.register(HalfLifeEntities.LEECH.get(), Leechrenderer::new);
         EntityRenderers.register(HalfLifeEntities.SHARK.get(), SharkRenderer::new);
         EntityRenderers.register(HalfLifeEntities.ALIENGRUNT.get(), AliengruntRenderer::new);
+        EntityRenderers.register(HalfLifeEntities.GARGANTUA.get(), GargantuaRenderer::new);
         EntityRenderers.register(HalfLifeEntities.ARCHER.get(), Archerrenderer::new);
         EntityRenderers.register(HalfLifeEntities.ACID_BALL.get(), ThrownItemRenderer::new);
         EntityRenderers.register(HalfLifeEntities.VOLTIGORE_SHOCK.get(), Voltigore_projectile_renderer::new);
@@ -137,7 +141,7 @@ public class ClientModBusEvents {
         EntityRenderers.register(HalfLifeEntities.UNDER_NADE.get(), Undernade_renderer::new);
         EntityRenderers.register(HalfLifeEntities.BARNACLE.get(), Barnacle_Renderer::new);
 
-
+        EntityRenderers.register(HalfLifeEntities.BULLET_FLOOR.get(), NoRenderer::new);
         EntityRenderers.register(HalfLifeEntities.HYDRA.get(), NoRenderer::new);
 
 

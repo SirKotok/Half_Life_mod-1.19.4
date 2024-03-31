@@ -2,7 +2,6 @@
   "values": [
     "#minecraft:is_projectile",
     "#minecraft:damages_helmet",
-    "#minecraft:is_lightning",
     "minecraft:mob_attack",
     "minecraft:mob_attack_no_aggro",
     "minecraft:player_attack"

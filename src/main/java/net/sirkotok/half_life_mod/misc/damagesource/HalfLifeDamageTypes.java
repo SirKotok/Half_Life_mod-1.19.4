@@ -25,6 +25,7 @@ public class HalfLifeDamageTypes {
 
 
     public static final ResourceKey<DamageType> HL_BULLET = register("hl_bullet");
+    public static final ResourceKey<DamageType> HL_ELECTRIC = register("hl_electric");
 
     private static ResourceKey<DamageType> register(String name)
     {
@@ -37,7 +38,9 @@ public class HalfLifeDamageTypes {
     public static DamageSource bulletdamage(RegistryAccess access, Entity pProjectile, @Nullable LivingEntity pThrower) {
         return new DamageSourceMultipleMesseges(access.registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(HL_BULLET), pProjectile, pThrower, 3 );
     }
-
+    public static DamageSource electricdamage(RegistryAccess access, Entity pProjectile, @Nullable LivingEntity pThrower) {
+        return new DamageSourceMultipleMesseges(access.registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(HL_ELECTRIC), pProjectile, pThrower, 2);
+    }
 
     private static class DamageSourceMultipleMesseges extends DamageSource {
 

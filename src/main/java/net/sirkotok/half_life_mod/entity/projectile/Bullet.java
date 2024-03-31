@@ -25,8 +25,6 @@ public class Bullet extends FireballNoTrail {
 
 
 
-
-
     public Bullet(EntityType<? extends Bullet> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }

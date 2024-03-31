@@ -257,16 +257,7 @@ public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, Ranged
         return new Vec3((float)this.getX()-i*d1, this.getY(), (float)this.getZ()+i*d2);
     }
 
-    @Override
-    protected void dropExperience() {
-    }
 
-    protected void actuallydropExperience() {
-        if (this.level instanceof ServerLevel && !this.wasExperienceConsumed() && (this.isAlwaysExperienceDropper() || this.lastHurtByPlayerTime > 0 && this.shouldDropExperience() && this.level.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT))) {
-            int reward = net.minecraftforge.event.ForgeEventFactory.getExperienceDrop(this, this.lastHurtByPlayer, this.getExperienceReward());
-            ExperienceOrb.award((ServerLevel)this.level, this.position(), reward);
-        }
-    }
 
     private void tickLeg2(GonarchPart pPart) {
         pPart.moveTo(rotvec(-45));
@@ -279,7 +270,16 @@ public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, Ranged
     }
 
 
+    @Override
+    protected void dropExperience() {
+    }
 
+    protected void actuallydropExperience() {
+        if (this.level instanceof ServerLevel && !this.wasExperienceConsumed() && (this.isAlwaysExperienceDropper() || this.lastHurtByPlayerTime > 0 && this.shouldDropExperience() && this.level.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT))) {
+            int reward = net.minecraftforge.event.ForgeEventFactory.getExperienceDrop(this, this.lastHurtByPlayer, this.getExperienceReward());
+            ExperienceOrb.award((ServerLevel)this.level, this.position(), reward);
+        }
+    }
 
     public void aiStep() {
         super.aiStep();
@@ -674,13 +674,13 @@ public class Gonarch extends HalfLifeMonster implements MultiMeleeEntity, Ranged
                 new SetWalkTargetToAttackTarget<>().speedMod(2.0f).startCondition(entity -> this.getLastHurtByMob() != null).cooldownFor(entity -> 600),
                 new FirstApplicableBehaviour<>(
                         new OneRandomBehaviour<>(
-                 new MultiMeleeAttack<Gonarch>(true, 4, 1f, 1, 1.5f, null, 0, this.getHitSound(), this.getAttackSound())
+                 new MultiMeleeAttack<Gonarch>(true, 4, 1f, 1, 1.5f, null, 0, this.getHitSound(), this.getAttackSound(), null)
                         .whenStarting(entity -> triggerAnim("onetime", "left"))
                         .cooldownFor(entity -> random.nextInt(10, 20)),
-                 new MultiMeleeAttack<Gonarch>(true,4, 1f, 1, 1.5f, null, 0, this.getHitSound(), this.getAttackSound())
+                 new MultiMeleeAttack<Gonarch>(true,4, 1f, 1, 1.5f, null, 0, this.getHitSound(), this.getAttackSound(), null)
                                 .whenStarting(entity -> triggerAnim("onetime", "right"))
                                 .cooldownFor(entity -> random.nextInt(10, 20)),
-                 new MultiMeleeAttack<Gonarch>(true,4, 1f, 1, 1.5f, null, 0, this.getHitSound(), this.getAttackSound())
+                 new MultiMeleeAttack<Gonarch>(true,4, 1f, 1, 1.5f, null, 0, this.getHitSound(), this.getAttackSound(), null)
                                 .whenStarting(entity -> triggerAnim("onetime", "double"))
                                 .cooldownFor(entity -> random.nextInt(10, 20))),
                 new StopAndShoot<Gonarch>(10, 10, 1f).attackRadius(32f).cooldownFor(entity -> random.nextFloat() < 0.1f ? 220 : random.nextInt(30, 60))

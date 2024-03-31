@@ -56,8 +56,8 @@ public class HalfLifeMod
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, HalfLifeCommonConfigs.SPEC, "half-life-infighting.toml");
-
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, HalfLifeCommonConfigs.INFIGHTINGSPEC, "half-life-infighting.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, HalfLifeCommonConfigs.ENTITYSPEC, "half-life-entityconfig.toml");
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
@@ -119,7 +119,7 @@ public class HalfLifeMod
             event.accept(HalfLifeItems.CHUMTOAD_SPAWN_EGG);
 
             event.accept(HalfLifeItems.BARNACLE_ONE_SPAWN_EGG);
-
+            event.accept(HalfLifeItems.GARG_SPAWN_EGG);
             event.accept(HalfLifeItems.CONTROLLER_SPAWN_EGG);
             event.accept(HalfLifeItems.ALIENGRUNT_SPAWN_EGG);
             event.accept(HalfLifeItems.VORTHL1_SPAWN_EGG);

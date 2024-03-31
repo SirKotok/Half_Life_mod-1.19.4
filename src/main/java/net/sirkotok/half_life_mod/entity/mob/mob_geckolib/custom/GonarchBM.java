@@ -661,16 +661,16 @@ public class GonarchBM extends HalfLifeMonster implements RushingMob, MultiMelee
                 new SetWalkTargetToAttackTarget<>().speedMod(2.0f).startCondition(entity -> this.getLastHurtByMob() != null && this.getPhase() < 2).cooldownFor(entity -> 600),
                 new FirstApplicableBehaviour<GonarchBM>(
                 new OneRandomBehaviour<>(
-                new MultiMeleeAttack<GonarchBM>(true, 4, 1f, 1, 1.5f, null, 0, this.getHitSound(), this.getAttackSound())
+                new MultiMeleeAttack<GonarchBM>(true, 4, 1f, 1, 1.5f, null, 0, this.getHitSound(), this.getAttackSound(), null)
                         .whenStarting(entity -> triggerAnim("onetime", "left")).startCondition(entity -> this.getPhase() < 2)
                         .cooldownFor(entity -> random.nextInt(10, 20)),
-                new MultiMeleeAttack<GonarchBM>(true,4, 1f, 1, 1.5f, null, 0, this.getHitSound(), this.getAttackSound())
+                new MultiMeleeAttack<GonarchBM>(true,4, 1f, 1, 1.5f, null, 0, this.getHitSound(), this.getAttackSound(), null)
                                 .whenStarting(entity -> triggerAnim("onetime", "right")).startCondition(entity -> this.getPhase() < 2)
                                 .cooldownFor(entity -> random.nextInt(10, 20)),
-                new MultiMeleeAttack<GonarchBM>(true,4, 0.5f, 1, 1f, null, 0, this.getHitSound(), this.getAttackSound())
+                new MultiMeleeAttack<GonarchBM>(true,4, 0.5f, 1, 1f, null, 0, this.getHitSound(), this.getAttackSound(), null)
                                       .whenStarting(entity -> triggerAnim("onetime", "injureattack")).startCondition(entity -> this.getPhase() == 2)
                                         .cooldownFor(entity -> random.nextInt(10, 20)),
-                new MultiMeleeAttack<GonarchBM>(true,15, 1f, 1.3f, 1.7f, null, 0, this.getHitSound(), this.getAttackSound())
+                new MultiMeleeAttack<GonarchBM>(true,15, 1f, 1.3f, 1.7f, null, 0, this.getHitSound(), this.getAttackSound(), null)
                                 .whenStarting(entity -> triggerAnim("onetime", "double")).startCondition(entity -> this.getPhase() < 2)
                                 .cooldownFor(entity -> random.nextInt(10, 20))),
                new OneRandomBehaviour<>(

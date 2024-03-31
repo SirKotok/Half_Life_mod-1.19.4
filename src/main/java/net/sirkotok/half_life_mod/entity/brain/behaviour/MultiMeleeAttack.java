@@ -5,6 +5,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.sirkotok.half_life_mod.entity.base.HalfLifeMonster;
 import net.sirkotok.half_life_mod.entity.mob.modinterface.MultiMeleeEntity;
+import net.sirkotok.half_life_mod.misc.util.CommonSounds;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.attack.AnimatableMeleeAttack;
 import net.tslat.smartbrainlib.util.BrainUtils;
 
@@ -26,10 +27,13 @@ public class MultiMeleeAttack<E extends HalfLifeMonster & MultiMeleeEntity> exte
     protected SoundEvent onhit;
     @Nullable
     protected SoundEvent startsound;
+    @Nullable
+    protected SoundEvent misssound;
 
     protected boolean doanyway;
 
-    public MultiMeleeAttack(boolean doanyway, int delayTicks, float disablechance, float modattack, float modknockback, @Nullable MobEffect effect, int effectduration, @Nullable SoundEvent onhit, @Nullable SoundEvent startsound) {
+
+    public MultiMeleeAttack(boolean doanyway, int delayTicks, float disablechance, float modattack, float modknockback, @Nullable MobEffect effect, int effectduration, @Nullable SoundEvent onhit, @Nullable SoundEvent startsound, @Nullable SoundEvent misssound) {
         super(delayTicks);
         this.attackmod = modattack;
         this.knockbackmod = modknockback;
@@ -39,6 +43,7 @@ public class MultiMeleeAttack<E extends HalfLifeMonster & MultiMeleeEntity> exte
         this.onhit = onhit;
         this.startsound = startsound;
         this.doanyway = doanyway;
+        this.misssound = misssound;
     }
 
 
@@ -63,7 +68,7 @@ public class MultiMeleeAttack<E extends HalfLifeMonster & MultiMeleeEntity> exte
             if (this.onhit != null) {
             entity.playSound(this.onhit, 0.8f, entity.getVoicePitch());}
             entity.ConfigurabledoHurtTarget(this.target, this.disableshield, this.attackmod, this.knockbackmod, this.effect, this.effectduration, false);
-        }
+        } else CommonSounds.PlaySoundAsOwn(entity, this.misssound);
 
 }
 

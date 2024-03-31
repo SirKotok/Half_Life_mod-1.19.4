@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "half_life_mod:hl_bullet"
+    "half_life_mod:hl_bullet",
+    "half_life_mod:hl_electric"
   ]
 }

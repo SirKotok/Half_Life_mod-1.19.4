@@ -223,7 +223,11 @@ public class HalfLifeEntities {
                     () -> EntityType.Builder.of(AlienGrunt::new, MobCategory.MONSTER)
                             .sized(1.2F, 2.7F)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "aliengrunt").toString()));
-
+    public static final RegistryObject<EntityType<Gargantua>> GARGANTUA =
+            ENTITY_TYPES.register("garg",
+                    () -> EntityType.Builder.of(Gargantua::new, MobCategory.MONSTER)
+                            .sized(3F, 4F)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "garg").toString()));
     public static final RegistryObject<EntityType<Shark>> SHARK =
             ENTITY_TYPES.register("shark",
                     () -> EntityType.Builder.of(Shark::new, MobCategory.MONSTER)
@@ -408,6 +412,13 @@ public class HalfLifeEntities {
                             .clientTrackingRange(20)
                             .updateInterval(1)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "bullet_one").toString()));
+    public static final RegistryObject<EntityType<FloorBullet>> BULLET_FLOOR =
+            ENTITY_TYPES.register("bullet_floor",
+                    () -> EntityType.Builder.<FloorBullet>of(FloorBullet::new, MobCategory.MISC)
+                            .sized(0.35F, 0.5F)
+                            .clientTrackingRange(20)
+                            .updateInterval(1)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "bullet_floor").toString()));
 
 
     public static final RegistryObject<EntityType<VortLightningProjectile>> VORT_LIGHTNING_PROJETILE =

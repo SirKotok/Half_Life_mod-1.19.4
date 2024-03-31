@@ -35,6 +35,11 @@ public final class HLperUtil {
     }
 
 
+    public static float DistanceToTarget(LivingEntity me) {
+        return me.distanceTo(HLperUtil.TargetOrThis(me));
+    }
+
+
     public static void rotateTTT(Entity currentone, LivingEntity to) {
         Vec3 vec31 =  to.position();
         Vec3 vec3 = currentone.position();

@@ -41,6 +41,7 @@ public class HalfLifeParticles {
 
     public static final RegistryObject<SimpleParticleType> STAT_GLOW = PARTICLE_TYPES.register("stationary_glow", () -> new SimpleParticleType(true));
     public static final RegistryObject<SimpleParticleType> BEE_GLOW = PARTICLE_TYPES.register("bee_glow", () -> new SimpleParticleType(true));
+    public static final RegistryObject<SimpleParticleType> GARG_GLOW = PARTICLE_TYPES.register("garg_glow", () -> new SimpleParticleType(true));
 
 
 

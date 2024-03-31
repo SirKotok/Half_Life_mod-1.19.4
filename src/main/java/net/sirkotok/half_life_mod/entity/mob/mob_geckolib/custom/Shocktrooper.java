@@ -310,6 +310,11 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Do
 
     int shotdelay = 0;
 
+    public void playChargeSound() {
+        if (this.random.nextFloat() < 0.1f) {
+        CommonSounds.PlaySoundAsOwn(this, HalfLifeSounds.SHOCKTROOPER_CHARGE.get()); }
+    }
+
 
     @Override
     public BrainActivityGroup<Shocktrooper> getFightTasks() {
@@ -324,7 +329,7 @@ public class Shocktrooper extends HalfLifeMonster implements RangedAttackMob, Do
                 new CustomBehaviour<>(entity -> setIsSitting(false)).startCondition(entity -> getIssitting())
                 ).cooldownFor(entity -> 200),
                 new FirstApplicableBehaviour<Shocktrooper>(
-                        new SetWalkTargetToRandomSpotAroundAttackTarget<>().startCondition(entity -> distanceTo(HLperUtil.TargetOrThis(this)) > 10).whenStarting(entity -> CommonSounds.PlaySoundAsOwn(this, HalfLifeSounds.SHOCKTROOPER_CHARGE.get())),
+                        new SetWalkTargetToRandomSpotAroundAttackTarget<>().startCondition(entity -> distanceTo(HLperUtil.TargetOrThis(this)) > 10).whenStarting(entity -> this.playChargeSound()),
                         new SetWalkTargetToRandomSpotAwayFromAttackTarget<>().startCondition(entity -> distanceTo(HLperUtil.TargetOrThis(this)) < 8),
                         new SetRandomWalkTarget<>()
                 ).startCondition(entity -> !entity.getcanattack()),

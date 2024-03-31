@@ -1,0 +1,8 @@
+{
+  "values": [
+    "#minecraft:is_lightning",
+    "#minecraft:is_explosion",
+    "half_life_mod:hl_electric",
+    "#minecraft:bypasses_invulnerability"
+  ]
+}
