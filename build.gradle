@@ -130,7 +130,22 @@ minecraft {
                 }
             }
         }
+        data {
+                    workingDirectory project.file('run')
+                    property 'forge.logging.markers', 'REGISTRIES'
+                    property 'forge.logging.console.level', 'debug'
 
+                    // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
+                    args '--mod', 'half_life_mod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+
+                    mods {
+                        half_life_mod {
+                            source sourceSets.main
+                        }
+                    }
+                }
+
+        /*
         data {
             properties 'mixin.env.remapRefMap': 'true'
             property 'mixin.env.refMapRemappingFile', "${project.projectDir}/build/createSrgToMcp/output.srg"
@@ -144,14 +159,11 @@ minecraft {
             property 'forge.enabledGameTestNamespaces', 'half_life_mod'
 
             mods {
-                citadel {
-                    source sourceSets.main
-                }
                 half_life_mod {
                     source sourceSets.main
                 }
             }
-        }
+        } */
     }
 }
 // apply plugin: 'org.spongepowered.mixin' version '0.7.+'

@@ -82,23 +82,24 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, HasLeaderMob
 
     private AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     protected float chance = 0.1f;
+    protected float chance2 = 0.03f;
 
 
+    public static final EntityDataAccessor<Integer> MODEL = SynchedEntityData.defineId(Houndeye.class, EntityDataSerializers.INT);
 
-
-
-    public static final EntityDataAccessor<Boolean> IS_ANGRY = SynchedEntityData.defineId(Bullsquid.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> IS_ANGRY = SynchedEntityData.defineId(Houndeye.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> IS_LIGHT = SynchedEntityData.defineId(Houndeye.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> IS_LEADER = SynchedEntityData.defineId(Houndeye.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Integer> SAD_TIMESTAMP = SynchedEntityData.defineId(Houndeye.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> SQUAD_SIZE = SynchedEntityData.defineId(Houndeye.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Boolean> AI_STOP = SynchedEntityData.defineId(Bullsquid.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<Integer> AI_STOP_TIMESTAMP = SynchedEntityData.defineId(Bullsquid.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> AI_STOP_DELAY = SynchedEntityData.defineId(Bullsquid.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> AI_STOP = SynchedEntityData.defineId(Houndeye.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Integer> AI_STOP_TIMESTAMP = SynchedEntityData.defineId(Houndeye.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> AI_STOP_DELAY = SynchedEntityData.defineId(Houndeye.class, EntityDataSerializers.INT);
 
 
     protected void defineSynchedData() {
         super.defineSynchedData();
+        this.entityData.define(MODEL, 0);
         this.entityData.define(SAD_TIMESTAMP, 0);
         this.entityData.define(IS_LIGHT, false);
         this.entityData.define(IS_LEADER, false);
@@ -149,8 +150,12 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, HasLeaderMob
         return this.entityData.get(SQUAD_SIZE);
     }
 
-
-
+    public int getmodel() {
+        return this.entityData.get(MODEL);
+    }
+    protected void setmodel(int model) {
+        this.entityData.set(MODEL, model);
+    }
     protected void setlight(boolean glow) {
         this.entityData.set(IS_LIGHT, glow);
     }
@@ -166,13 +171,13 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, HasLeaderMob
 
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
-
+        pCompound.putInt("ModelID", this.getmodel() - 1 );
         pCompound.putInt("Squad_size", this.getsquaidsize() - 1 );
         pCompound.putBoolean("Light", this.islight());
     }
 
     public void readAdditionalSaveData(CompoundTag pCompound) {
-
+        this.setmodel(pCompound.getInt("ModelID") + 1);
         this.setSquadSize(pCompound.getInt("Squad_size") + 1);
         this.setlight(pCompound.getBoolean("Light"));
         super.readAdditionalSaveData(pCompound);
@@ -634,7 +639,9 @@ public class Houndeye extends HalfLifeMonster implements GeoEntity, HasLeaderMob
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_33601_, DifficultyInstance p_33602_, MobSpawnType p_33603_, @Nullable SpawnGroupData p_33604_, @Nullable CompoundTag p_33605_) {
         RandomSource randomsource = p_33601_.getRandom();
         float i = randomsource.nextFloat();
-        if (i < chance) this.setlight(true);
+        float j = randomsource.nextFloat();
+        if (j < chance)  this.setlight(true);
+        if (i < chance2) this.setmodel(randomsource.nextInt(1,4));
      //   this.setCustomName(Component.literal(this.getUUID().toString()));
         return super.finalizeSpawn(p_33601_, p_33602_, p_33603_, p_33604_, p_33605_);
     }

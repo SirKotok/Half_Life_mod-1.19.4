@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.carver.*;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
+import net.sirkotok.half_life_mod.HalfLifeMod;
 import net.sirkotok.half_life_mod.misc.util.HLTags;
 
 public class HLCarvers {
@@ -22,7 +23,7 @@ public class HLCarvers {
     public static final ResourceKey<ConfiguredWorldCarver<?>> NETHER_CAVE_XEN = createKey("nether_cave_xen");
 
     private static ResourceKey<ConfiguredWorldCarver<?>> createKey(String pName) {
-        return ResourceKey.create(Registries.CONFIGURED_CARVER, new ResourceLocation(pName));
+        return ResourceKey.create(Registries.CONFIGURED_CARVER, new ResourceLocation(HalfLifeMod.MOD_ID, pName));
     }
 
     public static void bootstrap(BootstapContext<ConfiguredWorldCarver<?>> pContext) {

@@ -1,5 +1,12 @@
 {
-  "carvers": {},
+  "carvers": {
+    "air": [
+      "half_life_mod:cave_xen",
+      "half_life_mod:cave_extra_underground_xen",
+      "half_life_mod:canyon_xen"
+    ],
+    "liquid": "half_life_mod:nether_cave_xen"
+  },
   "downfall": 0.8,
   "effects": {
     "fog_color": 2269670,

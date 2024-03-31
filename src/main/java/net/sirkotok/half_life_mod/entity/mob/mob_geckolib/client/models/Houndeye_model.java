@@ -9,12 +9,21 @@ import software.bernie.geckolib.model.GeoModel;
 public class Houndeye_model extends GeoModel<Houndeye> {
 
     @Override
-    public ResourceLocation getModelResource(Houndeye animatable) {
+    public ResourceLocation getModelResource(Houndeye dog) {
+        int j = dog.getmodel();
+        if (j == 1) return new ResourceLocation(HalfLifeMod.MOD_ID, "geo/houndeye_dcast.geo.json");
+        if (j == 2) return new ResourceLocation(HalfLifeMod.MOD_ID, "geo/houndeye_hd.geo.json");
+        if (j == 3) return new ResourceLocation(HalfLifeMod.MOD_ID, "geo/houndeye_alpha.geo.json");
         return new ResourceLocation(HalfLifeMod.MOD_ID, "geo/houndeye.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureResource(Houndeye dog) {
+
+        int j = dog.getmodel();
+        if (j == 1) return new ResourceLocation(HalfLifeMod.MOD_ID, "textures/entity/houndeye_dcast.png");
+        if (j == 2) return new ResourceLocation(HalfLifeMod.MOD_ID, "textures/entity/houndeye_hd.png");
+        if (j == 3) return new ResourceLocation(HalfLifeMod.MOD_ID, "textures/entity/houndeye_alpha.png");
 
         if (dog.islight()) {
             if (dog.getsquaidsize()>3) return new ResourceLocation(HalfLifeMod.MOD_ID, "textures/entity/houndeye_g_purple.png");
