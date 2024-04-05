@@ -35,18 +35,19 @@ public class XenTeleporter implements ITeleporter {
         BlockPos destinationP = entity.blockPosition();
 
 
+
         double d = destinationWorld.dimensionType().coordinateScale();
         double c = currentWorld.dimensionType().coordinateScale();
 
         int x = (int) Math.round(destinationP.getX()*c/d);
-        int y = destinationP.getY();
+        int y = (int) Math.max(destinationP.getY(), 74);
         int z = (int) Math.round(destinationP.getZ()*c/d);
 
 
         BlockPos  destinationPos = new BlockPos(x, y, z);
 
 
-        SquareRadius radius = new SquareRadius(25, 60);
+        SquareRadius radius = new SquareRadius(20, 20);
         Boolean done = false;
         for (BlockPos pos : BlockPos.betweenClosed(destinationPos.subtract(radius.toVec3i()), destinationPos.offset(radius.toVec3i()))) {
             BlockState state = destinationWorld.getBlockState(pos);
@@ -67,9 +68,14 @@ public class XenTeleporter implements ITeleporter {
                     BlockState stateabove = destinationWorld.getBlockState(pos.above());
                     if (state.isAir() && !statebelow.isAir() && stateabove.isAir()) {
                             entity.moveTo(pos.getCenter());
+                            done = true;
                             break;
                         }
                     }
+            }
+
+            if (!done) {
+                entity.moveTo(destinationPos.getCenter());
             }
 
         return entity;

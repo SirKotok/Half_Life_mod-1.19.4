@@ -38,7 +38,7 @@ public class NetherTeleporter implements ITeleporter {
         BlockPos  destinationPos = new BlockPos( x, y, z);
 
 
-        SquareRadius radius = new SquareRadius(25, 90);
+        SquareRadius radius = new SquareRadius(25, 25);
         Boolean done = false;
         for (BlockPos pos : BlockPos.betweenClosed(destinationPos.subtract(radius.toVec3i()), destinationPos.offset(radius.toVec3i()))) {
             BlockState state = destinationWorld.getBlockState(pos);
