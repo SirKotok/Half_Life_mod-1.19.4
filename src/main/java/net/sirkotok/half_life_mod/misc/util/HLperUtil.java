@@ -109,9 +109,6 @@ public final class HLperUtil {
         return RandomSource.create().nextFloat()*upperbound*(RandomSource.create().nextFloat() < 0.5 ? 1 : -1);
     }
     public static double yanglefromvec3(Vec3 vec3){
-        Vec3 vec2 = new Vec3(vec3.x, 0, vec3.z);
-        double L = vec3.length();
-        double Lxz = vec2.length();
         double x = vec3.x;
         double z = vec3.z;
         double beta = -Math.atan(x/z)* 180/Math.PI* Mth.sign(x);

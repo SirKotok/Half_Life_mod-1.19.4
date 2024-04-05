@@ -203,7 +203,7 @@ public class Displacer_cannon extends EnergyGunItem implements GeoItem {
             TeleportingBullet snowball = new TeleportingBullet(pLevel, pPlayer);
             snowball.setDestination(this.getDestination());
             snowball.setdamage(this.getgundamage());
-            snowball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 0.7F, 1.0F);
+            snowball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 0.4F, 1.0F);
             pLevel.addFreshEntity(snowball);
             award(pPlayer);
         }

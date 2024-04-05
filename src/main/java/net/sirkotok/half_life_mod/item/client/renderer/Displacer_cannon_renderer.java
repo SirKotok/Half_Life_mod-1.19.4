@@ -10,6 +10,5 @@ import software.bernie.geckolib.renderer.GeoItemRenderer;
 public class Displacer_cannon_renderer extends GeoItemRenderer<Displacer_cannon> {
     public Displacer_cannon_renderer() {
         super(new Displacer_gun_model());
-       // addRenderLayer(new AutoGlowingGeoLayer<>(this)); //this makes the eye float around the snark so it doesnt work
     }
 }

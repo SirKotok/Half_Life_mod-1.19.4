@@ -46,27 +46,80 @@
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [
-      {
-        "type": "minecraft:wolf",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 5
-      }
-    ],
+    "creature": [],
     "misc": [],
     "monster": [
       {
         "type": "half_life_mod:headcrab_1",
         "maxCount": 4,
-        "minCount": 4,
-        "weight": 12
+        "minCount": 1,
+        "weight": 40
       },
       {
         "type": "half_life_mod:headcrab_2",
         "maxCount": 4,
-        "minCount": 4,
-        "weight": 12
+        "minCount": 1,
+        "weight": 40
+      },
+      {
+        "type": "half_life_mod:headcrab_a",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 40
+      },
+      {
+        "type": "half_life_mod:headcrab_poison_2",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "half_life_mod:headcrab_poison_a",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "half_life_mod:headcrab_fast",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "half_life_mod:headcrab_armor",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "half_life_mod:aliengrunt",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 30
+      },
+      {
+        "type": "half_life_mod:vorthl1",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 70
+      },
+      {
+        "type": "half_life_mod:controller",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 30
+      },
+      {
+        "type": "half_life_mod:bullsquid",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 2
+      },
+      {
+        "type": "half_life_mod:houndeye",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 20
       }
     ],
     "underground_water_creature": [],

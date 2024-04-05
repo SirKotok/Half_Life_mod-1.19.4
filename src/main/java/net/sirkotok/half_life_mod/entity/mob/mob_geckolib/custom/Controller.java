@@ -137,7 +137,7 @@ public class Controller extends HalfLifeMonster implements GeoEntity, RangedAtta
 
     public static AttributeSupplier setAttributes() {
         return Monster.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 30D)
+                .add(Attributes.MAX_HEALTH, 18D)
                 .add(Attributes.ATTACK_DAMAGE, 4f)
                 .add(Attributes.ATTACK_SPEED, 1.0f)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.0f)

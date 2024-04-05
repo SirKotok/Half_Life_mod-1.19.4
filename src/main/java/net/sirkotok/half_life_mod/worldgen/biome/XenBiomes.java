@@ -33,8 +33,10 @@ public class XenBiomes {
     public static Biome xen_basic(BootstapContext<Biome> context) {
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
 
-        spawnBuilder.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.WOLF, 5, 4, 4));
         HalfLifeBiomeFeatures.addmaxheadcrabs(spawnBuilder);
+        HalfLifeBiomeFeatures.addXenForcesNormal(spawnBuilder);
+        HalfLifeBiomeFeatures.addXenWildlifeNormal(spawnBuilder);
+
 
         BiomeGenerationSettings.Builder biomeBuilder =
                 new BiomeGenerationSettings.Builder(context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));

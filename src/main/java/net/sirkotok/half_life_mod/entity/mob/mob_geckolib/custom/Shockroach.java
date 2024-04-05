@@ -225,6 +225,7 @@ public class Shockroach extends CatchableMonster implements GeoEntity, SmartBrai
     public BrainActivityGroup<Shockroach> getFightTasks() { // These are the tasks that handle fighting
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>(),
+                new InvalidateAttackTarget<>().invalidateIf((entity, target) -> InfightingUtil.issameteam(target, entity)),
                 new Retaliate<>(),
                 new SetWalkTargetToAttackTarget<>().whenStarting(entity -> this.entityData.set(IS_ANGRY, true)),
                 new BiteWhileJumpingBehavior<>(30, getBiteSound(), -1f).startCondition(entity -> !isOnGround()).cooldownFor(entity -> 20),

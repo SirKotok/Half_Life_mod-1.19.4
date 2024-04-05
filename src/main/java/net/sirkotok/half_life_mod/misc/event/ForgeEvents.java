@@ -2,6 +2,7 @@ package net.sirkotok.half_life_mod.misc.event;
 
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
@@ -125,7 +126,11 @@ public class ForgeEvents {
     public static void  onDamagedEvent(LivingDamageEvent event) {
         DamageSource source = event.getSource();
         LivingEntity entity = event.getEntity();
-        if (entity instanceof Creeper creeper && source.is(HalfLifeDamageTypes.HL_ELECTRIC)) creeper.ignite(); //TODO make it power the creeper
+        if (entity instanceof Creeper creeper && !creeper.isPowered() && source.is(HalfLifeDamageTypes.HL_ELECTRIC)) {
+            CompoundTag tag = creeper.serializeNBT();
+            tag.putBoolean("powered", true);
+            creeper.deserializeNBT(tag);
+        }
         if (source.is(HalfLifeDamageTypes.HL_BULLET) && !entity.isSilent()) {
             entity.addTag("gunsilencedfor11");
         }
