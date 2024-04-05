@@ -23,7 +23,7 @@ import org.joml.Vector4f;
 public class VoltigoreLightningParticle extends Particle {
     private LightningRender lightningRender = new LightningRender();
 
-    public VoltigoreLightningParticle(ClientLevel world, double x, double y, double z, double xd, double yd, double zd) {
+    public VoltigoreLightningParticle(ClientLevel world, double x, double y, double z, double color, double yd, double zd) {
         super(world, x, y, z);
         this.setSize(1.0F, 1.0F);
         this.x = x;
@@ -36,8 +36,9 @@ public class VoltigoreLightningParticle extends Particle {
         Vec3 to = lightningTo.subtract(x, y, z);
         this.lifetime = (int) Math.ceil(to.length());
         int sections = 6 * this.lifetime;
-
-        LightningBoltData.BoltRenderInfo boltData = new LightningBoltData.BoltRenderInfo(0.01F, 0.15F, 0.1F, 0.05F, new Vector4f(0.5F , 0.01F, 0.99F, 0.3F), 0.6F);
+        Vector4f ColorVec = new Vector4f(0.5F , 0.01F, 0.99F, 0.3F);
+        if (color == 10 ) ColorVec = new Vector4f(0.1F , 0.8F, 0.1F, 0.3F);
+        LightningBoltData.BoltRenderInfo boltData = new LightningBoltData.BoltRenderInfo(0.01F, 0.15F, 0.1F, 0.05F, ColorVec , 0.6F);
         LightningBoltData bolt = new LightningBoltData(boltData, Vec3.ZERO, to, sections)
                 .size(0.1F + random.nextFloat() * 0.1F)
                 .lifespan(5)

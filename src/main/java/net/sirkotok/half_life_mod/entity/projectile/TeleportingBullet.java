@@ -17,12 +17,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.*;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
 import net.sirkotok.half_life_mod.entity.base.FireballNoTrail;
+import net.sirkotok.half_life_mod.entity.particle.HalfLifeParticles;
 import net.sirkotok.half_life_mod.item.HalfLifeItems;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.sirkotok.half_life_mod.misc.util.HLperUtil;
@@ -39,6 +37,16 @@ public class TeleportingBullet extends FireballNoTrail {
 
     public TeleportingBullet(EntityType<? extends TeleportingBullet> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (random.nextFloat() < 0.3 || this.tickCount % 4 == 0) {
+            Vec3 startPos = this.position().add(new Vec3(0, this.getBbHeight()/2, 0));
+            this.level.addParticle(HalfLifeParticles.VOLT_LIGHTNING.get(), startPos.x, startPos.y, startPos.z, 10, 0, 0);
+        }
+
     }
 
 

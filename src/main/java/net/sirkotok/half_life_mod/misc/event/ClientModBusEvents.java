@@ -134,7 +134,7 @@ public class ClientModBusEvents {
         EntityRenderers.register(HalfLifeEntities.FLECHETTE.get(), Flechette_renderer::new);
         EntityRenderers.register(HalfLifeEntities.SHOCK_SHOT.get(), ThrownItemRenderer::new);
         EntityRenderers.register(HalfLifeEntities.BULLET_ONE.get(), ThrownItemRenderer::new);
-        EntityRenderers.register(HalfLifeEntities.BULLET_TP.get(), ThrownItemRenderer::new);
+
         EntityRenderers.register(HalfLifeEntities.ACID_THROWN.get(), ThrownItemRenderer::new);
         EntityRenderers.register(HalfLifeEntities.BUGBAIT_PROJECTILE.get(), ThrownItemRenderer::new);
         EntityRenderers.register(HalfLifeEntities.ACID_THROWNBM.get(), AcidThrownBMRenderer::new);
@@ -147,6 +147,8 @@ public class ClientModBusEvents {
 
         EntityRenderers.register(HalfLifeEntities.CON_BIG_PROJECTILE.get(), BigItemRenderer::new);
         EntityRenderers.register(HalfLifeEntities.CON_PROJECTILE.get(), ThrownItemRenderer::new);
+        EntityRenderers.register(HalfLifeEntities.BULLET_TP.get(), MediumItemRenderer::new);
+
 
         EntityRenderers.register(HalfLifeEntities.VORT_LIGHTNING_PROJETILE.get(), NoRenderer::new);
 

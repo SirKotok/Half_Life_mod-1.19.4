@@ -433,7 +433,7 @@ public class HalfLifeEntities {
     public static final RegistryObject<EntityType<TeleportingBullet>> BULLET_TP =
             ENTITY_TYPES.register("bullet_tp",
                     () -> EntityType.Builder.<TeleportingBullet>of(TeleportingBullet::new, MobCategory.MISC)
-                            .sized(0.3F, 0.3F)
+                            .sized(0.6F, 0.6F)
                             .clientTrackingRange(20)
                             .updateInterval(1)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "bullet_tp").toString()));
