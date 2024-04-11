@@ -2,7 +2,7 @@ package net.sirkotok.half_life_mod.entity.mob.mob_geckolib.client.renderers;
 
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.client.renderers.renderlayer.VZombieProffesionLayer;
+// import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.client.renderers.renderlayer.VZombieProffesionLayer;
 import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.client.models.Zombiev_model;
 import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.HLZombieVillager;
 import software.bernie.geckolib.cache.object.GeoBone;
@@ -14,9 +14,9 @@ import javax.annotation.Nullable;
 public class Zombiev_renderer extends DynamicGeoEntityRenderer<HLZombieVillager> { //
     public Zombiev_renderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new Zombiev_model());
-        addRenderLayer(new VZombieProffesionLayer(this));
+      //  addRenderLayer(new VZombieProffesionLayer(this));
     }
-    private static final ResourceLocation VILLAGER_BASE_SKIN = new ResourceLocation("textures/entity/villager/villager.png");
+//    private static final ResourceLocation VILLAGER_BASE_SKIN = new ResourceLocation("textures/entity/villager/villager.png");
 
 
 
@@ -39,7 +39,7 @@ public class Zombiev_renderer extends DynamicGeoEntityRenderer<HLZombieVillager>
 
     } */
 
-
+    /*
 
     @Nullable
        @Override
@@ -59,6 +59,6 @@ public class Zombiev_renderer extends DynamicGeoEntityRenderer<HLZombieVillager>
 
 
         return null;
-        }
+        } */
 
     }

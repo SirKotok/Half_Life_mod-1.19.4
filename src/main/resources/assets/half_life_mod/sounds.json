@@ -17,6 +17,24 @@
       "half_life_mod:bugbait_impact1"
     ]
   },
+  "sghl1double": {
+    "subtitle": "sounds.half_life_mod.sghl1double",
+    "sounds": [
+      "half_life_mod:sghl1double"
+    ]
+  },
+  "sghl1reload": {
+    "subtitle": "sounds.half_life_mod.sghl1reload",
+    "sounds": [
+      "half_life_mod:sghl1reload"
+    ]
+  },
+  "sghl1single": {
+    "subtitle": "sounds.half_life_mod.sghl1single",
+    "sounds": [
+      "half_life_mod:sghl1single"
+    ]
+  },
   "mine_charge": {
     "subtitle": "sounds.half_life_mod.mine_charge",
     "sounds": [

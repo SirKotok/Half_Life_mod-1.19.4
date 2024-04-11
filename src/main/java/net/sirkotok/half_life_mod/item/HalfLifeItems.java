@@ -137,7 +137,7 @@ public class HalfLifeItems {
                  new Item.Properties()));
 
     public static final RegistryObject<Item> HL1_ZOMBIE_SCIENTIST_SPAWN_EGG = ITEMS.register("hl1_zombie_scientist_spawn_egg",
-            () -> new ForgeSpawnEggItem(HalfLifeEntities.ZOMBIE_SCIENTIST_HL1, 0xaf3300, 0xdbd9d6   ,
+            () -> new ForgeSpawnEggItem(HalfLifeEntities.ZOMBIE_HL1, 0xaf3300, 0xdbd9d6   ,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> HL2_ZOMBIE_SPAWN_EGG = ITEMS.register("hl2_zombie_spawn_egg",
@@ -214,9 +214,15 @@ public class HalfLifeItems {
     public static final RegistryObject<Item> PENGUIN_THROWER = ITEMS.register("penguin_thrower",
             () -> new PenguinItem(new Item.Properties()));
 
+    public static final RegistryObject<Item> GRANADE_HL1 = ITEMS.register("granade",
+            () -> new Granade_hl1(new Item.Properties()));
+
     //Guns
     public static final RegistryObject<Item> PISTOL = ITEMS.register("pistol_one_item",
             () -> new Pistol_1_Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> SHOTGUN = ITEMS.register("shotgun_hl1",
+            () -> new Shotgun_1_Item(new Item.Properties()));
 
     public static final RegistryObject<Item> GRAVITYGUN = ITEMS.register("gravitygun",
             () -> new GravityGun(new Item.Properties()));
@@ -227,6 +233,9 @@ public class HalfLifeItems {
             () -> new BugbaitItem(new Item.Properties()));
     public static final RegistryObject<Item> SMG_HL1 = ITEMS.register("smg_hl1",
          () -> new SMG_1_Item(new Item.Properties()));
+
+   // public static final RegistryObject<Item> SHOTGUN_HL1 = ITEMS.register("shotgun_hl1",
+    //        () -> new ShotgunGunItem(new Item.Properties()));
     public static final RegistryObject<Item> DISPLACER = ITEMS.register("displacer_cannon",
          () -> new Displacer_cannon(new Item.Properties()));
     public static final RegistryObject<Item> DISPLACER_NETHER = ITEMS.register("displacer_nether",

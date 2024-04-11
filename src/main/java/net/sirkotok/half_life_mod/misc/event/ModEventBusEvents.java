@@ -25,7 +25,7 @@ public class ModEventBusEvents {
         event.put(HalfLifeEntities.CHUMTOAD.get(), Chumtoad.setAttributes());
         event.put(HalfLifeEntities.BARNEY.get(), Barney.setAttributes());
         event.put(HalfLifeEntities.SCIENTIST.get(), Scientist.setAttributes());
-        event.put(HalfLifeEntities.ZOMBIE_SCIENTIST_HL1.get(), HL1ZombieScientist.setAttributes());
+        event.put(HalfLifeEntities.ZOMBIE_HL1.get(), ZombieHl1.setAttributes());
         event.put(HalfLifeEntities.ZOMBIE_HL2.get(), HL2Zombie.setAttributes());
         event.put(HalfLifeEntities.ZOMBIE_FAST.get(), HL2Zombie_fast.setAttributes());
         event.put(HalfLifeEntities.PZOMBIE.get(), Pzombie.setAttributes());
@@ -87,7 +87,7 @@ public class ModEventBusEvents {
                 Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(HalfLifeEntities.ZOMBIE_HL2.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
-        event.register(HalfLifeEntities.ZOMBIE_SCIENTIST_HL1.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+        event.register(HalfLifeEntities.ZOMBIE_HL1.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(HalfLifeEntities.ZOMBIE_FAST.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);

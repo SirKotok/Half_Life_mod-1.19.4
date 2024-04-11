@@ -21,7 +21,6 @@ public class Scientist_renderer2 extends GeoEntityRenderer<Scientist> {
         addRenderLayer(new ScientistRenderCoatLayer(this));
         addRenderLayer(new ScientistRenderHeadLayer(this));
         addRenderLayer(new ScientistRenderPantsLayer(this));
-
     }
 
 
@@ -34,14 +33,5 @@ public class Scientist_renderer2 extends GeoEntityRenderer<Scientist> {
     }
 
 
-    /*
-    @Override
-    protected void applyRotations(Scientist animatable, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTick) {
-        float xRot = (float) HLperUtil.xanglefromvec3(animatable.getLookAngle());
-        float yRot = (float) HLperUtil.yanglefromvec3(animatable.getLookAngle());
-        poseStack.mulPose(Axis.YP.rotationDegrees(yRot));
-        poseStack.mulPose(Axis.ZP.rotationDegrees(xRot));
-        poseStack.mulPose(Axis.YP.rotationDegrees(270));
 
-    } */
 }

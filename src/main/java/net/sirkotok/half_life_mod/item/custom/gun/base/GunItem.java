@@ -115,6 +115,8 @@ public class GunItem extends Item {
 
 
 
+
+
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
         if (pEntity instanceof Player pPlayer && !pLevel.isClientSide() && pIsSelected) {
@@ -134,13 +136,18 @@ public class GunItem extends Item {
             SetupCooldow(pStack, i-1);
         }
         if (GetReloadTimer(pStack) > -1) {
-            int i = GetReloadTimer(pStack);
-            if (i == 0 && pIsSelected && !pLevel.isClientSide()) {
-                reloadgun(pLevel, (Player) pEntity, pStack);
-            }
-            SetReloadTimer(pStack, i-1);
+            reloadtick(pStack, pIsSelected, pLevel, pplayer);
         }
     }
+    }
+
+
+    public void reloadtick(ItemStack pStack, Boolean pIsSelected, Level pLevel, Player pEntity) {
+        int i = GetReloadTimer(pStack);
+        if (i == 0 && pIsSelected && !pLevel.isClientSide()) {
+            reloadgun(pLevel, pEntity, pStack);
+        }
+        SetReloadTimer(pStack, i-1);
     }
 
 
@@ -206,9 +213,9 @@ public class GunItem extends Item {
         if (!pLevel.isClientSide) {
             if (GetAmmo(itemstack) != GetMaxAmmo() || pPlayer.getAbilities().instabuild) {
             if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
+            SetCooldow(pPlayer, getReloadCooldown()+5);
             SetReloadTimer(itemstack, getReloadCooldown());
             pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), this.reloadsound(), SoundSource.NEUTRAL, 0.5F, 1F);
-                SetCooldow(pPlayer, getReloadCooldown());
         }}
         return InteractionResultHolder.pass(itemstack);
     }

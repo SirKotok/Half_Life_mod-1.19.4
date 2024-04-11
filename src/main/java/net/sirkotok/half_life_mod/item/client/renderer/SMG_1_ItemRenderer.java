@@ -10,6 +10,5 @@ import software.bernie.geckolib.renderer.GeoItemRenderer;
 public class SMG_1_ItemRenderer extends GeoItemRenderer<SMG_1_Item> {
     public SMG_1_ItemRenderer() {
         super(new SMG_1_ItemModel());
-       // addRenderLayer(new AutoGlowingGeoLayer<>(this)); //this makes the eye float around the snark so it doesnt work
     }
 }

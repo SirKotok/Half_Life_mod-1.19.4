@@ -62,7 +62,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.List;
 
 
-public class HL1ZombieScientist extends HalfLifeMonster implements GeoEntity, SmartBrainOwner<HL1ZombieScientist> {
+public class ZombieHl1 extends HalfLifeMonster implements GeoEntity, SmartBrainOwner<ZombieHl1> {
 
 
 
@@ -71,20 +71,20 @@ public class HL1ZombieScientist extends HalfLifeMonster implements GeoEntity, Sm
 
 
 
-    public static final EntityDataAccessor<Boolean> IS_ANGRY = SynchedEntityData.defineId(HL1ZombieScientist.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> IS_ANGRY = SynchedEntityData.defineId(ZombieHl1.class, EntityDataSerializers.BOOLEAN);
     public DyeColor getColor() {
         return DyeColor.byId(this.entityData.get(DATA_COAT_ID) & 15);
     }
 
-    private static final EntityDataAccessor<Byte> DATA_COAT_ID = SynchedEntityData.defineId(HL1ZombieScientist.class, EntityDataSerializers.BYTE);
-    public static final EntityDataAccessor<Integer> ID_SHIRT = SynchedEntityData.defineId(HL1ZombieScientist.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> ID_TEXTURE = SynchedEntityData.defineId(HL1ZombieScientist.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Byte> DATA_COAT_ID = SynchedEntityData.defineId(ZombieHl1.class, EntityDataSerializers.BYTE);
+    public static final EntityDataAccessor<Integer> ID_SHIRT = SynchedEntityData.defineId(ZombieHl1.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> ID_TEXTURE = SynchedEntityData.defineId(ZombieHl1.class, EntityDataSerializers.INT);
 
-    public static final EntityDataAccessor<String> UUID_STRING_P = SynchedEntityData.defineId(HL1ZombieScientist.class, EntityDataSerializers.STRING);
-    public static final EntityDataAccessor<String> PLAYER_NAME_STRING = SynchedEntityData.defineId(HL1ZombieScientist.class, EntityDataSerializers.STRING);
+    public static final EntityDataAccessor<String> UUID_STRING_P = SynchedEntityData.defineId(ZombieHl1.class, EntityDataSerializers.STRING);
+    public static final EntityDataAccessor<String> PLAYER_NAME_STRING = SynchedEntityData.defineId(ZombieHl1.class, EntityDataSerializers.STRING);
 
 
-    public static final EntityDataAccessor<Boolean> MOVING = SynchedEntityData.defineId(HL1ZombieScientist.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> MOVING = SynchedEntityData.defineId(ZombieHl1.class, EntityDataSerializers.BOOLEAN);
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(IS_ANGRY, false);
@@ -163,7 +163,7 @@ public class HL1ZombieScientist extends HalfLifeMonster implements GeoEntity, Sm
     }
 
 
-    public HL1ZombieScientist(EntityType type, Level level) {
+    public ZombieHl1(EntityType type, Level level) {
         super(type, level);
         this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
     }
@@ -245,11 +245,11 @@ public class HL1ZombieScientist extends HalfLifeMonster implements GeoEntity, Sm
 
 
     @Override
-    public List<ExtendedSensor<HL1ZombieScientist>> getSensors() {
+    public List<ExtendedSensor<ZombieHl1>> getSensors() {
         return ObjectArrayList.of(
                 new HurtBySensor<>(),
                 new NearbyPlayersSensor<>(),
-                new NearbyLivingEntitySensor<HL1ZombieScientist>()
+                new NearbyLivingEntitySensor<ZombieHl1>()
                         .setPredicate((target, entity) ->
                                 (this.getFirstPassenger() instanceof HalfLifeMonster headcrab && target.equals(headcrab.getLastHurtByMob())) ||
                                 InfightingUtil.HeadcrabFactionSpecific(target) || InfightingUtil.commonenemy(target)
@@ -259,7 +259,7 @@ public class HL1ZombieScientist extends HalfLifeMonster implements GeoEntity, Sm
 
 
     @Override
-    public BrainActivityGroup<HL1ZombieScientist> getCoreTasks() {
+    public BrainActivityGroup<ZombieHl1> getCoreTasks() {
         return BrainActivityGroup.coreTasks(
                 new LookAtTarget<>(),
                 new MoveToWalkTarget<>());
@@ -268,9 +268,9 @@ public class HL1ZombieScientist extends HalfLifeMonster implements GeoEntity, Sm
 
 
     @Override
-    public BrainActivityGroup<HL1ZombieScientist> getIdleTasks() {
+    public BrainActivityGroup<ZombieHl1> getIdleTasks() {
         return BrainActivityGroup.idleTasks(
-                new FirstApplicableBehaviour<HL1ZombieScientist>(
+                new FirstApplicableBehaviour<ZombieHl1>(
                         new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, false)).startCondition(entity -> this.entityData.get(IS_ANGRY).equals(true)),
                         new TargetOrRetaliateHLT<>(),
                         new SetPlayerLookTarget<>(),
@@ -282,17 +282,17 @@ public class HL1ZombieScientist extends HalfLifeMonster implements GeoEntity, Sm
 
 
     @Override
-    public BrainActivityGroup<HL1ZombieScientist> getFightTasks() { // These are the tasks that handle fighting
+    public BrainActivityGroup<ZombieHl1> getFightTasks() { // These are the tasks that handle fighting
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>(),
                 new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, true)).startCondition(entity -> this.entityData.get(IS_ANGRY).equals(false)),
                 new SetWalkTargetToAttackTarget<>(),
                 new Retaliate<>(),
                new OneRandomBehaviour<>(
-               new ConfigurableAnimatableMeleeAttack<HL1ZombieScientist>(13, 0.1f, 1.5f, 1, null, 0, CommonSounds.getClawHitSound(), null, this.getMissSound(), this.getLongSound(), this.getShortSound())
+               new ConfigurableAnimatableMeleeAttack<ZombieHl1>(13, 0.1f, 1.5f, 1, null, 0, CommonSounds.getClawHitSound(), null, this.getMissSound(), this.getLongSound(), this.getShortSound())
                 .whenStarting(entity -> triggerAnim("onetime", "big"))
                 .cooldownFor(entity -> random.nextInt(10, 15)),
-                new DoubleMeleeAttack<HL1ZombieScientist>(21, 13, 0, 1, 1, null , 0, CommonSounds.getClawHitSound(), null, this.getMissSound(), this.getLongSound(), this.getShortSound())
+                new DoubleMeleeAttack<ZombieHl1>(21, 13, 0, 1, 1, null , 0, CommonSounds.getClawHitSound(), null, this.getMissSound(), this.getLongSound(), this.getShortSound())
                         .whenStarting(entity ->triggerAnim("onetime", "double"))
                         .cooldownFor(entity -> random.nextInt(10, 15)))
 

@@ -55,8 +55,8 @@ public class HalfLifeMod
 
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
-
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, HalfLifeCommonConfigs.INFIGHTINGSPEC, "half-life-infighting.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, HalfLifeCommonConfigs.WEOPONSPEC, "half-life-weoponconfig.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, HalfLifeCommonConfigs.INFIGHTINGSPEC, "half-life-infightingconfig.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, HalfLifeCommonConfigs.ENTITYSPEC, "half-life-entityconfig.toml");
     }
 
@@ -167,6 +167,9 @@ public class HalfLifeMod
             // items that are guns
             event.accept(HalfLifeItems.PISTOL);
             event.accept(HalfLifeItems.SMG_HL1);
+            event.accept(HalfLifeItems.SHOTGUN);
+            event.accept(HalfLifeItems.GRANADE_HL1);
+
             event.accept(HalfLifeItems.HIVEHAND_ITEM);
             event.accept(HalfLifeItems.SHOCKROACH_ITEM);
 

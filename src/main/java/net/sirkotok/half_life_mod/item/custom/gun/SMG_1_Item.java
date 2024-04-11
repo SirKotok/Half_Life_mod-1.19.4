@@ -14,9 +14,11 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.sirkotok.half_life_mod.entity.projectile.Bullet;
 import net.sirkotok.half_life_mod.entity.projectile.UnderbarrelGranade;
 import net.sirkotok.half_life_mod.item.client.renderer.SMG_1_ItemRenderer;
 import net.sirkotok.half_life_mod.item.custom.gun.base.GunAltFireItem;
+import net.sirkotok.half_life_mod.misc.config.HalfLifeCommonConfigs;
 import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
@@ -74,16 +76,19 @@ public class SMG_1_Item extends GunAltFireItem implements GeoItem {
         if (!pLevel.isClientSide) {
             if (GetAmmo(itemstack) != GetMaxAmmo() || pPlayer.getAbilities().instabuild) {
             if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
-            pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.SMG_RELOAD.get(), SoundSource.NEUTRAL, 0.5F, 1F);
-            triggerAnim(pPlayer, GeoItem.getOrAssignId(pPlayer.getItemInHand(pHand), (ServerLevel) pLevel),"onetime", "reload");
-            SetReloadTimer(itemstack, getReloadCooldown());
-            SetCooldow(pPlayer, getReloadCooldown());
+                actuallyreload(pLevel, pPlayer, pHand);
         }}
         return InteractionResultHolder.success(itemstack);
     }
 
 
-
+    public void actuallyreload(Level pLevel, Player pPlayer, InteractionHand pHand) {
+        SetCooldow(pPlayer, getReloadCooldown()+1);
+        ItemStack itemstack = pPlayer.getItemInHand(pHand);
+        pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.PISTOL_RELOAD.get(), SoundSource.NEUTRAL, 0.5F, 1F);
+        triggerAnim(pPlayer, GeoItem.getOrAssignId(pPlayer.getItemInHand(pHand), (ServerLevel) pLevel),"onetime", "reload");
+        SetReloadTimer(itemstack, getReloadCooldown());
+    }
 
 
 
@@ -126,18 +131,42 @@ public class SMG_1_Item extends GunAltFireItem implements GeoItem {
     public InteractionResultHolder<ItemStack> leftuse(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         if (!pLevel.isClientSide) {
-            if (GetAmmo(itemstack) == 0 && !pPlayer.getAbilities().instabuild) {
-                SetCooldow(pPlayer, 10);
-                pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
-                return InteractionResultHolder.fail(itemstack);
-            }
             if (GetCooldow(itemstack) > 0) return InteractionResultHolder.fail(itemstack);
+            if (GetAmmo(itemstack) == 0 && !pPlayer.getAbilities().instabuild) {
+                int slotwithitem = findSlotMatchingItem(pPlayer, getammoitem());
+                if (slotwithitem == -1  || !HalfLifeCommonConfigs.AUTO_RELOAD.get()) {
+                    pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), HalfLifeSounds.DRYFIRE1.get(), SoundSource.NEUTRAL, 0.5F, 1F);
+                    SetCooldow(pPlayer, 10);
+                    return InteractionResultHolder.fail(itemstack);
+                } else {
+                    if (GetAmmo(itemstack) != GetMaxAmmo()) {
+                        actuallyreload(pLevel, pPlayer, pHand);
+                    }
+                    return InteractionResultHolder.success(itemstack);
+                }
+            }
             triggerAnim(pPlayer, GeoItem.getOrAssignId(pPlayer.getItemInHand(pHand), (ServerLevel) pLevel),"onetime", "shoot");
             pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), getShootingSound(), SoundSource.NEUTRAL, 0.5F, 1F);
             shootleft(pLevel, pPlayer, pHand);
         }
         return InteractionResultHolder.success(itemstack);
     }
+
+
+    public void shootleft(Level pLevel, Player pPlayer, InteractionHand pHand) {
+        ItemStack itemstack = pPlayer.getItemInHand(pHand);
+        if (!pLevel.isClientSide) {
+            pPlayer.level.gameEvent(pPlayer, GameEvent.PROJECTILE_SHOOT, pPlayer.blockPosition());
+            SetCooldow(pPlayer, getLeftClickCooldown());
+            Bullet snowball = new Bullet(pLevel, pPlayer);
+            snowball.setdamage(this.getgundamage());
+            snowball.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 4F, 4.0F);
+            pLevel.addFreshEntity(snowball);
+        }
+        award(pPlayer);
+        if (!pPlayer.getAbilities().instabuild) SetAmmo(itemstack, GetAmmo(itemstack)-1);
+    }
+
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {

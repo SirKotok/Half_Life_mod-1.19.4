@@ -159,9 +159,9 @@ public class HalfLifeEntities {
                             .sized(0.6F, 1.8F)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "scientist").toString()));
 
-    public static final RegistryObject<EntityType<HL1ZombieScientist>> ZOMBIE_SCIENTIST_HL1 =
+    public static final RegistryObject<EntityType<ZombieHl1>> ZOMBIE_HL1 =
             ENTITY_TYPES.register("zombie_scientist_hl1",
-                    () -> EntityType.Builder.of(HL1ZombieScientist::new, MobCategory.MONSTER)
+                    () -> EntityType.Builder.of(ZombieHl1::new, MobCategory.MONSTER)
                             .sized(0.6F, 1.85F)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "zombie_scientist_hl1").toString()));
 
@@ -359,6 +359,14 @@ public class HalfLifeEntities {
                             .clientTrackingRange(20)
                             .updateInterval(1)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "spore_shot").toString()));
+
+    public static final RegistryObject<EntityType<Granade>> GRANADE_ONE =
+            ENTITY_TYPES.register("granade_one",
+                    () -> EntityType.Builder.<Granade>of(Granade::new, MobCategory.MISC)
+                            .sized(0.3F, 0.3F)
+                            .clientTrackingRange(20)
+                            .updateInterval(1)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "granade_one").toString()));
 
 
     public static final RegistryObject<EntityType<PitdroneSpike>> PITDRONE_SPIKE =

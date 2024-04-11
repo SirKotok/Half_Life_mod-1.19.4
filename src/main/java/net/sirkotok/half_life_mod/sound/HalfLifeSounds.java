@@ -15,6 +15,24 @@ public class HalfLifeSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 
+    //SHOTGUN
+
+  public static final RegistryObject<SoundEvent> SGHL1DOUBLE=
+          registerSoundEvent("sghl1double");
+  public static final RegistryObject<SoundEvent> SGHL1RELOAD=
+          registerSoundEvent("sghl1reload");
+  public static final RegistryObject<SoundEvent> SGHL1SINGLE=
+          registerSoundEvent("sghl1single");
+
+  //        "sounds.half_life_mod.sghl1double": "Shotgun ",
+   //       "sounds.half_life_mod.sghl1reload": "Shotgun ",
+   //       "sounds.half_life_mod.sghl1single": "Shotgun ",
+
+
+
+
+
+
     // GARG
     public static final RegistryObject<SoundEvent> MINE_CHARGE=
             registerSoundEvent("mine_charge");

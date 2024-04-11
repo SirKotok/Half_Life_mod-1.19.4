@@ -5,12 +5,13 @@ import net.minecraftforge.common.ForgeConfigSpec;
 public class HalfLifeCommonConfigs  {
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec.Builder BUILDER2 = new ForgeConfigSpec.Builder();
+    public static final ForgeConfigSpec.Builder BUILDER3 = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec INFIGHTINGSPEC;
-  //  public static final ForgeConfigSpec SPEC2;
+    public static final ForgeConfigSpec WEOPONSPEC;
     public static final ForgeConfigSpec ENTITYSPEC;
 
   //  public static final ForgeConfigSpec.ConfigValue<String> GRAVITY_GUN_BLACKLIST;
-
+  public static final ForgeConfigSpec.ConfigValue<Boolean> AUTO_RELOAD;
     public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_RACEX_XEN;
     public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_RACEX_NORMAL;
     public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_RACEX_ANTLION;
@@ -32,6 +33,9 @@ public class HalfLifeCommonConfigs  {
     public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_PITDRONE_HUNTS_SHOCKROACH;
     public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_BULLSQUID;
     public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_BULLSQUID_PITDRONE;
+
+
+
 
     public static final ForgeConfigSpec.ConfigValue<Float> GARG_SETFIRE_CHANCE;
     public static final ForgeConfigSpec.ConfigValue<Boolean> CHUMTOAD_LINE_OF_SIGHT;
@@ -88,14 +92,16 @@ public class HalfLifeCommonConfigs  {
         INFIGHTINGSPEC = BUILDER.build();
     }
 
-   /* static {
-        BUILDER.push("Weopons Config");
-        BUILDER.comment("This config determines things related to weopons.");
-        GRAVITY_GUN_BLACKLIST = BUILDER.comment("A blacklist for any blocks that shouldnt be pickable by the gravity gun")
-                .define("gravitygunblacklist", "#minecraft");
-        BUILDER.pop();
-        SPEC2 = BUILDER.build();
-    } */
+    static {
+        BUILDER3.push("Weopons Config");
+        BUILDER3.comment("This config determines things related to weopons.");
+      //  GRAVITY_GUN_BLACKLIST = BUILDER3.comment("A blacklist for any blocks that shouldnt be pickable by the gravity gun")
+      //          .define("gravitygunblacklist", "#minecraft");
+        AUTO_RELOAD = BUILDER3.comment("Does the gun automatically reload if you try to shoot after running out of ammo")
+                .define("auto_reload", true);
+        BUILDER3.pop();
+        WEOPONSPEC = BUILDER3.build();
+    }
 
 
       static {

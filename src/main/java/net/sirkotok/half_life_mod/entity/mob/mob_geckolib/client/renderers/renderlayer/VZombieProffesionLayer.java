@@ -15,10 +15,10 @@ import net.sirkotok.half_life_mod.entity.mob.mob_geckolib.custom.HLZombieVillage
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
-
+/*
 public class VZombieProffesionLayer extends GeoRenderLayer<HLZombieVillager> {
-
-public VZombieProffesionLayer(GeoRenderer<HLZombieVillager> entityRenderer) {
+}
+ public VZombieProffesionLayer(GeoRenderer<HLZombieVillager> entityRenderer) {
         super(entityRenderer);
         }
 

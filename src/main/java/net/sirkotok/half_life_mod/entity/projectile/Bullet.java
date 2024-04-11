@@ -48,11 +48,12 @@ public class Bullet extends FireballNoTrail {
     }
 
 
-
+    public static final EntityDataAccessor<Boolean> BULLETKNOCKBACK = SynchedEntityData.defineId(Bullet.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Float> BULLETDAMAGE = SynchedEntityData.defineId(Bullet.class, EntityDataSerializers.FLOAT);
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(BULLETDAMAGE, 3.5f);
+        this.entityData.define(BULLETKNOCKBACK, false);
     }
 
 
@@ -63,13 +64,18 @@ public class Bullet extends FireballNoTrail {
         return entityData.get(BULLETDAMAGE);
     }
 
+    public void sethasknockback(){
+        this.entityData.set(BULLETKNOCKBACK, true);
+    }
 
-
-
+    public boolean hasknockback(){
+        return entityData.get(BULLETKNOCKBACK);
+    }
     @Override
     protected boolean shouldBurn() {
         return false;
     }
+
 
 
     protected SoundEvent getHitSound(){
@@ -90,7 +96,7 @@ public class Bullet extends FireballNoTrail {
             if (entity1 instanceof LivingEntity shooter) {
                 Vec3 amogus = entity.getDeltaMovement();
                 entity.hurt(HalfLifeDamageTypes.bulletdamage(level.registryAccess(), this, shooter), this.getdamage());
-                entity.setDeltaMovement(amogus);
+                if (!hasknockback()) entity.setDeltaMovement(amogus);
             }
         }
     }

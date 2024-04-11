@@ -332,7 +332,7 @@ public class ForgeEvents {
                 if (event.getSource().getEntity() instanceof Headcrab_1 headcrab) {
 
                     if (entity instanceof Barney scientist) {
-                        HL1ZombieScientist zombie = HalfLifeEntities.ZOMBIE_SCIENTIST_HL1.get().create(scientist.level);
+                        ZombieHl1 zombie = HalfLifeEntities.ZOMBIE_HL1.get().create(scientist.level);
                         if (zombie != null) {
                             zombie.moveTo(scientist.position());
                             zombie.settexture(-5);
@@ -346,7 +346,7 @@ public class ForgeEvents {
 
 
                     if (entity instanceof Scientist scientist) {
-                        HL1ZombieScientist zombie = HalfLifeEntities.ZOMBIE_SCIENTIST_HL1.get().create(scientist.level);
+                        ZombieHl1 zombie = HalfLifeEntities.ZOMBIE_HL1.get().create(scientist.level);
                         if (zombie != null) {
                             zombie.moveTo(scientist.position());
                             zombie.setColor(scientist.getColor());
@@ -360,7 +360,7 @@ public class ForgeEvents {
                         }
                     }
                     if (entity instanceof Player player) {
-                        HL1ZombieScientist zombie = HalfLifeEntities.ZOMBIE_SCIENTIST_HL1.get().create(player.level);
+                        ZombieHl1 zombie = HalfLifeEntities.ZOMBIE_HL1.get().create(player.level);
                         if (zombie != null) {
                             zombie.moveTo(player.position());
                             zombie.setCustomName(player.getDisplayName());

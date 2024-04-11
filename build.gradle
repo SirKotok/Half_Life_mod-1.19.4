@@ -85,7 +85,7 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
             property 'forge.enabledGameTestNamespaces', 'half_life_mod'
-            property 'geckolib.disable_examples', 'true'
+       //     property 'geckolib.disable_examples', 'true'
             mods {
                 half_life_mod {
                     source sourceSets.main
@@ -104,7 +104,7 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
             property 'forge.enabledGameTestNamespaces', 'half_life_mod'
-            property 'geckolib.disable_examples', 'true'
+        //    property 'geckolib.disable_examples', 'true'
             mods {
                 citadel {
                     source sourceSets.main
@@ -123,7 +123,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             property 'forge.enabledGameTestNamespaces', 'half_life_mod'
-            property 'geckolib.disable_examples', 'true'
+       //     property 'geckolib.disable_examples', 'true'
             mods {
                 half_life_mod {
                     source sourceSets.main

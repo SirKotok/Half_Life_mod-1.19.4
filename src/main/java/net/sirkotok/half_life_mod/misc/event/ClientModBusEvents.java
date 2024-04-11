@@ -86,6 +86,7 @@ public class ClientModBusEvents {
         EntityRenderers.register(HalfLifeEntities.VORTSHOCKWAVEEFFECT.get(), VortShockwaverenderer::new);
         EntityRenderers.register(HalfLifeEntities.SITBLOWUP.get(), SitRenderer::new);
         EntityRenderers.register(HalfLifeEntities.SPORESHOT.get(), Spore_renderer::new);
+        EntityRenderers.register(HalfLifeEntities.GRANADE_ONE.get(), Granade1_renderer::new);
         EntityRenderers.register(HalfLifeEntities.HOTEYE.get(), Hoteyerenderer::new);
         EntityRenderers.register(HalfLifeEntities.CONTROLLER.get(), ControllerRenderer::new);
         EntityRenderers.register(HalfLifeEntities.PITDRONE.get(), Pitdrone_renderer::new);
@@ -111,7 +112,7 @@ public class ClientModBusEvents {
         EntityRenderers.register(HalfLifeEntities.SHOCKTROOPER.get(), ShocktrooperRenderer::new);
         EntityRenderers.register(HalfLifeEntities.BARNEY.get(), Barney_renderer::new);
         EntityRenderers.register(HalfLifeEntities.SCIENTIST.get(), Scientist_renderer2::new);
-        EntityRenderers.register(HalfLifeEntities.ZOMBIE_SCIENTIST_HL1.get(), Scientist_zombiehl1_renderer::new);
+        EntityRenderers.register(HalfLifeEntities.ZOMBIE_HL1.get(), Zombie2_HL1Renderer::new);
         EntityRenderers.register(HalfLifeEntities.ZOMBIE_HL2.get(), Zombiehl2_renderer::new);
         EntityRenderers.register(HalfLifeEntities.ZOMBIE_FAST.get(), Fast_zombieRenderer::new);
         EntityRenderers.register(HalfLifeEntities.PZOMBIE.get(), pzombieRenderer::new);
