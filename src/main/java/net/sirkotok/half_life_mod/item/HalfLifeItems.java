@@ -220,6 +220,10 @@ public class HalfLifeItems {
     //Guns
     public static final RegistryObject<Item> PISTOL = ITEMS.register("pistol_one_item",
             () -> new Pistol_1_Item(new Item.Properties()));
+    public static final RegistryObject<Item> SAW = ITEMS.register("m249",
+            () -> new SAW_Item(new Item.Properties()));
+    public static final RegistryObject<Item> DEAGLE = ITEMS.register("desert_eagle",
+            () -> new Deagle_Item(new Item.Properties()));
 
     public static final RegistryObject<Item> SHOTGUN = ITEMS.register("shotgun_hl1",
             () -> new Shotgun_1_Item(new Item.Properties()));

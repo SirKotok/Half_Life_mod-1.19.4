@@ -8,10 +8,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -25,6 +22,7 @@ import net.sirkotok.half_life_mod.entity.projectile.Granade;
 import net.sirkotok.half_life_mod.entity.projectile.client.renderer.Granade1_renderer;
 import net.sirkotok.half_life_mod.item.client.renderer.Granade_1_ItemRenderer;
 import net.sirkotok.half_life_mod.item.client.renderer.SnarkItemRenderer;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -59,35 +57,47 @@ public class Granade_hl1 extends Item implements GeoItem {
         projectile.setDeltaMovement(projectile.getDeltaMovement().add(vec3.x, pShooter.isOnGround() ? 0.0D : vec3.y, vec3.z));
     }
 
+    @Override
+    public boolean useOnRelease(ItemStack pStack) {
+        return pStack.is(this);
+    }
 
-
+    public int getUseDuration(ItemStack pStack) {
+        return 110;
+    }
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
-        ItemStack itemstack = pPlayer.getItemInHand(pHand);
-        pLevel.playSound((Player)null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.SNOWBALL_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (pLevel.getRandom().nextFloat() * 0.4F + 0.8F));
-        if (!pLevel.isClientSide) {
-            Granade summon = new Granade(pLevel, pPlayer);
-            float yrot = pPlayer.getYRot();
-            float yuserot = pPlayer.yHeadRot * ((float)Math.PI / 180F);
-            float xr = Math.min(pPlayer.getXRot(), 60);
-            float xrot = xr*((float)Math.PI / 180F);
-            double bb = (pPlayer.getBbWidth() + 1.0F) * 0.5D;
-            double dx = -bb * (double)Mth.sin(yuserot)*Mth.cos(xrot/1.5f)*1.2;
-            double dy = -0.8*(double) Mth.sin(xrot);
-            double dz = +bb * (double) Mth.cos(yuserot)*Mth.cos(xrot/1.5f)*1.2;
-            summon.moveTo(pPlayer.getX() + dx,
-                    pPlayer.getEyeY() + dy,
-                    pPlayer.getZ() + dz,
-                    yrot, 0.0f);
-            this.shootEntityFromRotation(summon, pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
-            pLevel.addFreshEntity(summon);
-        }
+        pPlayer.startUsingItem(pHand);
+        return InteractionResultHolder.consume(pPlayer.getItemInHand(pHand));
+    }
 
-        pPlayer.awardStat(Stats.ITEM_USED.get(this));
-        if (!pPlayer.getAbilities().instabuild) {
-            itemstack.shrink(1);
-        }
+    public void releaseUsing(ItemStack pStack, Level pLevel, @NotNull LivingEntity pLivingEntity, int pTimeCharged) {
+        if (pLivingEntity instanceof Player pPlayer) {
+            pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.SNOWBALL_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (pLevel.getRandom().nextFloat() * 0.4F + 0.8F));
+            if (!pLevel.isClientSide) {
+                Granade summon = new Granade(pLevel, pPlayer);
+                float yrot = pPlayer.getYRot();
+                float yuserot = pPlayer.yHeadRot * ((float) Math.PI / 180F);
+                float xr = Math.min(pPlayer.getXRot(), 60);
+                float xrot = xr * ((float) Math.PI / 180F);
+                double bb = (pPlayer.getBbWidth() + 1.0F) * 0.5D;
+                double dx = -bb * (double) Mth.sin(yuserot) * Mth.cos(xrot / 1.5f) * 1.2;
+                double dy = -0.8 * (double) Mth.sin(xrot);
+                double dz = +bb * (double) Mth.cos(yuserot) * Mth.cos(xrot / 1.5f) * 1.2;
+                summon.moveTo(pPlayer.getX() + dx,
+                        pPlayer.getEyeY() + dy,
+                        pPlayer.getZ() + dz,
+                        yrot, 0.0f);
+                summon.setlifetime(Math.max(pTimeCharged, 1));
+                this.shootEntityFromRotation(summon, pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 0.9F, 1.0F);
+                pLevel.addFreshEntity(summon);
+            }
 
-        return InteractionResultHolder.sidedSuccess(itemstack, pLevel.isClientSide());
+            pPlayer.awardStat(Stats.ITEM_USED.get(this));
+            if (!pPlayer.getAbilities().instabuild) {
+                pStack.shrink(1);
+            }
+
+        }
     }
 
 

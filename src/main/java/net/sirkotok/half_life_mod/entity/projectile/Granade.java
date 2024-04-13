@@ -8,10 +8,14 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.*;
 import net.sirkotok.half_life_mod.entity.HalfLifeEntities;
@@ -49,7 +53,7 @@ public class Granade extends ThrowableProjectile implements GeoEntity {
     @Override
     protected void defineSynchedData() {
         this.entityData.define(JUMP, 1f);
-        this.entityData.define(TICkS_REMAINING , 200);
+        this.entityData.define(TICkS_REMAINING , 110);
         this.entityData.define(JUMP_TIMESTAMP , 0);
     }
 
@@ -80,12 +84,11 @@ public class Granade extends ThrowableProjectile implements GeoEntity {
 
 
 
-
     public void explode(){
         this.playSound(HalfLifeSounds.SPLAUNCHER_IMPACT.get(), 0.8f, 1);
         if (!this.level.isClientSide) {
         ServerLevel serverlevel = (ServerLevel) level;
-            serverlevel.explode(this, this.getX(), this.getY(), this.getZ(), 2, Level.ExplosionInteraction.MOB);
+            serverlevel.explode(this, this.getX(), this.getY(), this.getZ(), 3, Level.ExplosionInteraction.MOB);
             this.discard();
     }}
 
@@ -93,16 +96,16 @@ public class Granade extends ThrowableProjectile implements GeoEntity {
     @Override
     public void tick() {
         super.tick();
-        this.level.addParticle(ParticleTypes.ITEM_SLIME, this.getX(), this.getY(), this.getZ(), 0, -0.1f, 0);
+      //  this.level.addParticle(ParticleTypes.ITEM_SLIME, this.getX(), this.getY(), this.getZ(), 0, -0.1f, 0);
         this.setlifetime(this.getlifetime() - 1);
         if (this.getlifetime() == 0) explode();
     }
 
 
-    public float minus = -0.5f;
+    public float minus = -0.4f;
     protected float assigncorrect(int i){
         if (i == 0) {
-            return 0.9f;
+            return 0.7f;
         } else return minus;
     }
     public int richochet = 0;
@@ -121,12 +124,14 @@ public class Granade extends ThrowableProjectile implements GeoEntity {
     }
 
 
+
     protected void onHitBlock(BlockHitResult blockhit) {
         super.onHitBlock(blockhit);
 
         Vec3i vec3i = blockhit.getDirection().getNormal();
         Vec3 vec31 = new Vec3(assigncorrect(vec3i.getX()), assigncorrect(vec3i.getY()), assigncorrect(vec3i.getZ()));
         Vec3 vec3 = this.getDeltaMovement().multiply(vec31);
+        vec3 = new Vec3(vec3.x(), Math.abs(vec3.y()) < 0.1f ? 0 : vec3.y(), vec3.z());
         this.richochet++;
         if (!this.amogus) this.explode();
       //  if (this.richochet > maxrichochet) this.explode();
@@ -138,9 +143,9 @@ public class Granade extends ThrowableProjectile implements GeoEntity {
 
     @Override
     protected void onHit(HitResult pResult) {
-        this.playSound(getSporeHitSound());
-        super.onHit(pResult);
-       // if (this.getlifetime() < 0) this.setlifetime(200);
+       if (this.richochet < 3) this.playSound(getSporeHitSound());
+       super.onHit(pResult);
+
     }
 
     @Override
@@ -149,7 +154,7 @@ public class Granade extends ThrowableProjectile implements GeoEntity {
        if (e instanceof LivingEntity living && this.getOwner() instanceof LivingEntity living1) {
            e.hurt(level.damageSources().mobProjectile(this, living1), 1f);
        }
-        this.setDeltaMovement(this.getDeltaMovement().multiply(random.nextFloat()*2-random.nextFloat(),random.nextFloat()*2-random.nextFloat(),random.nextFloat()*2-random.nextFloat()));
+        this.setDeltaMovement(this.getDeltaMovement().multiply(random.nextFloat()*2-random.nextFloat(),random.nextFloat()*2-random.nextFloat(),random.nextFloat()*2-random.nextFloat()).scale(0.2f));
     }
     /*
     public void makeParticle(int direction, BlockHitResult blockhit) {
@@ -172,7 +177,7 @@ public class Granade extends ThrowableProjectile implements GeoEntity {
 
     @Override
     protected float getGravity() {
-        return 0.03F;
+        return 0.045F;
     }
 
     private AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);

@@ -17,6 +17,54 @@
       "half_life_mod:bugbait_impact1"
     ]
   },
+  "desert_eagle_fire": {
+    "subtitle": "sounds.half_life_mod.desert_eagle_fire",
+    "sounds": [
+      "half_life_mod:desert_eagle_fire"
+    ]
+  },
+  "desert_eagle_reload": {
+    "subtitle": "sounds.half_life_mod.desert_eagle_reload",
+    "sounds": [
+      "half_life_mod:desert_eagle_reload"
+    ]
+  },
+  "desert_eagle_sight": {
+    "subtitle": "sounds.half_life_mod.desert_eagle_sight",
+    "sounds": [
+      "half_life_mod:desert_eagle_sight"
+    ]
+  },
+  "desert_eagle_sight2": {
+    "subtitle": "sounds.half_life_mod.desert_eagle_sight2",
+    "sounds": [
+      "half_life_mod:desert_eagle_sight2"
+    ]
+  },
+  "saw_fire1": {
+    "subtitle": "sounds.half_life_mod.saw_fire1",
+    "sounds": [
+      "half_life_mod:saw_fire1"
+    ]
+  },
+  "saw_fire2": {
+    "subtitle": "sounds.half_life_mod.saw_fire2",
+    "sounds": [
+      "half_life_mod:saw_fire2"
+    ]
+  },
+  "saw_fire3": {
+    "subtitle": "sounds.half_life_mod.saw_fire3",
+    "sounds": [
+      "half_life_mod:saw_fire3"
+    ]
+  },
+  "saw_reload": {
+    "subtitle": "sounds.half_life_mod.saw_reload",
+    "sounds": [
+      "half_life_mod:saw_reload"
+    ]
+  },
   "sghl1double": {
     "subtitle": "sounds.half_life_mod.sghl1double",
     "sounds": [

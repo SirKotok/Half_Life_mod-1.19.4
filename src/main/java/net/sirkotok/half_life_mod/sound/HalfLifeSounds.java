@@ -28,8 +28,34 @@ public class HalfLifeSounds {
    //       "sounds.half_life_mod.sghl1reload": "Shotgun ",
    //       "sounds.half_life_mod.sghl1single": "Shotgun ",
 
+ // M249 and Deagle
 
+  public static final RegistryObject<SoundEvent> DESERT_EAGLE_FIRE=
+          registerSoundEvent("desert_eagle_fire");
+  public static final RegistryObject<SoundEvent> DESERT_EAGLE_RELOAD=
+          registerSoundEvent("desert_eagle_reload");
+  public static final RegistryObject<SoundEvent> DESERT_EAGLE_SIGHT=
+          registerSoundEvent("desert_eagle_sight");
+  public static final RegistryObject<SoundEvent> DESERT_EAGLE_SIGHT2=
+          registerSoundEvent("desert_eagle_sight2");
+  public static final RegistryObject<SoundEvent> SAW_FIRE1=
+          registerSoundEvent("saw_fire1");
+  public static final RegistryObject<SoundEvent> SAW_FIRE2=
+          registerSoundEvent("saw_fire2");
+  public static final RegistryObject<SoundEvent> SAW_FIRE3=
+          registerSoundEvent("saw_fire3");
+  public static final RegistryObject<SoundEvent> SAW_RELOAD=
+          registerSoundEvent("saw_reload");
 
+    /*      "sounds.half_life_mod.desert_eagle_fire": "M249/Deagle ",
+          "sounds.half_life_mod.desert_eagle_reload": "M249/Deagle ",
+          "sounds.half_life_mod.desert_eagle_sight": "M249/Deagle ",
+          "sounds.half_life_mod.desert_eagle_sight2": "M249/Deagle ",
+          "sounds.half_life_mod.saw_fire1": "M249/Deagle ",
+          "sounds.half_life_mod.saw_fire2": "M249/Deagle ",
+          "sounds.half_life_mod.saw_fire3": "M249/Deagle ",
+          "sounds.half_life_mod.saw_reload": "M249/Deagle ",
+ */
 
 
 

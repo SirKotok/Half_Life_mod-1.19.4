@@ -166,9 +166,14 @@ public class HalfLifeMod
         if(event.getTab().equals(HalfLifeCreativeModeTabs.HALF_LIFE_WEOPONS_TAB)) {
             // items that are guns
             event.accept(HalfLifeItems.PISTOL);
+            event.accept(HalfLifeItems.DEAGLE);
             event.accept(HalfLifeItems.SMG_HL1);
             event.accept(HalfLifeItems.SHOTGUN);
+            event.accept(HalfLifeItems.SAW);
             event.accept(HalfLifeItems.GRANADE_HL1);
+
+
+
 
             event.accept(HalfLifeItems.HIVEHAND_ITEM);
             event.accept(HalfLifeItems.SHOCKROACH_ITEM);
