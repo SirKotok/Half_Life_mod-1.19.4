@@ -59,6 +59,12 @@
       "half_life_mod:saw_fire3"
     ]
   },
+  "sg_single_two": {
+    "subtitle": "sg_single_two",
+    "sounds": [
+      "sg_single_two"
+    ]
+  },
   "saw_reload": {
     "subtitle": "sounds.half_life_mod.saw_reload",
     "sounds": [

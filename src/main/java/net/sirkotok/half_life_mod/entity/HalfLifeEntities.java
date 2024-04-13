@@ -152,6 +152,13 @@ public class HalfLifeEntities {
                             .sized(0.6F, 1.8F)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "barney").toString()));
 
+    public static final RegistryObject<EntityType<HecuGrunt>> HECU_GRUNT =
+            ENTITY_TYPES.register("hecu_grunt",
+                    () -> EntityType.Builder.of(HecuGrunt::new, MobCategory.MONSTER)
+                            .sized(0.6F, 1.8F)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "hecu_grunt").toString()));
+
+
 
     public static final RegistryObject<EntityType<Scientist>> SCIENTIST =
             ENTITY_TYPES.register("scientist",

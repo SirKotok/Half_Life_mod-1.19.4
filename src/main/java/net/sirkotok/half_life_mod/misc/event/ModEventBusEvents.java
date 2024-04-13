@@ -24,6 +24,7 @@ public class ModEventBusEvents {
     public static void entityAttributeEvent(EntityAttributeCreationEvent event) {
         event.put(HalfLifeEntities.CHUMTOAD.get(), Chumtoad.setAttributes());
         event.put(HalfLifeEntities.BARNEY.get(), Barney.setAttributes());
+        event.put(HalfLifeEntities.HECU_GRUNT.get(), HecuGrunt.setAttributes());
         event.put(HalfLifeEntities.SCIENTIST.get(), Scientist.setAttributes());
         event.put(HalfLifeEntities.ZOMBIE_HL1.get(), ZombieHl1.setAttributes());
         event.put(HalfLifeEntities.ZOMBIE_HL2.get(), HL2Zombie.setAttributes());

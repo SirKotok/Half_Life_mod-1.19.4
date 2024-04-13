@@ -33,7 +33,9 @@
     "item.half_life_mod.barnacle_1_spawn_egg": "Barnacle Spawn Egg",
   "item.half_life_mod.chumtoad_spawn_egg": "Chumtoad Spawn Egg",
     "item.half_life_mod.shockroach_spawn_egg": "Shockroach Spawn Egg",
-  "item.half_life_mod.chumtoad_thrower": "Chumtoad",
+    "item.half_life_mod.chumtoad_thrower": "Chumtoad",
+    "item.half_life_mod.hecu_grunt_spawn_egg": "HECU Grunt Spawn Egg",
+
     "item.half_life_mod.vorthl1_spawn_egg": "Alien Slave Spawn Egg",
     "item.half_life_mod.vorthl2_spawn_egg": "Vortigaunt Spawn Egg",
   "item.half_life_mod.snark_spawn_egg": "Snark Spawn Egg",
@@ -96,6 +98,7 @@
     "key.half_life_mod.rc_gun": "Right Click Gun",
     "key.half_life_mod.lc_gun": "Left Click Gun",
 
+    "entity.half_life_mod.hecu_grunt": "HECU Grunt",
     "entity.half_life_mod.garg": "Gargantua",
     "entity.half_life_mod.hl_hydra": "Hydra",
     "entity.half_life_mod.aliengrunt": "Alien Grunt",

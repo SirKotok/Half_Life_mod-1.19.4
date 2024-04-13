@@ -107,19 +107,19 @@
         "type": "half_life_mod:controller",
         "maxCount": 4,
         "minCount": 1,
-        "weight": 30
+        "weight": 2
       },
       {
         "type": "half_life_mod:bullsquid",
-        "maxCount": 4,
+        "maxCount": 1,
         "minCount": 1,
-        "weight": 2
+        "weight": 10
       },
       {
         "type": "half_life_mod:houndeye",
         "maxCount": 4,
         "minCount": 1,
-        "weight": 20
+        "weight": 40
       }
     ],
     "underground_water_creature": [],

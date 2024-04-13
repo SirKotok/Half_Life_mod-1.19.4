@@ -128,6 +128,10 @@ public class HalfLifeMod
             event.accept(HalfLifeItems.BARNEY_SPAWN_EGG);
             event.accept(HalfLifeItems.SCIENTIST_SPAWN_EGG);
 
+
+            event.accept(HalfLifeItems.HECU_SPAWN_EGG);
+
+
             event.accept(HalfLifeItems.SHOCKROACH_SPAWN_EGG);
             event.accept(HalfLifeItems.SHOCKTROOPER_SPAWN_EGG);
             event.accept(HalfLifeItems.VORTIGORE_SPAWN_EGG);

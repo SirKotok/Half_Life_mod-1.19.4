@@ -1,8 +1,8 @@
-// 1.19.4	2024-04-02T22:38:21.4262441	Registries
+// 1.19.4	2024-04-13T19:10:11.1197183	Registries
 698573fae8c46960807aca80c9117057700e9791 data/half_life_mod/damage_type/hl_bullet.json
 c3aa5b5042bdf2ee8ed8cfd71e961094573a979b data/half_life_mod/dimension/half_life_dim.json
 ed34c13dae62704da5cc4dfb22c4b8ae5d4de742 data/half_life_mod/dimension_type/half_life_dim_type.json
-063b6501d908366b6a08b34a3612d3621c705544 data/half_life_mod/worldgen/biome/xen_basic_biome.json
+c7ef916bbcdd19faf9342516e8f7145b9c557d1e data/half_life_mod/worldgen/biome/xen_basic_biome.json
 7dd84a7633879739ec1afe7a08fe80b7bde16023 data/half_life_mod/worldgen/configured_carver/canyon_xen.json
 65a98c27ceb761e649f2e92b30f13714fa9920cd data/half_life_mod/worldgen/configured_carver/cave_extra_underground_xen.json
 56aadc611ce91365bbbfc873049d1a181684bf35 data/half_life_mod/worldgen/configured_carver/cave_xen.json

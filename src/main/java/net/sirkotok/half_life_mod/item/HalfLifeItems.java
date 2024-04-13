@@ -132,6 +132,11 @@ public class HalfLifeItems {
             () -> new ForgeSpawnEggItem(HalfLifeEntities.BARNEY, 0x5352fa, 0x000000   ,
                     new Item.Properties()));
 
+    public static final RegistryObject<Item> HECU_SPAWN_EGG = ITEMS.register("hecu_grunt_spawn_egg",
+            () -> new ForgeSpawnEggItem(HalfLifeEntities.HECU_GRUNT, 0xd6cec3, 0x505237  ,
+                    new Item.Properties()));
+
+
  public static final RegistryObject<Item> SCIENTIST_SPAWN_EGG = ITEMS.register("scientist_spawn_egg",
          () -> new ForgeSpawnEggItem(HalfLifeEntities.SCIENTIST, 0xe7dada, 0xcbff9a   ,
                  new Item.Properties()));

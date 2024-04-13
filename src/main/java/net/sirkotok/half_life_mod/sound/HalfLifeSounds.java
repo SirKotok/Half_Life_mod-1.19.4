@@ -23,10 +23,13 @@ public class HalfLifeSounds {
           registerSoundEvent("sghl1reload");
   public static final RegistryObject<SoundEvent> SGHL1SINGLE=
           registerSoundEvent("sghl1single");
+  public static final RegistryObject<SoundEvent> SG_HECU=
+          registerSoundEvent("sg_single_two");
 
   //        "sounds.half_life_mod.sghl1double": "Shotgun ",
    //       "sounds.half_life_mod.sghl1reload": "Shotgun ",
    //       "sounds.half_life_mod.sghl1single": "Shotgun ",
+ // "sounds.half_life_mod.sg_single_two": "Shotgun ",
 
  // M249 and Deagle
 
