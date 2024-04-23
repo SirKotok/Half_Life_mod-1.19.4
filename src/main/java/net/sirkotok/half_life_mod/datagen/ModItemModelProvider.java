@@ -28,7 +28,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(HalfLifeItems.BUGBAIT);
 
 
-        withExistingParent(HalfLifeItems.HECU_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
         withExistingParent(HalfLifeItems.HUNTER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(HalfLifeItems.SHARK_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(HalfLifeItems.LEECH_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
@@ -57,12 +57,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         withExistingParent(HalfLifeItems.HEADCRAB_FAST_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(HalfLifeItems.HEADCRAB_ZOMBIE_FAST_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(HalfLifeItems.PZOMBIE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(HalfLifeItems.GONOME_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(HalfLifeItems.VZOMBIE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(HalfLifeItems.CHUMTOAD_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(HalfLifeItems.SNARK_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(HalfLifeItems.SNARKNEST_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(HalfLifeItems.PENGUIN_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-      //  withExistingParent(HalfLifeItems.VORTHL2_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(HalfLifeItems.VORTIGORE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(HalfLifeItems.SHOCKTROOPER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(HalfLifeItems.ANTLION_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));

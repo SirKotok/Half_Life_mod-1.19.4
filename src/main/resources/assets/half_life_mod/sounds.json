@@ -41,6 +41,96 @@
       "half_life_mod:desert_eagle_sight2"
     ]
   },
+  "gonome_death2": {
+    "subtitle": "sounds.half_life_mod.gonome_death2",
+    "sounds": [
+      "half_life_mod:gonome_death2"
+    ]
+  },
+  "gonome_death3": {
+    "subtitle": "sounds.half_life_mod.gonome_death3",
+    "sounds": [
+      "half_life_mod:gonome_death3"
+    ]
+  },
+  "gonome_death4": {
+    "subtitle": "sounds.half_life_mod.gonome_death4",
+    "sounds": [
+      "half_life_mod:gonome_death4"
+    ]
+  },
+  "gonome_eat": {
+    "subtitle": "sounds.half_life_mod.gonome_eat",
+    "sounds": [
+      "half_life_mod:gonome_eat"
+    ]
+  },
+  "gonome_idle1": {
+    "subtitle": "sounds.half_life_mod.gonome_idle1",
+    "sounds": [
+      "half_life_mod:gonome_idle1"
+    ]
+  },
+  "gonome_idle2": {
+    "subtitle": "sounds.half_life_mod.gonome_idle2",
+    "sounds": [
+      "half_life_mod:gonome_idle2"
+    ]
+  },
+  "gonome_idle3": {
+    "subtitle": "sounds.half_life_mod.gonome_idle3",
+    "sounds": [
+      "half_life_mod:gonome_idle3"
+    ]
+  },
+  "gonome_jumpattack": {
+    "subtitle": "sounds.half_life_mod.gonome_jumpattack",
+    "sounds": [
+      "half_life_mod:gonome_jumpattack"
+    ]
+  },
+  "gonome_melee1": {
+    "subtitle": "sounds.half_life_mod.gonome_melee1",
+    "sounds": [
+      "half_life_mod:gonome_melee1"
+    ]
+  },
+  "gonome_melee2": {
+    "subtitle": "sounds.half_life_mod.gonome_melee2",
+    "sounds": [
+      "half_life_mod:gonome_melee2"
+    ]
+  },
+  "gonome_pain1": {
+    "subtitle": "sounds.half_life_mod.gonome_pain1",
+    "sounds": [
+      "half_life_mod:gonome_pain1"
+    ]
+  },
+  "gonome_pain2": {
+    "subtitle": "sounds.half_life_mod.gonome_pain2",
+    "sounds": [
+      "half_life_mod:gonome_pain2"
+    ]
+  },
+  "gonome_pain3": {
+    "subtitle": "sounds.half_life_mod.gonome_pain3",
+    "sounds": [
+      "half_life_mod:gonome_pain3"
+    ]
+  },
+  "gonome_pain4": {
+    "subtitle": "sounds.half_life_mod.gonome_pain4",
+    "sounds": [
+      "half_life_mod:gonome_pain4"
+    ]
+  },
+  "gonome_run": {
+    "subtitle": "sounds.half_life_mod.gonome_run",
+    "sounds": [
+      "half_life_mod:gonome_run"
+    ]
+  },
   "saw_fire1": {
     "subtitle": "sounds.half_life_mod.saw_fire1",
     "sounds": [
@@ -59,10 +149,10 @@
       "half_life_mod:saw_fire3"
     ]
   },
-  "sg_single_two": {
-    "subtitle": "sg_single_two",
+  "sghl1singlehecu": {
+    "subtitle": "sghl1singlehecu",
     "sounds": [
-      "sg_single_two"
+      "sghl1singlehecu"
     ]
   },
   "saw_reload": {

@@ -20,6 +20,7 @@ public class VortigoreSpawnEggItem extends ForgeSpawnEggItem {
 
 
 
+
     @Override
     public Optional<Mob> spawnOffspringFromSpawnEgg(Player pPlayer, Mob pMob, EntityType<? extends Mob> pEntityType, ServerLevel pServerLevel, Vec3 pPos, ItemStack pStack) {
         if (!this.spawnsEntity(pStack.getTag(), pEntityType)) {

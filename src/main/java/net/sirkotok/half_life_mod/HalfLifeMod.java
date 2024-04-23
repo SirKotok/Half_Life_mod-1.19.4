@@ -92,6 +92,7 @@ public class HalfLifeMod
             event.accept(HalfLifeItems.HEADCRAB_ARMOR_SPAWN_EGG);
 
             event.accept(HalfLifeItems.HL1_ZOMBIE_SCIENTIST_SPAWN_EGG);
+            event.accept(HalfLifeItems.GONOME_SPAWN_EGG);
             event.accept(HalfLifeItems.HL2_ZOMBIE_SPAWN_EGG);
 
             event.accept(HalfLifeItems.VZOMBIE_SPAWN_EGG);
@@ -130,7 +131,12 @@ public class HalfLifeMod
 
 
             event.accept(HalfLifeItems.HECU_SPAWN_EGG);
-
+            event.accept(HalfLifeItems.HECU_GASMASK_SPAWN_EGG);
+            event.accept(HalfLifeItems.HECU_BERET_SPAWN_EGG);
+            event.accept(HalfLifeItems.HECU_SHOTGUN_SPAWN_EGG);
+            event.accept(HalfLifeItems.HECU_SAW_SPAWN_EGG);
+            event.accept(HalfLifeItems.HECU_VENT_SPAWN_EGG);
+            event.accept(HalfLifeItems.HECU_MEDIC_SPAWN_EGG);
 
             event.accept(HalfLifeItems.SHOCKROACH_SPAWN_EGG);
             event.accept(HalfLifeItems.SHOCKTROOPER_SPAWN_EGG);

@@ -177,14 +177,30 @@ public class HecuGrunt extends HalfLifeMonster implements AmmoCountMob, RangedAt
 
     public void setKitFromGruntType(){
         int i = getGruntType();
-        if (i == 0) setHelmet(random.nextInt(0, 2));
-        if (i == 1) setHelmet(random.nextInt(2, 5));
-        if (i<4 && random.nextFloat() < 0.2) this.setPouch(random.nextInt(0, 3));
-        if (i<2) this.setGunType(0);
-        if (i==2) this.setGunType(1);
-        if (i==3) this.setGunType(4);
-        if (i==4) this.setGunType(random.nextFloat() < 0.1 ? 3 : 2);
-        if (i==5) this.setGunType(random.nextFloat() < 0.1 ? 2 : 3);
+        switch(i) {
+            case 0: setHelmet(random.nextInt(0, 2));
+                this.setGunType(0);
+                this.setPouch(random.nextFloat() < 0.2 ? random.nextInt(0, 3) : 0);
+                break;
+            case 1: setHelmet(random.nextInt(2, 5));
+                this.setGunType(0);
+                this.setPouch(random.nextFloat() < 0.2 ? random.nextInt(0, 3) : 0);
+                break;
+            case 2:
+                this.setGunType(1);
+                this.setPouch(random.nextFloat() < 0.2 ? random.nextInt(0, 3) : 0);
+                break;
+            case 3:
+                this.setGunType(4);
+                this.setPouch(random.nextFloat() < 0.2 ? random.nextInt(0, 3) : 0);
+                break;
+            case 4:
+                this.setGunType(3);
+                break;
+            case 5:
+                this.setGunType(2);
+                break;
+        }
     }
 
 
@@ -287,7 +303,7 @@ public class HecuGrunt extends HalfLifeMonster implements AmmoCountMob, RangedAt
     }
 
     public boolean getcanattack() {
-        return this.getAmmo() > 0 && this.getorder() == 1 && (!this.isBalaclava() || HLperUtil.DistanceToTarget(this) < 4.5f);
+        return this.getAmmo() > 0 && this.getorder() == 1 && (!this.isBalaclava() || HLperUtil.DistanceToTarget(this) < 6f);
     }
 
 
@@ -318,14 +334,14 @@ public class HecuGrunt extends HalfLifeMonster implements AmmoCountMob, RangedAt
 
     public static AttributeSupplier setAttributes() {
         return Monster.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 25D)
+                .add(Attributes.MAX_HEALTH, 22D)
                 .add(Attributes.ATTACK_DAMAGE, 5f)
                 .add(Attributes.ATTACK_SPEED, 1.0f)
                 .add(Attributes.ATTACK_KNOCKBACK, 1f)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.25f)
-                .add(Attributes.ARMOR, 15f)
-                .add(Attributes.ARMOR_TOUGHNESS, 10f)
-                .add(Attributes.MOVEMENT_SPEED, 0.34f).build();
+                .add(Attributes.ARMOR, 5f)
+                .add(Attributes.ARMOR_TOUGHNESS, 5f)
+                .add(Attributes.MOVEMENT_SPEED, 0.24f).build();
     }
 
 
@@ -369,7 +385,7 @@ public class HecuGrunt extends HalfLifeMonster implements AmmoCountMob, RangedAt
                     new AABB(pBlockPos.getX() - rad, pBlockPos.getY() - rad, pBlockPos.getZ() - rad,
                             pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj instanceof HecuGrunt trooper && trooper.getcanattack() && !obj.equals(this));
             int size = myfaction.size();
-            this.hit+=(14-Math.min(size, 13))+1;
+            this.hit+=(14-Math.min(size, 13))+(random.nextBoolean() ? 2 :1);
             if (this.random.nextInt(100) < Math.min(hit, 80)) this.changeorder();
         }
         if (!this.level.isClientSide() && this.getcanattack() && this.tickCount % (150+random.nextInt(200)) == 0) {
@@ -381,7 +397,7 @@ public class HecuGrunt extends HalfLifeMonster implements AmmoCountMob, RangedAt
                         pBlockPos.getX() + rad, pBlockPos.getY() + rad, pBlockPos.getZ() + rad), obj -> obj instanceof HecuGrunt trooper && trooper.getcanattack() && !obj.equals(this));
 
         int size = myfaction.size();
-        this.hit+=size+1;
+        this.hit+=size+(random.nextBoolean() ? 1 :0);
         if (this.random.nextInt(100) < Math.min(hit, 70)) this.changeorder();
     }
     }
@@ -415,7 +431,7 @@ public class HecuGrunt extends HalfLifeMonster implements AmmoCountMob, RangedAt
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<HecuGrunt>()
                         .setPredicate((target, entity) ->
-                                InfightingUtil.commonenemy(target) // || InfightingUtil.RaceXSpecific(target)
+                                InfightingUtil.commonenemy(target)  || InfightingUtil.HecuSpecific(target)
                             ));
     }
 
@@ -425,7 +441,7 @@ public class HecuGrunt extends HalfLifeMonster implements AmmoCountMob, RangedAt
     public BrainActivityGroup<HecuGrunt> getCoreTasks() {
         return BrainActivityGroup.coreTasks(
                 new LookAtTarget<>(),
-                new MoveToWalkTarget<>(),
+                new MoveToWalkTarget<>().startCondition(entity -> !getcanattack() || !isangry()),
                 new CustomBehaviour<>(entity -> setorder(random.nextInt(2))).cooldownFor(entity -> random.nextInt(300, 1000)));
     }
 
@@ -466,25 +482,26 @@ public class HecuGrunt extends HalfLifeMonster implements AmmoCountMob, RangedAt
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>(),
                 new Retaliate<>(),
-                new SetWalkTargetToRandomSpotAroundAttackTarget<>().startCondition(entity -> distanceTo(HLperUtil.TargetOrThis(this)) > 15 || (this.isBalaclava() && HLperUtil.DistanceToTarget(this) > 4)),
-                new SetWalkTargetToRandomSpotAwayFromAttackTarget<>().startCondition(entity -> distanceTo(HLperUtil.TargetOrThis(this)) < 4 && !this.isBalaclava()),
+                new CustomBehaviour<>(entity -> changeorder()).startCondition(entity -> this.getcanattack() && distanceTo(HLperUtil.TargetOrThis(this)) > getGunRadius()),
+                new SetWalkTargetToRandomSpotAroundAttackTarget<>().speedMod(1.2f).startCondition(entity -> distanceTo(HLperUtil.TargetOrThis(this)) > getGunRadius()),
+                new SetWalkTargetToRandomSpotAwayFromAttackTarget<>().speedMod(1.2f).startCondition(entity -> distanceTo(HLperUtil.TargetOrThis(this)) < 4 && !this.isBalaclava()),
                 new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, true)).startCondition(entity -> !this.isangry()), //.whenStarting(entity -> CommonSounds.PlaySoundAsOwn(this, this.getSpotSound(HLperUtil.TargetOrThis(this) instanceof Player)))
                 new FirstApplicableBehaviour<>(
                 new CustomBehaviour<>(entity -> setIsSitting(random.nextBoolean())).startCondition(entity -> !getIssitting() && getorder() == 1),
                 new CustomBehaviour<>(entity -> setIsSitting(false)).startCondition(entity -> getIssitting())
                 ).cooldownFor(entity -> 200),
                 new FirstApplicableBehaviour<HecuGrunt>(
-                        new SetWalkTargetToRandomSpotAroundAttackTarget<>().startCondition(entity -> distanceTo(HLperUtil.TargetOrThis(this)) > 10).whenStarting(entity -> this.playChargeSound()),
-                        new SetWalkTargetToRandomSpotAwayFromAttackTarget<>().startCondition(entity -> distanceTo(HLperUtil.TargetOrThis(this)) < 8 && !this.isBalaclava()),
-                        new SetRandomWalkTarget<>()
+                        new SetWalkTargetToRandomSpotAroundAttackTarget<>().speedMod(1.2f).startCondition(entity -> distanceTo(HLperUtil.TargetOrThis(this)) > 10).whenStarting(entity -> this.playChargeSound()),
+                        new SetWalkTargetToRandomSpotAwayFromAttackTarget<>().speedMod(1.2f).startCondition(entity -> distanceTo(HLperUtil.TargetOrThis(this)) < 8 && !this.isBalaclava()),
+                        new SetRandomWalkTarget<>().speedModifier(1.1f)
                 ).startCondition(entity -> !entity.getcanattack()),
                 new FirstApplicableBehaviour<>(
-                new StopAndReload<HecuGrunt>(20, 8, HalfLifeSounds.SMG_RELOAD.get()).cooldownFor(entity -> 100)
+                new StopAndReload<HecuGrunt>(20, 8, getReloadSound()).cooldownFor(entity -> 100)
                                 .whenStarting(entity -> triggerAnim("onetime", "reload")).startCondition(entity -> this.getAmmo() < 1 && !this.isBandana()),
-                        new StopAndReload<HecuGrunt>(65, 8, HalfLifeSounds.SAW_RELOAD.get()).cooldownFor(entity -> 100)
+                new StopAndReload<HecuGrunt>(65, 8, HalfLifeSounds.SAW_RELOAD.get()).cooldownFor(entity -> 100)
                                 .whenStarting(entity -> triggerAnim("onetime", "reloadsaw")).startCondition(entity -> this.getAmmo() < 1 && this.isBandana()),
-                new StopAndShoot<HecuGrunt>(2, 10, 4f).startCondition(entity -> this.getcanattack())
-                        .whenStarting(entity ->  triggerAnim("onetime", "shoot"))
+                new StopAndShoot<HecuGrunt>(getGunShootDelay(), 5, 4f, null, false).attackRadius(getGunRadius()).startCondition(entity -> this.getcanattack())
+                        .whenStarting(entity -> shootwhenstarting())
                         .cooldownFor(entity -> getGunDelay()),
                 new StopAndSecondShoot<HecuGrunt>(11, 10, 0.7f, HalfLifeSounds.SHOCKTROOPER_THROW.get()).startCondition(entity -> this.getorder() == 1 && this.random.nextFloat() < 0.01f)
                         .whenStarting(entity -> triggerAnim("onetime", "nade"))
@@ -493,19 +510,31 @@ public class HecuGrunt extends HalfLifeMonster implements AmmoCountMob, RangedAt
         );
 
     }
+    public void shootwhenstarting() {
+        this.triggerAnim("onetime", "shoot");
+        this.playSound(getShootSound(), 0.7f, 1f);
+    }
 
 
-
+    public int getGunShootDelay() {
+        int i = getGunType();
+        if (i == 0 || i == 4) return 0;
+        return 1;
+    }
 
 
     public int getGunDelay(){
         int i = getGunType();
-        if (i == 0 || i == 4) return this.shotdelay % 3 == 0 ? 4 : 0;
+        if (i == 0 || i == 4) return this.shotdelay % 5 == 0 ? 6 : 1;
         if (i == 1) return random.nextInt(15,25);
         if (i == 2) return 10;
         return 17;
     }
-
+    public int getGunRadius(){
+        int i = getGunType();
+        if (i == 1) return 5;
+        return 15;
+    }
 
 
 
@@ -579,10 +608,10 @@ public class HecuGrunt extends HalfLifeMonster implements AmmoCountMob, RangedAt
         // animation.hecu.cover
 
         if(tAnimationState.isMoving()) {
-            if (this.isangry()) {
-                tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.hecu.walk_fighting", Animation.LoopType.LOOP));
-                return PlayState.CONTINUE;
-            }
+         //   if (this.isangry()) {
+         ////       tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.hecu.walk_fighting", Animation.LoopType.LOOP));
+         //       return PlayState.CONTINUE;
+         //   }
             tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.hecu.walk_idle", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
@@ -654,7 +683,7 @@ public class HecuGrunt extends HalfLifeMonster implements AmmoCountMob, RangedAt
         double d2 = livingentity.getY(0.4D) - this.getY(0.4D);
         double d3 = livingentity.getZ() - this.getZ();
 
-        this.playSound(getShootSound(), this.getSoundVolume(), 1f);
+
         this.setAmmo(this.getAmmo()-1);
 
 
@@ -723,10 +752,22 @@ public class HecuGrunt extends HalfLifeMonster implements AmmoCountMob, RangedAt
         return HalfLifeSounds.HEADCRAB_1_ALERT_1.get();
     }
 
+
+
+    public SoundEvent getReloadSound(){
+        int i = getGunType();
+        switch (i) {
+            case 1: return HalfLifeSounds.SGHL1RELOAD.get();
+            case 2: return HalfLifeSounds.PISTOL_RELOAD.get();
+            case 3: return HalfLifeSounds.DESERT_EAGLE_RELOAD.get();
+        }
+        return HalfLifeSounds.SMG_RELOAD.get();
+    }
+
     public SoundEvent getShootSound() {
         int i = getGunType();
         switch (i) {
-            case 1: return HalfLifeSounds.SG_HECU.get();
+            case 1: return HalfLifeSounds.SGHL1SINGLE.get();
             case 2: return HalfLifeSounds.PISTOL_SHOOT.get();
             case 3: return HalfLifeSounds.DESERT_EAGLE_FIRE.get();
             case 4: return getSawSound();

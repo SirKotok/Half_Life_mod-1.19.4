@@ -15,7 +15,69 @@ public class HalfLifeSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HalfLifeMod.MOD_ID);
 
-    //SHOTGUN
+    // Gonome
+
+  public static final RegistryObject<SoundEvent> GONOME_DEATH2=
+          registerSoundEvent("gonome_death2");
+  public static final RegistryObject<SoundEvent> GONOME_DEATH3=
+          registerSoundEvent("gonome_death3");
+  public static final RegistryObject<SoundEvent> GONOME_DEATH4=
+          registerSoundEvent("gonome_death4");
+  public static final RegistryObject<SoundEvent> GONOME_EAT=
+          registerSoundEvent("gonome_eat");
+  public static final RegistryObject<SoundEvent> GONOME_IDLE1=
+          registerSoundEvent("gonome_idle1");
+  public static final RegistryObject<SoundEvent> GONOME_IDLE2=
+          registerSoundEvent("gonome_idle2");
+  public static final RegistryObject<SoundEvent> GONOME_IDLE3=
+          registerSoundEvent("gonome_idle3");
+  public static final RegistryObject<SoundEvent> GONOME_JUMPATTACK=
+          registerSoundEvent("gonome_jumpattack");
+  public static final RegistryObject<SoundEvent> GONOME_MELEE1=
+          registerSoundEvent("gonome_melee1");
+  public static final RegistryObject<SoundEvent> GONOME_MELEE2=
+          registerSoundEvent("gonome_melee2");
+  public static final RegistryObject<SoundEvent> GONOME_PAIN1=
+          registerSoundEvent("gonome_pain1");
+  public static final RegistryObject<SoundEvent> GONOME_PAIN2=
+          registerSoundEvent("gonome_pain2");
+  public static final RegistryObject<SoundEvent> GONOME_PAIN3=
+          registerSoundEvent("gonome_pain3");
+  public static final RegistryObject<SoundEvent> GONOME_PAIN4=
+          registerSoundEvent("gonome_pain4");
+  public static final RegistryObject<SoundEvent> GONOME_RUN=
+          registerSoundEvent("gonome_run");
+
+        /*  "sounds.half_life_mod.gonome_death2": "Gonome ",
+          "sounds.half_life_mod.gonome_death3": "Gonome ",
+          "sounds.half_life_mod.gonome_death4": "Gonome ",
+          "sounds.half_life_mod.gonome_eat": "Gonome ",
+          "sounds.half_life_mod.gonome_idle1": "Gonome ",
+          "sounds.half_life_mod.gonome_idle2": "Gonome ",
+          "sounds.half_life_mod.gonome_idle3": "Gonome ",
+          "sounds.half_life_mod.gonome_jumpattack": "Gonome ",
+          "sounds.half_life_mod.gonome_melee1": "Gonome ",
+          "sounds.half_life_mod.gonome_melee2": "Gonome ",
+          "sounds.half_life_mod.gonome_pain1": "Gonome ",
+          "sounds.half_life_mod.gonome_pain2": "Gonome ",
+          "sounds.half_life_mod.gonome_pain3": "Gonome ",
+          "sounds.half_life_mod.gonome_pain4": "Gonome ",
+          "sounds.half_life_mod.gonome_run": "Gonome ", */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //SHOTGUN
 
   public static final RegistryObject<SoundEvent> SGHL1DOUBLE=
           registerSoundEvent("sghl1double");
@@ -24,7 +86,7 @@ public class HalfLifeSounds {
   public static final RegistryObject<SoundEvent> SGHL1SINGLE=
           registerSoundEvent("sghl1single");
   public static final RegistryObject<SoundEvent> SG_HECU=
-          registerSoundEvent("sg_single_two");
+          registerSoundEvent("sghl1singlehecu");
 
   //        "sounds.half_life_mod.sghl1double": "Shotgun ",
    //       "sounds.half_life_mod.sghl1reload": "Shotgun ",

@@ -33,9 +33,10 @@ public class InfightingUtil {
         boolean neutral_vs_enemy_player = (one instanceof HalfLifeNeutral neutral && two instanceof Player player && neutral.ismyenemy(player.getStringUUID())) || (two instanceof HalfLifeNeutral neutral2 && one instanceof Player player2 && neutral2.ismyenemy(player2.getStringUUID()));
         boolean race_x = (one.getType().is(HLTags.EntityTypes.FACTION_RACE_X) && two.getType().is(HLTags.EntityTypes.FACTION_RACE_X));
         boolean xen = (one.getType().is(HLTags.EntityTypes.FACTION_XEN) && two.getType().is(HLTags.EntityTypes.FACTION_XEN));
+        boolean hecu = ishecu(one) && ishecu(two);
         boolean pitdrone_unique = !((one instanceof Pitdrone && two instanceof Shockroach) || (one instanceof Shockroach && two instanceof Pitdrone));
         boolean headcrab = (one.getType().is(HLTags.EntityTypes.FACTION_HEADCRAB) && two.getType().is(HLTags.EntityTypes.FACTION_HEADCRAB));
-        return (antlion || science_team || race_x || combine || headcrab || xen) && pitdrone_unique && !neutral_vs_enemy_player;
+        return (antlion || hecu || science_team || race_x || combine || headcrab || xen) && pitdrone_unique && !neutral_vs_enemy_player;
     }
 
 
@@ -68,12 +69,18 @@ public class InfightingUtil {
         boolean antlion = (isantlion(target) && HalfLifeCommonConfigs.INFIGHTING_ANTLION_NORMAL.get());
         boolean headcrab = (isfactionheadcrab(target) && HalfLifeCommonConfigs.INFIGHTING_HEADCRAB_NORMAL.get());
         boolean xen = (isxenforces(target) && HalfLifeCommonConfigs.INFIGHTING_XEN_NORMAL.get());
-        return commonenemy(target) || combine || racex ||  antlion || headcrab || xen;
+        boolean hecu = (isxenforces(target) && HalfLifeCommonConfigs.INFIGHTING_HECU_NORMAL.get());
+        return commonenemy(target) || combine || racex ||  antlion || headcrab || xen || hecu;
     }
 
     public static boolean iscombine(LivingEntity target) {
         return target.getType().is(HLTags.EntityTypes.FACTION_COMBINE);
     }
+
+    public static boolean ishecu(LivingEntity target) {
+        return target.getType().is(HLTags.EntityTypes.FACTION_HECU);
+    }
+
     public static boolean isscienceteam(LivingEntity target) {
         return target.getType().is(HLTags.EntityTypes.FACTION_SCIENCE_TEAM);
     }
@@ -98,7 +105,8 @@ public class InfightingUtil {
         boolean headcrab = target.getType().is(HLTags.EntityTypes.FACTION_HEADCRAB);
         boolean xen = target.getType().is(HLTags.EntityTypes.FACTION_XEN);
         boolean ant = target.getType().is(HLTags.EntityTypes.FACTION_ANTLION);
-        return race_x || s_team || combine || headcrab || xen || ant;
+        boolean hecu = target.getType().is(HLTags.EntityTypes.FACTION_HECU);
+        return race_x || s_team || combine || headcrab || xen || ant || hecu;
     }
     public static boolean CombineSpecific(LivingEntity target) {
         boolean normal = (target instanceof Enemy && !hasfaction(target) && HalfLifeCommonConfigs.INFIGHTING_COMBINE_VS_NORMAL.get());
@@ -106,7 +114,8 @@ public class InfightingUtil {
         boolean headcrab = (isfactionheadcrab(target) && HalfLifeCommonConfigs.INFIGHTING_HEADCRAB_COMBINE.get());
         boolean xen = (isxenforces(target) && HalfLifeCommonConfigs.INFIGHTING_XEN_COMBINE.get());
         boolean ant = (isantlion(target) && HalfLifeCommonConfigs.INFIGHTING_ANTLION_COMBINE.get());
-        return racex || normal || headcrab || xen || ant;
+        boolean hecu = (ishecu(target) && HalfLifeCommonConfigs.INFIGHTING_HECU_COMBINE.get());
+        return racex || normal || headcrab || xen || ant || hecu;
     }
 
     public static boolean RaceXSpecific(LivingEntity target) {
@@ -115,7 +124,8 @@ public class InfightingUtil {
         boolean headcrab = (isfactionheadcrab(target) && HalfLifeCommonConfigs.INFIGHTING_RACEX_HEADCRAB.get());
         boolean xen = (isxenforces(target) && HalfLifeCommonConfigs.INFIGHTING_RACEX_XEN.get());
         boolean ant = (isantlion(target) && HalfLifeCommonConfigs.INFIGHTING_RACEX_ANTLION.get());
-        return combine || normal || headcrab || xen || ant;
+        boolean hecu = (ishecu(target) && HalfLifeCommonConfigs.INFIGHTING_HECU_RACEX.get());
+        return combine || normal || headcrab || xen || ant || hecu;
     }
 
     public static boolean HeadcrabFactionSpecific(LivingEntity target) {
@@ -124,7 +134,8 @@ public class InfightingUtil {
         boolean racex = (isracex(target) && HalfLifeCommonConfigs.INFIGHTING_RACEX_HEADCRAB.get());
         boolean xen = (isxenforces(target) && HalfLifeCommonConfigs.INFIGHTING_HEADCRAB_XEN.get());
         boolean ant = (isantlion(target) && HalfLifeCommonConfigs.INFIGHTING_HEADCRAB_ANTLIONS.get());
-        return combine || normal || racex || xen || ant;
+        boolean hecu = (ishecu(target) && HalfLifeCommonConfigs.INFIGHTING_HECU_HEADCRAB.get());
+        return combine || normal || racex || xen || ant || hecu;
     }
 
     public static boolean XenForcesSpecific(LivingEntity target) {
@@ -133,7 +144,8 @@ public class InfightingUtil {
         boolean racex = (isracex(target) && HalfLifeCommonConfigs.INFIGHTING_RACEX_XEN.get());
         boolean headcrab = (isfactionheadcrab(target) && HalfLifeCommonConfigs.INFIGHTING_HEADCRAB_XEN.get());
         boolean ant = (isantlion(target) && HalfLifeCommonConfigs.INFIGHTING_XEN_ANTLION.get());
-        return combine || normal || racex || headcrab || ant;
+        boolean hecu = (ishecu(target) && HalfLifeCommonConfigs.INFIGHTING_HECU_XEN.get());
+        return combine || normal || racex || headcrab || ant || hecu;
     }
 
     public static boolean AntlionSpecific(LivingEntity target) {
@@ -142,8 +154,21 @@ public class InfightingUtil {
         boolean racex = (isracex(target) && HalfLifeCommonConfigs.INFIGHTING_RACEX_ANTLION.get());
         boolean headcrab = (isfactionheadcrab(target) && HalfLifeCommonConfigs.INFIGHTING_HEADCRAB_ANTLIONS.get());
         boolean xen = (isxenforces(target) && HalfLifeCommonConfigs.INFIGHTING_XEN_ANTLION.get());
-        return combine || normal || racex || headcrab || xen;
+        boolean hecu = (ishecu(target) && HalfLifeCommonConfigs.INFIGHTING_HECU_ANTLION.get());
+        return combine || normal || racex || headcrab || xen || hecu;
     }
+
+    public static boolean HecuSpecific(LivingEntity target) {
+        boolean normal = (target instanceof Enemy && !hasfaction(target) && HalfLifeCommonConfigs.INFIGHTING_HECU_NORMAL.get());
+        boolean combine = (iscombine(target) && HalfLifeCommonConfigs.INFIGHTING_HECU_COMBINE.get());
+        boolean racex = (isracex(target) && HalfLifeCommonConfigs.INFIGHTING_HECU_RACEX.get());
+        boolean headcrab = (isfactionheadcrab(target) && HalfLifeCommonConfigs.INFIGHTING_HECU_HEADCRAB.get());
+        boolean xen = (isxenforces(target) && HalfLifeCommonConfigs.INFIGHTING_HECU_XEN.get());
+        boolean ant = (isantlion(target) && HalfLifeCommonConfigs.INFIGHTING_HECU_ANTLION.get());
+        return combine || normal || racex || headcrab || xen || ant;
+    }
+
+
 
 
 }

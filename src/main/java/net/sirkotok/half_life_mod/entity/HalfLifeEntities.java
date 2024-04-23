@@ -172,6 +172,12 @@ public class HalfLifeEntities {
                             .sized(0.6F, 1.85F)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "zombie_scientist_hl1").toString()));
 
+    public static final RegistryObject<EntityType<Gonome>> GONOME =
+            ENTITY_TYPES.register("gonome",
+                    () -> EntityType.Builder.of(Gonome::new, MobCategory.MONSTER)
+                            .sized(0.75F, 2.1F)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "gonome").toString()));
+
 
     public static final RegistryObject<EntityType<HL2Zombie>> ZOMBIE_HL2 =
             ENTITY_TYPES.register("zombie_hl2",

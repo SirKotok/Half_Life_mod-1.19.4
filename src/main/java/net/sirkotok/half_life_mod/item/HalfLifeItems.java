@@ -17,6 +17,7 @@ import net.sirkotok.half_life_mod.item.custom.armor.SecurityGuardArmorItem;
 import net.sirkotok.half_life_mod.item.custom.fake.FakeBulletItem;
 import net.sirkotok.half_life_mod.item.custom.gun.*;
 import net.sirkotok.half_life_mod.item.custom.spawnegg.BarnacleSpawnEggItem;
+import net.sirkotok.half_life_mod.item.custom.spawnegg.HecuSpawnEgg;
 import net.sirkotok.half_life_mod.item.custom.spawnegg.VortigoreSpawnEggItem;
 
 
@@ -96,7 +97,9 @@ public class HalfLifeItems {
     public static final RegistryObject<Item> HEADCRAB_ZOMBIE_FAST_SPAWN_EGG = ITEMS.register("headcrab_zombie_fast_spawn_egg",
             () -> new ForgeSpawnEggItem(HalfLifeEntities.ZOMBIE_FAST, 0xf4ebae, 0xa2201c   ,
                     new Item.Properties()));
-
+    public static final RegistryObject<Item> GONOME_SPAWN_EGG = ITEMS.register("gonome_spawn_egg",
+            () -> new ForgeSpawnEggItem(HalfLifeEntities.GONOME, 0x9b5209, 0xa3ec9f,
+                    new Item.Properties()));
     public static final RegistryObject<Item> PZOMBIE_SPAWN_EGG = ITEMS.register("pzombie_spawn_egg",
             () -> new ForgeSpawnEggItem(HalfLifeEntities.PZOMBIE, 0x7f15b0, 0x16071d   ,
                     new Item.Properties()));
@@ -135,8 +138,24 @@ public class HalfLifeItems {
     public static final RegistryObject<Item> HECU_SPAWN_EGG = ITEMS.register("hecu_grunt_spawn_egg",
             () -> new ForgeSpawnEggItem(HalfLifeEntities.HECU_GRUNT, 0xd6cec3, 0x505237  ,
                     new Item.Properties()));
-
-
+    public static final RegistryObject<Item> HECU_GASMASK_SPAWN_EGG = ITEMS.register("hecu_gasmask_spawn_egg",
+            () -> new HecuSpawnEgg(HalfLifeEntities.HECU_GRUNT, 0xd6cec3, 0x505237  ,
+                    new Item.Properties(), 0));
+    public static final RegistryObject<Item> HECU_BERET_SPAWN_EGG = ITEMS.register("hecu_beret_spawn_egg",
+            () -> new HecuSpawnEgg(HalfLifeEntities.HECU_GRUNT, 0xd6cec3, 0x505237  ,
+                    new Item.Properties(), 1));
+    public static final RegistryObject<Item> HECU_SAW_SPAWN_EGG = ITEMS.register("hecu_saw_spawn_egg",
+            () -> new HecuSpawnEgg(HalfLifeEntities.HECU_GRUNT, 0xd6cec3, 0x505237  ,
+                    new Item.Properties(), 3));
+    public static final RegistryObject<Item> HECU_SHOTGUN_SPAWN_EGG = ITEMS.register("hecu_shotgun_spawn_egg",
+            () -> new HecuSpawnEgg(HalfLifeEntities.HECU_GRUNT, 0xd6cec3, 0x505237  ,
+                    new Item.Properties(), 2));
+    public static final RegistryObject<Item> HECU_MEDIC_SPAWN_EGG = ITEMS.register("hecu_medic_spawn_egg",
+            () -> new HecuSpawnEgg(HalfLifeEntities.HECU_GRUNT, 0xd6cec3, 0x505237  ,
+                    new Item.Properties(), 5));
+    public static final RegistryObject<Item> HECU_VENT_SPAWN_EGG = ITEMS.register("hecu_vent_spawn_egg",
+            () -> new HecuSpawnEgg(HalfLifeEntities.HECU_GRUNT, 0xd6cec3, 0x505237  ,
+                    new Item.Properties(), 4));
  public static final RegistryObject<Item> SCIENTIST_SPAWN_EGG = ITEMS.register("scientist_spawn_egg",
          () -> new ForgeSpawnEggItem(HalfLifeEntities.SCIENTIST, 0xe7dada, 0xcbff9a   ,
                  new Item.Properties()));

@@ -25,6 +25,12 @@ public class HalfLifeCommonConfigs  {
     public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_XEN_COMBINE;
     public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_XEN_NORMAL;
     public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_XEN_ANTLION;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_HECU_ANTLION;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_HECU_HEADCRAB;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_HECU_COMBINE;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_HECU_XEN;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_HECU_NORMAL;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_HECU_RACEX;
     public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_HEADCRAB_COMBINE;
     public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_COMBINE_VS_NORMAL;
     public static final ForgeConfigSpec.ConfigValue<Boolean> INFIGHTING_BULLSQUID_HUNTS_HEADCRABS;
@@ -75,6 +81,20 @@ public class HalfLifeCommonConfigs  {
                 .define("combinevsnormal", true);
         INFIGHTING_ANTLION_NORMAL = BUILDER.comment("Do Antlions attack other nonfriendly opponents")
                 .define("antlionvsnormal", false);
+
+        INFIGHTING_HECU_ANTLION = BUILDER.comment("Do HECU Soldiers and Antlions fight")
+                .define("antlionvshecu", true);
+        INFIGHTING_HECU_COMBINE = BUILDER.comment("Do HECU Soldiers and The Combine fight")
+                .define("combinevshecu", true);
+        INFIGHTING_HECU_HEADCRAB = BUILDER.comment("Do HECU Soldiers and Headcrabs fight")
+                .define("headcrabvshecu", true);
+        INFIGHTING_HECU_XEN = BUILDER.comment("Do HECU Soldiers and Xen Forces fight")
+                .define("xenvshecu", true);
+        INFIGHTING_HECU_RACEX = BUILDER.comment("Do HECU Soldiers and Race X fight")
+                .define("racexvshecu", true);
+        INFIGHTING_HECU_NORMAL = BUILDER.comment("Do HECU Soldiers attack other opponents")
+                .define("normalvshecu", false);
+
         INFIGHTING_BULLSQUID_HUNTS_ANIMALS = BUILDER.comment("Do Bullsquids hunt animals")
                 .define("bullsquidvscreature", true);
         INFIGHTING_BULLSQUID_HUNTS_HEADCRABS = BUILDER.comment("Do Bullsquids hunt Headcrabs")

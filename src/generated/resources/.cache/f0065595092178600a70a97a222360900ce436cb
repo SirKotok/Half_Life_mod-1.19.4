@@ -1,4 +1,4 @@
-// 1.19.4	2024-04-13T19:10:11.1177232	Item Models: half_life_mod
+// 1.19.4	2024-04-23T18:59:38.6054378	Item Models: half_life_mod
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/antlionworker_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/antlion_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/baby_headcrab_spawn_egg.json
@@ -11,6 +11,7 @@
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/controller_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/gonarchbm_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/gonarch_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/gonome_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/headcrab_1_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/headcrab_2_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/headcrab_armored_spawn_egg.json
@@ -19,7 +20,6 @@
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/headcrab_poison_2_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/headcrab_poison_3_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/headcrab_zombie_fast_spawn_egg.json
-63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/hecu_grunt_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/hl1_zombie_scientist_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/hl2_zombie_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/half_life_mod/models/item/hoteye_spawn_egg.json

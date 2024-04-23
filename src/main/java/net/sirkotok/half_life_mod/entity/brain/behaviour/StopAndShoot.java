@@ -25,6 +25,7 @@ public class StopAndShoot<E extends LivingEntity & RangedAttackMob> extends Anim
     public float vel;
     public int ded;
     public int count;
+    public boolean delay;
 
     @Nullable
     public SoundEvent startsound;
@@ -33,6 +34,7 @@ public class StopAndShoot<E extends LivingEntity & RangedAttackMob> extends Anim
         this.vel = velocity;
         this.ded = seconddelay;
         this.startsound = null;
+        this.delay = true;
     }
 
     public StopAndShoot(int delayTicks, int seconddelay, float velocity, @Nullable SoundEvent startsound) {
@@ -40,7 +42,17 @@ public class StopAndShoot<E extends LivingEntity & RangedAttackMob> extends Anim
         this.vel = velocity;
         this.ded = seconddelay;
         this.startsound = startsound;
+        this.delay = true;
     }
+
+    public StopAndShoot(int delayTicks, int seconddelay, float velocity, @Nullable SoundEvent startsound, boolean delay) {
+        super(delayTicks);
+        this.vel = velocity;
+        this.ded = seconddelay;
+        this.startsound = startsound;
+        this.delay = delay;
+    }
+
 
     @Override
     protected void start(E entity) {
@@ -79,7 +91,7 @@ public class StopAndShoot<E extends LivingEntity & RangedAttackMob> extends Anim
     protected void doDelayedAction(E entity) {
         if (this.target == null)
             return;
-        BrainUtils.setForgettableMemory(entity, MemoryModuleType.ATTACK_COOLING_DOWN, true, this.ded);
+        if (this.delay) BrainUtils.setForgettableMemory(entity, MemoryModuleType.ATTACK_COOLING_DOWN, true, this.ded);
         entity.performRangedAttack(this.target, this.vel);
 
     }

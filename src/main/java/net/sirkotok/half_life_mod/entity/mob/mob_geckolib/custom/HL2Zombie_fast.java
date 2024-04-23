@@ -277,7 +277,7 @@ public class HL2Zombie_fast extends HalfLifeMonster implements GeoEntity, SmartB
     public BrainActivityGroup<HL2Zombie_fast> getFightTasks() { // These are the tasks that handle fighting
         return BrainActivityGroup.fightTasks(
                 new InvalidateAttackTarget<>(),
-                new SetWalkTargetToAttackTarget<>().speedMod(1.25f),
+                new SetWalkTargetToAttackTarget<>().speedMod(1.35f),
                 new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, true)).startCondition(entity -> this.entityData.get(IS_ANGRY).equals(false)).whenStarting(entity -> CommonSounds.PlaySoundAsOwn(this, this.getHorrorSound())),
                 new Retaliate<>(),
                 new SetJumpTargetToRandomSpotAroundAttackTarget<>(0).cooldownFor(entity -> 10),
