@@ -283,7 +283,6 @@ public class Archer extends HalfLifeMonster implements GeoEntity, RangedAttackMo
     public List<ExtendedSensor<Archer>> getSensors() {
         return ObjectArrayList.of(
                 new HurtBySensor<>(),
-                new SmellSensor<>(),
                 new NearbyPlayersSensor<>(),
                 new NearbyBlocksSensor<Archer>().setRadius(16D, 16D).setPredicate((state, entity) -> state.is(Blocks.WATER)),
                 new NearbyLivingEntitySensor<Archer>().setRadius(32, 32)
@@ -302,7 +301,7 @@ public class Archer extends HalfLifeMonster implements GeoEntity, RangedAttackMo
     }
 
     @Override
-    public BrainActivityGroup<Archer> getIdleTasks() { // These are the tasks that run when the mob isn't doing anything else (usually)
+    public BrainActivityGroup<Archer> getIdleTasks() {
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<Archer>(
                         new CustomBehaviour<>(entity -> BrainUtils.clearMemory(this, MemoryModuleType.WALK_TARGET)).cooldownFor(entity -> 150),

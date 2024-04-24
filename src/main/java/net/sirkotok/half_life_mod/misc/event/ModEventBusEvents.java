@@ -63,6 +63,7 @@ public class ModEventBusEvents {
         event.put(HalfLifeEntities.HEADCRAB_POISON_HL2.get(), Headcrab_Poison_2.setAttributes());
         event.put(HalfLifeEntities.HEADCRAB_POISON_HLA.get(), Headcrab_Poison_3.setAttributes());
         event.put(HalfLifeEntities.BULLSQUID.get(), Bullsquid.setAttributes());
+        event.put(HalfLifeEntities.AQUATIC_BULLSQUID.get(), Bullsquid.setAttributes());
         event.put(HalfLifeEntities.PITDRONE.get(), Pitdrone.setAttributes());
         event.put(HalfLifeEntities.ANTLION.get(), Antlion.setAttributes());
         event.put(HalfLifeEntities.ANTLIONWORKER.get(), AntlionWorker.setAttributes());
@@ -118,6 +119,8 @@ public class ModEventBusEvents {
         event.register(HalfLifeEntities.HEADCRAB_ARMORED.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(HalfLifeEntities.BULLSQUID.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        event.register(HalfLifeEntities.AQUATIC_BULLSQUID.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Monster::checkMonsterSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
         event.register(HalfLifeEntities.SNARKNEST.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Snarknest::checkNestSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);

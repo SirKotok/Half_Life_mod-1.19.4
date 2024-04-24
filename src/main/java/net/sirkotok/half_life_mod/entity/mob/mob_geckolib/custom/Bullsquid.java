@@ -23,6 +23,7 @@ import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.fluids.FluidType;
@@ -54,6 +55,7 @@ import net.tslat.smartbrainlib.api.core.behaviour.custom.target.SetRandomLookTar
 import net.tslat.smartbrainlib.api.core.behaviour.custom.target.TargetOrRetaliate;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 
+import net.tslat.smartbrainlib.api.core.sensor.custom.NearbyBlocksSensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.HurtBySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyLivingEntitySensor;
 import net.tslat.smartbrainlib.api.core.sensor.vanilla.NearbyPlayersSensor;
@@ -330,6 +332,7 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
         return ObjectArrayList.of(
                 new SmellSensor<>(),
                 new HurtBySensor<>(),
+                new NearbyBlocksSensor<Bullsquid>().setRadius(16D, 16D).setPredicate((state, entity) -> state.is(Blocks.WATER)),
                 new NearbyPlayersSensor<>(),
                 new NearbyLivingEntitySensor<Bullsquid>()
                         .setPredicate((target, entity) ->
@@ -357,7 +360,6 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
     public BrainActivityGroup<Bullsquid> getIdleTasks() {
         return BrainActivityGroup.idleTasks(
                 new FirstApplicableBehaviour<Bullsquid>(
-                    //    new InvalidateFoodLocation<>().cooldownFor(entity -> 200), // not used because null pointer, the behavior needs rewrite
                         new CustomBehaviour<>(entity -> BrainUtils.clearMemory(this, HalfLifeMemoryModuleType.HUNGRY.get()))
                                 .startCondition(entity -> ((this.getHealth() + 2) < this.getMaxHealth())).cooldownFor(entity -> 400),
                         new CustomBehaviour<>(entity -> this.entityData.set(IS_ANGRY, true))
@@ -436,7 +438,7 @@ public class Bullsquid extends HalfLifeMonster implements RangedAttackMob, GeoEn
     }
 
 
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
+    protected <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
 
 
 

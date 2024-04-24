@@ -114,6 +114,11 @@ public class HalfLifeEntities {
                     () -> EntityType.Builder.of(Bullsquid::new, MobCategory.MONSTER)
                             .sized(1f, 1f)
                             .build(new ResourceLocation(HalfLifeMod.MOD_ID, "bullsquid").toString()));
+    public static final RegistryObject<EntityType<AquaticBullsquid>> AQUATIC_BULLSQUID =
+            ENTITY_TYPES.register("aquatic_bullsquid",
+                    () -> EntityType.Builder.of(AquaticBullsquid::new, MobCategory.MONSTER)
+                            .sized(1f, 1f)
+                            .build(new ResourceLocation(HalfLifeMod.MOD_ID, "aquatic_bullsquid").toString()));
 
 
     public static final RegistryObject<EntityType<Gonarch>> GONARCH =

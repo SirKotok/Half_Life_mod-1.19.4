@@ -42,6 +42,7 @@ import net.sirkotok.half_life_mod.sound.HalfLifeSounds;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.BrainActivityGroup;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
+import net.tslat.smartbrainlib.api.core.behaviour.AllApplicableBehaviours;
 import net.tslat.smartbrainlib.api.core.behaviour.FirstApplicableBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.OneRandomBehaviour;
 import net.tslat.smartbrainlib.api.core.behaviour.custom.look.LookAtTarget;
@@ -249,6 +250,7 @@ public class Gonome extends HalfLifeMonster implements RangedAttackMob, GeoEntit
     @Override
     public BrainActivityGroup<Gonome> getFightTasks() {
         return BrainActivityGroup.fightTasks(
+
                 new InvalidateAttackTarget<>(),
                 new Retaliate<>(),
                 new CustomBehaviour<>(entity -> this.setangry(false)).startCondition(entity -> this.isangry()),
@@ -264,7 +266,7 @@ public class Gonome extends HalfLifeMonster implements RangedAttackMob, GeoEntit
                                 .cooldownFor(entity -> random.nextInt(10, 25))),
                 new StopAndShoot<Gonome>(28, 12, 2f, HalfLifeSounds.GONOME_JUMPATTACK.get()).cooldownFor(entity -> random.nextInt(20, 40))
                                 .whenStarting(entity -> triggerAnim("onetime", "shoot"))
-                                .cooldownFor(entity -> (int) (random.nextInt(40, 250)/Math.max(1, ((int) Math.sqrt(HLperUtil.DistanceToTarget(this)*2)))))
+                                .cooldownFor(entity -> (int) (random.nextInt(150, 450)/Math.max(1, ((int) Math.sqrt(HLperUtil.DistanceToTarget(this)*2)))))
                 )
 
         );

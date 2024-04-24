@@ -119,7 +119,9 @@ public class HalfLifeItems {
     public static final RegistryObject<Item> BULLSQUID_SPAWN_EGG = ITEMS.register("bullsquid_spawn_egg",
             () -> new ForgeSpawnEggItem(HalfLifeEntities.BULLSQUID, 0x4f6307, 0x781104   ,
                     new Item.Properties()));
-
+    public static final RegistryObject<Item> AQUATIC_BULLSQUID_SPAWN_EGG = ITEMS.register("aquatic_bullsquid_spawn_egg",
+            () -> new ForgeSpawnEggItem(HalfLifeEntities.AQUATIC_BULLSQUID, 0x296307, 0xc5be4e  ,
+                    new Item.Properties()));
 
     public static final RegistryObject<Item> PITDRONE_SPAWN_EGG = ITEMS.register("pitdrone_spawn_egg",
             () -> new ForgeSpawnEggItem(HalfLifeEntities.PITDRONE, 0x7d4a10, 0x9b9b9b   ,
